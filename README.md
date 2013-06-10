@@ -5,27 +5,19 @@ EasyPost is a simple shipping API. You can sign up for an account at https://eas
 Requirements
 ============
 
-Java 1.5 and later.
+* Java 1.5 and later.
+* [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.2-release.zip>.
+
 
 Installation
 ============
 
-### Maven users (NOT YET ADDED TO MAVEN REPOSITORY - MUST PACKAGE MANUALLY)
+```sh
+mvn package
+```
 
-Add this dependency to your project's POM:
+or build the jar from src!
 
-    <dependency>
-      <groupId>com.easypost</groupId>
-      <artifactId>easypost-java</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-
-### Others
-
-You'll need to manually install the following JARs:
-
-* The EasyPost JAR from https://geteasypost.com/easypost-java-latest.jar
-* [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.2-release.zip>.
 
 Usage
 =====
