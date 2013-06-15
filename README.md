@@ -3,14 +3,13 @@
 EasyPost is a simple shipping API. You can sign up for an account at https://easypost.com
 
 Requirements
-============
+------------
 
 * Java 1.5 and later.
 * [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.2-release.zip>.
 
-
 Installation
-============
+------------
 
 ```sh
 mvn package
@@ -18,9 +17,8 @@ mvn package
 
 or build the jar from src!
 
-
-Usage
-=====
+Example
+------
 
 ```java
 
@@ -117,9 +115,15 @@ public class Readme {
             Shipment shipment = Shipment.create(shipmentMap);
 
             // buy postage
-            shipment = shipment.buy(shipment.lowestRate());
+            List<String> buyCarriers = new ArrayList<String>();
+            buyCarriers.add("USPS");
+            List<String> buyServices = new ArrayList<String>();
+            buyServices.add("PriorityMailInternational");
+
+            shipment = shipment.buy(shipment.lowestRate(buyCarriers, buyServices));
 
             System.out.println(shipment.prettyPrint());
+            
         } catch (EasyPostException e) {
             e.printStackTrace();
         }
@@ -127,3 +131,13 @@ public class Readme {
 }
 
 ```
+
+Documentation
+--------------------
+
+Up-to-date documentation at: https://easypost.com/docs/v2
+
+Tests
+--------------------
+
+Coming soon!

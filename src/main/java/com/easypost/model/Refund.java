@@ -18,25 +18,43 @@ public class Refund extends EasyPostResource {
 	public String getId() {
 		return id;
 	}
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getTrackingCode() {
 		return trackingCode;
+	}
+	public void setTrackingCode(String trackingCode) {
+		this.trackingCode = trackingCode;
 	}
 
 	public String getConfirmationNumber() {
 		return confirmationNumber;
 	}
+	public void setConfirmationNumber(String confirmationNumber) {
+		this.confirmationNumber = confirmationNumber;
+	}
 
 	public String getStatus() {
 		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getCarrier() {
 		return carrier;
 	}
+	public void setCarrier(String carrier) {
+		this.carrier = carrier;
+	}
 
 	public String getShipmentId() {
 		return shipmentId;
+	}
+	public void setShipmentId(String shipmentId) {
+		this.shipmentId = shipmentId;
 	}
 
 

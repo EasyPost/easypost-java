@@ -91,9 +91,15 @@ public class Readme {
             Shipment shipment = Shipment.create(shipmentMap);
 
             // buy postage
-            shipment = shipment.buy(shipment.lowestRate());
+            List<String> buyCarriers = new ArrayList<String>();
+            buyCarriers.add("USPS");
+            List<String> buyServices = new ArrayList<String>();
+            buyServices.add("PriorityMailInternational");
+
+            shipment = shipment.buy(shipment.lowestRate(buyCarriers, buyServices));
 
             System.out.println(shipment.prettyPrint());
+            
         } catch (EasyPostException e) {
             e.printStackTrace();
         }

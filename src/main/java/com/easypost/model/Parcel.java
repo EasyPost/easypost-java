@@ -18,6 +18,9 @@ public class Parcel extends EasyPostResource {
 	public String getId() {
 		return id;
 	}
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getPredefinedPackage() {
 		return predefinedPackage;

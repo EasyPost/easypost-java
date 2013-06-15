@@ -27,9 +27,15 @@ public class Shipment extends EasyPostResource {
 	public String getId() {
 		return id;
 	}
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getMode() {
 		return mode;
+	}
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 
 	public Address getToAddress() {
@@ -118,6 +124,9 @@ public class Shipment extends EasyPostResource {
 
 	public ScanForm getScanForm() {
 		return scanForm;
+	}
+	public void setScanForm(ScanForm scanForm) {
+		this.scanForm = scanForm;
 	}
 
 

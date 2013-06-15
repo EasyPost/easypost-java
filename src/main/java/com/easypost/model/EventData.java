@@ -10,7 +10,6 @@ public class EventData extends EasyPostResource {
 	public Map<String, Object> getPreviousAttributes() {
 		return previousAttributes;
 	}
-	
 	public void setPreviousAttributes(Map<String, Object> previousAttributes) {
 		this.previousAttributes = previousAttributes;
 	}
@@ -18,7 +17,6 @@ public class EventData extends EasyPostResource {
 	public EasyPostResource getObject() {
 		return object;
 	}
-
 	public void setObject(EasyPostResource object) {
 		this.object = object;
 	}

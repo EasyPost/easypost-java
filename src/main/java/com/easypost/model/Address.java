@@ -24,6 +24,9 @@ public class Address extends EasyPostResource {
 	public String getId() {
 		return id;
 	}
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -97,6 +100,9 @@ public class Address extends EasyPostResource {
 
 	public String getMessage() {
 		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	// create
