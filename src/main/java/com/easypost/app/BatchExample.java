@@ -118,8 +118,7 @@ public class BatchExample {
             // loop through each shipment in the batch, purchasing the lowest rate for each
             for (Shipment createdShipment : batch.getShipments()) {
                 // shipments in a new batch do not yet have rates, fetch them before purchasing
-                createdShipment.newRates();
-                createdShipment = createdShipment.refresh();
+                createdShipment = createdShipment.newRates();
 
                 List<String> buyCarriers = new ArrayList<String>();
                 buyCarriers.add("USPS");

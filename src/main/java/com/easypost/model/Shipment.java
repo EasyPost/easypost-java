@@ -176,19 +176,22 @@ public class Shipment extends EasyPostResource {
 	}
 
 	// get rates
-	public void newRates() throws EasyPostException {
-		this.newRates(null, null);
+	public Shipment newRates() throws EasyPostException {
+		return this.newRates(null, null);
 	}
-	public void newRates(Map<String, Object> params) throws EasyPostException {
-		this.newRates(params, null);
+	public Shipment newRates(Map<String, Object> params) throws EasyPostException {
+		return this.newRates(params, null);
 	}
-	public void newRates(String apiKey) throws EasyPostException {
-		this.newRates((Map<String, Object>) null, apiKey);
+	public Shipment newRates(String apiKey) throws EasyPostException {
+		return this.newRates((Map<String, Object>) null, apiKey);
 	}
-	public void newRates(Map<String, Object> params, String apiKey) throws EasyPostException {
-		request(
+	public Shipment newRates(Map<String, Object> params, String apiKey) throws EasyPostException {
+		Shipment response = request(
 			RequestMethod.GET,
-			String.format("%s/rates", instanceURL(Shipment.class, this.getId())), params, Rate.class, apiKey);
+			String.format("%s/rates", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+
+		this.merge(this, response);
+		return this;
 	}
 
 	// buy
