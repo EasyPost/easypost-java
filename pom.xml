@@ -4,7 +4,7 @@
     <groupId>com.easypost</groupId>
     <artifactId>easypost-java</artifactId>
     <packaging>jar</packaging>
-    <version>1.2</version>
+    <version>1.2.0</version>
     <name>easypost-java</name>
     <url>https://github.com/easypost/easypost-java-beta</url>
     <dependencies>

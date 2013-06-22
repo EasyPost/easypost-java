@@ -387,6 +387,8 @@ public abstract class EasyPostResource {
 				+ ". Please email contact@easypost.com for assistance.", e);
 		}
 
+        // System.out.println(url);	
+
 		EasyPostResponse response;
 		try {
 			// HTTPSURLConnection verifies SSL cert by default

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+import com.google.gson.reflect.TypeToken;
+
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
@@ -157,20 +159,36 @@ public class Shipment extends EasyPostResource {
 		return request(RequestMethod.GET, classURL(Shipment.class), params, ShipmentCollection.class, apiKey);
 	}
 
-	// get rates
-	public Shipment newRates() throws EasyPostException {
-		return this.newRates(null, null);
+	// refresh
+	public Shipment refresh() throws EasyPostException {
+		return this.refresh(null, null);
 	}
-	public Shipment newRates(Map<String, Object> params) throws EasyPostException {
-		return this.newRates(params, null);
+	public Shipment refresh(Map<String, Object> params) throws EasyPostException {
+		return this.refresh(params, null);
 	}
-	public Shipment newRates(String apiKey) throws EasyPostException {
-		return this.newRates((Map<String, Object>) null, apiKey);
+	public Shipment refresh(String apiKey) throws EasyPostException {
+		return this.refresh((Map<String, Object>) null, apiKey);
 	}
-	public Shipment newRates(Map<String, Object> params, String apiKey) throws EasyPostException {
+	public Shipment refresh(Map<String, Object> params, String apiKey) throws EasyPostException {
 		return request(
 			RequestMethod.GET,
-			String.format("%s/get_rates", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+			String.format("%s", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+	}
+
+	// get rates
+	public void newRates() throws EasyPostException {
+		this.newRates(null, null);
+	}
+	public void newRates(Map<String, Object> params) throws EasyPostException {
+		this.newRates(params, null);
+	}
+	public void newRates(String apiKey) throws EasyPostException {
+		this.newRates((Map<String, Object>) null, apiKey);
+	}
+	public void newRates(Map<String, Object> params, String apiKey) throws EasyPostException {
+		request(
+			RequestMethod.GET,
+			String.format("%s/rates", instanceURL(Shipment.class, this.getId())), params, Rate.class, apiKey);
 	}
 
 	// buy
