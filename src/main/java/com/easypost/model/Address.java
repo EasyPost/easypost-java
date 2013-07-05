@@ -132,6 +132,24 @@ public class Address extends EasyPostResource {
 		return request(RequestMethod.GET, classURL(Address.class), params, AddressCollection.class, apiKey);
 	}
 
+	// createAndVerify
+	public static Address createAndVerify(Map<String, Object> params) throws EasyPostException {
+		return createAndVerify(params, null);
+	}
+	public static Address createAndVerify(Map<String, Object> params, String apiKey) throws EasyPostException {
+		Map<String, Object> wrappedParams = new HashMap<String, Object>();
+		wrappedParams.put("address", params);
+		
+		AddressVerifyResponse response;
+		response = request(RequestMethod.GET, String.format("%s/create_and_verify", classURL(Address.class)), null, AddressVerifyResponse.class, apiKey);
+        
+        if (response.message != null) {
+        	response.address.message = response.message;
+        }
+        // System.out.println(response.address);	
+        return response.address;
+	}
+
 	// verify
 	public Address verify() throws EasyPostException {
 		return this.verify(null);

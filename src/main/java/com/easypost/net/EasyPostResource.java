@@ -24,6 +24,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.Rate;
+import com.easypost.model.RateDeserializer;
 import com.easypost.model.EventData;
 import com.easypost.model.EventDataDeserializer;
 
@@ -32,6 +34,7 @@ public abstract class EasyPostResource {
 	public static final Gson gson = new GsonBuilder()
 		.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 		.registerTypeAdapter(EventData.class, new EventDataDeserializer())
+		.registerTypeAdapter(Rate.class, new RateDeserializer())
 		.create();
 
 	public static final Gson prettyPrintGson = new GsonBuilder().

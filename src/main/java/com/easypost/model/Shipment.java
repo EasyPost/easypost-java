@@ -20,7 +20,10 @@ public class Shipment extends EasyPostResource {
 	Rate selectedRate;
 	List<Rate> rates;
 	PostageLabel postageLabel;
+	String insurance;
 	String trackingCode;
+	String status;
+	List<TrackingDetail> trackingDetails;
 	String refundStatus;
 	String batchStatus;
 	String batchMessage;
@@ -96,11 +99,32 @@ public class Shipment extends EasyPostResource {
 		this.postageLabel = postageLabel;
 	}
 
+	public String getInsurance() {
+		return insurance;
+	}
+	public void setInsurance(String insurance) {
+		this.insurance = insurance;
+	}
+
 	public String getTrackingCode() {
 		return trackingCode;
 	}
 	public void setTrackingCode(String trackingCode) {
 		this.trackingCode = trackingCode;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public List<TrackingDetail> getTrackingDetails() {
+		return trackingDetails;
+	}
+	public void setTrackingDetails(List<TrackingDetail> trackingDetails) {
+		this.trackingDetails = trackingDetails;
 	}
 
 	public String getRefundStatus() {
@@ -235,6 +259,38 @@ public class Shipment extends EasyPostResource {
 			String.format("%s/refund", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
 	}
 
+	// label
+	public Shipment label() throws EasyPostException {
+		return this.label(null, null);
+	}
+	public Shipment label(Map<String, Object> params) throws EasyPostException {
+		return this.label(params, null);
+	}
+	public Shipment label(String apiKey) throws EasyPostException {
+		return this.label((Map<String, Object>) null, apiKey);
+	}
+	public Shipment label(Map<String, Object> params, String apiKey) throws EasyPostException {
+		return request(
+			RequestMethod.GET,
+			String.format("%s/label", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+	}
+
+	// insure
+	public Shipment insure() throws EasyPostException {
+		return this.insure(null, null);
+	}
+	public Shipment insure(Map<String, Object> params) throws EasyPostException {
+		return this.insure(params, null);
+	}
+	public Shipment insure(String apiKey) throws EasyPostException {
+		return this.insure((Map<String, Object>) null, apiKey);
+	}
+	public Shipment insure(Map<String, Object> params, String apiKey) throws EasyPostException {
+		return request(
+			RequestMethod.GET,
+			String.format("%s/insure", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+	}
+
 	// lowest rate
 	public Rate lowestRate() throws EasyPostException {
 		return this.lowestRate(null, null);
@@ -258,10 +314,10 @@ public class Shipment extends EasyPostResource {
 		}
 
 		for(int i=0; i < this.rates.size(); i++) {
-			if (carriers != null && carriers.size() > 0 && !carriers.contains(this.rates.get(i).carrier.toLowerCase())) {
+			if (carriers != null && carriers.size() > 0 && !carriers.contains(this.rates.get(i).carrier.toLowerCase()) && !carriers.contains(this.rates.get(i).serviceCode.toLowerCase())) {
 				continue;
 			}
-			if (services != null && services.size() > 0 && !services.contains(this.rates.get(i).service.toLowerCase())) {
+			if (services != null && services.size() > 0 && !services.contains(this.rates.get(i).service.toLowerCase()) && !services.contains(this.rates.get(i).serviceCode.toLowerCase())) {
 				continue;
 			}
 

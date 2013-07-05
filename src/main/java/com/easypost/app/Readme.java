@@ -1,4 +1,4 @@
-// java -cp "target/easypost-java-1.2.0.jar:target/gson-2.2.2.jar" Readme
+// java -cp "target/easypost-java-2.0.1.jar:target/gson-2.2.2.jar" Readme
 
 import java.util.HashMap;
 import java.util.Map;
@@ -97,8 +97,15 @@ public class Readme {
             buyCarriers.add("USPS");
             List<String> buyServices = new ArrayList<String>();
             buyServices.add("PriorityMailInternational");
+            List<String> buyServiceCodes = new ArrayList<String>();
+            buyServiceCodes.add("fedex.fedex_ground");
 
-            shipment = shipment.buy(shipment.lowestRate(buyCarriers, buyServices));
+            Map<String, Object> buyMap = new HashMap<String, Object>();
+            buyMap.put("rate", shipment.lowestRate(buyServiceCodes));
+            buyMap.put("insurance", 249.99);
+
+            // shipment = shipment.buy(shipment.lowestRate(buyCarriers, buyServices));
+            shipment = shipment.buy(buyMap);
 
             System.out.println(shipment.prettyPrint());
             

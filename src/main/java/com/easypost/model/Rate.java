@@ -13,6 +13,7 @@ public class Rate extends EasyPostResource {
 	String service;
 	Float rate;
 	String shipmentId;
+	String serviceCode;
 	
 	public String getId() {
 		return id;
@@ -49,6 +50,24 @@ public class Rate extends EasyPostResource {
 		this.shipmentId = shipmentId;
 	}
 
+	public String getServiceCode() {
+		return serviceCode;
+	}
+	public void setServiceCode(String serviceCode) {
+		this.serviceCode = serviceCode;
+	}
+
+
+	public Rate(String id, String carrier, String service, Float rate, String shipmentId) {
+		this.id = id;
+		this.carrier = carrier;
+		this.service = service;
+		this.rate = rate;
+		this.shipmentId = shipmentId;
+
+		this.serviceCode = carrier.toLowerCase() + "." + service.toLowerCase();
+	}
+	
 
 	// create
 	public static Rate create(Map<String, Object> params) throws EasyPostException {
@@ -58,7 +77,10 @@ public class Rate extends EasyPostResource {
 		Map<String, Object> wrappedParams = new HashMap<String, Object>();
 		wrappedParams.put("rate", params);
 		
-		return request(RequestMethod.POST, classURL(Rate.class), wrappedParams, Rate.class, apiKey);
+		Rate response;
+		response = request(RequestMethod.POST, classURL(Rate.class), wrappedParams, Rate.class, apiKey);
+
+		return response;
 	}
 
 	// retrieve
@@ -66,7 +88,10 @@ public class Rate extends EasyPostResource {
 		return retrieve(id, null);
 	}
 	public static Rate retrieve(String id, String apiKey) throws EasyPostException {
-		return request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
+		Rate response;
+		response = request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
+
+		return response;
 	}
 
 	// all
