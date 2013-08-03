@@ -28,6 +28,7 @@ public class Shipment extends EasyPostResource {
 	String batchStatus;
 	String batchMessage;
 	ScanForm scanForm;
+	ShipmentOptions options;
 	
 	public String getId() {
 		return id;
@@ -155,6 +156,13 @@ public class Shipment extends EasyPostResource {
 		this.scanForm = scanForm;
 	}
 
+	public ShipmentOptions getOptions() {
+		return options;
+	}
+	public void setOptions(ShipmentOptions options) {
+		this.options = options;
+	}
+
 
 	// create
 	public static Shipment create(Map<String, Object> params) throws EasyPostException {
@@ -270,9 +278,12 @@ public class Shipment extends EasyPostResource {
 		return this.label((Map<String, Object>) null, apiKey);
 	}
 	public Shipment label(Map<String, Object> params, String apiKey) throws EasyPostException {
-		return request(
+		Shipment response = request(
 			RequestMethod.GET,
 			String.format("%s/label", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+		
+		this.merge(this, response);
+		return this;
 	}
 
 	// insure

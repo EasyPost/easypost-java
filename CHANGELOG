@@ -1,3 +1,9 @@
+=== 2.0.2 2013-08-02
+
+* API Addition: Tracker resource added. Trackers can be used to register any tracking code with EasyPost webhooks.
+* Attribute Addition: Added new BatchStatus attribute, and additional label format attributes to PostageLabel.
+
+
 === 2.0.1 2013-07-05
 
 * Added unique carrier/service combination serviceCodes to Rate objects.

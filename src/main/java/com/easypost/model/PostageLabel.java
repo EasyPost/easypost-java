@@ -16,6 +16,18 @@ public class PostageLabel extends EasyPostResource {
     String labelType;
     String labelUrl;
     String labelFileType;
+    String labelPdfSize;
+    String labelPdfType;
+    String labelPdfUrl;
+    String labelPdfFileType;
+    String labelEpl2Size;
+    String labelEpl2Type;
+    String labelEpl2Url;
+    String labelEpl2FileType;
+    String labelZplSize;
+    String labelZplType;
+    String labelZplUrl;
+    String labelZplFileType;
 
 	public String getId() {
 		return id;
@@ -71,6 +83,90 @@ public class PostageLabel extends EasyPostResource {
 	}
 	public void setLabelFileType(String labelFileType) {
 		this.labelFileType = labelFileType;
+	}
+
+	public String getLabelPdfSize() {
+		return labelPdfSize;
+	}
+	public void setLabelPdfSize(String labelPdfSize) {
+		this.labelPdfSize = labelPdfSize;
+	}
+
+	public String getPdfLabelType() {
+		return labelPdfType;
+	}
+	public void setLabelPdfType(String labelPdfType) {
+		this.labelPdfType = labelPdfType;
+	}
+
+	public String getLabelPdfUrl() {
+		return labelPdfUrl;
+	}
+	public void setLabelPdfUrl(String labelPdfUrl) {
+		this.labelPdfUrl = labelPdfUrl;
+	}
+
+	public String getLabelPdfFileType() {
+		return labelPdfFileType;
+	}
+	public void setLabelPdfFileType(String labelPdfFileType) {
+		this.labelPdfFileType = labelPdfFileType;
+	}
+
+	public String getLabelEpl2Size() {
+		return labelEpl2Size;
+	}
+	public void setLabelEpl2Size(String labelEpl2Size) {
+		this.labelEpl2Size = labelEpl2Size;
+	}
+
+	public String getEpl2LabelType() {
+		return labelEpl2Type;
+	}
+	public void setLabelEpl2Type(String labelEpl2Type) {
+		this.labelEpl2Type = labelEpl2Type;
+	}
+
+	public String getLabelEpl2Url() {
+		return labelEpl2Url;
+	}
+	public void setLabelEpl2Url(String labelEpl2Url) {
+		this.labelEpl2Url = labelEpl2Url;
+	}
+
+	public String getLabelEpl2FileType() {
+		return labelEpl2FileType;
+	}
+	public void setLabelEpl2FileType(String labelEpl2FileType) {
+		this.labelEpl2FileType = labelEpl2FileType;
+	}
+
+	public String getLabelZplSize() {
+		return labelZplSize;
+	}
+	public void setLabelZplSize(String labelZplSize) {
+		this.labelZplSize = labelZplSize;
+	}
+
+	public String getZplLabelType() {
+		return labelZplType;
+	}
+	public void setLabelZplType(String labelZplType) {
+		this.labelZplType = labelZplType;
+	}
+
+	public String getLabelZplUrl() {
+		return labelZplUrl;
+	}
+	public void setLabelZplUrl(String labelZplUrl) {
+		this.labelZplUrl = labelZplUrl;
+	}
+
+	public String getLabelZplFileType() {
+		return labelZplFileType;
+	}
+	public void setLabelZplFileType(String labelZplFileType) {
+		this.labelZplFileType = labelZplFileType;
 	}
 
 
