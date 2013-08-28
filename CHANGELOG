@@ -1,3 +1,8 @@
+=== 2.0.3 2013-08-28
+
+* Bug fix: Fixed handleAPIError to return proper exception message.
+
+
 === 2.0.2 2013-08-02
 
 * API Addition: Tracker resource added. Trackers can be used to register any tracking code with EasyPost webhooks.

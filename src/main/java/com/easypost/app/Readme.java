@@ -1,4 +1,4 @@
-// java -cp "target/easypost-java-2.0.1.jar:target/gson-2.2.2.jar" Readme
+// java -cp "target/easypost-java-2.0.3.jar:target/gson-2.2.2.jar" Readme
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class Readme {
 
     public static void main(String[] args) {
         EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
-        
+
         Map<String, Object> fromAddressMap = new HashMap<String, Object>();
         fromAddressMap.put("name", "Simpler Postage Inc");
         fromAddressMap.put("street1", "388 Townsend St");
@@ -64,7 +64,12 @@ public class Readme {
             Address toAddress = Address.create(toAddressMap);
             Parcel parcel = Parcel.create(parcelMap);
 
-            // Address verified = to_address.verify();
+
+            try {
+                Address verified = toAddress.verify();
+            } catch (EasyPostException e) {
+                System.out.println(e.getMessage());
+            }
 
             // customs
             Map<String, Object> customsInfoMap = new HashMap<String, Object>();
@@ -89,26 +94,26 @@ public class Readme {
             shipmentMap.put("from_address", fromAddress);
             shipmentMap.put("parcel", parcel);
             shipmentMap.put("customs_info", customsInfo);
-            
+
             Shipment shipment = Shipment.create(shipmentMap);
 
             // buy postage
             List<String> buyCarriers = new ArrayList<String>();
             buyCarriers.add("USPS");
             List<String> buyServices = new ArrayList<String>();
-            buyServices.add("PriorityMailInternational");
-            List<String> buyServiceCodes = new ArrayList<String>();
-            buyServiceCodes.add("fedex.fedex_ground");
+            buyServices.add("Priority");
+            // List<String> buyServiceCodes = new ArrayList<String>();
+            // buyServiceCodes.add("fedex.fedex_ground");
 
             Map<String, Object> buyMap = new HashMap<String, Object>();
-            buyMap.put("rate", shipment.lowestRate(buyServiceCodes));
+            buyMap.put("rate", shipment.lowestRate(buyCarriers, buyServices));
             buyMap.put("insurance", 249.99);
 
             // shipment = shipment.buy(shipment.lowestRate(buyCarriers, buyServices));
             shipment = shipment.buy(buyMap);
 
             System.out.println(shipment.prettyPrint());
-            
+
         } catch (EasyPostException e) {
             e.printStackTrace();
         }

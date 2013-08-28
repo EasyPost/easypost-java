@@ -29,7 +29,7 @@ public class Shipment extends EasyPostResource {
 	String batchMessage;
 	ScanForm scanForm;
 	ShipmentOptions options;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -246,7 +246,7 @@ public class Shipment extends EasyPostResource {
 		Shipment response = request(
 			RequestMethod.POST,
 			String.format("%s/buy", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
-		
+
 		this.merge(this, response);
 		return this;
 	}
@@ -281,7 +281,7 @@ public class Shipment extends EasyPostResource {
 		Shipment response = request(
 			RequestMethod.GET,
 			String.format("%s/label", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
-		
+
 		this.merge(this, response);
 		return this;
 	}
@@ -335,6 +335,10 @@ public class Shipment extends EasyPostResource {
 			if (lowestRate == null || lowestRate.rate > this.rates.get(i).rate) {
 				lowestRate = this.rates.get(i);
 			}
+		}
+
+		if(lowestRate == null) {
+			throw new EasyPostException("Unable to find lowest rate matching required criteria.");
 		}
 
 		return lowestRate;

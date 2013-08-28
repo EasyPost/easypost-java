@@ -116,7 +116,7 @@ public abstract class EasyPostResource {
 	                }
 	            } catch (Exception e) {
 	                e.printStackTrace();
-	            } 
+	            }
 	        }
 	    }
 	}
@@ -125,8 +125,8 @@ public abstract class EasyPostResource {
 
 	private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
 
-	
-	// Set this property to override your environment's default URLStreamHandler. 
+
+	// Set this property to override your environment's default URLStreamHandler.
 	private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
 
 	protected enum RequestMethod {
@@ -282,7 +282,7 @@ public abstract class EasyPostResource {
 			}
 		}
 
-        // System.out.println(flatParams);	
+        // System.out.println(flatParams);
 
 		return flatParams;
 	}
@@ -298,6 +298,7 @@ public abstract class EasyPostResource {
 		String message;
 		String code;
 		String param;
+		String error;
 	}
 
 	private static String getResponseBody(InputStream responseStream) throws IOException {
@@ -390,7 +391,7 @@ public abstract class EasyPostResource {
 				+ ". Please email contact@easypost.com for assistance.", e);
 		}
 
-        // System.out.println(url);	
+        // System.out.println(url);
 
 		EasyPostResponse response;
 		try {
@@ -411,11 +412,15 @@ public abstract class EasyPostResource {
 			handleAPIError(rBody, rCode);
 		}
 
-		return gson.fromJson(rBody, clazz);	
+		return gson.fromJson(rBody, clazz);
 	}
 
 	private static void handleAPIError(String rBody, int rCode) throws EasyPostException {
-		EasyPostResource.Error error = gson.fromJson(rBody, EasyPostResource.ErrorContainer.class).error;
+		EasyPostResource.Error error = gson.fromJson(rBody, EasyPostResource.Error.class);
+
+		if(error.error.length() > 0) {
+			throw new EasyPostException(error.error);
+		}
 
 		throw new EasyPostException(error.message, error.param, null);
 	}
