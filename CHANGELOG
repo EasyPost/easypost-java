@@ -1,3 +1,9 @@
+=== 2.0.3 2013-10-14
+
+* Added Event resource for webhook digestion.
+* Changed Batch.getStatus to Batch.getBatchStatus to avoid collisions with Tracker.getStatus in Event deserialization.
+
+
 === 2.0.3 2013-08-28
 
 * Bug fix: Fixed handleAPIError to return proper exception message.

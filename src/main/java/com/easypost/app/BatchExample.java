@@ -18,7 +18,7 @@ public class BatchExample {
 
     public static void main(String[] args) throws InterruptedException {
         EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
-        
+
         try {
             Map<String, Object> fromAddressMap = new HashMap<String, Object>();
             fromAddressMap.put("name", "Simpler Postage Inc");
@@ -105,7 +105,7 @@ public class BatchExample {
                 shipment.put("reference", order.get("reference"));
 
                 shipments.add(shipment);
-            }            
+            }
 
             // create batch
             Map<String, Object> batchMap = new HashMap<String, Object>();
@@ -129,7 +129,7 @@ public class BatchExample {
 
             // request a batch label of type pdf (other options are epl2 or zpl)
             batch = batch.refresh();
-            if (batch.getStatus().getPostagePurchased() == batch.getShipments().size()) {
+            if (batch.getBatchStatus().getPostagePurchased() == batch.getShipments().size()) {
                 Map<String, Object> labelMap = new HashMap<String, Object>();
                 labelMap.put("file_format", "pdf");
 
@@ -152,7 +152,7 @@ public class BatchExample {
             }
 
             System.out.println(batch.prettyPrint());
-            
+
         } catch (EasyPostException e) {
             e.printStackTrace();
         }

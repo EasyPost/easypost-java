@@ -13,16 +13,28 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.easypost.net.EasyPostResource;
+import com.easypost.model.Event;
 
-public class EventDataDeserializer implements JsonDeserializer<EventData> {
+public class EventDeserializer implements JsonDeserializer<Event> {
 
 	@SuppressWarnings("rawtypes")
 	static Map<String, Class> objectMap = new HashMap<String, Class>();
     static {
-        objectMap.put("address", Address.class);
-        
+        objectMap.put("Address", Address.class);
+        objectMap.put("Batch", Batch.class);
+        objectMap.put("CustomsInfo", CustomsInfo.class);
+        objectMap.put("CustomsItem", CustomsItem.class);
+        objectMap.put("Event", Event.class);
+        objectMap.put("Parcel", Parcel.class);
+        objectMap.put("PostageLabel", PostageLabel.class);
+        objectMap.put("Rate", Rate.class);
+        objectMap.put("Refund", Refund.class);
+        objectMap.put("ScanForm", ScanForm.class);
+        objectMap.put("Shipment", Shipment.class);
+        objectMap.put("Tracker", Tracker.class);
+        objectMap.put("TrackingDetail", TrackingDetail.class);
     }
-    
+
     private Object deserializeJsonPrimitive(JsonPrimitive element) {
     	if (element.isBoolean()) {
     		return element.getAsBoolean();
@@ -32,7 +44,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     		return element.getAsString();
     	}
     }
-    
+
     private Object[] deserializeJsonArray(JsonArray arr) {
     	Object[] elems = new Object[arr.size()];
     	Iterator<JsonElement> elemIter = arr.iterator();
@@ -43,7 +55,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     	}
     	return elems;
     }
-    
+
     private Object deserializeJsonElement(JsonElement element) {
     	if (element.isJsonNull()) {
     		return null;
@@ -57,11 +69,11 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 			return deserializeJsonArray(element.getAsJsonArray());
 		} else {
 			System.err.println("Unknown JSON element type for element " + element + ". " +
-					"Please email us at contact@easypost.com.");
+					"Please email us at support@easypost.com.");
 			return null;
 		}
 	}
-    
+
     private void populateMapFromJSONObject(Map<String, Object> objMap, JsonObject jsonObject) {
 		for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
 			String key = entry.getKey();
@@ -70,9 +82,10 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 		}
     }
 
-	@SuppressWarnings("unchecked")
-	public EventData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		EventData eventData = new EventData();
+    @SuppressWarnings("unchecked")
+	public Event deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+		Event event = new Event();
+
 		JsonObject jsonObject = json.getAsJsonObject();
 		for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
 			String key = entry.getKey();
@@ -80,14 +93,18 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 			if("previous_attributes".equals(key)) {
 				Map<String, Object> previousAttributes = new HashMap<String, Object>();
 				populateMapFromJSONObject(previousAttributes, element.getAsJsonObject());
-				eventData.setPreviousAttributes(previousAttributes);
-			} else if ("object".equals(key)) {
+				event.setPreviousAttributes(previousAttributes);
+        	} else if ("result".equals(key)) {
 				String type = element.getAsJsonObject().get("object").getAsString();
 				Class<EasyPostResource> cl = objectMap.get(type);
-				EasyPostResource object = EasyPostResource.gson.fromJson(entry.getValue(), cl);
-				eventData.setObject(object);
+				EasyPostResource result = EasyPostResource.gson.fromJson(entry.getValue(), cl);
+				event.setResult(result);
 			}
 		}
-		return eventData;
+        event.setId(jsonObject.get("id").getAsString());
+        event.setDescription(jsonObject.get("description").getAsString());
+        event.setMode(jsonObject.get("mode").getAsString());
+
+		return event;
 	}
 }

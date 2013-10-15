@@ -12,9 +12,9 @@ public class Tracker extends EasyPostResource {
 	String mode;
 	String trackingCode;
 	String status;
-	Shipment shipment;
+	String shipmentId;
 	List<TrackingDetail> trackingDetails;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -29,11 +29,11 @@ public class Tracker extends EasyPostResource {
 		this.mode = mode;
 	}
 
-	public Shipment getShipment() {
-		return shipment;
+	public String getShipmentId() {
+		return shipmentId;
 	}
-	public void setShipment(Shipment shipment) {
-		this.shipment = shipment;
+	public void setShipmentId(String shipmentId) {
+		this.shipmentId = shipmentId;
 	}
 
 	public String getTrackingCode() {
@@ -65,7 +65,7 @@ public class Tracker extends EasyPostResource {
 	public static Tracker create(Map<String, Object> params, String apiKey) throws EasyPostException {
 		Map<String, Object> wrappedParams = new HashMap<String, Object>();
 		wrappedParams.put("tracker", params);
-		
+
 		return request(RequestMethod.POST, classURL(Tracker.class), wrappedParams, Tracker.class, apiKey);
 	}
 

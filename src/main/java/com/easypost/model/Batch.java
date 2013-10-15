@@ -13,8 +13,8 @@ public class Batch extends EasyPostResource {
 	BatchStatus status;
 	List<Shipment> shipments;
 	String labelUrl;
-	
-	
+
+
 	public String getId() {
 		return id;
 	}
@@ -36,10 +36,10 @@ public class Batch extends EasyPostResource {
 		this.shipments = shipments;
 	}
 
-	public BatchStatus getStatus() {
+	public BatchStatus getBatchStatus() {
 		return status;
 	}
-	public void setStatus(BatchStatus status) {
+	public void setBatchStatus(BatchStatus status) {
 		this.status = status;
 	}
 
@@ -152,5 +152,5 @@ public class Batch extends EasyPostResource {
 			RequestMethod.POST,
 			String.format("%s/add_shipment", instanceURL(Batch.class, this.getId())), params, Batch.class, apiKey);
 	}
-	
+
 }

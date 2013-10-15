@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -24,16 +25,19 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.BatchStatus;
+import com.easypost.model.Event;
+import com.easypost.model.EventDeserializer;
 import com.easypost.model.Rate;
 import com.easypost.model.RateDeserializer;
-import com.easypost.model.EventData;
-import com.easypost.model.EventDataDeserializer;
+import com.easypost.model.Shipment;
+import com.easypost.model.TrackingDetail;
 
 public abstract class EasyPostResource {
 
 	public static final Gson gson = new GsonBuilder()
 		.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-		.registerTypeAdapter(EventData.class, new EventDataDeserializer())
+		.registerTypeAdapter(Event.class, new EventDeserializer())
 		.registerTypeAdapter(Rate.class, new RateDeserializer())
 		.create();
 
@@ -41,7 +45,7 @@ public abstract class EasyPostResource {
 		setPrettyPrinting().
 		serializeNulls().
 		setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
-		registerTypeAdapter(EventData.class, new EventDataDeserializer()).
+		registerTypeAdapter(Event.class, new EventDeserializer()).
 		create();
 
 	@Override public String toString() {
@@ -416,13 +420,17 @@ public abstract class EasyPostResource {
 	}
 
 	private static void handleAPIError(String rBody, int rCode) throws EasyPostException {
-		EasyPostResource.Error error = gson.fromJson(rBody, EasyPostResource.Error.class);
+		try {
+			EasyPostResource.Error error = gson.fromJson(rBody, EasyPostResource.Error.class);
 
-		if(error.error.length() > 0) {
-			throw new EasyPostException(error.error);
-		}
+			if(error.error.length() > 0) {
+				throw new EasyPostException(error.error);
+			}
 
-		throw new EasyPostException(error.message, error.param, null);
+			throw new EasyPostException(error.message, error.param, null);
+		} catch (Exception e) {
+            throw new EasyPostException(String.format("An error occured. Response code: %s Response body: %s", rCode, rBody));
+        }
 	}
 
 	private static EasyPostResponse makeAppEngineRequest(RequestMethod method, String url, String query, String apiKey) throws EasyPostException {
@@ -501,6 +509,36 @@ public abstract class EasyPostResource {
 		} catch (UnsupportedEncodingException e) {
 			throw new EasyPostException(unknownErrorMessage, e);
 		}
+	}
+
+	public String getId() {
+		return "";
+	}
+	public String getMode() {
+		return "";
+	}
+	// Batch
+	public List<Shipment> getShipments() {
+		return new ArrayList<Shipment>();
+	}
+	public BatchStatus getBatchStatus() {
+		return new BatchStatus();
+	}
+	public String getLabelUrl() {
+		return "";
+	}
+	// Tracker
+	public String getShipmentId() {
+		return "";
+	}
+	public String getTrackingCode() {
+		return "";
+	}
+	public String getStatus() {
+		return "";
+	}
+	public List<TrackingDetail> getTrackingDetails() {
+		return new ArrayList<TrackingDetail>();
 	}
 
 }
