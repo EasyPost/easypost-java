@@ -1,4 +1,9 @@
-=== 2.0.3 2013-10-14
+=== 2.0.5 2013-12-11
+
+* Bug fix. Made Batch.status public and removed the conflicting getStatus method.
+
+
+=== 2.0.4 2013-10-14
 
 * Added Event resource for webhook digestion.
 * Changed Batch.getStatus to Batch.getBatchStatus to avoid collisions with Tracker.getStatus in Event deserialization.

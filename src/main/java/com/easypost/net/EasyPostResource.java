@@ -521,9 +521,9 @@ public abstract class EasyPostResource {
 	public List<Shipment> getShipments() {
 		return new ArrayList<Shipment>();
 	}
-	public BatchStatus getBatchStatus() {
-		return new BatchStatus();
-	}
+	// public BatchStatus getStatus() {
+	// 	return new BatchStatus();
+	// }
 	public String getLabelUrl() {
 		return "";
 	}

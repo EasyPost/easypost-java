@@ -6,7 +6,7 @@ Requirements
 ------------
 
 * Java 1.5 and later.
-* [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.2-release.zip>.
+* [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.4-release.zip>.
 
 Installation
 ------------
@@ -39,7 +39,7 @@ public class Readme {
 
     public static void main(String[] args) {
         EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
-        
+
         Map<String, Object> fromAddressMap = new HashMap<String, Object>();
         fromAddressMap.put("name", "Simpler Postage Inc");
         fromAddressMap.put("street1", "388 Townsend St");
@@ -111,7 +111,7 @@ public class Readme {
             shipmentMap.put("from_address", fromAddress);
             shipmentMap.put("parcel", parcel);
             shipmentMap.put("customs_info", customsInfo);
-            
+
             Shipment shipment = Shipment.create(shipmentMap);
 
             // buy postage
@@ -123,7 +123,7 @@ public class Readme {
             shipment = shipment.buy(shipment.lowestRate(buyCarriers, buyServices));
 
             System.out.println(shipment.prettyPrint());
-            
+
         } catch (EasyPostException e) {
             e.printStackTrace();
         }

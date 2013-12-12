@@ -1,4 +1,4 @@
-// java -cp "target/easypost-java-2.0.3.jar:target/gson-2.2.2.jar" Readme
+// java -cp "target/easypost-java-2.0.4.jar:target/gson-2.2.4.jar" Readme
 
 import java.util.HashMap;
 import java.util.Map;

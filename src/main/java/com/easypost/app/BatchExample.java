@@ -129,7 +129,7 @@ public class BatchExample {
 
             // request a batch label of type pdf (other options are epl2 or zpl)
             batch = batch.refresh();
-            if (batch.getBatchStatus().getPostagePurchased() == batch.getShipments().size()) {
+            if (batch.status.getPostagePurchased() == batch.getShipments().size()) {
                 Map<String, Object> labelMap = new HashMap<String, Object>();
                 labelMap.put("file_format", "pdf");
 

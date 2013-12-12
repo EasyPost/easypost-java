@@ -10,7 +10,7 @@ import com.easypost.net.EasyPostResource;
 public class Batch extends EasyPostResource {
 	public String id;
 	String mode;
-	BatchStatus status;
+	public BatchStatus status;
 	List<Shipment> shipments;
 	String labelUrl;
 
@@ -34,13 +34,6 @@ public class Batch extends EasyPostResource {
 	}
 	public void setShipments(List<Shipment> shipments) {
 		this.shipments = shipments;
-	}
-
-	public BatchStatus getBatchStatus() {
-		return status;
-	}
-	public void setBatchStatus(BatchStatus status) {
-		this.status = status;
 	}
 
 	public String getLabelUrl() {

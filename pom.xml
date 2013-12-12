@@ -4,14 +4,14 @@
     <groupId>com.easypost</groupId>
     <artifactId>easypost-java</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.4</version>
+    <version>2.0.5</version>
     <name>easypost-java</name>
     <url>https://github.com/easypost/easypost-java</url>
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.2.2</version>
+            <version>2.2.4</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
