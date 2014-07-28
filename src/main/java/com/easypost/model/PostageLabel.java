@@ -10,24 +10,24 @@ import com.easypost.net.EasyPostResource;
 public class PostageLabel extends EasyPostResource {
 	public String id;
 	int dateAdvance;
-    String integratedForm;
-    int labelResolution;
-    String labelSize;
-    String labelType;
-    String labelUrl;
-    String labelFileType;
-    String labelPdfSize;
-    String labelPdfType;
-    String labelPdfUrl;
-    String labelPdfFileType;
-    String labelEpl2Size;
-    String labelEpl2Type;
-    String labelEpl2Url;
-    String labelEpl2FileType;
-    String labelZplSize;
-    String labelZplType;
-    String labelZplUrl;
-    String labelZplFileType;
+  String integratedForm;
+  int labelResolution;
+  String labelSize;
+  String labelType;
+  String labelUrl;
+  String labelFileType;
+  String labelPdfSize;
+  String labelPdfType;
+  String labelPdfUrl;
+  String labelPdfFileType;
+  String labelEpl2Size;
+  String labelEpl2Type;
+  String labelEpl2Url;
+  String labelEpl2FileType;
+  String labelZplSize;
+  String labelZplType;
+  String labelZplUrl;
+  String labelZplFileType;
 
 	public String getId() {
 		return id;
@@ -177,7 +177,7 @@ public class PostageLabel extends EasyPostResource {
 	public static PostageLabel create(Map<String, Object> params, String apiKey) throws EasyPostException {
 		Map<String, Object> wrappedParams = new HashMap<String, Object>();
 		wrappedParams.put("parcel", params);
-		
+
 		return request(RequestMethod.POST, classURL(PostageLabel.class), wrappedParams, PostageLabel.class, apiKey);
 	}
 
@@ -187,14 +187,6 @@ public class PostageLabel extends EasyPostResource {
 	}
 	public static PostageLabel retrieve(String id, String apiKey) throws EasyPostException {
 		return request(RequestMethod.GET, instanceURL(PostageLabel.class, id), null, PostageLabel.class, apiKey);
-	}
-
-	// all
-	public static PostageLabelCollection all(Map<String, Object> params) throws EasyPostException {
-		return all(params, null);
-	}
-	public static PostageLabelCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-		return request(RequestMethod.GET, classURL(PostageLabel.class), params, PostageLabelCollection.class, apiKey);
 	}
 
 }

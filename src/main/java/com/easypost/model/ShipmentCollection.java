@@ -4,19 +4,19 @@ import java.util.List;
 import com.easypost.net.EasyPostResource;
 
 public class ShipmentCollection extends EasyPostResource {
-	List<Shipment> data;
-	Integer count;
-	
-	public List<Shipment> getData() {
-		return data;
-	}
-	public void setData(List<Shipment> data) {
-		this.data = data;
-	}
-	public Integer getCount() {
-		return count;
-	}
-	public void setCount(Integer count) {
-		this.count = count;
-	}
+  List<Shipment> shipments;
+  Boolean hasMore;
+
+  public List<Shipment> getShipments() {
+    return shipments;
+  }
+  public void setShipments(List<Shipment> shipments) {
+    this.shipments = shipments;
+  }
+  public Boolean getHasMore() {
+    return hasMore;
+  }
+  public void setHasMore(Boolean hasMore) {
+    this.hasMore = hasMore;
+  }
 }

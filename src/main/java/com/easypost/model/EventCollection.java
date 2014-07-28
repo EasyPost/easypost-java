@@ -4,19 +4,19 @@ import java.util.List;
 import com.easypost.net.EasyPostResource;
 
 public class EventCollection extends EasyPostResource {
-	List<Event> data;
-	Integer count;
-	
-	public List<Event> getData() {
-		return data;
-	}
-	public void setData(List<Event> data) {
-		this.data = data;
-	}
-	public Integer getCount() {
-		return count;
-	}
-	public void setCount(Integer count) {
-		this.count = count;
-	} 
+  List<Event> events;
+  Boolean hasMore;
+
+  public List<Event> getEvents() {
+    return events;
+  }
+  public void setEvents(List<Event> events) {
+    this.events = events;
+  }
+  public Boolean getHasMore() {
+    return hasMore;
+  }
+  public void setHasMore(Boolean hasMore) {
+    this.hasMore = hasMore;
+  }
 }

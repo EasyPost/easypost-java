@@ -105,9 +105,6 @@ public class Batch extends EasyPostResource {
 	public Batch label(Map<String, Object> params) throws EasyPostException {
 		return this.label(params, null);
 	}
-	public Batch label(String apiKey) throws EasyPostException {
-		return this.label((Map<String, Object>) null, apiKey);
-	}
 	public Batch label(Map<String, Object> params, String apiKey) throws EasyPostException {
 		return request(
 			RequestMethod.POST,
@@ -120,9 +117,6 @@ public class Batch extends EasyPostResource {
 	}
 	public Batch removeShipment(Map<String, Object> params) throws EasyPostException {
 		return this.removeShipment(params, null);
-	}
-	public Batch removeShipment(String apiKey) throws EasyPostException {
-		return this.removeShipment((Map<String, Object>) null, apiKey);
 	}
 	public Batch removeShipment(Map<String, Object> params, String apiKey) throws EasyPostException {
 		return request(
@@ -137,13 +131,23 @@ public class Batch extends EasyPostResource {
 	public Batch addShipment(Map<String, Object> params) throws EasyPostException {
 		return this.addShipment(params, null);
 	}
-	public Batch addShipment(String apiKey) throws EasyPostException {
-		return this.addShipment((Map<String, Object>) null, apiKey);
-	}
 	public Batch addShipment(Map<String, Object> params, String apiKey) throws EasyPostException {
 		return request(
 			RequestMethod.POST,
 			String.format("%s/add_shipment", instanceURL(Batch.class, this.getId())), params, Batch.class, apiKey);
+	}
+
+	// create_scan_form
+	public Batch createScanForm() throws EasyPostException {
+		return this.createScanForm(null, null);
+	}
+	public Batch createScanForm(Map<String, Object> params) throws EasyPostException {
+		return this.createScanForm(params, null);
+	}
+	public Batch createScanForm(Map<String, Object> params, String apiKey) throws EasyPostException {
+		return request(
+			RequestMethod.POST,
+			String.format("%s/scan_form", instanceURL(Batch.class, this.getId())), params, Batch.class, apiKey);
 	}
 
 }

@@ -3,15 +3,15 @@ package com.easypost.model;
 import java.util.List;
 import com.easypost.net.EasyPostResource;
 
-public class ScanFormCollection extends EasyPostResource {
-  List<ScanForm> scanForms;
+public class OrderCollection extends EasyPostResource {
+  List<Order> orders;
   Boolean hasMore;
 
-  public List<ScanForm> getScanForms() {
-    return scanForms;
+  public List<Order> getOrders() {
+    return orders;
   }
-  public void setScanForms(List<ScanForm> scanForms) {
-    this.scanForms = scanForms;
+  public void setOrders(List<Order> orders) {
+    this.orders = orders;
   }
   public Boolean getHasMore() {
     return hasMore;

@@ -12,23 +12,29 @@ import com.easypost.net.EasyPostResource;
 public class Shipment extends EasyPostResource {
 	public String id;
 	String mode;
+	String reference;
+	Boolean isReturn;
 	Address toAddress;
+	Address buyerAddress;
 	Address fromAddress;
+	Address returnAddress;
 	Parcel parcel;
 	CustomsInfo customsInfo;
-	String reference;
 	Rate selectedRate;
 	List<Rate> rates;
 	PostageLabel postageLabel;
+	ScanForm scanForm;
+	Tracker tracker;
 	String insurance;
 	String trackingCode;
 	String status;
-	List<TrackingDetail> trackingDetails;
 	String refundStatus;
 	String batchStatus;
 	String batchMessage;
-	ScanForm scanForm;
-	ShipmentOptions options;
+	String uspsZone;
+	Map<String, String> options;
+	List<String> messages;
+	// ShipmentOptions options;
 
 	public String getId() {
 		return id;
@@ -44,6 +50,20 @@ public class Shipment extends EasyPostResource {
 		this.mode = mode;
 	}
 
+	public String getReference() {
+		return reference;
+	}
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
+	public Boolean getIsReturn() {
+		return isReturn;
+	}
+	public void setIsReturn(Boolean isReturn) {
+		this.isReturn = isReturn;
+	}
+
 	public Address getToAddress() {
 		return toAddress;
 	}
@@ -51,11 +71,25 @@ public class Shipment extends EasyPostResource {
 		this.toAddress = toAddress;
 	}
 
+	public Address getBuyerAddress() {
+		return buyerAddress;
+	}
+	public void setBuyerAddress(Address buyerAddress) {
+		this.buyerAddress = buyerAddress;
+	}
+
 	public Address getFromAddress() {
 		return fromAddress;
 	}
 	public void setFromAddress(Address fromAddress) {
 		this.fromAddress = fromAddress;
+	}
+
+	public Address getReturnAddress() {
+		return returnAddress;
+	}
+	public void setReturnAddress(Address returnAddress) {
+		this.returnAddress = returnAddress;
 	}
 
 	public Parcel getParcel() {
@@ -70,13 +104,6 @@ public class Shipment extends EasyPostResource {
 	}
 	public void setCustomsInfo(CustomsInfo customsInfo) {
 		this.customsInfo = customsInfo;
-	}
-
-	public String getReference() {
-		return reference;
-	}
-	public void setReference(String reference) {
-		this.reference = reference;
 	}
 
 	public Rate getSelectedRate() {
@@ -100,6 +127,20 @@ public class Shipment extends EasyPostResource {
 		this.postageLabel = postageLabel;
 	}
 
+	public ScanForm getScanForm() {
+		return scanForm;
+	}
+	public void setScanForm(ScanForm scanForm) {
+		this.scanForm = scanForm;
+	}
+
+	public Tracker getTracker() {
+		return tracker;
+	}
+	public void setTracker(Tracker tracker) {
+		this.tracker = tracker;
+	}
+
 	public String getInsurance() {
 		return insurance;
 	}
@@ -119,13 +160,6 @@ public class Shipment extends EasyPostResource {
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public List<TrackingDetail> getTrackingDetails() {
-		return trackingDetails;
-	}
-	public void setTrackingDetails(List<TrackingDetail> trackingDetails) {
-		this.trackingDetails = trackingDetails;
 	}
 
 	public String getRefundStatus() {
@@ -149,18 +183,25 @@ public class Shipment extends EasyPostResource {
 		this.batchMessage = batchMessage;
 	}
 
-	public ScanForm getScanForm() {
-		return scanForm;
+	public String getUspsZone() {
+		return uspsZone;
 	}
-	public void setScanForm(ScanForm scanForm) {
-		this.scanForm = scanForm;
+	public void setUspsZone(String uspsZone) {
+		this.uspsZone = uspsZone;
 	}
 
-	public ShipmentOptions getOptions() {
+	public Map<String, String> getOptions() {
 		return options;
 	}
-	public void setOptions(ShipmentOptions options) {
+	public void setOptions(Map<String, String> options) {
 		this.options = options;
+	}
+
+	public List<String> getMessages() {
+		return messages;
+	}
+	public void setMessages(List<String> messages) {
+		this.messages = messages;
 	}
 
 

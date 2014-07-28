@@ -17,7 +17,7 @@ public class CustomsInfo extends EasyPostResource {
 	String restrictionType;
 	String restrictionComments;
 	List<CustomsItem> customsItems;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -89,7 +89,7 @@ public class CustomsInfo extends EasyPostResource {
 	public static CustomsInfo create(Map<String, Object> params, String apiKey) throws EasyPostException {
 		Map<String, Object> wrappedParams = new HashMap<String, Object>();
 		wrappedParams.put("customs_info", params);
-		
+
 		return request(RequestMethod.POST, classURL(CustomsInfo.class), wrappedParams, CustomsInfo.class, apiKey);
 	}
 
@@ -99,14 +99,6 @@ public class CustomsInfo extends EasyPostResource {
 	}
 	public static CustomsInfo retrieve(String id, String apiKey) throws EasyPostException {
 		return request(RequestMethod.GET, instanceURL(CustomsInfo.class, id), null, CustomsInfo.class, apiKey);
-	}
-
-	// all
-	public static CustomsInfoCollection all(Map<String, Object> params) throws EasyPostException {
-		return all(params, null);
-	}
-	public static CustomsInfoCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-		return request(RequestMethod.GET, classURL(CustomsInfo.class), params, CustomsInfoCollection.class, apiKey);
 	}
 
 }

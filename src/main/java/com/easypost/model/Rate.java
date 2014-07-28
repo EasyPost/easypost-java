@@ -14,7 +14,13 @@ public class Rate extends EasyPostResource {
 	Float rate;
 	String shipmentId;
 	String serviceCode;
-	
+	String currency;
+	int estDeliveryDays;
+  String estDeliveryDate;
+  int guaranteedDeliveryDays;
+  String guaranteedDeliveryDate;
+
+
 	public String getId() {
 		return id;
 	}
@@ -57,6 +63,41 @@ public class Rate extends EasyPostResource {
 		this.serviceCode = serviceCode;
 	}
 
+	public String getCurrency() {
+		return currency;
+	}
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public int getEstDeliveryDays() {
+		return estDeliveryDays;
+	}
+	public void setEstDeliveryDays(int estDeliveryDays) {
+		this.estDeliveryDays = estDeliveryDays;
+	}
+
+	public String getEstDeliveryDate() {
+		return estDeliveryDate;
+	}
+	public void setEstDeliveryDate(String estDeliveryDate) {
+		this.estDeliveryDate = estDeliveryDate;
+	}
+
+	public int getGuaranteedDeliveryDays() {
+		return guaranteedDeliveryDays;
+	}
+	public void setGuaranteedDeliveryDays(int guaranteedDeliveryDays) {
+		this.guaranteedDeliveryDays = guaranteedDeliveryDays;
+	}
+
+	public String getGuaranteedDeliveryDate() {
+		return guaranteedDeliveryDate;
+	}
+	public void setGuaranteedDeliveryDate(String guaranteedDeliveryDate) {
+		this.guaranteedDeliveryDate = guaranteedDeliveryDate;
+	}
+
 
 	public Rate(String id, String carrier, String service, Float rate, String shipmentId) {
 		this.id = id;
@@ -64,23 +105,12 @@ public class Rate extends EasyPostResource {
 		this.service = service;
 		this.rate = rate;
 		this.shipmentId = shipmentId;
-
+		this.currency = currency;
+		this.estDeliveryDays = estDeliveryDays;
+  	this.estDeliveryDate = estDeliveryDate;
+  	this.guaranteedDeliveryDays = guaranteedDeliveryDays;
+  	this.guaranteedDeliveryDate = guaranteedDeliveryDate;
 		this.serviceCode = carrier.toLowerCase() + "." + service.toLowerCase();
-	}
-	
-
-	// create
-	public static Rate create(Map<String, Object> params) throws EasyPostException {
-		return create(params, null);
-	}
-	public static Rate create(Map<String, Object> params, String apiKey) throws EasyPostException {
-		Map<String, Object> wrappedParams = new HashMap<String, Object>();
-		wrappedParams.put("rate", params);
-		
-		Rate response;
-		response = request(RequestMethod.POST, classURL(Rate.class), wrappedParams, Rate.class, apiKey);
-
-		return response;
 	}
 
 	// retrieve
@@ -92,14 +122,6 @@ public class Rate extends EasyPostResource {
 		response = request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
 
 		return response;
-	}
-
-	// all
-	public static RateCollection all(Map<String, Object> params) throws EasyPostException {
-		return all(params, null);
-	}
-	public static RateCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-		return request(RequestMethod.GET, classURL(Rate.class), params, RateCollection.class, apiKey);
 	}
 
 }

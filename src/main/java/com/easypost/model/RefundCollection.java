@@ -4,19 +4,19 @@ import java.util.List;
 import com.easypost.net.EasyPostResource;
 
 public class RefundCollection extends EasyPostResource {
-	List<Refund> data;
-	Integer count;
-	
-	public List<Refund> getData() {
-		return data;
-	}
-	public void setData(List<Refund> data) {
-		this.data = data;
-	}
-	public Integer getCount() {
-		return count;
-	}
-	public void setCount(Integer count) {
-		this.count = count;
-	}
+  List<Refund> refunds;
+  Boolean hasMore;
+
+  public List<Refund> getRefunds() {
+    return refunds;
+  }
+  public void setRefunds(List<Refund> refunds) {
+    this.refunds = refunds;
+  }
+  public Boolean getHasMore() {
+    return hasMore;
+  }
+  public void setHasMore(Boolean hasMore) {
+    this.hasMore = hasMore;
+  }
 }

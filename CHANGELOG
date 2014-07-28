@@ -1,3 +1,10 @@
+=== 2.0.6 2014-07-28
+
+* Added Container, Item, Order resources.
+* Added Batch.createScanForm function for generating manifests from a batch.
+* Refactored and added a lot of new attributes for objects across the board.
+
+
 === 2.0.5 2013-12-11
 
 * Bug fix. Made Batch.status public and removed the conflicting getStatus method.

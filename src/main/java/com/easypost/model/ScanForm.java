@@ -11,7 +11,7 @@ public class ScanForm extends EasyPostResource {
 	public String id;
 	Address fromAddress;
 	List<String> trackingCodes;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -34,16 +34,7 @@ public class ScanForm extends EasyPostResource {
 	}
 
 
-	// create
-	public static ScanForm create(Map<String, Object> params) throws EasyPostException {
-		return create(params, null);
-	}
-	public static ScanForm create(Map<String, Object> params, String apiKey) throws EasyPostException {
-		Map<String, Object> wrappedParams = new HashMap<String, Object>();
-		wrappedParams.put("scan_form", params);
-		
-		return request(RequestMethod.POST, classURL(ScanForm.class), wrappedParams, ScanForm.class, apiKey);
-	}
+	// create via Batch.createScanForm
 
 	// retrieve
 	public static ScanForm retrieve(String id) throws EasyPostException {
