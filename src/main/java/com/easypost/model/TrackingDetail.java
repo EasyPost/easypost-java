@@ -7,7 +7,7 @@ public class TrackingDetail {
 	String message;
 	Date datetime;
 	TrackingLocation trackingLocation;
-	
+
 	public String getStatus() {
 		return status;
 	}
