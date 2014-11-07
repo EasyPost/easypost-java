@@ -288,7 +288,8 @@ public class Shipment extends EasyPostResource {
 			RequestMethod.POST,
 			String.format("%s/buy", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
 
-		return this.refresh();
+		this.merge(this, response);
+		return this;
 	}
 
 	// refund
