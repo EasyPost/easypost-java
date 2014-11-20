@@ -1,11 +1,7 @@
 package com.easypost;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,14 +11,15 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.lang.InterruptedException;
-
-import com.easypost.EasyPost;
-import com.easypost.exception.EasyPostException;
-import com.easypost.model.Address;
-import com.easypost.model.Parcel;
 import com.easypost.model.Shipment;
 import com.easypost.model.Batch;
+import com.easypost.model.Tracker;
+import com.easypost.model.TrackingDetail;
+import com.easypost.model.TrackingLocation;
+
+import java.lang.InterruptedException;
+
+import com.easypost.exception.EasyPostException;
 
 public class EasyPostTest {
 
@@ -101,6 +98,44 @@ public class EasyPostTest {
     }
 
     assertNotNull(batch.getScanForm());
+  }
+
+  @Test
+  public void testShipmentWithTracker() throws EasyPostException {
+    // create and buy shipment
+    Shipment shipment = createDefaultShipmentDomestic();
+    List<String> buyCarriers = new ArrayList<String>();
+    buyCarriers.add("USPS");
+    shipment = shipment.buy(shipment.lowestRate(buyCarriers));
+
+    assertNotNull(shipment.getTracker());
+  }
+
+  @Test
+  public void testTrackerCreateAndRetrieve() throws EasyPostException {
+    // create test tracker
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("tracking_code","EZ2000000002");
+    params.put("carrier","USPS");
+    Tracker tracker = Tracker.create(params);
+
+    assertNotNull(tracker);
+
+    Tracker retrieved = Tracker.retrieve(tracker.getId());
+
+    assertNotNull(retrieved);
+    assertEquals("Tracker ids are not the same", tracker.getId(), retrieved.getId());
+    assertEquals("Tracker statuses are not the same", tracker.getStatus(), retrieved.getStatus());
+
+    TrackingDetail trackingDetail = tracker.getTrackingDetails().get(0);
+    TrackingDetail retrievedDetail = tracker.getTrackingDetails().get(0);
+
+    assertEquals("TrackingDetails are not the same", trackingDetail, retrievedDetail);
+
+    TrackingLocation trackingLocation = trackingDetail.getTrackingLocation();
+    TrackingLocation retrievedLocation = retrievedDetail.getTrackingLocation();
+
+    assertEquals("TrackingLocations are not the same", trackingLocation, retrievedLocation);
   }
 
 }
