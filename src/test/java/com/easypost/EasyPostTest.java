@@ -138,4 +138,19 @@ public class EasyPostTest {
     assertEquals("TrackingLocations are not the same", trackingLocation, retrievedLocation);
   }
 
+  @Test
+  public void testShipmentWithRateError() throws EasyPostException {
+    Map<String, Object> parcelMap = new HashMap<String, Object>();
+    parcelMap.put("weight", 10);
+    parcelMap.put("predefined_package", "Pak");
+
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("to_address", defaultToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    shipmentMap.put("parcel", parcelMap);
+    Shipment shipment = Shipment.create(shipmentMap);
+
+    assertNotNull(shipment.getMessages());
+  }
+
 }

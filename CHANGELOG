@@ -1,3 +1,8 @@
+=== 2.0.8 2014-12-18
+
+* Added ShipmentMessage type for Shipment.messages
+
+
 === 2.0.7 2014-11-04
 
 * Added Tracker to shipment buy response

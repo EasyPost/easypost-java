@@ -33,7 +33,7 @@ public class Shipment extends EasyPostResource {
 	String batchMessage;
 	String uspsZone;
 	Map<String, String> options;
-	List<String> messages;
+	List<ShipmentMessage> messages;
 	// ShipmentOptions options;
 
 	public String getId() {
@@ -197,10 +197,10 @@ public class Shipment extends EasyPostResource {
 		this.options = options;
 	}
 
-	public List<String> getMessages() {
+	public List<ShipmentMessage> getMessages() {
 		return messages;
 	}
-	public void setMessages(List<String> messages) {
+	public void setMessages(List<ShipmentMessage> messages) {
 		this.messages = messages;
 	}
 
