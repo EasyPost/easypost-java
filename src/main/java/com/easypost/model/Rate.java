@@ -11,15 +11,17 @@ public class Rate extends EasyPostResource {
 	public String id;
 	String carrier;
 	String service;
+  String serviceCode;
 	Float rate;
-	String shipmentId;
-	String serviceCode;
 	String currency;
-	int estDeliveryDays;
-  String estDeliveryDate;
-  int guaranteedDeliveryDays;
-  String guaranteedDeliveryDate;
-
+  Float retailRate;
+  String retailCurrency;
+  Number deliveryDays;
+  String deliveryDate;
+  Boolean deliveryDateGuaranteed;
+  Number estDeliveryDays;
+  String shipmentId;
+  String carrierAccountId;
 
 	public String getId() {
 		return id;
@@ -42,6 +44,13 @@ public class Rate extends EasyPostResource {
 		this.service = service;
 	}
 
+  public String getServiceCode() {
+    return serviceCode;
+  }
+  public void setServiceCode(String serviceCode) {
+    this.serviceCode = serviceCode;
+  }
+
 	public Float getRate() {
 		return rate;
 	}
@@ -49,19 +58,12 @@ public class Rate extends EasyPostResource {
 		this.rate = rate;
 	}
 
-	public String getShipmentId() {
-		return shipmentId;
-	}
-	public void setShipmentId(String shipmentId) {
-		this.shipmentId = shipmentId;
-	}
-
-	public String getServiceCode() {
-		return serviceCode;
-	}
-	public void setServiceCode(String serviceCode) {
-		this.serviceCode = serviceCode;
-	}
+  public Float getRetailRate() {
+    return retailRate;
+  }
+  public void setRetailRate(Float retailRate) {
+    this.retailRate = retailRate;
+  }
 
 	public String getCurrency() {
 		return currency;
@@ -70,47 +72,71 @@ public class Rate extends EasyPostResource {
 		this.currency = currency;
 	}
 
-	public int getEstDeliveryDays() {
-		return estDeliveryDays;
+  public String getRetailCurrency() {
+    return retailCurrency;
+  }
+  public void setRetailCurrency(String retailCurrency) {
+    this.retailCurrency = retailCurrency;
+  }
+
+	public Number getDeliveryDays() {
+		return deliveryDays;
 	}
-	public void setEstDeliveryDays(int estDeliveryDays) {
-		this.estDeliveryDays = estDeliveryDays;
+	public void setDeliveryDays(Number deliveryDays) {
+		this.deliveryDays = deliveryDays;
 	}
 
-	public String getEstDeliveryDate() {
-		return estDeliveryDate;
+	public String getDeliveryDate() {
+		return deliveryDate;
 	}
-	public void setEstDeliveryDate(String estDeliveryDate) {
-		this.estDeliveryDate = estDeliveryDate;
-	}
-
-	public int getGuaranteedDeliveryDays() {
-		return guaranteedDeliveryDays;
-	}
-	public void setGuaranteedDeliveryDays(int guaranteedDeliveryDays) {
-		this.guaranteedDeliveryDays = guaranteedDeliveryDays;
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 
-	public String getGuaranteedDeliveryDate() {
-		return guaranteedDeliveryDate;
+	public Boolean getDeliveryDateGuaranteed() {
+		return deliveryDateGuaranteed;
 	}
-	public void setGuaranteedDeliveryDate(String guaranteedDeliveryDate) {
-		this.guaranteedDeliveryDate = guaranteedDeliveryDate;
+	public void setDeliveryDateGuaranteed(Boolean deliveryDateGuaranteed) {
+		this.deliveryDateGuaranteed = deliveryDateGuaranteed;
 	}
 
+  public Number getEstDeliveryDays() {
+    return estDeliveryDays;
+  }
+  public void setEstDeliveryDays(Number estDeliveryDays) {
+    this.estDeliveryDays = estDeliveryDays;
+  }
 
-	public Rate(String id, String carrier, String service, Float rate, String shipmentId) {
+  public String getShipmentId() {
+    return shipmentId;
+  }
+  public void setShipmentId(String shipmentId) {
+    this.shipmentId = shipmentId;
+  }
+
+  public String getCarrierAccountId() {
+    return carrierAccountId;
+  }
+  public void setCarrierAccountId(String carrierAccountId) {
+    this.carrierAccountId = carrierAccountId;
+  }
+
+
+	public Rate(String id, String carrier, String service, Float rate, String currency, Float retailRate, String retailCurrency, Number deliveryDays, String deliveryDaye, Boolean deliveryDateGuaranteed, Number estDeliveryDays, String shipmentId, String carrierAccountId) {
 		this.id = id;
 		this.carrier = carrier;
 		this.service = service;
+    this.serviceCode = carrier.toLowerCase() + "." + service.toLowerCase();
 		this.rate = rate;
-		this.shipmentId = shipmentId;
 		this.currency = currency;
-		this.estDeliveryDays = estDeliveryDays;
-  	this.estDeliveryDate = estDeliveryDate;
-  	this.guaranteedDeliveryDays = guaranteedDeliveryDays;
-  	this.guaranteedDeliveryDate = guaranteedDeliveryDate;
-		this.serviceCode = carrier.toLowerCase() + "." + service.toLowerCase();
+    this.retailRate = retailRate;
+    this.retailCurrency = retailCurrency;
+  	this.deliveryDays = deliveryDays;
+    this.deliveryDate = deliveryDate;
+  	this.deliveryDateGuaranteed = deliveryDateGuaranteed;
+    this.estDeliveryDays = estDeliveryDays;
+    this.shipmentId = shipmentId;
+    this.carrierAccountId = carrierAccountId;
 	}
 
 	// retrieve

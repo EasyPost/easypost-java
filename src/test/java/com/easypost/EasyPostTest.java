@@ -153,4 +153,10 @@ public class EasyPostTest {
     assertNotNull(shipment.getMessages());
   }
 
+  @Test
+  public void testRateDeserialization() throws EasyPostException {
+    Shipment shipment = createDefaultShipmentDomestic();
+    assertNotNull(shipment.getRates().get(0).getCarrierAccountId());
+  }
+
 }

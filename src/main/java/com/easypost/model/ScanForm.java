@@ -9,6 +9,7 @@ import com.easypost.net.EasyPostResource;
 
 public class ScanForm extends EasyPostResource {
 	public String id;
+  String status;
 	Address fromAddress;
 	List<String> trackingCodes;
 
@@ -18,6 +19,13 @@ public class ScanForm extends EasyPostResource {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+  public String getStatus() {
+    return status;
+  }
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
 	public Address getFromAddress() {
 		return fromAddress;

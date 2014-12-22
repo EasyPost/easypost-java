@@ -1,3 +1,8 @@
+=== 2.0.9 2014-12-22
+
+* Added a number of new Rate attributes and Batch.numShipments, Batch.reference, ScanForm.status
+
+
 === 2.0.8 2014-12-18
 
 * Added ShipmentMessage type for Shipment.messages

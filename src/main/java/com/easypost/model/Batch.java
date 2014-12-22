@@ -12,10 +12,11 @@ public class Batch extends EasyPostResource {
 	String mode;
 	String state;
 	public BatchStatus status;
+  Number numShipments;
 	List<Shipment> shipments;
 	String labelUrl;
 	ScanForm scanForm;
-
+  String reference;
 
 	public String getId() {
 		return id;
@@ -38,6 +39,13 @@ public class Batch extends EasyPostResource {
 		this.state = state;
 	}
 
+  public Number getNumShipments() {
+    return numShipments;
+  }
+  public void setNumShipments(Number numShipments) {
+    this.numShipments = numShipments;
+  }
+
 	public List<Shipment> getShipments() {
 		return shipments;
 	}
@@ -58,6 +66,13 @@ public class Batch extends EasyPostResource {
 	public void setScanForm(ScanForm scanForm) {
 		this.scanForm = scanForm;
 	}
+
+  public String getReference() {
+    return reference;
+  }
+  public void setReference(String reference) {
+    this.reference = reference;
+  }
 
 
 	// create

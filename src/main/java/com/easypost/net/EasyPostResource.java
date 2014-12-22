@@ -308,7 +308,6 @@ public abstract class EasyPostResource {
 	private static String getResponseBody(InputStream responseStream) throws IOException {
 		String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next();
 		responseStream.close();
-
 		return rBody;
 	}
 
