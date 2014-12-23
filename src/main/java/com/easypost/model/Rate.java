@@ -122,7 +122,7 @@ public class Rate extends EasyPostResource {
   }
 
 
-	public Rate(String id, String carrier, String service, Float rate, String currency, Float retailRate, String retailCurrency, Number deliveryDays, String deliveryDaye, Boolean deliveryDateGuaranteed, Number estDeliveryDays, String shipmentId, String carrierAccountId) {
+	public Rate(String id, String carrier, String service, Float rate, String currency, Float retailRate, String retailCurrency, Number deliveryDays, String deliveryDate, Boolean deliveryDateGuaranteed, Number estDeliveryDays, String shipmentId, String carrierAccountId) {
 		this.id = id;
 		this.carrier = carrier;
 		this.service = service;
