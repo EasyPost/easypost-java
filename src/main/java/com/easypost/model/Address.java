@@ -9,6 +9,7 @@ import com.easypost.net.EasyPostResource;
 
 public class Address extends EasyPostResource {
 	public String id;
+  String mode;
 	String name;
 	String company;
 	String street1;
@@ -20,13 +21,23 @@ public class Address extends EasyPostResource {
 	String phone;
 	String email;
 	String message;
-	
+  String carrierFacility;
+  String federalTaxId;
+  Boolean residential;
+
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
+
+  public String getMode() {
+    return mode;
+  }
+  public void setMode(String mode) {
+    this.mode = mode;
+  }
 
 	public String getName() {
 		return name;
@@ -76,7 +87,7 @@ public class Address extends EasyPostResource {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
+
 	public String getCountry() {
 		return country;
 	}
@@ -105,6 +116,27 @@ public class Address extends EasyPostResource {
 		this.message = message;
 	}
 
+  public String getCarrierFacility() {
+    return carrierFacility;
+  }
+  public void setCarrierFacility(String carrierFacility) {
+    this.carrierFacility = carrierFacility;
+  }
+
+  public String getFederalTaxId() {
+    return federalTaxId;
+  }
+  public void setFederalTaxId(String federalTaxId) {
+    this.federalTaxId = federalTaxId;
+  }
+
+  public Boolean getResidential() {
+    return residential;
+  }
+  public void setResidential(Boolean residential) {
+    this.residential = residential;
+  }
+
 	// create
 	public static Address create(Map<String, Object> params) throws EasyPostException {
 		return create(params, null);
@@ -112,7 +144,7 @@ public class Address extends EasyPostResource {
 	public static Address create(Map<String, Object> params, String apiKey) throws EasyPostException {
 		Map<String, Object> wrappedParams = new HashMap<String, Object>();
 		wrappedParams.put("address", params);
-		
+
 		return request(RequestMethod.POST, classURL(Address.class), wrappedParams, Address.class, apiKey);
 	}
 
@@ -139,14 +171,14 @@ public class Address extends EasyPostResource {
 	public static Address createAndVerify(Map<String, Object> params, String apiKey) throws EasyPostException {
 		Map<String, Object> wrappedParams = new HashMap<String, Object>();
 		wrappedParams.put("address", params);
-		
+
 		AddressVerifyResponse response;
 		response = request(RequestMethod.GET, String.format("%s/create_and_verify", classURL(Address.class)), null, AddressVerifyResponse.class, apiKey);
-        
+
         if (response.message != null) {
         	response.address.message = response.message;
         }
-        // System.out.println(response.address);	
+        // System.out.println(response.address);
         return response.address;
 	}
 
@@ -157,11 +189,11 @@ public class Address extends EasyPostResource {
 	public Address verify(String apiKey) throws EasyPostException {
 		AddressVerifyResponse response;
 		response = request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null, AddressVerifyResponse.class, apiKey);
-        
+
         if (response.message != null) {
         	response.address.message = response.message;
         }
-        // System.out.println(response.address);	
+        // System.out.println(response.address);
         return response.address;
 	}
 

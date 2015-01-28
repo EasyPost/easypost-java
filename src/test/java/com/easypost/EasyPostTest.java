@@ -2,6 +2,7 @@ package com.easypost;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,8 +12,9 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
-import com.easypost.model.Shipment;
+import com.easypost.model.Address;
 import com.easypost.model.Batch;
+import com.easypost.model.Shipment;
 import com.easypost.model.Tracker;
 import com.easypost.model.TrackingDetail;
 import com.easypost.model.TrackingLocation;
@@ -59,45 +61,6 @@ public class EasyPostTest {
     defaultParcel.put("width", 8.3);
     defaultParcel.put("height", 6);
     defaultParcel.put("weight", 10);
-  }
-
-  @Test
-  public void testBatchCreateScanForm() throws EasyPostException, InterruptedException {
-    // create and buy shipments
-    Shipment shipment1 = createDefaultShipmentDomestic();
-    Shipment shipment2 = createDefaultShipmentDomestic();
-    List<String> buyCarriers = new ArrayList<String>();
-    buyCarriers.add("USPS");
-    shipment1.buy(shipment1.lowestRate(buyCarriers));
-    shipment2.buy(shipment2.lowestRate(buyCarriers));
-
-    // create batch and wait until ready
-    Batch batch = Batch.create();
-    while(true) {
-        batch = batch.refresh();
-        if ("created".equals(batch.getState())) {
-          break;
-        }
-        Thread.sleep(3000);
-    }
-
-    // add shipments to batch
-    List<Shipment> shipments = new ArrayList<Shipment>();
-    shipments.add(shipment1);
-    shipments.add(shipment2);
-    batch.addShipments(shipments);
-
-    // create manifest and wait for it to be ready
-    batch.createScanForm();
-    while(true) {
-        batch = batch.refresh();
-        if (batch.getScanForm() != null) {
-            break;
-        }
-        Thread.sleep(3000);
-    }
-
-    assertNotNull(batch.getScanForm());
   }
 
   @Test
@@ -157,6 +120,108 @@ public class EasyPostTest {
   public void testRateDeserialization() throws EasyPostException {
     Shipment shipment = createDefaultShipmentDomestic();
     assertNotNull(shipment.getRates().get(0).getCarrierAccountId());
+  }
+
+  @Test
+  public void testAddressResidentialOption() throws EasyPostException {
+    // shipment residential_to_address option
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("to_address", defaultToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    shipmentMap.put("parcel", defaultParcel);
+    Map<String, Object> shipmentOptionsMap = new HashMap<String, Object>();
+    shipmentOptionsMap.put("residential_to_address", 1);
+    shipmentMap.put("options", shipmentOptionsMap);
+
+    Shipment shipment = Shipment.create(shipmentMap);
+    assertTrue(shipment.getToAddress().getResidential());
+  }
+
+  @Test
+  public void testAddressResidentialAttribute() throws EasyPostException {
+    // toAddress.residential flag
+    defaultToAddress.put("residential", 1);
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("to_address", defaultToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    shipmentMap.put("parcel", defaultParcel);
+
+    Shipment shipment = Shipment.create(shipmentMap);
+    assertTrue(shipment.getToAddress().getResidential());
+  }
+
+  @Test
+  public void testBatchBuy() throws EasyPostException, InterruptedException {
+    List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("to_address", defaultToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    shipmentMap.put("parcel", defaultParcel);
+    shipmentMap.put("carrier", "USPS");
+    shipmentMap.put("service", "Priority");
+    shipments.add(shipmentMap);
+
+    // create batch and wait until ready
+    Map<String, Object> batchMap = new HashMap<String, Object>();
+    batchMap.put("shipments", shipments);
+    Batch batch = Batch.create(batchMap);
+    while(true) {
+      batch = batch.refresh();
+      if ("created".equals(batch.getState())) {
+        break;
+      }
+      Thread.sleep(3000);
+    }
+
+    batch.buy();
+    while(true) {
+      batch = batch.refresh();
+      if ("purchased".equals(batch.getState())) {
+        break;
+      }
+      Thread.sleep(3000);
+    }
+
+    assertEquals("Batch state is not purchased.", batch.getState(), "purchased");
+  }
+
+  @Test
+  public void testBatchCreateScanForm() throws EasyPostException, InterruptedException {
+    // create and buy shipments
+    Shipment shipment1 = createDefaultShipmentDomestic();
+    Shipment shipment2 = createDefaultShipmentDomestic();
+    List<String> buyCarriers = new ArrayList<String>();
+    buyCarriers.add("USPS");
+    shipment1.buy(shipment1.lowestRate(buyCarriers));
+    shipment2.buy(shipment2.lowestRate(buyCarriers));
+
+    // create batch and wait until ready
+    Batch batch = Batch.create();
+    while(true) {
+      batch = batch.refresh();
+      if ("created".equals(batch.getState())) {
+        break;
+      }
+      Thread.sleep(3000);
+    }
+
+    // add shipments to batch
+    List<Shipment> shipments = new ArrayList<Shipment>();
+    shipments.add(shipment1);
+    shipments.add(shipment2);
+    batch.addShipments(shipments);
+
+    // create manifest and wait for it to be ready
+    batch.createScanForm();
+    while(true) {
+      batch = batch.refresh();
+      if (batch.getScanForm() != null) {
+          break;
+      }
+      Thread.sleep(3000);
+    }
+
+    assertNotNull(batch.getScanForm());
   }
 
 }
