@@ -1,3 +1,8 @@
+=== 2.0.11 2015-02-20
+
+* Added Pickup classes and pickup create, buy, cancel methods
+
+
 === 2.0.10 2015-01-27
 
 * Added Address.residential attribute, and Batch.buy function.
