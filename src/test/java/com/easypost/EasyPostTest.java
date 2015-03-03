@@ -20,6 +20,7 @@ import com.easypost.model.TrackingLocation;
 import com.easypost.model.Pickup;
 import com.easypost.model.PickupRate;
 import com.easypost.model.CarrierAccount;
+import com.easypost.model.Order;
 
 import java.lang.InterruptedException;
 
@@ -40,6 +41,12 @@ public class EasyPostTest {
     shipmentMap.put("parcel", defaultParcel);
     Shipment shipment = Shipment.create(shipmentMap);
     return shipment;
+  }
+
+  static Map<String, Object> orderShipment() throws EasyPostException {
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("parcel", defaultParcel);
+    return shipmentMap;
   }
 
   @BeforeClass
@@ -283,5 +290,30 @@ public class EasyPostTest {
     assertEquals(retrieved.getMessages().size(), 0);
     assertEquals(retrieved.getId(), pickup.getId());
     assertEquals(retrieved.getStatus(), pickup.getStatus());
+
+  @Test
+  public void testOrder() throws EasyPostException {
+    // create and buy multi-shipment order
+    Map<String, Object> shipment_1 = orderShipment();
+    Map<String, Object> shipment_2 = orderShipment();
+    List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
+    shipments.add(shipment_1);
+    shipments.add(shipment_2);
+
+    Map<String, Object> orderParams = new HashMap<String, Object>();
+    orderParams.put("shipments", shipments);
+    orderParams.put("from_address", defaultFromAddress);
+    orderParams.put("to_address", defaultToAddress);
+    Order order = Order.create(orderParams);
+
+    Map<String, Object> buyParams = new HashMap<String, Object>();
+    buyParams.put("carrier", "USPS");
+    buyParams.put("service", "Priority");
+
+    order.buy(buyParams);
+
+    assertNotNull(order.getShipments().get(0).getTracker());
+    assertNotNull(order.getShipments().get(0).getPostageLabel().getLabelUrl());
+    assertNotNull(order.getShipments().get(1).getPostageLabel().getLabelUrl());
   }
 }

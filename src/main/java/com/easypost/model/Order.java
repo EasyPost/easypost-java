@@ -187,9 +187,12 @@ public class Order extends EasyPostResource {
     return this.buy(params, null);
   }
   public Order buy(Map<String, Object> params, String apiKey) throws EasyPostException {
-    return request(
+    Order response = request(
       RequestMethod.POST,
       String.format("%s/buy", instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
+
+    this.merge(this, response);
+      return this;
   }
 
 }
