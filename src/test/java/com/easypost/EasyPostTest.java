@@ -290,6 +290,7 @@ public class EasyPostTest {
     assertEquals(retrieved.getMessages().size(), 0);
     assertEquals(retrieved.getId(), pickup.getId());
     assertEquals(retrieved.getStatus(), pickup.getStatus());
+  }
 
   @Test
   public void testOrder() throws EasyPostException {
