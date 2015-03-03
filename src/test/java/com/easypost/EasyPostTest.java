@@ -252,8 +252,6 @@ public class EasyPostTest {
 
     order.buy(buyParams);
 
-    System.out.println(order.prettyPrint());
-
     assertNotNull(order.getShipments().get(0).getTracker());
     assertNotNull(order.getShipments().get(0).getPostageLabel().getLabelUrl());
     assertNotNull(order.getShipments().get(1).getPostageLabel().getLabelUrl());
