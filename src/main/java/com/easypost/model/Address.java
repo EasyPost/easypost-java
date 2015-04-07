@@ -173,7 +173,7 @@ public class Address extends EasyPostResource {
 		wrappedParams.put("address", params);
 
 		AddressVerifyResponse response;
-		response = request(RequestMethod.GET, String.format("%s/create_and_verify", classURL(Address.class)), null, AddressVerifyResponse.class, apiKey);
+		response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)), wrappedParams, AddressVerifyResponse.class, apiKey);
 
         if (response.message != null) {
         	response.address.message = response.message;
@@ -181,6 +181,25 @@ public class Address extends EasyPostResource {
         // System.out.println(response.address);
         return response.address;
 	}
+
+  // createAndVerifyWithCarrier
+  public static Address createAndVerifyWithCarrier(Map<String, Object> params, String carrier) throws EasyPostException {
+    return createAndVerifyWithCarrier(params, carrier, null);
+  }
+  public static Address createAndVerifyWithCarrier(Map<String, Object> params, String carrier, String apiKey) throws EasyPostException {
+    Map<String, Object> wrappedParams = new HashMap<String, Object>();
+    wrappedParams.put("address", params);
+    wrappedParams.put("carrier", carrier);
+
+    AddressVerifyResponse response;
+    response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)), wrappedParams, AddressVerifyResponse.class, apiKey);
+
+    if (response.message != null) {
+      response.address.message = response.message;
+    }
+    // System.out.println(response.address);
+    return response.address;
+  }
 
 	// verify
 	public Address verify() throws EasyPostException {
@@ -196,5 +215,23 @@ public class Address extends EasyPostResource {
         // System.out.println(response.address);
         return response.address;
 	}
+
+  // verifyWithCarrier
+  public Address verifyWithCarrier(String carrier) throws EasyPostException {
+    return this.verifyWithCarrier(carrier, null);
+  }
+  public Address verifyWithCarrier(String carrier, String apiKey) throws EasyPostException {
+    Map<String, Object> wrappedParams = new HashMap<String, Object>();
+    wrappedParams.put("carrier", carrier);
+
+    AddressVerifyResponse response;
+    response = request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null, AddressVerifyResponse.class, apiKey);
+
+    if (response.message != null) {
+      response.address.message = response.message;
+    }
+    // System.out.println(response.address);
+    return response.address;
+  }
 
 }

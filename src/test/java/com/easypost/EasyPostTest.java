@@ -1,7 +1,10 @@
 package com.easypost;
 
+import com.easypost.model.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,17 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
-import com.easypost.model.Address;
-import com.easypost.model.Batch;
-import com.easypost.model.Shipment;
-import com.easypost.model.Tracker;
-import com.easypost.model.TrackingDetail;
-import com.easypost.model.TrackingLocation;
-import com.easypost.model.Pickup;
-import com.easypost.model.PickupRate;
-import com.easypost.model.CarrierAccount;
-import com.easypost.model.Order;
 
 import java.lang.InterruptedException;
 
@@ -159,6 +151,62 @@ public class EasyPostTest {
 
     Shipment shipment = Shipment.create(shipmentMap);
     assertTrue(shipment.getToAddress().getResidential());
+  }
+
+  @Test
+     public void testAddressVerifies() throws EasyPostException {
+    Map<String, Object> addressHash = new HashMap<String, Object>();
+    addressHash.put("street1", "164 Townsend St");
+    addressHash.put("street2", "Unit 1");
+    addressHash.put("city", "San Francisco");
+    addressHash.put("state", "CA");
+    addressHash.put("zip", "19087");
+
+    Address address = Address.create(addressHash);
+    Address verified = address.verify();
+
+    assertNull("Verified Address has no error message", verified.getMessage());
+    assertEquals("Address did not verify as expected", verified.getZip(), "94107-1990");
+
+    Address createdAndVerified = Address.createAndVerify(addressHash);
+
+    assertNull("Verified Address has no error message", createdAndVerified.getMessage());
+    assertEquals("Address did not verify as expected", createdAndVerified.getZip(), "94107-1990");
+  }
+
+  @Test
+  public void testAddressVerifiesWithCarrier() throws EasyPostException {
+    Map<String, Object> addressHash = new HashMap<String, Object>();
+    addressHash.put("street1", "164 Townsend St");
+    addressHash.put("street2", "Unit 1");
+    addressHash.put("city", "San Francisco");
+    addressHash.put("state", "CA");
+    addressHash.put("zip", "19087");
+
+    Address address = Address.create(addressHash);
+    Address verified = address.verifyWithCarrier("usps");
+
+    assertNull("Verified Address has no error message", verified.getMessage());
+    assertEquals("Address did not verify as expected", verified.getZip(), "94107-1990");
+
+    Address createdAndVerified = Address.createAndVerifyWithCarrier(addressHash, "usps");
+
+    assertNull("Verified Address has no error message", createdAndVerified.getMessage());
+    assertEquals("Address did not verify as expected", createdAndVerified.getZip(), "94107-1990");
+  }
+
+  @Rule
+  public ExpectedException exception = ExpectedException.none();
+  @Test
+  public void testAddressErrorParses() throws EasyPostException {
+    Map<String, Object> addressHash = new HashMap<String, Object>();
+    addressHash.put("street1", "118 Milky Way");
+    addressHash.put("zip", "19087");
+
+    Address address = Address.create(addressHash);
+
+    exception.expect(com.easypost.exception.EasyPostException.class);
+    address.verify();
   }
 
   @Test
