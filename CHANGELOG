@@ -1,3 +1,9 @@
+=== 2.0.13 2015-04-07
+
+* Fixed Address createAndVerify method
+* Added Address verifyWithCarrier and createAndVerifyWithCarrier methods
+
+
 === 2.0.12 2015-03-03
 
 * Added Pickup classes and pickup create, buy, cancel methods
