@@ -41,6 +41,9 @@ public class EasyPostTest {
     return shipmentMap;
   }
 
+  @Rule
+  public ExpectedException exception = ExpectedException.none();
+
   @BeforeClass
   public static void setUp() {
     EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi"; // easypost public test key
@@ -195,8 +198,6 @@ public class EasyPostTest {
     assertEquals("Address did not verify as expected", createdAndVerified.getZip(), "94107-1990");
   }
 
-  @Rule
-  public ExpectedException exception = ExpectedException.none();
   @Test
   public void testAddressErrorParses() throws EasyPostException {
     Map<String, Object> addressHash = new HashMap<String, Object>();
@@ -206,6 +207,7 @@ public class EasyPostTest {
     Address address = Address.create(addressHash);
 
     exception.expect(com.easypost.exception.EasyPostException.class);
+    exception.expectMessage("ADDRESS.VERIFY.FAILURE: Address Not Found.");
     address.verify();
   }
 

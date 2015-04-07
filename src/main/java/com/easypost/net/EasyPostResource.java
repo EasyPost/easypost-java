@@ -303,6 +303,7 @@ public abstract class EasyPostResource {
 		String code;
 		String param;
 		String error;
+    List<Object> errors;
 	}
 
 	private static String getResponseBody(InputStream responseStream) throws IOException {
@@ -419,17 +420,40 @@ public abstract class EasyPostResource {
 	}
 
 	private static void handleAPIError(String rBody, int rCode) throws EasyPostException {
-		try {
-			EasyPostResource.Error error = gson.fromJson(rBody, EasyPostResource.Error.class);
+    try {
+      Map<String, Map<String, Object>> errorHash = gson.fromJson(rBody, HashMap.class);
+      Map<String, Object> errorInfoHash = errorHash.get("error");
 
-			if(error.error.length() > 0) {
-				throw new EasyPostException(error.error);
-			}
+      String errorMessage = (String) errorInfoHash.get("message");
+      String code = (String) errorInfoHash.get("code");
+      if (code != null) {
+        errorMessage = code.concat(": ").concat(errorMessage);
+      }
 
-			throw new EasyPostException(error.message, error.param, null);
-		} catch (Exception e) {
-            throw new EasyPostException(String.format("An error occured. Response code: %s Response body: %s", rCode, rBody));
+      throw new EasyPostException(errorMessage);
+    }
+    catch(EasyPostException ex) {
+      throw ex;
+    }
+    catch(Exception ex) {
+      try {
+        EasyPostResource.Error error = gson.fromJson(rBody, EasyPostResource.Error.class);
+
+        if (error.error.length() > 0) {
+          throw new EasyPostException(error.error);
         }
+
+        throw new EasyPostException(error.message, error.param, null);
+      }
+      catch (EasyPostException e) {
+        throw e;
+      }
+      catch (Exception e) {
+        System.out.println("HERRO");
+
+        throw new EasyPostException(String.format("An error occured. Response code: %s Response body: %s", rCode, rBody));
+      }
+    }
 	}
 
 	private static EasyPostResponse makeAppEngineRequest(RequestMethod method, String url, String query, String apiKey) throws EasyPostException {
