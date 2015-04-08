@@ -449,8 +449,6 @@ public abstract class EasyPostResource {
         throw e;
       }
       catch (Exception e) {
-        System.out.println("HERRO");
-
         throw new EasyPostException(String.format("An error occured. Response code: %s Response body: %s", rCode, rBody));
       }
     }
