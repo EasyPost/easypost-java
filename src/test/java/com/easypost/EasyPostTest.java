@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -81,14 +82,20 @@ public class EasyPostTest {
   }
 
   @Test
-  public void testTrackerCreateAndRetrieve() throws EasyPostException {
+  public void testTrackerCreateAndRetrieve() throws EasyPostException, ParseException {
     // create test tracker
     Map<String, Object> params = new HashMap<String, Object>();
-    params.put("tracking_code","EZ2000000002");
-    params.put("carrier","USPS");
+    params.put("tracking_code","EZ4000000004");
+    params.put("carrier", "FedEx");
     Tracker tracker = Tracker.create(params);
 
     assertNotNull(tracker);
+
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy kk:mm:ss zzz");
+    Date date = sdf.parse("08/26/2014 17:00:00 PDT");
+    assertEquals(tracker.getEstDeliveryDate(), date);
+    assertEquals(tracker.getWeight(), 17.6, 0.0001);
+    assertEquals(tracker.getSignedBy(), "John Tester");
 
     Tracker retrieved = Tracker.retrieve(tracker.getId());
 
