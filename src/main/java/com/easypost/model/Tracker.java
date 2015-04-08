@@ -16,7 +16,7 @@ public class Tracker extends EasyPostResource {
 	String shipmentId;
 	List<TrackingDetail> trackingDetails;
 	float weight;
-	Date EstDeliveryDate;
+	Date estDeliveryDate;
 	String signedBy;
 
 	public String getId() {
@@ -69,10 +69,10 @@ public class Tracker extends EasyPostResource {
 	}
 
 	public Date getEstDeliveryDate() {
-		return EstDeliveryDate;
+		return estDeliveryDate;
 	}
 	public void setEstDeliveryDate(Date estDeliveryDate) {
-		EstDeliveryDate = estDeliveryDate;
+		this.estDeliveryDate = estDeliveryDate;
 	}
 
 	public String getSignedBy() {
