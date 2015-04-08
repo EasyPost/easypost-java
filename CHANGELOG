@@ -1,3 +1,8 @@
+=== 2.0.15 2015-04-08
+
+* Updated error handling to provide clearer error messages
+
+
 === 2.0.14 2015-04-08
 
 * Updated Tracker model to have weight, signedBy and estDeliveryDate fields
