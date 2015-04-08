@@ -3,6 +3,7 @@ package com.easypost.model;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Date;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
@@ -14,6 +15,9 @@ public class Tracker extends EasyPostResource {
 	String status;
 	String shipmentId;
 	List<TrackingDetail> trackingDetails;
+	float weight;
+	Date estDeliveryDate;
+	String signedBy;
 
 	public String getId() {
 		return id;
@@ -57,6 +61,26 @@ public class Tracker extends EasyPostResource {
 		this.trackingDetails = trackingDetails;
 	}
 
+	public float getWeight() {
+		return weight;
+	}
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+
+	public Date getEstDeliveryDate() {
+		return estDeliveryDate;
+	}
+	public void setEstDeliveryDate(Date estDeliveryDate) {
+		this.estDeliveryDate = estDeliveryDate;
+	}
+
+	public String getSignedBy() {
+		return signedBy;
+	}
+	public void setSignedBy(String signedBy) {
+		this.signedBy = signedBy;
+	}
 
 	// create
 	public static Tracker create(Map<String, Object> params) throws EasyPostException {

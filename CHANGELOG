@@ -1,3 +1,8 @@
+=== 2.0.14 2015-04-08
+
+* Updated Tracker model to have weight, signedBy and estDeliveryDate fields
+
+
 === 2.0.13 2015-04-07
 
 * Fixed Address createAndVerify method
