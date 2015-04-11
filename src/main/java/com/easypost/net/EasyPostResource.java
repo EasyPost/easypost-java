@@ -134,7 +134,7 @@ public abstract class EasyPostResource {
 	private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
 
 	protected enum RequestMethod {
-		GET, POST, DELETE
+		GET, POST, DELETE, PUT
 	}
 
 	private static String urlEncodePair(String k, String v) throws UnsupportedEncodingException {
@@ -237,6 +237,13 @@ public abstract class EasyPostResource {
 		return conn;
 	}
 
+	private static javax.net.ssl.HttpsURLConnection createPutConnection(String url, String query, String apiKey) throws IOException {
+		String putUrl = String.format("%s?%s", url, query);
+		javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(putUrl, apiKey);
+		conn.setRequestMethod("PUT");
+		return conn;
+	}
+
 	private static String createQuery(Map<String, Object> params) throws UnsupportedEncodingException {
 		Map<String, String> flatParams = flattenParams(params);
 		StringBuffer queryStringBuffer = new StringBuffer();
@@ -323,6 +330,9 @@ public abstract class EasyPostResource {
 				break;
 			case DELETE:
 				conn = createDeleteConnection(url, query, apiKey);
+				break;
+			case PUT:
+				conn = createPutConnection(url, query, apiKey);
 				break;
 			default:
 				throw new EasyPostException(

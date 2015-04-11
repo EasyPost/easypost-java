@@ -372,4 +372,68 @@ public class EasyPostTest {
     assertNotNull(order.getShipments().get(0).getPostageLabel().getLabelUrl());
     assertNotNull(order.getShipments().get(1).getPostageLabel().getLabelUrl());
   }
+
+	@Test
+	public void testCarrierAccountMutability() throws EasyPostException {
+		Map<String, Object> listHash = new HashMap<String, Object>();
+		listHash.put("type", "UpsAccount");
+		List<CarrierAccount> carrierAccounts = CarrierAccount.all(listHash);
+		assertNotNull(carrierAccounts);
+
+		int originalNumCarrierAccounts = carrierAccounts.size();
+
+		String description = "A java client library test account";
+		String reference = "FedexJavaTest-1";
+		String accountNumber = "B2B2B2";
+		Map<String, Object> credentials = new HashMap<String, Object>();
+		credentials.put("account_number", accountNumber);
+		credentials.put("user_id", "UPSDOTCOM_USERNAME");
+		credentials.put("password", "UPSDOTCOM_PASSWORD");
+		credentials.put("access_license_number", "UPS_ACCESS_LICENSE_NUMBER");
+
+		Map<String, Object> carrierParams = new HashMap<String, Object>();
+		carrierParams.put("type", "UpsAccount");
+		carrierParams.put("description", description);
+		carrierParams.put("reference", reference);
+		carrierParams.put("credentials", credentials);
+
+		CarrierAccount carrierAccount = CarrierAccount.create(carrierParams);
+		CarrierAccount retrieved = CarrierAccount.retrieve(carrierAccount.getId());
+
+		assertNotNull(retrieved);
+		assertEquals(carrierAccount.getId(), retrieved.getId());
+		assertEquals(retrieved.getDescription(), description);
+		assertEquals(retrieved.getReference(), reference);
+		assertEquals(retrieved.getCredentials().get("account_number"), accountNumber);
+
+		List<CarrierAccount> updatedCarrierAccounts = CarrierAccount.all(listHash);
+		assertNotNull(updatedCarrierAccounts);
+
+		int updatedNumCarrierAccounts = updatedCarrierAccounts.size();
+		assertEquals(originalNumCarrierAccounts + 1, updatedNumCarrierAccounts);
+
+		String newDescription = "A java client library test account that has been edited";
+
+		String newAccountNumber = "C3C3C3C3";
+		credentials.put("account_number", newAccountNumber);
+
+		Map<String, Object> newParams = new HashMap<String, Object>();
+		newParams.put("description", newDescription);
+		newParams.put("credentials", credentials);
+
+		CarrierAccount mutated = retrieved.update(newParams);
+
+		assertNotNull(mutated);
+		assertEquals(carrierAccount.getId(), mutated.getId());
+		assertEquals(mutated.getDescription(), newDescription);
+		assertEquals(mutated.getCredentials().get("account_number"), newAccountNumber);
+
+		mutated.delete();
+
+		List<CarrierAccount> deletedCarrierAccounts = CarrierAccount.all(listHash);
+		assertNotNull(deletedCarrierAccounts);
+
+		int finalNumCarrierAccounts = deletedCarrierAccounts.size();
+		assertEquals(originalNumCarrierAccounts, finalNumCarrierAccounts);
+	}
 }
