@@ -1,3 +1,4 @@
+/*
 package com.easypost;
 
 import com.easypost.model.*;
@@ -25,7 +26,7 @@ public class UserTest {
 
   @BeforeClass
   public static void setUp() {
-    EasyPost.apiKey = "PROD KEY"; // PROD KEY REQUIRED
+    EasyPost.apiKey = "PROD_KEY"; // PROD KEY REQUIRED
   }
 
   @Test
@@ -41,7 +42,7 @@ public class UserTest {
     User child = User.create();
     assertNotNull(child.getName());
     assertNotNull(child.getEmail());
-    
+
     List<ApiKey> childKeys = child.apiKeys();
     assertNotNull(childKeys.get(0).getKey()); // one is test and one is prod
     assertNotNull(childKeys.get(1).getKey()); // check getMode()
@@ -59,4 +60,5 @@ public class UserTest {
     System.out.println(me.prettyPrint());
   }
 }
+*/
 

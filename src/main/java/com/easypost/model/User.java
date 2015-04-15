@@ -91,9 +91,12 @@ public class User extends EasyPostResource {
       return update(params, null);
     }
     public User update(Map<String, Object> params, String apiKey) throws EasyPostException {
-      User response = request(RequestMethod.PATCH,
-        String.format("%s/update", instanceURL(User.class, this.getId())),
-        params, User.class, apiKey);
+      Map<String, Object> wrappedParams = new HashMap<String, Object>();
+      wrappedParams.put("user", params);
+
+      User response = request(RequestMethod.PUT,
+        instanceURL(User.class, this.getId()),
+        wrappedParams, User.class, apiKey);
 
       this.merge(this, response);
       return this;
