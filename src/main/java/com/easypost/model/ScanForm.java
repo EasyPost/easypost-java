@@ -13,6 +13,8 @@ public class ScanForm extends EasyPostResource {
 	Address fromAddress;
 	List<String> trackingCodes;
 
+	String formUrl;
+
 	public String getId() {
 		return id;
 	}
@@ -41,6 +43,16 @@ public class ScanForm extends EasyPostResource {
 		this.trackingCodes = trackingCodes;
 	}
 
+	public String getFormUrl() {
+		return formUrl;
+	}
+	public void setFormUrl(String formUrl) {
+		this.formUrl = formUrl;
+	}
+
+	public String getLabelUrl() {
+		return this.getFormUrl();
+	}
 
 	// create via Batch.createScanForm
 

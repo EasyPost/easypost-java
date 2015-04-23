@@ -10,3 +10,9 @@ Icon
 .project
 .settings
 target
+
+.idea/
+src/main/main.iml
+src/test/test.iml
+
+*.class
