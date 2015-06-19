@@ -377,6 +377,30 @@ public class EasyPostTest {
     assertNotNull(order.getShipments().get(1).getPostageLabel().getLabelUrl());
   }
 
+  /*
+  // This test requires a FedEx account
+  @Test
+  public void testShipmentWithForm() throws EasyPostException {
+    Map<String, Object> optionsMap = new HashMap<String, Object>();
+    optionsMap.put("cod_amount", 10);
+
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("to_address", defaultToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    shipmentMap.put("parcel", defaultParcel);
+    shipmentMap.put("options", optionsMap);
+    Shipment shipment = Shipment.create(shipmentMap);
+
+    List<String> buyCarriers = new ArrayList<String>();
+    buyCarriers.add("FEDEX");
+    List<String> buyServices = new ArrayList<String>();
+    buyServices.add("FEDEX_2_DAY");
+    shipment.buy(shipment.lowestRate(buyCarriers, buyServices));
+
+    assertNotNull(shipment.getForms().get(0).getFormUrl());
+  }
+  */
+
 //	//  This test requires a production api key
 //	@Test
 //	public void testCarrierAccountMutability() throws EasyPostException {

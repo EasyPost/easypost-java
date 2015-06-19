@@ -24,6 +24,7 @@ public class Shipment extends EasyPostResource {
 	List<Rate> rates;
 	PostageLabel postageLabel;
 	ScanForm scanForm;
+	List<Form> forms;
 	Tracker tracker;
 	String insurance;
 	String trackingCode;
@@ -201,6 +202,13 @@ public class Shipment extends EasyPostResource {
 	}
 	public void setMessages(List<ShipmentMessage> messages) {
 		this.messages = messages;
+	}
+
+        public List<Form> getForms() {
+		return forms;
+	}
+	public void setForms(List<Form> forms) {
+		this.forms = forms;
 	}
 
 
