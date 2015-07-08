@@ -100,6 +100,10 @@ public class EasyPostTest {
     assertEquals("Tracker ids are not the same", tracker.getId(), retrieved.getId());
     assertEquals("Tracker statuses are not the same", tracker.getStatus(), retrieved.getStatus());
 
+    assertNotNull(tracker.getCarrier());
+    assertNotNull(retrieved.getCarrier());
+    assertEquals("Tracker carriers are not the same", tracker.getCarrier(), retrieved.getCarrier());
+
     TrackingDetail trackingDetail = tracker.getTrackingDetails().get(0);
     TrackingDetail retrievedDetail = tracker.getTrackingDetails().get(0);
 

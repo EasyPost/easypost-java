@@ -14,6 +14,7 @@ public class Tracker extends EasyPostResource {
 	String trackingCode;
 	String status;
 	String shipmentId;
+	String carrier;
 	List<TrackingDetail> trackingDetails;
 	float weight;
 	Date estDeliveryDate;
@@ -38,6 +39,14 @@ public class Tracker extends EasyPostResource {
 	}
 	public void setShipmentId(String shipmentId) {
 		this.shipmentId = shipmentId;
+	}
+
+	public String getCarrier() {
+		return carrier;
+	}
+
+	public void setCarrier(String carrier) {
+		this.carrier = carrier;
 	}
 
 	public String getTrackingCode() {

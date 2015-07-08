@@ -1,3 +1,8 @@
+=== 2.1.2 2015-07-08
+
+* Added Carrier field to the tracker model.
+
+
 === 2.1.1 2015-06-19
 
 * Added Form model and Shipment.forms.
