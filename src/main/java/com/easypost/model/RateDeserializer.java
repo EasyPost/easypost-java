@@ -11,10 +11,23 @@ import com.google.gson.JsonParseException;
 import com.easypost.model.Rate;
 
 public class RateDeserializer implements JsonDeserializer<Rate> {
-	@Override
-	public Rate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+  @Override
+  public Rate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    JsonObject jo = (JsonObject) json;
 
-		JsonObject jo = (JsonObject) json;
+    Float listRate;
+    if(jo.get("list_rate").isJsonNull()) {
+      listRate = null;
+    } else {
+      listRate = jo.get("list_rate").getAsFloat();
+    }
+
+    String listCurrency;
+    if(jo.get("list_currency").isJsonNull()) {
+      listCurrency = null;
+    } else {
+      listCurrency = jo.get("list_currency").getAsString();
+    }
 
     Float retailRate;
     if(jo.get("retail_rate").isJsonNull()) {
@@ -24,7 +37,7 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
     }
 
     String retailCurrency;
-    if(jo.get("retail_rate").isJsonNull()) {
+    if(jo.get("retail_currency").isJsonNull()) {
       retailCurrency = null;
     } else {
       retailCurrency = jo.get("retail_currency").getAsString();
@@ -58,20 +71,22 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
       estDeliveryDays = jo.get("est_delivery_days").getAsNumber();
     }
 
-		return new Rate(
-			jo.get("id").getAsString(),
-			jo.get("carrier").getAsString(),
-			jo.get("service").getAsString(),
-			jo.get("rate").getAsFloat(),
+    return new Rate(
+      jo.get("id").getAsString(),
+      jo.get("carrier").getAsString(),
+      jo.get("service").getAsString(),
+      jo.get("rate").getAsFloat(),
       jo.get("currency").getAsString(),
+      listRate,
+      listCurrency,
       retailRate,
       retailCurrency,
       deliveryDays,
       deliveryDate,
       deliveryDateGuaranteed,
       estDeliveryDays,
-			jo.get("shipment_id").getAsString(),
+      jo.get("shipment_id").getAsString(),
       jo.get("carrier_account_id").getAsString()
-		);
-	}
+    );
+  }
 }
