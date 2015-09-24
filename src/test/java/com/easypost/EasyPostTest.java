@@ -93,6 +93,10 @@ public class EasyPostTest {
     assertEquals(tracker.getEstDeliveryDate(), date);
     assertEquals(tracker.getWeight(), 17.6, 0.0001);
     assertEquals(tracker.getSignedBy(), "John Tester");
+    assertEquals(tracker.getCarrierDetail().getService(), "FEDEX_GROUND");
+    assertEquals(tracker.getCarrierDetail().getContainerType(), "YOUR_PACKAGING");
+    assertNotNull(tracker.getCarrierDetail().getEstDeliveryDateLocal());
+    assertNotNull(tracker.getCarrierDetail().getEstDeliveryTimeLocal());
 
     Tracker retrieved = Tracker.retrieve(tracker.getId());
 

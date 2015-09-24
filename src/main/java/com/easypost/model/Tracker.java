@@ -19,6 +19,7 @@ public class Tracker extends EasyPostResource {
 	float weight;
 	Date estDeliveryDate;
 	String signedBy;
+	CarrierDetail carrierDetail;
 
 	public String getId() {
 		return id;
@@ -90,6 +91,9 @@ public class Tracker extends EasyPostResource {
 	public void setSignedBy(String signedBy) {
 		this.signedBy = signedBy;
 	}
+
+	public CarrierDetail getCarrierDetail() { return carrierDetail; }
+	public void setCarrierDetail(CarrierDetail carrierDetail) { this.carrierDetail = carrierDetail; }
 
 	// create
 	public static Tracker create(Map<String, Object> params) throws EasyPostException {
