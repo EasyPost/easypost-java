@@ -79,45 +79,84 @@ public class EasyPostTest {
   }
 
   @Test
-  public void testTrackerCreateAndRetrieve() throws EasyPostException, ParseException {
-    // create test tracker
-    Map<String, Object> params = new HashMap<String, Object>();
-    params.put("tracking_code","EZ4000000004");
-    params.put("carrier", "FedEx");
-    Tracker tracker = Tracker.create(params);
+		 public void testTrackerCreateAndRetrieve() throws EasyPostException, ParseException {
+		// create test tracker
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("tracking_code","EZ4000000004");
+		params.put("carrier", "FedEx");
+		Tracker tracker = Tracker.create(params);
 
-    assertNotNull(tracker);
+		assertNotNull(tracker);
 
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy kk:mm:ss zzz");
-    Date date = sdf.parse("08/26/2014 17:00:00 PDT");
-    assertEquals(tracker.getEstDeliveryDate(), date);
-    assertEquals(tracker.getWeight(), 17.6, 0.0001);
-    assertEquals(tracker.getSignedBy(), "John Tester");
-    assertEquals(tracker.getCarrierDetail().getService(), "FEDEX_GROUND");
-    assertEquals(tracker.getCarrierDetail().getContainerType(), "YOUR_PACKAGING");
-    assertNotNull(tracker.getCarrierDetail().getEstDeliveryDateLocal());
-    assertNotNull(tracker.getCarrierDetail().getEstDeliveryTimeLocal());
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy kk:mm:ss zzz");
+		Date date = sdf.parse("08/26/2014 17:00:00 PDT");
+		assertEquals(tracker.getEstDeliveryDate(), date);
+		assertEquals(tracker.getWeight(), 17.6, 0.0001);
+		assertEquals(tracker.getSignedBy(), "John Tester");
+		assertEquals(tracker.getCarrierDetail().getService(), "FEDEX_GROUND");
+		assertEquals(tracker.getCarrierDetail().getContainerType(), "YOUR_PACKAGING");
+		assertNotNull(tracker.getCarrierDetail().getEstDeliveryDateLocal());
+		assertNotNull(tracker.getCarrierDetail().getEstDeliveryTimeLocal());
 
-    Tracker retrieved = Tracker.retrieve(tracker.getId());
+		Tracker retrieved = Tracker.retrieve(tracker.getId());
 
-    assertNotNull(retrieved);
-    assertEquals("Tracker ids are not the same", tracker.getId(), retrieved.getId());
-    assertEquals("Tracker statuses are not the same", tracker.getStatus(), retrieved.getStatus());
+		assertNotNull(retrieved);
+		assertEquals("Tracker ids are not the same", tracker.getId(), retrieved.getId());
+		assertEquals("Tracker statuses are not the same", tracker.getStatus(), retrieved.getStatus());
 
-    assertNotNull(tracker.getCarrier());
-    assertNotNull(retrieved.getCarrier());
-    assertEquals("Tracker carriers are not the same", tracker.getCarrier(), retrieved.getCarrier());
+		assertNotNull(tracker.getCarrier());
+		assertNotNull(retrieved.getCarrier());
+		assertEquals("Tracker carriers are not the same", tracker.getCarrier(), retrieved.getCarrier());
 
-    TrackingDetail trackingDetail = tracker.getTrackingDetails().get(0);
-    TrackingDetail retrievedDetail = tracker.getTrackingDetails().get(0);
+		TrackingDetail trackingDetail = tracker.getTrackingDetails().get(0);
+		TrackingDetail retrievedDetail = tracker.getTrackingDetails().get(0);
 
-    assertEquals("TrackingDetails are not the same", trackingDetail, retrievedDetail);
+		assertEquals("TrackingDetails are not the same", trackingDetail, retrievedDetail);
 
-    TrackingLocation trackingLocation = trackingDetail.getTrackingLocation();
-    TrackingLocation retrievedLocation = retrievedDetail.getTrackingLocation();
+		TrackingLocation trackingLocation = trackingDetail.getTrackingLocation();
+		TrackingLocation retrievedLocation = retrievedDetail.getTrackingLocation();
 
-    assertEquals("TrackingLocations are not the same", trackingLocation, retrievedLocation);
-  }
+		assertEquals("TrackingLocations are not the same", trackingLocation, retrievedLocation);
+	}
+
+	@Test
+	public void testTrackerIndex() throws EasyPostException, ParseException {
+		// create test tracker
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("tracking_code","EZ2000000002");
+		params.put("carrier", "FedEx");
+		Tracker tracker = Tracker.create(params);
+
+		assertNotNull(tracker);
+
+		// retrieve tracker by id
+		Tracker tracker2 = Tracker.retrieve(tracker.id);
+
+		assertEquals("Tracker ids are not the same", tracker.getId(), tracker2.getId());
+
+		// retrieve all trackers by tracking_code
+		Map<String, Object> index_params = new HashMap<>();
+		index_params.put("tracking_code","EZ2000000002");
+		TrackerCollection trackers = Tracker.all(index_params);
+
+		assertEquals("Incorrect length received", trackers.getTrackers().size(), 30);
+		assertTrue("'has_more' should be true", trackers.getHasMore());
+		assertEquals("Tracker ids in create response and all response are not the same", trackers.getTrackers().get(0).id, tracker.id);
+
+		// create another test tracker
+		Tracker tracker3 = Tracker.create(params);
+
+		assertNotSame("Tracker ids are not the same", tracker.id, tracker3.id);
+
+		// retrieve all created since 'tracker'
+		Map<String, Object> index_params2 = new HashMap<>();
+		index_params2.put("after_id",tracker.id);
+		TrackerCollection trackers2 = Tracker.all(index_params2);
+
+		assertEquals("Incorrect length received", trackers2.getTrackers().size(), 1);
+		assertFalse("'has_more' should be true", trackers2.getHasMore());
+		assertEquals("Tracker ids in create response and all response are not the same", trackers2.getTrackers().get(0).id, tracker3.id);
+	}
 
   @Test
   public void testShipmentWithRateError() throws EasyPostException {
