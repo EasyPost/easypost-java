@@ -122,4 +122,15 @@ public class Tracker extends EasyPostResource {
 		return request(RequestMethod.GET, classURL(Tracker.class), params, TrackerCollection.class, apiKey);
 	}
 
+	// createList
+	public static boolean createList(Map<String, Object> params) throws EasyPostException {
+		return createList(params, null);
+	}
+	public static boolean createList(Map<String, Object> params, String apiKey) throws EasyPostException {
+		String createListUrl = String.format("%s/create_list", classURL(Tracker.class));
+
+		request(RequestMethod.POST, createListUrl, params, Object.class, apiKey);
+		return true;
+	}
+
 }
