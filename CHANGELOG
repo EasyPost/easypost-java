@@ -1,3 +1,8 @@
+=== 2.1.6 2015-12-21
+
+* Fixed Shipment Insure method so that it correctly uses http POST.
+
+
 === 2.1.5 2015-11-19
 
 * Added createList method to Tracker class

@@ -346,7 +346,7 @@ public class Shipment extends EasyPostResource {
 	}
 	public Shipment insure(Map<String, Object> params, String apiKey) throws EasyPostException {
 		return request(
-			RequestMethod.GET,
+			RequestMethod.POST,
 			String.format("%s/insure", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
 	}
 

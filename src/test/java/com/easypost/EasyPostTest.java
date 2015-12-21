@@ -79,6 +79,22 @@ public class EasyPostTest {
   }
 
   @Test
+  public void testShipmentWithInsurance() throws EasyPostException {
+    // create and buy shipment
+    Shipment shipment = createDefaultShipmentDomestic();
+
+    List<String> buyCarriers = new ArrayList<String>();
+    buyCarriers.add("USPS");
+    shipment = shipment.buy(shipment.lowestRate(buyCarriers));
+
+    Map<String, Object> insureMap = new HashMap<String, Object>();
+    insureMap.put("amount", 100.00);
+    shipment = shipment.insure(insureMap);
+
+    assertNotNull(shipment.getInsurance());
+  }
+
+  @Test
   public void testTrackerCreateAndRetrieve() throws EasyPostException, ParseException {
     // create test tracker
     Map<String, Object> params = new HashMap<String, Object>();
