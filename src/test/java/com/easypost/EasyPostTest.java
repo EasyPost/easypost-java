@@ -379,62 +379,6 @@ public class EasyPostTest {
     assertNotSame(scanForm.getLabelUrl(), "");
   }
 
-  @Test
-  public void testPickup() throws EasyPostException, InterruptedException {
-    Shipment shipment = createDefaultShipmentDomestic();
-    List<String> buyCarriers = new ArrayList<String>();
-    buyCarriers.add("UPS");
-    shipment = shipment.buy(shipment.lowestRate(buyCarriers));
-
-    DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-
-    String reference = "internal_id_1234";
-    String instructions = "Special pickup instructions";
-
-    Map<String, Object> pickupMap = new HashMap<String, Object>();
-    pickupMap.put("address", defaultFromAddress);
-    pickupMap.put("shipment", shipment);
-    pickupMap.put("reference", reference);
-    pickupMap.put("min_datetime", df.format(new Date()));
-    pickupMap.put("max_datetime", df.format(new Date()));
-    pickupMap.put("is_account_address", true);
-    pickupMap.put("instructions", instructions);
-
-    Pickup pickup = Pickup.create(pickupMap);
-
-    assertNotNull(pickup);
-    assertEquals(pickup.getMessages().size(), 0);
-    assertEquals(pickup.getReference(), reference);
-    assertEquals(pickup.getInstructions(), instructions);
-    assertEquals(pickup.getStatus(), "unknown");
-    assertTrue(pickup.getIsAccountAddress());
-
-    Map<String, Object> buyMap = new HashMap<String, Object>();
-    buyMap.put("carrier", "UPS");
-    buyMap.put("service", "Same-day Pickup");
-    pickup = pickup.buy(buyMap);
-
-    assertNotNull(pickup);
-    assertEquals(pickup.getMessages().size(), 0);
-    assertEquals(pickup.getStatus(), "scheduled");
-
-    Map<String, Object> cancelMap = new HashMap<String, Object>();
-    cancelMap.put("id", pickup.getId());
-    pickup = pickup.cancel(cancelMap);
-
-    assertNotNull(pickup);
-    assertEquals(pickup.getMessages().size(), 0);
-    assertEquals(pickup.getStatus(), "canceled");
-
-    Pickup retrieved = Pickup.retrieve(pickup.getId());
-    pickup = pickup.refresh();
-
-    assertNotNull(pickup);
-    assertNotNull((retrieved));
-    assertEquals(retrieved.getMessages().size(), 0);
-    assertEquals(retrieved.getId(), pickup.getId());
-    assertEquals(retrieved.getStatus(), pickup.getStatus());
-  }
 
   @Test
   public void testOrder() throws EasyPostException {
