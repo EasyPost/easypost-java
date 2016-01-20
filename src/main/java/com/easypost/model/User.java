@@ -14,9 +14,9 @@ public class User extends EasyPostResource {
     String email;
     String phoneNumber;
     String balance;
-    Number rechargeAmount;
-    Number secondaryRechargeAmount;
-    Number rechargeThreshold;
+    String rechargeAmount;
+    String secondaryRechargeAmount;
+    String rechargeThreshold;
     List<User> children;
 
     public String getId() { return id; }
@@ -34,18 +34,18 @@ public class User extends EasyPostResource {
     public String getBalance() { return balance; }
     public void setBalance(String balance) { this.balance = balance; }
 
-    public Number getRechargeAmount() { return rechargeAmount; }
-    public void setRechargeAmount(Number rechargeAmount) {
+    public String getRechargeAmount() { return rechargeAmount; }
+    public void setRechargeAmount(String rechargeAmount) {
       this.rechargeAmount = rechargeAmount;
     }
 
-    public Number getSecondaryRechargeAmount() { return secondaryRechargeAmount; }
-    public void setSecondaryRechargeAmount(Number secondaryRechargeAmount) {
+    public String getSecondaryRechargeAmount() { return secondaryRechargeAmount; }
+    public void setSecondaryRechargeAmount(String secondaryRechargeAmount) {
       this.secondaryRechargeAmount = secondaryRechargeAmount;
     }
 
-    public Number getRechargeThreshold() { return rechargeThreshold; }
-    public void setRechargeThreshold(Number rechargeThreshold) {
+    public String getRechargeThreshold() { return rechargeThreshold; }
+    public void setRechargeThreshold(String rechargeThreshold) {
       this.rechargeThreshold = rechargeThreshold;
     }
 

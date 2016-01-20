@@ -7,6 +7,8 @@ import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
 import java.text.ParseException;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -92,6 +94,18 @@ public class EasyPostTest {
     shipment = shipment.insure(insureMap);
 
     assertNotNull(shipment.getInsurance());
+  }
+
+  @Test
+  public void testCreateShipmentWithInsurance() throws EasyPostException {
+    // create and buy shipment
+    Shipment shipment = createDefaultShipmentDomestic();
+
+    List<String> buyCarriers = new ArrayList<String>();
+    buyCarriers.add("USPS");
+    shipment = shipment.buy(shipment.lowestRate(buyCarriers));
+
+
   }
 
   @Test
@@ -285,6 +299,89 @@ public class EasyPostTest {
 
     assertNull("Verified Address has no error message", createdAndVerified.getMessage());
     assertEquals("Address did not verify as expected", createdAndVerified.getZip(), "94107-1990");
+  }
+
+  @Test
+  public void testAddressCreateWithVerifyPasses() throws EasyPostException {
+    Map<String, Object> addressHash = new HashMap<String, Object>();
+
+    List<String> verificationList = new ArrayList<>();
+    verificationList.add("delivery");
+    addressHash.put("verify", verificationList);
+
+    addressHash.put("street1", "118 2 St");
+    addressHash.put("street2", "4");
+    addressHash.put("city", "SF");
+    addressHash.put("state", "CA");
+    addressHash.put("zip", "94105");
+    addressHash.put("country", "US");
+    addressHash.put("company", "EasyPost");
+    addressHash.put("phone", "415-123-4567");
+
+    Address address = Address.create(addressHash);
+
+    assertNotNull("Id is null", address.getId());
+    assertEquals("City did not verify", address.getCity(), "SAN FRANCISCO");
+
+    Map<String,AddressVerification> verifications = address.getVerifications();
+    assertEquals("Verification did not succeed.", verifications.get("delivery").getSuccess(), true);
+    assertEquals("Verification had errors.", verifications.get("delivery").getErrors(), Collections.emptyList());
+  }
+
+  @Test
+  public void testAddressCreateWithVerifyFails() throws EasyPostException {
+    Map<String, Object> addressHash = new HashMap<String, Object>();
+
+    List<String> verificationList = new ArrayList<>();
+    verificationList.add("delivery");
+    addressHash.put("verify", verificationList);
+
+    addressHash.put("street1", "UNDELIVERABLE ST");
+    addressHash.put("city", "SAN FRANCISCO");
+    addressHash.put("state", "CA");
+    addressHash.put("zip", "94105");
+    addressHash.put("country", "US");
+    addressHash.put("company", "EasyPost");
+    addressHash.put("phone", "415-123-4567");
+
+    Address address = Address.create(addressHash);
+
+    assertNotNull("Id is null", address.getId());
+    assertEquals("City did not verify", address.getCity(), "SAN FRANCISCO");
+
+    Map<String,AddressVerification> verifications = address.getVerifications();
+    assertEquals("Verification did not succeed.", verifications.get("delivery").getSuccess(), false);
+
+    List<com.easypost.model.Error> errors = verifications.get("delivery").getErrors();
+    assertEquals("More than one error is present", errors.size(), 1);
+
+    com.easypost.model.Error error = errors.get(0);
+    assertEquals("Error code does not match expected", error.getCode(), "ADDRESS.VERIFY.FAILURE");;
+    assertEquals("Error message does not match expected", error.getMessage(), "Address not found");;
+    assertEquals("Suberrors are present", error.getErrors(), Collections.emptyList());
+  }
+
+  @Rule
+  public ExpectedException verifyStrictException = ExpectedException.none();
+  @Test
+  public void testAddressCreateWithVerifyStrictFails() throws EasyPostException {
+    Map<String, Object> addressHash = new HashMap<String, Object>();
+
+    List<String> verificationList = new ArrayList<>();
+    verificationList.add("delivery");
+    addressHash.put("verify_strict", verificationList);
+
+    addressHash.put("street1", "UNDELIVERABLE ST");
+    addressHash.put("city", "SAN FRANCISCO");
+    addressHash.put("state", "CA");
+    addressHash.put("zip", "94105");
+    addressHash.put("country", "US");
+    addressHash.put("company", "EasyPost");
+    addressHash.put("phone", "415-123-4567");
+
+    verifyStrictException.expect(com.easypost.exception.EasyPostException.class);
+
+    Address address = Address.create(addressHash);
   }
 
   @Rule
@@ -488,7 +585,32 @@ public class EasyPostTest {
 
 //  //  This test requires a production api key
 //  @Test
+//  public void testUserMethods() throws EasyPostException {
+//    EasyPost.apiKey = "KEY"; // easypost private production key
+//
+//    User user = User.retrieveMe();
+//
+//    System.out.println(user.getPhoneNumber());
+//    System.out.println(user.getRechargeAmount());
+//    System.out.println(user.getSecondaryRechargeAmount());
+//
+//    user.setSecondaryRechargeAmount("$200.00");
+//
+//    Map<String, Object> userHash = new HashMap<String, Object>();
+//    userHash.put("secondary_recharge_amount", 100000.00);
+//
+//    user.update(userHash);
+//
+//    System.out.println(user.getSecondaryRechargeAmount());
+//
+//    System.out.println(user.getRechargeThreshold());
+//  }
+
+//  //  This test requires a production api key
+//  @Test
 //  public void testCarrierAccountMutability() throws EasyPostException {
+//    EasyPost.apiKey = "KEY"; // easypost private production key
+//
 //    Map<String, Object> listHash = new HashMap<String, Object>();
 //    listHash.put("type", "UpsAccount");
 //    List<CarrierAccount> carrierAccounts = CarrierAccount.all(listHash);

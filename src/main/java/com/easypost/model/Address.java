@@ -24,6 +24,7 @@ public class Address extends EasyPostResource {
   String carrierFacility;
   String federalTaxId;
   Boolean residential;
+  Map<String,AddressVerification> verifications;
 
   public String getId() {
     return id;
@@ -137,15 +138,39 @@ public class Address extends EasyPostResource {
     this.residential = residential;
   }
 
+  public Map<String,AddressVerification> getVerifications() { return verifications;  }
+  public void setVerifications(Map<String,AddressVerification> verifications) { this.verifications = verifications; }
+
   // create
   public static Address create(Map<String, Object> params) throws EasyPostException {
     return create(params, null);
   }
   public static Address create(Map<String, Object> params, String apiKey) throws EasyPostException {
+    String url = classURL(Address.class);
+
+    List<String> verifyList = (List<String>) params.remove("verify");
+    List<String> verifyStrictList = (List<String>) params.remove("verify_strict");
+
+    if ((verifyList != null && verifyList.size() >= 1) || (verifyStrictList != null && verifyStrictList.size() >= 1)) {
+      url += "?";
+
+      if (verifyList != null && verifyList.size() >= 1) {
+        for (String verification : verifyList) {
+          url += "verify[]=" + verification + "&";
+        }
+      }
+
+      if (verifyStrictList != null && verifyStrictList.size() >= 1) {
+        for (String strictVerification : verifyStrictList) {
+          url += "verify_strict[]=" + strictVerification + "&";
+        }
+      }
+    }
+
     Map<String, Object> wrappedParams = new HashMap<String, Object>();
     wrappedParams.put("address", params);
 
-    return request(RequestMethod.POST, classURL(Address.class), wrappedParams, Address.class, apiKey);
+    return request(RequestMethod.POST, url, wrappedParams, Address.class, apiKey);
   }
 
   // retrieve
