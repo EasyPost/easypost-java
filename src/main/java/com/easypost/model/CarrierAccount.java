@@ -3,6 +3,7 @@ package com.easypost.model;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -87,7 +88,8 @@ public class CarrierAccount extends EasyPostResource {
 			return all(params, null);
 		}
 		public static List<CarrierAccount> all(Map<String, Object> params, String apiKey) throws EasyPostException {
-			return request(RequestMethod.GET, classURL(CarrierAccount.class), params, List.class, apiKey);
+		  CarrierAccount[] response = request(RequestMethod.GET, classURL(CarrierAccount.class), params, CarrierAccount[].class, apiKey);
+		  return Arrays.asList(response);
 		}
 
 
