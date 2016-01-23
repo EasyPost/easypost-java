@@ -88,8 +88,8 @@ public class CarrierAccount extends EasyPostResource {
 			return all(params, null);
 		}
 		public static List<CarrierAccount> all(Map<String, Object> params, String apiKey) throws EasyPostException {
-		  CarrierAccount[] response = request(RequestMethod.GET, classURL(CarrierAccount.class), params, CarrierAccount[].class, apiKey);
-		  return Arrays.asList(response);
+			CarrierAccount[] response = request(RequestMethod.GET, classURL(CarrierAccount.class), params, CarrierAccount[].class, apiKey);
+			return Arrays.asList(response);
 		}
 
 
