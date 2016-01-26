@@ -5,6 +5,7 @@ public class Form {
   String mode;
   String formType;
   String formUrl;
+  Boolean submittedElectronically;
 
   public String getId() {
     return id;
@@ -32,5 +33,12 @@ public class Form {
   }
   public void setFormUrl(String formUrl) {
     this.formUrl = formUrl;
+  }
+
+  public Boolean getSubmittedElectronically() {
+    return submittedElectronically;
+  }
+  public void setSubmittedElectronically(Boolean submittedElectronically) {
+    this.submittedElectronically = submittedElectronically;
   }
 }
