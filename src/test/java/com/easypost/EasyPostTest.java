@@ -28,6 +28,9 @@ public class EasyPostTest {
   static Map<String, Object> defaultFromAddress = new HashMap<String, Object>();
   static Map<String, Object> defaultToAddress = new HashMap<String, Object>();
   static Map<String, Object> defaultParcel = new HashMap<String, Object>();
+  static Map<String, Object> defaultCustomsItem = new HashMap<String, Object>();
+  static Map<String, Object> defaultCustomsInfo = new HashMap<String, Object>();
+  static Map<String, Object> canadaToAddress = new HashMap<String, Object>();
 
   static Shipment createDefaultShipmentDomestic() throws EasyPostException {
     Map<String, Object> shipmentMap = new HashMap<String, Object>();
@@ -67,6 +70,28 @@ public class EasyPostTest {
     defaultParcel.put("width", 8.3);
     defaultParcel.put("height", 6);
     defaultParcel.put("weight", 10);
+
+    defaultCustomsItem.put("description", "Item descrpition");
+    defaultCustomsItem.put("origin_country", "US");
+    defaultCustomsItem.put("quantity", 1);
+    defaultCustomsItem.put("value", 10.50);
+    defaultCustomsItem.put("weight", 9.9);
+
+    List<Map<String, Object>> customsItems = new ArrayList<Map<String, Object>>();
+    customsItems.add(defaultCustomsItem);
+    defaultCustomsInfo.put("customs_certify", true);
+    defaultCustomsInfo.put("customs_signer", "Shipping Manager");
+    defaultCustomsInfo.put("contents_type", "merchandise");
+    defaultCustomsInfo.put("non_delivery_option", "return");
+    defaultCustomsInfo.put("restriction_type", "none");
+    defaultCustomsInfo.put("customs_items", customsItems);
+
+    canadaToAddress.put("company", "Canada Receiving");
+    canadaToAddress.put("street1", "1 Larkspur Cres");
+    canadaToAddress.put("city", "St. Albert");
+    canadaToAddress.put("state", "AB");
+    canadaToAddress.put("zip", "t8n2m4");
+    canadaToAddress.put("country", "CA");
   }
 
   @Test
@@ -149,26 +174,26 @@ public class EasyPostTest {
     assertEquals("TrackingLocations are not the same", trackingLocation, retrievedLocation);
   }
 
-	@Test
+  @Test
   public void testBatchTrackerCreate() throws EasyPostException {
-		List<String> trackingCodes = new ArrayList<>();
-		trackingCodes.add("EZ1000000001");
-		trackingCodes.add("EZ2000000002");
-		trackingCodes.add("EZ3000000003");
+    List<String> trackingCodes = new ArrayList<String>();
+    trackingCodes.add("EZ1000000001");
+    trackingCodes.add("EZ2000000002");
+    trackingCodes.add("EZ3000000003");
 
-		List<HashMap<String, Object>> trackingCodeParams = new ArrayList<>();
-		HashMap<String, Object> code;
+    List<HashMap<String, Object>> trackingCodeParams = new ArrayList<HashMap<String, Object>>();
+    HashMap<String, Object> code;
 
-		for(int i = 0; i < trackingCodes.size(); i++){
-			code = new HashMap<>();
-			code.put("tracking_code", trackingCodes.get(i));
-			trackingCodeParams.add(code);
-		}
+    for(int i = 0; i < trackingCodes.size(); i++){
+            code = new HashMap<String, Object>();
+            code.put("tracking_code", trackingCodes.get(i));
+            trackingCodeParams.add(code);
+    }
 
-		Map createListParams = new HashMap<String, Object>();
-		createListParams.put("trackers", trackingCodeParams);
+    Map createListParams = new HashMap<String, Object>();
+    createListParams.put("trackers", trackingCodeParams);
 
-		Tracker.createList(createListParams);
+    Tracker.createList(createListParams);
   }
 
   @Test
@@ -187,7 +212,7 @@ public class EasyPostTest {
     assertEquals("Tracker ids are not the same", tracker.getId(), tracker2.getId());
 
     // retrieve all trackers by tracking_code
-    Map<String, Object> index_params = new HashMap<>();
+    Map<String, Object> index_params = new HashMap<String, Object>();
     index_params.put("tracking_code","EZ2000000002");
     TrackerCollection trackers = Tracker.all(index_params);
 
@@ -201,7 +226,7 @@ public class EasyPostTest {
     assertNotSame("Tracker ids are not the same", tracker.id, tracker3.id);
 
     // retrieve all created since 'tracker'
-    Map<String, Object> index_params2 = new HashMap<>();
+    Map<String, Object> index_params2 = new HashMap<String, Object>();
     index_params2.put("after_id",tracker.id);
     TrackerCollection trackers2 = Tracker.all(index_params2);
 
@@ -305,7 +330,7 @@ public class EasyPostTest {
   public void testAddressCreateWithVerifyPasses() throws EasyPostException {
     Map<String, Object> addressHash = new HashMap<String, Object>();
 
-    List<String> verificationList = new ArrayList<>();
+    List<String> verificationList = new ArrayList<String>();
     verificationList.add("delivery");
     addressHash.put("verify", verificationList);
 
@@ -332,7 +357,7 @@ public class EasyPostTest {
   public void testAddressCreateWithVerifyFails() throws EasyPostException {
     Map<String, Object> addressHash = new HashMap<String, Object>();
 
-    List<String> verificationList = new ArrayList<>();
+    List<String> verificationList = new ArrayList<String>();
     verificationList.add("delivery");
     addressHash.put("verify", verificationList);
 
@@ -367,7 +392,7 @@ public class EasyPostTest {
   public void testAddressCreateWithVerifyStrictFails() throws EasyPostException {
     Map<String, Object> addressHash = new HashMap<String, Object>();
 
-    List<String> verificationList = new ArrayList<>();
+    List<String> verificationList = new ArrayList<String>();
     verificationList.add("delivery");
     addressHash.put("verify_strict", verificationList);
 
@@ -557,6 +582,26 @@ public class EasyPostTest {
     assertNotNull(order.getShipments().get(0).getTracker());
     assertNotNull(order.getShipments().get(0).getPostageLabel().getLabelUrl());
     assertNotNull(order.getShipments().get(1).getPostageLabel().getLabelUrl());
+  }
+
+  @Test
+  public void testCustomsInfo() throws EasyPostException {
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("to_address", canadaToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    shipmentMap.put("parcel", defaultParcel);
+    shipmentMap.put("customs_info", defaultCustomsInfo);
+    Map<String, Object> shipmentOptionsMap = new HashMap<String, Object>();
+    shipmentOptionsMap.put("suppress_etd", true);
+    shipmentMap.put("options", shipmentOptionsMap);
+
+    Shipment shipment = Shipment.create(shipmentMap);
+
+    List<String> buyCarriers = new ArrayList<String>();
+    buyCarriers.add("USPS");
+    shipment = shipment.buy(shipment.lowestRate(buyCarriers));
+
+    assertFalse(shipment.getForms().get(0).getSubmittedElectronically());
   }
 
   /*
