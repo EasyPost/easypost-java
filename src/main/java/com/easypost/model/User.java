@@ -83,7 +83,7 @@ public class User extends EasyPostResource {
       wrappedParams.put("user", params);
 
       return request(RequestMethod.POST, classURL(User.class), wrappedParams,
-          User.class, apiKey);
+          User.class, apiKey, false);
     }
 
     // update

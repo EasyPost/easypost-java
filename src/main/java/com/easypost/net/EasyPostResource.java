@@ -360,6 +360,10 @@ public abstract class EasyPostResource {
 	}
 
 	protected static <T> T request(EasyPostResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey) throws EasyPostException {
+		return request(method, url, params, clazz, apiKey, true);
+	}
+
+	protected static <T> T request(EasyPostResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey, boolean apiKeyRequired) throws EasyPostException {
 		String originalDNSCacheTTL = null;
 		Boolean allowedToSetTTL = true;
 		try {
@@ -371,7 +375,7 @@ public abstract class EasyPostResource {
 		}
 
 		try {
-			return _request(method, url, params, clazz, apiKey);
+			return _request(method, url, params, clazz, apiKey, apiKeyRequired);
 		} finally {
 			if (allowedToSetTTL) {
 				if (originalDNSCacheTTL == null) {
@@ -384,11 +388,14 @@ public abstract class EasyPostResource {
 		}
 	}
 
-	protected static <T> T _request(EasyPostResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey) throws EasyPostException {
+	protected static <T> T _request(EasyPostResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey, boolean apiKeyRequired) throws EasyPostException {
 		if ((EasyPost.apiKey == null || EasyPost.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
-			throw new EasyPostException(
-				"No API key provided. (set your API key using 'EasyPost.apiKey = {KEY}'. "
-					+ "Your API key can be found in your EasyPost dashboard, or you can email us at contact@easypost.com for assistance.");
+			if (apiKeyRequired) {
+				throw new EasyPostException(
+						"No API key provided. (set your API key using 'EasyPost.apiKey = {KEY}'. "
+								+ "Your API key can be found in your EasyPost dashboard, or you can email us at contact@easypost.com for assistance.");
+
+			}
 		}
 
 		if (apiKey == null) {
