@@ -378,12 +378,15 @@ public class EasyPostTest {
     assertEquals("Verification did not succeed.", verifications.get("delivery").getSuccess(), false);
 
     List<com.easypost.model.Error> errors = verifications.get("delivery").getErrors();
-    assertEquals("More than one error is present", errors.size(), 1);
+    assertEquals("More than one error is present", errors.size(), 2);
 
-    com.easypost.model.Error error = errors.get(0);
-    assertEquals("Error code does not match expected", error.getCode(), "ADDRESS.VERIFY.FAILURE");;
-    assertEquals("Error message does not match expected", error.getMessage(), "Address not found");;
-    assertEquals("Suberrors are present", error.getErrors(), Collections.emptyList());
+    com.easypost.model.Error error1 = errors.get(0);
+    assertEquals("Error code does not match expected", error1.getField(), "address");;
+    assertEquals("Error message does not match expected", error1.getMessage(), "Address not found");;
+
+    com.easypost.model.Error error2 = errors.get(1);
+    assertEquals("Error code does not match expected", error2.getField(), "street1");;
+    assertEquals("Error message does not match expected", error2.getMessage(), "House number is missing");;
   }
 
   @Rule

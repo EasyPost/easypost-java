@@ -1,3 +1,9 @@
+=== 2.2.0 2016-02-25
+
+* Added "confirmation" field to ScanForm object, along with appropriate accessor methods
+* Update Address verification errors array
+
+
 === 2.1.9 2016-02-08
 
 * Added ability to create new top-level users without API KEY
