@@ -9,11 +9,11 @@ import com.easypost.net.EasyPostResource;
 
 public class ScanForm extends EasyPostResource {
 	public String id;
-  String status;
+	String status;
 	Address fromAddress;
 	List<String> trackingCodes;
-
 	String formUrl;
+	String confirmation;
 
 	public String getId() {
 		return id;
@@ -22,10 +22,10 @@ public class ScanForm extends EasyPostResource {
 		this.id = id;
 	}
 
-  public String getStatus() {
-    return status;
-  }
-  public void setStatus(String status) {
+	public String getStatus() {
+	return status;
+	}
+	public void setStatus(String status) {
     this.status = status;
   }
 
@@ -46,13 +46,15 @@ public class ScanForm extends EasyPostResource {
 	public String getFormUrl() {
 		return formUrl;
 	}
+	public String getLabelUrl() {
+		return this.getFormUrl();
+	}
 	public void setFormUrl(String formUrl) {
 		this.formUrl = formUrl;
 	}
 
-	public String getLabelUrl() {
-		return this.getFormUrl();
-	}
+	public String getConfirmation() { return confirmation; }
+	public void setConfirmation(String confirmation) { this.confirmation = confirmation; }
 
 	// create via Batch.createScanForm
 
