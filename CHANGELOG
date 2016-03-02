@@ -1,3 +1,7 @@
+=== 2.2.1 2016-03-02
+
+* Updated Order Messages to be of the new, more descriptive format
+
 === 2.2.0 2016-02-25
 
 * Added "confirmation" field to ScanForm object, along with appropriate accessor methods

@@ -24,7 +24,7 @@ public class Order extends EasyPostResource {
   List<Container> containers;
   List<Item> items;
   Map<String, String> options;
-  List<String> messages;
+  List<ShipmentMessage> messages;
 
   public String getId() {
     return id;
@@ -124,10 +124,10 @@ public class Order extends EasyPostResource {
     this.options = options;
   }
 
-  public List<String> getMessages() {
+  public List<ShipmentMessage> getMessages() {
     return messages;
   }
-  public void setMessages(List<String> messages) {
+  public void setMessages(List<ShipmentMessage> messages) {
     this.messages = messages;
   }
 
