@@ -5,7 +5,7 @@ import com.easypost.net.EasyPostResource;
 public class PickupRate extends EasyPostResource {
     public String id;
     String mode;
-    CarrierAccount carrierAccount;
+    String carrier;
     String service;
     Float rate;
     String currency;
@@ -20,8 +20,8 @@ public class PickupRate extends EasyPostResource {
     public String getMode() { return mode; }
     public void setMode(String mode) { this.mode = mode; }
 
-    public CarrierAccount getCarrierAccount() { return carrierAccount; }
-    public void setCarrierAccount(CarrierAccount carrierAccount) { this.carrierAccount = carrierAccount; }
+    public String getCarrier() { return carrier; }
+    public void setCarrier(String carrier) { this.carrier = carrier; }
 
     public String getService() { return service; }
     public void setService(String service) { this.service = service; }

@@ -582,9 +582,12 @@ public class EasyPostTest {
     assertEquals(pickup.getStatus(), "unknown");
     assertTrue(pickup.getIsAccountAddress());
 
+    assertEquals(pickup.getPickupRates().get(0).getCarrier(), "UPS");
+    assertEquals(pickup.getPickupRates().get(0).getService(), "Same-day Pickup");
+
     Map<String, Object> buyMap = new HashMap<String, Object>();
-    buyMap.put("carrier", "UPS");
-    buyMap.put("service", "Same-day Pickup");
+    buyMap.put("carrier", pickup.getPickupRates().get(0).getCarrier());
+    buyMap.put("service", pickup.getPickupRates().get(0).getService());
     pickup = pickup.buy(buyMap);
 
     assertNotNull(pickup);
