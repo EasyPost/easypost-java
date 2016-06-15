@@ -378,7 +378,8 @@ public class EasyPostTest {
     assertEquals("Verification did not succeed.", verifications.get("delivery").getSuccess(), false);
 
     List<com.easypost.model.Error> errors = verifications.get("delivery").getErrors();
-    assertEquals("More than one error is present", errors.size(), 2);
+
+    assertEquals("More than one error is present", 4, errors.size());
 
     com.easypost.model.Error error1 = errors.get(0);
     assertEquals("Error code does not match expected", error1.getField(), "address");;
@@ -386,7 +387,7 @@ public class EasyPostTest {
 
     com.easypost.model.Error error2 = errors.get(1);
     assertEquals("Error code does not match expected", error2.getField(), "street1");;
-    assertEquals("Error message does not match expected", error2.getMessage(), "House number is missing");;
+    assertEquals("Error message does not match expected", error2.getMessage(), "House number is invalid");
   }
 
   @Rule

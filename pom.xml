@@ -1,12 +1,45 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.easypost</groupId>
-    <artifactId>easypost-java</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>easypost-api-client</artifactId>
+
     <version>2.2.2</version>
-    <name>easypost-java</name>
+    <packaging>jar</packaging>
+
+    <name>com.easypost:easypost-api-client</name>
+    <description>EasyPost Java Client Library for the EasyPost Shipping API</description>
     <url>https://github.com/easypost/easypost-java</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>James Epstein</name>
+            <email>jake@easypost.com</email>
+            <organization>EasyPost</organization>
+            <organizationUrl>http://www.easypost.com</organizationUrl>
+        </developer>
+        <developer>
+            <name>Sawyer Bateman</name>
+            <email>sawyer@easypost.com</email>
+            <organization>EasyPost</organization>
+            <organizationUrl>http://www.easypost.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:easypost/easypost-java.git</connection>
+        <developerConnection>scm:git:git@github.com:easypost/easypost-java.git</developerConnection>
+        <url>git@github.com:easypost/easypost-java.git</url>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -20,21 +53,29 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <description>EasyPost Java Client Library</description>
+
     <organization>
         <name>EasyPost</name>
         <url>https://easypost.com</url>
     </organization>
+
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
     </parent>
-    <scm>
-        <connection>scm:git:git@github.com:easypost/easypost-java.git</connection>
-        <developerConnection>scm:git:git@github.com:easypost/easypost-java.git</developerConnection>
-        <url>git@github.com:easypost/easypost-java.git</url>
-    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>easypost</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>easypost</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <resources>
             <resource>
@@ -47,7 +88,34 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -58,6 +126,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -65,30 +134,6 @@
                     <source>1.5</source>
                     <target>1.5</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
               <groupId>org.sonatype.plugins</groupId>
