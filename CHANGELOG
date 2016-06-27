@@ -1,3 +1,8 @@
+=== 2.2.4 2016-03-09
+
+* Bump version for deployment reasons
+
+
 === 2.2.3 2016-06-27
 * Updated POM.xml to fit Maven better and support the correct plugins
 * Removed a flaky text
