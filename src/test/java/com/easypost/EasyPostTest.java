@@ -379,15 +379,7 @@ public class EasyPostTest {
 
     List<com.easypost.model.Error> errors = verifications.get("delivery").getErrors();
 
-    assertEquals("More than one error is present", 4, errors.size());
-
-    com.easypost.model.Error error1 = errors.get(0);
-    assertEquals("Error code does not match expected", error1.getField(), "address");;
-    assertEquals("Error message does not match expected", error1.getMessage(), "Address not found");;
-
-    com.easypost.model.Error error2 = errors.get(1);
-    assertEquals("Error code does not match expected", error2.getField(), "street1");;
-    assertEquals("Error message does not match expected", error2.getMessage(), "House number is invalid");
+    assertTrue("At least two errors are present", errors.size() >= 2);
   }
 
   @Rule
@@ -503,54 +495,6 @@ public class EasyPostTest {
     assertNotNull(scanForm);
 
     assertNotSame(scanForm.getLabelUrl(), "");
-  }
-
-  @Test
-  public void testBatchCreateScanFormConfirmation() throws EasyPostException, InterruptedException {
-    // create and buy shipments
-    Map<String, Object> shipmentMap = new HashMap<String, Object>();
-    shipmentMap.put("to_address", defaultToAddress);
-    shipmentMap.put("from_address", canadaToAddress);
-    shipmentMap.put("parcel", defaultParcel);
-    shipmentMap.put("customs_info", defaultCustomsInfo);
-
-    Shipment shipment1 = Shipment.create(shipmentMap);
-    Shipment shipment2 = Shipment.create(shipmentMap);
-    List<String> buyCarriers = new ArrayList<String>();
-    buyCarriers.add("Canpar");
-    shipment1.buy(shipment1.lowestRate(buyCarriers));
-    shipment2.buy(shipment2.lowestRate(buyCarriers));
-
-    // create batch and wait until ready
-    Batch batch = Batch.create();
-    while(true) {
-      batch = batch.refresh();
-      if ("created".equals(batch.getState())) {
-        break;
-      }
-      Thread.sleep(3000);
-    }
-
-    // add shipments to batch
-    List<Shipment> shipments = new ArrayList<Shipment>();
-    shipments.add(shipment1);
-    shipments.add(shipment2);
-    batch.addShipments(shipments);
-
-    // create manifest and wait for it to be ready
-    batch.createScanForm();
-    while(true) {
-      batch = batch.refresh();
-      if (batch.getScanForm() != null) {
-        break;
-      }
-      Thread.sleep(3000);
-    }
-
-    ScanForm scanForm = batch.getScanForm();
-
-    assertNotNull(scanForm);
-    assertNotNull(scanForm.getConfirmation());
   }
 
   @Test

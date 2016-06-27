@@ -5,7 +5,7 @@
     <groupId>com.easypost</groupId>
     <artifactId>easypost-api-client</artifactId>
 
-    <version>2.2.2-STAGING</version>
+    <version>2.2.3-STAGING</version>
     <packaging>jar</packaging>
 
     <name>com.easypost:easypost-api-client</name>
@@ -126,10 +126,10 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
                 <configuration>
                     <source>1.5</source>
                     <target>1.5</target>
