@@ -1,3 +1,8 @@
+=== 2.2.5 2016-07-08
+
+* Allow shipment_id to be null on rates
+
+
 === 2.2.4 2016-03-09
 
 * Bump version for deployment reasons

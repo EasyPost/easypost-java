@@ -71,6 +71,13 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
       estDeliveryDays = jo.get("est_delivery_days").getAsNumber();
     }
 
+    String shipmentID;
+    if(jo.get("shipment_id").isJsonNull()) {
+      shipmentID = null;
+    } else {
+      shipmentID = jo.get("shipment_id").getAsString();
+    }
+
     return new Rate(
       jo.get("id").getAsString(),
       jo.get("carrier").getAsString(),
@@ -85,7 +92,7 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
       deliveryDate,
       deliveryDateGuaranteed,
       estDeliveryDays,
-      jo.get("shipment_id").getAsString(),
+      shipmentID,
       jo.get("carrier_account_id").getAsString()
     );
   }
