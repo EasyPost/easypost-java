@@ -1,3 +1,8 @@
+=== 2.2.6 2016-07-22
+
+* Allow the connection's read timeout to be set with EasyPost.readTimeout
+
+
 === 2.2.5 2016-07-08
 
 * Allow shipment_id to be null on rates
