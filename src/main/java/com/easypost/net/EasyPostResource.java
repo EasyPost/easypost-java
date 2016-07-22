@@ -197,7 +197,15 @@ public abstract class EasyPostResource {
 		}
 		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) easypostURL.openConnection();
 		conn.setConnectTimeout(20000); // 20 seconds
-		conn.setReadTimeout(40000); // 40 seconds
+
+		int readTimeout;
+		if (EasyPost.readTimeout != 0) {
+			readTimeout = EasyPost.readTimeout;
+		} else{
+			readTimeout = 40000;                  // 40 seconds by default
+		}
+		conn.setReadTimeout(readTimeout);
+
 		conn.setUseCaches(false);
 		for (Map.Entry<String, String> header : getHeaders(apiKey).entrySet()) {
 			conn.setRequestProperty(header.getKey(), header.getValue());
