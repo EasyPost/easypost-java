@@ -6,7 +6,7 @@ Requirements
 ------------
 
 * Java 1.5 and later.
-* [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.4-release.zip>.
+* [Google Gson](http://code.google.com/p/google-gson/)
 
 Installation
 ------------
