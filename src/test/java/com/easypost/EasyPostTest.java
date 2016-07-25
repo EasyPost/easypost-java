@@ -603,6 +603,38 @@ public class EasyPostTest {
     assertFalse(shipment.getForms().get(0).getSubmittedElectronically());
   }
 
+  @Test
+  public void testInsurance() throws EasyPostException {
+    Map<String, Object> insuraceMap = new HashMap<String, Object>();
+    insuraceMap.put("to_address", defaultToAddress);
+    insuraceMap.put("from_address", defaultFromAddress);
+    insuraceMap.put("amount", 101.00);
+    insuraceMap.put("carrier", "USPS");
+    insuraceMap.put("tracking_code", "EZ2000000002");
+
+    Insurance insurance = Insurance.create(insuraceMap);
+    assertNotNull("ID is null", insurance.getId());
+    assertNotNull("Tracking Code is null", insurance.getTrackingCode());
+    assertNotNull("To Address is null", insurance.getToAddress());
+    assertNotNull("From Address is null", insurance.getFromAddress());
+    assertNotNull("Tracker is null", insurance.getTracker());
+
+    Insurance insurance2 = Insurance.retrieve(insurance.getId());
+    assertNotNull("ID is null", insurance2.getId());
+    assertEquals("Create and Retrieve returned different ids", insurance.getId(), insurance2.getId());
+    assertEquals("Create and Retrieve returned different tracking codes", insurance.getTrackingCode(), insurance2.getTrackingCode());
+
+
+    Map<String, Object> index_params = new HashMap<String, Object>();
+    index_params.put("tracking_code","EZ2000000002");
+    index_params.put("page_size","5");
+    InsuranceCollection insurances = Insurance.all(index_params);
+
+    assertTrue("Wrong page_size returned", insurances.getInsurances().size() == 5);
+    assertTrue("Insurances HasMore not set correctly", insurances.getHasMore());
+  }
+
+
   /*
   // This test requires a FedEx account
   @Test
