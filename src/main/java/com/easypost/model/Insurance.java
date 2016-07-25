@@ -21,93 +21,47 @@ public class Insurance extends EasyPostResource {
 	String trackingCode;
 	String status;
 	String shipmentId;
-	Float amount; //TODO needs accessors
+	Float amount;
+	List<String> messages;
 
-	List<String> messages; //TODO needs checking
+	public String getId() { return id; }
+	public void setId(String id) { this.id = id; }
 
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	public String getMode() { return mode; }
+	public void setMode(String mode) { this.mode = mode; }
 
-	public String getMode() {
-		return mode;
-	}
-	public void setMode(String mode) {
-		this.mode = mode;
-	}
+	public String getReference() { return reference; }
+	public void setReference(String reference) { this.reference = reference; }
 
-	public String getReference() {
-		return reference;
-	}
-	public void setReference(String reference) {
-		this.reference = reference;
-	}
+	public Address getToAddress() { return toAddress; }
+	public void setToAddress(Address toAddress) { this.toAddress = toAddress; }
 
-	public Address getToAddress() {
-		return toAddress;
-	}
-	public void setToAddress(Address toAddress) {
-		this.toAddress = toAddress;
-	}
+	public Address getFromAddress() { return fromAddress; }
+	public void setFromAddress(Address fromAddress) { this.fromAddress = fromAddress; }
 
-	public Address getFromAddress() {
-		return fromAddress;
-	}
-	public void setFromAddress(Address fromAddress) {
-		this.fromAddress = fromAddress;
-	}
+	public Tracker getTracker() { return tracker; }
+	public void setTracker(Tracker tracker) { this.tracker = tracker; }
 
-	public Tracker getTracker() {
-		return tracker;
-	}
-	public void setTracker(Tracker tracker) {
-		this.tracker = tracker;
-	}
+	public String getProvider() { return provider; }
+	public void setProvider(String provider) { this.provider = provider; }
 
-	public String getTrackingCode() {
-		return trackingCode;
-	}
-	public void setTrackingCode(String trackingCode) {
-		this.trackingCode = trackingCode;
-	}
+	public String getProviderId() { return providerId; }
+	public void setProviderId(String providerId) { this.providerId = providerId; }
 
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	public String getTrackingCode() { return trackingCode; }
+	public void setTrackingCode(String trackingCode) { this.trackingCode = trackingCode; }
 
-	public String getProvider() {
-		return provider;
-	}
-	public void setProvider(String provider) {
-		this.provider = provider;
-	}
+	public String getStatus() { return status; }
+	public void setStatus(String status) { this.status = status; }
 
-	public String getProviderId() {
-		return providerId;
-	}
-	public void setProviderId(String providerId) {
-		this.providerId = providerId;
-	}
+	public String getShipmentId() { return shipmentId; }
+	public void setShipmentId(String shipmentId) { this.shipmentId = shipmentId; }
 
-	public String getShipmentId() {
-		return shipmentId;
-	}
-	public void setShipmentId(String shipmentId) {
-		this.shipmentId = shipmentId;
-	}
+	public Float getAmount() { return amount; }
+	public void setAmount(Float amount) { this.amount = amount; }
 
-	public List<String> getMessages() {
-		return messages;
-	}
-	public void setMessages(List<String> messages) {
-		this.messages = messages;
-	}
+	public List<String> getMessages() { return messages; }
+	public void setMessages(List<String> messages) { this.messages = messages; }
 
 	// create
 	public static Insurance create(Map<String, Object> params) throws EasyPostException {
