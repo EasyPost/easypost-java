@@ -1,3 +1,8 @@
+=== 3.0.1 2016-08-19
+
+* Removed some CRUD methods that are not (and never were) valid
+
+
 === 3.0.0 2016-07-25
 
 * Updated version of GSON from 2.2.4 to 2.7 to allow looser parsing of DateTime formats

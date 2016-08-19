@@ -106,6 +106,33 @@ public class EasyPostTest {
   }
 
   @Test
+  public void testShipmentWithPostageLabelWithOptions() throws EasyPostException {
+    // create and buy shipment
+    Map<String, Object> optionsMap = new HashMap<String, Object>();
+    optionsMap.put("label_format", "ZPL");
+    optionsMap.put("label_size", "4X4.5");
+
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("to_address", defaultToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    shipmentMap.put("parcel", defaultParcel);
+    shipmentMap.put("options", optionsMap);
+    Shipment shipment = Shipment.create(shipmentMap);
+
+    List<String> buyCarriers = new ArrayList<String>();
+    buyCarriers.add("USPS");
+    shipment = shipment.buy(shipment.lowestRate(buyCarriers));
+
+    PostageLabel label = shipment.getPostageLabel();
+
+    assertNotNull(label);
+    assertNotNull(label.getId());
+    assertNotNull(label.getLabelUrl());
+    assertEquals(label.getLabelSize(), "4x4.5");
+    assertEquals(label.getLabelFileType(), "application/zpl");
+  }
+
+  @Test
   public void testShipmentWithInsurance() throws EasyPostException {
     // create and buy shipment
     Shipment shipment = createDefaultShipmentDomestic();
