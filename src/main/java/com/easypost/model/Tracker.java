@@ -20,6 +20,8 @@ public class Tracker extends EasyPostResource {
 	Date estDeliveryDate;
 	String signedBy;
 	CarrierDetail carrierDetail;
+	Date createdAt;
+	Date updatedAt;
 
 	public String getId() {
 		return id;
@@ -45,7 +47,6 @@ public class Tracker extends EasyPostResource {
 	public String getCarrier() {
 		return carrier;
 	}
-
 	public void setCarrier(String carrier) {
 		this.carrier = carrier;
 	}
@@ -94,6 +95,20 @@ public class Tracker extends EasyPostResource {
 
 	public CarrierDetail getCarrierDetail() { return carrierDetail; }
 	public void setCarrierDetail(CarrierDetail carrierDetail) { this.carrierDetail = carrierDetail; }
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdateAt() {
+		return updatedAt;
+	}
+	public void setUpdateAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
 	// create
 	public static Tracker create(Map<String, Object> params) throws EasyPostException {

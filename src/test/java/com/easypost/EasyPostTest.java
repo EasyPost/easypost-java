@@ -172,13 +172,15 @@ public class EasyPostTest {
 
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy kk:mm:ss zzz");
     Date date = sdf.parse("08/26/2014 17:00:00 PDT");
-    assertEquals(tracker.getEstDeliveryDate(), date);
-    assertEquals(tracker.getWeight(), 17.6, 0.0001);
-    assertEquals(tracker.getSignedBy(), "John Tester");
-    assertEquals(tracker.getCarrierDetail().getService(), "FEDEX_GROUND");
-    assertEquals(tracker.getCarrierDetail().getContainerType(), "YOUR_PACKAGING");
-    assertNotNull(tracker.getCarrierDetail().getEstDeliveryDateLocal());
-    assertNotNull(tracker.getCarrierDetail().getEstDeliveryTimeLocal());
+    assertEquals("Est delivery dates don't match", tracker.getEstDeliveryDate(), date);
+    assertEquals("Weights don't match", tracker.getWeight(), 17.6, 0.0001);
+    assertEquals("Signed By doesn't match", tracker.getSignedBy(), "John Tester");
+    assertEquals("Service levels don't match", tracker.getCarrierDetail().getService(), "FEDEX_GROUND");
+    assertEquals("Containers don't match", tracker.getCarrierDetail().getContainerType(), "YOUR_PACKAGING");
+    assertNotNull("Est delivery Date local is null", tracker.getCarrierDetail().getEstDeliveryDateLocal());
+    assertNotNull("Est delivery Time local is null", tracker.getCarrierDetail().getEstDeliveryTimeLocal());
+    assertNotNull("Created at is null", tracker.getCreatedAt());
+    assertNotNull("Updated at is null", tracker.getUpdateAt());
 
     Tracker retrieved = Tracker.retrieve(tracker.getId());
 
@@ -627,7 +629,7 @@ public class EasyPostTest {
     buyCarriers.add("USPS");
     shipment = shipment.buy(shipment.lowestRate(buyCarriers));
 
-    assertFalse(shipment.getForms().get(0).getSubmittedElectronically());
+    assertTrue("Customs Form was not submitted electronically", shipment.getForms().get(0).getSubmittedElectronically());
   }
 
   @Test
