@@ -22,6 +22,7 @@ public class Tracker extends EasyPostResource {
 	CarrierDetail carrierDetail;
 	Date createdAt;
 	Date updatedAt;
+	String publicUrl;
 
 	public String getId() {
 		return id;
@@ -109,6 +110,9 @@ public class Tracker extends EasyPostResource {
 	public void setUpdateAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	public String getPublicUrl() { return publicUrl; }
+	public void setPublicUrl(String publicUrl) { this.publicUrl = publicUrl; }
 
 	// create
 	public static Tracker create(Map<String, Object> params) throws EasyPostException {

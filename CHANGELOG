@@ -1,3 +1,8 @@
+=== 3.0.3 2016-08-31
+
+* Added getPublicUrl() method for Tracker objects
+
+
 === 3.0.2 2016-08-30
 
 * Added getCreatedAt() and getUpdatedAt() methods for Tracker objects

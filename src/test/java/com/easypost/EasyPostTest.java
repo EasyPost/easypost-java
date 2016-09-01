@@ -181,6 +181,7 @@ public class EasyPostTest {
     assertNotNull("Est delivery Time local is null", tracker.getCarrierDetail().getEstDeliveryTimeLocal());
     assertNotNull("Created at is null", tracker.getCreatedAt());
     assertNotNull("Updated at is null", tracker.getUpdateAt());
+    assertNotNull("PublicURL is not null", tracker.getPublicUrl());
 
     Tracker retrieved = Tracker.retrieve(tracker.getId());
 
