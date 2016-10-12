@@ -1,6 +1,6 @@
-=== 3.0.3 2016-08-31
+=== 3.0.4 2016-10-12
 
-* Added getPublicUrl() method for Tracker objects
+* Added getbatchId() and other methods to ScanForms
 
 
 === 3.0.2 2016-08-30

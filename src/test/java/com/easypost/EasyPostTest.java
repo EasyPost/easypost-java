@@ -524,7 +524,10 @@ public class EasyPostTest {
 
     assertNotNull(scanForm);
 
-    assertNotSame(scanForm.getLabelUrl(), "");
+    assertNotNull(scanForm.getMessage());
+    assertNotEquals(scanForm.getLabelUrl(), "");
+    assertNotEquals(scanForm.getLabelFileType(), "");
+    assertNotNull(scanForm.getBatchId());
   }
 
   @Test

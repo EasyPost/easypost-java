@@ -10,10 +10,13 @@ import com.easypost.net.EasyPostResource;
 public class ScanForm extends EasyPostResource {
 	public String id;
 	String status;
+	String message;
 	Address fromAddress;
 	List<String> trackingCodes;
 	String formUrl;
+	String formFileType;
 	String confirmation;
+	String batchId;
 
 	public String getId() {
 		return id;
@@ -28,6 +31,13 @@ public class ScanForm extends EasyPostResource {
 	public void setStatus(String status) {
     this.status = status;
   }
+
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public Address getFromAddress() {
 		return fromAddress;
@@ -53,8 +63,23 @@ public class ScanForm extends EasyPostResource {
 		this.formUrl = formUrl;
 	}
 
+	public String getFormFileType() {
+		return formFileType;
+	}
+	public String getLabelFileType() { return this.getFormFileType(); }
+	public void setFormFileType(String formFileType) {
+		this.formFileType = formFileType;
+	}
+
 	public String getConfirmation() { return confirmation; }
 	public void setConfirmation(String confirmation) { this.confirmation = confirmation; }
+
+	public String getBatchId() {
+		return batchId;
+	}
+	public void setBatchId(String batchId) {
+		this.batchId = batchId;
+	}
 
 	// create via Batch.createScanForm
 
