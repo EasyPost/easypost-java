@@ -102,6 +102,14 @@ public class User extends EasyPostResource {
       return this;
     }
 
+    // delete
+    public void delete() throws EasyPostException {
+        this.delete(null);
+    }
+    public void delete(String apiKey) throws EasyPostException {
+        request(RequestMethod.DELETE, instanceURL(User.class, this.getId()), null, User.class, apiKey);
+    }
+
     // api keys
     public List<ApiKey> apiKeys() throws EasyPostException {
       ApiKeys parentKeys = ApiKeys.all();

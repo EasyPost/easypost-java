@@ -22,6 +22,8 @@ import java.lang.InterruptedException;
 import com.easypost.exception.EasyPostException;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+
 
 public class EasyPostTest {
 
@@ -217,6 +219,7 @@ public class EasyPostTest {
     for(int i = 0; i < trackingCodes.size(); i++){
             code = new HashMap<String, Object>();
             code.put("tracking_code", trackingCodes.get(i));
+            code.put("carrier", "USPS");
             trackingCodeParams.add(code);
     }
 
@@ -447,6 +450,32 @@ public class EasyPostTest {
 
     exception.expect(com.easypost.exception.EasyPostException.class);
     address.verify();
+  }
+
+  @Test
+  public void testAddressErrorCatchAndInspect() throws EasyPostException {
+    try {
+      Map<String, Object> address = new HashMap<String, Object>();
+      address.put("street1", "UNDELIVERABLE ST");
+      address.put("city", "SAN FRANCISCO");
+      address.put("state", "CA");
+      address.put("zip", "94105");
+      address.put("country", "US");
+      address.put("company", "EasyPost");
+      address.put("phone", "415-123-4567");
+
+      List<String> verifications = new ArrayList<String>();
+      verifications.add("delivery");
+      address.put("verify_strict", verifications);
+
+      Address.create(address);
+    } catch (EasyPostException e) {
+      assertNotNull(e);
+
+      assertThat(e.getMessage(), containsString("An error occured"));
+      assertThat(e.getMessage(), containsString("Response code: 422"));
+      assertThat(e.getMessage(), containsString("\"error\":{\"code\":\"ADDRESS.VERIFY.FAILURE\",\"message\":\"Unable to verify address.\""));
+    }
   }
 
   @Test
@@ -714,6 +743,59 @@ public class EasyPostTest {
 //
 //    System.out.println(user.getRechargeThreshold());
 //  }
+
+//  //  This test requires a production api key
+//  @Test
+//  public void testUserCreateAndDelete() throws EasyPostException {
+//    EasyPost.apiKey = "KEY"; // easypost private production key
+//
+//    Map<String, Object> userHash = new HashMap<String, Object>();
+//    userHash.put("name", "Chad DeVader");
+//    userHash.put("password", "4theempire");
+//    userHash.put("password_confirmation", "4theempire");
+//    userHash.put("phone_number", "555-123-4321");
+//
+//
+//    User child = User.create(userHash);
+//
+//    assertEquals("Child's name is incorrect", child.getName(), "Chad DeVader");
+//    assertNotNull("Child's email is not present", child.getEmail());
+//    assertNotNull("Child's phone_number is not present", child.getPhoneNumber());
+//    assertNotNull("Child's ID is not present", child.getId());
+//
+//    User fetchedChild = User.retrieve(child.getId());
+//    assertEquals("Child's ID is not the same as FetchedChild's ID", fetchedChild.getId(), child.getId());
+//
+//    fetchedChild.delete();
+//
+//    try {
+//      User newFetchedChild = User.retrieve(child.getId());
+//      assertNull("Child is not deleted", newFetchedChild);
+//    } catch (EasyPostException e) {
+//      assertThat(e.getMessage(), containsString("An error occured"));
+//      assertThat(e.getMessage(), containsString("Response code: 404"));
+//      assertThat(e.getMessage(), containsString("{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource could not be found.\",\"errors\":[]}}"));
+//    }
+//  }
+
+//  //  This test requires a production api key
+//  @Test
+//  public void testUserCreateAndDeleteFailsOnParent() throws EasyPostException {
+//    EasyPost.apiKey = "KEY"; // easypost private production key
+//
+//    User fetchedSelf = User.retrieveMe();
+//    assertNotNull("Parent's ID is not present", fetchedSelf);
+//
+//    try {
+//      fetchedSelf.delete();
+//      assertFalse("User did not delete", true);
+//    } catch (EasyPostException e) {
+//      assertThat(e.getMessage(), containsString("An error occured"));
+//      assertThat(e.getMessage(), containsString("Response code: 404"));
+//      assertThat(e.getMessage(), containsString("{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource could not be found.\",\"errors\":[]}}"));
+//    }
+//  }
+
 
 //  //  This test requires a production api key
 //  @Test

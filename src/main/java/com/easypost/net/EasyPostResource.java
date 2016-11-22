@@ -348,7 +348,9 @@ public abstract class EasyPostResource {
 			}
 			int rCode = conn.getResponseCode(); // sends the request
 			String rBody = null;
-			if (rCode >= 200 && rCode < 300) {
+			if (rCode == 204) {
+				rBody = "";
+			} else if (rCode >= 200 && rCode < 300) {
 				rBody = getResponseBody(conn.getInputStream());
 			} else {
 				rBody = getResponseBody(conn.getErrorStream());

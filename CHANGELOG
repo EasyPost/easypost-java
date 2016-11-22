@@ -1,3 +1,8 @@
+=== 3.0.5 2016-11-21
+
+* Added delete() to Users (for children only)
+
+
 === 3.0.4 2016-10-12
 
 * Added getbatchId() and other methods to ScanForms
