@@ -112,7 +112,7 @@ public class EasyPostTest {
     // create and buy shipment
     Map<String, Object> optionsMap = new HashMap<String, Object>();
     optionsMap.put("label_format", "ZPL");
-    optionsMap.put("label_size", "4X4.5");
+    optionsMap.put("label_size", "4x6");
 
     Map<String, Object> shipmentMap = new HashMap<String, Object>();
     shipmentMap.put("to_address", defaultToAddress);
@@ -121,7 +121,7 @@ public class EasyPostTest {
     shipmentMap.put("options", optionsMap);
     Shipment shipment = Shipment.create(shipmentMap);
 
-    List<String> buyCarriers = new ArrayList<String>();
+    List<String> buyCarriers = new ArrayList<>();
     buyCarriers.add("USPS");
     shipment = shipment.buy(shipment.lowestRate(buyCarriers));
 
@@ -130,7 +130,7 @@ public class EasyPostTest {
     assertNotNull(label);
     assertNotNull(label.getId());
     assertNotNull(label.getLabelUrl());
-    assertEquals(label.getLabelSize(), "4x4.5");
+    assertEquals(label.getLabelSize(), "4x6");
     assertEquals(label.getLabelFileType(), "application/zpl");
   }
 
@@ -172,13 +172,12 @@ public class EasyPostTest {
 
     assertNotNull(tracker);
 
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy kk:mm:ss zzz");
-    Date date = sdf.parse("08/26/2014 17:00:00 PDT");
-    assertEquals("Est delivery dates don't match", tracker.getEstDeliveryDate(), date);
-    assertEquals("Weights don't match", tracker.getWeight(), 17.6, 0.0001);
-    assertEquals("Signed By doesn't match", tracker.getSignedBy(), "John Tester");
-    assertEquals("Service levels don't match", tracker.getCarrierDetail().getService(), "FEDEX_GROUND");
-    assertEquals("Containers don't match", tracker.getCarrierDetail().getContainerType(), "YOUR_PACKAGING");
+    // This Est Delivery Date test confirms that the timestamps are within 1.5 seconds of each other (rather than exactly equal)
+    assertTrue("Est delivery dates aren't within expected timeframe", Math.abs((new Date()).getTime() - tracker.getEstDeliveryDate().getTime()) < 1500);
+    assertEquals("Weights don't match", 17.6, tracker.getWeight(), 0.0001);
+    assertEquals("Signed By doesn't match", "John Tester", tracker.getSignedBy());
+    assertEquals("Service levels don't match", "FEDEX_GROUND", tracker.getCarrierDetail().getService());
+    assertEquals("Containers don't match", "YOUR_PACKAGING", tracker.getCarrierDetail().getContainerType());
     assertNotNull("Est delivery Date local is null", tracker.getCarrierDetail().getEstDeliveryDateLocal());
     assertNotNull("Est delivery Time local is null", tracker.getCarrierDetail().getEstDeliveryTimeLocal());
     assertNotNull("Created at is null", tracker.getCreatedAt());
@@ -333,27 +332,6 @@ public class EasyPostTest {
     assertEquals("Address did not verify as expected", verified.getZip(), "94107-1990");
 
     Address createdAndVerified = Address.createAndVerify(addressHash);
-
-    assertNull("Verified Address has no error message", createdAndVerified.getMessage());
-    assertEquals("Address did not verify as expected", createdAndVerified.getZip(), "94107-1990");
-  }
-
-  @Test
-  public void testAddressVerifiesWithCarrier() throws EasyPostException {
-    Map<String, Object> addressHash = new HashMap<String, Object>();
-    addressHash.put("street1", "164 Townsend St");
-    addressHash.put("street2", "Unit 1");
-    addressHash.put("city", "San Francisco");
-    addressHash.put("state", "CA");
-    addressHash.put("zip", "19087");
-
-    Address address = Address.create(addressHash);
-    Address verified = address.verifyWithCarrier("usps");
-
-    assertNull("Verified Address has no error message", verified.getMessage());
-    assertEquals("Address did not verify as expected", verified.getZip(), "94107-1990");
-
-    Address createdAndVerified = Address.createAndVerifyWithCarrier(addressHash, "usps");
 
     assertNull("Verified Address has no error message", createdAndVerified.getMessage());
     assertEquals("Address did not verify as expected", createdAndVerified.getZip(), "94107-1990");
@@ -552,8 +530,6 @@ public class EasyPostTest {
     ScanForm scanForm = batch.getScanForm();
 
     assertNotNull(scanForm);
-
-    assertNotNull(scanForm.getMessage());
     assertNotEquals(scanForm.getLabelUrl(), "");
     assertNotEquals(scanForm.getLabelFileType(), "");
     assertNotNull(scanForm.getBatchId());
