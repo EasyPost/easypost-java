@@ -702,18 +702,18 @@ public class EasyPostTest {
     Map<String, Object> paramMap = new HashMap<>();
     paramMap.put("type", "tracker");
 
-    // Create a shipment report
+    // Create a tracker report
     Report trackerReport = Report.create(paramMap);
     assertNotNull("ID is null", trackerReport.getId());
     assertThat("ID is not a tracker report ID", trackerReport.getId(), containsString("trkrep_"));
 
-    // Retrieve a shipment report
+    // Retrieve a tracker report
     Report trackerReport2 = Report.retrieve(trackerReport.getId());
     assertNotNull("ID is null", trackerReport2.getId());
     assertThat("ID is not a tracker report ID", trackerReport2.getId(), containsString("trkrep_"));
     assertEquals("Create and Retrieve returned different ids", trackerReport.getId(), trackerReport2.getId());
 
-    // Index shipment reports
+    // Index tracker reports
     paramMap.put("page_size", "4");
     ReportCollection trackerReports = Report.all(paramMap);
     assertEquals("Page Size not respected", trackerReports.getReports().size(), 4);
@@ -726,18 +726,18 @@ public class EasyPostTest {
     Map<String, Object> paramMap = new HashMap<>();
     paramMap.put("type", "payment_log");
 
-    // Create a shipment report
+    // Create a payment_log report
     Report paymentLogReport = Report.create(paramMap);
     assertNotNull("ID is null", paymentLogReport.getId());
     assertThat("ID is not a payment_log report ID", paymentLogReport.getId(), containsString("plrep_"));
 
-    // Retrieve a shipment report
+    // Retrieve a payment_log report
     Report paymentLogReport2 = Report.retrieve(paymentLogReport.getId());
     assertNotNull("ID is null", paymentLogReport2.getId());
     assertThat("ID is not a payment_log report ID", paymentLogReport2.getId(), containsString("plrep_"));
     assertEquals("Create and Retrieve returned different ids", paymentLogReport.getId(), paymentLogReport2.getId());
 
-    // Index shipment reports
+    // Index payment_log reports
     paramMap.put("page_size", "4");
     ReportCollection paymentLogReports = Report.all(paramMap);
     assertEquals("Page Size not respected", paymentLogReports.getReports().size(), 4);
