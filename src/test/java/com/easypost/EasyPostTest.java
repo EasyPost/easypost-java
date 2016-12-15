@@ -672,6 +672,79 @@ public class EasyPostTest {
     assertTrue("Insurances HasMore not set correctly", insurances.getHasMore());
   }
 
+  @Test
+  public void testShipmentReport() throws EasyPostException {
+    // Define request params
+    Map<String, Object> paramMap = new HashMap<>();
+    paramMap.put("type", "shipment");
+
+    // Create a shipment report
+    Report shipmentReport = Report.create(paramMap);
+    assertNotNull("ID is null", shipmentReport.getId());
+    assertThat("ID is not a shipment report ID", shipmentReport.getId(), containsString("shprep_"));
+
+    // Retrieve a shipment report
+    Report shipmentReport2 = Report.retrieve(shipmentReport.getId());
+    assertNotNull("ID is null", shipmentReport2.getId());
+    assertThat("ID is not a shipment report ID", shipmentReport2.getId(), containsString("shprep_"));
+    assertEquals("Create and Retrieve returned different ids", shipmentReport.getId(), shipmentReport2.getId());
+
+    // Index shipment reports
+    paramMap.put("page_size", "4");
+    ReportCollection shipmentReports = Report.all(paramMap);
+    assertEquals("Page Size not respected", shipmentReports.getReports().size(), 4);
+    assertEquals("Does not have more", shipmentReports.getHasMore(), true);
+  }
+
+  @Test
+  public void testTrackerReport() throws EasyPostException {
+    // Define request params
+    Map<String, Object> paramMap = new HashMap<>();
+    paramMap.put("type", "tracker");
+
+    // Create a tracker report
+    Report trackerReport = Report.create(paramMap);
+    assertNotNull("ID is null", trackerReport.getId());
+    assertThat("ID is not a tracker report ID", trackerReport.getId(), containsString("trkrep_"));
+
+    // Retrieve a tracker report
+    Report trackerReport2 = Report.retrieve(trackerReport.getId());
+    assertNotNull("ID is null", trackerReport2.getId());
+    assertThat("ID is not a tracker report ID", trackerReport2.getId(), containsString("trkrep_"));
+    assertEquals("Create and Retrieve returned different ids", trackerReport.getId(), trackerReport2.getId());
+
+    // Index tracker reports
+    paramMap.put("page_size", "4");
+    ReportCollection trackerReports = Report.all(paramMap);
+    assertEquals("Page Size not respected", trackerReports.getReports().size(), 4);
+    assertEquals("Does not have more", trackerReports.getHasMore(), true);
+  }
+
+  @Test
+  public void testPaymentLogReport() throws EasyPostException {
+    // Define request params
+    Map<String, Object> paramMap = new HashMap<>();
+    paramMap.put("type", "payment_log");
+
+    // Create a payment_log report
+    Report paymentLogReport = Report.create(paramMap);
+    assertNotNull("ID is null", paymentLogReport.getId());
+    assertThat("ID is not a payment_log report ID", paymentLogReport.getId(), containsString("plrep_"));
+
+    // Retrieve a payment_log report
+    Report paymentLogReport2 = Report.retrieve(paymentLogReport.getId());
+    assertNotNull("ID is null", paymentLogReport2.getId());
+    assertThat("ID is not a payment_log report ID", paymentLogReport2.getId(), containsString("plrep_"));
+    assertEquals("Create and Retrieve returned different ids", paymentLogReport.getId(), paymentLogReport2.getId());
+
+    // Index payment_log reports
+    paramMap.put("page_size", "4");
+    ReportCollection paymentLogReports = Report.all(paramMap);
+    assertEquals("Page Size not respected", paymentLogReports.getReports().size(), 4);
+    assertEquals("Does not have more", paymentLogReports.getHasMore(), true);
+  }
+
+
 
   /*
   // This test requires a FedEx account
