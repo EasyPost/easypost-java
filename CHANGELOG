@@ -1,3 +1,8 @@
+=== 3.1.0 2016-12-14
+
+* Added ability to create, retrieve, and index shipment, tracker and payment_log reports
+
+
 === 3.0.5 2016-11-21
 
 * Added delete() to Users (for children only)
