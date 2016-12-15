@@ -28,7 +28,7 @@ public class Report extends EasyPostResource {
     protected static final Map<String, String> REPORT_PREFIXES;
     static
     {
-        REPORT_PREFIXES = new HashMap<>();
+        REPORT_PREFIXES = new HashMap<String, String>();
         REPORT_PREFIXES.put("shprep", "shipment");
         REPORT_PREFIXES.put("trkrep", "tracker");
         REPORT_PREFIXES.put("plrep", "payment_log");

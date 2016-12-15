@@ -121,7 +121,7 @@ public class EasyPostTest {
     shipmentMap.put("options", optionsMap);
     Shipment shipment = Shipment.create(shipmentMap);
 
-    List<String> buyCarriers = new ArrayList<>();
+    List<String> buyCarriers = new ArrayList<String>();
     buyCarriers.add("USPS");
     shipment = shipment.buy(shipment.lowestRate(buyCarriers));
 
@@ -675,7 +675,7 @@ public class EasyPostTest {
   @Test
   public void testShipmentReport() throws EasyPostException {
     // Define request params
-    Map<String, Object> paramMap = new HashMap<>();
+    Map<String, Object> paramMap = new HashMap<String, Object>();
     paramMap.put("type", "shipment");
 
     // Create a shipment report
@@ -699,7 +699,7 @@ public class EasyPostTest {
   @Test
   public void testTrackerReport() throws EasyPostException {
     // Define request params
-    Map<String, Object> paramMap = new HashMap<>();
+    Map<String, Object> paramMap = new HashMap<String, Object>();
     paramMap.put("type", "tracker");
 
     // Create a tracker report
@@ -723,7 +723,7 @@ public class EasyPostTest {
   @Test
   public void testPaymentLogReport() throws EasyPostException {
     // Define request params
-    Map<String, Object> paramMap = new HashMap<>();
+    Map<String, Object> paramMap = new HashMap<String, Object>();
     paramMap.put("type", "payment_log");
 
     // Create a payment_log report
