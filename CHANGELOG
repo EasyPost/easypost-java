@@ -1,3 +1,8 @@
+=== 3.2.0 2017-01-04
+
+* Changed Shipment and Order options from being a Map<String, String> to Map<String, Object> to support new non-string options
+
+
 === 3.1.0 2016-12-14
 
 * Added ability to create, retrieve, and index shipment, tracker and payment_log reports

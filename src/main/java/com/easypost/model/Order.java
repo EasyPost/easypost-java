@@ -23,7 +23,7 @@ public class Order extends EasyPostResource {
   List<Rate> rates;
   List<Container> containers;
   List<Item> items;
-  Map<String, String> options;
+  Map<String, Object> options;
   List<ShipmentMessage> messages;
 
   public String getId() {
@@ -117,10 +117,10 @@ public class Order extends EasyPostResource {
     this.items = items;
   }
 
-  public Map<String, String> getOptions() {
+  public Map<String, Object> getOptions() {
     return options;
   }
-  public void setOptions(Map<String, String> options) {
+  public void setOptions(Map<String, Object> options) {
     this.options = options;
   }
 
