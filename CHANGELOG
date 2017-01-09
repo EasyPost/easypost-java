@@ -1,3 +1,8 @@
+=== 3.2.1 2017-01-09
+
+* Fixed bug in Maven test dependencies
+
+
 === 3.2.0 2017-01-04
 
 * Changed Shipment and Order options from being a Map<String, String> to Map<String, Object> to support new non-string options
