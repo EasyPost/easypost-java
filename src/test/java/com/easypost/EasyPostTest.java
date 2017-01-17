@@ -744,7 +744,47 @@ public class EasyPostTest {
     assertEquals("Does not have more", paymentLogReports.getHasMore(), true);
   }
 
+  @Test
+  public void testWebhookCRUD() throws EasyPostException {
+    // Define request params
+    Map<String, Object> paramMap = new HashMap<String, Object>();
+    paramMap.put("url", "example.com");
 
+    // Create a webhook
+    Webhook webhook = Webhook.create(paramMap);
+    assertNotNull("ID is null", webhook.getId());
+    assertEquals("mode is not test", webhook.getMode(), "test");
+    assertEquals("URL is not correctly ser", webhook.getUrl(), "http://example.com");
+    assertNull("disabledAt is not null", webhook.getDisabledAt());
+    assertEquals("Class is not Webhook", webhook.getClass(), Webhook.class);
+
+    // Retrieve a webhook
+    Webhook webhook2 = Webhook.retrieve(webhook.getId());
+    assertNotNull("ID is null", webhook2.getId());
+    assertEquals("Create and Retrieve returned different ids", webhook.getId(), webhook2.getId());
+
+    // Update a webhook (re-enable it)
+    Map<String, Object> updateMap = new HashMap<String, Object>();
+    Webhook webhook3 = webhook.update(updateMap);
+    assertNotNull("ID is null", webhook3.getId());
+    assertEquals("Create and Update returned different ids", webhook.getId(), webhook3.getId());
+
+    // Index webhooks
+    Map<String, Object> indexMap = new HashMap<String, Object>();
+    WebhookCollection webhooks = Webhook.all(indexMap);
+    assertEquals("Create and Retrieve returned different ids", webhook.getId(), webhooks.getWebhooks().get(webhooks.getWebhooks().size() - 1).getId());
+
+    // Delete webhook
+    webhook.delete();
+    try {
+      Webhook.retrieve(webhook.getId());
+      assertFalse("Webhook did not delete", true);
+    } catch (EasyPostException e) {
+      assertThat(e.getMessage(), containsString("An error occured"));
+      assertThat(e.getMessage(), containsString("Response code: 404"));
+      assertThat(e.getMessage(), containsString("{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource could not be found.\",\"errors\":[]}}"));
+    }
+  }
 
   /*
   // This test requires a FedEx account

@@ -33,6 +33,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
         objectMap.put("Shipment", Shipment.class);
         objectMap.put("Tracker", Tracker.class);
         objectMap.put("TrackingDetail", TrackingDetail.class);
+		objectMap.put("Webhook", Webhook.class);
     }
 
     private Object deserializeJsonPrimitive(JsonPrimitive element) {
