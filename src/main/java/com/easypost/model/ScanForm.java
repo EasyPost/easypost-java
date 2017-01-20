@@ -81,7 +81,13 @@ public class ScanForm extends EasyPostResource {
 		this.batchId = batchId;
 	}
 
-	// create via Batch.createScanForm
+	// create
+	public static ScanForm create(Map<String, Object> params) throws EasyPostException {
+		return create(params, null);
+	}
+	public static ScanForm create(Map<String, Object> params, String apiKey) throws EasyPostException {
+		return request(RequestMethod.POST, classURL(ScanForm.class), params, ScanForm.class, apiKey);
+	}
 
 	// retrieve
 	public static ScanForm retrieve(String id) throws EasyPostException {

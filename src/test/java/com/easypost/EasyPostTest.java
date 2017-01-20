@@ -786,6 +786,36 @@ public class EasyPostTest {
     }
   }
 
+  @Test
+  public void testScanForm() throws EasyPostException {
+    // create and buy shipment
+    Shipment shipment = createDefaultShipmentDomestic();
+    List<String> buyCarriers = new ArrayList<String>();
+    buyCarriers.add("USPS");
+    shipment = shipment.buy(shipment.lowestRate(buyCarriers));
+
+    // create ScanForm
+    List<Shipment> shipments= new ArrayList<Shipment>();
+    shipments.add(shipment);
+    Map<String, Object> paramMap = new HashMap<String, Object>();
+    paramMap.put("shipments", shipments);
+    ScanForm scanForm = ScanForm.create(paramMap);
+
+    assertNotNull("No ID returned", scanForm.getId());
+    assertEquals("Shipment's tracking code not on Scan Form", scanForm.getTrackingCodes().get(0), shipment.getTrackingCode());
+
+    // retrieve ScanForm
+    ScanForm scanForm2 = ScanForm.retrieve(scanForm.getId());
+    assertNotNull("No ID returned", scanForm2.getId());
+    assertEquals("IDs do not match", scanForm2.getId(), scanForm.getId());
+
+    // index ScanForms
+    Map<String, Object> indexMap = new HashMap<String, Object>();
+    indexMap.put("page_size", 2);
+    ScanFormCollection scanForms = ScanForm.all(indexMap);
+    assertEquals("IDs do not match", scanForms.getScanForms().get(0).getId(), scanForm.getId());
+  }
+
   /*
   // This test requires a FedEx account
   @Test
