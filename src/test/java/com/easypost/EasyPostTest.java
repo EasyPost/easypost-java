@@ -764,14 +764,12 @@ public class EasyPostTest {
     assertEquals("Create and Retrieve returned different ids", webhook.getId(), webhook2.getId());
 
     // Update a webhook (re-enable it)
-    Map<String, Object> updateMap = new HashMap<String, Object>();
-    Webhook webhook3 = webhook.update(updateMap);
+    Webhook webhook3 = webhook.update();
     assertNotNull("ID is null", webhook3.getId());
     assertEquals("Create and Update returned different ids", webhook.getId(), webhook3.getId());
 
     // Index webhooks
-    Map<String, Object> indexMap = new HashMap<String, Object>();
-    WebhookCollection webhooks = Webhook.all(indexMap);
+    WebhookCollection webhooks = Webhook.all();
     assertEquals("Create and Retrieve returned different ids", webhook.getId(), webhooks.getWebhooks().get(webhooks.getWebhooks().size() - 1).getId());
 
     // Delete webhook

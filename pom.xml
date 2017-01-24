@@ -5,7 +5,7 @@
     <groupId>com.easypost</groupId>
     <artifactId>easypost-api-client</artifactId>
 
-    <version>3.3.1</version>
+    <version>3.3.2</version>
     <packaging>jar</packaging>
 
     <name>com.easypost:easypost-api-client</name>

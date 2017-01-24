@@ -61,6 +61,10 @@ public class Webhook extends EasyPostResource {
     }
 
     // all
+    public static WebhookCollection all() throws EasyPostException {
+        Map<String, Object> params = new HashMap<String, Object>();
+        return all(params, null);
+    }
     public static WebhookCollection all(Map<String, Object> params) throws EasyPostException {
         return all(params, null);
     }
@@ -77,6 +81,10 @@ public class Webhook extends EasyPostResource {
     }
 
     // update
+    public Webhook update() throws EasyPostException {
+        Map<String, Object> params = new HashMap<String, Object>();
+        return this.update(params, null);
+    }
     public Webhook update(Map<String, Object> params) throws EasyPostException {
         return this.update(params, null);
     }
