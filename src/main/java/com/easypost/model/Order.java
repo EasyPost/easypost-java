@@ -175,6 +175,25 @@ public class Order extends EasyPostResource {
       String.format("%s", instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
   }
 
+  // get rates
+  public Order newRates() throws EasyPostException {
+    return this.newRates(null, null);
+  }
+  public Order newRates(Map<String, Object> params) throws EasyPostException {
+    return this.newRates(params, null);
+  }
+  public Order newRates(String apiKey) throws EasyPostException {
+    return this.newRates((Map<String, Object>) null, apiKey);
+  }
+  public Order newRates(Map<String, Object> params, String apiKey) throws EasyPostException {
+    Order response = request(
+            RequestMethod.GET,
+            String.format("%s/rates", instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
+
+    this.merge(this, response);
+    return this;
+  }
+
   // buy
   public Order buy(Map<String, Object> params) throws EasyPostException {
     return this.buy(params, null);

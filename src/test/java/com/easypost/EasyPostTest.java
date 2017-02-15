@@ -622,6 +622,31 @@ public class EasyPostTest {
   }
 
   @Test
+  public void testOrderNewRates() throws EasyPostException {
+    // create and buy multi-shipment order
+    Map<String, Object> shipment_1 = orderShipment();
+    Map<String, Object> shipment_2 = orderShipment();
+    List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
+    shipments.add(shipment_1);
+    shipments.add(shipment_2);
+
+    Map<String, Object> orderParams = new HashMap<String, Object>();
+    orderParams.put("shipments", shipments);
+    orderParams.put("from_address", defaultFromAddress);
+    orderParams.put("to_address", defaultToAddress);
+    Order order = Order.create(orderParams);
+
+    String rateId = order.getShipments().get(0).getRates().get(0).getId();
+    assertNotNull("Original Rate ID is null", rateId);
+
+    order.newRates();
+    String newRateId = order.getShipments().get(0).getRates().get(0).getId();
+
+    assertNotNull("New Rate ID is null", newRateId);
+    assertNotEquals("New Rate ID and Old Rate ID are equal", newRateId, rateId);
+  }
+
+  @Test
   public void testCustomsInfo() throws EasyPostException {
     Map<String, Object> shipmentMap = new HashMap<String, Object>();
     shipmentMap.put("to_address", canadaToAddress);

@@ -1,3 +1,8 @@
+=== 3.3.3 2017-02-14
+
+* Added newRates method to Orders to refresh rates
+
+
 === 3.3.2 2017-01-24
 
 * Allow Webhook update and index to be called with empty params
