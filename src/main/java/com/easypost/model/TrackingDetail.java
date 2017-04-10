@@ -7,6 +7,7 @@ public class TrackingDetail {
 	String message;
 	Date datetime;
 	TrackingLocation trackingLocation;
+	String statusDetail;
 
 	public String getStatus() {
 		return status;
@@ -31,5 +32,12 @@ public class TrackingDetail {
 
 	public TrackingLocation getTrackingLocation() { return trackingLocation; }
 	public void setTrackingLocation(TrackingLocation location) { this.trackingLocation = location; }
+
+	public String getStatusDetail() {
+		return statusDetail;
+	}
+	public void setStatusDetail(String statusDetail) {
+		this.statusDetail = statusDetail;
+	}
 
 }

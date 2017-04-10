@@ -162,7 +162,7 @@ public abstract class EasyPostResource {
 		}
 		propertyMap.put("lang", "Java");
 		propertyMap.put("publisher", "EasyPost");
-		headers.put("X-EasyPost-Client-User-Agent", gson.toJson(propertyMap));
+		headers.put("X-Client-User-Agent", gson.toJson(propertyMap));
 
 		return headers;
 	}

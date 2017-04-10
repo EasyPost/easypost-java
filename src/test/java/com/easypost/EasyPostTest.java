@@ -174,10 +174,15 @@ public class EasyPostTest {
 
     // This Est Delivery Date test confirms that the timestamps are within 1.5 seconds of each other (rather than exactly equal)
     assertTrue("Est delivery dates aren't within expected timeframe", Math.abs((new Date()).getTime() - tracker.getEstDeliveryDate().getTime()) < 1500);
+
     assertEquals("Weights don't match", 17.6, tracker.getWeight(), 0.0001);
     assertEquals("Signed By doesn't match", "John Tester", tracker.getSignedBy());
     assertEquals("Service levels don't match", "FEDEX_GROUND", tracker.getCarrierDetail().getService());
     assertEquals("Containers don't match", "YOUR_PACKAGING", tracker.getCarrierDetail().getContainerType());
+
+    assertNotNull("Destination Location is null", tracker.getCarrierDetail().getDestinationLocation());
+    assertNotNull("Initial Delivery Attempt is null", tracker.getCarrierDetail().getInitialDeliveryAttempt());
+
     assertNotNull("Est delivery Date local is null", tracker.getCarrierDetail().getEstDeliveryDateLocal());
     assertNotNull("Est delivery Time local is null", tracker.getCarrierDetail().getEstDeliveryTimeLocal());
     assertNotNull("Created at is null", tracker.getCreatedAt());
@@ -193,11 +198,13 @@ public class EasyPostTest {
     assertNotNull(tracker.getCarrier());
     assertNotNull(retrieved.getCarrier());
     assertEquals("Tracker carriers are not the same", tracker.getCarrier(), retrieved.getCarrier());
+    assertEquals("Tracker StatusDetail is not populated", "arrived_at_destination", tracker.getStatusDetail());
 
     TrackingDetail trackingDetail = tracker.getTrackingDetails().get(0);
     TrackingDetail retrievedDetail = tracker.getTrackingDetails().get(0);
 
     assertEquals("TrackingDetails are not the same", trackingDetail, retrievedDetail);
+    assertEquals("TrackingDetail StatusDetail is not populated", "status_update", trackingDetail.getStatusDetail());
 
     TrackingLocation trackingLocation = trackingDetail.getTrackingLocation();
     TrackingLocation retrievedLocation = retrievedDetail.getTrackingLocation();
@@ -686,7 +693,6 @@ public class EasyPostTest {
     assertNotNull("ID is null", insurance2.getId());
     assertEquals("Create and Retrieve returned different ids", insurance.getId(), insurance2.getId());
     assertEquals("Create and Retrieve returned different tracking codes", insurance.getTrackingCode(), insurance2.getTrackingCode());
-
 
     Map<String, Object> index_params = new HashMap<String, Object>();
     index_params.put("tracking_code","EZ2000000002");
