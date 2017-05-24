@@ -25,15 +25,6 @@ public class Report extends EasyPostResource {
     String url;
     Date urlExpiresAt;
 
-    protected static final Map<String, String> REPORT_PREFIXES;
-    static
-    {
-        REPORT_PREFIXES = new HashMap<String, String>();
-        REPORT_PREFIXES.put("shprep", "shipment");
-        REPORT_PREFIXES.put("trkrep", "tracker");
-        REPORT_PREFIXES.put("plrep", "payment_log");
-    }
-
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -73,11 +64,7 @@ public class Report extends EasyPostResource {
         wrappedParams.put("report", params);
 
         String type = (String) params.get("type");
-        if (REPORT_PREFIXES.values().contains(type)) {
-            return request(RequestMethod.POST, reportURL(type), wrappedParams, Report.class, apiKey);
-        } else {
-            throw new EasyPostException("Undetermined Report Type");
-        }
+        return request(RequestMethod.POST, reportURL(type), wrappedParams, Report.class, apiKey);
     }
 
     // retrieve
@@ -85,13 +72,7 @@ public class Report extends EasyPostResource {
         return retrieve(id, null);
     }
     public static Report retrieve(String id, String apiKey) throws EasyPostException {
-        String prefix = id.split("_")[0];
-        String type = REPORT_PREFIXES.get(prefix);
-        if (type != null) {
-            return request(RequestMethod.GET, String.format("%s/%s", reportURL(type), id), null, Report.class, apiKey);
-        } else {
-            throw new EasyPostException("Undetermined Report Type");
-        }
+        return request(RequestMethod.GET, instanceURL(Report.class, id), null, Report.class, apiKey);
     }
 
     // all
@@ -100,11 +81,7 @@ public class Report extends EasyPostResource {
     }
     public static ReportCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
         String type = (String) params.get("type");
-        if (REPORT_PREFIXES.values().contains(type)) {
-            return request(RequestMethod.GET, reportURL(type), params, ReportCollection.class, apiKey);
-        } else {
-            throw new EasyPostException("Undetermined Report Type");
-        }
+        return request(RequestMethod.GET, reportURL(type), params, ReportCollection.class, apiKey);
     }
 
     // generate report URL pattern

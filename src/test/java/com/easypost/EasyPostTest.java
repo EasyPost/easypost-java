@@ -626,6 +626,10 @@ public class EasyPostTest {
     assertNotNull(order.getShipments().get(0).getTracker());
     assertNotNull(order.getShipments().get(0).getPostageLabel().getLabelUrl());
     assertNotNull(order.getShipments().get(1).getPostageLabel().getLabelUrl());
+
+    System.out.println(order.getShipments().get(0).getOrderId());
+
+    assertEquals(order.getShipments().get(0).getOrderId(), order.getId());
   }
 
   @Test
