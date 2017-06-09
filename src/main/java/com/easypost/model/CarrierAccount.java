@@ -58,7 +58,7 @@ public class CarrierAccount extends EasyPostResource {
 
 		// delete
 		public static CarrierAccount delete(String id) throws EasyPostException {
-			if(id.substring(0,2) == "ca"){
+			if(id.substring(0,2).equals("ca")){
 				return delete(id,null); 
 			}
 			else{
