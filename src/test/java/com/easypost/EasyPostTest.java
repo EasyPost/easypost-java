@@ -1005,7 +1005,7 @@ public class EasyPostTest {
 //    assertEquals(mutated.getDescription(), newDescription);
 //    assertEquals(mutated.getCredentials().get("account_number"), newAccountNumber);
 //
-//    mutated.delete();
+//    CarrierAccount.delete(mutated.id);
 //
 //    List<CarrierAccount> deletedCarrierAccounts = CarrierAccount.all(listHash);
 //    assertNotNull(deletedCarrierAccounts);
