@@ -846,6 +846,31 @@ public class EasyPostTest {
     ScanFormCollection scanForms = ScanForm.all(indexMap);
     assertEquals("IDs do not match", scanForms.getScanForms().get(0).getId(), scanForm.getId());
   }
+  
+  /*
+  // This test requires the account to have standalone rating enabled
+  @Test
+  public void testRating() throws EasyPostException {
+    //create shipment to get CarrierAccount id
+    Shipment shipment = createDefaultShipmentDomestic();    
+    String ca = shipment.getRates().get(0).getCarrierAccountId();
+
+    // create rating
+    Map<String, Object> ratingMap = new HashMap<String, Object>();
+    ratingMap.put("to_address", defaultToAddress);
+    ratingMap.put("from_address", defaultFromAddress);
+    List<Parcel> parcels = new ArrayList<Parcel>();
+    Parcel pcl = Parcel.create(defaultParcel); 
+    parcels.add(pcl);
+    ratingMap.put("parcels", parcels);
+    List<String> carriers = new ArrayList<String>();
+    carriers.add(ca);
+    ratingMap.put("carrier_accounts", carriers);
+    Rating rt = Rating.create(ratingMap);
+
+    assertNotNull(rt.getRating());
+  }
+*/ 
 
   /*
   // This test requires a FedEx account

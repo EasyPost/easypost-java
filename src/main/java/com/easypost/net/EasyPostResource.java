@@ -221,11 +221,16 @@ public abstract class EasyPostResource {
 		return conn;
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createPostConnection(String url, String query, String apiKey) throws IOException {
+	private static javax.net.ssl.HttpsURLConnection createPostConnection(String url, String query, String apiKey, Boolean isRating) throws IOException {
 		javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey);
 		conn.setDoOutput(true);
 		conn.setRequestMethod("POST");
-		conn.setRequestProperty("Content-Type", String.format("application/x-www-form-urlencoded;charset=%s", CHARSET));
+		if (!isRating) {
+			conn.setRequestProperty("Content-Type", String.format("application/x-www-form-urlencoded;charset=%s", CHARSET));
+		}
+		else{
+			conn.setRequestProperty("Content-Type", String.format("application/json"));
+		}
 		OutputStream output = null;
 		try {
 			output = conn.getOutputStream();
@@ -301,7 +306,6 @@ public abstract class EasyPostResource {
 			}
 		}
 
-        // System.out.println(flatParams);
 
 		return flatParams;
 	}
@@ -326,7 +330,7 @@ public abstract class EasyPostResource {
 		return rBody;
 	}
 
-	private static EasyPostResponse makeURLConnectionRequest(EasyPostResource.RequestMethod method, String url, String query, String apiKey) throws EasyPostException {
+	private static EasyPostResponse makeURLConnectionRequest(EasyPostResource.RequestMethod method, String url, String query, String apiKey, Boolean isRating) throws EasyPostException {
 		javax.net.ssl.HttpsURLConnection conn = null;
 		try {
 			switch (method) {
@@ -334,7 +338,7 @@ public abstract class EasyPostResource {
 				conn = createGetConnection(url, query, apiKey);
 				break;
 			case POST:
-				conn = createPostConnection(url, query, apiKey);
+				conn = createPostConnection(url, query, apiKey,isRating);
 				break;
 			case DELETE:
 				conn = createDeleteConnection(url, query, apiKey);
@@ -399,6 +403,12 @@ public abstract class EasyPostResource {
 	}
 
 	protected static <T> T _request(EasyPostResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey, boolean apiKeyRequired) throws EasyPostException {
+		Boolean isRating = false;
+		if (url.equals("https://api.easypost.com/rating/v1/rates")) {
+			isRating = true;
+		}
+
+
 		if ((EasyPost.apiKey == null || EasyPost.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
 			if (apiKeyRequired) {
 				throw new EasyPostException(
@@ -414,19 +424,21 @@ public abstract class EasyPostResource {
 
 		String query;
 		try {
-			query = createQuery(params);
+			if (!isRating){
+				query = createQuery(params);
+			}
+			else{
+				query = gson.toJson(params);
+			}
 		} catch (UnsupportedEncodingException e) {
 			throw new EasyPostException("Unable to encode parameters to "
 				+ CHARSET
 				+ ". Please email contact@easypost.com for assistance.", e);
 		}
-
-        // System.out.println(url);
-
 		EasyPostResponse response;
 		try {
 			// HTTPSURLConnection verifies SSL cert by default
-			response = makeURLConnectionRequest(method, url, query, apiKey);
+			response = makeURLConnectionRequest(method, url, query, apiKey,isRating);
 		} catch (ClassCastException ce) {
 			// appengine
 			String appEngineEnv = System.getProperty("com.google.appengine.runtime.environment", null);
@@ -441,7 +453,6 @@ public abstract class EasyPostResource {
 		if (rCode < 200 || rCode >= 300) {
 			handleAPIError(rBody, rCode);
 		}
-
 		return gson.fromJson(rBody, clazz);
 	}
 

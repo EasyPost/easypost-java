@@ -1,3 +1,7 @@
+=== 4.0.0 2017-06-27
+
+* added standalone ratings endpoint to library
+
 === 3.3.6 2017-06-09
 
 * updated delete in CarrierAccounts to delete by id
