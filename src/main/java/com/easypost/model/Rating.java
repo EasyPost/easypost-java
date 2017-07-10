@@ -11,8 +11,8 @@ public class Rating extends EasyPostResource {
 	List<?> ratings;
 	List<ShipmentMessage> messages;
 
-	public List<?>  getRating() {return ratings;}
-	public void setRatingList() {this.ratings = ratings;}
+	public List<?>  getRatings() {return ratings;}
+	public void setRatings() {this.ratings = ratings;}
 
 	public List<ShipmentMessage> getMessages() { return messages; }
     public void setMessages(List<ShipmentMessage> messages) { this.messages = messages; }
