@@ -58,17 +58,17 @@ public class CarrierAccount extends EasyPostResource {
 
 		// delete
 		public void delete() throws EasyPostException {
-			this.delete(null, null);
+			this.delete(null);
 		}
-		public void delete(String apiKey, String placeholder) throws EasyPostException {
+		public void delete(String apiKey) throws EasyPostException {
 			request(RequestMethod.DELETE, instanceURL(CarrierAccount.class, this.getId()), null, CarrierAccount.class, apiKey);
 		}
-		public static void delete(String id) throws EasyPostException {
+		public static void deleteById(String id) throws EasyPostException {
 			if(id.substring(0,2).equals("ca")){
-				delete(id,null,null); 
+				deleteById(id,null); 
 			}
 		}
-		public static void delete(String id, String apiKey, String placeholder) throws EasyPostException {
+		public static void deleteById(String id, String apiKey) throws EasyPostException {
 			request(RequestMethod.DELETE, instanceURL(CarrierAccount.class, id), null, CarrierAccount.class, apiKey);
 		}
 
