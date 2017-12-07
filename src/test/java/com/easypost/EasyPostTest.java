@@ -135,6 +135,42 @@ public class EasyPostTest {
   }
 
   @Test
+  public void testShipmentWithPaymentOptions() throws EasyPostException {
+    // create and buy shipment
+    Map<String, Object> optionsMap = new HashMap<String, Object>();
+    Map<String, Object> paymentMap = new HashMap<String, Object>();
+    paymentMap.put("type", "SENDER");
+    optionsMap.put("payment", paymentMap);
+
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("to_address", defaultToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    shipmentMap.put("parcel", defaultParcel);
+    shipmentMap.put("options", optionsMap);
+    Shipment shipment = Shipment.create(shipmentMap);
+
+    assertNotNull(shipment.getOptions());
+    assertTrue(shipment.getOptions().containsKey("payment"));
+  }
+
+  @Test
+  public void testShipmentWithoutPaymentOptions() throws EasyPostException {
+    // create and buy shipment
+    Map<String, Object> optionsMap = new HashMap<String, Object>();
+    optionsMap.put("label_format", "ZPL");
+
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("to_address", defaultToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    shipmentMap.put("parcel", defaultParcel);
+    shipmentMap.put("options", optionsMap);
+    Shipment shipment = Shipment.create(shipmentMap);
+
+    assertNotNull(shipment.getOptions());
+    assertTrue(shipment.getOptions().containsKey("payment"));
+  }
+
+  @Test
   public void testShipmentWithInsurance() throws EasyPostException {
     // create and buy shipment
     Shipment shipment = createDefaultShipmentDomestic();
