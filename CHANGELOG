@@ -1,3 +1,9 @@
+=== 3.4.0 2017-12-07
+
+* Updated version of junit from 4.1.10 to 4.1.12
+* Updated version of maven-compiler-plugin from 1.5 to 1.8
+* Added tests for new shipment option payment
+
 === 3.3.5 2017-05-23
 
 * Added orderId field to Shipments
