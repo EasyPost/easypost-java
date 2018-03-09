@@ -20,8 +20,6 @@ public class Tracker extends EasyPostResource {
 	Date estDeliveryDate;
 	String signedBy;
 	CarrierDetail carrierDetail;
-	Date createdAt;
-	Date updatedAt;
 	String publicUrl;
 	String statusDetail;
 
@@ -98,18 +96,12 @@ public class Tracker extends EasyPostResource {
 	public CarrierDetail getCarrierDetail() { return carrierDetail; }
 	public void setCarrierDetail(CarrierDetail carrierDetail) { this.carrierDetail = carrierDetail; }
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
+	// This method is a misspelling, but it persists to avoid breaking backwards compatibility
 	public Date getUpdateAt() {
-		return updatedAt;
+		return getUpdatedAt();
 	}
 	public void setUpdateAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
+		setUpdatedAt(updatedAt);
 	}
 
 	public String getPublicUrl() { return publicUrl; }

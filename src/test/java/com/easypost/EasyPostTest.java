@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 
 import java.util.Collections;
@@ -124,14 +125,32 @@ public class EasyPostTest {
     List<String> buyCarriers = new ArrayList<String>();
     buyCarriers.add("USPS");
     shipment = shipment.buy(shipment.lowestRate(buyCarriers));
+    assertNotNull(shipment.getCreatedAt());
+    assertNotNull(shipment.getUpdatedAt());
+    assertNotNull(shipment.getFees());
 
     PostageLabel label = shipment.getPostageLabel();
 
     assertNotNull(label);
     assertNotNull(label.getId());
     assertNotNull(label.getLabelUrl());
+    assertNotNull(label.getCreatedAt());
+    assertNotNull(label.getUpdatedAt());
     assertEquals(label.getLabelSize(), "4x6");
     assertEquals(label.getLabelFileType(), "application/zpl");
+
+    ArrayList<Fee> fees = shipment.getFees();
+    assertEquals(fees.size(), 2);
+
+    Fee fee1 = fees.get(0);
+    assertEquals(fee1.getAmount(), 0.01, 0.001);
+    assertEquals(fee1.getCharged(), true);
+    assertEquals(fee1.getRefunded(), false);
+
+    Fee fee2 = fees.get(1);
+    assertEquals(fee2.getAmount(), 3.50, 0.001);
+    assertEquals(fee2.getCharged(), true);
+    assertEquals(fee2.getRefunded(), false);
   }
 
   @Test
@@ -207,6 +226,10 @@ public class EasyPostTest {
     Tracker tracker = Tracker.create(params);
 
     assertNotNull(tracker);
+    assertNotNull(tracker.getCreatedAt());
+    assertNotNull(tracker.getUpdatedAt());
+    assertNotNull(tracker.getFees());
+    assertEquals(tracker.getFees().size(), 1);
 
     // This Est Delivery Date test confirms that the timestamps are within 1.5 seconds of each other (rather than exactly equal)
     assertTrue("Est delivery dates aren't within expected timeframe", Math.abs((new Date()).getTime() - tracker.getEstDeliveryDate().getTime()) < 1500);
@@ -576,6 +599,14 @@ public class EasyPostTest {
     assertNotEquals(scanForm.getLabelUrl(), "");
     assertNotEquals(scanForm.getLabelFileType(), "");
     assertNotNull(scanForm.getBatchId());
+
+    shipment1 = Shipment.retrieve(shipment1.getId());
+    assertNotNull(shipment1.getBatchId());
+    assertEquals(shipment1.getBatchId(), batch.getId());
+
+    shipment2 = Shipment.retrieve(shipment2.getId());
+    assertNotNull(shipment2.getBatchId());
+    assertEquals(shipment2.getBatchId(), batch.getId());
   }
 
   @Test

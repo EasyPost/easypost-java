@@ -15,8 +15,6 @@ import com.easypost.net.EasyPostResource;
 
 public class Report extends EasyPostResource {
     public String id;
-    Date createdAt;
-    Date updatedAt;
     Date startDate;
     Date endDate;
     String mode;
@@ -27,12 +25,6 @@ public class Report extends EasyPostResource {
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
-
-    public Date getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
-
-    public Date getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
 
     public Date getStartDate() { return startDate; }
     public void setStartDate(Date startDate) { this.startDate = startDate; }
