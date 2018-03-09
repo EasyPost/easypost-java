@@ -1,3 +1,8 @@
+=== 3.4.1 2018-03-09
+
+* Added createdAt, updatedAt and fees fields on all top-level objects
+* Added batchId to Shipment objects
+
 === 3.4.0 2017-12-07
 
 * Updated version of junit from 4.1.10 to 4.1.12
