@@ -31,6 +31,7 @@ public class Shipment extends EasyPostResource {
 	String trackingCode;
 	String status;
 	String refundStatus;
+	String batchId;
 	String batchStatus;
 	String batchMessage;
 	String uspsZone;
@@ -175,6 +176,13 @@ public class Shipment extends EasyPostResource {
 	}
 	public void setRefundStatus(String refundStatus) {
 		this.refundStatus = refundStatus;
+	}
+
+	public String getBatchId() {
+		return batchId;
+	}
+	public void setBatchId(String batchId) {
+		this.batchId = batchId;
 	}
 
 	public String getBatchStatus() {

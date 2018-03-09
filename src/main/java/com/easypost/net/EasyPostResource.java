@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -28,6 +30,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.model.BatchStatus;
 import com.easypost.model.Event;
 import com.easypost.model.EventDeserializer;
+import com.easypost.model.Fee;
 import com.easypost.model.Rate;
 import com.easypost.model.RateDeserializer;
 import com.easypost.model.Shipment;
@@ -107,7 +110,8 @@ public abstract class EasyPostResource {
 	    Method[] methods = obj.getClass().getMethods();
 
 	    for (Method fromMethod: methods) {
-	        if (fromMethod.getDeclaringClass().equals(obj.getClass()) && fromMethod.getName().startsWith("get")) {
+	        if ((fromMethod.getDeclaringClass().equals(obj.getClass()) && fromMethod.getName().startsWith("get"))
+					|| GLOBAL_FIELD_ACCESSORS.contains(fromMethod.getName())) {
 
 	            String fromName = fromMethod.getName();
 	            String toName = fromName.replace("get", "set");
@@ -535,6 +539,32 @@ public abstract class EasyPostResource {
 		} catch (UnsupportedEncodingException e) {
 			throw new EasyPostException(unknownErrorMessage, e);
 		}
+	}
+
+	public static final ArrayList<String> GLOBAL_FIELD_ACCESSORS = new ArrayList<>(Arrays.asList("getCreatedAt", "getUpdatedAt", "getFees"));
+	Date CreatedAt;
+	Date UpdatedAt;
+	ArrayList<Fee> fees;
+
+	public Date getCreatedAt() {
+		return CreatedAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		CreatedAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return UpdatedAt;
+	}
+	public void setUpdatedAt(Date updatedAt) {
+		UpdatedAt = updatedAt;
+	}
+
+	public ArrayList<Fee> getFees() {
+		return fees;
+	}
+	public void setFees(ArrayList<Fee> fees) {
+		this.fees = fees;
 	}
 
 	public String getId() {
