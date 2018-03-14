@@ -428,6 +428,8 @@ public class EasyPostTest {
     Map<String,AddressVerification> verifications = address.getVerifications();
     assertEquals("Verification did not succeed.", verifications.get("delivery").getSuccess(), true);
     assertEquals("Verification had errors.", verifications.get("delivery").getErrors(), Collections.emptyList());
+    assertNotNull("Address details is null.", verifications.get("delivery").getAddressDetail());
+    assertEquals("Address details did not have TZ.", verifications.get("delivery").getAddressDetail().getTimeZone(), "America/Los_Angeles");
   }
 
   @Test
@@ -457,6 +459,8 @@ public class EasyPostTest {
     List<com.easypost.model.Error> errors = verifications.get("delivery").getErrors();
 
     assertTrue("At least two errors are present", errors.size() >= 2);
+    assertEquals("Verification had a suggestion.", errors.get(0).getSuggestion(), null);
+    assertEquals("Verification error did not have a code.", errors.get(0).getCode(), "E.ADDRESS.NOT_FOUND");
   }
 
   @Rule

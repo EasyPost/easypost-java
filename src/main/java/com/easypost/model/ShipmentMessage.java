@@ -3,7 +3,7 @@ package com.easypost.model;
 public class ShipmentMessage {
   String carrier;
   String type;
-  String message;
+  Object message;
 
   public String getCarrier() {
     return carrier;
@@ -19,10 +19,10 @@ public class ShipmentMessage {
     this.type = type;
   }
 
-  public String getMessage() {
+  public Object getMessage() {
     return message;
   }
-  public void setMessage(String message) {
+  public void setMessage(Object message) {
     this.message = message;
   }
 }
