@@ -364,6 +364,7 @@ public class EasyPostTest {
   public void testRateDeserialization() throws EasyPostException {
     Shipment shipment = createDefaultShipmentDomestic();
     assertNotNull(shipment.getRates().get(0).getCarrierAccountId());
+    assertNotNull(shipment.getRates().get(0).getCurrency());
   }
 
   @Test
@@ -967,6 +968,35 @@ public class EasyPostTest {
     ScanFormCollection scanForms = ScanForm.all(indexMap);
     assertEquals("IDs do not match", scanForms.getScanForms().get(0).getId(), scanForm.getId());
   }
+
+  /*
+  //This test needs to have new set of dates to avoid "report already exists" error
+  @Test
+  public void testShipmentReportDates() throws EasyPostException {
+    // Define request params
+    Map<String, Object> paramMap = new HashMap<String, Object>();
+    paramMap.put("type", "shipment");
+    paramMap.put("start_date", "2017-10-01");
+    paramMap.put("end_date", "2017-10-30");
+
+    // Create a shipment report
+    Report shipmentReport = Report.create(paramMap);
+    assertNotNull("ID is null", shipmentReport.getId());
+    assertThat("ID is not a shipment report ID", shipmentReport.getId(), containsString("shprep_"));
+
+    // Retrieve a shipment report
+    Report shipmentReport2 = Report.retrieve(shipmentReport.getId());
+    assertNotNull("ID is null", shipmentReport2.getId());
+    assertThat(
+        "ID is not a shipment report ID", shipmentReport2.getId(), containsString("shprep_"));
+    assertEquals(
+        "Create and Retrieve returned different ids",
+        shipmentReport.getId(),
+        shipmentReport2.getId());
+    assertEquals("Incorrect ShipmentReport start_date", shipmentReport2.getStartDate().toString(), "Sun Oct 01 00:00:00 PDT 2017");
+    assertEquals("Incorrect ShipmentReport end_date", shipmentReport2.getEndDate().toString(), "Mon Oct 30 00:00:00 PDT 2017");
+  }
+  */
 
   /*
    // This test requires a FedExSameDayCity account

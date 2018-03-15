@@ -1,8 +1,10 @@
-=== 3.4.2 2018-03-14
+=== 4.0.0 2018-03-15
 
 * Added additional fields to Error object used in Address verification
 * Added delivery details to Address verification
 * Changed message field of ShipmentMessage to support non-string values
+* Fixed currency field of Rate to handle null
+* Fixed Report params to include start_date and end_date in the top-level JSON, as expected by the reports endpoint
 
 === 3.4.1 2018-03-09
 
