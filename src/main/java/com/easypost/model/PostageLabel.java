@@ -15,6 +15,7 @@ public class PostageLabel extends EasyPostResource {
   String labelSize;
   String labelType;
   String labelUrl;
+  String labelFile;
   String labelFileType;
   String labelPdfSize;
   String labelPdfType;
@@ -76,6 +77,13 @@ public class PostageLabel extends EasyPostResource {
 	}
 	private void setLabelUrl(String labelUrl) {
 		this.labelUrl = labelUrl;
+	}
+
+	public String getLabelFile() {
+		return labelFile;
+	}
+	private void setLabelFile(String labelFile) {
+		this.labelFile = labelFile;
 	}
 
 	public String getLabelFileType() {
