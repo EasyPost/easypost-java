@@ -147,6 +147,31 @@ public class EasyPostTest {
   }
 
   @Test
+  public void testShipmentWithPostageLabelInline() throws EasyPostException {
+    // create and buy shipment with inline postage label
+    Map<String, Object> optionsMap = new HashMap<String, Object>();
+    optionsMap.put("postage_label_inline", true);
+
+    Map<String, Object> shipmentMap = new HashMap<String, Object>();
+    shipmentMap.put("to_address", defaultToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    shipmentMap.put("parcel", defaultParcel);
+    shipmentMap.put("options", optionsMap);
+    Shipment shipment = Shipment.create(shipmentMap);
+
+    List<String> buyCarriers = new ArrayList<String>();
+    buyCarriers.add("USPS");
+    shipment = shipment.buy(shipment.lowestRate(buyCarriers));
+
+    PostageLabel label = shipment.getPostageLabel();
+
+    assertNotNull(label);
+    assertNotNull(label.getId());
+    assertNotNull(label.getLabelFile());
+    assertNull(label.getLabelUrl());
+  }
+
+  @Test
   public void testShipmentWithPaymentOptions() throws EasyPostException {
     // create and buy shipment
     Map<String, Object> optionsMap = new HashMap<String, Object>();
