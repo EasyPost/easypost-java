@@ -1,5 +1,6 @@
 package com.easypost.model;
 
+import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
@@ -73,6 +74,20 @@ public class CarrierAccount extends EasyPostResource {
 			wrappedParams.put("carrier_account", params);
 
 			return request(RequestMethod.POST, classURL(CarrierAccount.class), wrappedParams, CarrierAccount.class, apiKey);
+		}
+
+		// createFedEx
+		public static CarrierAccount createFedEx(Map<String, Object> params) throws EasyPostException {
+			return createFedEx(params, null);
+		}
+		public static CarrierAccount createFedEx(Map<String, Object> params, String apiKey) throws EasyPostException {
+			Map<String, Object> wrappedParams = new HashMap<String, Object>();
+			// the description is required by the endpoint; manually supply it here to ensure that the call goes through
+			params.put("description", "FedEx Account");
+			// wrap the parameters, as required by the endpoint
+			wrappedParams.put("fedex_registration", params);
+			
+			return request(RequestMethod.POST, String.format("%s/%s", EasyPost.API_BASE, "fedex_registrations"), wrappedParams, CarrierAccount.class, apiKey);
 		}
 
 		// retrieve
