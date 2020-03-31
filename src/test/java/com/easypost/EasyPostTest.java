@@ -142,7 +142,7 @@ public class EasyPostTest {
     assertEquals(fee1.getRefunded(), false);
 
     Fee fee2 = fees.get(1);
-    assertEquals(fee2.getAmount(), 4.320000171661377, 0.001);
+    assertEquals(fee2.getAmount(), 4.19, 0.001);
     assertEquals(fee2.getCharged(), true);
     assertEquals(fee2.getRefunded(), false);
   }
@@ -664,7 +664,7 @@ public class EasyPostTest {
   }
 
   @Test
-  @Ignore
+  @Ignore // The UserId is currently locked out
   public void testPickup() throws EasyPostException, InterruptedException {
     Shipment shipment = createDefaultShipmentDomestic();
     List<String> buyCarriers = new ArrayList<String>();
