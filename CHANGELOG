@@ -5,6 +5,7 @@
 * Fixed test cases on EasyPostTest (testPickup, testShipmentWithPostageLabelWithOptions )
 * Fixed intermittent WebHook callback event containing "previous_attributes": null
 
+
 === 4.0.1 2018-08-28
 
 * Add labelFile for postage_label_inline option
