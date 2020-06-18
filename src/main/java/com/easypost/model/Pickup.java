@@ -94,14 +94,6 @@ public class Pickup extends EasyPostResource {
         return request(RequestMethod.GET, instanceURL(Pickup.class, id), null, Pickup.class, apiKey);
     }
 
-    // all
-    public static PickupCollection all(Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-    public static PickupCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Pickup.class), params, PickupCollection.class, apiKey);
-    }
-
     // refresh
     public Pickup refresh() throws EasyPostException {
         return this.refresh(null, null);
