@@ -113,7 +113,7 @@ public class Batch extends EasyPostResource {
 		Map<String, Object> wrappedParams = new HashMap<String, Object>();
 		wrappedParams.put("batch", params);
 
-		return request(RequestMethod.POST, classURL(Batch.class), wrappedParams, Batch.class, apiKey);
+		return request(RequestMethod.POST, String.format("%s/create_and_buy", classURL(Batch.class)), wrappedParams, Batch.class, apiKey);
 	}
 
 	// refresh
