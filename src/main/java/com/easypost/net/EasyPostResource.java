@@ -250,9 +250,19 @@ public abstract class EasyPostResource {
 	}
 
 	private static javax.net.ssl.HttpsURLConnection createPutConnection(String url, String query, String apiKey) throws IOException {
-		String putUrl = String.format("%s?%s", url, query);
-		javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(putUrl, apiKey);
+		javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey);
+		conn.setDoOutput(true);
 		conn.setRequestMethod("PUT");
+		conn.setRequestProperty("Content-Type", String.format("application/x-www-form-urlencoded;charset=%s", CHARSET));
+		OutputStream output = null;
+		try {
+			output = conn.getOutputStream();
+			output.write(query.getBytes(CHARSET));
+		} finally {
+			if (output != null) {
+				output.close();
+			}
+		}
 		return conn;
 	}
 
