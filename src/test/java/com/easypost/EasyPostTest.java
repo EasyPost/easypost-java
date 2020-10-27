@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -142,7 +143,7 @@ public class EasyPostTest {
     assertEquals(fee1.getRefunded(), false);
 
     Fee fee2 = fees.get(1);
-    assertEquals(fee2.getAmount(), 4.19, 0.001);
+    assertEquals(fee2.getAmount(), 4.57, 0.001);
     assertEquals(fee2.getCharged(), true);
     assertEquals(fee2.getRefunded(), false);
   }
@@ -926,13 +927,14 @@ public class EasyPostTest {
   public void testWebhookCRUD() throws EasyPostException {
     // Define request params
     Map<String, Object> paramMap = new HashMap<String, Object>();
-    paramMap.put("url", "example.com");
+    String url = "https://example.com/" + UUID.randomUUID().toString();
+    paramMap.put("url", url);
 
     // Create a webhook
     Webhook webhook = Webhook.create(paramMap);
     assertNotNull("ID is null", webhook.getId());
     assertEquals("mode is not test", webhook.getMode(), "test");
-    assertEquals("URL is not correctly ser", webhook.getUrl(), "http://example.com");
+    assertEquals("URL is not correctly ser", webhook.getUrl(), url);
     assertNull("disabledAt is not null", webhook.getDisabledAt());
     assertEquals("Class is not Webhook", webhook.getClass(), Webhook.class);
 
