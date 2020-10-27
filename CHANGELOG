@@ -1,3 +1,7 @@
+=== 4.0.3 2020-10-26
+* Change `PUT` requests to be properly-encoded
+* Handle null previous_attributes
+
 === 4.0.2 2020-03-30
 
 * Merged pull request #49
