@@ -1,3 +1,6 @@
+=== 4.0.4 2020-10-29
+- Actually bump User-Agent (which hadn't been bumped since 4.0.0)
+
 === 4.0.3 2020-10-26
 * Change `PUT` requests to be properly-encoded
 * Handle null previous_attributes
@@ -8,7 +11,6 @@
 * Added EvenTest file
 * Fixed test cases on EasyPostTest (testPickup, testShipmentWithPostageLabelWithOptions )
 * Fixed intermittent WebHook callback event containing "previous_attributes": null
-
 
 === 4.0.1 2018-08-28
 
