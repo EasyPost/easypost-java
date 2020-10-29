@@ -5,7 +5,7 @@
     <groupId>com.easypost</groupId>
     <artifactId>easypost-api-client</artifactId>
 
-    <version>4.0.3</version>
+    <version>4.0.4</version>
     <packaging>jar</packaging>
 
     <name>com.easypost:easypost-api-client</name>
@@ -67,11 +67,11 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
+            <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>sonatype-nexus-staging</id>
+            <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
@@ -144,10 +144,23 @@
               <version>1.6.7</version>
               <extensions>true</extensions>
               <configuration>
-                <serverId>sonatype-nexus-staging</serverId>
+                <serverId>ossrh</serverId>
                 <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                 <autoReleaseAfterClose>true</autoReleaseAfterClose>
               </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>templating-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <id>filtering-java-templates</id>
+                        <goals>
+                            <goal>filter-sources</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
