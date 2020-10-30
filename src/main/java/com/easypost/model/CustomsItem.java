@@ -15,6 +15,8 @@ public class CustomsItem extends EasyPostResource {
 	int quantity;
 	Float value;
 	Float weight;
+	String code;
+	String currency;
 
 	public String getId() {
 		return id;
@@ -63,6 +65,20 @@ public class CustomsItem extends EasyPostResource {
 	}
 	public void setWeight(Float weight) {
 		this.weight = weight;
+	}
+
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 
