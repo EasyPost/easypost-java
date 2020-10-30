@@ -74,6 +74,8 @@ public class EasyPostTest {
     defaultCustomsItem.put("quantity", 1);
     defaultCustomsItem.put("value", 10.50);
     defaultCustomsItem.put("weight", 9.9);
+    defaultCustomsItem.put("code", "123");
+    defaultCustomsItem.put("currency", "USD");
 
     List<Map<String, Object>> customsItems = new ArrayList<Map<String, Object>>();
     customsItems.add(defaultCustomsItem);
@@ -141,11 +143,13 @@ public class EasyPostTest {
     assertEquals(fee1.getAmount(), 0.01, 0.001);
     assertEquals(fee1.getCharged(), true);
     assertEquals(fee1.getRefunded(), false);
+    assertEquals(fee1.getType(), "LabelFee");
 
     Fee fee2 = fees.get(1);
     assertEquals(fee2.getAmount(), 4.57, 0.001);
     assertEquals(fee2.getCharged(), true);
     assertEquals(fee2.getRefunded(), false);
+    assertEquals(fee2.getType(), "PostageFee");
   }
 
   @Test
@@ -803,6 +807,31 @@ public class EasyPostTest {
         "Customs Form was not submitted electronically",
         shipment.getForms().get(0).getSubmittedElectronically());
         */
+  }
+
+  @Test
+  public void testCustomsItem() throws EasyPostException {
+    Map<String, Object> customsItemMap = new HashMap<String, Object>();
+    customsItemMap.put("description", "T-shirt");
+    customsItemMap.put("quantity", 1);
+    customsItemMap.put("value", 10);
+    customsItemMap.put("weight", 5);
+    customsItemMap.put("origin_country", "us");
+    customsItemMap.put("hs_tariff_number", "123456");
+    customsItemMap.put("code", "123");
+    customsItemMap.put("currency", "USD");
+
+    CustomsItem customsItem = CustomsItem.create(customsItemMap);
+    CustomsItem customsItem2 = CustomsItem.retrieve(customsItem.getId());
+
+    assertEquals(customsItem2.getDescription(), "T-shirt");
+    assertEquals(customsItem2.getQuantity(), 1, 0.1);
+    assertEquals(customsItem2.getValue(), 10, 0.1);
+    assertEquals(customsItem2.getWeight(), 5, 0.1);
+    assertEquals(customsItem2.getOriginCountry(), "US");
+    assertEquals(customsItem2.getHsTariffNumber(), "123456");
+    assertEquals(customsItem2.getCurrency(), "USD");
+    assertEquals(customsItem2.getCode(), "123");
   }
 
   @Test
