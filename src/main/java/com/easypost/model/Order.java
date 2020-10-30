@@ -151,14 +151,6 @@ public class Order extends EasyPostResource {
     return request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, apiKey);
   }
 
-  // all
-  public static OrderCollection all(Map<String, Object> params) throws EasyPostException {
-    return all(params, null);
-  }
-  public static OrderCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-    return request(RequestMethod.GET, classURL(Order.class), params, OrderCollection.class, apiKey);
-  }
-
   // refresh
   public Order refresh() throws EasyPostException {
     return this.refresh(null, null);
