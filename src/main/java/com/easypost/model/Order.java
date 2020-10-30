@@ -21,8 +21,6 @@ public class Order extends EasyPostResource {
   CustomsInfo customsInfo;
   List<Shipment> shipments;
   List<Rate> rates;
-  List<Container> containers;
-  List<Item> items;
   Map<String, Object> options;
   List<ShipmentMessage> messages;
 
@@ -101,20 +99,6 @@ public class Order extends EasyPostResource {
   }
   public void setRates(List<Rate> rates) {
     this.rates = rates;
-  }
-
-  public List<Container> getContainers() {
-    return containers;
-  }
-  public void setContainers(List<Container> containers) {
-    this.containers = containers;
-  }
-
-  public List<Item> getItems() {
-    return items;
-  }
-  public void setItems(List<Item> items) {
-    this.items = items;
   }
 
   public Map<String, Object> getOptions() {
