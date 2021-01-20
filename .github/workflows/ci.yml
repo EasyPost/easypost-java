@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request: ~
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+          javaversion: ['8', '9', '10', '11']
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java ${{ matrix.javaversion }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.javaversion }}
+      - name: Build with Maven
+        run: mvn --batch-mode install -Dgpg.skip=true -DskipTests=true
+
