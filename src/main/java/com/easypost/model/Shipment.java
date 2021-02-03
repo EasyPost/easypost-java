@@ -283,8 +283,8 @@ public class Shipment extends EasyPostResource {
 	}
 	public Shipment newRates(Map<String, Object> params, String apiKey) throws EasyPostException {
 		Shipment response = request(
-			RequestMethod.GET,
-			String.format("%s/rates", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+			RequestMethod.POST,
+			String.format("%s/rerate", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
 
 		this.merge(this, response);
 		return this;
