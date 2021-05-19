@@ -1,7 +1,13 @@
+=== NEXT RELEASE
+
+* Removes `items` and `containers` which have not been supported for some time
+
 === 4.0.4 2020-10-29
-- Actually bump User-Agent (which hadn't been bumped since 4.0.0)
+
+* Actually bump User-Agent (which hadn't been bumped since 4.0.0)
 
 === 4.0.3 2020-10-26
+
 * Change `PUT` requests to be properly-encoded
 * Handle null previous_attributes
 
