@@ -1,6 +1,10 @@
+# CHANGELOG
+
+
 ## NEXT RELEASE
 
 * Removes `items` and `containers` which have not been supported for some time
+* Corrects references of `contact@easypost.com` to `support@easypost.com`
 
 
 ## 4.0.4 2020-10-29
