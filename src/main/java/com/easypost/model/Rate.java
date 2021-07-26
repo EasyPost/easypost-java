@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.google.gson.JsonObject;
 
 public class Rate extends EasyPostResource {
   public String id;
@@ -24,6 +25,7 @@ public class Rate extends EasyPostResource {
   Number estDeliveryDays;
   String shipmentId;
   String carrierAccountId;
+  TimeInTransit timeInTransit;
 
   public String getId() {
     return id;
@@ -137,8 +139,31 @@ public class Rate extends EasyPostResource {
     this.carrierAccountId = carrierAccountId;
   }
 
+  public TimeInTransit getTimeInTransit() {
+        return timeInTransit;
+    }
+  public void setTimeInTransit(TimeInTransit timeInTransit) {
+        this.timeInTransit = timeInTransit;
+    }
 
-  public Rate(String id, String carrier, String service, Float rate, String currency, Float listRate, String listCurrency, Float retailRate, String retailCurrency, Number deliveryDays, String deliveryDate, Boolean deliveryDateGuaranteed, Number estDeliveryDays, String shipmentId, String carrierAccountId) {
+  public Rate(
+      String id,
+      String carrier,
+      String service,
+      Float rate,
+      String currency,
+      Float listRate,
+      String listCurrency,
+      Float retailRate,
+      String retailCurrency,
+      Number deliveryDays,
+      String deliveryDate,
+      Boolean deliveryDateGuaranteed,
+      Number estDeliveryDays,
+      String shipmentId,
+      String carrierAccountId,
+      TimeInTransit timeInTransit
+  ) {
     this.id = id;
     this.carrier = carrier;
     this.service = service;
@@ -155,6 +180,7 @@ public class Rate extends EasyPostResource {
     this.estDeliveryDays = estDeliveryDays;
     this.shipmentId = shipmentId;
     this.carrierAccountId = carrierAccountId;
+    this.timeInTransit = timeInTransit;
   }
 
   // retrieve
