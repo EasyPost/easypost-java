@@ -10,12 +10,15 @@ public class ScanFormCollection extends EasyPostResource {
   public List<ScanForm> getScanForms() {
     return scanForms;
   }
+
   public void setScanForms(List<ScanForm> scanForms) {
     this.scanForms = scanForms;
   }
+
   public Boolean getHasMore() {
     return hasMore;
   }
+
   public void setHasMore(Boolean hasMore) {
     this.hasMore = hasMore;
   }

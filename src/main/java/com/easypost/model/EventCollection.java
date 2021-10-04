@@ -10,12 +10,15 @@ public class EventCollection extends EasyPostResource {
   public List<Event> getEvents() {
     return events;
   }
+
   public void setEvents(List<Event> events) {
     this.events = events;
   }
+
   public Boolean getHasMore() {
     return hasMore;
   }
+
   public void setHasMore(Boolean hasMore) {
     this.hasMore = hasMore;
   }

@@ -10,12 +10,15 @@ public class TrackerCollection extends EasyPostResource {
   public List<Tracker> getTrackers() {
     return trackers;
   }
+
   public void setTrackers(List<Tracker> trackers) {
     this.trackers = trackers;
   }
+
   public Boolean getHasMore() {
     return hasMore;
   }
+
   public void setHasMore(Boolean hasMore) {
     this.hasMore = hasMore;
   }

@@ -10,12 +10,15 @@ public class OrderCollection extends EasyPostResource {
   public List<Order> getOrders() {
     return orders;
   }
+
   public void setOrders(List<Order> orders) {
     this.orders = orders;
   }
+
   public Boolean getHasMore() {
     return hasMore;
   }
+
   public void setHasMore(Boolean hasMore) {
     this.hasMore = hasMore;
   }

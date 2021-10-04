@@ -3,23 +3,15 @@ package com.easypost;
 import com.easypost.model.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import java.lang.InterruptedException;
 
 import com.easypost.exception.EasyPostException;
-
-import static org.junit.Assert.*;
 
 public class ThreadTest {
   static Map<String, Object> defaultFromAddress = new HashMap<String, Object>();
@@ -67,17 +59,14 @@ public class ThreadTest {
     public void run() {
       try {
         for (int i = 0; i < this.orders.size(); i++) {
-          System.out.format("Thread %s: starting order creation...%n",
-            Thread.currentThread().getName());
+          System.out.format("Thread %s: starting order creation...%n", Thread.currentThread().getName());
 
           Order order = Order.create(this.orders.get(i));
           // save order id to database or buy now
 
-          System.out.format("Thread %s: created order %s%n",
-            Thread.currentThread().getName(),
-            order.getId());
+          System.out.format("Thread %s: created order %s%n", Thread.currentThread().getName(), order.getId());
         }
-      } catch(EasyPostException e) {
+      } catch (EasyPostException e) {
         System.out.println("EasyPost Exception caught creating order.");
       }
     }
@@ -121,4 +110,3 @@ public class ThreadTest {
 
   }
 }
-

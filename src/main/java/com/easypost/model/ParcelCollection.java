@@ -10,12 +10,15 @@ public class ParcelCollection extends EasyPostResource {
   public List<Parcel> getParcels() {
     return parcels;
   }
+
   public void setParcels(List<Parcel> parcels) {
     this.parcels = parcels;
   }
+
   public Boolean getHasMore() {
     return hasMore;
   }
+
   public void setHasMore(Boolean hasMore) {
     this.hasMore = hasMore;
   }

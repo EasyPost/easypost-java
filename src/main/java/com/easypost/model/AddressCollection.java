@@ -10,12 +10,15 @@ public class AddressCollection extends EasyPostResource {
   public List<Batch> getAddresses() {
     return addresses;
   }
+
   public void setAddresses(List<Batch> addresses) {
     this.addresses = addresses;
   }
+
   public Boolean getHasMore() {
     return hasMore;
   }
+
   public void setHasMore(Boolean hasMore) {
     this.hasMore = hasMore;
   }

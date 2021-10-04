@@ -9,145 +9,206 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
 public class Pickup extends EasyPostResource {
-    public String id;
-    String mode;
-    String status;
-    String reference;
-    Date minDatetime;
-    Date maxDatetime;
-    Boolean isAccountAddress;
-    String instructions;
-    List<ShipmentMessage> messages;
-    String confirmation;
-    Address address;
-    List<CarrierAccount> carrierAccounts;
-    List<PickupRate> pickupRates;
+  public String id;
+  String mode;
+  String status;
+  String reference;
+  Date minDatetime;
+  Date maxDatetime;
+  Boolean isAccountAddress;
+  String instructions;
+  List<ShipmentMessage> messages;
+  String confirmation;
+  Address address;
+  List<CarrierAccount> carrierAccounts;
+  List<PickupRate> pickupRates;
 
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public String getMode() {
-        return mode;
-    }
-    public void setMode(String mode) {
-        this.mode = mode;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
+  public String getMode() {
+    return mode;
+  }
 
-    public String getReference() { return reference; }
-    public void setReference(String reference) { this.reference = reference; }
+  public void setMode(String mode) {
+    this.mode = mode;
+  }
 
-    public Date getMinDatetime() { return minDatetime; }
-    public void setMinDatetime(Date minDatetime) { this.minDatetime = minDatetime; }
+  public String getStatus() {
+    return status;
+  }
 
-    public Date getMaxDatetime() { return maxDatetime; }
-    public void setMaxDatetime(Date maxDatetime) { this.maxDatetime = maxDatetime; }
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
-    public Boolean getIsAccountAddress() { return isAccountAddress; }
-    public void setIsAccountAddress(Boolean isAccountAddress) { this.isAccountAddress = isAccountAddress; }
+  public String getReference() {
+    return reference;
+  }
 
-    public String getInstructions() { return instructions; }
-    public void setInstructions(String instructions) { this.instructions = instructions; }
+  public void setReference(String reference) {
+    this.reference = reference;
+  }
 
-    public List<ShipmentMessage> getMessages() { return messages; }
-    public void setMessages(List<ShipmentMessage> messages) { this.messages = messages; }
+  public Date getMinDatetime() {
+    return minDatetime;
+  }
 
-    public String getConfirmation() { return confirmation; }
-    public void setConfirmation(String confirmation) { this.confirmation = confirmation; }
+  public void setMinDatetime(Date minDatetime) {
+    this.minDatetime = minDatetime;
+  }
 
-    public Address getAddress() { return address; }
-    public void setAddress(Address address) { this.address = address; }
+  public Date getMaxDatetime() {
+    return maxDatetime;
+  }
 
-    public List<CarrierAccount> getCarrierAccounts() { return carrierAccounts; }
-    public void setCarrierAccounts(List<CarrierAccount> carrierAccounts) { this.carrierAccounts = carrierAccounts; }
+  public void setMaxDatetime(Date maxDatetime) {
+    this.maxDatetime = maxDatetime;
+  }
 
-    public List<PickupRate> getPickupRates() { return pickupRates; }
-    public void setPickupRates(List<PickupRate> pickupRates) { this.pickupRates = pickupRates; }
+  public Boolean getIsAccountAddress() {
+    return isAccountAddress;
+  }
 
+  public void setIsAccountAddress(Boolean isAccountAddress) {
+    this.isAccountAddress = isAccountAddress;
+  }
 
-    // create
-    public static Pickup create(Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-    public static Pickup create(Map<String, Object> params, String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("pickup", params);
+  public String getInstructions() {
+    return instructions;
+  }
 
-        return request(RequestMethod.POST, classURL(Pickup.class), wrappedParams, Pickup.class, apiKey);
-    }
+  public void setInstructions(String instructions) {
+    this.instructions = instructions;
+  }
 
-    // retrieve
-    public static Pickup retrieve(String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-    public static Pickup retrieve(String id, String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Pickup.class, id), null, Pickup.class, apiKey);
-    }
+  public List<ShipmentMessage> getMessages() {
+    return messages;
+  }
 
-    // refresh
-    public Pickup refresh() throws EasyPostException {
-        return this.refresh(null, null);
-    }
-    public Pickup refresh(Map<String, Object> params) throws EasyPostException {
-        return this.refresh(params, null);
-    }
-    public Pickup refresh(String apiKey) throws EasyPostException {
-        return this.refresh((Map<String, Object>) null, apiKey);
-    }
-    public Pickup refresh(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(
-                RequestMethod.GET,
-                String.format("%s", instanceURL(Pickup.class, this.getId())), params, Pickup.class, apiKey);
-    }
+  public void setMessages(List<ShipmentMessage> messages) {
+    this.messages = messages;
+  }
 
-    // buy
-    public Pickup buy() throws EasyPostException {
-        return this.buy(null, null);
-    }
-    public Pickup buy(Map<String, Object> params) throws EasyPostException {
-        return this.buy(params, null);
-    }
-    public Pickup buy(String apiKey) throws EasyPostException {
-        return this.buy((Map<String, Object>) null, apiKey);
-    }
-    public Pickup buy(PickupRate pickupRate) throws EasyPostException {
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("rate", pickupRate);
+  public String getConfirmation() {
+    return confirmation;
+  }
 
-        return this.buy(params, null);
-    }
-    public Pickup buy(Map<String, Object> params, String apiKey) throws EasyPostException {
-        Pickup response = request(
-                RequestMethod.POST,
-                String.format("%s/buy", instanceURL(Pickup.class, this.getId())), params, Pickup.class, apiKey);
+  public void setConfirmation(String confirmation) {
+    this.confirmation = confirmation;
+  }
 
-        this.merge(this, response);
-        return this;
-    }
+  public Address getAddress() {
+    return address;
+  }
 
-    // cancel
-    public Pickup cancel() throws EasyPostException {
-        return this.cancel(null, null);
-    }
-    public Pickup cancel(Map<String, Object> params) throws EasyPostException {
-        return this.cancel(params, null);
-    }
-    public Pickup cancel(String apiKey) throws EasyPostException {
-        return this.cancel((Map<String, Object>) null, apiKey);
-    }
-    public Pickup cancel(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(
-                RequestMethod.POST,
-                String.format("%s/cancel", instanceURL(Pickup.class, this.getId())), params, Pickup.class, apiKey);
-    }
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
+  public List<CarrierAccount> getCarrierAccounts() {
+    return carrierAccounts;
+  }
+
+  public void setCarrierAccounts(List<CarrierAccount> carrierAccounts) {
+    this.carrierAccounts = carrierAccounts;
+  }
+
+  public List<PickupRate> getPickupRates() {
+    return pickupRates;
+  }
+
+  public void setPickupRates(List<PickupRate> pickupRates) {
+    this.pickupRates = pickupRates;
+  }
+
+  // create
+  public static Pickup create(Map<String, Object> params) throws EasyPostException {
+    return create(params, null);
+  }
+
+  public static Pickup create(Map<String, Object> params, String apiKey) throws EasyPostException {
+    Map<String, Object> wrappedParams = new HashMap<String, Object>();
+    wrappedParams.put("pickup", params);
+
+    return request(RequestMethod.POST, classURL(Pickup.class), wrappedParams, Pickup.class, apiKey);
+  }
+
+  // retrieve
+  public static Pickup retrieve(String id) throws EasyPostException {
+    return retrieve(id, null);
+  }
+
+  public static Pickup retrieve(String id, String apiKey) throws EasyPostException {
+    return request(RequestMethod.GET, instanceURL(Pickup.class, id), null, Pickup.class, apiKey);
+  }
+
+  // refresh
+  public Pickup refresh() throws EasyPostException {
+    return this.refresh(null, null);
+  }
+
+  public Pickup refresh(Map<String, Object> params) throws EasyPostException {
+    return this.refresh(params, null);
+  }
+
+  public Pickup refresh(String apiKey) throws EasyPostException {
+    return this.refresh((Map<String, Object>) null, apiKey);
+  }
+
+  public Pickup refresh(Map<String, Object> params, String apiKey) throws EasyPostException {
+    return request(RequestMethod.GET, String.format("%s", instanceURL(Pickup.class, this.getId())), params,
+        Pickup.class, apiKey);
+  }
+
+  // buy
+  public Pickup buy() throws EasyPostException {
+    return this.buy(null, null);
+  }
+
+  public Pickup buy(Map<String, Object> params) throws EasyPostException {
+    return this.buy(params, null);
+  }
+
+  public Pickup buy(String apiKey) throws EasyPostException {
+    return this.buy((Map<String, Object>) null, apiKey);
+  }
+
+  public Pickup buy(PickupRate pickupRate) throws EasyPostException {
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("rate", pickupRate);
+
+    return this.buy(params, null);
+  }
+
+  public Pickup buy(Map<String, Object> params, String apiKey) throws EasyPostException {
+    Pickup response = request(RequestMethod.POST, String.format("%s/buy", instanceURL(Pickup.class, this.getId())),
+        params, Pickup.class, apiKey);
+
+    this.merge(this, response);
+    return this;
+  }
+
+  // cancel
+  public Pickup cancel() throws EasyPostException {
+    return this.cancel(null, null);
+  }
+
+  public Pickup cancel(Map<String, Object> params) throws EasyPostException {
+    return this.cancel(params, null);
+  }
+
+  public Pickup cancel(String apiKey) throws EasyPostException {
+    return this.cancel((Map<String, Object>) null, apiKey);
+  }
+
+  public Pickup cancel(Map<String, Object> params, String apiKey) throws EasyPostException {
+    return request(RequestMethod.POST, String.format("%s/cancel", instanceURL(Pickup.class, this.getId())), params,
+        Pickup.class, apiKey);
+  }
 }

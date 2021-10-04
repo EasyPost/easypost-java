@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.google.gson.reflect.TypeToken;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
@@ -27,6 +25,7 @@ public class Order extends EasyPostResource {
   public String getId() {
     return id;
   }
+
   public void setId(String id) {
     this.id = id;
   }
@@ -34,6 +33,7 @@ public class Order extends EasyPostResource {
   public String getMode() {
     return mode;
   }
+
   public void setMode(String mode) {
     this.mode = mode;
   }
@@ -41,6 +41,7 @@ public class Order extends EasyPostResource {
   public String getReference() {
     return reference;
   }
+
   public void setReference(String reference) {
     this.reference = reference;
   }
@@ -48,6 +49,7 @@ public class Order extends EasyPostResource {
   public Boolean getIsReturn() {
     return isReturn;
   }
+
   public void setIsReturn(Boolean isReturn) {
     this.isReturn = isReturn;
   }
@@ -55,6 +57,7 @@ public class Order extends EasyPostResource {
   public Address getToAddress() {
     return toAddress;
   }
+
   public void setToAddress(Address toAddress) {
     this.toAddress = toAddress;
   }
@@ -62,6 +65,7 @@ public class Order extends EasyPostResource {
   public Address getBuyerAddress() {
     return buyerAddress;
   }
+
   public void setBuyerAddress(Address buyerAddress) {
     this.buyerAddress = buyerAddress;
   }
@@ -69,6 +73,7 @@ public class Order extends EasyPostResource {
   public Address getFromAddress() {
     return fromAddress;
   }
+
   public void setFromAddress(Address fromAddress) {
     this.fromAddress = fromAddress;
   }
@@ -76,6 +81,7 @@ public class Order extends EasyPostResource {
   public Address getReturnAddress() {
     return returnAddress;
   }
+
   public void setReturnAddress(Address returnAddress) {
     this.returnAddress = returnAddress;
   }
@@ -83,6 +89,7 @@ public class Order extends EasyPostResource {
   public CustomsInfo getCustomsInfo() {
     return customsInfo;
   }
+
   public void setCustomsInfo(CustomsInfo customsInfo) {
     this.customsInfo = customsInfo;
   }
@@ -90,6 +97,7 @@ public class Order extends EasyPostResource {
   public List<Shipment> getShipments() {
     return shipments;
   }
+
   public void setShipments(List<Shipment> shipments) {
     this.shipments = shipments;
   }
@@ -97,6 +105,7 @@ public class Order extends EasyPostResource {
   public List<Rate> getRates() {
     return rates;
   }
+
   public void setRates(List<Rate> rates) {
     this.rates = rates;
   }
@@ -104,6 +113,7 @@ public class Order extends EasyPostResource {
   public Map<String, Object> getOptions() {
     return options;
   }
+
   public void setOptions(Map<String, Object> options) {
     this.options = options;
   }
@@ -111,15 +121,16 @@ public class Order extends EasyPostResource {
   public List<ShipmentMessage> getMessages() {
     return messages;
   }
+
   public void setMessages(List<ShipmentMessage> messages) {
     this.messages = messages;
   }
-
 
   // create
   public static Order create(Map<String, Object> params) throws EasyPostException {
     return create(params, null);
   }
+
   public static Order create(Map<String, Object> params, String apiKey) throws EasyPostException {
     Map<String, Object> wrappedParams = new HashMap<String, Object>();
     wrappedParams.put("order", params);
@@ -131,6 +142,7 @@ public class Order extends EasyPostResource {
   public static Order retrieve(String id) throws EasyPostException {
     return retrieve(id, null);
   }
+
   public static Order retrieve(String id, String apiKey) throws EasyPostException {
     return request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, apiKey);
   }
@@ -139,32 +151,36 @@ public class Order extends EasyPostResource {
   public Order refresh() throws EasyPostException {
     return this.refresh(null, null);
   }
+
   public Order refresh(Map<String, Object> params) throws EasyPostException {
     return this.refresh(params, null);
   }
+
   public Order refresh(String apiKey) throws EasyPostException {
     return this.refresh((Map<String, Object>) null, apiKey);
   }
+
   public Order refresh(Map<String, Object> params, String apiKey) throws EasyPostException {
-    return request(
-      RequestMethod.GET,
-      String.format("%s", instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
+    return request(RequestMethod.GET, String.format("%s", instanceURL(Order.class, this.getId())), params, Order.class,
+        apiKey);
   }
 
   // get rates
   public Order newRates() throws EasyPostException {
     return this.newRates(null, null);
   }
+
   public Order newRates(Map<String, Object> params) throws EasyPostException {
     return this.newRates(params, null);
   }
+
   public Order newRates(String apiKey) throws EasyPostException {
     return this.newRates((Map<String, Object>) null, apiKey);
   }
+
   public Order newRates(Map<String, Object> params, String apiKey) throws EasyPostException {
-    Order response = request(
-            RequestMethod.GET,
-            String.format("%s/rates", instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
+    Order response = request(RequestMethod.GET, String.format("%s/rates", instanceURL(Order.class, this.getId())),
+        params, Order.class, apiKey);
 
     this.merge(this, response);
     return this;
@@ -174,6 +190,7 @@ public class Order extends EasyPostResource {
   public Order buy(Map<String, Object> params) throws EasyPostException {
     return this.buy(params, null);
   }
+
   public Order buy(Rate rate) throws EasyPostException {
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("carrier", rate.carrier);
@@ -181,13 +198,13 @@ public class Order extends EasyPostResource {
 
     return this.buy(params, null);
   }
+
   public Order buy(Map<String, Object> params, String apiKey) throws EasyPostException {
-    Order response = request(
-      RequestMethod.POST,
-      String.format("%s/buy", instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
+    Order response = request(RequestMethod.POST, String.format("%s/buy", instanceURL(Order.class, this.getId())),
+        params, Order.class, apiKey);
 
     this.merge(this, response);
-      return this;
+    return this;
   }
 
 }

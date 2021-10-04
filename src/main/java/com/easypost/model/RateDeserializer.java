@@ -66,7 +66,7 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
     if (jo.get("delivery_date_guaranteed").isJsonNull()) {
       deliveryDateGuaranteed = false;
     } else {
-      deliveryDateGuaranteed = new Boolean(jo.get("delivery_date_guaranteed").getAsString());
+      deliveryDateGuaranteed = Boolean.parseBoolean(jo.get("delivery_date_guaranteed").getAsString());
     }
 
     Number estDeliveryDays;
@@ -83,21 +83,11 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
       shipmentID = jo.get("shipment_id").getAsString();
     }
 
-    return new Rate(
-        jo.get("id").getAsString(),
-        jo.get("carrier").getAsString(),
-        jo.get("service").getAsString(),
-        jo.get("rate").getAsFloat(),
-        currency,
-        listRate,
-        listCurrency,
-        retailRate,
-        retailCurrency,
-        deliveryDays,
-        deliveryDate,
-        deliveryDateGuaranteed,
-        estDeliveryDays,
-        shipmentID,
-        jo.get("carrier_account_id").getAsString());
+    // TODO: Unpack this list so each item is on its own line even with formatting
+    Rate rate = new Rate(jo.get("id").getAsString(), jo.get("carrier").getAsString(), jo.get("service").getAsString(),
+        jo.get("rate").getAsFloat(), currency, listRate, listCurrency, retailRate, retailCurrency, deliveryDays,
+        deliveryDate, deliveryDateGuaranteed, estDeliveryDays, shipmentID, jo.get("carrier_account_id").getAsString());
+
+    return rate;
   }
 }

@@ -253,28 +253,22 @@ public class EasyPostTest {
     assertNotNull(tracker.getFees());
     assertEquals(tracker.getFees().size(), 1);
 
-    // This Est Delivery Date test confirms that the timestamps are within 1.5 seconds of each other
+    // This Est Delivery Date test confirms that the timestamps are within 1.5
+    // seconds of each other
     // (rather than exactly equal)
-    assertTrue(
-        "Est delivery dates aren't within expected timeframe",
+    assertTrue("Est delivery dates aren't within expected timeframe",
         Math.abs((new Date()).getTime() - tracker.getEstDeliveryDate().getTime()) < 1500);
 
     assertEquals("Weights don't match", 17.6, tracker.getWeight(), 0.0001);
     assertEquals("Signed By doesn't match", "John Tester", tracker.getSignedBy());
-    assertEquals(
-        "Service levels don't match", "FEDEX_GROUND", tracker.getCarrierDetail().getService());
-    assertEquals(
-        "Containers don't match", "YOUR_PACKAGING", tracker.getCarrierDetail().getContainerType());
+    assertEquals("Service levels don't match", "FEDEX_GROUND", tracker.getCarrierDetail().getService());
+    assertEquals("Containers don't match", "YOUR_PACKAGING", tracker.getCarrierDetail().getContainerType());
 
-    assertNotNull(
-        "Destination Location is null", tracker.getCarrierDetail().getDestinationLocation());
-    assertNotNull(
-        "Initial Delivery Attempt is null", tracker.getCarrierDetail().getInitialDeliveryAttempt());
+    assertNotNull("Destination Location is null", tracker.getCarrierDetail().getDestinationLocation());
+    assertNotNull("Initial Delivery Attempt is null", tracker.getCarrierDetail().getInitialDeliveryAttempt());
 
-    assertNotNull(
-        "Est delivery Date local is null", tracker.getCarrierDetail().getEstDeliveryDateLocal());
-    assertNotNull(
-        "Est delivery Time local is null", tracker.getCarrierDetail().getEstDeliveryTimeLocal());
+    assertNotNull("Est delivery Date local is null", tracker.getCarrierDetail().getEstDeliveryDateLocal());
+    assertNotNull("Est delivery Time local is null", tracker.getCarrierDetail().getEstDeliveryTimeLocal());
     assertNotNull("Created at is null", tracker.getCreatedAt());
     assertNotNull("Updated at is null", tracker.getUpdateAt());
     assertNotNull("PublicURL is not null", tracker.getPublicUrl());
@@ -288,19 +282,13 @@ public class EasyPostTest {
     assertNotNull(tracker.getCarrier());
     assertNotNull(retrieved.getCarrier());
     assertEquals("Tracker carriers are not the same", tracker.getCarrier(), retrieved.getCarrier());
-    assertEquals(
-        "Tracker StatusDetail is not populated",
-        "arrived_at_destination",
-        tracker.getStatusDetail());
+    assertEquals("Tracker StatusDetail is not populated", "arrived_at_destination", tracker.getStatusDetail());
 
     TrackingDetail trackingDetail = tracker.getTrackingDetails().get(0);
     TrackingDetail retrievedDetail = tracker.getTrackingDetails().get(0);
 
     assertEquals("TrackingDetails are not the same", trackingDetail, retrievedDetail);
-    assertEquals(
-        "TrackingDetail StatusDetail is not populated",
-        "status_update",
-        trackingDetail.getStatusDetail());
+    assertEquals("TrackingDetail StatusDetail is not populated", "status_update", trackingDetail.getStatusDetail());
 
     TrackingLocation trackingLocation = trackingDetail.getTrackingLocation();
     TrackingLocation retrievedLocation = retrievedDetail.getTrackingLocation();
@@ -353,9 +341,7 @@ public class EasyPostTest {
 
     assertEquals("Incorrect length received", trackers.getTrackers().size(), 30);
     assertTrue("'has_more' should be true", trackers.getHasMore());
-    assertEquals(
-        "Tracker ids in create response and all response are not the same",
-        trackers.getTrackers().get(0).id,
+    assertEquals("Tracker ids in create response and all response are not the same", trackers.getTrackers().get(0).id,
         tracker.id);
 
     // create another test tracker
@@ -370,9 +356,7 @@ public class EasyPostTest {
 
     assertEquals("Incorrect length received", trackers2.getTrackers().size(), 1);
     assertFalse("'has_more' should be true", trackers2.getHasMore());
-    assertEquals(
-        "Tracker ids in create response and all response are not the same",
-        trackers2.getTrackers().get(0).id,
+    assertEquals("Tracker ids in create response and all response are not the same", trackers2.getTrackers().get(0).id,
         tracker3.id);
   }
 
@@ -471,14 +455,9 @@ public class EasyPostTest {
 
     Map<String, AddressVerification> verifications = address.getVerifications();
     assertEquals("Verification did not succeed.", verifications.get("delivery").getSuccess(), true);
-    assertEquals(
-        "Verification had errors.",
-        verifications.get("delivery").getErrors(),
-        Collections.emptyList());
+    assertEquals("Verification had errors.", verifications.get("delivery").getErrors(), Collections.emptyList());
     assertNotNull("Address details is null.", verifications.get("delivery").getAddressDetail());
-    assertEquals(
-        "Address details did not have TZ.",
-        verifications.get("delivery").getAddressDetail().getTimeZone(),
+    assertEquals("Address details did not have TZ.", verifications.get("delivery").getAddressDetail().getTimeZone(),
         "America/Los_Angeles");
   }
 
@@ -504,18 +483,17 @@ public class EasyPostTest {
     assertEquals("City did not verify", address.getCity(), "SAN FRANCISCO");
 
     Map<String, AddressVerification> verifications = address.getVerifications();
-    assertEquals(
-        "Verification did not succeed.", verifications.get("delivery").getSuccess(), false);
+    assertEquals("Verification did not succeed.", verifications.get("delivery").getSuccess(), false);
 
     List<com.easypost.model.Error> errors = verifications.get("delivery").getErrors();
 
     assertTrue("At least two errors are present", errors.size() >= 2);
     assertEquals("Verification had a suggestion.", errors.get(0).getSuggestion(), null);
-    assertEquals(
-        "Verification error did not have a code.", errors.get(0).getCode(), "E.ADDRESS.NOT_FOUND");
+    assertEquals("Verification error did not have a code.", errors.get(0).getCode(), "E.ADDRESS.NOT_FOUND");
   }
 
-  @Rule public ExpectedException verifyStrictException = ExpectedException.none();
+  @Rule
+  public ExpectedException verifyStrictException = ExpectedException.none();
 
   @Test
   public void testAddressCreateWithVerifyStrictFails() throws EasyPostException {
@@ -538,7 +516,8 @@ public class EasyPostTest {
     Address address = Address.create(addressHash);
   }
 
-  @Rule public ExpectedException exception = ExpectedException.none();
+  @Rule
+  public ExpectedException exception = ExpectedException.none();
 
   @Test
   public void testAddressErrorParses() throws EasyPostException {
@@ -574,10 +553,8 @@ public class EasyPostTest {
 
       assertThat(e.getMessage(), containsString("An error occured"));
       assertThat(e.getMessage(), containsString("Response code: 422"));
-      assertThat(
-          e.getMessage(),
-          containsString(
-              "\"error\":{\"code\":\"ADDRESS.VERIFY.FAILURE\",\"message\":\"Unable to verify address.\""));
+      assertThat(e.getMessage(),
+          containsString("\"error\":{\"code\":\"ADDRESS.VERIFY.FAILURE\",\"message\":\"Unable to verify address.\""));
     }
   }
 
@@ -799,14 +776,13 @@ public class EasyPostTest {
     buyCarriers.add("USPS");
     shipment = shipment.buy(shipment.lowestRate(buyCarriers));
 
-    ///System.out.println("Shipment.getForms(): >>"+shipment.getForms()+"<<");
+    /// System.out.println("Shipment.getForms(): >>"+shipment.getForms()+"<<");
     /// java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
     /// Form does not exists. Invalid test
     /*
-    assertTrue(
-        "Customs Form was not submitted electronically",
-        shipment.getForms().get(0).getSubmittedElectronically());
-        */
+     * assertTrue( "Customs Form was not submitted electronically",
+     * shipment.getForms().get(0).getSubmittedElectronically());
+     */
   }
 
   @Test
@@ -852,11 +828,8 @@ public class EasyPostTest {
 
     Insurance insurance2 = Insurance.retrieve(insurance.getId());
     assertNotNull("ID is null", insurance2.getId());
-    assertEquals(
-        "Create and Retrieve returned different ids", insurance.getId(), insurance2.getId());
-    assertEquals(
-        "Create and Retrieve returned different tracking codes",
-        insurance.getTrackingCode(),
+    assertEquals("Create and Retrieve returned different ids", insurance.getId(), insurance2.getId());
+    assertEquals("Create and Retrieve returned different tracking codes", insurance.getTrackingCode(),
         insurance2.getTrackingCode());
 
     Map<String, Object> index_params = new HashMap<String, Object>();
@@ -882,12 +855,8 @@ public class EasyPostTest {
     // Retrieve a shipment report
     Report shipmentReport2 = Report.retrieve(shipmentReport.getId());
     assertNotNull("ID is null", shipmentReport2.getId());
-    assertThat(
-        "ID is not a shipment report ID", shipmentReport2.getId(), containsString("shprep_"));
-    assertEquals(
-        "Create and Retrieve returned different ids",
-        shipmentReport.getId(),
-        shipmentReport2.getId());
+    assertThat("ID is not a shipment report ID", shipmentReport2.getId(), containsString("shprep_"));
+    assertEquals("Create and Retrieve returned different ids", shipmentReport.getId(), shipmentReport2.getId());
 
     // Index shipment reports
     paramMap.put("page_size", "4");
@@ -911,10 +880,7 @@ public class EasyPostTest {
     Report trackerReport2 = Report.retrieve(trackerReport.getId());
     assertNotNull("ID is null", trackerReport2.getId());
     assertThat("ID is not a tracker report ID", trackerReport2.getId(), containsString("trkrep_"));
-    assertEquals(
-        "Create and Retrieve returned different ids",
-        trackerReport.getId(),
-        trackerReport2.getId());
+    assertEquals("Create and Retrieve returned different ids", trackerReport.getId(), trackerReport2.getId());
 
     // Index tracker reports
     paramMap.put("page_size", "4");
@@ -932,18 +898,13 @@ public class EasyPostTest {
     // Create a payment_log report
     Report paymentLogReport = Report.create(paramMap);
     assertNotNull("ID is null", paymentLogReport.getId());
-    assertThat(
-        "ID is not a payment_log report ID", paymentLogReport.getId(), containsString("plrep_"));
+    assertThat("ID is not a payment_log report ID", paymentLogReport.getId(), containsString("plrep_"));
 
     // Retrieve a payment_log report
     Report paymentLogReport2 = Report.retrieve(paymentLogReport.getId());
     assertNotNull("ID is null", paymentLogReport2.getId());
-    assertThat(
-        "ID is not a payment_log report ID", paymentLogReport2.getId(), containsString("plrep_"));
-    assertEquals(
-        "Create and Retrieve returned different ids",
-        paymentLogReport.getId(),
-        paymentLogReport2.getId());
+    assertThat("ID is not a payment_log report ID", paymentLogReport2.getId(), containsString("plrep_"));
+    assertEquals("Create and Retrieve returned different ids", paymentLogReport.getId(), paymentLogReport2.getId());
 
     // Index payment_log reports
     paramMap.put("page_size", "4");
@@ -979,9 +940,7 @@ public class EasyPostTest {
 
     // Index webhooks
     WebhookCollection webhooks = Webhook.all();
-    assertEquals(
-        "Create and Retrieve returned different ids",
-        webhook.getId(),
+    assertEquals("Create and Retrieve returned different ids", webhook.getId(),
         webhooks.getWebhooks().get(webhooks.getWebhooks().size() - 1).getId());
 
     // Delete webhook
@@ -992,10 +951,8 @@ public class EasyPostTest {
     } catch (EasyPostException e) {
       assertThat(e.getMessage(), containsString("An error occured"));
       assertThat(e.getMessage(), containsString("Response code: 404"));
-      assertThat(
-          e.getMessage(),
-          containsString(
-              "{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource could not be found.\",\"errors\":[]}}"));
+      assertThat(e.getMessage(), containsString(
+          "{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource could not be found.\",\"errors\":[]}}"));
     }
   }
 
@@ -1015,9 +972,7 @@ public class EasyPostTest {
     ScanForm scanForm = ScanForm.create(paramMap);
 
     assertNotNull("No ID returned", scanForm.getId());
-    assertEquals(
-        "Shipment's tracking code not on Scan Form",
-        scanForm.getTrackingCodes().get(0),
+    assertEquals("Shipment's tracking code not on Scan Form", scanForm.getTrackingCodes().get(0),
         shipment.getTrackingCode());
 
     // retrieve ScanForm
@@ -1033,227 +988,222 @@ public class EasyPostTest {
   }
 
   /*
-  //This test needs to have new set of dates to avoid "report already exists" error
-  @Test
-  public void testShipmentReportDates() throws EasyPostException {
-    // Define request params
-    Map<String, Object> paramMap = new HashMap<String, Object>();
-    paramMap.put("type", "shipment");
-    paramMap.put("start_date", "2017-10-01");
-    paramMap.put("end_date", "2017-10-30");
-
-    // Create a shipment report
-    Report shipmentReport = Report.create(paramMap);
-    assertNotNull("ID is null", shipmentReport.getId());
-    assertThat("ID is not a shipment report ID", shipmentReport.getId(), containsString("shprep_"));
-
-    // Retrieve a shipment report
-    Report shipmentReport2 = Report.retrieve(shipmentReport.getId());
-    assertNotNull("ID is null", shipmentReport2.getId());
-    assertThat(
-        "ID is not a shipment report ID", shipmentReport2.getId(), containsString("shprep_"));
-    assertEquals(
-        "Create and Retrieve returned different ids",
-        shipmentReport.getId(),
-        shipmentReport2.getId());
-    assertEquals("Incorrect ShipmentReport start_date", shipmentReport2.getStartDate().toString(), "Sun Oct 01 00:00:00 PDT 2017");
-    assertEquals("Incorrect ShipmentReport end_date", shipmentReport2.getEndDate().toString(), "Mon Oct 30 00:00:00 PDT 2017");
-  }
-  */
+   * //This test needs to have new set of dates to avoid "report already exists"
+   * error
+   * 
+   * @Test public void testShipmentReportDates() throws EasyPostException { //
+   * Define request params Map<String, Object> paramMap = new HashMap<String,
+   * Object>(); paramMap.put("type", "shipment"); paramMap.put("start_date",
+   * "2017-10-01"); paramMap.put("end_date", "2017-10-30");
+   * 
+   * // Create a shipment report Report shipmentReport = Report.create(paramMap);
+   * assertNotNull("ID is null", shipmentReport.getId());
+   * assertThat("ID is not a shipment report ID", shipmentReport.getId(),
+   * containsString("shprep_"));
+   * 
+   * // Retrieve a shipment report Report shipmentReport2 =
+   * Report.retrieve(shipmentReport.getId()); assertNotNull("ID is null",
+   * shipmentReport2.getId()); assertThat( "ID is not a shipment report ID",
+   * shipmentReport2.getId(), containsString("shprep_")); assertEquals(
+   * "Create and Retrieve returned different ids", shipmentReport.getId(),
+   * shipmentReport2.getId()); assertEquals("Incorrect ShipmentReport start_date",
+   * shipmentReport2.getStartDate().toString(), "Sun Oct 01 00:00:00 PDT 2017");
+   * assertEquals("Incorrect ShipmentReport end_date",
+   * shipmentReport2.getEndDate().toString(), "Mon Oct 30 00:00:00 PDT 2017"); }
+   */
 
   /*
-   // This test requires a FedExSameDayCity account
-   @Test
-   public void testShipmentMessageInRateError() throws EasyPostException {
-     EasyPost.apiKey = "KEY";
-       Map<String, Object> address = new HashMap<String, Object>();
-       address.put("street1", "UNDELIVERABLE ST");
-       address.put("city", "SAN FRANCISCO");
-       address.put("state", "CA");
-       address.put("zip", "94105");
-       address.put("country", "US");
-     Map<String, Object> shipmentMap = new HashMap<String, Object>();
-     shipmentMap.put("to_address", address);
-     shipmentMap.put("from_address", defaultFromAddress);
-     shipmentMap.put("parcel", defaultParcel);
-     shipmentMap.put("carrier_accounts", "ca_123xyz");   // FedExSameDayCity carrier account id
-     Shipment shipment = Shipment.create(shipmentMap);
-             System.out.println(shipment.prettyPrint());
-     List<ShipmentMessage> messages = shipment.getMessages();
-     assertNotNull(messages);
-     assertEquals("Shipment message as an object did not parse.",messages.get(0).getMessage().toString(),
-                 "{code=E.ADDRESS.NOT_FOUND, field=address, message=Address not found, suggestion=null}");
-   }
-  */
+   * // This test requires a FedExSameDayCity account
+   * 
+   * @Test public void testShipmentMessageInRateError() throws EasyPostException {
+   * EasyPost.apiKey = "KEY"; Map<String, Object> address = new HashMap<String,
+   * Object>(); address.put("street1", "UNDELIVERABLE ST"); address.put("city",
+   * "SAN FRANCISCO"); address.put("state", "CA"); address.put("zip", "94105");
+   * address.put("country", "US"); Map<String, Object> shipmentMap = new
+   * HashMap<String, Object>(); shipmentMap.put("to_address", address);
+   * shipmentMap.put("from_address", defaultFromAddress);
+   * shipmentMap.put("parcel", defaultParcel); shipmentMap.put("carrier_accounts",
+   * "ca_123xyz"); // FedExSameDayCity carrier account id Shipment shipment =
+   * Shipment.create(shipmentMap); System.out.println(shipment.prettyPrint());
+   * List<ShipmentMessage> messages = shipment.getMessages();
+   * assertNotNull(messages);
+   * assertEquals("Shipment message as an object did not parse.",messages.get(0).
+   * getMessage().toString(),
+   * "{code=E.ADDRESS.NOT_FOUND, field=address, message=Address not found, suggestion=null}"
+   * ); }
+   */
 
   /*
-  // This test requires a FedEx account
-  @Test
-  public void testShipmentWithForm() throws EasyPostException {
-    Map<String, Object> optionsMap = new HashMap<String, Object>();
-    optionsMap.put("cod_amount", 10);
+   * // This test requires a FedEx account
+   * 
+   * @Test public void testShipmentWithForm() throws EasyPostException {
+   * Map<String, Object> optionsMap = new HashMap<String, Object>();
+   * optionsMap.put("cod_amount", 10);
+   * 
+   * Map<String, Object> shipmentMap = new HashMap<String, Object>();
+   * shipmentMap.put("to_address", defaultToAddress);
+   * shipmentMap.put("from_address", defaultFromAddress);
+   * shipmentMap.put("parcel", defaultParcel); shipmentMap.put("options",
+   * optionsMap); Shipment shipment = Shipment.create(shipmentMap);
+   * 
+   * List<String> buyCarriers = new ArrayList<String>(); buyCarriers.add("FEDEX");
+   * List<String> buyServices = new ArrayList<String>();
+   * buyServices.add("FEDEX_2_DAY"); shipment.buy(shipment.lowestRate(buyCarriers,
+   * buyServices));
+   * 
+   * assertNotNull(shipment.getForms().get(0).getFormUrl()); }
+   */
 
-    Map<String, Object> shipmentMap = new HashMap<String, Object>();
-    shipmentMap.put("to_address", defaultToAddress);
-    shipmentMap.put("from_address", defaultFromAddress);
-    shipmentMap.put("parcel", defaultParcel);
-    shipmentMap.put("options", optionsMap);
-    Shipment shipment = Shipment.create(shipmentMap);
+  // // This test requires a production api key
+  // @Test
+  // public void testUserMethods() throws EasyPostException {
+  // EasyPost.apiKey = "KEY"; // easypost private production key
+  //
+  // User user = User.retrieveMe();
+  //
+  // System.out.println(user.getPhoneNumber());
+  // System.out.println(user.getRechargeAmount());
+  // System.out.println(user.getSecondaryRechargeAmount());
+  //
+  // user.setSecondaryRechargeAmount("$200.00");
+  //
+  // Map<String, Object> userHash = new HashMap<String, Object>();
+  // userHash.put("secondary_recharge_amount", 100000.00);
+  //
+  // user.update(userHash);
+  //
+  // System.out.println(user.getSecondaryRechargeAmount());
+  //
+  // System.out.println(user.getRechargeThreshold());
+  // }
 
-    List<String> buyCarriers = new ArrayList<String>();
-    buyCarriers.add("FEDEX");
-    List<String> buyServices = new ArrayList<String>();
-    buyServices.add("FEDEX_2_DAY");
-    shipment.buy(shipment.lowestRate(buyCarriers, buyServices));
-
-    assertNotNull(shipment.getForms().get(0).getFormUrl());
-  }
-  */
-
-  //  //  This test requires a production api key
-  //  @Test
-  //  public void testUserMethods() throws EasyPostException {
-  //    EasyPost.apiKey = "KEY"; // easypost private production key
+  // // This test requires a production api key
+  // @Test
+  // public void testUserCreateAndDelete() throws EasyPostException {
+  // EasyPost.apiKey = "KEY"; // easypost private production key
   //
-  //    User user = User.retrieveMe();
-  //
-  //    System.out.println(user.getPhoneNumber());
-  //    System.out.println(user.getRechargeAmount());
-  //    System.out.println(user.getSecondaryRechargeAmount());
-  //
-  //    user.setSecondaryRechargeAmount("$200.00");
-  //
-  //    Map<String, Object> userHash = new HashMap<String, Object>();
-  //    userHash.put("secondary_recharge_amount", 100000.00);
-  //
-  //    user.update(userHash);
-  //
-  //    System.out.println(user.getSecondaryRechargeAmount());
-  //
-  //    System.out.println(user.getRechargeThreshold());
-  //  }
-
-  //  //  This test requires a production api key
-  //  @Test
-  //  public void testUserCreateAndDelete() throws EasyPostException {
-  //    EasyPost.apiKey = "KEY"; // easypost private production key
-  //
-  //    Map<String, Object> userHash = new HashMap<String, Object>();
-  //    userHash.put("name", "Chad DeVader");
-  //    userHash.put("password", "4theempire");
-  //    userHash.put("password_confirmation", "4theempire");
-  //    userHash.put("phone_number", "555-123-4321");
+  // Map<String, Object> userHash = new HashMap<String, Object>();
+  // userHash.put("name", "Chad DeVader");
+  // userHash.put("password", "4theempire");
+  // userHash.put("password_confirmation", "4theempire");
+  // userHash.put("phone_number", "555-123-4321");
   //
   //
-  //    User child = User.create(userHash);
+  // User child = User.create(userHash);
   //
-  //    assertEquals("Child's name is incorrect", child.getName(), "Chad DeVader");
-  //    assertNotNull("Child's email is not present", child.getEmail());
-  //    assertNotNull("Child's phone_number is not present", child.getPhoneNumber());
-  //    assertNotNull("Child's ID is not present", child.getId());
+  // assertEquals("Child's name is incorrect", child.getName(), "Chad DeVader");
+  // assertNotNull("Child's email is not present", child.getEmail());
+  // assertNotNull("Child's phone_number is not present", child.getPhoneNumber());
+  // assertNotNull("Child's ID is not present", child.getId());
   //
-  //    User fetchedChild = User.retrieve(child.getId());
-  //    assertEquals("Child's ID is not the same as FetchedChild's ID", fetchedChild.getId(),
+  // User fetchedChild = User.retrieve(child.getId());
+  // assertEquals("Child's ID is not the same as FetchedChild's ID",
+  // fetchedChild.getId(),
   // child.getId());
   //
-  //    fetchedChild.delete();
+  // fetchedChild.delete();
   //
-  //    try {
-  //      User newFetchedChild = User.retrieve(child.getId());
-  //      assertNull("Child is not deleted", newFetchedChild);
-  //    } catch (EasyPostException e) {
-  //      assertThat(e.getMessage(), containsString("An error occured"));
-  //      assertThat(e.getMessage(), containsString("Response code: 404"));
-  //      assertThat(e.getMessage(),
-  // containsString("{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource could
+  // try {
+  // User newFetchedChild = User.retrieve(child.getId());
+  // assertNull("Child is not deleted", newFetchedChild);
+  // } catch (EasyPostException e) {
+  // assertThat(e.getMessage(), containsString("An error occured"));
+  // assertThat(e.getMessage(), containsString("Response code: 404"));
+  // assertThat(e.getMessage(),
+  // containsString("{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The
+  // requested resource could
   // not be found.\",\"errors\":[]}}"));
-  //    }
-  //  }
+  // }
+  // }
 
-  //  //  This test requires a production api key
-  //  @Test
-  //  public void testUserCreateAndDeleteFailsOnParent() throws EasyPostException {
-  //    EasyPost.apiKey = "KEY"; // easypost private production key
+  // // This test requires a production api key
+  // @Test
+  // public void testUserCreateAndDeleteFailsOnParent() throws EasyPostException {
+  // EasyPost.apiKey = "KEY"; // easypost private production key
   //
-  //    User fetchedSelf = User.retrieveMe();
-  //    assertNotNull("Parent's ID is not present", fetchedSelf);
+  // User fetchedSelf = User.retrieveMe();
+  // assertNotNull("Parent's ID is not present", fetchedSelf);
   //
-  //    try {
-  //      fetchedSelf.delete();
-  //      assertFalse("User did not delete", true);
-  //    } catch (EasyPostException e) {
-  //      assertThat(e.getMessage(), containsString("An error occured"));
-  //      assertThat(e.getMessage(), containsString("Response code: 404"));
-  //      assertThat(e.getMessage(),
-  // containsString("{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource could
+  // try {
+  // fetchedSelf.delete();
+  // assertFalse("User did not delete", true);
+  // } catch (EasyPostException e) {
+  // assertThat(e.getMessage(), containsString("An error occured"));
+  // assertThat(e.getMessage(), containsString("Response code: 404"));
+  // assertThat(e.getMessage(),
+  // containsString("{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The
+  // requested resource could
   // not be found.\",\"errors\":[]}}"));
-  //    }
-  //  }
+  // }
+  // }
 
-  //  //  This test requires a production api key
-  //  @Test
-  //  public void testCarrierAccountMutability() throws EasyPostException {
-  //    EasyPost.apiKey = "KEY"; // easypost private production key
+  // // This test requires a production api key
+  // @Test
+  // public void testCarrierAccountMutability() throws EasyPostException {
+  // EasyPost.apiKey = "KEY"; // easypost private production key
   //
-  //    Map<String, Object> listHash = new HashMap<String, Object>();
-  //    listHash.put("type", "UpsAccount");
-  //    List<CarrierAccount> carrierAccounts = CarrierAccount.all(listHash);
-  //    assertNotNull(carrierAccounts);
+  // Map<String, Object> listHash = new HashMap<String, Object>();
+  // listHash.put("type", "UpsAccount");
+  // List<CarrierAccount> carrierAccounts = CarrierAccount.all(listHash);
+  // assertNotNull(carrierAccounts);
   //
-  //    int originalNumCarrierAccounts = carrierAccounts.size();
+  // int originalNumCarrierAccounts = carrierAccounts.size();
   //
-  //    String description = "A java client library test account";
-  //    String reference = "FedexJavaTest-1";
-  //    String accountNumber = "B2B2B2";
-  //    Map<String, Object> credentials = new HashMap<String, Object>();
-  //    credentials.put("account_number", accountNumber);
-  //    credentials.put("user_id", "UPSDOTCOM_USERNAME");
-  //    credentials.put("password", "UPSDOTCOM_PASSWORD");
-  //    credentials.put("access_license_number", "UPS_ACCESS_LICENSE_NUMBER");
+  // String description = "A java client library test account";
+  // String reference = "FedexJavaTest-1";
+  // String accountNumber = "B2B2B2";
+  // Map<String, Object> credentials = new HashMap<String, Object>();
+  // credentials.put("account_number", accountNumber);
+  // credentials.put("user_id", "UPSDOTCOM_USERNAME");
+  // credentials.put("password", "UPSDOTCOM_PASSWORD");
+  // credentials.put("access_license_number", "UPS_ACCESS_LICENSE_NUMBER");
   //
-  //    Map<String, Object> carrierParams = new HashMap<String, Object>();
-  //    carrierParams.put("type", "UpsAccount");
-  //    carrierParams.put("description", description);
-  //    carrierParams.put("reference", reference);
-  //    carrierParams.put("credentials", credentials);
+  // Map<String, Object> carrierParams = new HashMap<String, Object>();
+  // carrierParams.put("type", "UpsAccount");
+  // carrierParams.put("description", description);
+  // carrierParams.put("reference", reference);
+  // carrierParams.put("credentials", credentials);
   //
-  //    CarrierAccount carrierAccount = CarrierAccount.create(carrierParams);
-  //    CarrierAccount retrieved = CarrierAccount.retrieve(carrierAccount.getId());
+  // CarrierAccount carrierAccount = CarrierAccount.create(carrierParams);
+  // CarrierAccount retrieved = CarrierAccount.retrieve(carrierAccount.getId());
   //
-  //    assertNotNull(retrieved);
-  //    assertEquals(carrierAccount.getId(), retrieved.getId());
-  //    assertEquals(retrieved.getDescription(), description);
-  //    assertEquals(retrieved.getReference(), reference);
-  //    assertEquals(retrieved.getCredentials().get("account_number"), accountNumber);
+  // assertNotNull(retrieved);
+  // assertEquals(carrierAccount.getId(), retrieved.getId());
+  // assertEquals(retrieved.getDescription(), description);
+  // assertEquals(retrieved.getReference(), reference);
+  // assertEquals(retrieved.getCredentials().get("account_number"),
+  // accountNumber);
   //
-  //    List<CarrierAccount> updatedCarrierAccounts = CarrierAccount.all(listHash);
-  //    assertNotNull(updatedCarrierAccounts);
+  // List<CarrierAccount> updatedCarrierAccounts = CarrierAccount.all(listHash);
+  // assertNotNull(updatedCarrierAccounts);
   //
-  //    int updatedNumCarrierAccounts = updatedCarrierAccounts.size();
-  //    assertEquals(originalNumCarrierAccounts + 1, updatedNumCarrierAccounts);
+  // int updatedNumCarrierAccounts = updatedCarrierAccounts.size();
+  // assertEquals(originalNumCarrierAccounts + 1, updatedNumCarrierAccounts);
   //
-  //    String newDescription = "A java client library test account that has been edited";
+  // String newDescription = "A java client library test account that has been
+  // edited";
   //
-  //    String newAccountNumber = "C3C3C3C3";
-  //    credentials.put("account_number", newAccountNumber);
+  // String newAccountNumber = "C3C3C3C3";
+  // credentials.put("account_number", newAccountNumber);
   //
-  //    Map<String, Object> newParams = new HashMap<String, Object>();
-  //    newParams.put("description", newDescription);
-  //    newParams.put("credentials", credentials);
+  // Map<String, Object> newParams = new HashMap<String, Object>();
+  // newParams.put("description", newDescription);
+  // newParams.put("credentials", credentials);
   //
-  //    CarrierAccount mutated = retrieved.update(newParams);
+  // CarrierAccount mutated = retrieved.update(newParams);
   //
-  //    assertNotNull(mutated);
-  //    assertEquals(carrierAccount.getId(), mutated.getId());
-  //    assertEquals(mutated.getDescription(), newDescription);
-  //    assertEquals(mutated.getCredentials().get("account_number"), newAccountNumber);
+  // assertNotNull(mutated);
+  // assertEquals(carrierAccount.getId(), mutated.getId());
+  // assertEquals(mutated.getDescription(), newDescription);
+  // assertEquals(mutated.getCredentials().get("account_number"),
+  // newAccountNumber);
   //
-  //    mutated.delete();
+  // mutated.delete();
   //
-  //    List<CarrierAccount> deletedCarrierAccounts = CarrierAccount.all(listHash);
-  //    assertNotNull(deletedCarrierAccounts);
+  // List<CarrierAccount> deletedCarrierAccounts = CarrierAccount.all(listHash);
+  // assertNotNull(deletedCarrierAccounts);
   //
-  //    int finalNumCarrierAccounts = deletedCarrierAccounts.size();
-  //    assertEquals(originalNumCarrierAccounts, finalNumCarrierAccounts);
-  //  }
+  // int finalNumCarrierAccounts = deletedCarrierAccounts.size();
+  // assertEquals(originalNumCarrierAccounts, finalNumCarrierAccounts);
+  // }
 }

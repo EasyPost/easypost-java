@@ -10,6 +10,7 @@ public class Form {
   public String getId() {
     return id;
   }
+
   public void setId(String id) {
     this.id = id;
   }
@@ -17,6 +18,7 @@ public class Form {
   public String getMode() {
     return mode;
   }
+
   public void setMode(String mode) {
     this.mode = mode;
   }
@@ -24,6 +26,7 @@ public class Form {
   public String getFormType() {
     return formType;
   }
+
   public void setFormType(String formType) {
     this.formType = formType;
   }
@@ -31,6 +34,7 @@ public class Form {
   public String getFormUrl() {
     return formUrl;
   }
+
   public void setFormUrl(String formUrl) {
     this.formUrl = formUrl;
   }
@@ -38,6 +42,7 @@ public class Form {
   public Boolean getSubmittedElectronically() {
     return submittedElectronically;
   }
+
   public void setSubmittedElectronically(Boolean submittedElectronically) {
     this.submittedElectronically = submittedElectronically;
   }

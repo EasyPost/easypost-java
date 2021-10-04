@@ -111,8 +111,7 @@ public class Report extends EasyPostResource {
     return all(params, null);
   }
 
-  public static ReportCollection all(Map<String, Object> params, String apiKey)
-      throws EasyPostException {
+  public static ReportCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
     String type = (String) params.get("type");
     return request(RequestMethod.GET, reportURL(type), params, ReportCollection.class, apiKey);
   }
