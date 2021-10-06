@@ -35,7 +35,7 @@ import com.easypost.model.Shipment;
 public class Readme {
 
     public static void main(String[] args) {
-        EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
+        EasyPost.apiKey = "API_KEY";
 
         Map<String, Object> fromAddressMap = new HashMap<String, Object>();
         fromAddressMap.put("name", "Simpler Postage Inc");
