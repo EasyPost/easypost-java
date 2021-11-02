@@ -200,13 +200,13 @@ public abstract class EasyPostResource {
 			easypostURL = new URL(url);
 		}
 		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) easypostURL.openConnection();
-		conn.setConnectTimeout(20000); // 20 seconds
+		conn.setConnectTimeout(30000);
 
 		int readTimeout;
 		if (EasyPost.readTimeout != 0) {
 			readTimeout = EasyPost.readTimeout;
 		} else{
-			readTimeout = 40000;                  // 40 seconds by default
+			readTimeout = 60000;
 		}
 		conn.setReadTimeout(readTimeout);
 
