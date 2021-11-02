@@ -5,6 +5,7 @@
 
 * Removes `items` and `containers` which have not been supported for some time
 * Corrects references of `contact@easypost.com` to `support@easypost.com`
+* Updates the connection timeout to 30 seconds from 20 and the request timeout to 60 from 40
 
 
 ## 4.0.4 2020-10-29
