@@ -33,6 +33,8 @@ import com.easypost.model.EventDeserializer;
 import com.easypost.model.Fee;
 import com.easypost.model.Rate;
 import com.easypost.model.RateDeserializer;
+import com.easypost.model.SmartrateCollection;
+import com.easypost.model.SmartrateCollectionDeserializer;
 import com.easypost.model.Shipment;
 import com.easypost.model.TrackingDetail;
 
