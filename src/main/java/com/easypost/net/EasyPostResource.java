@@ -42,6 +42,7 @@ public abstract class EasyPostResource {
 		.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 		.registerTypeAdapter(Event.class, new EventDeserializer())
 		.registerTypeAdapter(Rate.class, new RateDeserializer())
+		.registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer())
 		.create();
 
 	public static final Gson prettyPrintGson = new GsonBuilder().
