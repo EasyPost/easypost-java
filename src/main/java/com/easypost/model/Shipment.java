@@ -290,6 +290,28 @@ public class Shipment extends EasyPostResource {
 		return this;
 	}
 
+	// get smartrates
+    public List<Rate> getSmartrates() throws EasyPostException {
+        return this.getSmartrates(null, null);
+    }
+    public List<Rate> getSmartrates(Map<String, Object> params) throws EasyPostException {
+        return this.getSmartrates(params, null);
+    }
+    public List<Rate> getSmartrates(String apiKey) throws EasyPostException {
+        return this.getSmartrates((Map<String, Object>) null, apiKey);
+    }
+    public List<Rate> getSmartrates(Map<String, Object> params, String apiKey) throws EasyPostException {
+        SmartrateCollection smartrateCollection = (SmartrateCollection) request(
+            RequestMethod.GET,
+            String.format("%s/smartrate", instanceURL(Shipment.class, this.getId())),
+            params,
+            SmartrateCollection.class,
+            apiKey
+        );
+
+        return smartrateCollection.getRates();
+    }
+
 	// buy
 	public Shipment buy() throws EasyPostException {
 		return this.buy(null, null);

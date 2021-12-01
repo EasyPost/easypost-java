@@ -32,6 +32,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
         objectMap.put("Refund", Refund.class);
         objectMap.put("ScanForm", ScanForm.class);
         objectMap.put("Shipment", Shipment.class);
+        objectMap.put("TimeInTransit", TimeInTransit.class);
         objectMap.put("Tracker", Tracker.class);
         objectMap.put("TrackingDetail", TrackingDetail.class);
 		objectMap.put("Webhook", Webhook.class);
