@@ -114,7 +114,7 @@ public class EasyPostTest {
     assertTrue(rates.size() > 0);
 
     Rate firstRate = rates.get(0);
-    TimeInTransit timeInTransit = rates.get(0).getTimeInTransit();
+    TimeInTransit timeInTransit = firstRate.getTimeInTransit();
 
     assertNotNull(timeInTransit);
     // TODO: assert on exact values once we have a VCR libary integrated
@@ -168,7 +168,7 @@ public class EasyPostTest {
     assertEquals(fee1.getType(), "LabelFee");
 
     Fee fee2 = fees.get(1);
-    assertEquals(4.53, fee2.getAmount(), 0.001);
+    assertEquals(4.83, fee2.getAmount(), 0.001);
     assertEquals(true, fee2.getCharged());
     assertEquals(false, fee2.getRefunded());
     assertEquals("PostageFee", fee2.getType());

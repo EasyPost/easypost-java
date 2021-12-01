@@ -10,7 +10,7 @@ public class SmartrateCollectionDeserializer implements JsonDeserializer<Smartra
         SmartrateCollection smartrateCollection = new SmartrateCollection();
 
         JsonObject jo = (JsonObject) json;
-        JsonElement results = jo.get("results");
+        JsonElement results = jo.get("result");
 
         if (results == null || !results.isJsonArray()) {
             return smartrateCollection;  // return empty collection if "results" key does not exist or corresponding value is not an array
