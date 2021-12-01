@@ -291,7 +291,6 @@ public class Shipment extends EasyPostResource {
 	}
 
 	// get smartrates
-
     public List<Rate> getSmartrates() throws EasyPostException {
         return this.getSmartrates(null, null);
     }
