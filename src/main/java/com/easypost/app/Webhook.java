@@ -1,4 +1,5 @@
 // java -cp "target/easypost-java-2.0.4.jar:target/gson-2.2.2.jar" Webhook
+package com.easypost.app;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;

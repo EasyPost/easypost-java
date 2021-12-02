@@ -1,3 +1,5 @@
+package com.easypost.app;
+
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Batch;

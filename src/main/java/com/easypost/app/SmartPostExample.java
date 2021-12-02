@@ -1,4 +1,5 @@
 // java -cp "target/easypost-java-2.0.2.jar:target/gson-2.2.2.jar" SmartPostExample
+package com.easypost.app;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
