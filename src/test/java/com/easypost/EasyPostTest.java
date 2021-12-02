@@ -155,17 +155,17 @@ public class EasyPostTest {
     assertNotNull(label.getLabelUrl());
     assertNotNull(label.getCreatedAt());
     assertNotNull(label.getUpdatedAt());
-    assertEquals(label.getLabelSize(), "4x6");
-    assertEquals(label.getLabelFileType(), "application/zpl");
+    assertEquals("4x6", label.getLabelSize());
+    assertEquals("application/zpl", label.getLabelFileType());
 
     ArrayList<Fee> fees = shipment.getFees();
     assertEquals(fees.size(), 2);
 
     Fee fee1 = fees.get(0);
-    assertEquals(fee1.getAmount(), 0.01, 0.001);
-    assertEquals(fee1.getCharged(), true);
-    assertEquals(fee1.getRefunded(), false);
-    assertEquals(fee1.getType(), "LabelFee");
+    assertEquals(0.01, fee1.getAmount(), 0.001);
+    assertEquals(true, fee1.getCharged());
+    assertEquals(false, fee1.getRefunded());
+    assertEquals("LabelFee", fee1.getType());
 
     Fee fee2 = fees.get(1);
     assertEquals(4.83, fee2.getAmount(), 0.001);
@@ -273,7 +273,7 @@ public class EasyPostTest {
     assertNotNull(tracker.getCreatedAt());
     assertNotNull(tracker.getUpdatedAt());
     assertNotNull(tracker.getFees());
-    assertEquals(tracker.getFees().size(), 1);
+    assertEquals(1, tracker.getFees().size());
 
     // This Est Delivery Date test confirms that the timestamps are within 1.5 seconds of each other
     // (rather than exactly equal)
@@ -373,7 +373,7 @@ public class EasyPostTest {
     index_params.put("tracking_code", "EZ2000000002");
     TrackerCollection trackers = Tracker.all(index_params);
 
-    assertEquals("Incorrect length received", trackers.getTrackers().size(), 30);
+    assertEquals("Incorrect length received", 30, trackers.getTrackers().size());
     assertTrue("'has_more' should be true", trackers.getHasMore());
     assertEquals(
         "Tracker ids in create response and all response are not the same",
@@ -390,7 +390,7 @@ public class EasyPostTest {
     index_params2.put("after_id", tracker.id);
     TrackerCollection trackers2 = Tracker.all(index_params2);
 
-    assertEquals("Incorrect length received", trackers2.getTrackers().size(), 1);
+    assertEquals("Incorrect length received", 1, trackers2.getTrackers().size());
     assertFalse("'has_more' should be true", trackers2.getHasMore());
     assertEquals(
         "Tracker ids in create response and all response are not the same",
@@ -461,12 +461,12 @@ public class EasyPostTest {
     Address verified = address.verify();
 
     assertNull("Verified Address has no error message", verified.getMessage());
-    assertEquals("Address did not verify as expected", verified.getZip(), "94107-1990");
+    assertEquals("Address did not verify as expected", "94107-1990", verified.getZip());
 
     Address createdAndVerified = Address.createAndVerify(addressHash);
 
     assertNull("Verified Address has no error message", createdAndVerified.getMessage());
-    assertEquals("Address did not verify as expected", createdAndVerified.getZip(), "94107-1990");
+    assertEquals("Address did not verify as expected", "94107-1990", createdAndVerified.getZip());
   }
 
   @Test
@@ -489,10 +489,10 @@ public class EasyPostTest {
     Address address = Address.create(addressHash);
 
     assertNotNull("Id is null", address.getId());
-    assertEquals("City did not verify", address.getCity(), "SAN FRANCISCO");
+    assertEquals("City did not verify", "SAN FRANCISCO", address.getCity());
 
     Map<String, AddressVerification> verifications = address.getVerifications();
-    assertEquals("Verification did not succeed.", verifications.get("delivery").getSuccess(), true);
+    assertEquals("Verification did not succeed.", true, verifications.get("delivery").getSuccess());
     assertEquals(
         "Verification had errors.",
         verifications.get("delivery").getErrors(),
@@ -500,8 +500,9 @@ public class EasyPostTest {
     assertNotNull("Address details is null.", verifications.get("delivery").getAddressDetail());
     assertEquals(
         "Address details did not have TZ.",
-        verifications.get("delivery").getAddressDetail().getTimeZone(),
-        "America/Los_Angeles");
+        "America/Los_Angeles",
+        verifications.get("delivery").getAddressDetail().getTimeZone()
+        );
   }
 
   @Test
@@ -523,18 +524,18 @@ public class EasyPostTest {
     Address address = Address.create(addressHash);
 
     assertNotNull("Id is null", address.getId());
-    assertEquals("City did not verify", address.getCity(), "SAN FRANCISCO");
+    assertEquals("City did not verify", "SAN FRANCISCO", address.getCity());
 
     Map<String, AddressVerification> verifications = address.getVerifications();
     assertEquals(
-        "Verification did not succeed.", verifications.get("delivery").getSuccess(), false);
+        "Verification did not succeed.", false, verifications.get("delivery").getSuccess());
 
     List<com.easypost.model.Error> errors = verifications.get("delivery").getErrors();
 
     assertTrue("At least two errors are present", errors.size() >= 2);
-    assertEquals("Verification had a suggestion.", errors.get(0).getSuggestion(), null);
+    assertEquals("Verification had a suggestion.", null, errors.get(0).getSuggestion());
     assertEquals(
-        "Verification error did not have a code.", errors.get(0).getCode(), "E.ADDRESS.NOT_FOUND");
+        "Verification error did not have a code.", "E.ADDRESS.NOT_FOUND", errors.get(0).getCode());
   }
 
   @Rule public ExpectedException verifyStrictException = ExpectedException.none();
@@ -635,7 +636,7 @@ public class EasyPostTest {
       Thread.sleep(3000);
     }
 
-    assertEquals("Batch state is not purchased.", batch.getState(), "purchased");
+    assertEquals("Batch state is not purchased.", "purchased", batch.getState());
   }
 
   @Test
@@ -715,14 +716,14 @@ public class EasyPostTest {
     Pickup pickup = Pickup.create(pickupMap);
 
     assertNotNull(pickup);
-    assertEquals(pickup.getMessages().size(), 0);
+    assertEquals(0 ,pickup.getMessages().size());
     assertEquals(pickup.getReference(), reference);
     assertEquals(pickup.getInstructions(), instructions);
-    assertEquals(pickup.getStatus(), "unknown");
+    assertEquals("unknown", pickup.getStatus());
     assertTrue(pickup.getIsAccountAddress());
 
-    assertEquals(pickup.getPickupRates().get(0).getCarrier(), "UPS");
-    assertEquals(pickup.getPickupRates().get(0).getService(), "Same-day Pickup");
+    assertEquals("UPS", pickup.getPickupRates().get(0).getCarrier());
+    assertEquals("Same-day Pickup", pickup.getPickupRates().get(0).getService());
 
     Map<String, Object> buyMap = new HashMap<String, Object>();
     buyMap.put("carrier", pickup.getPickupRates().get(0).getCarrier());
@@ -730,23 +731,23 @@ public class EasyPostTest {
     pickup = pickup.buy(buyMap);
 
     assertNotNull(pickup);
-    assertEquals(pickup.getMessages().size(), 0);
-    assertEquals(pickup.getStatus(), "scheduled");
+    assertEquals(0, pickup.getMessages().size());
+    assertEquals("scheduled", pickup.getStatus());
 
     Map<String, Object> cancelMap = new HashMap<String, Object>();
     cancelMap.put("id", pickup.getId());
     pickup = pickup.cancel(cancelMap);
 
     assertNotNull(pickup);
-    assertEquals(pickup.getMessages().size(), 0);
-    assertEquals(pickup.getStatus(), "canceled");
+    assertEquals(0, pickup.getMessages().size());
+    assertEquals("canceled", pickup.getStatus());
 
     Pickup retrieved = Pickup.retrieve(pickup.getId());
     pickup = pickup.refresh();
 
     assertNotNull(pickup);
     assertNotNull((retrieved));
-    assertEquals(retrieved.getMessages().size(), 0);
+    assertEquals(0, retrieved.getMessages().size());
     assertEquals(retrieved.getId(), pickup.getId());
     assertEquals(retrieved.getStatus(), pickup.getStatus());
   }
@@ -846,14 +847,14 @@ public class EasyPostTest {
     CustomsItem customsItem = CustomsItem.create(customsItemMap);
     CustomsItem customsItem2 = CustomsItem.retrieve(customsItem.getId());
 
-    assertEquals(customsItem2.getDescription(), "T-shirt");
-    assertEquals(customsItem2.getQuantity(), 1, 0.1);
-    assertEquals(customsItem2.getValue(), 10, 0.1);
-    assertEquals(customsItem2.getWeight(), 5, 0.1);
-    assertEquals(customsItem2.getOriginCountry(), "US");
-    assertEquals(customsItem2.getHsTariffNumber(), "123456");
-    assertEquals(customsItem2.getCurrency(), "USD");
-    assertEquals(customsItem2.getCode(), "123");
+    assertEquals("T-shirt", customsItem2.getDescription());
+    assertEquals(1, customsItem2.getQuantity(), 0.1);
+    assertEquals(10, customsItem2.getValue(), 0.1);
+    assertEquals(5,customsItem2.getWeight(), 0.1);
+    assertEquals("US", customsItem2.getOriginCountry());
+    assertEquals("123456", customsItem2.getHsTariffNumber());
+    assertEquals("USD", customsItem2.getCurrency());
+    assertEquals("123", customsItem2.getCode());
   }
 
   @Test
@@ -914,8 +915,8 @@ public class EasyPostTest {
     // Index shipment reports
     paramMap.put("page_size", "4");
     ReportCollection shipmentReports = Report.all(paramMap);
-    assertEquals("Page Size not respected", shipmentReports.getReports().size(), 4);
-    assertEquals("Does not have more", shipmentReports.getHasMore(), true);
+    assertEquals("Page Size not respected", 4, shipmentReports.getReports().size());
+    assertEquals("Does not have more", true, shipmentReports.getHasMore());
   }
 
   @Test
@@ -941,8 +942,8 @@ public class EasyPostTest {
     // Index tracker reports
     paramMap.put("page_size", "4");
     ReportCollection trackerReports = Report.all(paramMap);
-    assertEquals("Page Size not respected", trackerReports.getReports().size(), 4);
-    assertEquals("Does not have more", trackerReports.getHasMore(), true);
+    assertEquals("Page Size not respected", 4, trackerReports.getReports().size());
+    assertEquals("Does not have more", true, trackerReports.getHasMore());
   }
 
   @Test
@@ -970,8 +971,8 @@ public class EasyPostTest {
     // Index payment_log reports
     paramMap.put("page_size", "4");
     ReportCollection paymentLogReports = Report.all(paramMap);
-    assertEquals("Page Size not respected", paymentLogReports.getReports().size(), 4);
-    assertEquals("Does not have more", paymentLogReports.getHasMore(), true);
+    assertEquals("Page Size not respected", 4, paymentLogReports.getReports().size());
+    assertEquals("Does not have more", true, paymentLogReports.getHasMore());
   }
 
   @Ignore("TODO: rework webhook tests. Skipping until then.")
@@ -985,10 +986,10 @@ public class EasyPostTest {
     // Create a webhook
     Webhook webhook = Webhook.create(paramMap);
     assertNotNull("ID is null", webhook.getId());
-    assertEquals("mode is not test", webhook.getMode(), "test");
+    assertEquals("mode is not test",  "test", webhook.getMode());
     assertEquals("URL is not correctly ser", webhook.getUrl(), url);
     assertNull("disabledAt is not null", webhook.getDisabledAt());
-    assertEquals("Class is not Webhook", webhook.getClass(), Webhook.class);
+    assertEquals("Class is not Webhook", Webhook.class, webhook.getClass());
 
     // Retrieve a webhook
     Webhook webhook2 = Webhook.retrieve(webhook.getId());
@@ -1055,8 +1056,9 @@ public class EasyPostTest {
     assertEquals("IDs do not match", scanForms.getScanForms().get(0).getId(), scanForm.getId());
   }
 
-  /*
+  
   //This test needs to have new set of dates to avoid "report already exists" error
+  /*
   @Test
   public void testShipmentReportDates() throws EasyPostException {
     // Define request params
@@ -1079,10 +1081,10 @@ public class EasyPostTest {
         "Create and Retrieve returned different ids",
         shipmentReport.getId(),
         shipmentReport2.getId());
-    assertEquals("Incorrect ShipmentReport start_date", shipmentReport2.getStartDate().toString(), "Sun Oct 01 00:00:00 PDT 2017");
-    assertEquals("Incorrect ShipmentReport end_date", shipmentReport2.getEndDate().toString(), "Mon Oct 30 00:00:00 PDT 2017");
-  }
-  */
+    assertEquals("Incorrect ShipmentReport start_date", "Sun Oct 01 00:00:00 PDT 2017", shipmentReport2.getStartDate().toString());
+    assertEquals("Incorrect ShipmentReport end_date", "Mon Oct 30 00:00:00 PDT 2017", shipmentReport2.getEndDate().toString());
+  }*/
+  
 
   /*
    // This test requires a FedExSameDayCity account
@@ -1170,7 +1172,7 @@ public class EasyPostTest {
   //
   //    User child = User.create(userHash);
   //
-  //    assertEquals("Child's name is incorrect", child.getName(), "Chad DeVader");
+  //    assertEquals("Child's name is incorrect", "Chad DeVader", child.getName());
   //    assertNotNull("Child's email is not present", child.getEmail());
   //    assertNotNull("Child's phone_number is not present", child.getPhoneNumber());
   //    assertNotNull("Child's ID is not present", child.getId());
@@ -1245,9 +1247,9 @@ public class EasyPostTest {
   //
   //    assertNotNull(retrieved);
   //    assertEquals(carrierAccount.getId(), retrieved.getId());
-  //    assertEquals(retrieved.getDescription(), description);
-  //    assertEquals(retrieved.getReference(), reference);
-  //    assertEquals(retrieved.getCredentials().get("account_number"), accountNumber);
+  //    assertEquals(description, retrieved.getDescription());
+  //    assertEquals(reference, retrieved.getReference());
+  //    assertEquals(accountNumber, retrieved.getCredentials().get("account_number"));
   //
   //    List<CarrierAccount> updatedCarrierAccounts = CarrierAccount.all(listHash);
   //    assertNotNull(updatedCarrierAccounts);
@@ -1268,8 +1270,8 @@ public class EasyPostTest {
   //
   //    assertNotNull(mutated);
   //    assertEquals(carrierAccount.getId(), mutated.getId());
-  //    assertEquals(mutated.getDescription(), newDescription);
-  //    assertEquals(mutated.getCredentials().get("account_number"), newAccountNumber);
+  //    assertEquals(newDescription, mutated.getDescription());
+  //    assertEquals(newAccountNumber, mutated.getCredentials().get("account_number"));
   //
   //    mutated.delete();
   //
