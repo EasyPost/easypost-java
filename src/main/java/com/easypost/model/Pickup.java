@@ -1,12 +1,12 @@
 package com.easypost.model;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Date;
-import java.util.Map;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Pickup extends EasyPostResource {
     public String id;

@@ -1,19 +1,12 @@
 package com.easypost.model;
 
+import com.easypost.net.EasyPostResource;
+import com.google.gson.*;
+
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonPrimitive;
-import com.easypost.net.EasyPostResource;
-import com.easypost.model.Event;
 
 public class EventDeserializer implements JsonDeserializer<Event> {
 

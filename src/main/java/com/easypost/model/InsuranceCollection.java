@@ -1,7 +1,8 @@
 package com.easypost.model;
 
-import java.util.List;
 import com.easypost.net.EasyPostResource;
+
+import java.util.List;
 
 public class InsuranceCollection extends EasyPostResource {
   List<Insurance> insurances;

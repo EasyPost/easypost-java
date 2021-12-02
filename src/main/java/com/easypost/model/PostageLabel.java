@@ -1,10 +1,5 @@
 package com.easypost.model;
 
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
 public class PostageLabel extends EasyPostResource {

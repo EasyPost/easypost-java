@@ -1,42 +1,25 @@
 package com.easypost.net;
 
+import com.easypost.EasyPost;
+import com.easypost.exception.EasyPostException;
+import com.easypost.model.*;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.URLStreamHandler;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.easypost.EasyPost;
-import com.easypost.exception.EasyPostException;
-import com.easypost.model.BatchStatus;
-import com.easypost.model.Event;
-import com.easypost.model.EventDeserializer;
-import com.easypost.model.Fee;
-import com.easypost.model.Rate;
-import com.easypost.model.RateDeserializer;
-import com.easypost.model.SmartrateCollection;
-import com.easypost.model.SmartrateCollectionDeserializer;
-import com.easypost.model.Shipment;
-import com.easypost.model.TrackingDetail;
+import java.util.*;
 
 public abstract class EasyPostResource {
 

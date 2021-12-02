@@ -1,16 +1,12 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-
-import java.lang.InterruptedException;
-
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.Address;
-import com.easypost.model.Parcel;
-import com.easypost.model.Shipment;
 import com.easypost.model.Batch;
+import com.easypost.model.Shipment;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BatchManifestExample {
 

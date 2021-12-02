@@ -1,11 +1,11 @@
 package com.easypost.model;
 
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Address extends EasyPostResource {
   public String id;
