@@ -2,7 +2,11 @@
 
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.*;
+import com.easypost.model.Address;
+import com.easypost.model.CustomsInfo;
+import com.easypost.model.CustomsItem;
+import com.easypost.model.Parcel;
+import com.easypost.model.Shipment;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,7 +1,29 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.*;
+import com.easypost.model.Address;
+import com.easypost.model.AddressVerification;
+import com.easypost.model.Batch;
+import com.easypost.model.CustomsItem;
+import com.easypost.model.Fee;
+import com.easypost.model.Insurance;
+import com.easypost.model.InsuranceCollection;
+import com.easypost.model.Order;
+import com.easypost.model.Pickup;
+import com.easypost.model.PostageLabel;
+import com.easypost.model.Rate;
+import com.easypost.model.Report;
+import com.easypost.model.ReportCollection;
+import com.easypost.model.ScanForm;
+import com.easypost.model.ScanFormCollection;
+import com.easypost.model.Shipment;
+import com.easypost.model.TimeInTransit;
+import com.easypost.model.Tracker;
+import com.easypost.model.TrackerCollection;
+import com.easypost.model.TrackingDetail;
+import com.easypost.model.TrackingLocation;
+import com.easypost.model.Webhook;
+import com.easypost.model.WebhookCollection;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -11,10 +33,23 @@ import org.junit.rules.ExpectedException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class EasyPostTest {
 

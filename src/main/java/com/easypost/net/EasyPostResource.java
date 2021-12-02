@@ -2,7 +2,12 @@ package com.easypost.net;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.*;
+import com.easypost.model.Event;
+import com.easypost.model.EventDeserializer;
+import com.easypost.model.Rate;
+import com.easypost.model.RateDeserializer;
+import com.easypost.model.SmartrateCollection;
+import com.easypost.model.SmartrateCollectionDeserializer;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,7 +24,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.URLStreamHandler;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public abstract class EasyPostResource {
 
