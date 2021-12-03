@@ -3,6 +3,7 @@ package com.easypost.model;
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;

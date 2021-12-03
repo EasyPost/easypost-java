@@ -1,7 +1,8 @@
 package com.easypost.model;
 
-import java.util.List;
 import com.easypost.net.EasyPostResource;
+
+import java.util.List;
 
 public class TrackerCollection extends EasyPostResource {
   List<Tracker> trackers;

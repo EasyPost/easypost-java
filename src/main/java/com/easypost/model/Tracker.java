@@ -1,12 +1,12 @@
 package com.easypost.model;
 
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Date;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Tracker extends EasyPostResource {
 	public String id;

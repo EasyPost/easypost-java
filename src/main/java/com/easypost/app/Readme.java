@@ -1,17 +1,18 @@
 // java -cp "target/easypost-java-2.0.4.jar:target/gson-2.2.4.jar" Readme
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
+package com.easypost.app;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Address;
-import com.easypost.model.Parcel;
-import com.easypost.model.CustomsItem;
 import com.easypost.model.CustomsInfo;
+import com.easypost.model.CustomsItem;
+import com.easypost.model.Parcel;
 import com.easypost.model.Shipment;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Readme {
 

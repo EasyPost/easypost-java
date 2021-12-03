@@ -1,25 +1,14 @@
 package com.easypost;
 
-import com.easypost.model.*;
+import com.easypost.exception.EasyPostException;
+import com.easypost.model.Order;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 
-import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-import java.lang.InterruptedException;
-
-import com.easypost.exception.EasyPostException;
-
-import static org.junit.Assert.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ThreadTest {
   static Map<String, Object> defaultFromAddress = new HashMap<String, Object>();

@@ -1,11 +1,11 @@
 package com.easypost.model;
 
+import com.easypost.exception.EasyPostException;
+import com.easypost.net.EasyPostResource;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
 
 public class Webhook extends EasyPostResource {
     public String id;

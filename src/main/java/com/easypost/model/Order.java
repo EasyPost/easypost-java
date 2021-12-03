@@ -1,13 +1,11 @@
 package com.easypost.model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-
-import com.google.gson.reflect.TypeToken;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Order extends EasyPostResource {
   public String id;

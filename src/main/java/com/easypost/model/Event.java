@@ -1,9 +1,9 @@
 package com.easypost.model;
 
-import java.util.Map;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+
+import java.util.Map;
 
 public class Event extends EasyPostResource {
 	public String id;

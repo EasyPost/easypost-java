@@ -1,7 +1,8 @@
 package com.easypost.model;
 
-import java.util.Map;
 import com.easypost.net.EasyPostResource;
+
+import java.util.Map;
 
 public class EventData extends EasyPostResource {
 	Map<String, Object> previousAttributes;

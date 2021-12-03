@@ -5,8 +5,8 @@ import com.easypost.net.EasyPostResource;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 public class CarrierAccount extends EasyPostResource {
     public String id;

@@ -1,12 +1,11 @@
 package com.easypost.model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
-import com.easypost.model.ApiKeys;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class User extends EasyPostResource {
     public String id;
