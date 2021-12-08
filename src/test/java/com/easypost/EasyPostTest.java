@@ -9,6 +9,7 @@ import com.easypost.model.Fee;
 import com.easypost.model.Insurance;
 import com.easypost.model.InsuranceCollection;
 import com.easypost.model.Order;
+import com.easypost.model.Parcel;
 import com.easypost.model.Pickup;
 import com.easypost.model.PostageLabel;
 import com.easypost.model.Rate;
@@ -17,6 +18,7 @@ import com.easypost.model.ReportCollection;
 import com.easypost.model.ScanForm;
 import com.easypost.model.ScanFormCollection;
 import com.easypost.model.Shipment;
+import com.easypost.model.TaxIdentifier;
 import com.easypost.model.TimeInTransit;
 import com.easypost.model.Tracker;
 import com.easypost.model.TrackerCollection;
@@ -34,6 +36,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -667,6 +670,41 @@ public class EasyPostTest {
     }
 
     assertEquals("Batch state is not purchased.", "purchased", batch.getState());
+  }
+
+  @Test
+  public void testTaxIdentifier() throws EasyPostException, ParseException{
+
+    Address fromAddress = Address.create(defaultFromAddress);
+    Address toAddress = Address.create(defaultToAddress);
+    Parcel parcel = Parcel.create(defaultParcel);
+
+    Map<String, Object> taxIdentifierMap = new HashMap<>();
+    taxIdentifierMap.put("entity", "SENDER");
+    taxIdentifierMap.put("issuing_country", "US");
+    taxIdentifierMap.put("tax_id", "123456789");
+    taxIdentifierMap.put("tax_id_type", "EORI");
+
+    HashMap<String, Object> shipmentMap = new HashMap<>();
+    shipmentMap.put("parcel", parcel);
+    shipmentMap.put("to_address", toAddress);
+    shipmentMap.put("from_address", fromAddress);
+    shipmentMap.put("tax_identifiers", new ArrayList<>(Arrays.asList(taxIdentifierMap)));
+
+
+    Shipment shipment = Shipment.create(shipmentMap);
+    TaxIdentifier taxIdentifierReceived = shipment.getTaxIdentifiers().get(0);
+    assertEquals("SENDER", taxIdentifierReceived.getEntity());
+    assertEquals("HIDDEN", taxIdentifierReceived.getTaxId());
+    assertEquals("EORI", taxIdentifierReceived.getTaxIdType());
+    assertEquals("US", taxIdentifierReceived.getIssuingCountry());
+
+    Shipment retrievedShipment = Shipment.retrieve(shipment.id);
+    TaxIdentifier taxIdentifierRetrieved = retrievedShipment.getTaxIdentifiers().get(0);
+    assertEquals("SENDER", taxIdentifierRetrieved.getEntity());
+    assertEquals("HIDDEN", taxIdentifierRetrieved.getTaxId());
+    assertEquals("EORI", taxIdentifierRetrieved.getTaxIdType());
+    assertEquals("US", taxIdentifierRetrieved.getIssuingCountry());
   }
 
   @Test
