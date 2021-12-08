@@ -226,12 +226,12 @@ public class Shipment extends EasyPostResource {
         this.forms = forms;
     }
 
-    public List<TaxIdentifier> getTaxIdentifiers(){
-        return taxIdentifiers;
-    }
-    public void setTaxIdentifiers(List<TaxIdentifier> taxIdentifiers){
-        this.taxIdentifiers = taxIdentifiers;
-    }
+	public List<TaxIdentifier> getTaxIdentifiers(){
+		return taxIdentifiers;
+	}
+	public void setTaxIdentifiers(List<TaxIdentifier> taxIdentifiers){
+		this.taxIdentifiers = taxIdentifiers;
+	}
 
 
     // create
