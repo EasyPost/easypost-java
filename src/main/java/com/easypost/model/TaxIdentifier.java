@@ -5,10 +5,10 @@ import com.easypost.net.EasyPostResource;
 
 public class TaxIdentifier extends EasyPostResource {
 
-    String entity;
-    String taxId;
-    String taxIdType;
-    String issuingCountry;
+    public String entity;
+    public String taxId;
+    public String taxIdType;
+    public String issuingCountry;
 
     public void setEntity(String entity) {
         this.entity = entity;
