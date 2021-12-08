@@ -625,7 +625,7 @@ public class EasyPostTest {
     } catch (EasyPostException e) {
       assertNotNull(e);
 
-      assertThat(e.getMessage(), containsString("An error occured"));
+      assertThat(e.getMessage(), containsString("An error occurred"));
       assertThat(e.getMessage(), containsString("Response code: 422"));
       assertThat(
           e.getMessage(),
@@ -1044,7 +1044,7 @@ public class EasyPostTest {
       Webhook.retrieve(webhook.getId());
       assertFalse("Webhook did not delete", true);
     } catch (EasyPostException e) {
-      assertThat(e.getMessage(), containsString("An error occured"));
+      assertThat(e.getMessage(), containsString("An error occurred"));
       assertThat(e.getMessage(), containsString("Response code: 404"));
       assertThat(
           e.getMessage(),
@@ -1217,7 +1217,7 @@ public class EasyPostTest {
   //      User newFetchedChild = User.retrieve(child.getId());
   //      assertNull("Child is not deleted", newFetchedChild);
   //    } catch (EasyPostException e) {
-  //      assertThat(e.getMessage(), containsString("An error occured"));
+  //      assertThat(e.getMessage(), containsString("An error occurred"));
   //      assertThat(e.getMessage(), containsString("Response code: 404"));
   //      assertThat(e.getMessage(),
   // containsString("{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource could
@@ -1237,7 +1237,7 @@ public class EasyPostTest {
   //      fetchedSelf.delete();
   //      assertFalse("User did not delete", true);
   //    } catch (EasyPostException e) {
-  //      assertThat(e.getMessage(), containsString("An error occured"));
+  //      assertThat(e.getMessage(), containsString("An error occurred"));
   //      assertThat(e.getMessage(), containsString("Response code: 404"));
   //      assertThat(e.getMessage(),
   // containsString("{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource could

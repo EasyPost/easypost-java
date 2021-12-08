@@ -14,6 +14,7 @@ import com.easypost.model.TrackingDetail;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -220,6 +221,24 @@ public abstract class EasyPostResource {
 		return conn;
 	}
 
+	private static javax.net.ssl.HttpsURLConnection writeBody(javax.net.ssl.HttpsURLConnection conn, JsonObject body) throws IOException {
+		if (body != null) {
+			conn.setDoOutput(true);
+			conn.setRequestProperty("Content-Type", "application/json");
+			OutputStream output = null;
+			try {
+				output = conn.getOutputStream();
+				String jsonString = body.toString();
+				output.write(jsonString.getBytes(CHARSET));
+			} finally {
+				if (output != null) {
+					output.close();
+				}
+			}
+		}
+		return conn;
+	}
+
 	private static javax.net.ssl.HttpsURLConnection createGetConnection(String url, String query, String apiKey) throws IOException {
 		String getURL = String.format("%s?%s", url, query);
 		javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(getURL, apiKey);
@@ -227,20 +246,10 @@ public abstract class EasyPostResource {
 		return conn;
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createPostConnection(String url, String query, String apiKey) throws IOException {
+	private static javax.net.ssl.HttpsURLConnection createPostConnection(String url, JsonObject body, String apiKey) throws IOException {
 		javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey);
-		conn.setDoOutput(true);
 		conn.setRequestMethod("POST");
-		conn.setRequestProperty("Content-Type", String.format("application/x-www-form-urlencoded;charset=%s", CHARSET));
-		OutputStream output = null;
-		try {
-			output = conn.getOutputStream();
-			output.write(query.getBytes(CHARSET));
-		} finally {
-			if (output != null) {
-				output.close();
-			}
-		}
+		conn = writeBody(conn, body);
 		return conn;
 	}
 
@@ -251,26 +260,20 @@ public abstract class EasyPostResource {
 		return conn;
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createPutConnection(String url, String query, String apiKey) throws IOException {
+	private static javax.net.ssl.HttpsURLConnection createPutConnection(String url, JsonObject body, String apiKey) throws IOException {
 		javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey);
-		conn.setDoOutput(true);
 		conn.setRequestMethod("PUT");
-		conn.setRequestProperty("Content-Type", String.format("application/x-www-form-urlencoded;charset=%s", CHARSET));
-		OutputStream output = null;
-		try {
-			output = conn.getOutputStream();
-			output.write(query.getBytes(CHARSET));
-		} finally {
-			if (output != null) {
-				output.close();
-			}
-		}
+		writeBody(conn, body);
 		return conn;
+	}
+
+	private static JsonObject createBody(Map<String, Object> params) {
+		return createJsonObjectFromMap(params);
 	}
 
 	private static String createQuery(Map<String, Object> params) throws UnsupportedEncodingException {
 		Map<String, String> flatParams = flattenParams(params);
-		StringBuffer queryStringBuffer = new StringBuffer();
+		StringBuilder queryStringBuffer = new StringBuilder();
 		for (Map.Entry<String, String> entry : flatParams.entrySet()) {
 			queryStringBuffer.append("&");
 			queryStringBuffer.append(urlEncodePair(entry.getKey(), entry.getValue()));
@@ -279,6 +282,11 @@ public abstract class EasyPostResource {
 			queryStringBuffer.deleteCharAt(0);
 		}
 		return queryStringBuffer.toString();
+	}
+
+	private static JsonObject createJsonObjectFromMap(Map<String, Object> map) {
+		Gson gson = new Gson();
+		return gson.toJsonTree(map).getAsJsonObject();
 	}
 
 	private static Map<String, String> flattenParams(Map<String, Object> params) {
@@ -317,8 +325,6 @@ public abstract class EasyPostResource {
 			}
 		}
 
-        // System.out.println(flatParams);
-
 		return flatParams;
 	}
 
@@ -342,7 +348,7 @@ public abstract class EasyPostResource {
 		return rBody;
 	}
 
-	private static EasyPostResponse makeURLConnectionRequest(EasyPostResource.RequestMethod method, String url, String query, String apiKey) throws EasyPostException {
+	private static EasyPostResponse makeURLConnectionRequest(EasyPostResource.RequestMethod method, String url, String query, JsonObject body, String apiKey) throws EasyPostException {
 		javax.net.ssl.HttpsURLConnection conn = null;
 		try {
 			switch (method) {
@@ -350,13 +356,13 @@ public abstract class EasyPostResource {
 				conn = createGetConnection(url, query, apiKey);
 				break;
 			case POST:
-				conn = createPostConnection(url, query, apiKey);
+				conn = createPostConnection(url, body, apiKey);
 				break;
+            case PUT:
+                conn = createPutConnection(url, body, apiKey);
+                break;
 			case DELETE:
 				conn = createDeleteConnection(url, query, apiKey);
-				break;
-			case PUT:
-				conn = createPutConnection(url, query, apiKey);
 				break;
 			default:
 				throw new EasyPostException(
@@ -391,7 +397,7 @@ public abstract class EasyPostResource {
 
 	protected static <T> T request(EasyPostResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey, boolean apiKeyRequired) throws EasyPostException {
 		String originalDNSCacheTTL = null;
-		Boolean allowedToSetTTL = true;
+		boolean allowedToSetTTL = true;
 		try {
 			originalDNSCacheTTL = java.security.Security.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
 			// disable DNS cache
@@ -429,25 +435,38 @@ public abstract class EasyPostResource {
 			apiKey = EasyPost.apiKey;
 		}
 
-		String query;
-		try {
-			query = createQuery(params);
-		} catch (UnsupportedEncodingException e) {
-			throw new EasyPostException(
-                String.format("Unable to encode parameters to %s. Please email %s for assistance.", CHARSET, EasyPostResource.EASYPOST_SUPPORT_EMAIL), e);
+		String query = null;
+        JsonObject body = null;
+		if (params != null) {
+			switch (method) {
+				case GET:
+				case DELETE:
+					try {
+						query = createQuery(params);
+					} catch (UnsupportedEncodingException e) {
+						throw new EasyPostException(
+								String.format("Unable to encode parameters to %s. Please email %s for assistance.", CHARSET, EasyPostResource.EASYPOST_SUPPORT_EMAIL), e);
+					}
+					break;
+				case POST:
+				case PUT:
+					body = createBody(params);
+					break;
+				default:
+					break;
+			}
 		}
 
-        // System.out.println(url);
 
 		EasyPostResponse response;
 		try {
 			// HTTPSURLConnection verifies SSL cert by default
-			response = makeURLConnectionRequest(method, url, query, apiKey);
+			response = makeURLConnectionRequest(method, url, query, body, apiKey);
 		} catch (ClassCastException ce) {
 			// appengine
 			String appEngineEnv = System.getProperty("com.google.appengine.runtime.environment", null);
 			if (appEngineEnv != null) {
-				response = makeAppEngineRequest(method, url, query, apiKey);
+				response = makeAppEngineRequest(method, url, query, body, apiKey);
 			} else {
 				throw ce;
 			}
@@ -471,15 +490,15 @@ public abstract class EasyPostResource {
 
 			throw new EasyPostException(error.message, error.param, null);
 		} catch (Exception e) {
-            throw new EasyPostException(String.format("An error occured. Response code: %s Response body: %s", rCode, rBody));
+            throw new EasyPostException(String.format("An error occurred. Response code: %s Response body: %s", rCode, rBody));
         }
 	}
 
-	private static EasyPostResponse makeAppEngineRequest(RequestMethod method, String url, String query, String apiKey) throws EasyPostException {
+	private static EasyPostResponse makeAppEngineRequest(RequestMethod method, String url, String query, JsonObject body, String apiKey) throws EasyPostException {
 		String unknownErrorMessage = String.format("Sorry, an unknown error occurred while trying to use the Google App Engine runtime."
-            + "Please email %s for assistance.", EasyPostResource.EASYPOST_SUPPORT_EMAIL);
+				+ "Please email %s for assistance.", EasyPostResource.EASYPOST_SUPPORT_EMAIL);
 		try {
-			if (method == RequestMethod.GET || method == RequestMethod.DELETE) {
+			if ((method == RequestMethod.GET || method == RequestMethod.DELETE) && query != null) {
 				url = String.format("%s?%s", url, query);
 			}
 			URL fetchURL = new URL(url);
@@ -507,8 +526,9 @@ public abstract class EasyPostResource {
 
 			Object request = requestClass.getDeclaredConstructor(URL.class, requestMethodClass, fetchOptionsClass).newInstance(fetchURL, httpMethod, fetchOptions);
 
-			if (method == RequestMethod.POST) {
-				requestClass.getDeclaredMethod("setPayload", byte[].class).invoke(request, query.getBytes());
+			if ((method == RequestMethod.POST || method == RequestMethod.PUT) && body != null) {
+				String bodyString = body.toString();
+				requestClass.getDeclaredMethod("setPayload", byte[].class).invoke(request, bodyString.getBytes());
 			}
 
 			for (Map.Entry<String, String> header : getHeaders(apiKey).entrySet()) {
@@ -525,9 +545,9 @@ public abstract class EasyPostResource {
 			Object response = fetchMethod.invoke(urlFetchService, request);
 
 			int responseCode = (Integer) response.getClass().getDeclaredMethod("getResponseCode").invoke(response);
-			String body = new String((byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response), CHARSET);
+			String responseBody = new String((byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response), CHARSET);
 
-			return new EasyPostResponse(responseCode, body);
+			return new EasyPostResponse(responseCode, responseBody);
 
 		} catch (InvocationTargetException e) {
 			throw new EasyPostException(unknownErrorMessage, e);
