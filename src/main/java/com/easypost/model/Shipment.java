@@ -35,7 +35,7 @@ public class Shipment extends EasyPostResource {
 	String uspsZone;
 	Map<String, Object> options;
 	List<ShipmentMessage> messages;
-        List<TaxIdentifier> taxIdentifier;
+    List<TaxIdentifier> taxIdentifier;
 
 	public String getId() {
 		return id;
@@ -227,10 +227,10 @@ public class Shipment extends EasyPostResource {
 	}
 
 	public List<TaxIdentifier> getTaxIdentifiers(){
-		return taxIdentifiers;
+		return taxIdentifier;
 	}
 	public void setTaxIdentifiers(List<TaxIdentifier> taxIdentifiers){
-		this.taxIdentifiers = taxIdentifiers;
+		this.taxIdentifier = taxIdentifiers;
 	}
 
 
