@@ -6,8 +6,8 @@ import com.easypost.net.EasyPostResource;
 public class TaxIdentifier extends EasyPostResource {
 
     String entity;
-    String taxID;
-    String taxIDType;
+    String taxId;
+    String taxIdType;
     String issuingCountry;
 
     public void setEntity(String entity) {
@@ -18,20 +18,20 @@ public class TaxIdentifier extends EasyPostResource {
         return entity;
     }
 
-    public void setTaxID(String taxID) {
-        this.taxID = taxID;
+    public void setTaxId(String taxId) {
+        this.taxId = taxId;
     }
 
-    public String getTaxID() {
-        return taxID;
+    public String getTaxId() {
+        return taxId;
     }
 
-    public void setTaxIDType(String taxIDType) {
-        this.taxIDType = taxIDType;
+    public void setTaxIdType(String taxIdType) {
+        this.taxIdType = taxIdType;
     }
 
-    public String getTaxIDType() {
-        return taxIDType;
+    public String getTaxIdType() {
+        return taxIdType;
     }
 
     public void setIssuingCountry(String issuingCountry) {
