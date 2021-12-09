@@ -1,39 +1,45 @@
 package com.easypost.model;
 
 
-public class TaxIdentifier{
-    
-    public String entity;
-    public String taxID;
-    public String taxIDType;
-    public String issuingCountry;
+import com.easypost.net.EasyPostResource;
 
-    public void setEntiy(String entity){
+public class TaxIdentifier extends EasyPostResource {
+
+    String entity;
+    String taxID;
+    String taxIDType;
+    String issuingCountry;
+
+    public void setEntity(String entity) {
         this.entity = entity;
     }
-    public String getEntity(){
+
+    public String getEntity() {
         return entity;
     }
 
-    public void setTaxID(String taxID){
+    public void setTaxID(String taxID) {
         this.taxID = taxID;
     }
-    public String getTaxID(){
+
+    public String getTaxID() {
         return taxID;
     }
 
-    public void setTaxIDType(String taxIDType){
+    public void setTaxIDType(String taxIDType) {
         this.taxIDType = taxIDType;
     }
-    public String getTaxIDType(){
+
+    public String getTaxIDType() {
         return taxIDType;
     }
 
-    public void setIssuingCountry(String issuingCountry){
+    public void setIssuingCountry(String issuingCountry) {
         this.issuingCountry = issuingCountry;
     }
-    public String getIssuingCountry(){
+
+    public String getIssuingCountry() {
         return issuingCountry;
     }
-    
+
 }
