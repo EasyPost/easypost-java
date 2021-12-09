@@ -17,6 +17,7 @@ import com.easypost.model.ReportCollection;
 import com.easypost.model.ScanForm;
 import com.easypost.model.ScanFormCollection;
 import com.easypost.model.Shipment;
+import com.easypost.model.TaxIdentifier;
 import com.easypost.model.TimeInTransit;
 import com.easypost.model.Tracker;
 import com.easypost.model.TrackerCollection;
@@ -667,6 +668,34 @@ public class EasyPostTest {
     }
 
     assertEquals("Batch state is not purchased.", "purchased", batch.getState());
+  }
+
+  @Test
+  public void testTaxIdentifier() throws EasyPostException, ParseException{
+    HashMap<String, Object> shipmentMap = new HashMap<>();
+    TaxIdentifier taxIdentifier = new TaxIdentifier();
+    taxIdentifier.setEntiy("SENDER");
+    taxIdentifier.setIssuingCountry("US");
+    taxIdentifier.setTaxID("12345");
+    taxIdentifier.setTaxIDType("EORI");
+    shipmentMap.put("parcel", defaultParcel);
+    shipmentMap.put("to_address", defaultToAddress);
+    shipmentMap.put("from_address", defaultFromAddress);
+    ArrayList<TaxIdentifier> taxIdentifiers = new ArrayList<>();
+    taxIdentifiers.add(taxIdentifier);
+    shipmentMap.put("tax_identifier", taxIdentifiers);
+    Shipment shipment = Shipment.create(shipmentMap);
+    TaxIdentifier taxIdentifierReceived = shipment.getTaxIdentifiers().get(0);
+    assertEquals("SENDER", taxIdentifierReceived.entity);
+    assertEquals("HIDDEN", taxIdentifierReceived.taxID);
+    assertEquals("EORI", taxIdentifierReceived.taxIDType);
+    assertEquals("US", taxIdentifierReceived.issuingCountry);
+    Shipment retrievedShipment = Shipment.retrieve(shipment.id);
+    TaxIdentifier taxIdentifierRetrieved = retrievedShipment.getTaxIdentifiers().get(0);
+    assertEquals("SENDER", taxIdentifierRetrieved.entity);
+    assertEquals("HIDDEN", taxIdentifierRetrieved.taxID);
+    assertEquals("EORI", taxIdentifierRetrieved.taxIDType);
+    assertEquals("US", taxIdentifierRetrieved.issuingCountry);
   }
 
   @Test
