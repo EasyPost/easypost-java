@@ -673,29 +673,32 @@ public class EasyPostTest {
   @Test
   public void testTaxIdentifier() throws EasyPostException, ParseException{
     HashMap<String, Object> shipmentMap = new HashMap<>();
-    TaxIdentifier taxIdentifier = new TaxIdentifier();
-    taxIdentifier.setEntiy("SENDER");
-    taxIdentifier.setIssuingCountry("US");
-    taxIdentifier.setTaxID("12345");
-    taxIdentifier.setTaxIDType("EORI");
+  
+    List<Map<String, Object>> taxIdentifiers = new ArrayList<>();
+    Map<String, Object> taxIdentifierMap = new HashMap<>();
+    taxIdentifierMap.put("entity", "SENDER");
+    taxIdentifierMap.put("issuing_country", "US");
+    taxIdentifierMap.put("tax_id", "123456789");
+    taxIdentifierMap.put("tax_id_type", "EORI");
+    taxIdentifiers.add(taxIdentifierMap);
+
     shipmentMap.put("parcel", defaultParcel);
     shipmentMap.put("to_address", defaultToAddress);
     shipmentMap.put("from_address", defaultFromAddress);
-    ArrayList<TaxIdentifier> taxIdentifiers = new ArrayList<>();
-    taxIdentifiers.add(taxIdentifier);
-    shipmentMap.put("tax_identifier", taxIdentifiers);
+    shipmentMap.put("tax_identifiers", taxIdentifiers);
+
     Shipment shipment = Shipment.create(shipmentMap);
     TaxIdentifier taxIdentifierReceived = shipment.getTaxIdentifiers().get(0);
-    assertEquals("SENDER", taxIdentifierReceived.entity);
-    assertEquals("HIDDEN", taxIdentifierReceived.taxID);
-    assertEquals("EORI", taxIdentifierReceived.taxIDType);
-    assertEquals("US", taxIdentifierReceived.issuingCountry);
+    assertEquals("SENDER", taxIdentifierReceived.getEntity());
+    assertEquals("HIDDEN", taxIdentifierReceived.getTaxId());
+    assertEquals("EORI", taxIdentifierReceived.getTaxIdType());
+    assertEquals("US", taxIdentifierReceived.getIssuingCountry());
     Shipment retrievedShipment = Shipment.retrieve(shipment.id);
     TaxIdentifier taxIdentifierRetrieved = retrievedShipment.getTaxIdentifiers().get(0);
-    assertEquals("SENDER", taxIdentifierRetrieved.entity);
-    assertEquals("HIDDEN", taxIdentifierRetrieved.taxID);
-    assertEquals("EORI", taxIdentifierRetrieved.taxIDType);
-    assertEquals("US", taxIdentifierRetrieved.issuingCountry);
+    assertEquals("SENDER", taxIdentifierRetrieved.getEntity());
+    assertEquals("HIDDEN", taxIdentifierRetrieved.getTaxId());
+    assertEquals("EORI", taxIdentifierRetrieved.getTaxIdType());
+    assertEquals("US", taxIdentifierRetrieved.getIssuingCountry());
   }
 
   @Test
