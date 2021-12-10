@@ -397,7 +397,7 @@ public abstract class EasyPostResource {
 
 	protected static <T> T request(EasyPostResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey, boolean apiKeyRequired) throws EasyPostException {
 		String originalDNSCacheTTL = null;
-		boolean allowedToSetTTL = true;
+		Boolean allowedToSetTTL = true;
 		try {
 			originalDNSCacheTTL = java.security.Security.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
 			// disable DNS cache
