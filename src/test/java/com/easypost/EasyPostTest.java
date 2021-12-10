@@ -851,15 +851,6 @@ public class EasyPostTest {
     List<String> buyCarriers = new ArrayList<String>();
     buyCarriers.add("USPS");
     shipment = shipment.buy(shipment.lowestRate(buyCarriers));
-
-    ///System.out.println("Shipment.getForms(): >>"+shipment.getForms()+"<<");
-    /// java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-    /// Form does not exists. Invalid test
-    /*
-    assertTrue(
-        "Customs Form was not submitted electronically",
-        shipment.getForms().get(0).getSubmittedElectronically());
-        */
   }
 
   @Test
