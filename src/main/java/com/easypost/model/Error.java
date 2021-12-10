@@ -1,40 +1,40 @@
 package com.easypost.model;
 
 public class Error {
-  String field;
-  String message;
-  String suggestion;
-  String code;
+    String field;
+    String message;
+    String suggestion;
+    String code;
 
-  public String getField() {
-    return field;
-  }
+    public String getField() {
+        return field;
+    }
 
-  public void setField(String field) {
-    this.field = field;
-  }
+    public void setField(String field) {
+        this.field = field;
+    }
 
-  public String getMessage() {
-    return message;
-  }
+    public String getMessage() {
+        return message;
+    }
 
-  public void setMessage(String message) {
-    this.message = message;
-  }
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-  public String getSuggestion() {
-    return suggestion;
-  }
+    public String getSuggestion() {
+        return suggestion;
+    }
 
-  public void setSuggestion(String suggestion) {
-    this.suggestion = suggestion;
-  }
+    public void setSuggestion(String suggestion) {
+        this.suggestion = suggestion;
+    }
 
-  public String getCode() {
-    return code;
-  }
+    public String getCode() {
+        return code;
+    }
 
-  public void setCode(String code) {
-    this.code = code;
-  }
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

@@ -6,7 +6,8 @@ import java.util.List;
 public class SmartrateCollection {
     private List<Rate> rates = new ArrayList<>();
 
-    public SmartrateCollection() { }
+    public SmartrateCollection() {
+    }
 
     public SmartrateCollection(List<Rate> rates) {
         this.rates = rates;

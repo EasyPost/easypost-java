@@ -88,7 +88,7 @@ public class BatchExample {
             List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
             Map<String, Object> shipment = new HashMap<String, Object>();
             Map<String, Object> toAddressMap = new HashMap<String, Object>();
-            for(Map<String, Object> order : orders) {
+            for (Map<String, Object> order : orders) {
                 toAddressMap.put("name", order.get("name"));
                 toAddressMap.put("street1", order.get("street1"));
                 toAddressMap.put("street2", order.get("street2"));
@@ -141,7 +141,7 @@ public class BatchExample {
             }
 
             // batch label creation is asyncronous; wait for it to be done before continuing
-            while(true) {
+            while (true) {
                 batch = batch.refresh();
 
                 if (batch.getLabelUrl() != null) {

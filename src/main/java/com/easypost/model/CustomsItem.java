@@ -7,97 +7,108 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CustomsItem extends EasyPostResource {
-	public String id;
-	String description;
-	String hsTariffNumber;
-	String originCountry;
-	int quantity;
-	Float value;
-	Float weight;
-	String code;
-	String currency;
+    public String id;
+    String description;
+    String hsTariffNumber;
+    String originCountry;
+    int quantity;
+    Float value;
+    Float weight;
+    String code;
+    String currency;
 
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getHsTariffNumber() {
-		return hsTariffNumber;
-	}
-	public void setHsTariffNumber(String hsTariffNumber) {
-		this.hsTariffNumber = hsTariffNumber;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public String getOriginCountry() {
-		return originCountry;
-	}
-	public void setOriginCountry(String originCountry) {
-		this.originCountry = originCountry;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    public String getHsTariffNumber() {
+        return hsTariffNumber;
+    }
 
-	public Float getValue() {
-		return value;
-	}
-	public void setValue(Float value) {
-		this.value = value;
-	}
+    public void setHsTariffNumber(String hsTariffNumber) {
+        this.hsTariffNumber = hsTariffNumber;
+    }
 
-	public Float getWeight() {
-		return weight;
-	}
-	public void setWeight(Float weight) {
-		this.weight = weight;
-	}
+    public String getOriginCountry() {
+        return originCountry;
+    }
 
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setOriginCountry(String originCountry) {
+        this.originCountry = originCountry;
+    }
 
-	public String getCurrency() {
-		return currency;
-	}
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Float getValue() {
+        return value;
+    }
+
+    public void setValue(Float value) {
+        this.value = value;
+    }
+
+    public Float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Float weight) {
+        this.weight = weight;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
 
-	// create
-	public static CustomsItem create(Map<String, Object> params) throws EasyPostException {
-		return create(params, null);
-	}
-	public static CustomsItem create(Map<String, Object> params, String apiKey) throws EasyPostException {
-		Map<String, Object> wrappedParams = new HashMap<String, Object>();
-		wrappedParams.put("customs_item", params);
+    // create
+    public static CustomsItem create(Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
 
-		return request(RequestMethod.POST, classURL(CustomsItem.class), wrappedParams, CustomsItem.class, apiKey);
-	}
+    public static CustomsItem create(Map<String, Object> params, String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("customs_item", params);
 
-	// retrieve
-	public static CustomsItem retrieve(String id) throws EasyPostException {
-		return retrieve(id, null);
-	}
-	public static CustomsItem retrieve(String id, String apiKey) throws EasyPostException {
-		return request(RequestMethod.GET, instanceURL(CustomsItem.class, id), null, CustomsItem.class, apiKey);
-	}
+        return request(RequestMethod.POST, classURL(CustomsItem.class), wrappedParams, CustomsItem.class, apiKey);
+    }
+
+    // retrieve
+    public static CustomsItem retrieve(String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    public static CustomsItem retrieve(String id, String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(CustomsItem.class, id), null, CustomsItem.class, apiKey);
+    }
 
 }

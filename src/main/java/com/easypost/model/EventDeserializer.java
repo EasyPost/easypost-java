@@ -16,8 +16,9 @@ import java.util.Map;
 
 public class EventDeserializer implements JsonDeserializer<Event> {
 
-	@SuppressWarnings("rawtypes")
-	static Map<String, Class> objectMap = new HashMap<String, Class>();
+    @SuppressWarnings("rawtypes")
+    static Map<String, Class> objectMap = new HashMap<String, Class>();
+
     static {
         objectMap.put("Address", Address.class);
         objectMap.put("Batch", Batch.class);
@@ -34,28 +35,28 @@ public class EventDeserializer implements JsonDeserializer<Event> {
         objectMap.put("TimeInTransit", TimeInTransit.class);
         objectMap.put("Tracker", Tracker.class);
         objectMap.put("TrackingDetail", TrackingDetail.class);
-		objectMap.put("Webhook", Webhook.class);
+        objectMap.put("Webhook", Webhook.class);
     }
 
     private Object deserializeJsonPrimitive(JsonPrimitive element) {
-    	if (element.isBoolean()) {
-    		return element.getAsBoolean();
-    	} else if (element.isNumber()) {
-    		return element.getAsNumber();
-    	} else {
-    		return element.getAsString();
-    	}
+        if (element.isBoolean()) {
+            return element.getAsBoolean();
+        } else if (element.isNumber()) {
+            return element.getAsNumber();
+        } else {
+            return element.getAsString();
+        }
     }
 
     private Object[] deserializeJsonArray(JsonArray arr) {
-    	Object[] elems = new Object[arr.size()];
-    	Iterator<JsonElement> elemIter = arr.iterator();
-    	int i = 0;
-    	while (elemIter.hasNext()) {
-    		JsonElement elem = elemIter.next();
-    		elems[i++] = deserializeJsonElement(elem);
-    	}
-    	return elems;
+        Object[] elems = new Object[arr.size()];
+        Iterator<JsonElement> elemIter = arr.iterator();
+        int i = 0;
+        while (elemIter.hasNext()) {
+            JsonElement elem = elemIter.next();
+            elems[i++] = deserializeJsonElement(elem);
+        }
+        return elems;
     }
 
     private Object deserializeJsonElement(JsonElement element) {
@@ -76,36 +77,36 @@ public class EventDeserializer implements JsonDeserializer<Event> {
 	}
 
     private void populateMapFromJSONObject(Map<String, Object> objMap, JsonObject jsonObject) {
-		for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-			String key = entry.getKey();
-			JsonElement element = entry.getValue();
-			objMap.put(key, deserializeJsonElement(element));
-		}
+        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+            String key = entry.getKey();
+            JsonElement element = entry.getValue();
+            objMap.put(key, deserializeJsonElement(element));
+        }
     }
 
     @SuppressWarnings("unchecked")
-	public Event deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		Event event = new Event();
+    public Event deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        Event event = new Event();
 
-		JsonObject jsonObject = json.getAsJsonObject();
-		for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-			String key = entry.getKey();
-			JsonElement element = entry.getValue();
-			if("previous_attributes".equals(key) && !element.isJsonNull()) {
-				Map<String, Object> previousAttributes = new HashMap<String, Object>();
-				populateMapFromJSONObject(previousAttributes, element.getAsJsonObject());
-				event.setPreviousAttributes(previousAttributes);
-        	} else if ("result".equals(key)) {
-				String type = element.getAsJsonObject().get("object").getAsString();
-				Class<EasyPostResource> cl = objectMap.get(type);
-				EasyPostResource result = EasyPostResource.gson.fromJson(entry.getValue(), cl);
-				event.setResult(result);
-			}
-		}
+        JsonObject jsonObject = json.getAsJsonObject();
+        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+            String key = entry.getKey();
+            JsonElement element = entry.getValue();
+            if ("previous_attributes".equals(key) && !element.isJsonNull()) {
+                Map<String, Object> previousAttributes = new HashMap<String, Object>();
+                populateMapFromJSONObject(previousAttributes, element.getAsJsonObject());
+                event.setPreviousAttributes(previousAttributes);
+            } else if ("result".equals(key)) {
+                String type = element.getAsJsonObject().get("object").getAsString();
+                Class<EasyPostResource> cl = objectMap.get(type);
+                EasyPostResource result = EasyPostResource.gson.fromJson(entry.getValue(), cl);
+                event.setResult(result);
+            }
+        }
         event.setId(jsonObject.get("id").getAsString());
         event.setDescription(jsonObject.get("description").getAsString());
         event.setMode(jsonObject.get("mode").getAsString());
 
-		return event;
-	}
+        return event;
+    }
 }

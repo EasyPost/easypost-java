@@ -13,22 +13,48 @@ public class PickupRate extends EasyPostResource {
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
 
-    public String getMode() { return mode; }
-    public void setMode(String mode) { this.mode = mode; }
+    public String getMode() {
+        return mode;
+    }
 
-    public String getCarrier() { return carrier; }
-    public void setCarrier(String carrier) { this.carrier = carrier; }
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
 
-    public String getService() { return service; }
-    public void setService(String service) { this.service = service; }
+    public String getCarrier() {
+        return carrier;
+    }
 
-    public Float getRate() { return rate; }
-    public void setRate(Float rate) { this.rate = rate; }
+    public void setCarrier(String carrier) {
+        this.carrier = carrier;
+    }
 
-    public String getCurrency() { return currency; }
-    public void setCurrency(String currency) { this.currency = currency; }
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
+    public Float getRate() {
+        return rate;
+    }
+
+    public void setRate(Float rate) {
+        this.rate = rate;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 }

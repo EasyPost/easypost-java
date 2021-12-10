@@ -43,7 +43,7 @@ public class BatchManifestExample {
             Batch batch = Batch.create();
 
             // wait until batch is created asynchronously
-            while(true) {
+            while (true) {
                 batch = batch.refresh();
 
                 if (batch.getState() == "created") {
@@ -63,7 +63,7 @@ public class BatchManifestExample {
             batch.createScanForm();
 
             // batch label creation is asyncronou
-            while(true) {
+            while (true) {
                 batch = batch.refresh();
 
                 if (batch.getScanForm() != null) {

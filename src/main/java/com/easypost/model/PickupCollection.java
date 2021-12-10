@@ -11,12 +11,15 @@ public class PickupCollection extends EasyPostResource {
     public List<Pickup> getPickups() {
         return pickups;
     }
+
     public void setPickups(List<Pickup> pickups) {
         this.pickups = pickups;
     }
+
     public Boolean getHasMore() {
         return hasMore;
     }
+
     public void setHasMore(Boolean hasMore) {
         this.hasMore = hasMore;
     }

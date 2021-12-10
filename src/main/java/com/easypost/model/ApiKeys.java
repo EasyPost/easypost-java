@@ -10,21 +10,37 @@ public class ApiKeys extends EasyPostResource {
     List<ApiKey> keys;
     List<ApiKeys> children;
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getId() {
+        return id;
+    }
 
-    public List<ApiKey> getKeys() { return keys; }
-    public void setKeys(List<ApiKey> keys) { this.keys = keys; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public List<ApiKeys> getChildren() { return children; }
-    public void setChildren(List<ApiKeys> children) { this.children = children; }
+    public List<ApiKey> getKeys() {
+        return keys;
+    }
+
+    public void setKeys(List<ApiKey> keys) {
+        this.keys = keys;
+    }
+
+    public List<ApiKeys> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<ApiKeys> children) {
+        this.children = children;
+    }
 
     // all
     public static ApiKeys all() throws EasyPostException {
-      return all(null);
+        return all(null);
     }
+
     public static ApiKeys all(String apiKey) throws EasyPostException {
-      return request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
+        return request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
     }
 
 }

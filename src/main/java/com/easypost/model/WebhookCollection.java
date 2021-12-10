@@ -10,6 +10,7 @@ public class WebhookCollection extends EasyPostResource {
     public List<Webhook> getWebhooks() {
         return webhooks;
     }
+
     public void setWebhooks(List<Webhook> webhooks) {
         this.webhooks = webhooks;
     }

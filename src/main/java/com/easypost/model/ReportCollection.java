@@ -11,6 +11,7 @@ public class ReportCollection extends EasyPostResource {
     public List<Report> getReports() {
         return reports;
     }
+
     public void setReports(List<Report> reports) {
         this.reports = reports;
     }
@@ -18,6 +19,7 @@ public class ReportCollection extends EasyPostResource {
     public Boolean getHasMore() {
         return hasMore;
     }
+
     public void setHasMore(Boolean hasMore) {
         this.hasMore = hasMore;
     }

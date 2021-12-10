@@ -1,6 +1,6 @@
 package com.easypost.model;
 
-public class Fee{
+public class Fee {
     String type;
     float amount;
     Boolean charged;
@@ -9,6 +9,7 @@ public class Fee{
     public String getType() {
         return type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -16,6 +17,7 @@ public class Fee{
     public float getAmount() {
         return amount;
     }
+
     public void setAmount(float amount) {
         this.amount = amount;
     }
@@ -23,6 +25,7 @@ public class Fee{
     public Boolean getCharged() {
         return charged;
     }
+
     public void setCharged(Boolean charged) {
         this.charged = charged;
     }
@@ -30,6 +33,7 @@ public class Fee{
     public Boolean getRefunded() {
         return refunded;
     }
+
     public void setRefunded(Boolean refunded) {
         this.refunded = refunded;
     }
