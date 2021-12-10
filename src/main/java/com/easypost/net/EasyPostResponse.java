@@ -8,6 +8,8 @@ public class EasyPostResponse {
 	public EasyPostResponse(int responseCode, String responseBody) {
 		this.responseCode = responseCode;
 		this.responseBody = responseBody;
+
+    // System.out.println(this.responseBody);
 	}
 
 	public int getResponseCode() {

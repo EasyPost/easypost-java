@@ -317,6 +317,7 @@ public abstract class EasyPostResource {
 			}
 		}
 
+        // System.out.println(flatParams);
 
 		return flatParams;
 	}
@@ -359,8 +360,8 @@ public abstract class EasyPostResource {
 				break;
 			default:
 				throw new EasyPostException(
-					String.format("Unrecognized HTTP method %s. Please contact EasyPost at "
-                        + EasyPostResource.EASYPOST_SUPPORT_EMAIL + ".", method));
+					String.format("Unrecognized HTTP method %s. Please contact EasyPost at " + 
+                        EasyPostResource.EASYPOST_SUPPORT_EMAIL + ".", method));
 			}
 			int rCode = conn.getResponseCode(); // sends the request
 			String rBody = null;
@@ -419,8 +420,8 @@ public abstract class EasyPostResource {
 			if (apiKeyRequired) {
 				throw new EasyPostException(
 						"No API key provided. (set your API key using 'EasyPost.apiKey = {KEY}'. "
-							+ "Your API key can be found in your EasyPost dashboard, or you can email us at " 
-                            + EasyPostResource.EASYPOST_SUPPORT_EMAIL + " for assistance.");
+								+ "Your API key can be found in your EasyPost dashboard, or you can email us at " 
+                                + EasyPostResource.EASYPOST_SUPPORT_EMAIL + " for assistance.");
 
 			}
 		}
@@ -434,9 +435,11 @@ public abstract class EasyPostResource {
 			query = createQuery(params);
 		} catch (UnsupportedEncodingException e) {
 			throw new EasyPostException("Unable to encode parameters to "
-			    + CHARSET + ". Please email " + EasyPostResource.EASYPOST_SUPPORT_EMAIL + " for assistance.", e);
+				+ CHARSET
+				+ ". Please email " + EasyPostResource.EASYPOST_SUPPORT_EMAIL + " for assistance.", e);
 		}
 
+        // System.out.println(url);
 
 		EasyPostResponse response;
 		try {
@@ -584,12 +587,17 @@ public abstract class EasyPostResource {
 	public String getMode() {
 		return "";
 	}
+	// Batch
 	public List<Shipment> getShipments() {
 		return new ArrayList<Shipment>();
 	}
+	// public BatchStatus getStatus() {
+	// 	return new BatchStatus();
+	// }
 	public String getLabelUrl() {
 		return "";
 	}
+	// Tracker
 	public String getShipmentId() {
 		return "";
 	}
