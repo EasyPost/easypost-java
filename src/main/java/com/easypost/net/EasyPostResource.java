@@ -37,6 +37,8 @@ import java.util.Scanner;
 
 public abstract class EasyPostResource {
 
+    public static final String EASYPOST_SUPPORT_EMAIL = "support@easypost.com";
+
 	public static final Gson gson = new GsonBuilder()
 		.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 		.registerTypeAdapter(Event.class, new EventDeserializer())
@@ -358,7 +360,8 @@ public abstract class EasyPostResource {
 				break;
 			default:
 				throw new EasyPostException(
-					String.format("Unrecognized HTTP method %s. Please contact EasyPost at support@easypost.com.", method));
+					String.format("Unrecognized HTTP method %s. Please contact EasyPost at " + 
+                        EasyPostResource.EASYPOST_SUPPORT_EMAIL + ".", method));
 			}
 			int rCode = conn.getResponseCode(); // sends the request
 			String rBody = null;
@@ -375,7 +378,7 @@ public abstract class EasyPostResource {
 				String.format(
 					"Could not connect to EasyPost (%s). "
 						+ "Please check your internet connection and try again. If this problem persists,"
-						+ "please contact us at support@easypost.com.", EasyPost.API_BASE), e);
+						+ "please contact us at " + EasyPostResource.EASYPOST_SUPPORT_EMAIL + ".", EasyPost.API_BASE), e);
 		} finally {
 			if (conn != null) {
 				conn.disconnect();
@@ -417,7 +420,8 @@ public abstract class EasyPostResource {
 			if (apiKeyRequired) {
 				throw new EasyPostException(
 						"No API key provided. (set your API key using 'EasyPost.apiKey = {KEY}'. "
-								+ "Your API key can be found in your EasyPost dashboard, or you can email us at support@easypost.com for assistance.");
+								+ "Your API key can be found in your EasyPost dashboard, or you can email us at " 
+                                + EasyPostResource.EASYPOST_SUPPORT_EMAIL + " for assistance.");
 
 			}
 		}
@@ -432,7 +436,7 @@ public abstract class EasyPostResource {
 		} catch (UnsupportedEncodingException e) {
 			throw new EasyPostException("Unable to encode parameters to "
 				+ CHARSET
-				+ ". Please email support@easypost.com for assistance.", e);
+				+ ". Please email " + EasyPostResource.EASYPOST_SUPPORT_EMAIL + " for assistance.", e);
 		}
 
         // System.out.println(url);
@@ -475,7 +479,7 @@ public abstract class EasyPostResource {
 
 	private static EasyPostResponse makeAppEngineRequest(RequestMethod method, String url, String query, String apiKey) throws EasyPostException {
 		String unknownErrorMessage = "Sorry, an unknown error occurred while trying to use the "
-			+ "Google App Engine runtime. Please email support@easypost.com for assistance.";
+			+ "Google App Engine runtime. Please email " + EasyPostResource.EASYPOST_SUPPORT_EMAIL + " for assistance.";
 		try {
 			if (method == RequestMethod.GET || method == RequestMethod.DELETE) {
 				url = String.format("%s?%s", url, query);
@@ -493,7 +497,7 @@ public abstract class EasyPostResource {
 				System.err
 					.println("Warning: this App Engine SDK version does not allow verification of SSL certificates;"
 						+ "this exposes you to a MITM attack. Please upgrade your App Engine SDK to >=1.5.0. "
-						+ "If you have questions, email support@easypost.com.");
+						+ "If you have questions, email " + EasyPostResource.EASYPOST_SUPPORT_EMAIL + ".");
 				fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("withDefaults").invoke(null);
 			}
 
