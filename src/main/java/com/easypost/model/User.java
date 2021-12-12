@@ -123,7 +123,7 @@ public class User extends EasyPostResource {
         }
       }
 
-      throw new EasyPostException("Unable to find api key. Please contact " + EasyPostResource.EASYPOST_SUPPORT_EMAIL + ".");
+      throw new EasyPostException(String.format("Unable to find api key. Please contact %s.", EasyPostResource.EASYPOST_SUPPORT_EMAIL));
     }
 }
 
