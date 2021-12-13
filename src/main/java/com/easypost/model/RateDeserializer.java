@@ -1,3 +1,10 @@
+/**
+ * RateDeserializer.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.net.EasyPostResource;
@@ -9,9 +16,10 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-public class RateDeserializer implements JsonDeserializer<Rate> {
+public final class RateDeserializer implements JsonDeserializer<Rate> {
     @Override
-    public Rate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+    public Rate deserialize(final JsonElement json, final Type typeOfT,
+                            final JsonDeserializationContext context)
             throws JsonParseException {
         JsonObject jo = (JsonObject) json;
 
@@ -33,7 +41,8 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
 
         String listCurrency;
         JsonElement listCurrencyJsonElement = jo.get("list_currency");
-        if (listCurrencyJsonElement == null || listCurrencyJsonElement.isJsonNull()) {
+        if (listCurrencyJsonElement == null ||
+                listCurrencyJsonElement.isJsonNull()) {
             listCurrency = null;
         } else {
             listCurrency = jo.get("list_currency").getAsString();
@@ -41,7 +50,8 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
 
         Float retailRate;
         JsonElement retailRateJsonElement = jo.get("retail_rate");
-        if (retailRateJsonElement == null || retailRateJsonElement.isJsonNull()) {
+        if (retailRateJsonElement == null ||
+                retailRateJsonElement.isJsonNull()) {
             retailRate = null;
         } else {
             retailRate = jo.get("retail_rate").getAsFloat();
@@ -49,7 +59,8 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
 
         String retailCurrency;
         JsonElement retailCurrencyJsonElement = jo.get("retail_currency");
-        if (retailCurrencyJsonElement == null || retailCurrencyJsonElement.isJsonNull()) {
+        if (retailCurrencyJsonElement == null ||
+                retailCurrencyJsonElement.isJsonNull()) {
             retailCurrency = null;
         } else {
             retailCurrency = jo.get("retail_currency").getAsString();
@@ -57,7 +68,8 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
 
         Number deliveryDays;
         JsonElement deliveryDaysJsonElement = jo.get("delivery_days");
-        if (deliveryDaysJsonElement == null || deliveryDaysJsonElement.isJsonNull()) {
+        if (deliveryDaysJsonElement == null ||
+                deliveryDaysJsonElement.isJsonNull()) {
             deliveryDays = null;
         } else {
             deliveryDays = jo.get("delivery_days").getAsNumber();
@@ -65,23 +77,28 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
 
         String deliveryDate;
         JsonElement deliveryDateJsonElement = jo.get("delivery_date");
-        if (deliveryDateJsonElement == null || deliveryDateJsonElement.isJsonNull()) {
+        if (deliveryDateJsonElement == null ||
+                deliveryDateJsonElement.isJsonNull()) {
             deliveryDate = null;
         } else {
             deliveryDate = jo.get("delivery_date").getAsString();
         }
 
         Boolean deliveryDateGuaranteed;
-        JsonElement deliveryDateGuaranteedJsonElement = jo.get("delivery_date_guaranteed");
-        if (deliveryDateGuaranteedJsonElement == null || deliveryDateGuaranteedJsonElement.isJsonNull()) {
+        JsonElement deliveryDateGuaranteedJsonElement =
+                jo.get("delivery_date_guaranteed");
+        if (deliveryDateGuaranteedJsonElement == null ||
+                deliveryDateGuaranteedJsonElement.isJsonNull()) {
             deliveryDateGuaranteed = false;
         } else {
-            deliveryDateGuaranteed = new Boolean(jo.get("delivery_date_guaranteed").getAsString());
+            deliveryDateGuaranteed = new Boolean(
+                    jo.get("delivery_date_guaranteed").getAsString());
         }
 
         Number estDeliveryDays;
         JsonElement estDeliveryDaysJsonElement = jo.get("est_delivery_days");
-        if (estDeliveryDaysJsonElement == null || estDeliveryDaysJsonElement.isJsonNull()) {
+        if (estDeliveryDaysJsonElement == null ||
+                estDeliveryDaysJsonElement.isJsonNull()) {
             estDeliveryDays = null;
         } else {
             estDeliveryDays = jo.get("est_delivery_days").getAsNumber();
@@ -89,7 +106,8 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
 
         String shipmentID;
         JsonElement shipmentIdJsonElement = jo.get("shipment_id");
-        if (shipmentIdJsonElement == null || shipmentIdJsonElement.isJsonNull()) {
+        if (shipmentIdJsonElement == null ||
+                shipmentIdJsonElement.isJsonNull()) {
             shipmentID = null;
         } else {
             shipmentID = jo.get("shipment_id").getAsString();
@@ -97,32 +115,20 @@ public class RateDeserializer implements JsonDeserializer<Rate> {
 
         TimeInTransit timeInTransit;
         JsonElement timeInTransitJsonElement = jo.get("time_in_transit");
-        if (timeInTransitJsonElement == null || timeInTransitJsonElement.isJsonNull()) {
+        if (timeInTransitJsonElement == null ||
+                timeInTransitJsonElement.isJsonNull()) {
             timeInTransit = null;
         } else {
             timeInTransit = (TimeInTransit) EasyPostResource.gson.fromJson(
-                    timeInTransitJsonElement,
-                    TimeInTransit.class
-            );
+                    timeInTransitJsonElement, TimeInTransit.class);
         }
 
-        return new Rate(
-                jo.get("id").getAsString(),
+        return new Rate(jo.get("id").getAsString(),
                 jo.get("carrier").getAsString(),
-                jo.get("service").getAsString(),
-                jo.get("rate").getAsFloat(),
-                currency,
-                listRate,
-                listCurrency,
-                retailRate,
-                retailCurrency,
-                deliveryDays,
-                deliveryDate,
-                deliveryDateGuaranteed,
-                estDeliveryDays,
-                shipmentID,
-                jo.get("carrier_account_id").getAsString(),
-                timeInTransit
-        );
+                jo.get("service").getAsString(), jo.get("rate").getAsFloat(),
+                currency, listRate, listCurrency, retailRate, retailCurrency,
+                deliveryDays, deliveryDate, deliveryDateGuaranteed,
+                estDeliveryDays, shipmentID,
+                jo.get("carrier_account_id").getAsString(), timeInTransit);
     }
 }

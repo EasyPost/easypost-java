@@ -1,11 +1,18 @@
+/**
+ * EasyPostResponse.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.net;
 
 public class EasyPostResponse {
 
-    int responseCode;
-    String responseBody;
+    private int responseCode;
+    private String responseBody;
 
-    public EasyPostResponse(int responseCode, String responseBody) {
+    public EasyPostResponse(final int responseCode, final String responseBody) {
         this.responseCode = responseCode;
         this.responseBody = responseBody;
 
@@ -16,7 +23,7 @@ public class EasyPostResponse {
         return responseCode;
     }
 
-    public void setResponseCode(int responseCode) {
+    public void setResponseCode(final int responseCode) {
         this.responseCode = responseCode;
     }
 
@@ -24,7 +31,7 @@ public class EasyPostResponse {
         return responseBody;
     }
 
-    public void setResponseBody(String responseBody) {
+    public void setResponseBody(final String responseBody) {
         this.responseBody = responseBody;
     }
 }

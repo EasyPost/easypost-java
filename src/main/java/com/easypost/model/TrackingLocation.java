@@ -1,16 +1,23 @@
+/**
+ * TrackingLocation.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
-public class TrackingLocation {
-    String city;
-    String state;
-    String country;
-    String zip;
+public final class TrackingLocation {
+    private String city;
+    private String state;
+    private String country;
+    private String zip;
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(final String city) {
         this.city = city;
     }
 
@@ -18,7 +25,7 @@ public class TrackingLocation {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(final String state) {
         this.state = state;
     }
 
@@ -26,7 +33,7 @@ public class TrackingLocation {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(final String country) {
         this.country = country;
     }
 
@@ -34,7 +41,7 @@ public class TrackingLocation {
         return zip;
     }
 
-    public void setZip(String zip) {
+    public void setZip(final String zip) {
         this.zip = zip;
     }
 

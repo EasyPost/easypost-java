@@ -1,21 +1,28 @@
+/**
+ * CarrierDetail.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
-public class CarrierDetail {
-    String service;
-    String containerType;
-    String estDeliveryDateLocal;
-    String estDeliveryTimeLocal;
-    String originLocation;
-    String destinationLocation;
-    String guaranteedDeliveryDate;
-    String alternateIdentifier;
-    String initialDeliveryAttempt;
+public final class CarrierDetail {
+    private String service;
+    private String containerType;
+    private String estDeliveryDateLocal;
+    private String estDeliveryTimeLocal;
+    private String originLocation;
+    private String destinationLocation;
+    private String guaranteedDeliveryDate;
+    private String alternateIdentifier;
+    private String initialDeliveryAttempt;
 
     public String getService() {
         return service;
     }
 
-    public void setService(String service) {
+    public void setService(final String service) {
         this.service = service;
     }
 
@@ -23,7 +30,7 @@ public class CarrierDetail {
         return containerType;
     }
 
-    public void setContainerType(String containerType) {
+    public void setContainerType(final String containerType) {
         this.containerType = containerType;
     }
 
@@ -31,7 +38,7 @@ public class CarrierDetail {
         return estDeliveryDateLocal;
     }
 
-    public void setEstDeliveryDateLocal(String estDeliveryDateLocal) {
+    public void setEstDeliveryDateLocal(final String estDeliveryDateLocal) {
         this.estDeliveryDateLocal = estDeliveryDateLocal;
     }
 
@@ -39,7 +46,7 @@ public class CarrierDetail {
         return estDeliveryTimeLocal;
     }
 
-    public void setEstDeliveryTimeLocal(String estDeliveryTimeLocal) {
+    public void setEstDeliveryTimeLocal(final String estDeliveryTimeLocal) {
         this.estDeliveryTimeLocal = estDeliveryTimeLocal;
     }
 
@@ -47,7 +54,7 @@ public class CarrierDetail {
         return originLocation;
     }
 
-    public void setOriginLocation(String originLocation) {
+    public void setOriginLocation(final String originLocation) {
         this.originLocation = originLocation;
     }
 
@@ -55,7 +62,7 @@ public class CarrierDetail {
         return destinationLocation;
     }
 
-    public void setDestinationLocation(String destinationLocation) {
+    public void setDestinationLocation(final String destinationLocation) {
         this.destinationLocation = destinationLocation;
     }
 
@@ -63,7 +70,7 @@ public class CarrierDetail {
         return guaranteedDeliveryDate;
     }
 
-    public void setGuaranteedDeliveryDate(String guaranteedDeliveryDate) {
+    public void setGuaranteedDeliveryDate(final String guaranteedDeliveryDate) {
         this.guaranteedDeliveryDate = guaranteedDeliveryDate;
     }
 
@@ -71,7 +78,7 @@ public class CarrierDetail {
         return alternateIdentifier;
     }
 
-    public void setAlternateIdentifier(String alternateIdentifier) {
+    public void setAlternateIdentifier(final String alternateIdentifier) {
         this.alternateIdentifier = alternateIdentifier;
     }
 
@@ -79,7 +86,7 @@ public class CarrierDetail {
         return initialDeliveryAttempt;
     }
 
-    public void setInitialDeliveryAttempt(String initialDeliveryAttempt) {
+    public void setInitialDeliveryAttempt(final String initialDeliveryAttempt) {
         this.initialDeliveryAttempt = initialDeliveryAttempt;
     }
 }

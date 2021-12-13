@@ -1,16 +1,23 @@
+/**
+ * TaxIdentifier.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 
 import com.easypost.net.EasyPostResource;
 
-public class TaxIdentifier extends EasyPostResource {
+public final class TaxIdentifier extends EasyPostResource {
 
-    public String entity;
-    public String taxId;
-    public String taxIdType;
-    public String issuingCountry;
+    private String entity;
+    private String taxId;
+    private String taxIdType;
+    private String issuingCountry;
 
-    public void setEntity(String entity) {
+    public void setEntity(final String entity) {
         this.entity = entity;
     }
 
@@ -18,7 +25,7 @@ public class TaxIdentifier extends EasyPostResource {
         return entity;
     }
 
-    public void setTaxId(String taxId) {
+    public void setTaxId(final String taxId) {
         this.taxId = taxId;
     }
 
@@ -26,7 +33,7 @@ public class TaxIdentifier extends EasyPostResource {
         return taxId;
     }
 
-    public void setTaxIdType(String taxIdType) {
+    public void setTaxIdType(final String taxIdType) {
         this.taxIdType = taxIdType;
     }
 
@@ -34,7 +41,7 @@ public class TaxIdentifier extends EasyPostResource {
         return taxIdType;
     }
 
-    public void setIssuingCountry(String issuingCountry) {
+    public void setIssuingCountry(final String issuingCountry) {
         this.issuingCountry = issuingCountry;
     }
 

@@ -17,15 +17,6 @@ import java.lang.reflect.Type;
 
 public final class SmartrateCollectionDeserializer
         implements JsonDeserializer<SmartrateCollection> {
-    /**
-     * Deserialize a SmartrateCollection from a JSON object.
-     *
-     * @param json    JSON object to deserialize.
-     * @param typeOfT Type of the object to deserialize.
-     * @param context Deserialization context.
-     * @return Deserialized SmartrateCollection object.
-     * @throws JsonParseException
-     */
     @Override
     public SmartrateCollection deserialize(final JsonElement json,
                                            final Type typeOfT,

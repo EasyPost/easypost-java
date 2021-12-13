@@ -1,19 +1,26 @@
+/**
+ * TrackingDetail.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import java.util.Date;
 
-public class TrackingDetail {
-    String status;
-    String message;
-    Date datetime;
-    TrackingLocation trackingLocation;
-    String statusDetail;
+public final class TrackingDetail {
+    private String status;
+    private String message;
+    private Date datetime;
+    private TrackingLocation trackingLocation;
+    private String statusDetail;
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
         this.status = status;
     }
 
@@ -21,7 +28,7 @@ public class TrackingDetail {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(final String message) {
         this.message = message;
     }
 
@@ -29,7 +36,7 @@ public class TrackingDetail {
         return datetime;
     }
 
-    public void setDatetime(Date datetime) {
+    public void setDatetime(final Date datetime) {
         this.datetime = datetime;
     }
 
@@ -37,7 +44,7 @@ public class TrackingDetail {
         return trackingLocation;
     }
 
-    public void setTrackingLocation(TrackingLocation location) {
+    public void setTrackingLocation(final TrackingLocation location) {
         this.trackingLocation = location;
     }
 
@@ -45,7 +52,7 @@ public class TrackingDetail {
         return statusDetail;
     }
 
-    public void setStatusDetail(String statusDetail) {
+    public void setStatusDetail(final String statusDetail) {
         this.statusDetail = statusDetail;
     }
 

@@ -1,3 +1,10 @@
+/**
+ * Webhook.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -7,17 +14,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Webhook extends EasyPostResource {
+public final class Webhook extends EasyPostResource {
     public String id;
-    String mode;
-    String url;
-    Date disabledAt;
+    private String mode;
+    private String url;
+    private Date disabledAt;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -25,7 +32,7 @@ public class Webhook extends EasyPostResource {
         return mode;
     }
 
-    public void setMode(String mode) {
+    public void setMode(final String mode) {
         this.mode = mode;
     }
 
@@ -33,7 +40,7 @@ public class Webhook extends EasyPostResource {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -41,29 +48,34 @@ public class Webhook extends EasyPostResource {
         return disabledAt;
     }
 
-    public void setDisabledAt(Date disabledAt) {
+    public void setDisabledAt(final Date disabledAt) {
         this.disabledAt = disabledAt;
     }
 
     // create
-    public static Webhook create(Map<String, Object> params) throws EasyPostException {
+    public static Webhook create(final Map<String, Object> params)
+            throws EasyPostException {
         return create(params, null);
     }
 
-    public static Webhook create(Map<String, Object> params, String apiKey) throws EasyPostException {
+    public static Webhook create(final Map<String, Object> params,
+                                 String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("webhook", params);
 
-        return request(RequestMethod.POST, classURL(Webhook.class), wrappedParams, Webhook.class, apiKey);
+        return request(RequestMethod.POST, classURL(Webhook.class),
+                wrappedParams, Webhook.class, apiKey);
     }
 
     // retrieve
-    public static Webhook retrieve(String id) throws EasyPostException {
+    public static Webhook retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
     }
 
-    public static Webhook retrieve(String id, String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Webhook.class, id), null, Webhook.class, apiKey);
+    public static Webhook retrieve(final String id, String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Webhook.class, id), null,
+                Webhook.class, apiKey);
     }
 
     // all
@@ -72,12 +84,16 @@ public class Webhook extends EasyPostResource {
         return all(params, null);
     }
 
-    public static WebhookCollection all(Map<String, Object> params) throws EasyPostException {
+    public static WebhookCollection all(final Map<String, Object> params)
+            throws EasyPostException {
         return all(params, null);
     }
 
-    public static WebhookCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
+    public static WebhookCollection all(final Map<String, Object> params,
+                                        final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Webhook.class), params,
+                WebhookCollection.class, apiKey);
     }
 
     // delete
@@ -85,8 +101,9 @@ public class Webhook extends EasyPostResource {
         this.delete(null);
     }
 
-    public void delete(String apiKey) throws EasyPostException {
-        request(RequestMethod.DELETE, instanceURL(Webhook.class, this.getId()), null, Webhook.class, apiKey);
+    public void delete(final String apiKey) throws EasyPostException {
+        request(RequestMethod.DELETE, instanceURL(Webhook.class, this.getId()),
+                null, Webhook.class, apiKey);
     }
 
     // update
@@ -95,15 +112,19 @@ public class Webhook extends EasyPostResource {
         return this.update(params, null);
     }
 
-    public Webhook update(Map<String, Object> params) throws EasyPostException {
+    public Webhook update(final Map<String, Object> params)
+            throws EasyPostException {
         return this.update(params, null);
     }
 
-    public Webhook update(Map<String, Object> params, String apiKey) throws EasyPostException {
+    public Webhook update(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("webhook", params);
 
-        Webhook response = request(RequestMethod.PUT, instanceURL(Webhook.class, this.getId()), wrappedParams, Webhook.class, apiKey);
+        Webhook response = request(RequestMethod.PUT,
+                instanceURL(Webhook.class, this.getId()), wrappedParams,
+                Webhook.class, apiKey);
 
         this.merge(this, response);
         return this;

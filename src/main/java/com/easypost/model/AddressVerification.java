@@ -1,17 +1,24 @@
+/**
+ * AddressVerification.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import java.util.List;
 
-public class AddressVerification {
-    Boolean success;
-    List<Error> errors;
-    AddressDetail details;
+public final class AddressVerification {
+    private Boolean success;
+    private List<Error> errors;
+    private AddressDetail details;
 
     public Boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public void setSuccess(final Boolean success) {
         this.success = success;
     }
 
@@ -19,7 +26,7 @@ public class AddressVerification {
         return errors;
     }
 
-    public void setErrors(List<Error> errors) {
+    public void setErrors(final List<Error> errors) {
         this.errors = errors;
     }
 
@@ -27,7 +34,7 @@ public class AddressVerification {
         return details;
     }
 
-    public void setAddressDetail(AddressDetail details) {
+    public void setAddressDetail(final AddressDetail details) {
         this.details = details;
     }
 }

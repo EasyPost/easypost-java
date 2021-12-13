@@ -1,32 +1,39 @@
+/**
+ * Rate.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
-public class Rate extends EasyPostResource {
+public final class Rate extends EasyPostResource {
     public String id;
-    String carrier;
-    String service;
-    String serviceCode;
-    Float rate;
-    String currency;
-    Float listRate;
-    String listCurrency;
-    Float retailRate;
-    String retailCurrency;
-    Number deliveryDays;
-    String deliveryDate;
-    Boolean deliveryDateGuaranteed;
-    Number estDeliveryDays;
-    String shipmentId;
-    String carrierAccountId;
-    TimeInTransit timeInTransit;
+    private String carrier;
+    private String service;
+    private String serviceCode;
+    private Float rate;
+    private String currency;
+    private Float listRate;
+    private String listCurrency;
+    private Float retailRate;
+    private String retailCurrency;
+    private Number deliveryDays;
+    private String deliveryDate;
+    private Boolean deliveryDateGuaranteed;
+    private Number estDeliveryDays;
+    private String shipmentId;
+    private String carrierAccountId;
+    private TimeInTransit timeInTransit;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -34,7 +41,7 @@ public class Rate extends EasyPostResource {
         return carrier;
     }
 
-    public void setCarrier(String carrier) {
+    public void setCarrier(final String carrier) {
         this.carrier = carrier;
     }
 
@@ -42,7 +49,7 @@ public class Rate extends EasyPostResource {
         return service;
     }
 
-    public void setService(String service) {
+    public void setService(final String service) {
         this.service = service;
     }
 
@@ -50,7 +57,7 @@ public class Rate extends EasyPostResource {
         return serviceCode;
     }
 
-    public void setServiceCode(String serviceCode) {
+    public void setServiceCode(final String serviceCode) {
         this.serviceCode = serviceCode;
     }
 
@@ -58,7 +65,7 @@ public class Rate extends EasyPostResource {
         return rate;
     }
 
-    public void setRate(Float rate) {
+    public void setRate(final Float rate) {
         this.rate = rate;
     }
 
@@ -66,7 +73,7 @@ public class Rate extends EasyPostResource {
         return listRate;
     }
 
-    public void setListRate(Float listRate) {
+    public void setListRate(final Float listRate) {
         this.listRate = listRate;
     }
 
@@ -74,7 +81,7 @@ public class Rate extends EasyPostResource {
         return retailRate;
     }
 
-    public void setRetailRate(Float retailRate) {
+    public void setRetailRate(final Float retailRate) {
         this.retailRate = retailRate;
     }
 
@@ -82,7 +89,7 @@ public class Rate extends EasyPostResource {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(final String currency) {
         this.currency = currency;
     }
 
@@ -90,7 +97,7 @@ public class Rate extends EasyPostResource {
         return listCurrency;
     }
 
-    public void setListCurrency(String listCurrency) {
+    public void setListCurrency(final String listCurrency) {
         this.listCurrency = listCurrency;
     }
 
@@ -98,7 +105,7 @@ public class Rate extends EasyPostResource {
         return retailCurrency;
     }
 
-    public void setRetailCurrency(String retailCurrency) {
+    public void setRetailCurrency(final String retailCurrency) {
         this.retailCurrency = retailCurrency;
     }
 
@@ -106,7 +113,7 @@ public class Rate extends EasyPostResource {
         return deliveryDays;
     }
 
-    public void setDeliveryDays(Number deliveryDays) {
+    public void setDeliveryDays(final Number deliveryDays) {
         this.deliveryDays = deliveryDays;
     }
 
@@ -114,7 +121,7 @@ public class Rate extends EasyPostResource {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(String deliveryDate) {
+    public void setDeliveryDate(final String deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
@@ -122,7 +129,8 @@ public class Rate extends EasyPostResource {
         return deliveryDateGuaranteed;
     }
 
-    public void setDeliveryDateGuaranteed(Boolean deliveryDateGuaranteed) {
+    public void setDeliveryDateGuaranteed(
+            final Boolean deliveryDateGuaranteed) {
         this.deliveryDateGuaranteed = deliveryDateGuaranteed;
     }
 
@@ -130,7 +138,7 @@ public class Rate extends EasyPostResource {
         return estDeliveryDays;
     }
 
-    public void setEstDeliveryDays(Number estDeliveryDays) {
+    public void setEstDeliveryDays(final Number estDeliveryDays) {
         this.estDeliveryDays = estDeliveryDays;
     }
 
@@ -138,7 +146,7 @@ public class Rate extends EasyPostResource {
         return shipmentId;
     }
 
-    public void setShipmentId(String shipmentId) {
+    public void setShipmentId(final String shipmentId) {
         this.shipmentId = shipmentId;
     }
 
@@ -146,7 +154,7 @@ public class Rate extends EasyPostResource {
         return carrierAccountId;
     }
 
-    public void setCarrierAccountId(String carrierAccountId) {
+    public void setCarrierAccountId(final String carrierAccountId) {
         this.carrierAccountId = carrierAccountId;
     }
 
@@ -154,28 +162,16 @@ public class Rate extends EasyPostResource {
         return timeInTransit;
     }
 
-    public void setTimeInTransit(TimeInTransit timeInTransit) {
+    public void setTimeInTransit(final TimeInTransit timeInTransit) {
         this.timeInTransit = timeInTransit;
     }
 
-    public Rate(
-            String id,
-            String carrier,
-            String service,
-            Float rate,
-            String currency,
-            Float listRate,
-            String listCurrency,
-            Float retailRate,
-            String retailCurrency,
-            Number deliveryDays,
-            String deliveryDate,
-            Boolean deliveryDateGuaranteed,
-            Number estDeliveryDays,
-            String shipmentId,
-            String carrierAccountId,
-            TimeInTransit timeInTransit
-    ) {
+    public Rate(String id, String carrier, String service, Float rate,
+                String currency, Float listRate, String listCurrency,
+                Float retailRate, String retailCurrency, Number deliveryDays,
+                String deliveryDate, Boolean deliveryDateGuaranteed,
+                Number estDeliveryDays, String shipmentId,
+                String carrierAccountId, TimeInTransit timeInTransit) {
         this.id = id;
         this.carrier = carrier;
         this.service = service;
@@ -196,13 +192,15 @@ public class Rate extends EasyPostResource {
     }
 
     // retrieve
-    public static Rate retrieve(String id) throws EasyPostException {
+    public static Rate retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
     }
 
-    public static Rate retrieve(String id, String apiKey) throws EasyPostException {
+    public static Rate retrieve(final String id, final String apiKey)
+            throws EasyPostException {
         Rate response;
-        response = request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
+        response = request(RequestMethod.GET, instanceURL(Rate.class, id), null,
+                Rate.class, apiKey);
 
         return response;
     }

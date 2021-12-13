@@ -1,6 +1,13 @@
+/**
+ * ShipmentOptions.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
-public class ShipmentOptions {
+public final class ShipmentOptions {
     String smartpostHub;
     String smartpostManifest;
 
@@ -8,7 +15,7 @@ public class ShipmentOptions {
         return smartpostHub;
     }
 
-    public void setSmartpostHub(String smartpostHub) {
+    public void setSmartpostHub(final String smartpostHub) {
         this.smartpostHub = smartpostHub;
     }
 
@@ -16,7 +23,7 @@ public class ShipmentOptions {
         return smartpostManifest;
     }
 
-    public void setSmartpostManifest(String smartpostManifest) {
+    public void setSmartpostManifest(final String smartpostManifest) {
         this.smartpostManifest = smartpostManifest;
     }
 }
