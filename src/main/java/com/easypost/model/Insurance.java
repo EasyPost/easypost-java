@@ -1,3 +1,10 @@
+/**
+ * Insurance.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -7,26 +14,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Insurance extends EasyPostResource {
+public final class Insurance extends EasyPostResource {
     public String id;
-    String mode;
-    String reference;
-    Address toAddress;
-    Address fromAddress;
-    Tracker tracker;
-    String provider;
-    String providerId;
-    String trackingCode;
-    String status;
-    String shipmentId;
-    Float amount;
-    List<String> messages;
+    private String mode;
+    private String reference;
+    private Address toAddress;
+    private Address fromAddress;
+    private Tracker tracker;
+    private String provider;
+    private String providerId;
+    private String trackingCode;
+    private String status;
+    private String shipmentId;
+    private Float amount;
+    private List<String> messages;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -34,7 +41,7 @@ public class Insurance extends EasyPostResource {
         return mode;
     }
 
-    public void setMode(String mode) {
+    public void setMode(final String mode) {
         this.mode = mode;
     }
 
@@ -42,7 +49,7 @@ public class Insurance extends EasyPostResource {
         return reference;
     }
 
-    public void setReference(String reference) {
+    public void setReference(final String reference) {
         this.reference = reference;
     }
 
@@ -50,7 +57,7 @@ public class Insurance extends EasyPostResource {
         return toAddress;
     }
 
-    public void setToAddress(Address toAddress) {
+    public void setToAddress(final Address toAddress) {
         this.toAddress = toAddress;
     }
 
@@ -58,7 +65,7 @@ public class Insurance extends EasyPostResource {
         return fromAddress;
     }
 
-    public void setFromAddress(Address fromAddress) {
+    public void setFromAddress(final Address fromAddress) {
         this.fromAddress = fromAddress;
     }
 
@@ -66,7 +73,7 @@ public class Insurance extends EasyPostResource {
         return tracker;
     }
 
-    public void setTracker(Tracker tracker) {
+    public void setTracker(final Tracker tracker) {
         this.tracker = tracker;
     }
 
@@ -74,7 +81,7 @@ public class Insurance extends EasyPostResource {
         return provider;
     }
 
-    public void setProvider(String provider) {
+    public void setProvider(final String provider) {
         this.provider = provider;
     }
 
@@ -82,7 +89,7 @@ public class Insurance extends EasyPostResource {
         return providerId;
     }
 
-    public void setProviderId(String providerId) {
+    public void setProviderId(final String providerId) {
         this.providerId = providerId;
     }
 
@@ -90,7 +97,7 @@ public class Insurance extends EasyPostResource {
         return trackingCode;
     }
 
-    public void setTrackingCode(String trackingCode) {
+    public void setTrackingCode(final String trackingCode) {
         this.trackingCode = trackingCode;
     }
 
@@ -98,7 +105,7 @@ public class Insurance extends EasyPostResource {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
         this.status = status;
     }
 
@@ -106,7 +113,7 @@ public class Insurance extends EasyPostResource {
         return shipmentId;
     }
 
-    public void setShipmentId(String shipmentId) {
+    public void setShipmentId(final String shipmentId) {
         this.shipmentId = shipmentId;
     }
 
@@ -114,7 +121,7 @@ public class Insurance extends EasyPostResource {
         return amount;
     }
 
-    public void setAmount(Float amount) {
+    public void setAmount(final Float amount) {
         this.amount = amount;
     }
 
@@ -122,38 +129,48 @@ public class Insurance extends EasyPostResource {
         return messages;
     }
 
-    public void setMessages(List<String> messages) {
+    public void setMessages(final List<String> messages) {
         this.messages = messages;
     }
 
     // create
-    public static Insurance create(Map<String, Object> params) throws EasyPostException {
+    public static Insurance create(final Map<String, Object> params)
+            throws EasyPostException {
         return create(params, null);
     }
 
-    public static Insurance create(Map<String, Object> params, String apiKey) throws EasyPostException {
+    public static Insurance create(final Map<String, Object> params,
+                                   final String apiKey)
+            throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("insurance", params);
 
-        return request(RequestMethod.POST, classURL(Insurance.class), wrappedParams, Insurance.class, apiKey);
+        return request(RequestMethod.POST, classURL(Insurance.class),
+                wrappedParams, Insurance.class, apiKey);
     }
 
     // retrieve
-    public static Insurance retrieve(String id) throws EasyPostException {
+    public static Insurance retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
     }
 
-    public static Insurance retrieve(String id, String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Insurance.class, id), null, Insurance.class, apiKey);
+    public static Insurance retrieve(final String id, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Insurance.class, id),
+                null, Insurance.class, apiKey);
     }
 
     // all
-    public static InsuranceCollection all(Map<String, Object> params) throws EasyPostException {
+    public static InsuranceCollection all(final Map<String, Object> params)
+            throws EasyPostException {
         return all(params, null);
     }
 
-    public static InsuranceCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Insurance.class), params, InsuranceCollection.class, apiKey);
+    public static InsuranceCollection all(final Map<String, Object> params,
+                                          final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Insurance.class), params,
+                InsuranceCollection.class, apiKey);
     }
 
     // refresh
@@ -161,17 +178,19 @@ public class Insurance extends EasyPostResource {
         return this.refresh(null, null);
     }
 
-    public Insurance refresh(Map<String, Object> params) throws EasyPostException {
+    public Insurance refresh(final Map<String, Object> params)
+            throws EasyPostException {
         return this.refresh(params, null);
     }
 
-    public Insurance refresh(String apiKey) throws EasyPostException {
+    public Insurance refresh(final String apiKey) throws EasyPostException {
         return this.refresh((Map<String, Object>) null, apiKey);
     }
 
-    public Insurance refresh(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(
-                RequestMethod.GET,
-                String.format("%s", instanceURL(Insurance.class, this.getId())), params, Insurance.class, apiKey);
+    public Insurance refresh(final Map<String, Object> params,
+                             final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET,
+                String.format("%s", instanceURL(Insurance.class, this.getId())),
+                params, Insurance.class, apiKey);
     }
 }

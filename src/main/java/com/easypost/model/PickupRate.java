@@ -1,20 +1,27 @@
+/**
+ * PickupRate.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.net.EasyPostResource;
 
-public class PickupRate extends EasyPostResource {
+public final class PickupRate extends EasyPostResource {
     public String id;
-    String mode;
-    String carrier;
-    String service;
-    Float rate;
-    String currency;
+    private String mode;
+    private String carrier;
+    private String service;
+    private Float rate;
+    private String currency;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -22,7 +29,7 @@ public class PickupRate extends EasyPostResource {
         return mode;
     }
 
-    public void setMode(String mode) {
+    public void setMode(final String mode) {
         this.mode = mode;
     }
 
@@ -30,7 +37,7 @@ public class PickupRate extends EasyPostResource {
         return carrier;
     }
 
-    public void setCarrier(String carrier) {
+    public void setCarrier(final String carrier) {
         this.carrier = carrier;
     }
 
@@ -38,7 +45,7 @@ public class PickupRate extends EasyPostResource {
         return service;
     }
 
-    public void setService(String service) {
+    public void setService(final String service) {
         this.service = service;
     }
 
@@ -46,7 +53,7 @@ public class PickupRate extends EasyPostResource {
         return rate;
     }
 
-    public void setRate(Float rate) {
+    public void setRate(final Float rate) {
         this.rate = rate;
     }
 
@@ -54,7 +61,7 @@ public class PickupRate extends EasyPostResource {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(final String currency) {
         this.currency = currency;
     }
 }

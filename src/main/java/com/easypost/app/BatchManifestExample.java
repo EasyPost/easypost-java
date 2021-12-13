@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class BatchManifestExample {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(final String[] args) throws InterruptedException {
         EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
 
         try {

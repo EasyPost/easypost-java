@@ -1,3 +1,10 @@
+/**
+ * ScanForm.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -6,22 +13,22 @@ import com.easypost.net.EasyPostResource;
 import java.util.List;
 import java.util.Map;
 
-public class ScanForm extends EasyPostResource {
+public final class ScanForm extends EasyPostResource {
     public String id;
-    String status;
-    String message;
-    Address fromAddress;
-    List<String> trackingCodes;
-    String formUrl;
-    String formFileType;
-    String confirmation;
-    String batchId;
+    private String status;
+    private String message;
+    private Address fromAddress;
+    private List<String> trackingCodes;
+    private String formUrl;
+    private String formFileType;
+    private String confirmation;
+    private String batchId;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -29,7 +36,7 @@ public class ScanForm extends EasyPostResource {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
         this.status = status;
     }
 
@@ -37,7 +44,7 @@ public class ScanForm extends EasyPostResource {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(final String message) {
         this.message = message;
     }
 
@@ -45,7 +52,7 @@ public class ScanForm extends EasyPostResource {
         return fromAddress;
     }
 
-    public void setFromAddress(Address fromAddress) {
+    public void setFromAddress(final Address fromAddress) {
         this.fromAddress = fromAddress;
     }
 
@@ -53,7 +60,7 @@ public class ScanForm extends EasyPostResource {
         return trackingCodes;
     }
 
-    public void setTrackingCodes(List<String> trackingCodes) {
+    public void setTrackingCodes(final List<String> trackingCodes) {
         this.trackingCodes = trackingCodes;
     }
 
@@ -65,7 +72,7 @@ public class ScanForm extends EasyPostResource {
         return this.getFormUrl();
     }
 
-    public void setFormUrl(String formUrl) {
+    public void setFormUrl(final String formUrl) {
         this.formUrl = formUrl;
     }
 
@@ -77,7 +84,7 @@ public class ScanForm extends EasyPostResource {
         return this.getFormFileType();
     }
 
-    public void setFormFileType(String formFileType) {
+    public void setFormFileType(final String formFileType) {
         this.formFileType = formFileType;
     }
 
@@ -85,7 +92,7 @@ public class ScanForm extends EasyPostResource {
         return confirmation;
     }
 
-    public void setConfirmation(String confirmation) {
+    public void setConfirmation(final String confirmation) {
         this.confirmation = confirmation;
     }
 
@@ -93,35 +100,45 @@ public class ScanForm extends EasyPostResource {
         return batchId;
     }
 
-    public void setBatchId(String batchId) {
+    public void setBatchId(final String batchId) {
         this.batchId = batchId;
     }
 
     // create
-    public static ScanForm create(Map<String, Object> params) throws EasyPostException {
+    public static ScanForm create(final Map<String, Object> params)
+            throws EasyPostException {
         return create(params, null);
     }
 
-    public static ScanForm create(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, classURL(ScanForm.class), params, ScanForm.class, apiKey);
+    public static ScanForm create(final Map<String, Object> params,
+                                  final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.POST, classURL(ScanForm.class), params,
+                ScanForm.class, apiKey);
     }
 
     // retrieve
-    public static ScanForm retrieve(String id) throws EasyPostException {
+    public static ScanForm retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
     }
 
-    public static ScanForm retrieve(String id, String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(ScanForm.class, id), null, ScanForm.class, apiKey);
+    public static ScanForm retrieve(final String id, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(ScanForm.class, id), null,
+                ScanForm.class, apiKey);
     }
 
     // all
-    public static ScanFormCollection all(Map<String, Object> params) throws EasyPostException {
+    public static ScanFormCollection all(final Map<String, Object> params)
+            throws EasyPostException {
         return all(params, null);
     }
 
-    public static ScanFormCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(ScanForm.class), params, ScanFormCollection.class, apiKey);
+    public static ScanFormCollection all(final Map<String, Object> params,
+                                         final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(ScanForm.class), params,
+                ScanFormCollection.class, apiKey);
     }
 
 }

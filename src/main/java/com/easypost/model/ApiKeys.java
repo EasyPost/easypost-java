@@ -1,3 +1,10 @@
+/**
+ * ApiKeys.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -5,16 +12,16 @@ import com.easypost.net.EasyPostResource;
 
 import java.util.List;
 
-public class ApiKeys extends EasyPostResource {
+public final class ApiKeys extends EasyPostResource {
     public String id;
-    List<ApiKey> keys;
-    List<ApiKeys> children;
+    private List<ApiKey> keys;
+    private List<ApiKeys> children;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -22,7 +29,7 @@ public class ApiKeys extends EasyPostResource {
         return keys;
     }
 
-    public void setKeys(List<ApiKey> keys) {
+    public void setKeys(final List<ApiKey> keys) {
         this.keys = keys;
     }
 
@@ -30,7 +37,7 @@ public class ApiKeys extends EasyPostResource {
         return children;
     }
 
-    public void setChildren(List<ApiKeys> children) {
+    public void setChildren(final List<ApiKeys> children) {
         this.children = children;
     }
 
@@ -39,8 +46,9 @@ public class ApiKeys extends EasyPostResource {
         return all(null);
     }
 
-    public static ApiKeys all(String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
+    public static ApiKeys all(final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, classURL(ApiKey.class), null,
+                ApiKeys.class, apiKey);
     }
 
 }

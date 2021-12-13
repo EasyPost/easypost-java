@@ -1,3 +1,10 @@
+/**
+ * Shipment.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -7,41 +14,41 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Shipment extends EasyPostResource {
+public final class Shipment extends EasyPostResource {
     public String id;
-    String mode;
-    String reference;
-    Boolean isReturn;
-    Address toAddress;
-    Address buyerAddress;
-    Address fromAddress;
-    Address returnAddress;
-    Parcel parcel;
-    CustomsInfo customsInfo;
-    Rate selectedRate;
-    List<Rate> rates;
-    PostageLabel postageLabel;
-    ScanForm scanForm;
-    String orderId;
-    List<Form> forms;
-    Tracker tracker;
-    String insurance;
-    String trackingCode;
-    String status;
-    String refundStatus;
-    String batchId;
-    String batchStatus;
-    String batchMessage;
-    String uspsZone;
-    Map<String, Object> options;
-    List<ShipmentMessage> messages;
-    List<TaxIdentifier> taxIdentifiers;
+    private String mode;
+    private String reference;
+    private Boolean isReturn;
+    private Address toAddress;
+    private Address buyerAddress;
+    private Address fromAddress;
+    private Address returnAddress;
+    private Parcel parcel;
+    private CustomsInfo customsInfo;
+    private Rate selectedRate;
+    private List<Rate> rates;
+    private PostageLabel postageLabel;
+    private ScanForm scanForm;
+    private String orderId;
+    private List<Form> forms;
+    private Tracker tracker;
+    private String insurance;
+    private String trackingCode;
+    private String status;
+    private String refundStatus;
+    private String batchId;
+    private String batchStatus;
+    private String batchMessage;
+    private String uspsZone;
+    private Map<String, Object> options;
+    private List<ShipmentMessage> messages;
+    private List<TaxIdentifier> taxIdentifiers;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -49,7 +56,7 @@ public class Shipment extends EasyPostResource {
         return mode;
     }
 
-    public void setMode(String mode) {
+    public void setMode(final String mode) {
         this.mode = mode;
     }
 
@@ -57,7 +64,7 @@ public class Shipment extends EasyPostResource {
         return reference;
     }
 
-    public void setReference(String reference) {
+    public void setReference(final String reference) {
         this.reference = reference;
     }
 
@@ -65,7 +72,7 @@ public class Shipment extends EasyPostResource {
         return isReturn;
     }
 
-    public void setIsReturn(Boolean isReturn) {
+    public void setIsReturn(final Boolean isReturn) {
         this.isReturn = isReturn;
     }
 
@@ -73,7 +80,7 @@ public class Shipment extends EasyPostResource {
         return toAddress;
     }
 
-    public void setToAddress(Address toAddress) {
+    public void setToAddress(final Address toAddress) {
         this.toAddress = toAddress;
     }
 
@@ -81,7 +88,7 @@ public class Shipment extends EasyPostResource {
         return buyerAddress;
     }
 
-    public void setBuyerAddress(Address buyerAddress) {
+    public void setBuyerAddress(final Address buyerAddress) {
         this.buyerAddress = buyerAddress;
     }
 
@@ -89,7 +96,7 @@ public class Shipment extends EasyPostResource {
         return fromAddress;
     }
 
-    public void setFromAddress(Address fromAddress) {
+    public void setFromAddress(final Address fromAddress) {
         this.fromAddress = fromAddress;
     }
 
@@ -97,7 +104,7 @@ public class Shipment extends EasyPostResource {
         return returnAddress;
     }
 
-    public void setReturnAddress(Address returnAddress) {
+    public void setReturnAddress(final Address returnAddress) {
         this.returnAddress = returnAddress;
     }
 
@@ -105,7 +112,7 @@ public class Shipment extends EasyPostResource {
         return parcel;
     }
 
-    public void setParcel(Parcel parcel) {
+    public void setParcel(final Parcel parcel) {
         this.parcel = parcel;
     }
 
@@ -113,7 +120,7 @@ public class Shipment extends EasyPostResource {
         return customsInfo;
     }
 
-    public void setCustomsInfo(CustomsInfo customsInfo) {
+    public void setCustomsInfo(final CustomsInfo customsInfo) {
         this.customsInfo = customsInfo;
     }
 
@@ -121,7 +128,7 @@ public class Shipment extends EasyPostResource {
         return selectedRate;
     }
 
-    public void setSelectedRate(Rate selectedRate) {
+    public void setSelectedRate(final Rate selectedRate) {
         this.selectedRate = selectedRate;
     }
 
@@ -129,7 +136,7 @@ public class Shipment extends EasyPostResource {
         return rates;
     }
 
-    public void setRates(List<Rate> rates) {
+    public void setRates(final List<Rate> rates) {
         this.rates = rates;
     }
 
@@ -137,7 +144,7 @@ public class Shipment extends EasyPostResource {
         return postageLabel;
     }
 
-    public void setPostageLabel(PostageLabel postageLabel) {
+    public void setPostageLabel(final PostageLabel postageLabel) {
         this.postageLabel = postageLabel;
     }
 
@@ -145,7 +152,7 @@ public class Shipment extends EasyPostResource {
         return scanForm;
     }
 
-    public void setScanForm(ScanForm scanForm) {
+    public void setScanForm(final ScanForm scanForm) {
         this.scanForm = scanForm;
     }
 
@@ -153,7 +160,7 @@ public class Shipment extends EasyPostResource {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(final String orderId) {
         this.orderId = orderId;
     }
 
@@ -161,7 +168,7 @@ public class Shipment extends EasyPostResource {
         return tracker;
     }
 
-    public void setTracker(Tracker tracker) {
+    public void setTracker(final Tracker tracker) {
         this.tracker = tracker;
     }
 
@@ -169,7 +176,7 @@ public class Shipment extends EasyPostResource {
         return insurance;
     }
 
-    public void setInsurance(String insurance) {
+    public void setInsurance(final String insurance) {
         this.insurance = insurance;
     }
 
@@ -177,7 +184,7 @@ public class Shipment extends EasyPostResource {
         return trackingCode;
     }
 
-    public void setTrackingCode(String trackingCode) {
+    public void setTrackingCode(final String trackingCode) {
         this.trackingCode = trackingCode;
     }
 
@@ -185,7 +192,7 @@ public class Shipment extends EasyPostResource {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
         this.status = status;
     }
 
@@ -193,7 +200,7 @@ public class Shipment extends EasyPostResource {
         return refundStatus;
     }
 
-    public void setRefundStatus(String refundStatus) {
+    public void setRefundStatus(final String refundStatus) {
         this.refundStatus = refundStatus;
     }
 
@@ -201,7 +208,7 @@ public class Shipment extends EasyPostResource {
         return batchId;
     }
 
-    public void setBatchId(String batchId) {
+    public void setBatchId(final String batchId) {
         this.batchId = batchId;
     }
 
@@ -209,7 +216,7 @@ public class Shipment extends EasyPostResource {
         return batchStatus;
     }
 
-    public void setBatchStatus(String batchStatus) {
+    public void setBatchStatus(final String batchStatus) {
         this.batchStatus = batchStatus;
     }
 
@@ -217,7 +224,7 @@ public class Shipment extends EasyPostResource {
         return batchMessage;
     }
 
-    public void setBatchMessage(String batchMessage) {
+    public void setBatchMessage(final String batchMessage) {
         this.batchMessage = batchMessage;
     }
 
@@ -225,7 +232,7 @@ public class Shipment extends EasyPostResource {
         return uspsZone;
     }
 
-    public void setUspsZone(String uspsZone) {
+    public void setUspsZone(final String uspsZone) {
         this.uspsZone = uspsZone;
     }
 
@@ -233,7 +240,7 @@ public class Shipment extends EasyPostResource {
         return options;
     }
 
-    public void setOptions(Map<String, Object> options) {
+    public void setOptions(final Map<String, Object> options) {
         this.options = options;
     }
 
@@ -241,7 +248,7 @@ public class Shipment extends EasyPostResource {
         return messages;
     }
 
-    public void setMessages(List<ShipmentMessage> messages) {
+    public void setMessages(final List<ShipmentMessage> messages) {
         this.messages = messages;
     }
 
@@ -249,7 +256,7 @@ public class Shipment extends EasyPostResource {
         return forms;
     }
 
-    public void setForms(List<Form> forms) {
+    public void setForms(final List<Form> forms) {
         this.forms = forms;
     }
 
@@ -257,39 +264,49 @@ public class Shipment extends EasyPostResource {
         return taxIdentifiers;
     }
 
-    public void setTaxIdentifiers(List<TaxIdentifier> taxIdentifiers) {
+    public void setTaxIdentifiers(final List<TaxIdentifier> taxIdentifiers) {
         this.taxIdentifiers = taxIdentifiers;
     }
 
 
     // create
-    public static Shipment create(Map<String, Object> params) throws EasyPostException {
+    public static Shipment create(final Map<String, Object> params)
+            throws EasyPostException {
         return create(params, null);
     }
 
-    public static Shipment create(Map<String, Object> params, String apiKey) throws EasyPostException {
+    public static Shipment create(final Map<String, Object> params,
+                                  final String apiKey)
+            throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("shipment", params);
 
-        return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
+        return request(RequestMethod.POST, classURL(Shipment.class),
+                wrappedParams, Shipment.class, apiKey);
     }
 
     // retrieve
-    public static Shipment retrieve(String id) throws EasyPostException {
+    public static Shipment retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
     }
 
-    public static Shipment retrieve(String id, String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Shipment.class, id), null, Shipment.class, apiKey);
+    public static Shipment retrieve(final String id, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Shipment.class, id), null,
+                Shipment.class, apiKey);
     }
 
     // all
-    public static ShipmentCollection all(Map<String, Object> params) throws EasyPostException {
+    public static ShipmentCollection all(final Map<String, Object> params)
+            throws EasyPostException {
         return all(params, null);
     }
 
-    public static ShipmentCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Shipment.class), params, ShipmentCollection.class, apiKey);
+    public static ShipmentCollection all(final Map<String, Object> params,
+                                         final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Shipment.class), params,
+                ShipmentCollection.class, apiKey);
     }
 
     // refresh
@@ -297,18 +314,20 @@ public class Shipment extends EasyPostResource {
         return this.refresh(null, null);
     }
 
-    public Shipment refresh(Map<String, Object> params) throws EasyPostException {
+    public Shipment refresh(final Map<String, Object> params)
+            throws EasyPostException {
         return this.refresh(params, null);
     }
 
-    public Shipment refresh(String apiKey) throws EasyPostException {
+    public Shipment refresh(final String apiKey) throws EasyPostException {
         return this.refresh((Map<String, Object>) null, apiKey);
     }
 
-    public Shipment refresh(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(
-                RequestMethod.GET,
-                String.format("%s", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+    public Shipment refresh(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET,
+                String.format("%s", instanceURL(Shipment.class, this.getId())),
+                params, Shipment.class, apiKey);
     }
 
     // get rates
@@ -316,18 +335,21 @@ public class Shipment extends EasyPostResource {
         return this.newRates(null, null);
     }
 
-    public Shipment newRates(Map<String, Object> params) throws EasyPostException {
+    public Shipment newRates(final Map<String, Object> params)
+            throws EasyPostException {
         return this.newRates(params, null);
     }
 
-    public Shipment newRates(String apiKey) throws EasyPostException {
+    public Shipment newRates(final String apiKey) throws EasyPostException {
         return this.newRates((Map<String, Object>) null, apiKey);
     }
 
-    public Shipment newRates(Map<String, Object> params, String apiKey) throws EasyPostException {
-        Shipment response = request(
-                RequestMethod.POST,
-                String.format("%s/rerate", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+    public Shipment newRates(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        Shipment response = request(RequestMethod.POST,
+                String.format("%s/rerate",
+                        instanceURL(Shipment.class, this.getId())), params,
+                Shipment.class, apiKey);
 
         this.merge(this, response);
         return this;
@@ -338,22 +360,22 @@ public class Shipment extends EasyPostResource {
         return this.getSmartrates(null, null);
     }
 
-    public List<Rate> getSmartrates(Map<String, Object> params) throws EasyPostException {
+    public List<Rate> getSmartrates(final Map<String, Object> params)
+            throws EasyPostException {
         return this.getSmartrates(params, null);
     }
 
-    public List<Rate> getSmartrates(String apiKey) throws EasyPostException {
+    public List<Rate> getSmartrates(final String apiKey) throws EasyPostException {
         return this.getSmartrates((Map<String, Object>) null, apiKey);
     }
 
-    public List<Rate> getSmartrates(Map<String, Object> params, String apiKey) throws EasyPostException {
-        SmartrateCollection smartrateCollection = (SmartrateCollection) request(
-                RequestMethod.GET,
-                String.format("%s/smartrate", instanceURL(Shipment.class, this.getId())),
-                params,
-                SmartrateCollection.class,
-                apiKey
-        );
+    public List<Rate> getSmartrates(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        SmartrateCollection smartrateCollection =
+                (SmartrateCollection) request(RequestMethod.GET,
+                        String.format("%s/smartrate",
+                                instanceURL(Shipment.class, this.getId())),
+                        params, SmartrateCollection.class, apiKey);
 
         return smartrateCollection.getRates();
     }
@@ -363,25 +385,26 @@ public class Shipment extends EasyPostResource {
         return this.buy(null, null);
     }
 
-    public Shipment buy(Map<String, Object> params) throws EasyPostException {
+    public Shipment buy(final Map<String, Object> params) throws EasyPostException {
         return this.buy(params, null);
     }
 
-    public Shipment buy(String apiKey) throws EasyPostException {
+    public Shipment buy(final String apiKey) throws EasyPostException {
         return this.buy((Map<String, Object>) null, apiKey);
     }
 
-    public Shipment buy(Rate rate) throws EasyPostException {
+    public Shipment buy(final Rate rate) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("rate", rate);
 
         return this.buy(params, null);
     }
 
-    public Shipment buy(Map<String, Object> params, String apiKey) throws EasyPostException {
-        Shipment response = request(
-                RequestMethod.POST,
-                String.format("%s/buy", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+    public Shipment buy(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        Shipment response = request(RequestMethod.POST, String.format("%s/buy",
+                        instanceURL(Shipment.class, this.getId())), params,
+                Shipment.class, apiKey);
 
         this.merge(this, response);
         return this;
@@ -392,18 +415,20 @@ public class Shipment extends EasyPostResource {
         return this.refund(null, null);
     }
 
-    public Shipment refund(Map<String, Object> params) throws EasyPostException {
+    public Shipment refund(final Map<String, Object> params)
+            throws EasyPostException {
         return this.refund(params, null);
     }
 
-    public Shipment refund(String apiKey) throws EasyPostException {
+    public Shipment refund(final String apiKey) throws EasyPostException {
         return this.refund((Map<String, Object>) null, apiKey);
     }
 
-    public Shipment refund(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(
-                RequestMethod.GET,
-                String.format("%s/refund", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+    public Shipment refund(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, String.format("%s/refund",
+                        instanceURL(Shipment.class, this.getId())), params,
+                Shipment.class, apiKey);
     }
 
     // label
@@ -411,18 +436,19 @@ public class Shipment extends EasyPostResource {
         return this.label(null, null);
     }
 
-    public Shipment label(Map<String, Object> params) throws EasyPostException {
+    public Shipment label(final Map<String, Object> params) throws EasyPostException {
         return this.label(params, null);
     }
 
-    public Shipment label(String apiKey) throws EasyPostException {
+    public Shipment label(final String apiKey) throws EasyPostException {
         return this.label((Map<String, Object>) null, apiKey);
     }
 
-    public Shipment label(Map<String, Object> params, String apiKey) throws EasyPostException {
-        Shipment response = request(
-                RequestMethod.GET,
-                String.format("%s/label", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+    public Shipment label(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        Shipment response = request(RequestMethod.GET, String.format("%s/label",
+                        instanceURL(Shipment.class, this.getId())), params,
+                Shipment.class, apiKey);
 
         this.merge(this, response);
         return this;
@@ -433,18 +459,20 @@ public class Shipment extends EasyPostResource {
         return this.insure(null, null);
     }
 
-    public Shipment insure(Map<String, Object> params) throws EasyPostException {
+    public Shipment insure(final Map<String, Object> params)
+            throws EasyPostException {
         return this.insure(params, null);
     }
 
-    public Shipment insure(String apiKey) throws EasyPostException {
+    public Shipment insure(final String apiKey) throws EasyPostException {
         return this.insure((Map<String, Object>) null, apiKey);
     }
 
-    public Shipment insure(Map<String, Object> params, String apiKey) throws EasyPostException {
-        return request(
-                RequestMethod.POST,
-                String.format("%s/insure", instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
+    public Shipment insure(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.POST, String.format("%s/insure",
+                        instanceURL(Shipment.class, this.getId())), params,
+                Shipment.class, apiKey);
     }
 
     // lowest rate
@@ -452,11 +480,12 @@ public class Shipment extends EasyPostResource {
         return this.lowestRate(null, null);
     }
 
-    public Rate lowestRate(List<String> carriers) throws EasyPostException {
+    public Rate lowestRate(final List<String> carriers) throws EasyPostException {
         return this.lowestRate(carriers, null);
     }
 
-    public Rate lowestRate(List<String> carriers, List<String> services) throws EasyPostException {
+    public Rate lowestRate(final List<String> carriers, final List<String> services)
+            throws EasyPostException {
         Rate lowestRate = null;
 
         if (carriers != null) {
@@ -472,20 +501,28 @@ public class Shipment extends EasyPostResource {
         }
 
         for (int i = 0; i < this.rates.size(); i++) {
-            if (carriers != null && carriers.size() > 0 && !carriers.contains(this.rates.get(i).carrier.toLowerCase()) && !carriers.contains(this.rates.get(i).serviceCode.toLowerCase())) {
+            if (carriers != null && carriers.size() > 0 && !carriers.contains(
+                    this.rates.get(i).getCarrier().toLowerCase()) &&
+                    !carriers.contains(
+                            this.rates.get(i).getServiceCode().toLowerCase())) {
                 continue;
             }
-            if (services != null && services.size() > 0 && !services.contains(this.rates.get(i).service.toLowerCase()) && !services.contains(this.rates.get(i).serviceCode.toLowerCase())) {
+            if (services != null && services.size() > 0 && !services.contains(
+                    this.rates.get(i).getService().toLowerCase())
+                    && !services.contains(
+                            this.rates.get(i).getService().toLowerCase())) {
                 continue;
             }
 
-            if (lowestRate == null || lowestRate.rate > this.rates.get(i).rate) {
+            if (lowestRate == null
+                    || lowestRate.getRate() > this.rates.get(i).getRate()) {
                 lowestRate = this.rates.get(i);
             }
         }
 
         if (lowestRate == null) {
-            throw new EasyPostException("Unable to find lowest rate matching required criteria.");
+            throw new EasyPostException(
+                    "Unable to find lowest rate matching required criteria.");
         }
 
         return lowestRate;

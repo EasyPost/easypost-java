@@ -1,35 +1,42 @@
+/**
+ * PostageLabel.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.net.EasyPostResource;
 
-public class PostageLabel extends EasyPostResource {
+public final class PostageLabel extends EasyPostResource {
     public String id;
-    int dateAdvance;
-    String integratedForm;
-    int labelResolution;
-    String labelSize;
-    String labelType;
-    String labelUrl;
-    String labelFile;
-    String labelFileType;
-    String labelPdfSize;
-    String labelPdfType;
-    String labelPdfUrl;
-    String labelPdfFileType;
-    String labelEpl2Size;
-    String labelEpl2Type;
-    String labelEpl2Url;
-    String labelEpl2FileType;
-    String labelZplSize;
-    String labelZplType;
-    String labelZplUrl;
-    String labelZplFileType;
+    private int dateAdvance;
+    private String integratedForm;
+    private int labelResolution;
+    private String labelSize;
+    private String labelType;
+    private String labelUrl;
+    private String labelFile;
+    private String labelFileType;
+    private String labelPdfSize;
+    private String labelPdfType;
+    private String labelPdfUrl;
+    private String labelPdfFileType;
+    private String labelEpl2Size;
+    private String labelEpl2Type;
+    private String labelEpl2Url;
+    private String labelEpl2FileType;
+    private String labelZplSize;
+    private String labelZplType;
+    private String labelZplUrl;
+    private String labelZplFileType;
 
     public String getId() {
         return id;
     }
 
-    private void setId(String id) {
+    private void setId(final String id) {
         this.id = id;
     }
 
@@ -37,7 +44,7 @@ public class PostageLabel extends EasyPostResource {
         return dateAdvance;
     }
 
-    private void setDateAdvance(int dateAdvance) {
+    private void setDateAdvance(final int dateAdvance) {
         this.dateAdvance = dateAdvance;
     }
 
@@ -45,7 +52,7 @@ public class PostageLabel extends EasyPostResource {
         return integratedForm;
     }
 
-    private void setIntegratedForm(String integratedForm) {
+    private void setIntegratedForm(final String integratedForm) {
         this.integratedForm = integratedForm;
     }
 
@@ -53,7 +60,7 @@ public class PostageLabel extends EasyPostResource {
         return labelResolution;
     }
 
-    private void setLabelResolution(int labelResolution) {
+    private void setLabelResolution(final int labelResolution) {
         this.labelResolution = labelResolution;
     }
 
@@ -61,7 +68,7 @@ public class PostageLabel extends EasyPostResource {
         return labelSize;
     }
 
-    private void setLabelSize(String labelSize) {
+    private void setLabelSize(final String labelSize) {
         this.labelSize = labelSize;
     }
 
@@ -69,7 +76,7 @@ public class PostageLabel extends EasyPostResource {
         return labelType;
     }
 
-    private void setLabelType(String labelType) {
+    private void setLabelType(final String labelType) {
         this.labelType = labelType;
     }
 
@@ -77,7 +84,7 @@ public class PostageLabel extends EasyPostResource {
         return labelUrl;
     }
 
-    private void setLabelUrl(String labelUrl) {
+    private void setLabelUrl(final String labelUrl) {
         this.labelUrl = labelUrl;
     }
 
@@ -85,7 +92,7 @@ public class PostageLabel extends EasyPostResource {
         return labelFile;
     }
 
-    private void setLabelFile(String labelFile) {
+    private void setLabelFile(final String labelFile) {
         this.labelFile = labelFile;
     }
 
@@ -93,7 +100,7 @@ public class PostageLabel extends EasyPostResource {
         return labelFileType;
     }
 
-    private void setLabelFileType(String labelFileType) {
+    private void setLabelFileType(final String labelFileType) {
         this.labelFileType = labelFileType;
     }
 
@@ -101,7 +108,7 @@ public class PostageLabel extends EasyPostResource {
         return labelPdfSize;
     }
 
-    private void setLabelPdfSize(String labelPdfSize) {
+    private void setLabelPdfSize(final String labelPdfSize) {
         this.labelPdfSize = labelPdfSize;
     }
 
@@ -109,7 +116,7 @@ public class PostageLabel extends EasyPostResource {
         return labelPdfType;
     }
 
-    private void setLabelPdfType(String labelPdfType) {
+    private void setLabelPdfType(final String labelPdfType) {
         this.labelPdfType = labelPdfType;
     }
 
@@ -117,7 +124,7 @@ public class PostageLabel extends EasyPostResource {
         return labelPdfUrl;
     }
 
-    private void setLabelPdfUrl(String labelPdfUrl) {
+    private void setLabelPdfUrl(final String labelPdfUrl) {
         this.labelPdfUrl = labelPdfUrl;
     }
 
@@ -125,7 +132,7 @@ public class PostageLabel extends EasyPostResource {
         return labelPdfFileType;
     }
 
-    private void setLabelPdfFileType(String labelPdfFileType) {
+    private void setLabelPdfFileType(final String labelPdfFileType) {
         this.labelPdfFileType = labelPdfFileType;
     }
 
@@ -133,7 +140,7 @@ public class PostageLabel extends EasyPostResource {
         return labelEpl2Size;
     }
 
-    private void setLabelEpl2Size(String labelEpl2Size) {
+    private void setLabelEpl2Size(final String labelEpl2Size) {
         this.labelEpl2Size = labelEpl2Size;
     }
 
@@ -141,7 +148,7 @@ public class PostageLabel extends EasyPostResource {
         return labelEpl2Type;
     }
 
-    private void setLabelEpl2Type(String labelEpl2Type) {
+    private void setLabelEpl2Type(final String labelEpl2Type) {
         this.labelEpl2Type = labelEpl2Type;
     }
 
@@ -149,7 +156,7 @@ public class PostageLabel extends EasyPostResource {
         return labelEpl2Url;
     }
 
-    private void setLabelEpl2Url(String labelEpl2Url) {
+    private void setLabelEpl2Url(final String labelEpl2Url) {
         this.labelEpl2Url = labelEpl2Url;
     }
 
@@ -157,7 +164,7 @@ public class PostageLabel extends EasyPostResource {
         return labelEpl2FileType;
     }
 
-    private void setLabelEpl2FileType(String labelEpl2FileType) {
+    private void setLabelEpl2FileType(final String labelEpl2FileType) {
         this.labelEpl2FileType = labelEpl2FileType;
     }
 
@@ -165,7 +172,7 @@ public class PostageLabel extends EasyPostResource {
         return labelZplSize;
     }
 
-    private void setLabelZplSize(String labelZplSize) {
+    private void setLabelZplSize(final String labelZplSize) {
         this.labelZplSize = labelZplSize;
     }
 
@@ -173,7 +180,7 @@ public class PostageLabel extends EasyPostResource {
         return labelZplType;
     }
 
-    private void setLabelZplType(String labelZplType) {
+    private void setLabelZplType(final String labelZplType) {
         this.labelZplType = labelZplType;
     }
 
@@ -181,7 +188,7 @@ public class PostageLabel extends EasyPostResource {
         return labelZplUrl;
     }
 
-    private void setLabelZplUrl(String labelZplUrl) {
+    private void setLabelZplUrl(final String labelZplUrl) {
         this.labelZplUrl = labelZplUrl;
     }
 
@@ -189,7 +196,7 @@ public class PostageLabel extends EasyPostResource {
         return labelZplFileType;
     }
 
-    private void setLabelZplFileType(String labelZplFileType) {
+    private void setLabelZplFileType(final String labelZplFileType) {
         this.labelZplFileType = labelZplFileType;
     }
 }
