@@ -17,6 +17,15 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 
 public final class RateDeserializer implements JsonDeserializer<Rate> {
+    /**
+     * Deserialize a Rate from a JSON object.
+     *
+     * @param json    JSON object.
+     * @param typeOfT Type of the object.
+     * @param context Deserialization context.
+     * @return Deserialized Rate object.
+     * @throws JsonParseException
+     */
     @Override
     public Rate deserialize(final JsonElement json, final Type typeOfT,
                             final JsonDeserializationContext context)
