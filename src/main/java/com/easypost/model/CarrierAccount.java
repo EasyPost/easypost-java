@@ -22,52 +22,104 @@ public final class CarrierAccount extends EasyPostResource {
     private String reference;
     private Map<String, Object> credentials;
 
+    /**
+     * Get ID of the carrier account.
+     * @return ID of the carrier account.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Set ID of the carrier account.
+     * @param id ID of the carrier account.
+     */
     public void setId(final String id) {
         this.id = id;
     }
 
+    /**
+     * Get readable name of the carrier account.
+     * @return readable name of the carrier account.
+     */
     public String getReadable() {
         return readable;
     }
 
+    /**
+     * Set readable name of the carrier account.
+     * @param readable readable name of the carrier account.
+     */
     public void setReadable(final String readable) {
         this.readable = readable;
     }
 
+    /**
+     * Get description of the carrier account.
+     * @return description of the carrier account.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Set description of the carrier account.
+     * @param description description of the carrier account.
+     */
     public void setDescription(final String description) {
         this.description = description;
     }
 
+    /**
+     * Get reference of the carrier account.
+     * @return reference of the carrier account.
+     */
     public String getReference() {
         return reference;
     }
 
+    /**
+     * Set reference of the carrier account.
+     * @param reference reference of the carrier account.
+     */
     public void setReference(final String reference) {
         this.reference = reference;
     }
 
+    /**
+     * Get credentials of the carrier account.
+     * @return credentials of the carrier account.
+     */
     public Map<String, Object> getCredentials() {
         return credentials;
     }
 
+    /**
+     * Set credentials of the carrier account.
+     * @param credentials credentials of the carrier account.
+     */
     public void setCredentials(final Map<String, Object> credentials) {
         this.credentials = credentials;
     }
 
-    // update
+    /**
+     * Update this carrier account.
+     * @param params parameters to update.
+     * @return updated carrier account.
+     * @throws EasyPostException
+     */
     public CarrierAccount update(final Map<String, Object> params)
             throws EasyPostException {
         return this.update(params, null);
     }
 
+    /**
+     * Update this carrier account.
+     * @param params parameters to update.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return updated CarrierAccount object.
+     * @throws EasyPostException
+     */
     public CarrierAccount update(final Map<String, Object> params,
                                  final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
@@ -81,23 +133,43 @@ public final class CarrierAccount extends EasyPostResource {
         return this;
     }
 
-    // delete
+    /**
+     * Delete this carrier account.
+     * @throws EasyPostException
+     */
     public void delete() throws EasyPostException {
         this.delete(null);
     }
 
+    /**
+     * Delete this carrier account.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @throws EasyPostException
+     */
     public void delete(final String apiKey) throws EasyPostException {
         request(RequestMethod.DELETE,
                 instanceURL(CarrierAccount.class, this.getId()), null,
                 CarrierAccount.class, apiKey);
     }
 
-    // create
+    /**
+     * Create a carrier account.
+     * @param params parameters to create.
+     * @return created CarrierAccount object.
+     * @throws EasyPostException
+     */
     public static CarrierAccount create(final Map<String, Object> params)
             throws EasyPostException {
         return create(params, null);
     }
 
+    /**
+     * Create a carrier account.
+     * @param params parameters to create.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return created CarrierAccount object.
+     * @throws EasyPostException
+     */
     public static CarrierAccount create(final Map<String, Object> params,
                                         final String apiKey)
             throws EasyPostException {
@@ -108,24 +180,47 @@ public final class CarrierAccount extends EasyPostResource {
                 wrappedParams, CarrierAccount.class, apiKey);
     }
 
-    // retrieve
+    /**
+     * Retrieve a carrier account from the API.
+     * @param id id of the carrier account.
+     * @return CarrierAccount object.
+     * @throws EasyPostException
+     */
     public static CarrierAccount retrieve(final String id)
             throws EasyPostException {
         return retrieve(id, null);
     }
 
+    /**
+     * Retrieve a carrier account from the API.
+     * @param id id of the carrier account.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return CarrierAccount object.
+     * @throws EasyPostException
+     */
     public static CarrierAccount retrieve(final String id, final String apiKey)
             throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(CarrierAccount.class, id),
                 null, CarrierAccount.class, apiKey);
     }
 
-    // all
+    /**
+     * List all carrier accounts.
+     * @return List of CarrierAccount objects.
+     * @throws EasyPostException
+     */
     public static List<CarrierAccount> all(final Map<String, Object> params)
             throws EasyPostException {
         return all(params, null);
     }
 
+    /**
+     * List all carrier accounts.
+     * @param params parameters to list.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return List of CarrierAccount objects.
+     * @throws EasyPostException
+     */
     public static List<CarrierAccount> all(final Map<String, Object> params,
                                            final String apiKey)
             throws EasyPostException {
