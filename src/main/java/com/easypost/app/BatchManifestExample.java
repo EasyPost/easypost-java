@@ -46,7 +46,7 @@ public class BatchManifestExample {
             while (true) {
                 batch = batch.refresh();
 
-                if (batch.getState() == "created") {
+                if (batch.getState().equals("created")) {
                     break;
                 }
 

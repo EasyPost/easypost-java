@@ -1,3 +1,10 @@
+/**
+ * User.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2021 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -161,9 +168,9 @@ public class User extends EasyPostResource {
             return parentKeys.getKeys();
         }
 
-        for (int i = 0; i < parentKeys.children.size(); i++) {
-            if (this.getId().equals(parentKeys.children.get(i).getId())) {
-                return parentKeys.children.get(i).getKeys();
+        for (int i = 0; i < parentKeys.getChildren().size(); i++) {
+            if (this.getId().equals(parentKeys.getChildren().get(i).getId())) {
+                return parentKeys.getChildren().get(i).getKeys();
             }
         }
 

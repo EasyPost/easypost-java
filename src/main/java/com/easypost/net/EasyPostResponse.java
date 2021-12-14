@@ -9,8 +9,8 @@ package com.easypost.net;
 
 public class EasyPostResponse {
 
-    private int responseCode;
-    private String responseBody;
+    public int responseCode;
+    public String responseBody;
 
     public EasyPostResponse(final int responseCode, final String responseBody) {
         this.responseCode = responseCode;

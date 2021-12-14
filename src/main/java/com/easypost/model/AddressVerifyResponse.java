@@ -11,19 +11,35 @@ public class AddressVerifyResponse {
     public Address address;
     public String message;
 
+    /**
+     * Get the Address object.
+     * @return Address
+     */
     public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    /**
+     * Set the Address object.
+     * @param address Address
+     */
+    public void setAddress(final Address address) {
         this.address = address;
     }
 
+    /**
+     * Get the message.
+     * @return message
+     */
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    /**
+     * Set the message.
+     * @param message message
+     */
+    public void setMessage(final String message) {
         this.message = message;
     }
 }
