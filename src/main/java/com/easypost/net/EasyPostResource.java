@@ -268,7 +268,8 @@ public abstract class EasyPostResource {
 	}
 
 	private static JsonObject createBody(Map<String, Object> params) {
-		return createJsonObjectFromMap(params);
+		Gson gson = new Gson();
+		return gson.toJsonTree(params).getAsJsonObject();
 	}
 
 	private static String createQuery(Map<String, Object> params) throws UnsupportedEncodingException {
@@ -282,11 +283,6 @@ public abstract class EasyPostResource {
 			queryStringBuffer.deleteCharAt(0);
 		}
 		return queryStringBuffer.toString();
-	}
-
-	private static JsonObject createJsonObjectFromMap(Map<String, Object> map) {
-		Gson gson = new Gson();
-		return gson.toJsonTree(map).getAsJsonObject();
 	}
 
 	private static Map<String, String> flattenParams(Map<String, Object> params) {
@@ -450,7 +446,12 @@ public abstract class EasyPostResource {
 					break;
 				case POST:
 				case PUT:
-					body = createBody(params);
+					try {
+						body = createBody(params);
+					} catch (Exception e) {
+						throw new EasyPostException(
+								String.format("Unable to create JSON body from parameters. Please email %s for assistance.", EasyPostResource.EASYPOST_SUPPORT_EMAIL), e);
+					}
 					break;
 				default:
 					break;

@@ -147,19 +147,22 @@ public class Tracker extends EasyPostResource {
 		return createList(params, null);
 	}
 	public static boolean createList(Map<String, Object> params, String apiKey) throws EasyPostException {
-		String createListUrl = String.format("%s/create_list", classURL(Tracker.class));
+		try {
+			String createListUrl = String.format("%s/create_list", classURL(Tracker.class));
 
-		int count = 0;
-		Map<String, Object> newParams = new HashMap<String, Object>();
-		Map<String, Object> trackers = new HashMap<String, Object>();
-		for (Object tracker : (ArrayList)params.get("trackers")) {
-			trackers.put(String.valueOf(count), tracker);
-			count++;
+			int count = 0;
+			Map<String, Object> newParams = new HashMap<String, Object>();
+			Map<String, Object> trackers = new HashMap<String, Object>();
+			for (Object tracker : (ArrayList)params.get("trackers")) {
+				trackers.put(String.valueOf(count), tracker);
+				count++;
+			}
+			newParams.put("trackers", trackers);
+
+			request(RequestMethod.POST, createListUrl, newParams, Object.class, apiKey);
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
-		newParams.put("trackers", trackers);
-
-		request(RequestMethod.POST, createListUrl, newParams, Object.class, apiKey);
-		return true;
 	}
-
 }
