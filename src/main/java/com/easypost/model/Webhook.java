@@ -20,44 +20,98 @@ public final class Webhook extends EasyPostResource {
     private String url;
     private Date disabledAt;
 
+    /**
+     * Get the ID of the webhook.
+     *
+     * @return the ID of the webhook
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Set the ID of the webhook.
+     *
+     * @param id the ID of the webhook
+     */
     public void setId(final String id) {
         this.id = id;
     }
 
+    /**
+     * Get the mode of the webhook.
+     *
+     * @return the mode of the webhook
+     */
     public String getMode() {
         return mode;
     }
 
+    /**
+     * Set the mode of the webhook.
+     *
+     * @param mode the mode of the webhook
+     */
     public void setMode(final String mode) {
         this.mode = mode;
     }
 
+    /**
+     * Get the URL of the webhook.
+     *
+     * @return the URL of the webhook
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * Set the URL of the webhook.
+     *
+     * @param url the URL of the webhook
+     */
     public void setUrl(final String url) {
         this.url = url;
     }
 
+    /**
+     * Get the date and time when the webhook was disabled.
+     *
+     * @return the date and time when the webhook was disabled
+     */
     public Date getDisabledAt() {
         return disabledAt;
     }
 
+    /**
+     * Set the date and time when the webhook was disabled.
+     *
+     * @param disabledAt the date and time when the webhook was disabled
+     */
     public void setDisabledAt(final Date disabledAt) {
         this.disabledAt = disabledAt;
     }
 
-    // create
+    /**
+     * Create a Webhook object from a map of parameters.
+     *
+     * @param params the map of parameters
+     * @return Webhook object
+     * @throws EasyPostException
+     */
     public static Webhook create(final Map<String, Object> params)
             throws EasyPostException {
         return create(params, null);
     }
 
+    /**
+     * Create a Webhook object from a map of parameters.
+     *
+     * @param params the map of parameters
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Webhook object
+     * @throws EasyPostException
+     */
     public static Webhook create(final Map<String, Object> params,
                                  String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
@@ -67,28 +121,61 @@ public final class Webhook extends EasyPostResource {
                 wrappedParams, Webhook.class, apiKey);
     }
 
-    // retrieve
+    /**
+     * Retrieve a Webhook object from the API.
+     *
+     * @param id the ID of the Webhook to retrieve
+     * @return Webhook object
+     * @throws EasyPostException
+     */
     public static Webhook retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
     }
 
+    /**
+     * Retrieve a Webhook object from the API.
+     *
+     * @param id     the ID of the Webhook to retrieve
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Webhook object
+     * @throws EasyPostException
+     */
     public static Webhook retrieve(final String id, String apiKey)
             throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Webhook.class, id), null,
                 Webhook.class, apiKey);
     }
 
-    // all
+    /**
+     * Get a list of all Webhook objects.
+     *
+     * @return WebhookCollection object
+     * @throws EasyPostException
+     */
     public static WebhookCollection all() throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         return all(params, null);
     }
 
+    /**
+     * Get a list of all Webhook objects.
+     *
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return WebhookCollection object
+     * @throws EasyPostException
+     */
     public static WebhookCollection all(final Map<String, Object> params)
             throws EasyPostException {
         return all(params, null);
     }
 
+    /**
+     * Get a list of all Webhook objects.
+     *
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return WebhookCollection object
+     * @throws EasyPostException
+     */
     public static WebhookCollection all(final Map<String, Object> params,
                                         final String apiKey)
             throws EasyPostException {
@@ -96,27 +183,57 @@ public final class Webhook extends EasyPostResource {
                 WebhookCollection.class, apiKey);
     }
 
-    // delete
+    /**
+     * Delete this Webhook.
+     *
+     * @throws EasyPostException
+     */
     public void delete() throws EasyPostException {
         this.delete(null);
     }
 
+    /**
+     * Delete this Webhook.
+     *
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @throws EasyPostException
+     */
     public void delete(final String apiKey) throws EasyPostException {
         request(RequestMethod.DELETE, instanceURL(Webhook.class, this.getId()),
                 null, Webhook.class, apiKey);
     }
 
-    // update
+    /**
+     * Update this webhook.
+     *
+     * @return Webhook object
+     * @throws EasyPostException
+     */
     public Webhook update() throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         return this.update(params, null);
     }
 
+    /**
+     * Update this webhook.
+     *
+     * @param params the map of parameters
+     * @return Webhook object
+     * @throws EasyPostException
+     */
     public Webhook update(final Map<String, Object> params)
             throws EasyPostException {
         return this.update(params, null);
     }
 
+    /**
+     * Update this webhook.
+     *
+     * @param params the map of parameters
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Webhook object
+     * @throws EasyPostException
+     */
     public Webhook update(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
