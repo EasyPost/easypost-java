@@ -153,7 +153,7 @@ public class Tracker extends EasyPostResource {
 			int count = 0;
 			Map<String, Object> newParams = new HashMap<String, Object>();
 			Map<String, Object> trackers = new HashMap<String, Object>();
-			for (Object tracker : (ArrayList)params.get("trackers")) {
+			for (Object tracker : (ArrayList) params.get("trackers")) {
 				trackers.put(String.valueOf(count), tracker);
 				count++;
 			}
@@ -162,7 +162,7 @@ public class Tracker extends EasyPostResource {
 			request(RequestMethod.POST, createListUrl, newParams, Object.class, apiKey);
 			return true;
 		} catch (Exception e) {
-			return false;
+            throw new EasyPostException("Cannot create list of trackers", e);
 		}
 	}
 }

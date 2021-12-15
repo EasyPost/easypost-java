@@ -274,15 +274,15 @@ public abstract class EasyPostResource {
 
 	private static String createQuery(Map<String, Object> params) throws UnsupportedEncodingException {
 		Map<String, String> flatParams = flattenParams(params);
-		StringBuilder queryStringBuffer = new StringBuilder();
+		StringBuilder queryStringBuilder = new StringBuilder();
 		for (Map.Entry<String, String> entry : flatParams.entrySet()) {
-			queryStringBuffer.append("&");
-			queryStringBuffer.append(urlEncodePair(entry.getKey(), entry.getValue()));
+			queryStringBuilder.append("&");
+			queryStringBuilder.append(urlEncodePair(entry.getKey(), entry.getValue()));
 		}
-		if (queryStringBuffer.length() > 0) {
-			queryStringBuffer.deleteCharAt(0);
+		if (queryStringBuilder.length() > 0) {
+			queryStringBuilder.deleteCharAt(0);
 		}
-		return queryStringBuffer.toString();
+		return queryStringBuilder.toString();
 	}
 
 	private static Map<String, String> flattenParams(Map<String, Object> params) {
