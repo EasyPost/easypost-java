@@ -17,6 +17,7 @@ public final class BatchCollection extends EasyPostResource {
 
     /**
      * Get a list of batches.
+     *
      * @return List of Batch objects.
      */
     public List<Batch> getBatches() {
@@ -25,6 +26,7 @@ public final class BatchCollection extends EasyPostResource {
 
     /**
      * Set a list of batches.
+     *
      * @param batches List of Batch objects.
      */
     public void setBatches(final List<Batch> batches) {
@@ -33,6 +35,7 @@ public final class BatchCollection extends EasyPostResource {
 
     /**
      * Get whether there are more batches to retrieve.
+     *
      * @return true if there are more batches to retrieve, false otherwise.
      */
     public Boolean getHasMore() {
@@ -41,6 +44,7 @@ public final class BatchCollection extends EasyPostResource {
 
     /**
      * Set whether there are more batches to retrieve.
+     *
      * @param hasMore true if there are more batches to retrieve, false otherwise.
      */
     public void setHasMore(final Boolean hasMore) {

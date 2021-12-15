@@ -15,6 +15,7 @@ public final class BatchStatus {
 
     /**
      * Get the number of batches created.
+     *
      * @return the number of batches created.
      */
     public int getCreated() {
@@ -23,6 +24,7 @@ public final class BatchStatus {
 
     /**
      * Set the number of batches created.
+     *
      * @param created the number of batches created.
      */
     public void setCreated(final int created) {
@@ -31,6 +33,7 @@ public final class BatchStatus {
 
     /**
      * Get the number of batches that failed to be created.
+     *
      * @return the number of batches that failed to be created.
      */
     public int getCreationFailed() {
@@ -39,6 +42,7 @@ public final class BatchStatus {
 
     /**
      * Set the number of batches that failed to be created.
+     *
      * @param creationFailed the number of batches that failed to be created.
      */
     public void setCreationFailed(final int creationFailed) {
@@ -47,6 +51,7 @@ public final class BatchStatus {
 
     /**
      * Get the number of postage purchases.
+     *
      * @return the number of postage purchases.
      */
     public int getPostagePurchased() {
@@ -55,6 +60,7 @@ public final class BatchStatus {
 
     /**
      * Set the number of postage purchases.
+     *
      * @param postagePurchased the number of postage purchases.
      */
     public void setPostagePurchased(final int postagePurchased) {
@@ -63,6 +69,7 @@ public final class BatchStatus {
 
     /**
      * Get the number of postage purchases that failed.
+     *
      * @return the number of postage purchases that failed.
      */
     public int getPostagePurchaseFailed() {
@@ -71,6 +78,7 @@ public final class BatchStatus {
 
     /**
      * Set the number of postage purchases that failed.
+     *
      * @param postagePurchaseFailed the number of postage purchases that failed.
      */
     public void setPostagePurchaseFailed(final int postagePurchaseFailed) {

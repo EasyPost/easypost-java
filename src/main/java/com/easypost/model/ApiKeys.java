@@ -19,6 +19,7 @@ public final class ApiKeys extends EasyPostResource {
 
     /**
      * Get API key ID.
+     *
      * @return API key ID.
      */
     public String getId() {
@@ -27,6 +28,7 @@ public final class ApiKeys extends EasyPostResource {
 
     /**
      * Set API key ID.
+     *
      * @param id API key ID.
      */
     public void setId(final String id) {
@@ -35,6 +37,7 @@ public final class ApiKeys extends EasyPostResource {
 
     /**
      * Get a list of API keys.
+     *
      * @return List of ApiKey objects.
      */
     public List<ApiKey> getKeys() {
@@ -43,6 +46,7 @@ public final class ApiKeys extends EasyPostResource {
 
     /**
      * Set list of API keys.
+     *
      * @param keys List of ApiKey objects.
      */
     public void setKeys(final List<ApiKey> keys) {
@@ -51,6 +55,7 @@ public final class ApiKeys extends EasyPostResource {
 
     /**
      * Get a list of API keys for a given parent key.
+     *
      * @return List of ApiKeys objects.
      */
     public List<ApiKeys> getChildren() {
@@ -59,6 +64,7 @@ public final class ApiKeys extends EasyPostResource {
 
     /**
      * Set a list of API keys for a given parent key.
+     *
      * @param children List of ApiKeys objects.
      */
     public void setChildren(final List<ApiKeys> children) {
@@ -67,6 +73,7 @@ public final class ApiKeys extends EasyPostResource {
 
     /**
      * Get all API keys.
+     *
      * @return ApiKeys object.
      * @throws EasyPostException
      */
@@ -76,6 +83,7 @@ public final class ApiKeys extends EasyPostResource {
 
     /**
      * Get all API keys.
+     *
      * @param apiKey API key to use for this request.
      * @return ApiKeys object.
      * @throws EasyPostException

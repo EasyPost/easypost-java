@@ -13,6 +13,7 @@ public class AddressVerifyResponse {
 
     /**
      * Get the Address object.
+     *
      * @return Address
      */
     public Address getAddress() {
@@ -21,6 +22,7 @@ public class AddressVerifyResponse {
 
     /**
      * Set the Address object.
+     *
      * @param address Address
      */
     public void setAddress(final Address address) {
@@ -29,6 +31,7 @@ public class AddressVerifyResponse {
 
     /**
      * Get the message.
+     *
      * @return message
      */
     public String getMessage() {
@@ -37,6 +40,7 @@ public class AddressVerifyResponse {
 
     /**
      * Set the message.
+     *
      * @param message message
      */
     public void setMessage(final String message) {

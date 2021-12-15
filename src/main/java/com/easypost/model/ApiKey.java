@@ -15,6 +15,7 @@ public final class ApiKey extends EasyPostResource {
 
     /**
      * Get the API key mode.
+     *
      * @return API key mode
      */
     public String getMode() {
@@ -23,6 +24,7 @@ public final class ApiKey extends EasyPostResource {
 
     /**
      * Set the API key mode.
+     *
      * @param mode API key mode
      */
     public void setMode(final String mode) {
@@ -31,6 +33,7 @@ public final class ApiKey extends EasyPostResource {
 
     /**
      * Get the API key.
+     *
      * @return API key
      */
     public String getKey() {
@@ -39,6 +42,7 @@ public final class ApiKey extends EasyPostResource {
 
     /**
      * Set the API key.
+     *
      * @param key API key
      */
     public void setKey(final String key) {

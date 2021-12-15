@@ -16,6 +16,7 @@ public final class AddressVerification {
 
     /**
      * Get whether the address verification was successful.
+     *
      * @return true if the address was successfully verified
      */
     public Boolean getSuccess() {
@@ -24,6 +25,7 @@ public final class AddressVerification {
 
     /**
      * Set whether the address verification was successful.
+     *
      * @param success true if the address was successfully verified
      */
     public void setSuccess(final Boolean success) {
@@ -32,6 +34,7 @@ public final class AddressVerification {
 
     /**
      * Get the list of errors that occurred during the address verification.
+     *
      * @return list of Error objects
      */
     public List<Error> getErrors() {
@@ -40,6 +43,7 @@ public final class AddressVerification {
 
     /**
      * Set the list of errors that occurred during the address verification.
+     *
      * @param errors list of Error objects
      */
     public void setErrors(final List<Error> errors) {
@@ -48,6 +52,7 @@ public final class AddressVerification {
 
     /**
      * Get the address detail object.
+     *
      * @return AddressDetail object
      */
     public AddressDetail getAddressDetail() {
@@ -56,6 +61,7 @@ public final class AddressVerification {
 
     /**
      * Set the address detail object.
+     *
      * @param details AddressDetail object
      */
     public void setAddressDetail(final AddressDetail details) {

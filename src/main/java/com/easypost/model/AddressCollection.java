@@ -17,6 +17,7 @@ public final class AddressCollection extends EasyPostResource {
 
     /**
      * Get a list of addresses.
+     *
      * @return List of Batch objects
      */
     public List<Batch> getAddresses() {
@@ -25,6 +26,7 @@ public final class AddressCollection extends EasyPostResource {
 
     /**
      * Set a list of addresses.
+     *
      * @param addresses List of Batch objects
      */
     public void setAddresses(final List<Batch> addresses) {
@@ -33,6 +35,7 @@ public final class AddressCollection extends EasyPostResource {
 
     /**
      * Get whether there are more addresses to retrieve.
+     *
      * @return Boolean whether there are more addresses to retrieve
      */
     public Boolean getHasMore() {
@@ -41,6 +44,7 @@ public final class AddressCollection extends EasyPostResource {
 
     /**
      * Set whether there are more addresses to retrieve.
+     *
      * @param hasMore Boolean whether there are more addresses to retrieve
      */
     public void setHasMore(final Boolean hasMore) {

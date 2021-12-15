@@ -14,6 +14,7 @@ public final class AddressDetail {
 
     /**
      * Get latitude of the address.
+     *
      * @return latitude of the address.
      */
     public Float getLatitude() {
@@ -22,6 +23,7 @@ public final class AddressDetail {
 
     /**
      * Set latitude of the address.
+     *
      * @param latitude latitude of the address.
      */
     public void setLatitude(final Float latitude) {
@@ -30,6 +32,7 @@ public final class AddressDetail {
 
     /**
      * Get longitude of the address.
+     *
      * @return longitude of the address.
      */
     public Float getLongitude() {
@@ -38,6 +41,7 @@ public final class AddressDetail {
 
     /**
      * Set longitude of the address.
+     *
      * @param longitude longitude of the address.
      */
     public void setLongitude(final Float longitude) {
@@ -46,6 +50,7 @@ public final class AddressDetail {
 
     /**
      * Get time zone of the address.
+     *
      * @return time zone of the address.
      */
     public String getTimeZone() {
@@ -54,6 +59,7 @@ public final class AddressDetail {
 
     /**
      * Set time zone of the address.
+     *
      * @param timeZone time zone of the address.
      */
     public void setCode(final String timeZone) {
