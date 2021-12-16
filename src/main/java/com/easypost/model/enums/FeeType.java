@@ -1,11 +1,16 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum FeeType implements EasyPostEnum {
+    @SerializedName("LabelFee")
     LABEL("LabelFee"),
+    @SerializedName("PostageFee")
     POSTAGE("PostageFee"),
+    @SerializedName("InsuranceFee")
     INSURANCE("InsuranceFee"),
+    @SerializedName("TrackerFee")
     TRACKER("TrackerFee");
 
     private String value;
@@ -19,6 +24,6 @@ public enum FeeType implements EasyPostEnum {
     }
 
     public static FeeType getEnum(String value) throws EasyPostException {
-        return (FeeType) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (FeeType) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

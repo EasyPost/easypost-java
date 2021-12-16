@@ -1,13 +1,20 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum CustomsContentsType implements EasyPostEnum {
+    @SerializedName("documents")
     DOCUMENTS("documents"),
+    @SerializedName("gift")
     GIFT("gift"),
+    @SerializedName("merchandise")
     MERCHANDISE("merchandise"),
+    @SerializedName("returned_goods")
     RETURNED_GOODS("returned_goods"),
+    @SerializedName("sample")
     SAMPLE("sample"),
+    @SerializedName("other")
     OTHER("other");
 
     private String value;
@@ -21,6 +28,6 @@ public enum CustomsContentsType implements EasyPostEnum {
     }
 
     public static CustomsContentsType getEnum(String value) throws EasyPostException {
-        return (CustomsContentsType) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (CustomsContentsType) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

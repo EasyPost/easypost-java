@@ -1,6 +1,8 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.Mode;
+import com.easypost.model.enums.TrackerStatus;
 import com.easypost.net.EasyPostResource;
 
 import java.util.Date;
@@ -10,9 +12,9 @@ import java.util.Map;
 
 public class Tracker extends EasyPostResource {
 	public String id;
-	String mode;
+	Mode mode;
 	String trackingCode;
-	String status;
+	TrackerStatus status;
 	String shipmentId;
 	String carrier;
 	List<TrackingDetail> trackingDetails;
@@ -30,10 +32,10 @@ public class Tracker extends EasyPostResource {
 		this.id = id;
 	}
 
-	public String getMode() {
+	public Mode getMode() {
 		return mode;
 	}
-	public void setMode(String mode) {
+	public void setMode(Mode mode) {
 		this.mode = mode;
 	}
 
@@ -58,10 +60,10 @@ public class Tracker extends EasyPostResource {
 		this.trackingCode = trackingCode;
 	}
 
-	public String getStatus() {
+	public TrackerStatus getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(TrackerStatus status) {
 		this.status = status;
 	}
 

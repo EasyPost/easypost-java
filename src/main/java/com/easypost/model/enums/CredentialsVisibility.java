@@ -20,6 +20,6 @@ public enum CredentialsVisibility implements EasyPostEnum {
     }
 
     public static CredentialsVisibility getEnum(String value) throws EasyPostException {
-        return (CredentialsVisibility) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (CredentialsVisibility) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

@@ -26,6 +26,6 @@ public enum Incoterm implements EasyPostEnum {
     }
 
     public static Incoterm getEnum(String value) throws EasyPostException {
-        return (Incoterm) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (Incoterm) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

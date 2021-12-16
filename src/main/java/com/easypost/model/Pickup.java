@@ -1,6 +1,8 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.Mode;
+import com.easypost.model.enums.PickupStatus;
 import com.easypost.net.EasyPostResource;
 
 import java.util.Date;
@@ -10,8 +12,8 @@ import java.util.Map;
 
 public class Pickup extends EasyPostResource {
     public String id;
-    String mode;
-    String status;
+    Mode mode;
+    PickupStatus status;
     String reference;
     Date minDatetime;
     Date maxDatetime;
@@ -30,17 +32,17 @@ public class Pickup extends EasyPostResource {
         this.id = id;
     }
 
-    public String getMode() {
+    public Mode getMode() {
         return mode;
     }
-    public void setMode(String mode) {
+    public void setMode(Mode mode) {
         this.mode = mode;
     }
 
-    public String getStatus() {
+    public PickupStatus getStatus() {
         return status;
     }
-    public void setStatus(String status) {
+    public void setStatus(PickupStatus status) {
         this.status = status;
     }
 

@@ -21,6 +21,6 @@ public enum EventStatus implements EasyPostEnum {
     }
 
     public static EventStatus getEnum(String value) throws EasyPostException {
-        return (EventStatus) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (EventStatus) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

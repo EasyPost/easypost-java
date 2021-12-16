@@ -25,6 +25,6 @@ public enum DropoffType implements EasyPostEnum {
     }
 
     public static DropoffType getEnum(String value) throws EasyPostException {
-        return (DropoffType) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (DropoffType) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

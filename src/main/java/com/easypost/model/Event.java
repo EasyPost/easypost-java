@@ -1,6 +1,7 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.Mode;
 import com.easypost.net.EasyPostResource;
 
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Map;
 public class Event extends EasyPostResource {
 	public String id;
 	String description;
-	String mode;
+	Mode mode;
 	EasyPostResource result;
 	Map<String, Object> previousAttributes;
 
@@ -27,10 +28,10 @@ public class Event extends EasyPostResource {
 		this.description = description;
 	}
 
-	public String getMode() {
+	public Mode getMode() {
 		return mode;
 	}
-	public void setMode(String mode) {
+	public void setMode(Mode mode) {
 		this.mode = mode;
 	}
 

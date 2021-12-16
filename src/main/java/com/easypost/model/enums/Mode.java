@@ -1,9 +1,13 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum Mode implements EasyPostEnum {
+    // https://stackoverflow.com/a/18851314
+    @SerializedName ("test")
     TEST("test"),
+    @SerializedName ("production")
     PRODUCTION("production");
 
     private String value;
@@ -17,6 +21,7 @@ public enum Mode implements EasyPostEnum {
     }
 
     public static Mode getEnum(String value) throws EasyPostException {
-        return (Mode) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        
+        return (Mode) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

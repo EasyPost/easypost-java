@@ -1,6 +1,7 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.RefundStatus;
 import com.easypost.net.EasyPostResource;
 
 import java.util.HashMap;
@@ -11,7 +12,7 @@ public class Refund extends EasyPostResource {
 	public String id;
 	String trackingCode;
 	String confirmationNumber;
-	String status;
+	RefundStatus status;
 	String carrier;
 	String shipmentId;
 	
@@ -36,10 +37,10 @@ public class Refund extends EasyPostResource {
 		this.confirmationNumber = confirmationNumber;
 	}
 
-	public String getStatus() {
+	public RefundStatus getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(RefundStatus status) {
 		this.status = status;
 	}
 

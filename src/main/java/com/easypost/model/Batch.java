@@ -1,6 +1,8 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.BatchState;
+import com.easypost.model.enums.Mode;
 import com.easypost.net.EasyPostResource;
 
 import java.util.HashMap;
@@ -9,8 +11,8 @@ import java.util.Map;
 
 public class Batch extends EasyPostResource {
 	public String id;
-	String mode;
-	String state;
+	Mode mode;
+	BatchState state;
 	public BatchStatus status;
   Number numShipments;
 	List<Shipment> shipments;
@@ -25,17 +27,17 @@ public class Batch extends EasyPostResource {
 		this.id = id;
 	}
 
-	public String getMode() {
+	public Mode getMode() {
 		return mode;
 	}
-	public void setMode(String mode) {
+	public void setMode(Mode mode) {
 		this.mode = mode;
 	}
 
-	public String getState() {
+	public BatchState getState() {
 		return state;
 	}
-	public void setState(String state) {
+	public void setState(BatchState state) {
 		this.state = state;
 	}
 

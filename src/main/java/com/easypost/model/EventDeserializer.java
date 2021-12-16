@@ -1,5 +1,7 @@
 package com.easypost.model;
 
+import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.Mode;
 import com.easypost.net.EasyPostResource;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
@@ -104,7 +106,11 @@ public class EventDeserializer implements JsonDeserializer<Event> {
 		}
         event.setId(jsonObject.get("id").getAsString());
         event.setDescription(jsonObject.get("description").getAsString());
-        event.setMode(jsonObject.get("mode").getAsString());
+		try {
+			event.setMode(Mode.getEnum(jsonObject.get("mode").getAsString()));
+		} catch (EasyPostException e) {
+			e.printStackTrace();
+		}
 
 		return event;
 	}

@@ -2,6 +2,8 @@ package com.easypost.model;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.Mode;
+import com.easypost.model.enums.ReportStatus;
 import com.easypost.net.EasyPostResource;
 
 import java.net.URLEncoder;
@@ -13,8 +15,8 @@ public class Report extends EasyPostResource {
   public String id;
   Date startDate;
   Date endDate;
-  String mode;
-  String status;
+  Mode mode;
+  ReportStatus status;
   Boolean includeChildren;
   String url;
   Date urlExpiresAt;
@@ -43,19 +45,19 @@ public class Report extends EasyPostResource {
     this.endDate = endDate;
   }
 
-  public String getMode() {
+  public Mode getMode() {
     return mode;
   }
 
-  public void setMode(String mode) {
+  public void setMode(Mode mode) {
     this.mode = mode;
   }
 
-  public String getStatus() {
+  public ReportStatus getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(ReportStatus status) {
     this.status = status;
   }
 

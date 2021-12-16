@@ -37,7 +37,7 @@ public enum PrintCustomCode implements EasyPostEnum {
     }
 
     public static PrintCustomCode getEnum(String value) throws EasyPostException {
-        return (PrintCustomCode) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (PrintCustomCode) EasyPostEnum.getEnumFromValue(values(), value);
     }
 
     public static PrintCustomCode getFedexDefault() {

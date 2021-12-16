@@ -1,6 +1,8 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.InsuranceStatus;
+import com.easypost.model.enums.Mode;
 import com.easypost.net.EasyPostResource;
 
 import java.util.HashMap;
@@ -9,7 +11,7 @@ import java.util.Map;
 
 public class Insurance extends EasyPostResource {
 	public String id;
-	String mode;
+	Mode mode;
 	String reference;
 	Address toAddress;
 	Address fromAddress;
@@ -17,7 +19,7 @@ public class Insurance extends EasyPostResource {
 	String provider;
 	String providerId;
 	String trackingCode;
-	String status;
+	InsuranceStatus status;
 	String shipmentId;
 	Float amount;
 	List<String> messages;
@@ -25,8 +27,8 @@ public class Insurance extends EasyPostResource {
 	public String getId() { return id; }
 	public void setId(String id) { this.id = id; }
 
-	public String getMode() { return mode; }
-	public void setMode(String mode) { this.mode = mode; }
+	public Mode getMode() { return mode; }
+	public void setMode(Mode mode) { this.mode = mode; }
 
 	public String getReference() { return reference; }
 	public void setReference(String reference) { this.reference = reference; }
@@ -49,8 +51,8 @@ public class Insurance extends EasyPostResource {
 	public String getTrackingCode() { return trackingCode; }
 	public void setTrackingCode(String trackingCode) { this.trackingCode = trackingCode; }
 
-	public String getStatus() { return status; }
-	public void setStatus(String status) { this.status = status; }
+	public InsuranceStatus getStatus() { return status; }
+	public void setStatus(InsuranceStatus status) { this.status = status; }
 
 	public String getShipmentId() { return shipmentId; }
 	public void setShipmentId(String shipmentId) { this.shipmentId = shipmentId; }

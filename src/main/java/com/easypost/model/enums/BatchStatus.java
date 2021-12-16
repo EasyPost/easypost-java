@@ -19,6 +19,6 @@ public enum BatchStatus implements EasyPostEnum {
     }
 
     public static BatchStatus getEnum(String value) throws EasyPostException {
-        return (BatchStatus) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (BatchStatus) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

@@ -1,6 +1,7 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.ScanFormStatus;
 import com.easypost.net.EasyPostResource;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Map;
 
 public class ScanForm extends EasyPostResource {
 	public String id;
-	String status;
+	ScanFormStatus status;
 	String message;
 	Address fromAddress;
 	List<String> trackingCodes;
@@ -24,10 +25,10 @@ public class ScanForm extends EasyPostResource {
 		this.id = id;
 	}
 
-	public String getStatus() {
-	return status;
+	public ScanFormStatus getStatus() {
+		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(ScanFormStatus status) {
     this.status = status;
   }
 

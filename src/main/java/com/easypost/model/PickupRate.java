@@ -1,10 +1,11 @@
 package com.easypost.model;
 
+import com.easypost.model.enums.Mode;
 import com.easypost.net.EasyPostResource;
 
 public class PickupRate extends EasyPostResource {
     public String id;
-    String mode;
+    Mode mode;
     String carrier;
     String service;
     Float rate;
@@ -17,8 +18,8 @@ public class PickupRate extends EasyPostResource {
         this.id = id;
     }
 
-    public String getMode() { return mode; }
-    public void setMode(String mode) { this.mode = mode; }
+    public Mode getMode() { return mode; }
+    public void setMode(Mode mode) { this.mode = mode; }
 
     public String getCarrier() { return carrier; }
     public void setCarrier(String carrier) { this.carrier = carrier; }

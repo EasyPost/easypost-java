@@ -1,6 +1,7 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.Mode;
 import com.easypost.net.EasyPostResource;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 public class Address extends EasyPostResource {
   public String id;
-  String mode;
+  Mode mode;
   String name;
   String company;
   String street1;
@@ -33,10 +34,10 @@ public class Address extends EasyPostResource {
     this.id = id;
   }
 
-  public String getMode() {
+  public Mode getMode() {
     return mode;
   }
-  public void setMode(String mode) {
+  public void setMode(Mode mode) {
     this.mode = mode;
   }
 

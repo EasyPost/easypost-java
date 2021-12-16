@@ -1,10 +1,14 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum ScanFormStatus implements EasyPostEnum {
+    @SerializedName("creating")
     CREATING("creating"),
+    @SerializedName("created")
     CREATED("created"),
+    @SerializedName("failed")
     FAILED("failed");
 
     private String value;
@@ -18,6 +22,6 @@ public enum ScanFormStatus implements EasyPostEnum {
     }
 
     public static ScanFormStatus getEnum(String value) throws EasyPostException {
-        return (ScanFormStatus) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (ScanFormStatus) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

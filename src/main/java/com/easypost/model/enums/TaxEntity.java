@@ -17,6 +17,6 @@ public enum TaxEntity implements EasyPostEnum {
     }
 
     public static TaxEntity getEnum(String value) throws EasyPostException {
-        return (TaxEntity) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (TaxEntity) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

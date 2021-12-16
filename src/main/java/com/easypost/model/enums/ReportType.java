@@ -21,6 +21,6 @@ public enum ReportType implements EasyPostEnum {
     }
 
     public static ReportType getEnum(String value) throws EasyPostException {
-        return (ReportType) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (ReportType) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

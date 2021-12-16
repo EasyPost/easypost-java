@@ -19,7 +19,7 @@ public enum Payment implements EasyPostEnum {
     }
 
     public static Payment getEnum(String value) throws EasyPostException {
-        return (Payment) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (Payment) EasyPostEnum.getEnumFromValue(values(), value);
     }
 
     public static Payment getDefault() {

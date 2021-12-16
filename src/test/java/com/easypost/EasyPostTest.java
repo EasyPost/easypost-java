@@ -24,6 +24,7 @@ import com.easypost.model.TrackingDetail;
 import com.easypost.model.TrackingLocation;
 import com.easypost.model.Webhook;
 import com.easypost.model.WebhookCollection;
+import com.easypost.model.enums.FeeType;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -195,13 +196,13 @@ public class EasyPostTest {
     assertEquals(0.01, fee1.getAmount(), 0.001);
     assertEquals(true, fee1.getCharged());
     assertEquals(false, fee1.getRefunded());
-    assertEquals("LabelFee", fee1.getType());
+    assertEquals(FeeType.LABEL, fee1.getType());
 
     Fee fee2 = fees.get(1);
     assertEquals(4.83, fee2.getAmount(), 0.001);
     assertEquals(true, fee2.getCharged());
     assertEquals(false, fee2.getRefunded());
-    assertEquals("PostageFee", fee2.getType());
+    assertEquals(FeeType.POSTAGE, fee2.getType());
   }
 
   @Test

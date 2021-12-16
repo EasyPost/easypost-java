@@ -18,7 +18,7 @@ public enum Customs_EEL_PFC implements EasyPostEnum {
 
     public static Customs_EEL_PFC getEnum(String value)
             throws EasyPostException {
-        return (Customs_EEL_PFC) EasyPostEnum.getEnumFromValue(Mode.class,
+        return (Customs_EEL_PFC) EasyPostEnum.getEnumFromValue(values(),
                 value);
     }
 }

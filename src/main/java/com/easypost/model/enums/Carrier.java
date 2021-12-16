@@ -79,6 +79,6 @@ public enum Carrier implements EasyPostEnum {
     }
 
     public static Carrier getEnum(String value) throws EasyPostException {
-        return (Carrier) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (Carrier) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

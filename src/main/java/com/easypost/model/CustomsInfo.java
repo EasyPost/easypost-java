@@ -1,6 +1,9 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.enums.CustomsContentsType;
+import com.easypost.model.enums.CustomsNonDeliveryOption;
+import com.easypost.model.enums.CustomsRestrictionType;
 import com.easypost.net.EasyPostResource;
 
 import java.util.HashMap;
@@ -9,12 +12,12 @@ import java.util.Map;
 
 public class CustomsInfo extends EasyPostResource {
 	public String id;
-	String contentsType;
+	CustomsContentsType contentsType;
 	String contentsExplanation;
 	boolean customsCertify;
 	String customsSigner;
-	String nonDeliveryOption;
-	String restrictionType;
+	CustomsNonDeliveryOption nonDeliveryOption;
+	CustomsRestrictionType restrictionType;
 	String restrictionComments;
 	List<CustomsItem> customsItems;
 
@@ -25,10 +28,10 @@ public class CustomsInfo extends EasyPostResource {
 		this.id = id;
 	}
 
-	public String getContentsType() {
+	public CustomsContentsType getContentsType() {
 		return contentsType;
 	}
-	public void setContentsType(String contentsType) {
+	public void setContentsType(CustomsContentsType contentsType) {
 		this.contentsType = contentsType;
 	}
 
@@ -53,17 +56,17 @@ public class CustomsInfo extends EasyPostResource {
 		this.customsSigner = customsSigner;
 	}
 
-	public String getNonDeliveryOption() {
+	public CustomsNonDeliveryOption getNonDeliveryOption() {
 		return nonDeliveryOption;
 	}
-	public void setNonDeliveryOption(String nonDeliveryOption) {
+	public void setNonDeliveryOption(CustomsNonDeliveryOption nonDeliveryOption) {
 		this.nonDeliveryOption = nonDeliveryOption;
 	}
 
-	public String getRestrictionType() {
+	public CustomsRestrictionType getRestrictionType() {
 		return restrictionType;
 	}
-	public void setRestrictionType(String restrictionType) {
+	public void setRestrictionType(CustomsRestrictionType restrictionType) {
 		this.restrictionType = restrictionType;
 	}
 

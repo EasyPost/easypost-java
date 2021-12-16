@@ -1,15 +1,17 @@
 package com.easypost.model;
 
+import com.easypost.model.enums.FeeType;
+
 public class Fee{
-    String type;
+    FeeType type;
     float amount;
     Boolean charged;
     Boolean refunded;
 
-    public String getType() {
+    public FeeType getType() {
         return type;
     }
-    public void setType(String type) {
+    public void setType(FeeType type) {
         this.type = type;
     }
 

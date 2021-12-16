@@ -6,11 +6,12 @@ public interface EasyPostEnum {
 
     public String getValue();
 
-    public static Enum getEnumFromValue(Class enumClazz, String value) throws EasyPostException {
-        try {
-            return Enum.valueOf(enumClazz, value);
-        } catch (IllegalArgumentException e) {
-            throw new EasyPostException("Invalid enum: " + value);
+    public static EasyPostEnum getEnumFromValue(EasyPostEnum[] values, String value) throws EasyPostException {
+        for (EasyPostEnum v : values) {
+            if (v.getValue().equals(value)) {
+                return v;
+            }
         }
+        throw new EasyPostException("Invalid enum: " + value);
     }
 }

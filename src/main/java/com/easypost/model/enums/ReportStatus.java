@@ -1,10 +1,14 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum ReportStatus implements EasyPostEnum {
+    @SerializedName("new")
     NEW("new"),
+    @SerializedName("available")
     AVAILABLE("available"),
+    @SerializedName("failed")
     FAILED("failed"),
     NULL(null);
 
@@ -22,6 +26,6 @@ public enum ReportStatus implements EasyPostEnum {
         if (value == null) {
             return NULL;
         }
-        return (ReportStatus) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (ReportStatus) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

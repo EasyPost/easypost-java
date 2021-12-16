@@ -4,6 +4,7 @@ import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Batch;
 import com.easypost.model.Shipment;
+import com.easypost.model.enums.BatchState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +47,7 @@ public class BatchManifestExample {
             while(true) {
                 batch = batch.refresh();
 
-                if (batch.getState() == "created") {
+                if (batch.getState() == BatchState.CREATED) {
                     break;
                 }
 

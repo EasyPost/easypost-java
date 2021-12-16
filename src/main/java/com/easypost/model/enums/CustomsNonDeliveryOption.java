@@ -1,9 +1,12 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum CustomsNonDeliveryOption implements EasyPostEnum {
+    @SerializedName("abandon")
     ABANDON("abandon"),
+    @SerializedName("return")
     RETURN("return");
 
     private String value;
@@ -19,7 +22,7 @@ public enum CustomsNonDeliveryOption implements EasyPostEnum {
     public static CustomsNonDeliveryOption getEnum(String value)
             throws EasyPostException {
         return (CustomsNonDeliveryOption) EasyPostEnum.getEnumFromValue(
-                Mode.class, value);
+                values(), value);
     }
 
     public static CustomsNonDeliveryOption getDefault() {

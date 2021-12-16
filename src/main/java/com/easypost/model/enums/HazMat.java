@@ -24,6 +24,6 @@ public enum HazMat implements EasyPostEnum {
     }
 
     public static HazMat getEnum(String value) throws EasyPostException {
-        return (HazMat) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (HazMat) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

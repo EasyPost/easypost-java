@@ -18,6 +18,6 @@ public enum DeliveryConfirmation implements EasyPostEnum {
     }
 
     public static DeliveryConfirmation getEnum(String value) throws EasyPostException {
-        return (DeliveryConfirmation) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (DeliveryConfirmation) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

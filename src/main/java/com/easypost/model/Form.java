@@ -1,9 +1,12 @@
 package com.easypost.model;
 
+import com.easypost.model.enums.FormType;
+import com.easypost.model.enums.Mode;
+
 public class Form {
   public String id;
-  String mode;
-  String formType;
+  Mode mode;
+  FormType formType;
   String formUrl;
   Boolean submittedElectronically;
 
@@ -14,17 +17,17 @@ public class Form {
     this.id = id;
   }
 
-  public String getMode() {
+  public Mode getMode() {
     return mode;
   }
-  public void setMode(String mode) {
+  public void setMode(Mode mode) {
     this.mode = mode;
   }
 
-  public String getFormType() {
+  public FormType getFormType() {
     return formType;
   }
-  public void setFormType(String formType) {
+  public void setFormType(FormType formType) {
     this.formType = formType;
   }
 

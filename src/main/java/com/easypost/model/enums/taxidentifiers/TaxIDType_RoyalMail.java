@@ -2,7 +2,6 @@ package com.easypost.model.enums.taxidentifiers;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.enums.EasyPostEnum;
-import com.easypost.model.enums.Mode;
 
 public enum TaxIDType_RoyalMail implements EasyPostEnum {
     VAT("VAT"),
@@ -20,6 +19,6 @@ public enum TaxIDType_RoyalMail implements EasyPostEnum {
     }
 
     public static TaxIDType_RoyalMail getEnum(String value) throws EasyPostException {
-        return (TaxIDType_RoyalMail) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (TaxIDType_RoyalMail) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

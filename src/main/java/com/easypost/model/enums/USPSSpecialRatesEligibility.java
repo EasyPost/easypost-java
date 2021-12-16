@@ -17,6 +17,6 @@ public enum USPSSpecialRatesEligibility implements EasyPostEnum {
     }
 
     public static USPSSpecialRatesEligibility getEnum(String value) throws EasyPostException {
-        return (USPSSpecialRatesEligibility) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (USPSSpecialRatesEligibility) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }

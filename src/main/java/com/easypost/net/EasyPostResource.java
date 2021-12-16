@@ -11,6 +11,8 @@ import com.easypost.model.Shipment;
 import com.easypost.model.SmartrateCollection;
 import com.easypost.model.SmartrateCollectionDeserializer;
 import com.easypost.model.TrackingDetail;
+import com.easypost.model.enums.EasyPostEnum;
+import com.easypost.model.enums.Mode;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -47,11 +49,11 @@ public abstract class EasyPostResource {
 		.create();
 
 	public static final Gson prettyPrintGson = new GsonBuilder().
-		setPrettyPrinting().
-		serializeNulls().
-		setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
-		registerTypeAdapter(Event.class, new EventDeserializer()).
-		create();
+		setPrettyPrinting()
+		.serializeNulls()
+		.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+		.registerTypeAdapter(Event.class, new EventDeserializer())
+		.create();
 
 	@Override public String toString() {
 
@@ -581,8 +583,8 @@ public abstract class EasyPostResource {
 	public String getId() {
 		return "";
 	}
-	public String getMode() {
-		return "";
+	public Mode getMode() {
+		return Mode.TEST;
 	}
 	// Batch
 	public List<Shipment> getShipments() {
@@ -601,8 +603,8 @@ public abstract class EasyPostResource {
 	public String getTrackingCode() {
 		return "";
 	}
-	public String getStatus() {
-		return "";
+	public EasyPostEnum getStatus() {
+		return null;
 	}
 	public List<TrackingDetail> getTrackingDetails() {
 		return new ArrayList<TrackingDetail>();

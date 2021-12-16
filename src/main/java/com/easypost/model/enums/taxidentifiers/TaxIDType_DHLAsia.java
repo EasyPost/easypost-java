@@ -2,7 +2,6 @@ package com.easypost.model.enums.taxidentifiers;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.enums.EasyPostEnum;
-import com.easypost.model.enums.Mode;
 
 public enum TaxIDType_DHLAsia implements EasyPostEnum {
     VAT("VAT"),
@@ -22,6 +21,6 @@ public enum TaxIDType_DHLAsia implements EasyPostEnum {
     }
 
     public static TaxIDType_DHLAsia getEnum(String value) throws EasyPostException {
-        return (TaxIDType_DHLAsia) EasyPostEnum.getEnumFromValue(Mode.class, value);
+        return (TaxIDType_DHLAsia) EasyPostEnum.getEnumFromValue(values(), value);
     }
 }
