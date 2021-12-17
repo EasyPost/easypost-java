@@ -1,18 +1,23 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum DropoffType implements EasyPostEnum {
+    @SerializedName ("REGULAR_PICKUP")
     REGULAR_PICKUP("REGULAR_PICKUP"),
+    @SerializedName("SCHEDULED_PICKUP")
     SCHEDULED_PICKUP("SCHEDULED_PICKUP"),
-    RETAIL_LOCATION("rejected"),
+    @SerializedName("RETAIL_LOCATION")
+    RETAIL_LOCATION("RETAIL_LOCATION"),
+    @SerializedName("STATION")
     STATION("STATION"),
+    @SerializedName("DROP_BOX")
     DROP_BOX("DROP_BOX"),
-    FEDEX_REGULAR_PICKUP("REGULAR_PICKUP"),
+    @SerializedName("REQUEST_COURIER")
     FEDEX_SCHEDULED_PICKUP("REQUEST_COURIER"),
-    FEDEX_RETAIL_LOCATION("BUSINESS_SERVICE_CENTER"),
-    FEDEX_STATION("STATION"),
-    FEDEX_DROP_BOX("DROP_BOX");
+    @SerializedName("BUSINESS_SERVICE_CENTER")
+    FEDEX_RETAIL_LOCATION("BUSINESS_SERVICE_CENTER");
 
     private String value;
 

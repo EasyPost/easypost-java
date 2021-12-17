@@ -1,11 +1,16 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum LabelFormat implements EasyPostEnum {
+    @SerializedName ("PNG")
     PNG("PNG"),
+    @SerializedName("PDF")
     PDF("PDF"),
+    @SerializedName("ZPL")
     ZPL("ZPL"),
+    @SerializedName("EPL2")
     EPL2("EPL2");
 
     private String value;

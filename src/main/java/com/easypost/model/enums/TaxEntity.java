@@ -1,9 +1,12 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum TaxEntity implements EasyPostEnum {
+    @SerializedName ("SENDER")
     SENDER("SENDER"),
+    @SerializedName("RECEIVER")
     RECEIVER("RECEIVER");
 
     private String value;

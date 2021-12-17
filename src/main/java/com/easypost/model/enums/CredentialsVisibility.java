@@ -1,12 +1,18 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum CredentialsVisibility implements EasyPostEnum {
+    @SerializedName("visible")
     VISIBLE("visible"),
+    @SerializedName("checkbox")
     CHECKBOX("checkbox"),
+    @SerializedName("fake")
     FAKE("fake"),
+    @SerializedName("password")
     PASSWORD("password"),
+    @SerializedName("masked")
     MASKED("masked");
 
     private String value;

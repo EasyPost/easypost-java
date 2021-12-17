@@ -2,8 +2,10 @@ package com.easypost.model.enums.taxidentifiers;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.enums.EasyPostEnum;
+import com.google.gson.annotations.SerializedName;
 
 public enum TaxIDType_FedEx implements EasyPostEnum {
+    @SerializedName ("TIN")
     TIN("TIN");
 
     private String value;

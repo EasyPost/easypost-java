@@ -1,11 +1,16 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum Payment implements EasyPostEnum {
+    @SerializedName ("SENDER")
     SENDER("SENDER"),
+    @SerializedName("THIRD_PARTY")
     THIRD_PARTY("THIRD_PARTY"),
+    @SerializedName("RECEIVER")
     RECEIVER("RECEIVER"),
+    @SerializedName("COLLECT")
     COLLECT("COLLECT");
 
     private String value;

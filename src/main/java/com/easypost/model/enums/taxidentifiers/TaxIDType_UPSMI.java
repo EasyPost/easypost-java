@@ -2,8 +2,10 @@ package com.easypost.model.enums.taxidentifiers;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.enums.EasyPostEnum;
+import com.google.gson.annotations.SerializedName;
 
 public enum TaxIDType_UPSMI implements EasyPostEnum {
+    @SerializedName ("VAT")
     VAT("VAT");
 
     private String value;

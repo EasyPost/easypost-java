@@ -1,10 +1,14 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum DeliveryConfirmation implements EasyPostEnum {
+    @SerializedName ("ADULT_SIGNATURE")
     ADULT_SIGNATURE("ADULT_SIGNATURE"),
+    @SerializedName("SIGNATURE")
     SIGNATURE("SIGNATURE"),
+    @SerializedName("NO_SIGNATURE")
     NO_SIGNATURE("NO_SIGNATURE");
 
     private String value;

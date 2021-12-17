@@ -1,9 +1,12 @@
 package com.easypost.model.enums;
 
 import com.easypost.exception.EasyPostException;
+import com.google.gson.annotations.SerializedName;
 
 public enum Customs_EEL_PFC implements EasyPostEnum {
+    @SerializedName ("EEL")
     EEL("EEL"),
+    @SerializedName("PFC")
     PFC("PFC");
 
     private String value;

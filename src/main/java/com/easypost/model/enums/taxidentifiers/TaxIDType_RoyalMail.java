@@ -2,10 +2,14 @@ package com.easypost.model.enums.taxidentifiers;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.enums.EasyPostEnum;
+import com.google.gson.annotations.SerializedName;
 
 public enum TaxIDType_RoyalMail implements EasyPostEnum {
+    @SerializedName ("VAT")
     VAT("VAT"),
+    @SerializedName("EORI")
     EORI("EORI"),
+    @SerializedName("IOSS")
     IOSS("IOSS");
 
     private String value;
