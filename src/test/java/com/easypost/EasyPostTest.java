@@ -24,7 +24,10 @@ import com.easypost.model.TrackingDetail;
 import com.easypost.model.TrackingLocation;
 import com.easypost.model.Webhook;
 import com.easypost.model.WebhookCollection;
+import com.easypost.model.enums.BatchState;
 import com.easypost.model.enums.FeeType;
+import com.easypost.model.enums.Mode;
+import com.easypost.model.enums.PickupStatus;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -652,7 +655,7 @@ public class EasyPostTest {
     Batch batch = Batch.create(batchMap);
     while (true) {
       batch = batch.refresh();
-      if ("created".equals(batch.getState())) {
+      if (batch.getState() == BatchState.CREATED) {
         break;
       }
       Thread.sleep(3000);
@@ -661,13 +664,13 @@ public class EasyPostTest {
     batch.buy();
     while (true) {
       batch = batch.refresh();
-      if ("purchased".equals(batch.getState())) {
+      if (batch.getState() == BatchState.PURCHASED) {
         break;
       }
       Thread.sleep(3000);
     }
 
-    assertEquals("Batch state is not purchased.", "purchased", batch.getState());
+    assertEquals("Batch state is not purchased.", BatchState.PURCHASED, batch.getState());
   }
 
   @Test
@@ -684,7 +687,7 @@ public class EasyPostTest {
     Batch batch = Batch.create();
     while (true) {
       batch = batch.refresh();
-      if ("created".equals(batch.getState())) {
+      if (batch.getState() == BatchState.CREATED) {
         break;
       }
       Thread.sleep(3000);
@@ -763,7 +766,7 @@ public class EasyPostTest {
 
     assertNotNull(pickup);
     assertEquals(0, pickup.getMessages().size());
-    assertEquals("scheduled", pickup.getStatus());
+    assertEquals(PickupStatus.SCHEDULED, pickup.getStatus());
 
     Map<String, Object> cancelMap = new HashMap<String, Object>();
     cancelMap.put("id", pickup.getId());
@@ -771,7 +774,7 @@ public class EasyPostTest {
 
     assertNotNull(pickup);
     assertEquals(0, pickup.getMessages().size());
-    assertEquals("canceled", pickup.getStatus());
+    assertEquals(PickupStatus.CANCELLED, pickup.getStatus());
 
     Pickup retrieved = Pickup.retrieve(pickup.getId());
     pickup = pickup.refresh();
@@ -1017,7 +1020,7 @@ public class EasyPostTest {
     // Create a webhook
     Webhook webhook = Webhook.create(paramMap);
     assertNotNull("ID is null", webhook.getId());
-    assertEquals("mode is not test",  "test", webhook.getMode());
+    assertEquals("mode is not test", Mode.TEST, webhook.getMode());
     assertEquals("URL is not correctly ser", webhook.getUrl(), url);
     assertNull("disabledAt is not null", webhook.getDisabledAt());
     assertEquals("Class is not Webhook", Webhook.class, webhook.getClass());
