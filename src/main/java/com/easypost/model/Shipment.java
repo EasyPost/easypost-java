@@ -350,7 +350,6 @@ public final class Shipment extends EasyPostResource {
                 String.format("%s/rerate",
                         instanceURL(Shipment.class, this.getId())), params,
                 Shipment.class, apiKey);
-
         this.merge(this, response);
         return this;
     }
@@ -376,7 +375,6 @@ public final class Shipment extends EasyPostResource {
                         String.format("%s/smartrate",
                                 instanceURL(Shipment.class, this.getId())),
                         params, SmartrateCollection.class, apiKey);
-
         return smartrateCollection.getRates();
     }
 
@@ -399,13 +397,12 @@ public final class Shipment extends EasyPostResource {
 
         return this.buy(params, null);
     }
-
+  
     public Shipment buy(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
         Shipment response = request(RequestMethod.POST, String.format("%s/buy",
                         instanceURL(Shipment.class, this.getId())), params,
                 Shipment.class, apiKey);
-
         this.merge(this, response);
         return this;
     }
@@ -449,7 +446,6 @@ public final class Shipment extends EasyPostResource {
         Shipment response = request(RequestMethod.GET, String.format("%s/label",
                         instanceURL(Shipment.class, this.getId())), params,
                 Shipment.class, apiKey);
-
         this.merge(this, response);
         return this;
     }
@@ -479,7 +475,7 @@ public final class Shipment extends EasyPostResource {
     public Rate lowestRate() throws EasyPostException {
         return this.lowestRate(null, null);
     }
-
+  
     public Rate lowestRate(final List<String> carriers) throws EasyPostException {
         return this.lowestRate(carriers, null);
     }
