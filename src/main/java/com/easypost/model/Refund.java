@@ -137,8 +137,7 @@ public final class Refund extends EasyPostResource {
      * @return Refund object
      * @throws EasyPostException
      */
-    public static List<Refund> create(final Map<String, Object> params)
-            throws EasyPostException {
+    public static List<Refund> create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
     }
 
@@ -150,14 +149,11 @@ public final class Refund extends EasyPostResource {
      * @return Refund object
      * @throws EasyPostException
      */
-    public static List<Refund> create(final Map<String, Object> params,
-                                      final String apiKey)
-            throws EasyPostException {
+    public static List<Refund> create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("refund", params);
 
-        return request(RequestMethod.POST, classURL(Refund.class),
-                wrappedParams, List.class, apiKey);
+        return request(RequestMethod.POST, classURL(Refund.class), wrappedParams, List.class, apiKey);
     }
 
     /**
@@ -179,10 +175,8 @@ public final class Refund extends EasyPostResource {
      * @return Refund object
      * @throws EasyPostException
      */
-    public static Refund retrieve(final String id, final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Refund.class, id), null,
-                Refund.class, apiKey);
+    public static Refund retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Refund.class, id), null, Refund.class, apiKey);
     }
 
     /**
@@ -192,8 +186,7 @@ public final class Refund extends EasyPostResource {
      * @return RefundCollection object
      * @throws EasyPostException
      */
-    public static RefundCollection all(final Map<String, Object> params)
-            throws EasyPostException {
+    public static RefundCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
     }
 
@@ -205,10 +198,7 @@ public final class Refund extends EasyPostResource {
      * @return RefundCollection object
      * @throws EasyPostException
      */
-    public static RefundCollection all(final Map<String, Object> params,
-                                       final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Refund.class), params,
-                RefundCollection.class, apiKey);
+    public static RefundCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Refund.class), params, RefundCollection.class, apiKey);
     }
 }

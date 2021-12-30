@@ -336,8 +336,7 @@ public final class Address extends EasyPostResource {
      *
      * @param verifications address verifications
      */
-    public void setVerifications(
-            final Map<String, AddressVerification> verifications) {
+    public void setVerifications(final Map<String, AddressVerification> verifications) {
         this.verifications = verifications;
     }
 
@@ -348,8 +347,7 @@ public final class Address extends EasyPostResource {
      * @return Address object.
      * @throws EasyPostException
      */
-    public static Address create(final Map<String, Object> params)
-            throws EasyPostException {
+    public static Address create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
     }
 
@@ -361,13 +359,11 @@ public final class Address extends EasyPostResource {
      * @return Address object.
      * @throws EasyPostException
      */
-    public static Address create(final Map<String, Object> params,
-                                 final String apiKey) throws EasyPostException {
+    public static Address create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         String url = classURL(Address.class);
 
         List<String> verifyList = (List<String>) params.remove("verify");
-        List<String> verifyStrictList =
-                (List<String>) params.remove("verify_strict");
+        List<String> verifyStrictList = (List<String>) params.remove("verify_strict");
 
         if ((verifyList != null && verifyList.size() >= 1) ||
                 (verifyStrictList != null && verifyStrictList.size() >= 1)) {
@@ -389,8 +385,7 @@ public final class Address extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("address", params);
 
-        return request(RequestMethod.POST, url, wrappedParams, Address.class,
-                apiKey);
+        return request(RequestMethod.POST, url, wrappedParams, Address.class, apiKey);
     }
 
     /**
@@ -412,10 +407,8 @@ public final class Address extends EasyPostResource {
      * @return Address object.
      * @throws EasyPostException
      */
-    public static Address retrieve(final String id, final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Address.class, id), null,
-                Address.class, apiKey);
+    public static Address retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Address.class, id), null, Address.class, apiKey);
     }
 
     /**
@@ -425,8 +418,7 @@ public final class Address extends EasyPostResource {
      * @return AddressCollection object.
      * @throws EasyPostException
      */
-    public static AddressCollection all(final Map<String, Object> params)
-            throws EasyPostException {
+    public static AddressCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
     }
 
@@ -438,11 +430,9 @@ public final class Address extends EasyPostResource {
      * @return AddressCollection object.
      * @throws EasyPostException
      */
-    public static AddressCollection all(final Map<String, Object> params,
-                                        final String apiKey)
+    public static AddressCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Address.class), params,
-                AddressCollection.class, apiKey);
+        return request(RequestMethod.GET, classURL(Address.class), params, AddressCollection.class, apiKey);
     }
 
     /**
@@ -452,8 +442,7 @@ public final class Address extends EasyPostResource {
      * @return Address object.
      * @throws EasyPostException
      */
-    public static Address createAndVerify(final Map<String, Object> params)
-            throws EasyPostException {
+    public static Address createAndVerify(final Map<String, Object> params) throws EasyPostException {
         return createAndVerify(params, null);
     }
 
@@ -465,15 +454,13 @@ public final class Address extends EasyPostResource {
      * @return Address object.
      * @throws EasyPostException
      */
-    public static Address createAndVerify(final Map<String, Object> params,
-                                          final String apiKey)
+    public static Address createAndVerify(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("address", params);
 
         AddressVerifyResponse response;
-        response = request(RequestMethod.POST,
-                String.format("%s/create_and_verify", classURL(Address.class)),
+        response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
                 wrappedParams, AddressVerifyResponse.class, apiKey);
 
         if (response.message != null) {
@@ -491,8 +478,7 @@ public final class Address extends EasyPostResource {
      * @return Address object.
      * @throws EasyPostException
      */
-    public static Address createAndVerifyWithCarrier(
-            final Map<String, Object> params, final String carrier)
+    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier)
             throws EasyPostException {
         return createAndVerifyWithCarrier(params, carrier, null);
     }
@@ -507,16 +493,14 @@ public final class Address extends EasyPostResource {
      * @return Address object.
      * @throws EasyPostException
      */
-    public static Address createAndVerifyWithCarrier(
-            final Map<String, Object> params, final String carrier,
-            final String apiKey) throws EasyPostException {
+    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier,
+                                                     final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("address", params);
         wrappedParams.put("carrier", carrier);
 
         AddressVerifyResponse response;
-        response = request(RequestMethod.POST,
-                String.format("%s/create_and_verify", classURL(Address.class)),
+        response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
                 wrappedParams, AddressVerifyResponse.class, apiKey);
 
         if (response.message != null) {
@@ -544,9 +528,9 @@ public final class Address extends EasyPostResource {
      */
     public Address verify(final String apiKey) throws EasyPostException {
         AddressVerifyResponse response;
-        response = request(RequestMethod.GET, String.format("%s/verify",
-                        instanceURL(Address.class, this.getId())), null,
-                AddressVerifyResponse.class, apiKey);
+        response =
+                request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null,
+                        AddressVerifyResponse.class, apiKey);
 
         if (response.message != null) {
             response.address.message = response.message;
@@ -561,8 +545,7 @@ public final class Address extends EasyPostResource {
      * @return Address object.
      * @throws EasyPostException
      */
-    public Address verifyWithCarrier(final String carrier)
-            throws EasyPostException {
+    public Address verifyWithCarrier(final String carrier) throws EasyPostException {
         return this.verifyWithCarrier(carrier, null);
     }
 
@@ -574,15 +557,14 @@ public final class Address extends EasyPostResource {
      * @return Address object.
      * @throws EasyPostException
      */
-    public Address verifyWithCarrier(final String carrier, final String apiKey)
-            throws EasyPostException {
+    public Address verifyWithCarrier(final String carrier, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("carrier", carrier);
 
         AddressVerifyResponse response;
-        response = request(RequestMethod.GET, String.format("%s/verify",
-                        instanceURL(Address.class, this.getId())), null,
-                AddressVerifyResponse.class, apiKey);
+        response =
+                request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null,
+                        AddressVerifyResponse.class, apiKey);
 
         if (response.message != null) {
             response.address.message = response.message;

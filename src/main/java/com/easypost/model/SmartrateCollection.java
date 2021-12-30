@@ -16,14 +16,29 @@ public final class SmartrateCollection {
     public SmartrateCollection() {
     }
 
+    /**
+     * Create a SmartrateCollection from a list of rates.
+     *
+     * @param rates List of Rate objects
+     */
     public SmartrateCollection(final List<Rate> rates) {
         this.rates = rates;
     }
 
+    /**
+     * Get the Rate objects in this SmartrateCollection.
+     *
+     * @return List of Rate objects
+     */
     public List<Rate> getRates() {
         return rates;
     }
 
+    /**
+     * Add a Rate object to this SmartrateCollection.
+     *
+     * @param rate Rate object
+     */
     public void addRate(final Rate rate) {
         rates.add(rate);
     }

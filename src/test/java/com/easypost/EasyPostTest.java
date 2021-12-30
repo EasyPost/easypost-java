@@ -9,7 +9,6 @@ import com.easypost.model.Fee;
 import com.easypost.model.Insurance;
 import com.easypost.model.InsuranceCollection;
 import com.easypost.model.Order;
-import com.easypost.model.Parcel;
 import com.easypost.model.Pickup;
 import com.easypost.model.PostageLabel;
 import com.easypost.model.Rate;
@@ -36,7 +35,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -56,14 +54,11 @@ import static org.junit.Assert.assertTrue;
 
 public class EasyPostTest {
 
-    static Map<String, Object> defaultFromAddress =
-            new HashMap<String, Object>();
+    static Map<String, Object> defaultFromAddress = new HashMap<String, Object>();
     static Map<String, Object> defaultToAddress = new HashMap<String, Object>();
     static Map<String, Object> defaultParcel = new HashMap<String, Object>();
-    static Map<String, Object> defaultCustomsItem =
-            new HashMap<String, Object>();
-    static Map<String, Object> defaultCustomsInfo =
-            new HashMap<String, Object>();
+    static Map<String, Object> defaultCustomsItem = new HashMap<String, Object>();
+    static Map<String, Object> defaultCustomsInfo = new HashMap<String, Object>();
     static Map<String, Object> canadaToAddress = new HashMap<String, Object>();
 
     static Shipment createDefaultShipmentDomestic() throws EasyPostException {
@@ -83,8 +78,7 @@ public class EasyPostTest {
 
     @BeforeClass
     public static void setUp() {
-        EasyPost.apiKey =
-                "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi"; // easypost public test key
+        EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi"; // easypost public test key
 
         defaultFromAddress.put("name", "EasyPost");
         defaultFromAddress.put("street1", "164 Townsend St");
@@ -114,8 +108,7 @@ public class EasyPostTest {
         defaultCustomsItem.put("code", "123");
         defaultCustomsItem.put("currency", "USD");
 
-        List<Map<String, Object>> customsItems =
-                new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> customsItems = new ArrayList<Map<String, Object>>();
         customsItems.add(defaultCustomsItem);
         defaultCustomsInfo.put("customs_certify", true);
         defaultCustomsInfo.put("customs_signer", "Shipping Manager");
@@ -166,8 +159,7 @@ public class EasyPostTest {
     }
 
     @Test
-    public void testShipmentWithPostageLabelWithOptions()
-            throws EasyPostException {
+    public void testShipmentWithPostageLabelWithOptions() throws EasyPostException {
         // create and buy shipment
         Map<String, Object> optionsMap = new HashMap<String, Object>();
         optionsMap.put("label_format", "ZPL");
@@ -301,8 +293,7 @@ public class EasyPostTest {
     }
 
     @Test
-    public void testTrackerCreateAndRetrieve()
-            throws EasyPostException, ParseException {
+    public void testTrackerCreateAndRetrieve() throws EasyPostException, ParseException {
         // create test tracker
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("tracking_code", "EZ4000000004");
@@ -318,26 +309,18 @@ public class EasyPostTest {
         // This Est Delivery Date test confirms that the timestamps are within 1.5 seconds of each other
         // (rather than exactly equal)
         assertTrue("Est delivery dates aren't within expected timeframe",
-                Math.abs((new Date()).getTime() -
-                        tracker.getEstDeliveryDate().getTime()) < 1500);
+                Math.abs((new Date()).getTime() - tracker.getEstDeliveryDate().getTime()) < 1500);
 
         assertEquals("Weights don't match", 17.6, tracker.getWeight(), 0.0001);
-        assertEquals("Signed By doesn't match", "John Tester",
-                tracker.getSignedBy());
-        assertEquals("Service levels don't match", "FEDEX_GROUND",
-                tracker.getCarrierDetail().getService());
-        assertEquals("Containers don't match", "YOUR_PACKAGING",
-                tracker.getCarrierDetail().getContainerType());
+        assertEquals("Signed By doesn't match", "John Tester", tracker.getSignedBy());
+        assertEquals("Service levels don't match", "FEDEX_GROUND", tracker.getCarrierDetail().getService());
+        assertEquals("Containers don't match", "YOUR_PACKAGING", tracker.getCarrierDetail().getContainerType());
 
-        assertNotNull("Destination Location is null",
-                tracker.getCarrierDetail().getDestinationLocation());
-        assertNotNull("Initial Delivery Attempt is null",
-                tracker.getCarrierDetail().getInitialDeliveryAttempt());
+        assertNotNull("Destination Location is null", tracker.getCarrierDetail().getDestinationLocation());
+        assertNotNull("Initial Delivery Attempt is null", tracker.getCarrierDetail().getInitialDeliveryAttempt());
 
-        assertNotNull("Est delivery Date local is null",
-                tracker.getCarrierDetail().getEstDeliveryDateLocal());
-        assertNotNull("Est delivery Time local is null",
-                tracker.getCarrierDetail().getEstDeliveryTimeLocal());
+        assertNotNull("Est delivery Date local is null", tracker.getCarrierDetail().getEstDeliveryDateLocal());
+        assertNotNull("Est delivery Time local is null", tracker.getCarrierDetail().getEstDeliveryTimeLocal());
         assertNotNull("Created at is null", tracker.getCreatedAt());
         assertNotNull("Updated at is null", tracker.getUpdateAt());
         assertNotNull("PublicURL is not null", tracker.getPublicUrl());
@@ -345,33 +328,24 @@ public class EasyPostTest {
         Tracker retrieved = Tracker.retrieve(tracker.getId());
 
         assertNotNull(retrieved);
-        assertEquals("Tracker ids are not the same", tracker.getId(),
-                retrieved.getId());
-        assertEquals("Tracker statuses are not the same", tracker.getStatus(),
-                retrieved.getStatus());
+        assertEquals("Tracker ids are not the same", tracker.getId(), retrieved.getId());
+        assertEquals("Tracker statuses are not the same", tracker.getStatus(), retrieved.getStatus());
 
         assertNotNull(tracker.getCarrier());
         assertNotNull(retrieved.getCarrier());
-        assertEquals("Tracker carriers are not the same", tracker.getCarrier(),
-                retrieved.getCarrier());
-        assertEquals("Tracker StatusDetail is not populated",
-                "arrived_at_destination", tracker.getStatusDetail());
+        assertEquals("Tracker carriers are not the same", tracker.getCarrier(), retrieved.getCarrier());
+        assertEquals("Tracker StatusDetail is not populated", "arrived_at_destination", tracker.getStatusDetail());
 
         TrackingDetail trackingDetail = tracker.getTrackingDetails().get(0);
         TrackingDetail retrievedDetail = tracker.getTrackingDetails().get(0);
 
-        assertEquals("TrackingDetails are not the same", trackingDetail,
-                retrievedDetail);
-        assertEquals("TrackingDetail StatusDetail is not populated",
-                "status_update", trackingDetail.getStatusDetail());
+        assertEquals("TrackingDetails are not the same", trackingDetail, retrievedDetail);
+        assertEquals("TrackingDetail StatusDetail is not populated", "status_update", trackingDetail.getStatusDetail());
 
-        TrackingLocation trackingLocation =
-                trackingDetail.getTrackingLocation();
-        TrackingLocation retrievedLocation =
-                retrievedDetail.getTrackingLocation();
+        TrackingLocation trackingLocation = trackingDetail.getTrackingLocation();
+        TrackingLocation retrievedLocation = retrievedDetail.getTrackingLocation();
 
-        assertEquals("TrackingLocations are not the same", trackingLocation,
-                retrievedLocation);
+        assertEquals("TrackingLocations are not the same", trackingLocation, retrievedLocation);
     }
 
     @Test
@@ -381,8 +355,7 @@ public class EasyPostTest {
         trackingCodes.add("EZ2000000002");
         trackingCodes.add("EZ3000000003");
 
-        List<HashMap<String, Object>> trackingCodeParams =
-                new ArrayList<HashMap<String, Object>>();
+        List<HashMap<String, Object>> trackingCodeParams = new ArrayList<HashMap<String, Object>>();
         HashMap<String, Object> code;
 
         for (int i = 0; i < trackingCodes.size(); i++) {
@@ -411,19 +384,16 @@ public class EasyPostTest {
         // retrieve tracker by id
         Tracker tracker2 = Tracker.retrieve(tracker.id);
 
-        assertEquals("Tracker ids are not the same", tracker.getId(),
-                tracker2.getId());
+        assertEquals("Tracker ids are not the same", tracker.getId(), tracker2.getId());
 
         // retrieve all trackers by tracking_code
         Map<String, Object> index_params = new HashMap<String, Object>();
         index_params.put("tracking_code", "EZ2000000002");
         TrackerCollection trackers = Tracker.all(index_params);
 
-        assertEquals("Incorrect length received", 30,
-                trackers.getTrackers().size());
+        assertEquals("Incorrect length received", 30, trackers.getTrackers().size());
         assertTrue("'has_more' should be true", trackers.getHasMore());
-        assertEquals(
-                "Tracker ids in create response and all response are not the same",
+        assertEquals("Tracker ids in create response and all response are not the same",
                 trackers.getTrackers().get(0).id, tracker.id);
 
         // create another test tracker
@@ -436,11 +406,9 @@ public class EasyPostTest {
         index_params2.put("after_id", tracker.id);
         TrackerCollection trackers2 = Tracker.all(index_params2);
 
-        assertEquals("Incorrect length received", 1,
-                trackers2.getTrackers().size());
+        assertEquals("Incorrect length received", 1, trackers2.getTrackers().size());
         assertFalse("'has_more' should be true", trackers2.getHasMore());
-        assertEquals(
-                "Tracker ids in create response and all response are not the same",
+        assertEquals("Tracker ids in create response and all response are not the same",
                 trackers2.getTrackers().get(0).id, tracker3.id);
     }
 
@@ -506,17 +474,13 @@ public class EasyPostTest {
         Address address = Address.create(addressHash);
         Address verified = address.verify();
 
-        assertNull("Verified Address has no error message",
-                verified.getMessage());
-        assertEquals("Address did not verify as expected", "94107-1990",
-                verified.getZip());
+        assertNull("Verified Address has no error message", verified.getMessage());
+        assertEquals("Address did not verify as expected", "94107-1990", verified.getZip());
 
         Address createdAndVerified = Address.createAndVerify(addressHash);
 
-        assertNull("Verified Address has no error message",
-                createdAndVerified.getMessage());
-        assertEquals("Address did not verify as expected", "94107-1990",
-                createdAndVerified.getZip());
+        assertNull("Verified Address has no error message", createdAndVerified.getMessage());
+        assertEquals("Address did not verify as expected", "94107-1990", createdAndVerified.getZip());
     }
 
     @Test
@@ -541,15 +505,10 @@ public class EasyPostTest {
         assertNotNull("Id is null", address.getId());
         assertEquals("City did not verify", "SAN FRANCISCO", address.getCity());
 
-        Map<String, AddressVerification> verifications =
-                address.getVerifications();
-        assertEquals("Verification did not succeed.", true,
-                verifications.get("delivery").getSuccess());
-        assertEquals("Verification had errors.",
-                verifications.get("delivery").getErrors(),
-                Collections.emptyList());
-        assertNotNull("Address details is null.",
-                verifications.get("delivery").getAddressDetail());
+        Map<String, AddressVerification> verifications = address.getVerifications();
+        assertEquals("Verification did not succeed.", true, verifications.get("delivery").getSuccess());
+        assertEquals("Verification had errors.", verifications.get("delivery").getErrors(), Collections.emptyList());
+        assertNotNull("Address details is null.", verifications.get("delivery").getAddressDetail());
         assertEquals("Address details did not have TZ.", "America/Los_Angeles",
                 verifications.get("delivery").getAddressDetail().getTimeZone());
     }
@@ -575,27 +534,21 @@ public class EasyPostTest {
         assertNotNull("Id is null", address.getId());
         assertEquals("City did not verify", "SAN FRANCISCO", address.getCity());
 
-        Map<String, AddressVerification> verifications =
-                address.getVerifications();
-        assertEquals("Verification did not succeed.", false,
-                verifications.get("delivery").getSuccess());
+        Map<String, AddressVerification> verifications = address.getVerifications();
+        assertEquals("Verification did not succeed.", false, verifications.get("delivery").getSuccess());
 
-        List<com.easypost.model.Error> errors =
-                verifications.get("delivery").getErrors();
+        List<com.easypost.model.Error> errors = verifications.get("delivery").getErrors();
 
         assertTrue("At least two errors are present", errors.size() >= 2);
-        assertEquals("Verification had a suggestion.", null,
-                errors.get(0).getSuggestion());
-        assertEquals("Verification error did not have a code.",
-                "E.ADDRESS.NOT_FOUND", errors.get(0).getCode());
+        assertEquals("Verification had a suggestion.", null, errors.get(0).getSuggestion());
+        assertEquals("Verification error did not have a code.", "E.ADDRESS.NOT_FOUND", errors.get(0).getCode());
     }
 
     @Rule
     public ExpectedException verifyStrictException = ExpectedException.none();
 
     @Test
-    public void testAddressCreateWithVerifyStrictFails()
-            throws EasyPostException {
+    public void testAddressCreateWithVerifyStrictFails() throws EasyPostException {
         Map<String, Object> addressHash = new HashMap<String, Object>();
 
         List<String> verificationList = new ArrayList<String>();
@@ -610,8 +563,7 @@ public class EasyPostTest {
         addressHash.put("company", "EasyPost");
         addressHash.put("phone", "415-123-4567");
 
-        verifyStrictException.expect(
-                com.easypost.exception.EasyPostException.class);
+        verifyStrictException.expect(com.easypost.exception.EasyPostException.class);
 
         Address address = Address.create(addressHash);
     }
@@ -660,8 +612,7 @@ public class EasyPostTest {
 
     @Test
     public void testBatchBuy() throws EasyPostException, InterruptedException {
-        List<Map<String, Object>> shipments =
-                new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
         Map<String, Object> shipmentMap = new HashMap<String, Object>();
         shipmentMap.put("to_address", defaultToAddress);
         shipmentMap.put("from_address", defaultFromAddress);
@@ -691,8 +642,7 @@ public class EasyPostTest {
             Thread.sleep(3000);
         }
 
-        assertEquals("Batch state is not purchased.", "purchased",
-                batch.getState());
+        assertEquals("Batch state is not purchased.", "purchased", batch.getState());
     }
 
     @Test
@@ -713,15 +663,13 @@ public class EasyPostTest {
         shipmentMap.put("tax_identifiers", taxIdentifiers);
 
         Shipment shipment = Shipment.create(shipmentMap);
-        TaxIdentifier taxIdentifierReceived =
-                shipment.getTaxIdentifiers().get(0);
+        TaxIdentifier taxIdentifierReceived = shipment.getTaxIdentifiers().get(0);
         assertEquals("SENDER", taxIdentifierReceived.getEntity());
         assertEquals("HIDDEN", taxIdentifierReceived.getTaxId());
         assertEquals("EORI", taxIdentifierReceived.getTaxIdType());
         assertEquals("US", taxIdentifierReceived.getIssuingCountry());
         Shipment retrievedShipment = Shipment.retrieve(shipment.id);
-        TaxIdentifier taxIdentifierRetrieved =
-                retrievedShipment.getTaxIdentifiers().get(0);
+        TaxIdentifier taxIdentifierRetrieved = retrievedShipment.getTaxIdentifiers().get(0);
         assertEquals("SENDER", taxIdentifierRetrieved.getEntity());
         assertEquals("HIDDEN", taxIdentifierRetrieved.getTaxId());
         assertEquals("EORI", taxIdentifierRetrieved.getTaxIdType());
@@ -729,8 +677,7 @@ public class EasyPostTest {
     }
 
     @Test
-    public void testBatchCreateScanForm()
-            throws EasyPostException, InterruptedException {
+    public void testBatchCreateScanForm() throws EasyPostException, InterruptedException {
         // create and buy shipments
         Shipment shipment1 = createDefaultShipmentDomestic();
         Shipment shipment2 = createDefaultShipmentDomestic();
@@ -813,8 +760,7 @@ public class EasyPostTest {
         assertTrue(pickup.getIsAccountAddress());
 
         assertEquals("UPS", pickup.getPickupRates().get(0).getCarrier());
-        assertEquals("Same-day Pickup",
-                pickup.getPickupRates().get(0).getService());
+        assertEquals("Same-day Pickup", pickup.getPickupRates().get(0).getService());
 
         Map<String, Object> buyMap = new HashMap<String, Object>();
         buyMap.put("carrier", pickup.getPickupRates().get(0).getCarrier());
@@ -848,8 +794,7 @@ public class EasyPostTest {
         // create and buy multi-shipment order
         Map<String, Object> shipment_1 = orderShipment();
         Map<String, Object> shipment_2 = orderShipment();
-        List<Map<String, Object>> shipments =
-                new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
         shipments.add(shipment_1);
         shipments.add(shipment_2);
 
@@ -866,10 +811,8 @@ public class EasyPostTest {
         order.buy(buyParams);
 
         assertNotNull(order.getShipments().get(0).getTracker());
-        assertNotNull(
-                order.getShipments().get(0).getPostageLabel().getLabelUrl());
-        assertNotNull(
-                order.getShipments().get(1).getPostageLabel().getLabelUrl());
+        assertNotNull(order.getShipments().get(0).getPostageLabel().getLabelUrl());
+        assertNotNull(order.getShipments().get(1).getPostageLabel().getLabelUrl());
 
         assertEquals(order.getShipments().get(0).getOrderId(), order.getId());
     }
@@ -879,8 +822,7 @@ public class EasyPostTest {
         // create and buy multi-shipment order
         Map<String, Object> shipment_1 = orderShipment();
         Map<String, Object> shipment_2 = orderShipment();
-        List<Map<String, Object>> shipments =
-                new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
         shipments.add(shipment_1);
         shipments.add(shipment_2);
 
@@ -894,12 +836,10 @@ public class EasyPostTest {
         assertNotNull("Original Rate ID is null", rateId);
 
         order.newRates();
-        String newRateId =
-                order.getShipments().get(0).getRates().get(0).getId();
+        String newRateId = order.getShipments().get(0).getRates().get(0).getId();
 
         assertNotNull("New Rate ID is null", newRateId);
-        assertNotEquals("New Rate ID and Old Rate ID are equal", newRateId,
-                rateId);
+        assertNotEquals("New Rate ID and Old Rate ID are equal", newRateId, rateId);
     }
 
     @Test
@@ -972,20 +912,17 @@ public class EasyPostTest {
 
         Insurance insurance2 = Insurance.retrieve(insurance.getId());
         assertNotNull("ID is null", insurance2.getId());
-        assertEquals("Create and Retrieve returned different ids",
-                insurance.getId(), insurance2.getId());
-        assertEquals("Create and Retrieve returned different tracking codes",
-                insurance.getTrackingCode(), insurance2.getTrackingCode());
+        assertEquals("Create and Retrieve returned different ids", insurance.getId(), insurance2.getId());
+        assertEquals("Create and Retrieve returned different tracking codes", insurance.getTrackingCode(),
+                insurance2.getTrackingCode());
 
         Map<String, Object> index_params = new HashMap<String, Object>();
         index_params.put("tracking_code", "EZ2000000002");
         index_params.put("page_size", "5");
         InsuranceCollection insurances = Insurance.all(index_params);
 
-        assertTrue("Wrong page_size returned",
-                insurances.getInsurances().size() == 5);
-        assertTrue("Insurances HasMore not set correctly",
-                insurances.getHasMore());
+        assertTrue("Wrong page_size returned", insurances.getInsurances().size() == 5);
+        assertTrue("Insurances HasMore not set correctly", insurances.getHasMore());
     }
 
     @Test
@@ -997,22 +934,18 @@ public class EasyPostTest {
         // Create a shipment report
         Report shipmentReport = Report.create(paramMap);
         assertNotNull("ID is null", shipmentReport.getId());
-        assertThat("ID is not a shipment report ID", shipmentReport.getId(),
-                containsString("shprep_"));
+        assertThat("ID is not a shipment report ID", shipmentReport.getId(), containsString("shprep_"));
 
         // Retrieve a shipment report
         Report shipmentReport2 = Report.retrieve(shipmentReport.getId());
         assertNotNull("ID is null", shipmentReport2.getId());
-        assertThat("ID is not a shipment report ID", shipmentReport2.getId(),
-                containsString("shprep_"));
-        assertEquals("Create and Retrieve returned different ids",
-                shipmentReport.getId(), shipmentReport2.getId());
+        assertThat("ID is not a shipment report ID", shipmentReport2.getId(), containsString("shprep_"));
+        assertEquals("Create and Retrieve returned different ids", shipmentReport.getId(), shipmentReport2.getId());
 
         // Index shipment reports
         paramMap.put("page_size", "4");
         ReportCollection shipmentReports = Report.all(paramMap);
-        assertEquals("Page Size not respected", 4,
-                shipmentReports.getReports().size());
+        assertEquals("Page Size not respected", 4, shipmentReports.getReports().size());
         assertEquals("Does not have more", true, shipmentReports.getHasMore());
     }
 
@@ -1025,22 +958,18 @@ public class EasyPostTest {
         // Create a tracker report
         Report trackerReport = Report.create(paramMap);
         assertNotNull("ID is null", trackerReport.getId());
-        assertThat("ID is not a tracker report ID", trackerReport.getId(),
-                containsString("trkrep_"));
+        assertThat("ID is not a tracker report ID", trackerReport.getId(), containsString("trkrep_"));
 
         // Retrieve a tracker report
         Report trackerReport2 = Report.retrieve(trackerReport.getId());
         assertNotNull("ID is null", trackerReport2.getId());
-        assertThat("ID is not a tracker report ID", trackerReport2.getId(),
-                containsString("trkrep_"));
-        assertEquals("Create and Retrieve returned different ids",
-                trackerReport.getId(), trackerReport2.getId());
+        assertThat("ID is not a tracker report ID", trackerReport2.getId(), containsString("trkrep_"));
+        assertEquals("Create and Retrieve returned different ids", trackerReport.getId(), trackerReport2.getId());
 
         // Index tracker reports
         paramMap.put("page_size", "4");
         ReportCollection trackerReports = Report.all(paramMap);
-        assertEquals("Page Size not respected", 4,
-                trackerReports.getReports().size());
+        assertEquals("Page Size not respected", 4, trackerReports.getReports().size());
         assertEquals("Does not have more", true, trackerReports.getHasMore());
     }
 
@@ -1053,24 +982,19 @@ public class EasyPostTest {
         // Create a payment_log report
         Report paymentLogReport = Report.create(paramMap);
         assertNotNull("ID is null", paymentLogReport.getId());
-        assertThat("ID is not a payment_log report ID",
-                paymentLogReport.getId(), containsString("plrep_"));
+        assertThat("ID is not a payment_log report ID", paymentLogReport.getId(), containsString("plrep_"));
 
         // Retrieve a payment_log report
         Report paymentLogReport2 = Report.retrieve(paymentLogReport.getId());
         assertNotNull("ID is null", paymentLogReport2.getId());
-        assertThat("ID is not a payment_log report ID",
-                paymentLogReport2.getId(), containsString("plrep_"));
-        assertEquals("Create and Retrieve returned different ids",
-                paymentLogReport.getId(), paymentLogReport2.getId());
+        assertThat("ID is not a payment_log report ID", paymentLogReport2.getId(), containsString("plrep_"));
+        assertEquals("Create and Retrieve returned different ids", paymentLogReport.getId(), paymentLogReport2.getId());
 
         // Index payment_log reports
         paramMap.put("page_size", "4");
         ReportCollection paymentLogReports = Report.all(paramMap);
-        assertEquals("Page Size not respected", 4,
-                paymentLogReports.getReports().size());
-        assertEquals("Does not have more", true,
-                paymentLogReports.getHasMore());
+        assertEquals("Page Size not respected", 4, paymentLogReports.getReports().size());
+        assertEquals("Does not have more", true, paymentLogReports.getHasMore());
     }
 
     @Ignore ("TODO: rework webhook tests. Skipping until then.")
@@ -1092,21 +1016,17 @@ public class EasyPostTest {
         // Retrieve a webhook
         Webhook webhook2 = Webhook.retrieve(webhook.getId());
         assertNotNull("ID is null", webhook2.getId());
-        assertEquals("Create and Retrieve returned different ids",
-                webhook.getId(), webhook2.getId());
+        assertEquals("Create and Retrieve returned different ids", webhook.getId(), webhook2.getId());
 
         // Update a webhook (re-enable it)
         Webhook webhook3 = webhook.update();
         assertNotNull("ID is null", webhook3.getId());
-        assertEquals("Create and Update returned different ids",
-                webhook.getId(), webhook3.getId());
+        assertEquals("Create and Update returned different ids", webhook.getId(), webhook3.getId());
 
         // Index webhooks
         WebhookCollection webhooks = Webhook.all();
-        assertEquals("Create and Retrieve returned different ids",
-                webhook.getId(),
-                webhooks.getWebhooks().get(webhooks.getWebhooks().size() - 1)
-                        .getId());
+        assertEquals("Create and Retrieve returned different ids", webhook.getId(),
+                webhooks.getWebhooks().get(webhooks.getWebhooks().size() - 1).getId());
 
         // Delete webhook
         webhook.delete();
@@ -1137,8 +1057,8 @@ public class EasyPostTest {
         ScanForm scanForm = ScanForm.create(paramMap);
 
         assertNotNull("No ID returned", scanForm.getId());
-        assertEquals("Shipment's tracking code not on Scan Form",
-                scanForm.getTrackingCodes().get(0), shipment.getTrackingCode());
+        assertEquals("Shipment's tracking code not on Scan Form", scanForm.getTrackingCodes().get(0),
+                shipment.getTrackingCode());
 
         // retrieve ScanForm
         ScanForm scanForm2 = ScanForm.retrieve(scanForm.getId());
@@ -1149,8 +1069,7 @@ public class EasyPostTest {
         Map<String, Object> indexMap = new HashMap<String, Object>();
         indexMap.put("page_size", 2);
         ScanFormCollection scanForms = ScanForm.all(indexMap);
-        assertEquals("IDs do not match",
-                scanForms.getScanForms().get(0).getId(), scanForm.getId());
+        assertEquals("IDs do not match", scanForms.getScanForms().get(0).getId(), scanForm.getId());
     }
 
 

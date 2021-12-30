@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ThreadTest {
-    static Map<String, Object> defaultFromAddress =
-            new HashMap<String, Object>();
+    static Map<String, Object> defaultFromAddress = new HashMap<String, Object>();
     static Map<String, Object> defaultToAddress = new HashMap<String, Object>();
     static Map<String, Object> defaultParcel = new HashMap<String, Object>();
 
@@ -57,14 +56,12 @@ public class ThreadTest {
         public void run() {
             try {
                 for (int i = 0; i < this.orders.size(); i++) {
-                    System.out.format("Thread %s: starting order creation...%n",
-                            Thread.currentThread().getName());
+                    System.out.format("Thread %s: starting order creation...%n", Thread.currentThread().getName());
 
                     Order order = Order.create(this.orders.get(i));
                     // save order id to database or buy now
 
-                    System.out.format("Thread %s: created order %s%n",
-                            Thread.currentThread().getName(), order.getId());
+                    System.out.format("Thread %s: created order %s%n", Thread.currentThread().getName(), order.getId());
                 }
             } catch (EasyPostException e) {
                 System.out.println("EasyPost Exception caught creating order.");
@@ -73,13 +70,11 @@ public class ThreadTest {
     }
 
     @Test
-    public void testThreadOrderCreation()
-            throws EasyPostException, InterruptedException {
+    public void testThreadOrderCreation() throws EasyPostException, InterruptedException {
 
         // create a default set of shipment and order params to feed to the threads
         Map<String, Object> shipment_1 = orderShipment();
-        List<Map<String, Object>> shipments =
-                new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
         shipments.add(shipment_1);
         Map<String, Object> orderParams = new HashMap<String, Object>();
         orderParams.put("shipments", shipments);
@@ -87,10 +82,8 @@ public class ThreadTest {
         orderParams.put("to_address", defaultToAddress);
 
         // divide up the orders among the threads
-        List<Map<String, Object>> orderBatch1 =
-                new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> orderBatch2 =
-                new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> orderBatch1 = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> orderBatch2 = new ArrayList<Map<String, Object>>();
         orderBatch1.add(orderParams);
         orderBatch1.add(orderParams);
         orderBatch2.add(orderParams);

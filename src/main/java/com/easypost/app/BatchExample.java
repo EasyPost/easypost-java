@@ -71,8 +71,7 @@ public class BatchExample {
 
             // this will be coming from your database or other input source
             // hard coding it here for demonstration purposes only
-            List<Map<String, Object>> orders =
-                    new ArrayList<Map<String, Object>>();
+            List<Map<String, Object>> orders = new ArrayList<Map<String, Object>>();
             Map<String, Object> sampleOrder = new HashMap<String, Object>();
             sampleOrder.put("name", "Sawyer Bateman");
             sampleOrder.put("street1", "1A Larkspur Cres");
@@ -86,8 +85,7 @@ public class BatchExample {
             orders.add(sampleOrder);
 
             // loop over your orders and add a shipment for each
-            List<Map<String, Object>> shipments =
-                    new ArrayList<Map<String, Object>>();
+            List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
             Map<String, Object> shipment = new HashMap<String, Object>();
             Map<String, Object> toAddressMap = new HashMap<String, Object>();
             for (Map<String, Object> order : orders) {
@@ -131,8 +129,7 @@ public class BatchExample {
 
             // request a batch label of type pdf (other options are epl2 or zpl)
             batch = batch.refresh();
-            if (batch.status.getPostagePurchased() ==
-                    batch.getShipments().size()) {
+            if (batch.status.getPostagePurchased() == batch.getShipments().size()) {
                 Map<String, Object> labelMap = new HashMap<String, Object>();
                 labelMap.put("file_format", "pdf");
 

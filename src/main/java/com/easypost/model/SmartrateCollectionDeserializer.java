@@ -15,13 +15,19 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-public final class SmartrateCollectionDeserializer
-        implements JsonDeserializer<SmartrateCollection> {
+public final class SmartrateCollectionDeserializer implements JsonDeserializer<SmartrateCollection> {
+    /**
+     * Deserialize a SmartrateCollection from a JSON object.
+     *
+     * @param json    JSON object to deserialize.
+     * @param typeOfT Type of the object to deserialize.
+     * @param context Deserialization context.
+     * @return Deserialized SmartrateCollection object.
+     * @throws JsonParseException
+     */
     @Override
-    public SmartrateCollection deserialize(final JsonElement json,
-                                           final Type typeOfT,
-                                           final JsonDeserializationContext context)
-            throws JsonParseException {
+    public SmartrateCollection deserialize(final JsonElement json, final Type typeOfT,
+                                           final JsonDeserializationContext context) throws JsonParseException {
         SmartrateCollection smartrateCollection = new SmartrateCollection();
 
         JsonObject jo = (JsonObject) json;
@@ -33,8 +39,7 @@ public final class SmartrateCollectionDeserializer
 
         // the JsonDeserializationContext should have access to the other type adapters, so we can tap into the RateDeserializer from here
         results.getAsJsonArray().forEach(rateData -> {
-            smartrateCollection.addRate(
-                    context.deserialize(rateData, Rate.class));
+            smartrateCollection.addRate(context.deserialize(rateData, Rate.class));
         });
 
         return smartrateCollection;
