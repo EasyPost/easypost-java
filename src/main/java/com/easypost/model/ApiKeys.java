@@ -75,7 +75,7 @@ public final class ApiKeys extends EasyPostResource {
      * Get all API keys.
      *
      * @return ApiKeys object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static ApiKeys all() throws EasyPostException {
         return all(null);
@@ -86,7 +86,7 @@ public final class ApiKeys extends EasyPostResource {
      *
      * @param apiKey API key to use for this request.
      * @return ApiKeys object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static ApiKeys all(final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);

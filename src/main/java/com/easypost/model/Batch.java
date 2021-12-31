@@ -173,7 +173,7 @@ public final class Batch extends EasyPostResource {
      * Create a Batch object.
      *
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Batch create() throws EasyPostException {
         return create(null, null);
@@ -184,7 +184,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param params Map of parameters.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Batch create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
@@ -196,7 +196,7 @@ public final class Batch extends EasyPostResource {
      * @param params Map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Batch create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
@@ -210,7 +210,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param id ID of the Batch to retrieve.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Batch retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -222,7 +222,7 @@ public final class Batch extends EasyPostResource {
      * @param id     ID of the Batch to retrieve.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Batch retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Batch.class, id), null, Batch.class, apiKey);
@@ -233,7 +233,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param params Map of parameters.
      * @return BatchCollection object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static BatchCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
@@ -245,7 +245,7 @@ public final class Batch extends EasyPostResource {
      * @param params Map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return BatchCollection object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static BatchCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, classURL(Batch.class), params, BatchCollection.class, apiKey);
@@ -254,11 +254,12 @@ public final class Batch extends EasyPostResource {
     /**
      * Create and buy a Batch object in one step.
      *
+     * @param params Map of parameters.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public static Batch create_and_buy(final Map<String, Object> params) throws EasyPostException {
-        return create_and_buy(params, null);
+    public static Batch createAndBuy(final Map<String, Object> params) throws EasyPostException {
+        return createAndBuy(params, null);
     }
 
     /**
@@ -267,9 +268,9 @@ public final class Batch extends EasyPostResource {
      * @param params Map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public static Batch create_and_buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+    public static Batch createAndBuy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("batch", params);
 
@@ -280,7 +281,7 @@ public final class Batch extends EasyPostResource {
      * Refresh this Batch object.
      *
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch refresh() throws EasyPostException {
         return this.refresh(null, null);
@@ -291,7 +292,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param params Map of parameters.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch refresh(final Map<String, Object> params) throws EasyPostException {
         return this.refresh(params, null);
@@ -302,7 +303,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch refresh(final String apiKey) throws EasyPostException {
         return this.refresh((Map<String, Object>) null, apiKey);
@@ -314,7 +315,7 @@ public final class Batch extends EasyPostResource {
      * @param params Map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, String.format("%s", instanceURL(Batch.class, this.getId())), params,
@@ -325,7 +326,7 @@ public final class Batch extends EasyPostResource {
      * Label this Batch object.
      *
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch label() throws EasyPostException {
         return this.label(null, null);
@@ -336,7 +337,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param params Map of parameters.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch label(final Map<String, Object> params) throws EasyPostException {
         return this.label(params, null);
@@ -348,7 +349,7 @@ public final class Batch extends EasyPostResource {
      * @param params Map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch label(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.POST, String.format("%s/label", instanceURL(Batch.class, this.getId())), params,
@@ -360,7 +361,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param shipments List of Shipment objects.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch addShipments(final List<Shipment> shipments) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
@@ -374,7 +375,7 @@ public final class Batch extends EasyPostResource {
      * @param shipments List of Shipment objects.
      * @param apiKey    API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch addShipments(final List<Shipment> shipments, final String apiKey) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
@@ -387,7 +388,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param params Map of parameters.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch addShipments(final Map<String, Object> params) throws EasyPostException {
         return this.addShipments(params, null);
@@ -399,7 +400,7 @@ public final class Batch extends EasyPostResource {
      * @param params Map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch addShipments(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.POST, String.format("%s/add_shipments", instanceURL(Batch.class, this.getId())),
@@ -411,7 +412,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param shipments List of Shipment objects.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch removeShipments(final List<Shipment> shipments) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
@@ -425,7 +426,7 @@ public final class Batch extends EasyPostResource {
      * @param shipments List of Shipment objects.
      * @param apiKey    API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch removeShipments(final List<Shipment> shipments, final String apiKey) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
@@ -438,7 +439,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param params Map of parameters.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch removeShipments(final Map<String, Object> params) throws EasyPostException {
         return this.removeShipments(params, null);
@@ -450,7 +451,7 @@ public final class Batch extends EasyPostResource {
      * @param params Map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch removeShipments(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.POST, String.format("%s/remove_shipments", instanceURL(Batch.class, this.getId())),
@@ -461,7 +462,7 @@ public final class Batch extends EasyPostResource {
      * Buy this batch.
      *
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch buy() throws EasyPostException {
         return this.buy(null, null);
@@ -472,7 +473,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param params Map of parameters.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch buy(final Map<String, Object> params) throws EasyPostException {
         return this.buy(params, null);
@@ -484,7 +485,7 @@ public final class Batch extends EasyPostResource {
      * @param params Map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.POST, String.format("%s/buy", instanceURL(Batch.class, this.getId())), params,
@@ -495,7 +496,7 @@ public final class Batch extends EasyPostResource {
      * Create a scan form for this batch.
      *
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch createScanForm() throws EasyPostException {
         return this.createScanForm(null, null);
@@ -506,7 +507,7 @@ public final class Batch extends EasyPostResource {
      *
      * @param params Map of parameters.
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch createScanForm(final Map<String, Object> params) throws EasyPostException {
         return this.createScanForm(params, null);
@@ -518,7 +519,7 @@ public final class Batch extends EasyPostResource {
      * @param params Map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Batch object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Batch createScanForm(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.POST, String.format("%s/scan_form", instanceURL(Batch.class, this.getId())),

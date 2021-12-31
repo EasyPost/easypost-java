@@ -31,6 +31,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -47,25 +48,37 @@ public abstract class EasyPostResource {
 
     public static final String EASYPOST_SUPPORT_EMAIL = "support@easypost.com";
 
-    public static final Gson gson =
+    private static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
+    private static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
+    private static final double APP_ENGINE_DEFAULT_TIMEOUT_SECONDS = 20.0;
+
+    public static final Gson GSON =
             new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .registerTypeAdapter(Event.class, new EventDeserializer())
                     .registerTypeAdapter(Rate.class, new RateDeserializer())
                     .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer()).create();
 
-    public static final Gson prettyPrintGson = new GsonBuilder().setPrettyPrinting().serializeNulls()
+    public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .registerTypeAdapter(Event.class, new EventDeserializer()).create();
 
+    /**
+     * Returns a string representation of the object.
+     */
     @Override
     public String toString() {
 
         return (String) this.getIdString();
     }
 
+    /**
+     * Pretty print the JSON representation of the object.
+     *
+     * @return the JSON representation of the object.
+     */
     public String prettyPrint() {
         return String.format("<%s@%s id=%s> JSON: %s", this.getClass().getName(), System.identityHashCode(this),
-                this.getIdString(), prettyPrintGson.toJson(this));
+                this.getIdString(), PRETTY_PRINT_GSON.toJson(this));
     }
 
     private Object getIdString() {
@@ -83,16 +96,16 @@ public abstract class EasyPostResource {
         }
     }
 
-    private static String className(Class<?> clazz) {
+    private static String className(final Class<?> clazz) {
         return clazz.getSimpleName().replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase().replace("$", "");
 
     }
 
-    protected static String singleClassURL(Class<?> clazz) {
+    protected static String singleClassURL(final Class<?> clazz) {
         return String.format("%s/%s", EasyPost.API_BASE, className(clazz));
     }
 
-    protected static String classURL(Class<?> clazz) {
+    protected static String classURL(final Class<?> clazz) {
         String singleURL = singleClassURL(clazz);
         if (singleURL.charAt(singleURL.length() - 1) == 's' || singleURL.charAt(singleURL.length() - 1) == 'h') {
             return String.format("%ses", singleClassURL(clazz));
@@ -101,11 +114,17 @@ public abstract class EasyPostResource {
         }
     }
 
-    protected static String instanceURL(Class<?> clazz, String id) {
+    protected static String instanceURL(final Class<?> clazz, final String id) {
         return String.format("%s/%s", classURL(clazz), id);
     }
 
-    public void merge(EasyPostResource obj, EasyPostResource update) {
+    /**
+     * Merge two EasyPostResource objects.
+     *
+     * @param obj    the base object
+     * @param update the object to merge
+     */
+    public void merge(final EasyPostResource obj, final EasyPostResource update) {
         if (!obj.getClass().isAssignableFrom(update.getClass())) {
             return;
         }
@@ -144,7 +163,7 @@ public abstract class EasyPostResource {
         GET, POST, DELETE, PUT
     }
 
-    private static String urlEncodePair(String k, String v) throws UnsupportedEncodingException {
+    private static String urlEncodePair(final String k, final String v) throws UnsupportedEncodingException {
         return String.format("%s=%s", URLEncoder.encode(k, CHARSET), URLEncoder.encode(v, CHARSET));
     }
 
@@ -160,20 +179,20 @@ public abstract class EasyPostResource {
         headers.put("Authorization", String.format("Bearer %s", apiKey));
 
         // debug headers
-        String[] propertyNames = { "os.name", "os.version", "os.arch", "java.version", "java.vendor", "java.vm.version",
-                "java.vm.vendor" };
+        String[] propertyNames = {"os.name", "os.version", "os.arch", "java.version", "java.vendor", "java.vm.version",
+                "java.vm.vendor"};
         Map<String, String> propertyMap = new HashMap<String, String>();
         for (String propertyName : propertyNames) {
             propertyMap.put(propertyName, System.getProperty(propertyName));
         }
         propertyMap.put("lang", "Java");
         propertyMap.put("publisher", "EasyPost");
-        headers.put("X-Client-User-Agent", gson.toJson(propertyMap));
+        headers.put("X-Client-User-Agent", GSON.toJson(propertyMap));
 
         return headers;
     }
 
-    private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(String url, String apiKey)
+    private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(final String url, final String apiKey)
             throws IOException {
         URL easypostURL = null;
         String customURLStreamHandlerClassName = System.getProperty(CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
@@ -204,13 +223,13 @@ public abstract class EasyPostResource {
             easypostURL = new URL(url);
         }
         javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) easypostURL.openConnection();
-        conn.setConnectTimeout(30000);
+        conn.setConnectTimeout(DEFAULT_CONNECT_TIMEOUT_MILLISECONDS);
 
         int readTimeout;
         if (EasyPost.readTimeout != 0) {
             readTimeout = EasyPost.readTimeout;
         } else {
-            readTimeout = 60000;
+            readTimeout = DEFAULT_READ_TIMEOUT_MILLISECONDS;
         }
         conn.setReadTimeout(readTimeout);
 
@@ -222,8 +241,8 @@ public abstract class EasyPostResource {
         return conn;
     }
 
-    private static javax.net.ssl.HttpsURLConnection writeBody(javax.net.ssl.HttpsURLConnection conn, JsonObject body)
-            throws IOException {
+    private static javax.net.ssl.HttpsURLConnection writeBody(final javax.net.ssl.HttpsURLConnection conn,
+                                                              final JsonObject body) throws IOException {
         if (body != null) {
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/json");
@@ -241,44 +260,44 @@ public abstract class EasyPostResource {
         return conn;
     }
 
-    private static javax.net.ssl.HttpsURLConnection createGetConnection(String url, String query, String apiKey)
-            throws IOException {
+    private static javax.net.ssl.HttpsURLConnection createGetConnection(final String url, final String query,
+                                                                        final String apiKey) throws IOException {
         String getURL = String.format("%s?%s", url, query);
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(getURL, apiKey);
         conn.setRequestMethod("GET");
         return conn;
     }
 
-    private static javax.net.ssl.HttpsURLConnection createPostConnection(String url, JsonObject body, String apiKey)
-            throws IOException {
+    private static javax.net.ssl.HttpsURLConnection createPostConnection(final String url, final JsonObject body,
+                                                                         final String apiKey) throws IOException {
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey);
         conn.setRequestMethod("POST");
         conn = writeBody(conn, body);
         return conn;
     }
 
-    private static javax.net.ssl.HttpsURLConnection createDeleteConnection(String url, String query, String apiKey)
-            throws IOException {
+    private static javax.net.ssl.HttpsURLConnection createDeleteConnection(final String url, final String query,
+                                                                           final String apiKey) throws IOException {
         String deleteUrl = String.format("%s?%s", url, query);
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(deleteUrl, apiKey);
         conn.setRequestMethod("DELETE");
         return conn;
     }
 
-    private static javax.net.ssl.HttpsURLConnection createPutConnection(String url, JsonObject body, String apiKey)
-            throws IOException {
+    private static javax.net.ssl.HttpsURLConnection createPutConnection(final String url, final JsonObject body,
+                                                                        final String apiKey) throws IOException {
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey);
         conn.setRequestMethod("PUT");
         writeBody(conn, body);
         return conn;
     }
 
-    private static JsonObject createBody(Map<String, Object> params) {
+    private static JsonObject createBody(final Map<String, Object> params) {
         Gson gson = new Gson();
         return gson.toJsonTree(params).getAsJsonObject();
     }
 
-    private static String createQuery(Map<String, Object> params) throws UnsupportedEncodingException {
+    private static String createQuery(final Map<String, Object> params) throws UnsupportedEncodingException {
         Map<String, String> flatParams = flattenParams(params);
         StringBuilder queryStringBuilder = new StringBuilder();
         for (Map.Entry<String, String> entry : flatParams.entrySet()) {
@@ -291,7 +310,7 @@ public abstract class EasyPostResource {
         return queryStringBuilder.toString();
     }
 
-    private static Map<String, String> flattenParams(Map<String, Object> params) {
+    private static Map<String, String> flattenParams(final Map<String, Object> params) {
         if (params == null) {
             return new HashMap<String, String>();
         }
@@ -338,14 +357,15 @@ public abstract class EasyPostResource {
         String error;
     }
 
-    private static String getResponseBody(InputStream responseStream) throws IOException {
+    private static String getResponseBody(final InputStream responseStream) throws IOException {
         String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next();
         responseStream.close();
         return rBody;
     }
 
-    private static EasyPostResponse makeURLConnectionRequest(EasyPostResource.RequestMethod method, String url,
-                                                             String query, JsonObject body, String apiKey)
+    private static EasyPostResponse makeURLConnectionRequest(final EasyPostResource.RequestMethod method,
+                                                             final String url, final String query,
+                                                             final JsonObject body, final String apiKey)
             throws EasyPostException {
         javax.net.ssl.HttpsURLConnection conn = null;
         try {
@@ -369,9 +389,9 @@ public abstract class EasyPostResource {
             }
             int rCode = conn.getResponseCode(); // sends the request
             String rBody = null;
-            if (rCode == 204) {
+            if (rCode == HttpURLConnection.HTTP_NO_CONTENT) {
                 rBody = "";
-            } else if (rCode >= 200 && rCode < 300) {
+            } else if (rCode >= HttpURLConnection.HTTP_OK && rCode < HttpURLConnection.HTTP_MULT_CHOICE) {
                 rBody = getResponseBody(conn.getInputStream());
             } else {
                 rBody = getResponseBody(conn.getErrorStream());
@@ -388,15 +408,17 @@ public abstract class EasyPostResource {
         }
     }
 
-    protected static <T> T request(EasyPostResource.RequestMethod method, String url, Map<String, Object> params,
-                                   Class<T> clazz, String apiKey) throws EasyPostException {
+    protected static <T> T request(final EasyPostResource.RequestMethod method, final String url,
+                                   final Map<String, Object> params, final Class<T> clazz, final String apiKey)
+            throws EasyPostException {
         return request(method, url, params, clazz, apiKey, true);
     }
 
-    protected static <T> T request(EasyPostResource.RequestMethod method, String url, Map<String, Object> params,
-                                   Class<T> clazz, String apiKey, boolean apiKeyRequired) throws EasyPostException {
+    protected static <T> T request(final EasyPostResource.RequestMethod method, final String url,
+                                   final Map<String, Object> params, final Class<T> clazz, final String apiKey,
+                                   final boolean apiKeyRequired) throws EasyPostException {
         String originalDNSCacheTTL = null;
-        Boolean allowedToSetTTL = true;
+        boolean allowedToSetTTL = true;
         try {
             originalDNSCacheTTL = java.security.Security.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
             // disable DNS cache
@@ -419,14 +441,15 @@ public abstract class EasyPostResource {
         }
     }
 
-    protected static <T> T _request(EasyPostResource.RequestMethod method, String url, Map<String, Object> params,
-                                    Class<T> clazz, String apiKey, boolean apiKeyRequired) throws EasyPostException {
+    protected static <T> T _request(final EasyPostResource.RequestMethod method, final String url,
+                                    final Map<String, Object> params, final Class<T> clazz, String apiKey,
+                                    final boolean apiKeyRequired) throws EasyPostException {
         if ((EasyPost.apiKey == null || EasyPost.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
             if (apiKeyRequired) {
                 throw new EasyPostException(String.format(
                         "No API key provided. (set your API key using 'EasyPost.apiKey = {KEY}'. " +
-                                "Your API key can be found in your EasyPost dashboard, or you can email us at %s for assistance.",
-                        EasyPostResource.EASYPOST_SUPPORT_EMAIL));
+                                "Your API key can be found in your EasyPost dashboard, " +
+                                "or you can email us at %s for assistance.", EasyPostResource.EASYPOST_SUPPORT_EMAIL));
 
             }
         }
@@ -480,16 +503,16 @@ public abstract class EasyPostResource {
         }
         int rCode = response.responseCode;
         String rBody = response.responseBody;
-        if (rCode < 200 || rCode >= 300) {
+        if (rCode < HttpURLConnection.HTTP_OK || rCode >= HttpURLConnection.HTTP_MULT_CHOICE) {
             handleAPIError(rBody, rCode);
         }
 
-        return gson.fromJson(rBody, clazz);
+        return GSON.fromJson(rBody, clazz);
     }
 
-    private static void handleAPIError(String rBody, int rCode) throws EasyPostException {
+    private static void handleAPIError(final String rBody, final int rCode) throws EasyPostException {
         try {
-            EasyPostResource.Error error = gson.fromJson(rBody, EasyPostResource.Error.class);
+            EasyPostResource.Error error = GSON.fromJson(rBody, EasyPostResource.Error.class);
 
             if (error.error.length() > 0) {
                 throw new EasyPostException(error.error);
@@ -502,8 +525,9 @@ public abstract class EasyPostResource {
         }
     }
 
-    private static EasyPostResponse makeAppEngineRequest(RequestMethod method, String url, String query,
-                                                         JsonObject body, String apiKey) throws EasyPostException {
+    private static EasyPostResponse makeAppEngineRequest(final RequestMethod method, String url, final String query,
+                                                         final JsonObject body, final String apiKey)
+            throws EasyPostException {
         String unknownErrorMessage = String.format(
                 "Sorry, an unknown error occurred while trying to use the Google App Engine runtime." +
                         "Please email %s for assistance.", EasyPostResource.EASYPOST_SUPPORT_EMAIL);
@@ -521,18 +545,17 @@ public abstract class EasyPostResource {
             try {
                 fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("validateCertificate").invoke(null);
             } catch (NoSuchMethodException e) {
-                System.err.println(String.format(
+                System.err.printf(
                         "Warning: this App Engine SDK version does not allow verification of SSL certificates;" +
                                 "this exposes you to a MITM attack. Please upgrade your App Engine SDK to >=1.5.0. " +
-                                "If you have questions, email %s.", EasyPostResource.EASYPOST_SUPPORT_EMAIL));
+                                "If you have questions, email %s.%n", EasyPostResource.EASYPOST_SUPPORT_EMAIL);
                 fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("withDefaults").invoke(null);
             }
 
             Class<?> fetchOptionsClass = Class.forName("com.google.appengine.api.urlfetch.FetchOptions");
 
             // Heroku times out after 30s, so leave some time for the API to return a response
-            fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class)
-                    .invoke(fetchOptions, new Double(20));
+            fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class).invoke(fetchOptions, APP_ENGINE_DEFAULT_TIMEOUT_SECONDS);
 
             Class<?> requestClass = Class.forName("com.google.appengine.api.urlfetch.HTTPRequest");
 
@@ -541,7 +564,8 @@ public abstract class EasyPostResource {
 
             if ((method == RequestMethod.POST || method == RequestMethod.PUT) && body != null) {
                 String bodyString = body.toString();
-                requestClass.getDeclaredMethod("setPayload", byte[].class).invoke(request, bodyString.getBytes());
+                requestClass.getDeclaredMethod("setPayload", byte[].class)
+                        .invoke(request, (Object) bodyString.getBytes());
             }
 
             for (Map.Entry<String, String> header : getHeaders(apiKey).entrySet()) {
@@ -589,67 +613,114 @@ public abstract class EasyPostResource {
 
     public static final ArrayList<String> GLOBAL_FIELD_ACCESSORS =
             new ArrayList<>(Arrays.asList("getCreatedAt", "getUpdatedAt", "getFees"));
-    Date CreatedAt;
-    Date UpdatedAt;
+    Date createdAt;
+    Date updatedAt;
     ArrayList<Fee> fees;
 
+    /**
+     * @return the Date this object was created
+     */
     public Date getCreatedAt() {
-        return CreatedAt;
+        return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        CreatedAt = createdAt;
+    /**
+     * Set the Date this object was created.
+     *
+     * @param createdAt the Date this object was created
+     */
+    public void setCreatedAt(final Date createdAt) {
+        this.createdAt = createdAt;
     }
 
+    /**
+     * @return the Date this object was last updated
+     */
     public Date getUpdatedAt() {
-        return UpdatedAt;
+        return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        UpdatedAt = updatedAt;
+    /**
+     * Set the Date this object was last updated.
+     *
+     * @param updatedAt the Date this object was last updated
+     */
+    public void setUpdatedAt(final Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
+    /**
+     * @return the Fees associated with this object
+     */
     public ArrayList<Fee> getFees() {
         return fees;
     }
 
-    public void setFees(ArrayList<Fee> fees) {
+    /**
+     * Set the Fees associated with this object.
+     *
+     * @param fees the Fees associated with this object
+     */
+    public void setFees(final ArrayList<Fee> fees) {
         this.fees = fees;
     }
 
+    /**
+     * @return the ID of this object
+     */
     public String getId() {
         return "";
     }
 
+    /**
+     * @return the API mode used to create this object
+     */
     public String getMode() {
         return "";
     }
 
     // Batch
+
+    /**
+     * @return the list of shipments in this batch
+     */
     public List<Shipment> getShipments() {
         return new ArrayList<Shipment>();
     }
 
-    // public BatchStatus getStatus() {
-    // 	return new BatchStatus();
-    // }
+    /**
+     * @return the URL of the label for this object
+     */
     public String getLabelUrl() {
         return "";
     }
 
     // Tracker
+
+    /**
+     * @return the ID of this shipment
+     */
     public String getShipmentId() {
         return "";
     }
 
+    /**
+     * @return the tracking code of this shipment
+     */
     public String getTrackingCode() {
         return "";
     }
 
+    /**
+     * @return the status of this object
+     */
     public String getStatus() {
         return "";
     }
 
+    /**
+     * @return the tracking details of this shipment
+     */
     public List<TrackingDetail> getTrackingDetails() {
         return new ArrayList<TrackingDetail>();
     }

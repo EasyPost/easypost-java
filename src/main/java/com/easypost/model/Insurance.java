@@ -268,7 +268,7 @@ public final class Insurance extends EasyPostResource {
      *
      * @param params map of parameters
      * @return Insurance object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Insurance create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
@@ -280,7 +280,7 @@ public final class Insurance extends EasyPostResource {
      * @param params a map of parameters
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Insurance object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Insurance create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
@@ -294,7 +294,7 @@ public final class Insurance extends EasyPostResource {
      *
      * @param id the id of the Insurance to retrieve
      * @return Insurance object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Insurance retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -306,7 +306,7 @@ public final class Insurance extends EasyPostResource {
      * @param id     the id of the Insurance to retrieve
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Insurance object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Insurance retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Insurance.class, id), null, Insurance.class, apiKey);
@@ -317,7 +317,7 @@ public final class Insurance extends EasyPostResource {
      *
      * @param params a map of parameters
      * @return InsuranceCollection object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static InsuranceCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
@@ -329,7 +329,7 @@ public final class Insurance extends EasyPostResource {
      * @param params a map of parameters
      * @param apiKey API key to use in request (ovverides default API key).
      * @return InsuranceCollection object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static InsuranceCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
@@ -340,7 +340,7 @@ public final class Insurance extends EasyPostResource {
      * Refresh this Insurance.
      *
      * @return Insurance object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Insurance refresh() throws EasyPostException {
         return this.refresh(null, null);
@@ -351,7 +351,7 @@ public final class Insurance extends EasyPostResource {
      *
      * @param params a map of parameters
      * @return Insurance object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Insurance refresh(final Map<String, Object> params) throws EasyPostException {
         return this.refresh(params, null);
@@ -362,7 +362,7 @@ public final class Insurance extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Insurance object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Insurance refresh(final String apiKey) throws EasyPostException {
         return this.refresh((Map<String, Object>) null, apiKey);
@@ -374,7 +374,7 @@ public final class Insurance extends EasyPostResource {
      * @param params a map of parameters
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Insurance object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Insurance refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, String.format("%s", instanceURL(Insurance.class, this.getId())), params,

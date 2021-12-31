@@ -13,40 +13,40 @@ public class EasyPostException extends Exception {
     private final String param;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param message the exception message
      */
-    public EasyPostException(String message) {
+    public EasyPostException(final String message) {
         super(message, null);
         this.param = null;
     }
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param message the exception message
      * @param e       the exception cause
      */
-    public EasyPostException(String message, Throwable e) {
+    public EasyPostException(final String message, final Throwable e) {
         super(message, e);
         this.param = null;
     }
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param message the exception message
      * @param param   the parameter name
      * @param e       the exception cause
      */
-    public EasyPostException(String message, String param, Throwable e) {
+    public EasyPostException(final String message, final String param, final Throwable e) {
         super(message, e);
         this.param = param;
     }
 
     /**
-     * Get the parameter name
+     * Get the parameter name.
      *
      * @return the parameter name
      */

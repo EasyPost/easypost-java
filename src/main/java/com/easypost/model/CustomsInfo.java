@@ -192,7 +192,7 @@ public final class CustomsInfo extends EasyPostResource {
      *
      * @param params the map of parameters.
      * @return CustomsInfo object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static CustomsInfo create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
@@ -204,7 +204,7 @@ public final class CustomsInfo extends EasyPostResource {
      * @param params the map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return CustomsInfo object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static CustomsInfo create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
@@ -218,7 +218,7 @@ public final class CustomsInfo extends EasyPostResource {
      *
      * @param id the ID of the CustomsInfo to retrieve.
      * @return CustomsInfo object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static CustomsInfo retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -230,7 +230,7 @@ public final class CustomsInfo extends EasyPostResource {
      * @param id     the ID of the CustomsInfo to retrieve.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return CustomsInfo object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static CustomsInfo retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(CustomsInfo.class, id), null, CustomsInfo.class, apiKey);

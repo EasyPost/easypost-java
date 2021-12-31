@@ -345,7 +345,7 @@ public final class Address extends EasyPostResource {
      *
      * @param params Map of address parameters.
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Address create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
@@ -357,7 +357,7 @@ public final class Address extends EasyPostResource {
      * @param params Map of address parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Address create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         String url = classURL(Address.class);
@@ -393,7 +393,7 @@ public final class Address extends EasyPostResource {
      *
      * @param id ID of address to retrieve.
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Address retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -405,7 +405,7 @@ public final class Address extends EasyPostResource {
      * @param id     ID of address to retrieve.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Address retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Address.class, id), null, Address.class, apiKey);
@@ -416,7 +416,7 @@ public final class Address extends EasyPostResource {
      *
      * @param params Map of parameters.
      * @return AddressCollection object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static AddressCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
@@ -428,7 +428,7 @@ public final class Address extends EasyPostResource {
      * @param params Map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return AddressCollection object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static AddressCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
@@ -440,7 +440,7 @@ public final class Address extends EasyPostResource {
      *
      * @param params Map of address parameters.
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Address createAndVerify(final Map<String, Object> params) throws EasyPostException {
         return createAndVerify(params, null);
@@ -452,7 +452,7 @@ public final class Address extends EasyPostResource {
      * @param params Map of address parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Address createAndVerify(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
@@ -476,7 +476,7 @@ public final class Address extends EasyPostResource {
      * @param params  Map of address parameters.
      * @param carrier Carrier to verify address with.
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier)
             throws EasyPostException {
@@ -491,7 +491,7 @@ public final class Address extends EasyPostResource {
      * @param carrier Carrier to verify address with.
      * @param apiKey  API key to use in request (ovverides default API key).
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier,
                                                      final String apiKey) throws EasyPostException {
@@ -513,7 +513,7 @@ public final class Address extends EasyPostResource {
      * Verify this Address object.
      *
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Address verify() throws EasyPostException {
         return this.verify(null);
@@ -524,7 +524,7 @@ public final class Address extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Address verify(final String apiKey) throws EasyPostException {
         AddressVerifyResponse response;
@@ -543,7 +543,7 @@ public final class Address extends EasyPostResource {
      *
      * @param carrier Carrier to verify address with.
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Address verifyWithCarrier(final String carrier) throws EasyPostException {
         return this.verifyWithCarrier(carrier, null);
@@ -555,7 +555,7 @@ public final class Address extends EasyPostResource {
      * @param carrier Carrier to verify address with.
      * @param apiKey  API key to use in request (ovverides default API key).
      * @return Address object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Address verifyWithCarrier(final String carrier, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();

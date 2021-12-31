@@ -191,7 +191,7 @@ public final class CustomsItem extends EasyPostResource {
      *
      * @param params the map of parameters.
      * @return CustomsItem object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static CustomsItem create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
@@ -203,7 +203,7 @@ public final class CustomsItem extends EasyPostResource {
      * @param params the map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return CustomsItem object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static CustomsItem create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
@@ -217,7 +217,7 @@ public final class CustomsItem extends EasyPostResource {
      *
      * @param id the ID of the CustomsItem to retrieve.
      * @return CustomsItem object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static CustomsItem retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -229,7 +229,7 @@ public final class CustomsItem extends EasyPostResource {
      * @param id     the ID of the CustomsItem to retrieve.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return CustomsItem object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static CustomsItem retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(CustomsItem.class, id), null, CustomsItem.class, apiKey);

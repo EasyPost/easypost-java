@@ -355,10 +355,11 @@ public final class Rate extends EasyPostResource {
      * @param carrierAccountId       ID of the carrier account of this Rate.
      * @param timeInTransit          TimeInTransit object.
      */
-    public Rate(String id, String carrier, String service, Float rate, String currency, Float listRate,
-                String listCurrency, Float retailRate, String retailCurrency, Number deliveryDays, String deliveryDate,
-                Boolean deliveryDateGuaranteed, Number estDeliveryDays, String shipmentId, String carrierAccountId,
-                TimeInTransit timeInTransit) {
+    public Rate(final String id, final String carrier, final String service, final Float rate, final String currency,
+                final Float listRate, final String listCurrency, final Float retailRate, final String retailCurrency,
+                final Number deliveryDays, final String deliveryDate, final Boolean deliveryDateGuaranteed,
+                final Number estDeliveryDays, final String shipmentId, final String carrierAccountId,
+                final TimeInTransit timeInTransit) {
         this.id = id;
         this.carrier = carrier;
         this.service = service;
@@ -383,7 +384,7 @@ public final class Rate extends EasyPostResource {
      *
      * @param id ID of the Rate to retrieve.
      * @return Rate object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Rate retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -395,7 +396,7 @@ public final class Rate extends EasyPostResource {
      * @param id     ID of the Rate to retrieve.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Rate object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Rate retrieve(final String id, final String apiKey) throws EasyPostException {
         Rate response;

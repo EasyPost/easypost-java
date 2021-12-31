@@ -175,7 +175,7 @@ public final class Report extends EasyPostResource {
      *
      * @param params a map of parameters.
      * @return Report object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Report create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
@@ -187,7 +187,7 @@ public final class Report extends EasyPostResource {
      * @param params a map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Report object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Report create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
@@ -204,7 +204,7 @@ public final class Report extends EasyPostResource {
      *
      * @param id the ID of the Report to retrieve.
      * @return Report object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Report retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -216,7 +216,7 @@ public final class Report extends EasyPostResource {
      * @param id     the ID of the Report to retrieve.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Report object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Report retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Report.class, id), null, Report.class, apiKey);
@@ -227,7 +227,7 @@ public final class Report extends EasyPostResource {
      *
      * @param params a map of parameters.
      * @return ReportCollection object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static ReportCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
@@ -239,7 +239,7 @@ public final class Report extends EasyPostResource {
      * @param params a map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return ReportCollection object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static ReportCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         String type = (String) params.get("type");
@@ -251,7 +251,7 @@ public final class Report extends EasyPostResource {
      *
      * @param type the type of report to generate.
      * @return the URL to generate the report.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     protected static String reportURL(final String type) throws EasyPostException {
         try {

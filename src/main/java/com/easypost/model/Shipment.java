@@ -553,7 +553,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param params the map of parameters.
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Shipment create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
@@ -565,7 +565,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Shipment create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
@@ -579,7 +579,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param id the id of the Shipment to retrieve.
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Shipment retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -591,7 +591,7 @@ public final class Shipment extends EasyPostResource {
      * @param id     the id of the Shipment to retrieve.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Shipment retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Shipment.class, id), null, Shipment.class, apiKey);
@@ -602,7 +602,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param params the options for the query.
      * @return ShipmentCollection object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static ShipmentCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
@@ -614,7 +614,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return ShipmentCollection object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static ShipmentCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
@@ -625,7 +625,7 @@ public final class Shipment extends EasyPostResource {
      * Refresh this Shipment.
      *
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment refresh() throws EasyPostException {
         return this.refresh(null, null);
@@ -636,7 +636,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param params the options for the query.
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment refresh(final Map<String, Object> params) throws EasyPostException {
         return this.refresh(params, null);
@@ -647,7 +647,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment refresh(final String apiKey) throws EasyPostException {
         return this.refresh((Map<String, Object>) null, apiKey);
@@ -659,7 +659,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, String.format("%s", instanceURL(Shipment.class, this.getId())), params,
@@ -670,7 +670,7 @@ public final class Shipment extends EasyPostResource {
      * Get new rates for this Shipment.
      *
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment newRates() throws EasyPostException {
         return this.newRates(null, null);
@@ -681,7 +681,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param params the options for the query.
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment newRates(final Map<String, Object> params) throws EasyPostException {
         return this.newRates(params, null);
@@ -692,7 +692,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment newRates(final String apiKey) throws EasyPostException {
         return this.newRates((Map<String, Object>) null, apiKey);
@@ -704,7 +704,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment newRates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Shipment response =
@@ -715,11 +715,15 @@ public final class Shipment extends EasyPostResource {
         return this;
     }
 
+    public void setSmartrates(List<Rate> rates) {}
+
+    public void setSmartrates(SmartrateCollection smartrateCollection) {}
+
     /**
      * Get smart rates for this Shipment.
      *
      * @return List of Rate objects
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public List<Rate> getSmartrates() throws EasyPostException {
         return this.getSmartrates(null, null);
@@ -730,7 +734,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param params the options for the query.
      * @return List of Rate objects
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public List<Rate> getSmartrates(final Map<String, Object> params) throws EasyPostException {
         return this.getSmartrates(params, null);
@@ -741,7 +745,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return List of Rate objects
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public List<Rate> getSmartrates(final String apiKey) throws EasyPostException {
         return this.getSmartrates((Map<String, Object>) null, apiKey);
@@ -753,7 +757,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return List of Rate objects
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public List<Rate> getSmartrates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         SmartrateCollection smartrateCollection = (SmartrateCollection) request(RequestMethod.GET,
@@ -767,7 +771,7 @@ public final class Shipment extends EasyPostResource {
      * Buy this Shipment.
      *
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment buy() throws EasyPostException {
         return this.buy(null, null);
@@ -778,7 +782,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param params the options for the query.
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final Map<String, Object> params) throws EasyPostException {
         return this.buy(params, null);
@@ -789,7 +793,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final String apiKey) throws EasyPostException {
         return this.buy((Map<String, Object>) null, apiKey);
@@ -800,7 +804,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param rate the Rate to use for this Shipment.
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final Rate rate) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
@@ -815,7 +819,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Shipment response =
@@ -830,7 +834,7 @@ public final class Shipment extends EasyPostResource {
      * Refund this Shipment.
      *
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment refund() throws EasyPostException {
         return this.refund(null, null);
@@ -841,7 +845,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param params the options for the query.
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final Map<String, Object> params) throws EasyPostException {
         return this.refund(params, null);
@@ -852,7 +856,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final String apiKey) throws EasyPostException {
         return this.refund((Map<String, Object>) null, apiKey);
@@ -864,7 +868,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, String.format("%s/refund", instanceURL(Shipment.class, this.getId())), params,
@@ -875,7 +879,7 @@ public final class Shipment extends EasyPostResource {
      * Label this Shipment.
      *
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment label() throws EasyPostException {
         return this.label(null, null);
@@ -886,7 +890,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param params the options for the query.
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment label(final Map<String, Object> params) throws EasyPostException {
         return this.label(params, null);
@@ -897,7 +901,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment label(final String apiKey) throws EasyPostException {
         return this.label((Map<String, Object>) null, apiKey);
@@ -909,7 +913,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment label(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Shipment response =
@@ -924,7 +928,7 @@ public final class Shipment extends EasyPostResource {
      * Insure this Shipment.
      *
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment insure() throws EasyPostException {
         return this.insure(null, null);
@@ -935,7 +939,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param params the options for the query.
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment insure(final Map<String, Object> params) throws EasyPostException {
         return this.insure(params, null);
@@ -946,7 +950,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment insure(final String apiKey) throws EasyPostException {
         return this.insure((Map<String, Object>) null, apiKey);
@@ -958,7 +962,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Shipment object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Shipment insure(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.POST, String.format("%s/insure", instanceURL(Shipment.class, this.getId())),
@@ -969,7 +973,7 @@ public final class Shipment extends EasyPostResource {
      * Get the lowest rate for this shipment.
      *
      * @return Rate object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate() throws EasyPostException {
         return this.lowestRate(null, null);
@@ -980,7 +984,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param carriers the carriers to use in the query.
      * @return Rate object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate(final List<String> carriers) throws EasyPostException {
         return this.lowestRate(carriers, null);
@@ -992,7 +996,7 @@ public final class Shipment extends EasyPostResource {
      * @param carriers the carriers to use in the query.
      * @param services the services to use in the query.
      * @return Rate object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate(final List<String> carriers, final List<String> services) throws EasyPostException {
         Rate lowestRate = null;

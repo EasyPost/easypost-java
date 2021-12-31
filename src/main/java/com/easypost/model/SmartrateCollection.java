@@ -13,6 +13,9 @@ import java.util.List;
 public final class SmartrateCollection {
     private List<Rate> rates = new ArrayList<>();
 
+    /**
+     * Constructor.
+     */
     public SmartrateCollection() {
     }
 

@@ -117,7 +117,7 @@ public final class RateDeserializer implements JsonDeserializer<Rate> {
             timeInTransit = null;
         } else {
             timeInTransit =
-                    (TimeInTransit) EasyPostResource.gson.fromJson(timeInTransitJsonElement, TimeInTransit.class);
+                    (TimeInTransit) EasyPostResource.GSON.fromJson(timeInTransitJsonElement, TimeInTransit.class);
         }
 
         return new Rate(jo.get("id").getAsString(), jo.get("carrier").getAsString(), jo.get("service").getAsString(),

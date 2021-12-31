@@ -51,7 +51,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
      * @param element The JSON primitive to deserialize.
      * @return The deserialized Java object.
      */
-    private Object deserializeJsonPrimitive(JsonPrimitive element) {
+    private Object deserializeJsonPrimitive(final JsonPrimitive element) {
         if (element.isBoolean()) {
             return element.getAsBoolean();
         } else if (element.isNumber()) {
@@ -67,7 +67,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
      * @param arr The JSON array to deserialize.
      * @return The deserialized Java object.
      */
-    private Object[] deserializeJsonArray(JsonArray arr) {
+    private Object[] deserializeJsonArray(final JsonArray arr) {
         Object[] elems = new Object[arr.size()];
         Iterator<JsonElement> elemIter = arr.iterator();
         int i = 0;
@@ -84,7 +84,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
      * @param element The JSON object to deserialize.
      * @return The deserialized Java object.
      */
-    private Object deserializeJsonElement(JsonElement element) {
+    private Object deserializeJsonElement(final JsonElement element) {
         if (element.isJsonNull()) {
             return null;
         } else if (element.isJsonObject()) {
@@ -96,8 +96,8 @@ public class EventDeserializer implements JsonDeserializer<Event> {
         } else if (element.isJsonArray()) {
             return deserializeJsonArray(element.getAsJsonArray());
         } else {
-            System.err.println(String.format("Unknown JSON element type for element %s. Please email us at %s.",
-                    element.toString(), EasyPostResource.EASYPOST_SUPPORT_EMAIL));
+            System.err.printf("Unknown JSON element type for element %s. Please email us at %s.%n",
+                    element.toString(), EasyPostResource.EASYPOST_SUPPORT_EMAIL);
             return null;
         }
     }
@@ -108,7 +108,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
      * @param objMap     The map to populate.
      * @param jsonObject The JSON object to populate the map from.
      */
-    private void populateMapFromJSONObject(Map<String, Object> objMap, JsonObject jsonObject) {
+    private void populateMapFromJSONObject(final Map<String, Object> objMap, final JsonObject jsonObject) {
         for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
             String key = entry.getKey();
             JsonElement element = entry.getValue();
@@ -126,7 +126,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
      * @throws JsonParseException
      */
     @SuppressWarnings ("unchecked")
-    public Event deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+    public Event deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
             throws JsonParseException {
         Event event = new Event();
 
@@ -141,7 +141,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
             } else if ("result".equals(key)) {
                 String type = element.getAsJsonObject().get("object").getAsString();
                 Class<EasyPostResource> cl = objectMap.get(type);
-                EasyPostResource result = EasyPostResource.gson.fromJson(entry.getValue(), cl);
+                EasyPostResource result = EasyPostResource.GSON.fromJson(entry.getValue(), cl);
                 event.setResult(result);
             }
         }

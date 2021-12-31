@@ -8,30 +8,30 @@
 package com.easypost.model;
 
 public final class TimeInTransit {
-    private Integer percentile_50;
-    private Integer percentile_75;
-    private Integer percentile_85;
-    private Integer percentile_90;
-    private Integer percentile_95;
-    private Integer percentile_97;
-    private Integer percentile_99;
+    private Integer percentile50;
+    private Integer percentile75;
+    private Integer percentile85;
+    private Integer percentile90;
+    private Integer percentile95;
+    private Integer percentile97;
+    private Integer percentile99;
 
     /**
      * Get the 50th percentile of this TimeInTransit.
      *
      * @return the 50th percentile of this TimeInTransit
      */
-    public Integer getPercentile_50() {
-        return percentile_50;
+    public Integer getPercentile50() {
+        return percentile50;
     }
 
     /**
      * Set the 50th percentile of this TimeInTransit.
      *
-     * @param percentile_50 the 50th percentile of this TimeInTransit
+     * @param percentile50 the 50th percentile of this TimeInTransit
      */
-    public void setPercentile_50(final Integer percentile_50) {
-        this.percentile_50 = percentile_50;
+    public void setPercentile50(final Integer percentile50) {
+        this.percentile50 = percentile50;
     }
 
     /**
@@ -39,17 +39,17 @@ public final class TimeInTransit {
      *
      * @return the 75th percentile of this TimeInTransit
      */
-    public Integer getPercentile_75() {
-        return percentile_75;
+    public Integer getPercentile75() {
+        return percentile75;
     }
 
     /**
      * Get the 75th percentile of this TimeInTransit.
      *
-     * @param percentile_75 the 75th percentile of this TimeInTransit
+     * @param percentile75 the 75th percentile of this TimeInTransit
      */
-    public void setPercentile_75(final Integer percentile_75) {
-        this.percentile_75 = percentile_75;
+    public void setPercentile75(final Integer percentile75) {
+        this.percentile75 = percentile75;
     }
 
     /**
@@ -57,17 +57,17 @@ public final class TimeInTransit {
      *
      * @return the 85th percentile of this TimeInTransit
      */
-    public Integer getPercentile_85() {
-        return percentile_85;
+    public Integer getPercentile85() {
+        return percentile85;
     }
 
     /**
      * Get the 85th percentile of this TimeInTransit.
      *
-     * @param percentile_85 the 85th percentile of this TimeInTransit
+     * @param percentile85 the 85th percentile of this TimeInTransit
      */
-    public void setPercentile_85(final Integer percentile_85) {
-        this.percentile_85 = percentile_85;
+    public void setPercentile85(final Integer percentile85) {
+        this.percentile85 = percentile85;
     }
 
     /**
@@ -75,17 +75,17 @@ public final class TimeInTransit {
      *
      * @return the 90th percentile of this TimeInTransit
      */
-    public Integer getPercentile_90() {
-        return percentile_90;
+    public Integer getPercentile90() {
+        return percentile90;
     }
 
     /**
      * Set the 90th percentile of this TimeInTransit.
      *
-     * @param percentile_90 the 90th percentile of this TimeInTransit
+     * @param percentile90 the 90th percentile of this TimeInTransit
      */
-    public void setPercentile_90(final Integer percentile_90) {
-        this.percentile_90 = percentile_90;
+    public void setPercentile90(final Integer percentile90) {
+        this.percentile90 = percentile90;
     }
 
     /**
@@ -93,17 +93,17 @@ public final class TimeInTransit {
      *
      * @return the 95th percentile of this TimeInTransit
      */
-    public Integer getPercentile_95() {
-        return percentile_95;
+    public Integer getPercentile95() {
+        return percentile95;
     }
 
     /**
      * Set the 95th percentile of this TimeInTransit.
      *
-     * @param percentile_95 the 95th percentile of this TimeInTransit
+     * @param percentile95 the 95th percentile of this TimeInTransit
      */
-    public void setPercentile_95(final Integer percentile_95) {
-        this.percentile_95 = percentile_95;
+    public void setPercentile95(final Integer percentile95) {
+        this.percentile95 = percentile95;
     }
 
     /**
@@ -111,17 +111,17 @@ public final class TimeInTransit {
      *
      * @return the 97th percentile of this TimeInTransit
      */
-    public Integer getPercentile_97() {
-        return percentile_97;
+    public Integer getPercentile97() {
+        return percentile97;
     }
 
     /**
      * Set the 97th percentile of this TimeInTransit.
      *
-     * @param percentile_97 the 97th percentile of this TimeInTransit
+     * @param percentile97 the 97th percentile of this TimeInTransit
      */
-    public void setPercentile_97(final Integer percentile_97) {
-        this.percentile_97 = percentile_97;
+    public void setPercentile97(final Integer percentile97) {
+        this.percentile97 = percentile97;
     }
 
     /**
@@ -129,16 +129,16 @@ public final class TimeInTransit {
      *
      * @return the 99th percentile of this TimeInTransit
      */
-    public Integer getPercentile_99() {
-        return percentile_99;
+    public Integer getPercentile99() {
+        return percentile99;
     }
 
     /**
      * Set the 99th percentile of this TimeInTransit.
      *
-     * @param percentile_99 the 99th percentile of this TimeInTransit
+     * @param percentile99 the 99th percentile of this TimeInTransit
      */
-    public void setPercentile_99(final Integer percentile_99) {
-        this.percentile_99 = percentile_99;
+    public void setPercentile99(final Integer percentile99) {
+        this.percentile99 = percentile99;
     }
 }

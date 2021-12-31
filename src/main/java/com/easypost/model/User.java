@@ -13,17 +13,18 @@ import com.easypost.net.EasyPostResource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class User extends EasyPostResource {
     public String id;
-    String name;
-    String email;
-    String phoneNumber;
-    String balance;
-    String rechargeAmount;
-    String secondaryRechargeAmount;
-    String rechargeThreshold;
-    List<User> children;
+    public String name;
+    public String email;
+    public String phoneNumber;
+    public String balance;
+    public String rechargeAmount;
+    public String secondaryRechargeAmount;
+    public String rechargeThreshold;
+    public List<User> children;
 
     /**
      * Get the ID of the User.
@@ -39,7 +40,7 @@ public class User extends EasyPostResource {
      *
      * @param id the ID of the User.
      */
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -57,7 +58,7 @@ public class User extends EasyPostResource {
      *
      * @param name the name of the User.
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -75,7 +76,7 @@ public class User extends EasyPostResource {
      *
      * @param email the email of the User.
      */
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -93,7 +94,7 @@ public class User extends EasyPostResource {
      *
      * @param phoneNumber the phone number of the User.
      */
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(final String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -111,7 +112,7 @@ public class User extends EasyPostResource {
      *
      * @param balance the balance of the User.
      */
-    public void setBalance(String balance) {
+    public void setBalance(final String balance) {
         this.balance = balance;
     }
 
@@ -129,7 +130,7 @@ public class User extends EasyPostResource {
      *
      * @param rechargeAmount the recharge amount of the User.
      */
-    public void setRechargeAmount(String rechargeAmount) {
+    public void setRechargeAmount(final String rechargeAmount) {
         this.rechargeAmount = rechargeAmount;
     }
 
@@ -147,7 +148,7 @@ public class User extends EasyPostResource {
      *
      * @param secondaryRechargeAmount the secondary recharge amount of the User.
      */
-    public void setSecondaryRechargeAmount(String secondaryRechargeAmount) {
+    public void setSecondaryRechargeAmount(final String secondaryRechargeAmount) {
         this.secondaryRechargeAmount = secondaryRechargeAmount;
     }
 
@@ -165,7 +166,7 @@ public class User extends EasyPostResource {
      *
      * @param rechargeThreshold the recharge threshold of the User.
      */
-    public void setRechargeThreshold(String rechargeThreshold) {
+    public void setRechargeThreshold(final String rechargeThreshold) {
         this.rechargeThreshold = rechargeThreshold;
     }
 
@@ -183,7 +184,7 @@ public class User extends EasyPostResource {
      *
      * @param children List of User objects.
      */
-    public void setChildren(List<User> children) {
+    public void setChildren(final List<User> children) {
         this.children = children;
     }
 
@@ -192,9 +193,9 @@ public class User extends EasyPostResource {
      *
      * @param id The ID of the User to retrieve.
      * @return User object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public static User retrieve(String id) throws EasyPostException {
+    public static User retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
     }
 
@@ -204,9 +205,9 @@ public class User extends EasyPostResource {
      * @param id     The ID of the User to retrieve.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return User object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public static User retrieve(String id, String apiKey) throws EasyPostException {
+    public static User retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(User.class, id), null, User.class, apiKey);
     }
 
@@ -214,7 +215,7 @@ public class User extends EasyPostResource {
      * Retrieve your User from the API.
      *
      * @return User object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static User retrieveMe() throws EasyPostException {
         return retrieveMe(null);
@@ -225,9 +226,9 @@ public class User extends EasyPostResource {
      *
      * @param apiKey API key to use in request (ovverides default API key).
      * @return User object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public static User retrieveMe(String apiKey) throws EasyPostException {
+    public static User retrieveMe(final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, classURL(User.class), null, User.class, apiKey);
     }
 
@@ -235,7 +236,7 @@ public class User extends EasyPostResource {
      * Create a User object with a map of parameters.
      *
      * @return User object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static User create() throws EasyPostException {
         return create(null, null);
@@ -246,9 +247,9 @@ public class User extends EasyPostResource {
      *
      * @param params Map<String, Object> parameters.
      * @return User object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public static User create(Map<String, Object> params) throws EasyPostException {
+    public static User create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
     }
 
@@ -258,9 +259,9 @@ public class User extends EasyPostResource {
      * @param params Map<String, Object> parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return User object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public static User create(Map<String, Object> params, String apiKey) throws EasyPostException {
+    public static User create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
@@ -272,9 +273,9 @@ public class User extends EasyPostResource {
      *
      * @param params Map<String, Object> parameters.
      * @return User object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public User update(Map<String, Object> params) throws EasyPostException {
+    public User update(final Map<String, Object> params) throws EasyPostException {
         return update(params, null);
     }
 
@@ -284,9 +285,9 @@ public class User extends EasyPostResource {
      * @param params Map<String, Object> parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return User object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public User update(Map<String, Object> params, String apiKey) throws EasyPostException {
+    public User update(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
@@ -300,7 +301,7 @@ public class User extends EasyPostResource {
     /**
      * Delete this User.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public void delete() throws EasyPostException {
         this.delete(null);
@@ -310,9 +311,9 @@ public class User extends EasyPostResource {
      * Delete this User.
      *
      * @param apiKey API key to use in request (ovverides default API key).
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public void delete(String apiKey) throws EasyPostException {
+    public void delete(final String apiKey) throws EasyPostException {
         request(RequestMethod.DELETE, instanceURL(User.class, this.getId()), null, User.class, apiKey);
     }
 
@@ -320,12 +321,12 @@ public class User extends EasyPostResource {
      * Get this User's API keys.
      *
      * @return List of ApiKey objects.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public List<ApiKey> apiKeys() throws EasyPostException {
         ApiKeys parentKeys = ApiKeys.all();
 
-        if (this.getId() == parentKeys.getId()) {
+        if (Objects.equals(this.getId(), parentKeys.getId())) {
             return parentKeys.getKeys();
         }
 

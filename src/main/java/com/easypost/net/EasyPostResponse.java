@@ -13,7 +13,7 @@ public class EasyPostResponse {
     public String responseBody;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param responseCode HTTP response code
      * @param responseBody HTTP response body
@@ -24,7 +24,7 @@ public class EasyPostResponse {
     }
 
     /**
-     * Get HTTP response code
+     * Get HTTP response code.
      *
      * @return HTTP response code
      */
@@ -33,7 +33,7 @@ public class EasyPostResponse {
     }
 
     /**
-     * Set HTTP response code
+     * Set HTTP response code.
      *
      * @param responseCode HTTP response code
      */
@@ -42,7 +42,7 @@ public class EasyPostResponse {
     }
 
     /**
-     * Get HTTP response body
+     * Get HTTP response body.
      *
      * @return HTTP response body
      */
@@ -51,7 +51,7 @@ public class EasyPostResponse {
     }
 
     /**
-     * Set HTTP response body
+     * Set HTTP response body.
      *
      * @param responseBody HTTP response body
      */

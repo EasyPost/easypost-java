@@ -290,7 +290,7 @@ public final class Tracker extends EasyPostResource {
      *
      * @param params Map of parameters used to create the Tracker.
      * @return Tracker object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Tracker create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
@@ -302,7 +302,7 @@ public final class Tracker extends EasyPostResource {
      * @param params Map of parameters used to create the Tracker.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Tracker object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Tracker create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
@@ -316,7 +316,7 @@ public final class Tracker extends EasyPostResource {
      *
      * @param id ID of the Tracker to retrieve.
      * @return Tracker object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Tracker retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -328,7 +328,7 @@ public final class Tracker extends EasyPostResource {
      * @param id     ID of the Tracker to retrieve.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Tracker object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Tracker retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Tracker.class, id), null, Tracker.class, apiKey);
@@ -339,7 +339,7 @@ public final class Tracker extends EasyPostResource {
      *
      * @param params Map of parameters used to filter the list of Trackers.
      * @return TrackerCollection object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static TrackerCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
@@ -351,7 +351,7 @@ public final class Tracker extends EasyPostResource {
      * @param params Map of parameters used to filter the list of Trackers.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return TrackerCollection object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static TrackerCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
@@ -363,7 +363,7 @@ public final class Tracker extends EasyPostResource {
      *
      * @param params Map of parameters used to create the Trackers.
      * @return whether the creation was successful.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static boolean createList(final Map<String, Object> params) throws EasyPostException {
         return createList(params, null);
@@ -375,7 +375,7 @@ public final class Tracker extends EasyPostResource {
      * @param params Map of parameters used to create the Trackers.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return whether the creation was successful.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static boolean createList(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         String createListUrl = String.format("%s/create_list", classURL(Tracker.class));

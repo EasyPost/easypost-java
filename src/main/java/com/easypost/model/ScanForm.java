@@ -15,14 +15,14 @@ import java.util.Map;
 
 public class ScanForm extends EasyPostResource {
     public String id;
-    String status;
-    String message;
-    Address fromAddress;
-    List<String> trackingCodes;
-    String formUrl;
-    String formFileType;
-    String confirmation;
-    String batchId;
+    public String status;
+    public String message;
+    public Address fromAddress;
+    public List<String> trackingCodes;
+    public String formUrl;
+    public String formFileType;
+    public String confirmation;
+    public String batchId;
 
     /**
      * Get the ID of the ScanForm.
@@ -38,7 +38,7 @@ public class ScanForm extends EasyPostResource {
      *
      * @param id the ID of the ScanForm.
      */
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -56,7 +56,7 @@ public class ScanForm extends EasyPostResource {
      *
      * @param status the status of the ScanForm.
      */
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
         this.status = status;
     }
 
@@ -74,7 +74,7 @@ public class ScanForm extends EasyPostResource {
      *
      * @param message the message of the ScanForm.
      */
-    public void setMessage(String message) {
+    public void setMessage(final String message) {
         this.message = message;
     }
 
@@ -92,7 +92,7 @@ public class ScanForm extends EasyPostResource {
      *
      * @param fromAddress
      */
-    public void setFromAddress(Address fromAddress) {
+    public void setFromAddress(final Address fromAddress) {
         this.fromAddress = fromAddress;
     }
 
@@ -110,7 +110,7 @@ public class ScanForm extends EasyPostResource {
      *
      * @param trackingCodes the tracking codes of the ScanForm.
      */
-    public void setTrackingCodes(List<String> trackingCodes) {
+    public void setTrackingCodes(final List<String> trackingCodes) {
         this.trackingCodes = trackingCodes;
     }
 
@@ -128,7 +128,7 @@ public class ScanForm extends EasyPostResource {
      *
      * @param formUrl the URL for the ScanForm.
      */
-    public void setFormUrl(String formUrl) {
+    public void setFormUrl(final String formUrl) {
         this.formUrl = formUrl;
     }
 
@@ -155,7 +155,7 @@ public class ScanForm extends EasyPostResource {
      *
      * @param formFileType the file type of the ScanForm.
      */
-    public void setFormFileType(String formFileType) {
+    public void setFormFileType(final String formFileType) {
         this.formFileType = formFileType;
     }
 
@@ -164,21 +164,25 @@ public class ScanForm extends EasyPostResource {
      *
      * @return the label file type of the ScanForm.
      */
-    public String getLabelFileType() {return this.getFormFileType();}
+    public String getLabelFileType() {
+        return this.getFormFileType();
+    }
 
     /**
      * Get the confirmation of the ScanForm.
      *
      * @return the confirmation of the ScanForm.
      */
-    public String getConfirmation() {return confirmation;}
+    public String getConfirmation() {
+        return confirmation;
+    }
 
     /**
      * Set the confirmation of the ScanForm.
      *
      * @param confirmation the confirmation of the ScanForm.
      */
-    public void setConfirmation(String confirmation) {
+    public void setConfirmation(final String confirmation) {
         this.confirmation = confirmation;
     }
 
@@ -196,7 +200,7 @@ public class ScanForm extends EasyPostResource {
      *
      * @param batchId the batch ID of the ScanForm.
      */
-    public void setBatchId(String batchId) {
+    public void setBatchId(final String batchId) {
         this.batchId = batchId;
     }
 
@@ -205,9 +209,9 @@ public class ScanForm extends EasyPostResource {
      *
      * @param params the map of parameters.
      * @return ScanForm object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails. when the request fails.
      */
-    public static ScanForm create(Map<String, Object> params) throws EasyPostException {
+    public static ScanForm create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
     }
 
@@ -217,9 +221,9 @@ public class ScanForm extends EasyPostResource {
      * @param params the map of parameters.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return ScanForm object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails. when the request fails.
      */
-    public static ScanForm create(Map<String, Object> params, String apiKey) throws EasyPostException {
+    public static ScanForm create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.POST, classURL(ScanForm.class), params, ScanForm.class, apiKey);
     }
 
@@ -228,9 +232,9 @@ public class ScanForm extends EasyPostResource {
      *
      * @param id the id of the ScanForm to retrieve.
      * @return ScanForm object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails. when the request fails.
      */
-    public static ScanForm retrieve(String id) throws EasyPostException {
+    public static ScanForm retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
     }
 
@@ -240,9 +244,9 @@ public class ScanForm extends EasyPostResource {
      * @param id     the id of the ScanForm to retrieve.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return ScanForm object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails. when the request fails.
      */
-    public static ScanForm retrieve(String id, String apiKey) throws EasyPostException {
+    public static ScanForm retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(ScanForm.class, id), null, ScanForm.class, apiKey);
     }
 
@@ -251,9 +255,9 @@ public class ScanForm extends EasyPostResource {
      *
      * @param params the parameters to send to the API.
      * @return ScanFormCollection object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails. when the request fails.
      */
-    public static ScanFormCollection all(Map<String, Object> params) throws EasyPostException {
+    public static ScanFormCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
     }
 
@@ -263,9 +267,10 @@ public class ScanForm extends EasyPostResource {
      * @param params the parameters to send to the API.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return ScanFormCollection object.
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails. when the request fails.
      */
-    public static ScanFormCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
+    public static ScanFormCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
         return request(RequestMethod.GET, classURL(ScanForm.class), params, ScanFormCollection.class, apiKey);
     }
 }

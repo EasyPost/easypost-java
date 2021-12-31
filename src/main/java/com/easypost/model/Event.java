@@ -115,7 +115,7 @@ public final class Event extends EasyPostResource {
      *
      * @param id ID of the Event to retrieve
      * @return Event object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Event retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -127,7 +127,7 @@ public final class Event extends EasyPostResource {
      * @param id     ID of the Event to retrieve
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Event object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Event retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, apiKey);
@@ -138,7 +138,7 @@ public final class Event extends EasyPostResource {
      *
      * @param params A map of parameters to pass to the API.
      * @return EventCollection object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static EventCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
@@ -150,7 +150,7 @@ public final class Event extends EasyPostResource {
      * @param params A map of parameters to pass to the API.
      * @param apiKey API key to use in request (ovverides default API key).
      * @return EventCollection object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static EventCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, classURL(Event.class), params, EventCollection.class, apiKey);

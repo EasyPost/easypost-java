@@ -135,7 +135,7 @@ public final class Refund extends EasyPostResource {
      *
      * @param params Map of parameters
      * @return Refund object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static List<Refund> create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
@@ -147,7 +147,7 @@ public final class Refund extends EasyPostResource {
      * @param params Map of parameters
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Refund object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static List<Refund> create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
@@ -161,7 +161,7 @@ public final class Refund extends EasyPostResource {
      *
      * @param id ID of refund to retrieve
      * @return Refund object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Refund retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
@@ -173,7 +173,7 @@ public final class Refund extends EasyPostResource {
      * @param id     ID of refund to retrieve
      * @param apiKey API key to use in request (ovverides default API key).
      * @return Refund object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static Refund retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Refund.class, id), null, Refund.class, apiKey);
@@ -184,7 +184,7 @@ public final class Refund extends EasyPostResource {
      *
      * @param params Map of parameters
      * @return RefundCollection object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static RefundCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
@@ -196,7 +196,7 @@ public final class Refund extends EasyPostResource {
      * @param params Map of parameters
      * @param apiKey API key to use in request (ovverides default API key).
      * @return RefundCollection object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
     public static RefundCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, classURL(Refund.class), params, RefundCollection.class, apiKey);

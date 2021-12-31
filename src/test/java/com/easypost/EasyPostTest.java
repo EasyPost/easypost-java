@@ -149,13 +149,13 @@ public class EasyPostTest {
 
         assertNotNull(timeInTransit);
         // TODO: assert on exact values once we have a VCR libary integrated
-        assertNotNull(timeInTransit.getPercentile_50());
-        assertNotNull(timeInTransit.getPercentile_75());
-        assertNotNull(timeInTransit.getPercentile_85());
-        assertNotNull(timeInTransit.getPercentile_90());
-        assertNotNull(timeInTransit.getPercentile_95());
-        assertNotNull(timeInTransit.getPercentile_97());
-        assertNotNull(timeInTransit.getPercentile_99());
+        assertNotNull(timeInTransit.getPercentile50());
+        assertNotNull(timeInTransit.getPercentile75());
+        assertNotNull(timeInTransit.getPercentile85());
+        assertNotNull(timeInTransit.getPercentile90());
+        assertNotNull(timeInTransit.getPercentile95());
+        assertNotNull(timeInTransit.getPercentile97());
+        assertNotNull(timeInTransit.getPercentile99());
     }
 
     @Test
@@ -199,7 +199,7 @@ public class EasyPostTest {
         assertEquals("LabelFee", fee1.getType());
 
         Fee fee2 = fees.get(1);
-        assertEquals(4.83, fee2.getAmount(), 0.001);
+        assertEquals(4.53, fee2.getAmount(), 0.001);
         assertEquals(true, fee2.getCharged());
         assertEquals(false, fee2.getRefunded());
         assertEquals("PostageFee", fee2.getType());
