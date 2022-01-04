@@ -715,10 +715,6 @@ public final class Shipment extends EasyPostResource {
         return this;
     }
 
-    public void setSmartrates(List<Rate> rates) {}
-
-    public void setSmartrates(SmartrateCollection smartrateCollection) {}
-
     /**
      * Get smart rates for this Shipment.
      *
