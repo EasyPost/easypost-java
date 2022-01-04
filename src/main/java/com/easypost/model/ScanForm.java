@@ -90,7 +90,7 @@ public class ScanForm extends EasyPostResource {
     /**
      * Set the from address of the ScanForm.
      *
-     * @param fromAddress
+     * @param fromAddress the from address of the ScanForm.
      */
     public void setFromAddress(final Address fromAddress) {
         this.fromAddress = fromAddress;
