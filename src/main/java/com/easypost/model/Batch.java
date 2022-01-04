@@ -127,7 +127,7 @@ public final class Batch extends EasyPostResource {
     /**
      * Set label url of this batch.
      *
-     * @param labelUrl
+     * @param labelUrl Label URL of this batch.
      */
     public void setLabelUrl(final String labelUrl) {
         this.labelUrl = labelUrl;

@@ -24,7 +24,7 @@ public final class RateDeserializer implements JsonDeserializer<Rate> {
      * @param typeOfT Type of the object.
      * @param context Deserialization context.
      * @return Deserialized Rate object.
-     * @throws JsonParseException when JSON deserialization fails.
+     * @throws JsonParseException if the JSON object is not a valid Rate.
      */
     @Override
     public Rate deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)

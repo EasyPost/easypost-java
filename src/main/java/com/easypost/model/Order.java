@@ -411,6 +411,7 @@ public final class Order extends EasyPostResource {
      *
      * @param params map of parameters.
      * @return Order object.
+     * @throws EasyPostException when the request fails.
      */
     public Order buy(final Map<String, Object> params) throws EasyPostException {
         return this.buy(params, null);
@@ -421,6 +422,7 @@ public final class Order extends EasyPostResource {
      *
      * @param rate Rate to buy.
      * @return Order object.
+     * @throws EasyPostException when the request fails.
      */
     public Order buy(final Rate rate) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();

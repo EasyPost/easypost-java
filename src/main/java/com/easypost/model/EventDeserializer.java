@@ -123,7 +123,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
      * @param typeOfT The type of the Java object to deserialize into.
      * @param context The deserialization context.
      * @return The deserialized Java object.
-     * @throws JsonParseException
+     * @throws JsonParseException if the JSON object is not a valid Event.
      */
     @SuppressWarnings ("unchecked")
     public Event deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
