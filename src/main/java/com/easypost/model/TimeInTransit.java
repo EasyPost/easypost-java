@@ -10,9 +10,11 @@ package com.easypost.model;
 public final class TimeInTransit {
 
     /*
-    Using underscores in a field name violates the style guide, but this is necessary because of how we do JSON deserialization.
+    Using underscores in a field name violates the style guide,
+    but this is necessary because of how we do JSON deserialization.
     (We just Gson, which expects a one-to-one match between JSON keys and Java field names.)
-    This can (potentially) be rectified by using Jackson in the future to de/serialize via setters and getters, while the field names could follow proper style.
+    This can (potentially) be rectified by using Jackson in the future to de/serialize via setters and getters,
+    while the field names could follow proper style.
     */
     Integer percentile_50;
     Integer percentile_75;
