@@ -120,9 +120,27 @@ public final class RateDeserializer implements JsonDeserializer<Rate> {
                     (TimeInTransit) EasyPostResource.GSON.fromJson(timeInTransitJsonElement, TimeInTransit.class);
         }
 
-        return new Rate(jo.get("id").getAsString(), jo.get("carrier").getAsString(), jo.get("service").getAsString(),
-                jo.get("rate").getAsFloat(), currency, listRate, listCurrency, retailRate, retailCurrency, deliveryDays,
-                deliveryDate, deliveryDateGuaranteed, estDeliveryDays, shipmentID,
-                jo.get("carrier_account_id").getAsString(), timeInTransit);
+        Rate rate = new Rate();
+        rate.setId(jo.get("id").getAsString());
+        String carrier = jo.get("carrier").getAsString();
+        rate.setCarrier(carrier);
+        String service = jo.get("service").getAsString();
+        rate.setService(service);
+        rate.setServiceCode(carrier.toLowerCase() + "." + service.toLowerCase());
+        rate.setRate(jo.get("rate").getAsFloat());
+        rate.setCurrency(currency);
+        rate.setListRate(listRate);
+        rate.setListCurrency(listCurrency);
+        rate.setRetailRate(retailRate);
+        rate.setRetailCurrency(retailCurrency);
+        rate.setDeliveryDays(deliveryDays);
+        rate.setDeliveryDate(deliveryDate);
+        rate.setDeliveryDateGuaranteed(deliveryDateGuaranteed);
+        rate.setEstDeliveryDays(estDeliveryDays);
+        rate.setShipmentId(shipmentID);
+        rate.setCarrierAccountId(jo.get("carrier_account_id").getAsString());
+        rate.setTimeInTransit(timeInTransit);
+
+        return rate;
     }
 }

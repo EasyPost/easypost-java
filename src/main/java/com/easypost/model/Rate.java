@@ -336,50 +336,6 @@ public final class Rate extends EasyPostResource {
     }
 
     /**
-     * Create a new Rate object.
-     *
-     * @param id                     ID of this Rate.
-     * @param carrier                The carrier of this Rate.
-     * @param service                The service of this Rate.
-     * @param rate                   The rate of this Rate.
-     * @param currency               The currency of this Rate.
-     * @param listRate               The list rate of this Rate.
-     * @param listCurrency           The list currency of this Rate.
-     * @param retailRate             The retail rate of this Rate.
-     * @param retailCurrency         The retail currency of this Rate.
-     * @param deliveryDays           The delivery days of this Rate.
-     * @param deliveryDate           The delivery date of this Rate.
-     * @param deliveryDateGuaranteed true if the delivery date is guaranteed for this Rate.
-     * @param estDeliveryDays        The estimated delivery days for this Rate.
-     * @param shipmentId             ID of the shipment of this Rate.
-     * @param carrierAccountId       ID of the carrier account of this Rate.
-     * @param timeInTransit          TimeInTransit object.
-     */
-    public Rate(final String id, final String carrier, final String service, final Float rate, final String currency,
-                final Float listRate, final String listCurrency, final Float retailRate, final String retailCurrency,
-                final Number deliveryDays, final String deliveryDate, final Boolean deliveryDateGuaranteed,
-                final Number estDeliveryDays, final String shipmentId, final String carrierAccountId,
-                final TimeInTransit timeInTransit) {
-        this.id = id;
-        this.carrier = carrier;
-        this.service = service;
-        this.serviceCode = carrier.toLowerCase() + "." + service.toLowerCase();
-        this.rate = rate;
-        this.currency = currency;
-        this.listRate = listRate;
-        this.listCurrency = listCurrency;
-        this.retailRate = retailRate;
-        this.retailCurrency = retailCurrency;
-        this.deliveryDays = deliveryDays;
-        this.deliveryDate = deliveryDate;
-        this.deliveryDateGuaranteed = deliveryDateGuaranteed;
-        this.estDeliveryDays = estDeliveryDays;
-        this.shipmentId = shipmentId;
-        this.carrierAccountId = carrierAccountId;
-        this.timeInTransit = timeInTransit;
-    }
-
-    /**
      * Retrieve a Rate from the API.
      *
      * @param id ID of the Rate to retrieve.
