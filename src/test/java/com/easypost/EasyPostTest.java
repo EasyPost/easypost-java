@@ -201,7 +201,7 @@ public class EasyPostTest {
     assertEquals("LabelFee", fee1.getType());
 
     Fee fee2 = fees.get(1);
-    assertEquals(4.83, fee2.getAmount(), 0.001);
+    assertEquals(4.53, fee2.getAmount(), 0.001);
     assertEquals(true, fee2.getCharged());
     assertEquals(false, fee2.getRefunded());
     assertEquals("PostageFee", fee2.getType());
