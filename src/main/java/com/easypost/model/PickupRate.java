@@ -10,7 +10,7 @@ package com.easypost.model;
 import com.easypost.net.EasyPostResource;
 
 public final class PickupRate extends EasyPostResource {
-    public String id;
+    private String id;
     private String mode;
     private String carrier;
     private String service;

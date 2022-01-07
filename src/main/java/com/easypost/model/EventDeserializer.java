@@ -24,25 +24,25 @@ import java.util.Map;
 public class EventDeserializer implements JsonDeserializer<Event> {
 
     @SuppressWarnings ("rawtypes")
-    static Map<String, Class> objectMap = new HashMap<String, Class>();
+    private static final Map<String, Class> OBJECT_MAP = new HashMap<String, Class>();
 
     static {
-        objectMap.put("Address", Address.class);
-        objectMap.put("Batch", Batch.class);
-        objectMap.put("CustomsInfo", CustomsInfo.class);
-        objectMap.put("CustomsItem", CustomsItem.class);
-        objectMap.put("Event", Event.class);
-        objectMap.put("Fee", Fee.class);
-        objectMap.put("Parcel", Parcel.class);
-        objectMap.put("PostageLabel", PostageLabel.class);
-        objectMap.put("Rate", Rate.class);
-        objectMap.put("Refund", Refund.class);
-        objectMap.put("ScanForm", ScanForm.class);
-        objectMap.put("Shipment", Shipment.class);
-        objectMap.put("TimeInTransit", TimeInTransit.class);
-        objectMap.put("Tracker", Tracker.class);
-        objectMap.put("TrackingDetail", TrackingDetail.class);
-        objectMap.put("Webhook", Webhook.class);
+        OBJECT_MAP.put("Address", Address.class);
+        OBJECT_MAP.put("Batch", Batch.class);
+        OBJECT_MAP.put("CustomsInfo", CustomsInfo.class);
+        OBJECT_MAP.put("CustomsItem", CustomsItem.class);
+        OBJECT_MAP.put("Event", Event.class);
+        OBJECT_MAP.put("Fee", Fee.class);
+        OBJECT_MAP.put("Parcel", Parcel.class);
+        OBJECT_MAP.put("PostageLabel", PostageLabel.class);
+        OBJECT_MAP.put("Rate", Rate.class);
+        OBJECT_MAP.put("Refund", Refund.class);
+        OBJECT_MAP.put("ScanForm", ScanForm.class);
+        OBJECT_MAP.put("Shipment", Shipment.class);
+        OBJECT_MAP.put("TimeInTransit", TimeInTransit.class);
+        OBJECT_MAP.put("Tracker", Tracker.class);
+        OBJECT_MAP.put("TrackingDetail", TrackingDetail.class);
+        OBJECT_MAP.put("Webhook", Webhook.class);
     }
 
     /**
@@ -140,7 +140,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
                 event.setPreviousAttributes(previousAttributes);
             } else if ("result".equals(key)) {
                 String type = element.getAsJsonObject().get("object").getAsString();
-                Class<EasyPostResource> cl = objectMap.get(type);
+                Class<EasyPostResource> cl = OBJECT_MAP.get(type);
                 EasyPostResource result = EasyPostResource.GSON.fromJson(entry.getValue(), cl);
                 event.setResult(result);
             }

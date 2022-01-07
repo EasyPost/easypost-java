@@ -163,8 +163,8 @@ public abstract class EasyPostResource {
         GET, POST, DELETE, PUT
     }
 
-    private static String urlEncodePair(final String k, final String v) throws UnsupportedEncodingException {
-        return String.format("%s=%s", URLEncoder.encode(k, CHARSET), URLEncoder.encode(v, CHARSET));
+    private static String urlEncodePair(final String key, final String value) throws UnsupportedEncodingException {
+        return String.format("%s=%s", URLEncoder.encode(key, CHARSET), URLEncoder.encode(value, CHARSET));
     }
 
     static Map<String, String> getHeaders(String apiKey) {
@@ -350,11 +350,11 @@ public abstract class EasyPostResource {
 
     private static class Error {
         @SuppressWarnings ("unused")
-        String type;
-        String message;
-        String code;
-        String param;
-        String error;
+        public String type;
+        public String message;
+        public String code;
+        public String param;
+        public String error;
     }
 
     private static String getResponseBody(final InputStream responseStream) throws IOException {
@@ -501,8 +501,8 @@ public abstract class EasyPostResource {
                 throw ce;
             }
         }
-        int rCode = response.responseCode;
-        String rBody = response.responseBody;
+        int rCode = response.getResponseCode();
+        String rBody = response.getResponseBody();
         if (rCode < HttpURLConnection.HTTP_OK || rCode >= HttpURLConnection.HTTP_MULT_CHOICE) {
             handleAPIError(rBody, rCode);
         }
@@ -555,7 +555,8 @@ public abstract class EasyPostResource {
             Class<?> fetchOptionsClass = Class.forName("com.google.appengine.api.urlfetch.FetchOptions");
 
             // Heroku times out after 30s, so leave some time for the API to return a response
-            fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class).invoke(fetchOptions, APP_ENGINE_DEFAULT_TIMEOUT_SECONDS);
+            fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class)
+                    .invoke(fetchOptions, APP_ENGINE_DEFAULT_TIMEOUT_SECONDS);
 
             Class<?> requestClass = Class.forName("com.google.appengine.api.urlfetch.HTTPRequest");
 
@@ -613,9 +614,9 @@ public abstract class EasyPostResource {
 
     public static final ArrayList<String> GLOBAL_FIELD_ACCESSORS =
             new ArrayList<>(Arrays.asList("getCreatedAt", "getUpdatedAt", "getFees"));
-    Date createdAt;
-    Date updatedAt;
-    ArrayList<Fee> fees;
+    private Date createdAt;
+    private Date updatedAt;
+    private ArrayList<Fee> fees;
 
     /**
      * @return the Date this object was created

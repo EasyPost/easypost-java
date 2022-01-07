@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class Shipment extends EasyPostResource {
-    public String id;
+    private String id;
     private String mode;
     private String reference;
     private Boolean isReturn;

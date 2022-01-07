@@ -9,8 +9,8 @@ package com.easypost.net;
 
 public class EasyPostResponse {
 
-    public int responseCode;
-    public String responseBody;
+    private int responseCode;
+    private String responseBody;
 
     /**
      * Constructor.

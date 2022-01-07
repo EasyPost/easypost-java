@@ -11,7 +11,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
 public final class Rate extends EasyPostResource {
-    public String id;
+    private String id;
     private String carrier;
     private String service;
     private String serviceCode;

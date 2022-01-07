@@ -16,7 +16,7 @@ import java.util.Map;
 
 public final class Address extends EasyPostResource {
 
-    public String id;
+    private String id;
     private String mode;
     private String name;
     private String company;
@@ -463,10 +463,10 @@ public final class Address extends EasyPostResource {
         response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
                 wrappedParams, AddressVerifyResponse.class, apiKey);
 
-        if (response.message != null) {
-            response.address.message = response.message;
+        if (response.getMessage() != null) {
+            response.getAddress().setMessage(response.getMessage());
         }
-        return response.address;
+        return response.getAddress();
     }
 
     /**
@@ -503,10 +503,10 @@ public final class Address extends EasyPostResource {
         response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
                 wrappedParams, AddressVerifyResponse.class, apiKey);
 
-        if (response.message != null) {
-            response.address.message = response.message;
+        if (response.getMessage() != null) {
+            response.getAddress().setMessage(response.getMessage());
         }
-        return response.address;
+        return response.getAddress();
     }
 
     /**
@@ -532,10 +532,10 @@ public final class Address extends EasyPostResource {
                 request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null,
                         AddressVerifyResponse.class, apiKey);
 
-        if (response.message != null) {
-            response.address.message = response.message;
+        if (response.getMessage() != null) {
+            response.getAddress().setMessage(response.getMessage());
         }
-        return response.address;
+        return response.getAddress();
     }
 
     /**
@@ -566,9 +566,9 @@ public final class Address extends EasyPostResource {
                 request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null,
                         AddressVerifyResponse.class, apiKey);
 
-        if (response.message != null) {
-            response.address.message = response.message;
+        if (response.getMessage() != null) {
+            response.getAddress().setMessage(response.getMessage());
         }
-        return response.address;
+        return response.getAddress();
     }
 }

@@ -14,15 +14,15 @@ import java.util.List;
 import java.util.Map;
 
 public class ScanForm extends EasyPostResource {
-    public String id;
-    public String status;
-    public String message;
-    public Address fromAddress;
-    public List<String> trackingCodes;
-    public String formUrl;
-    public String formFileType;
-    public String confirmation;
-    public String batchId;
+    private String id;
+    private String status;
+    private String message;
+    private Address fromAddress;
+    private List<String> trackingCodes;
+    private String formUrl;
+    private String formFileType;
+    private String confirmation;
+    private String batchId;
 
     /**
      * Get the ID of the ScanForm.

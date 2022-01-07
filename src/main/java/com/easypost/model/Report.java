@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class Report extends EasyPostResource {
-    public String id;
+    private String id;
     private Date startDate;
     private Date endDate;
     private String mode;

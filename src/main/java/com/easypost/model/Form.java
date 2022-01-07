@@ -8,7 +8,7 @@
 package com.easypost.model;
 
 public final class Form {
-    public String id;
+    private String id;
     private String mode;
     private String formType;
     private String formUrl;

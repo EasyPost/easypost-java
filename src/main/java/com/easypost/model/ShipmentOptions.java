@@ -8,8 +8,8 @@
 package com.easypost.model;
 
 public final class ShipmentOptions {
-    String smartpostHub;
-    String smartpostManifest;
+    private String smartpostHub;
+    private String smartpostManifest;
 
     /**
      * Get the SmartPost hub of the shipment.

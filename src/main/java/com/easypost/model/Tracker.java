@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class Tracker extends EasyPostResource {
-    public String id;
+    private String id;
     private String mode;
     private String trackingCode;
     private String status;

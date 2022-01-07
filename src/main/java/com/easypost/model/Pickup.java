@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class Pickup extends EasyPostResource {
-    public String id;
+    private String id;
     private String mode;
     private String status;
     private String reference;

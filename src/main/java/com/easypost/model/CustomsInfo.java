@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class CustomsInfo extends EasyPostResource {
-    public String id;
+    private String id;
     private String contentsType;
     private String contentsExplanation;
     private boolean customsCertify;

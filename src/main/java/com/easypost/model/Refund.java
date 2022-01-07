@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class Refund extends EasyPostResource {
-    public String id;
+    private String id;
     private String trackingCode;
     private String confirmationNumber;
     private String status;

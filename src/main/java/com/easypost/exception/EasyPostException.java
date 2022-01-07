@@ -26,10 +26,10 @@ public class EasyPostException extends Exception {
      * Constructor.
      *
      * @param message the exception message
-     * @param e       the exception cause
+     * @param ex      the exception cause
      */
-    public EasyPostException(final String message, final Throwable e) {
-        super(message, e);
+    public EasyPostException(final String message, final Throwable ex) {
+        super(message, ex);
         this.param = null;
     }
 
@@ -38,10 +38,10 @@ public class EasyPostException extends Exception {
      *
      * @param message the exception message
      * @param param   the parameter name
-     * @param e       the exception cause
+     * @param ex       the exception cause
      */
-    public EasyPostException(final String message, final String param, final Throwable e) {
-        super(message, e);
+    public EasyPostException(final String message, final String param, final Throwable ex) {
+        super(message, ex);
         this.param = param;
     }
 

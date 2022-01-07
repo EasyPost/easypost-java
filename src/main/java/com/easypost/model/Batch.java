@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 public final class Batch extends EasyPostResource {
-    public String id;
+    private String id;
     private String mode;
     private String state;
-    public BatchStatus status;
+    private BatchStatus status;
     private Number numShipments;
     private List<Shipment> shipments;
     private String labelUrl;
@@ -80,6 +80,24 @@ public final class Batch extends EasyPostResource {
     }
 
     /**
+     * Get status of this batch.
+     *
+     * @return status of this batch.
+     */
+    public BatchStatus getBatchStatus() {
+        return status;
+    }
+
+    /**
+     * Set status of this batch.
+     *
+     * @param status status of this batch.
+     */
+    public void setBatchStatus(final BatchStatus status) {
+        this.status = status;
+    }
+
+    /**
      * Get number of shipments in this batch.
      *
      * @return number of shipments in this batch.
@@ -118,7 +136,7 @@ public final class Batch extends EasyPostResource {
     /**
      * Get label URL of this batch.
      *
-     * @return Label URL of this batch.
+     * @return Label URL of this batch.x
      */
     public String getLabelUrl() {
         return labelUrl;

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class CarrierAccount extends EasyPostResource {
-    public String id;
+    private String id;
     private String readable;
     private String description;
     private String reference;

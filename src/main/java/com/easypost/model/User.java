@@ -16,15 +16,15 @@ import java.util.Map;
 import java.util.Objects;
 
 public class User extends EasyPostResource {
-    public String id;
-    public String name;
-    public String email;
-    public String phoneNumber;
-    public String balance;
-    public String rechargeAmount;
-    public String secondaryRechargeAmount;
-    public String rechargeThreshold;
-    public List<User> children;
+    private String id;
+    private String name;
+    private String email;
+    private String phoneNumber;
+    private String balance;
+    private String rechargeAmount;
+    private String secondaryRechargeAmount;
+    private String rechargeThreshold;
+    private List<User> children;
 
     /**
      * Get the ID of the User.

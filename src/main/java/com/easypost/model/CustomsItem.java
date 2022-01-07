@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class CustomsItem extends EasyPostResource {
-    public String id;
+    private String id;
     private String description;
     private String hsTariffNumber;
     private String originCountry;

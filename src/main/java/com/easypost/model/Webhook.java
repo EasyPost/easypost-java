@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class Webhook extends EasyPostResource {
-    public String id;
+    private String id;
     private String mode;
     private String url;
     private Date disabledAt;

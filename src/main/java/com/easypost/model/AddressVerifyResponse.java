@@ -8,8 +8,8 @@
 package com.easypost.model;
 
 public class AddressVerifyResponse {
-    public Address address;
-    public String message;
+    private Address address;
+    private String message;
 
     /**
      * Get the Address object.

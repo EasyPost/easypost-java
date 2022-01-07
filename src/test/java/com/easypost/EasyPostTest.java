@@ -382,7 +382,7 @@ public class EasyPostTest {
         assertNotNull(tracker);
 
         // retrieve tracker by id
-        Tracker tracker2 = Tracker.retrieve(tracker.id);
+        Tracker tracker2 = Tracker.retrieve(tracker.getId());
 
         assertEquals("Tracker ids are not the same", tracker.getId(), tracker2.getId());
 
@@ -394,22 +394,22 @@ public class EasyPostTest {
         assertEquals("Incorrect length received", 30, trackers.getTrackers().size());
         assertTrue("'has_more' should be true", trackers.getHasMore());
         assertEquals("Tracker ids in create response and all response are not the same",
-                trackers.getTrackers().get(0).id, tracker.id);
+                trackers.getTrackers().get(0).getId(), tracker.getId());
 
         // create another test tracker
         Tracker tracker3 = Tracker.create(params);
 
-        assertNotSame("Tracker ids are not the same", tracker.id, tracker3.id);
+        assertNotSame("Tracker ids are not the same", tracker.getId(), tracker3.getId());
 
         // retrieve all created since 'tracker'
         Map<String, Object> index_params2 = new HashMap<String, Object>();
-        index_params2.put("after_id", tracker.id);
+        index_params2.put("after_id", tracker.getId());
         TrackerCollection trackers2 = Tracker.all(index_params2);
 
         assertEquals("Incorrect length received", 1, trackers2.getTrackers().size());
         assertFalse("'has_more' should be true", trackers2.getHasMore());
         assertEquals("Tracker ids in create response and all response are not the same",
-                trackers2.getTrackers().get(0).id, tracker3.id);
+                trackers2.getTrackers().get(0).getId(), tracker3.getId());
     }
 
     @Test
@@ -668,7 +668,7 @@ public class EasyPostTest {
         assertEquals("HIDDEN", taxIdentifierReceived.getTaxId());
         assertEquals("EORI", taxIdentifierReceived.getTaxIdType());
         assertEquals("US", taxIdentifierReceived.getIssuingCountry());
-        Shipment retrievedShipment = Shipment.retrieve(shipment.id);
+        Shipment retrievedShipment = Shipment.retrieve(shipment.getId());
         TaxIdentifier taxIdentifierRetrieved = retrievedShipment.getTaxIdentifiers().get(0);
         assertEquals("SENDER", taxIdentifierRetrieved.getEntity());
         assertEquals("HIDDEN", taxIdentifierRetrieved.getTaxId());

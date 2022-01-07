@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class Parcel extends EasyPostResource {
-    public String id;
+    private String id;
     private String predefinedPackage;
     private Float weight;
     private Float length;

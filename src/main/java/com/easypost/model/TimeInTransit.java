@@ -16,13 +16,13 @@ public final class TimeInTransit {
     This can (potentially) be rectified by using Jackson in the future to de/serialize via setters and getters,
     while the field names could follow proper style.
     */
-    Integer percentile_50;
-    Integer percentile_75;
-    Integer percentile_85;
-    Integer percentile_90;
-    Integer percentile_95;
-    Integer percentile_97;
-    Integer percentile_99;
+    private Integer percentile_50;
+    private Integer percentile_75;
+    private Integer percentile_85;
+    private Integer percentile_90;
+    private Integer percentile_95;
+    private Integer percentile_97;
+    private Integer percentile_99;
 
     /**
      * Get the 50th percentile of this TimeInTransit.

@@ -13,7 +13,7 @@ import com.easypost.net.EasyPostResource;
 import java.util.List;
 
 public final class ApiKeys extends EasyPostResource {
-    public String id;
+    private String id;
     private List<ApiKey> keys;
     private List<ApiKeys> children;
 

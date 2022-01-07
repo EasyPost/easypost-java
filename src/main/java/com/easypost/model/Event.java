@@ -13,7 +13,7 @@ import com.easypost.net.EasyPostResource;
 import java.util.Map;
 
 public final class Event extends EasyPostResource {
-    public String id;
+    private String id;
     private String description;
     private String mode;
     private EasyPostResource result;
