@@ -1,5 +1,5 @@
 /**
- * Classes from handling requests and responses to the EasyPost API.
+ * Classes for handling requests and responses to the EasyPost API.
  *
  * @author EasyPost developers
  * @version 1.0
