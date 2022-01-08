@@ -94,13 +94,10 @@
     </module>
 
     <!-- Checks for Headers -->
-    <!-- This is commented out as it was in the original Sun Java config -->
     <!-- See https://checkstyle.org/config_header.html -->
-    <!-- <module name="Header"> -->
-    <!--   <property name="headerFile" value="${checkstyle.header.file}"/> -->
-    <!--   <property name="fileExtensions" value="java"/> -->
-    <!-- </module> -->
 
+    <!-- TreeWalker checks -->
+    <!-- See https://checkstyle.org/config.html#TreeWalker -->
     <module name="TreeWalker">
 
         <!-- Checks for Javadoc comments -->
