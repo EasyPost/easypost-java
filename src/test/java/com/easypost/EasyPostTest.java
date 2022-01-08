@@ -157,7 +157,7 @@ public class EasyPostTest {
         assertNotNull(timeInTransit.getPercentile_97());
         assertNotNull(timeInTransit.getPercentile_99());
     }
-
+  
     @Test
     public void testShipmentWithPostageLabelWithOptions() throws EasyPostException {
         // create and buy shipment
