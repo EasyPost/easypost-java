@@ -1,7 +1,7 @@
 /**
  * PostageLabel.java
  * This file is a part of EasyPost API SDK.
- * (c) 2021 EasyPost
+ * (c) 2022 EasyPost
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -339,72 +339,72 @@ public final class PostageLabel extends EasyPostResource {
     }
 
     /**
-     * Get the ZPL2 size of this PostageLabel.
+     * Get the ZPL size of this PostageLabel.
      *
-     * @return ZPL2 size of this PostageLabel.
+     * @return ZPL size of this PostageLabel.
      */
     public String getLabelZplSize() {
         return labelZplSize;
     }
 
     /**
-     * Set the ZPL2 size of this PostageLabel.
+     * Set the ZPL size of this PostageLabel.
      *
-     * @param labelZplSize ZPL2 size of this PostageLabel.
+     * @param labelZplSize ZPL size of this PostageLabel.
      */
     private void setLabelZplSize(final String labelZplSize) {
         this.labelZplSize = labelZplSize;
     }
 
     /**
-     * Get the ZPL2 type of this PostageLabel.
+     * Get the ZPL type of this PostageLabel.
      *
-     * @return ZPL2 type of this PostageLabel.
+     * @return ZPL type of this PostageLabel.
      */
     public String getZplLabelType() {
         return labelZplType;
     }
 
     /**
-     * Set the ZPL2 type of this PostageLabel.
+     * Set the ZPL type of this PostageLabel.
      *
-     * @param labelZplType ZPL2 type of this PostageLabel.
+     * @param labelZplType ZPL type of this PostageLabel.
      */
     private void setLabelZplType(final String labelZplType) {
         this.labelZplType = labelZplType;
     }
 
     /**
-     * Get the ZPL2 URL of this PostageLabel.
+     * Get the ZPL URL of this PostageLabel.
      *
-     * @return ZPL2 URL of this PostageLabel.
+     * @return ZPL URL of this PostageLabel.
      */
     public String getLabelZplUrl() {
         return labelZplUrl;
     }
 
     /**
-     * Set the ZPL2 URL of this PostageLabel.
+     * Set the ZPL URL of this PostageLabel.
      *
-     * @param labelZplUrl ZPL2 URL of this PostageLabel.
+     * @param labelZplUrl ZPL URL of this PostageLabel.
      */
     private void setLabelZplUrl(final String labelZplUrl) {
         this.labelZplUrl = labelZplUrl;
     }
 
     /**
-     * Get the ZPL2 file type of this PostageLabel.
+     * Get the ZPL file type of this PostageLabel.
      *
-     * @return ZPL2 file type of this PostageLabel.
+     * @return ZPL file type of this PostageLabel.
      */
     public String getLabelZplFileType() {
         return labelZplFileType;
     }
 
     /**
-     * Set the ZPL2 file type of this PostageLabel.
+     * Set the ZPL file type of this PostageLabel.
      *
-     * @param labelZplFileType ZPL2 file type of this PostageLabel.
+     * @param labelZplFileType ZPL file type of this PostageLabel.
      */
     private void setLabelZplFileType(final String labelZplFileType) {
         this.labelZplFileType = labelZplFileType;

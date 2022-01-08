@@ -1,7 +1,7 @@
 /**
  * Fee.java
  * This file is a part of EasyPost API SDK.
- * (c) 2021 EasyPost
+ * (c) 2022 EasyPost
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -68,7 +68,7 @@ public final class Fee {
     }
 
     /**
-     * Get if the fee is refunded.
+     * Check if the fee is refunded.
      *
      * @return true if the fee is refunded
      */
@@ -77,7 +77,7 @@ public final class Fee {
     }
 
     /**
-     * Set if the fee is refunded.
+     * Set whether the fee is refunded.
      *
      * @param refunded true if the fee is refunded
      */

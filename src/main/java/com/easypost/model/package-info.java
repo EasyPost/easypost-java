@@ -1,5 +1,5 @@
 /**
- * Custom classes for the EasyPost API.
+ * Classes for the EasyPost API.
  *
  * @author EasyPost developers
  * @version 1.0

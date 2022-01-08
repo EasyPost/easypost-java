@@ -1,7 +1,7 @@
 /**
  * EasyPostResource.java
  * This file is a part of EasyPost API SDK.
- * (c) 2021 EasyPost
+ * (c) 2022 EasyPost
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -45,7 +45,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 public abstract class EasyPostResource {
-
     public static final String EASYPOST_SUPPORT_EMAIL = "support@easypost.com";
 
     private static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
