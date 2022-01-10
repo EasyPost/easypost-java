@@ -113,31 +113,14 @@
         <!-- Class names, method names, variable names, etc. must match these RegEx patterns -->
         <!-- See https://checkstyle.org/config_naming.html -->
         <module name="ConstantName"/>
-        <module name="LocalFinalVariableName">
-            <property name="format" value="^[A-Z](_?[A-Z0-9]+)*$"/>
-        </module>
-        <module name="LocalVariableName">
-            <property name="format" value="^[a-z](_?[a-zA-Z0-9]+)*$"/>
-        </module>
-        <module name="MemberName">
-            <property name="format" value="^[a-z](_?[a-zA-Z0-9]+)*$"/>
-            <property name="applyToProtected" value="false"/>
-            <property name="applyToPackage" value="false"/>
-        </module>
-        <module name="MethodName">
-            <property name="format" value="^[_a-zA-Z](_?[a-zA-Z0-9]+)*$"/>
-            <property name="allowClassName" value="false"/>
-        </module>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
         <module name="PackageName"/>
-        <module name="ParameterName">
-            <property name="format" value="^[a-z][_a-zA-Z0-9]+$"/>
-        </module>
+        <module name="ParameterName"/>
         <module name="StaticVariableName"/>
-        <module name="TypeName">
-            <property name="format" value="^[A-Z](_?[a-zA-Z0-9]+)*$"/>
-            <property name="applyToProtected" value="false"/>
-            <property name="applyToPrivate" value="false"/>
-        </module>
+        <module name="TypeName"/>
 
         <!-- Checks for imports -->
         <!-- See https://checkstyle.org/config_imports.html -->
