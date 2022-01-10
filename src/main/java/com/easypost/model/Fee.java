@@ -50,7 +50,7 @@ public final class Fee {
     }
 
     /**
-     * Get if the fee is charged.
+     * Get whether the fee is charged.
      *
      * @return true if the fee is charged
      */
@@ -59,7 +59,7 @@ public final class Fee {
     }
 
     /**
-     * Set if the fee is charged.
+     * Set whether the fee is charged.
      *
      * @param charged true if the fee is charged
      */

@@ -80,7 +80,7 @@ public final class CustomsInfo extends EasyPostResource {
     }
 
     /**
-     * Get if this CustomsInfo is certified by customs.
+     * Get whether this CustomsInfo is certified by customs.
      *
      * @return true if this CustomsInfo is certified by customs.
      */
@@ -89,7 +89,7 @@ public final class CustomsInfo extends EasyPostResource {
     }
 
     /**
-     * Set if this CustomsInfo is certified by customs.
+     * Set whether this CustomsInfo is certified by customs.
      *
      * @param customsCertify true if this CustomsInfo is certified by customs.
      */

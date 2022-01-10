@@ -139,16 +139,16 @@ public final class Pickup extends EasyPostResource {
     }
 
     /**
-     * Get if the address is an account address.
+     * Get whether the address is an account address.
      *
-     * @return if the address is an account address.
+     * @return whether the address is an account address.
      */
     public Boolean getIsAccountAddress() {
         return isAccountAddress;
     }
 
     /**
-     * Set if the address is an account address.
+     * Set whether the address is an account address.
      *
      * @param isAccountAddress if the address is an account address.
      */

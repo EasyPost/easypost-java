@@ -246,7 +246,7 @@ public final class Rate extends EasyPostResource {
     }
 
     /**
-     * Get if the delivery date is guaranteed for this Rate.
+     * Get whether the delivery date is guaranteed for this Rate.
      *
      * @return true if the delivery date is guaranteed for this Rate.
      */
@@ -255,7 +255,7 @@ public final class Rate extends EasyPostResource {
     }
 
     /**
-     * Set if the delivery date is guaranteed for this Rate.
+     * Set whether the delivery date is guaranteed for this Rate.
      *
      * @param deliveryDateGuaranteed true if the delivery date is guaranteed for this Rate.
      */

@@ -36,7 +36,7 @@ public final class AddressCollection extends EasyPostResource {
     /**
      * Get whether there are more addresses to retrieve.
      *
-     * @return Boolean whether there are more addresses to retrieve
+     * @return whether there are more addresses to retrieve
      */
     public Boolean getHasMore() {
         return hasMore;

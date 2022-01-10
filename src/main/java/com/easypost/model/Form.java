@@ -87,16 +87,16 @@ public final class Form {
     }
 
     /**
-     * Get if the Form is submitted electronically.
+     * Get whether the Form is submitted electronically.
      *
-     * @return if the Form is submitted electronically.
+     * @return whether the Form is submitted electronically.
      */
     public Boolean getSubmittedElectronically() {
         return submittedElectronically;
     }
 
     /**
-     * Set if the Form is submitted electronically.
+     * Set whether the Form is submitted electronically.
      *
      * @param submittedElectronically if the Form is submitted electronically.
      */
