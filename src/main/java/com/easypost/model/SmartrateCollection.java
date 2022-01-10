@@ -16,7 +16,6 @@ public final class SmartrateCollection {
     /**
      * Constructor.
      */
-    // intentionally present, used by SmartrateCollectionDeserializer
     public SmartrateCollection() {
         this.rates = new ArrayList<Rate>();
     }
