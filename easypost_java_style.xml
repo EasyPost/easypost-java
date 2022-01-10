@@ -93,6 +93,16 @@
         <property name="message" value="Line has trailing spaces."/>
     </module>
 
+
+    <!-- Allow inline CheckStyle Suppression Annotations (see SuppressWarningsHolder) -->
+    <module name="SuppressWarningsFilter"/>
+
+    <!-- Import Suppression Filters -->
+    <module name="SuppressionFilter">
+        <property name="file" value="style_suppressions.xml"/>
+        <property name="optional" value="false"/>
+    </module>
+
     <!-- Checks for Headers -->
     <!-- See https://checkstyle.org/config_header.html -->
 
@@ -198,6 +208,10 @@
                       default="checkstyle-xpath-suppressions.xml"/>
             <property name="optional" value="true"/>
         </module>
+
+        <!-- Allow Annotations to Suppress CheckStyle rules -->
+        <!-- i.e. @SuppressWarnings("checkstyle:methodname") -->
+        <module name="SuppressWarningsHolder"/>
 
     </module>
 

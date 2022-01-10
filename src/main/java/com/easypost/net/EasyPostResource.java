@@ -460,6 +460,7 @@ public abstract class EasyPostResource {
         }
     }
 
+    @SuppressWarnings("checkstyle:methodname")
     protected static <T> T _request(final EasyPostResource.RequestMethod method, final String url,
                                        final Map<String, Object> params, final Class<T> clazz, String apiKey,
                                        final boolean apiKeyRequired) throws EasyPostException {
