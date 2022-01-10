@@ -178,8 +178,8 @@ public abstract class EasyPostResource {
         headers.put("Authorization", String.format("Bearer %s", apiKey));
 
         // debug headers
-        String[] propertyNames = {"os.name", "os.version", "os.arch", "java.version", "java.vendor", "java.vm.version",
-                "java.vm.vendor"};
+        String[] propertyNames = { "os.name", "os.version", "os.arch", "java.version", "java.vendor", "java.vm.version",
+                "java.vm.vendor" };
         Map<String, String> propertyMap = new HashMap<String, String>();
         for (String propertyName : propertyNames) {
             propertyMap.put(propertyName, System.getProperty(propertyName));
@@ -349,11 +349,31 @@ public abstract class EasyPostResource {
 
     private static class Error {
         @SuppressWarnings ("unused")
-        public String type;
-        public String message;
-        public String code;
-        public String param;
-        public String error;
+        private String type;
+        private String message;
+        private String code;
+        private String param;
+        private String error;
+
+        public String getType() {
+            return type;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getParam() {
+            return param;
+        }
+
+        public String getError() {
+            return error;
+        }
     }
 
     private static String getResponseBody(final InputStream responseStream) throws IOException {
@@ -441,8 +461,8 @@ public abstract class EasyPostResource {
     }
 
     protected static <T> T _request(final EasyPostResource.RequestMethod method, final String url,
-                                    final Map<String, Object> params, final Class<T> clazz, String apiKey,
-                                    final boolean apiKeyRequired) throws EasyPostException {
+                                       final Map<String, Object> params, final Class<T> clazz, String apiKey,
+                                       final boolean apiKeyRequired) throws EasyPostException {
         if ((EasyPost.apiKey == null || EasyPost.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
             if (apiKeyRequired) {
                 throw new EasyPostException(String.format(
@@ -513,11 +533,11 @@ public abstract class EasyPostResource {
         try {
             EasyPostResource.Error error = GSON.fromJson(rBody, EasyPostResource.Error.class);
 
-            if (error.error.length() > 0) {
-                throw new EasyPostException(error.error);
+            if (error.getError().length() > 0) {
+                throw new EasyPostException(error.getError());
             }
 
-            throw new EasyPostException(error.message, error.param, null);
+            throw new EasyPostException(error.getMessage(), error.getParam(), null);
         } catch (Exception e) {
             throw new EasyPostException(
                     String.format("An error occurred. Response code: %s Response body: %s", rCode, rBody));
