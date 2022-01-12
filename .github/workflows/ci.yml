@@ -19,7 +19,7 @@ jobs:
           java-version: ${{ matrix.javaversion }}
       - name: Build with Maven
         run: mvn --batch-mode install -Dgpg.skip=true -DskipTests=true
-  checkstyle_job:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
