@@ -1,3 +1,10 @@
+/**
+ * Order.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2022 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -7,185 +14,438 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Order extends EasyPostResource {
-  public String id;
-  String mode;
-  String reference;
-  Boolean isReturn;
-  Address toAddress;
-  Address buyerAddress;
-  Address fromAddress;
-  Address returnAddress;
-  CustomsInfo customsInfo;
-  List<Shipment> shipments;
-  List<Rate> rates;
-  Map<String, Object> options;
-  List<ShipmentMessage> messages;
+public final class Order extends EasyPostResource {
+    private String id;
+    private String mode;
+    private String reference;
+    private Boolean isReturn;
+    private Address toAddress;
+    private Address buyerAddress;
+    private Address fromAddress;
+    private Address returnAddress;
+    private CustomsInfo customsInfo;
+    private List<Shipment> shipments;
+    private List<Rate> rates;
+    private Map<String, Object> options;
+    private List<ShipmentMessage> messages;
 
-  public String getId() {
-    return id;
-  }
-  public void setId(String id) {
-    this.id = id;
-  }
+    /**
+     * Get the ID of the Order.
+     *
+     * @return the ID of the Order.
+     */
+    public String getId() {
+        return id;
+    }
 
-  public String getMode() {
-    return mode;
-  }
-  public void setMode(String mode) {
-    this.mode = mode;
-  }
+    /**
+     * Set the ID of the Order.
+     *
+     * @param id the ID of the Order.
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
 
-  public String getReference() {
-    return reference;
-  }
-  public void setReference(String reference) {
-    this.reference = reference;
-  }
+    /**
+     * Get the mode of the Order.
+     *
+     * @return the mode of the Order.
+     */
+    public String getMode() {
+        return mode;
+    }
 
-  public Boolean getIsReturn() {
-    return isReturn;
-  }
-  public void setIsReturn(Boolean isReturn) {
-    this.isReturn = isReturn;
-  }
+    /**
+     * Set the mode of the Order.
+     *
+     * @param mode the mode of the Order.
+     */
+    public void setMode(final String mode) {
+        this.mode = mode;
+    }
 
-  public Address getToAddress() {
-    return toAddress;
-  }
-  public void setToAddress(Address toAddress) {
-    this.toAddress = toAddress;
-  }
+    /**
+     * Get the reference of the Order.
+     *
+     * @return the reference of the Order.
+     */
+    public String getReference() {
+        return reference;
+    }
 
-  public Address getBuyerAddress() {
-    return buyerAddress;
-  }
-  public void setBuyerAddress(Address buyerAddress) {
-    this.buyerAddress = buyerAddress;
-  }
+    /**
+     * Set the reference of the Order.
+     *
+     * @param reference the reference of the Order.
+     */
+    public void setReference(final String reference) {
+        this.reference = reference;
+    }
 
-  public Address getFromAddress() {
-    return fromAddress;
-  }
-  public void setFromAddress(Address fromAddress) {
-    this.fromAddress = fromAddress;
-  }
+    /**
+     * Get whether the order is a return.
+     *
+     * @return true if the order is a return.
+     */
+    public Boolean getIsReturn() {
+        return isReturn;
+    }
 
-  public Address getReturnAddress() {
-    return returnAddress;
-  }
-  public void setReturnAddress(Address returnAddress) {
-    this.returnAddress = returnAddress;
-  }
+    /**
+     * Set whether the order is a return.
+     *
+     * @param isReturn true if the order is a return.
+     */
+    public void setIsReturn(final Boolean isReturn) {
+        this.isReturn = isReturn;
+    }
 
-  public CustomsInfo getCustomsInfo() {
-    return customsInfo;
-  }
-  public void setCustomsInfo(CustomsInfo customsInfo) {
-    this.customsInfo = customsInfo;
-  }
+    /**
+     * Get the to address of the Order.
+     *
+     * @return the to address of the Order.
+     */
+    public Address getToAddress() {
+        return toAddress;
+    }
 
-  public List<Shipment> getShipments() {
-    return shipments;
-  }
-  public void setShipments(List<Shipment> shipments) {
-    this.shipments = shipments;
-  }
+    /**
+     * Set the to address of the Order.
+     *
+     * @param toAddress the to address of the Order.
+     */
+    public void setToAddress(final Address toAddress) {
+        this.toAddress = toAddress;
+    }
 
-  public List<Rate> getRates() {
-    return rates;
-  }
-  public void setRates(List<Rate> rates) {
-    this.rates = rates;
-  }
+    /**
+     * Get the buyer address of the Order.
+     *
+     * @return the buyer address of the Order.
+     */
+    public Address getBuyerAddress() {
+        return buyerAddress;
+    }
 
-  public Map<String, Object> getOptions() {
-    return options;
-  }
-  public void setOptions(Map<String, Object> options) {
-    this.options = options;
-  }
+    /**
+     * Set the buyer address of the Order.
+     *
+     * @param buyerAddress the buyer address of the Order.
+     */
+    public void setBuyerAddress(final Address buyerAddress) {
+        this.buyerAddress = buyerAddress;
+    }
 
-  public List<ShipmentMessage> getMessages() {
-    return messages;
-  }
-  public void setMessages(List<ShipmentMessage> messages) {
-    this.messages = messages;
-  }
+    /**
+     * Get the from address of the Order.
+     *
+     * @return the from address of the Order.
+     */
+    public Address getFromAddress() {
+        return fromAddress;
+    }
 
+    /**
+     * Set the from address of the Order.
+     *
+     * @param fromAddress the from address of the Order.
+     */
+    public void setFromAddress(final Address fromAddress) {
+        this.fromAddress = fromAddress;
+    }
 
-  // create
-  public static Order create(Map<String, Object> params) throws EasyPostException {
-    return create(params, null);
-  }
-  public static Order create(Map<String, Object> params, String apiKey) throws EasyPostException {
-    Map<String, Object> wrappedParams = new HashMap<String, Object>();
-    wrappedParams.put("order", params);
+    /**
+     * Get the return address of the Order.
+     *
+     * @return the return address of the Order.
+     */
+    public Address getReturnAddress() {
+        return returnAddress;
+    }
 
-    return request(RequestMethod.POST, classURL(Order.class), wrappedParams, Order.class, apiKey);
-  }
+    /**
+     * Set the return address of the Order.
+     *
+     * @param returnAddress the return address of the Order.
+     */
+    public void setReturnAddress(final Address returnAddress) {
+        this.returnAddress = returnAddress;
+    }
 
-  // retrieve
-  public static Order retrieve(String id) throws EasyPostException {
-    return retrieve(id, null);
-  }
-  public static Order retrieve(String id, String apiKey) throws EasyPostException {
-    return request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, apiKey);
-  }
+    /**
+     * Get the customs info of the Order.
+     *
+     * @return CustomsInfo object.
+     */
+    public CustomsInfo getCustomsInfo() {
+        return customsInfo;
+    }
 
-  // refresh
-  public Order refresh() throws EasyPostException {
-    return this.refresh(null, null);
-  }
-  public Order refresh(Map<String, Object> params) throws EasyPostException {
-    return this.refresh(params, null);
-  }
-  public Order refresh(String apiKey) throws EasyPostException {
-    return this.refresh((Map<String, Object>) null, apiKey);
-  }
-  public Order refresh(Map<String, Object> params, String apiKey) throws EasyPostException {
-    return request(
-      RequestMethod.GET,
-      String.format("%s", instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
-  }
+    /**
+     * Set the customs info of the Order.
+     *
+     * @param customsInfo CustomsInfo object.
+     */
+    public void setCustomsInfo(final CustomsInfo customsInfo) {
+        this.customsInfo = customsInfo;
+    }
 
-  // get rates
-  public Order newRates() throws EasyPostException {
-    return this.newRates(null, null);
-  }
-  public Order newRates(Map<String, Object> params) throws EasyPostException {
-    return this.newRates(params, null);
-  }
-  public Order newRates(String apiKey) throws EasyPostException {
-    return this.newRates((Map<String, Object>) null, apiKey);
-  }
-  public Order newRates(Map<String, Object> params, String apiKey) throws EasyPostException {
-    Order response = request(
-            RequestMethod.GET,
-            String.format("%s/rates", instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
+    /**
+     * Get the shipments of the Order.
+     *
+     * @return List of Shipment objects.
+     */
+    public List<Shipment> getShipments() {
+        return shipments;
+    }
 
-    this.merge(this, response);
-    return this;
-  }
+    /**
+     * Set the shipments of the Order.
+     *
+     * @param shipments List of Shipment objects.
+     */
+    public void setShipments(final List<Shipment> shipments) {
+        this.shipments = shipments;
+    }
 
-  // buy
-  public Order buy(Map<String, Object> params) throws EasyPostException {
-    return this.buy(params, null);
-  }
-  public Order buy(Rate rate) throws EasyPostException {
-    Map<String, Object> params = new HashMap<String, Object>();
-    params.put("carrier", rate.carrier);
-    params.put("service", rate.service);
+    /**
+     * Get the rates of the Order.
+     *
+     * @return List of Rate objects.
+     */
+    public List<Rate> getRates() {
+        return rates;
+    }
 
-    return this.buy(params, null);
-  }
-  public Order buy(Map<String, Object> params, String apiKey) throws EasyPostException {
-    Order response = request(
-      RequestMethod.POST,
-      String.format("%s/buy", instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
+    /**
+     * Set the rates of the Order.
+     *
+     * @param rates List of Rate objects.
+     */
+    public void setRates(final List<Rate> rates) {
+        this.rates = rates;
+    }
 
-    this.merge(this, response);
-      return this;
-  }
+    /**
+     * Get the options of the Order.
+     *
+     * @return map of options.
+     */
+    public Map<String, Object> getOptions() {
+        return options;
+    }
 
+    /**
+     * Set the options of the Order.
+     *
+     * @param options map of options.
+     */
+    public void setOptions(final Map<String, Object> options) {
+        this.options = options;
+    }
+
+    /**
+     * Get the messages of the Order.
+     *
+     * @return List of ShipmentMessage objects.
+     */
+    public List<ShipmentMessage> getMessages() {
+        return messages;
+    }
+
+    /**
+     * Set the messages of the Order.
+     *
+     * @param messages List of ShipmentMessage objects.
+     */
+    public void setMessages(final List<ShipmentMessage> messages) {
+        this.messages = messages;
+    }
+
+    /**
+     * Create an Order object from a map of paramters.
+     *
+     * @param params map of parameters.
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Order create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create an Order object from a map of paramters.
+     *
+     * @param params map of parameters.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Order create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("order", params);
+
+        return request(RequestMethod.POST, classURL(Order.class), wrappedParams, Order.class, apiKey);
+    }
+
+    /**
+     * Retrieve an Order object from the API.
+     *
+     * @param id ID of the Order to retrieve.
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Order retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve an Order object from the API.
+     *
+     * @param id     ID of the Order to retrieve.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Order retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, apiKey);
+    }
+
+    /**
+     * Refresh this Order object.
+     *
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order refresh() throws EasyPostException {
+        return this.refresh(null, null);
+    }
+
+    /**
+     * Refresh this Order object.
+     *
+     * @param params map of parameters.
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order refresh(final Map<String, Object> params) throws EasyPostException {
+        return this.refresh(params, null);
+    }
+
+    /**
+     * Refresh this Order object.
+     *
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order refresh(final String apiKey) throws EasyPostException {
+        return this.refresh((Map<String, Object>) null, apiKey);
+    }
+
+    /**
+     * Refresh this Order object.
+     *
+     * @param params map of parameters.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, String.format("%s", instanceURL(Order.class, this.getId())), params,
+                Order.class, apiKey);
+    }
+
+    /**
+     * Get new rates for this Order.
+     *
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order newRates() throws EasyPostException {
+        return this.newRates(null, null);
+    }
+
+    /**
+     * Get new rates for this Order.
+     *
+     * @param params map of parameters.
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order newRates(final Map<String, Object> params) throws EasyPostException {
+        return this.newRates(params, null);
+    }
+
+    /**
+     * Get new rates for this Order.
+     *
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order newRates(final String apiKey) throws EasyPostException {
+        return this.newRates((Map<String, Object>) null, apiKey);
+    }
+
+    /**
+     * Get new rates for this Order.
+     *
+     * @param params map of parameters.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order newRates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Order response =
+                request(RequestMethod.GET, String.format("%s/rates", instanceURL(Order.class, this.getId())), params,
+                        Order.class, apiKey);
+
+        this.merge(this, response);
+        return this;
+    }
+
+    /**
+     * Buy this Order.
+     *
+     * @param params map of parameters.
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order buy(final Map<String, Object> params) throws EasyPostException {
+        return this.buy(params, null);
+    }
+
+    /**
+     * Buy this Order.
+     *
+     * @param rate Rate to buy.
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order buy(final Rate rate) throws EasyPostException {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("carrier", rate.getCarrier());
+        params.put("service", rate.getService());
+
+        return this.buy(params, null);
+    }
+
+    /**
+     * Buy this Order.
+     *
+     * @param params map of parameters.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Order buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Order response =
+                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Order.class, this.getId())), params,
+                        Order.class, apiKey);
+
+        this.merge(this, response);
+        return this;
+    }
 }

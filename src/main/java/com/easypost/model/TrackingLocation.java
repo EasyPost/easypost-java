@@ -1,21 +1,87 @@
+/**
+ * TrackingLocation.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2022 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
-public class TrackingLocation {
-    String city;
-    String state;
-    String country;
-    String zip;
+public final class TrackingLocation {
+    private String city;
+    private String state;
+    private String country;
+    private String zip;
 
-    public String getCity() { return city; }
-    public void setCity(String city) { this.city = city; }
+    /**
+     * Get the city of the tracking location.
+     *
+     * @return the city of the tracking location.
+     */
+    public String getCity() {
+        return city;
+    }
 
-    public String getState() { return state; }
-    public void setState(String state) { this.state = state; }
+    /**
+     * Set the city of the tracking location.
+     *
+     * @param city the city of the tracking location.
+     */
+    public void setCity(final String city) {
+        this.city = city;
+    }
 
-    public String getCountry() { return country; }
-    public void setCountry(String country) { this.country = country; }
+    /**
+     * Get the state of the tracking location.
+     *
+     * @return the state of the tracking location.
+     */
+    public String getState() {
+        return state;
+    }
 
-    public String getZip() { return zip; }
-    public void setZip(String zip) { this.zip = zip; }
+    /**
+     * Set the state of the tracking location.
+     *
+     * @param state the state of the tracking location.
+     */
+    public void setState(final String state) {
+        this.state = state;
+    }
 
+    /**
+     * Get the country of the tracking location.
+     *
+     * @return the country of the tracking location.
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * Set the country of the tracking location.
+     *
+     * @param country the country of the tracking location.
+     */
+    public void setCountry(final String country) {
+        this.country = country;
+    }
+
+    /**
+     * Get the zip code of the tracking location.
+     *
+     * @return the zip code of the tracking location.
+     */
+    public String getZip() {
+        return zip;
+    }
+
+    /**
+     * Set the zip code of the tracking location.
+     *
+     * @param zip the zip code of the tracking location.
+     */
+    public void setZip(final String zip) {
+        this.zip = zip;
+    }
 }

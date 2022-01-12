@@ -1,20 +1,49 @@
+/**
+ * ShipmentOptions.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2022 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
-public class ShipmentOptions {
-	String smartpostHub;
-	String smartpostManifest;
-	
-	public String getSmartpostHub() {
-		return smartpostHub;
-	}
-	public void setSmartpostHub(String smartpostHub) {
-		this.smartpostHub = smartpostHub;
-	}
+public final class ShipmentOptions {
+    private String smartpostHub;
+    private String smartpostManifest;
 
-	public String getSmartpostManifest() {
-		return smartpostManifest;
-	}
-	public void setSmartpostManifest(String smartpostManifest) {
-		this.smartpostManifest = smartpostManifest;
-	}
+    /**
+     * Get the SmartPost hub of the shipment.
+     *
+     * @return the SmartPost hub of the shipment
+     */
+    public String getSmartpostHub() {
+        return smartpostHub;
+    }
+
+    /**
+     * Set the SmartPost hub of the shipment.
+     *
+     * @param smartpostHub the SmartPost hub of the shipment
+     */
+    public void setSmartpostHub(final String smartpostHub) {
+        this.smartpostHub = smartpostHub;
+    }
+
+    /**
+     * Get the SmartPost manifest of the shipment.
+     *
+     * @return the SmartPost manifest of the shipment
+     */
+    public String getSmartpostManifest() {
+        return smartpostManifest;
+    }
+
+    /**
+     * Set the SmartPost manifest of the shipment.
+     *
+     * @param smartpostManifest the SmartPost manifest of the shipment
+     */
+    public void setSmartpostManifest(final String smartpostManifest) {
+        this.smartpostManifest = smartpostManifest;
+    }
 }

@@ -1,3 +1,10 @@
+/**
+ * Insurance.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2022 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -7,100 +14,370 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Insurance extends EasyPostResource {
-	public String id;
-	String mode;
-	String reference;
-	Address toAddress;
-	Address fromAddress;
-	Tracker tracker;
-	String provider;
-	String providerId;
-	String trackingCode;
-	String status;
-	String shipmentId;
-	Float amount;
-	List<String> messages;
+public final class Insurance extends EasyPostResource {
+    private String id;
+    private String mode;
+    private String reference;
+    private Address toAddress;
+    private Address fromAddress;
+    private Tracker tracker;
+    private String provider;
+    private String providerId;
+    private String trackingCode;
+    private String status;
+    private String shipmentId;
+    private Float amount;
+    private List<String> messages;
 
-	public String getId() { return id; }
-	public void setId(String id) { this.id = id; }
+    /**
+     * Get the ID of this Insurance.
+     *
+     * @return the ID of the Insurance
+     */
+    public String getId() {
+        return id;
+    }
 
-	public String getMode() { return mode; }
-	public void setMode(String mode) { this.mode = mode; }
+    /**
+     * Set the ID of this Insurance.
+     *
+     * @param id the ID of the Insurance
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
 
-	public String getReference() { return reference; }
-	public void setReference(String reference) { this.reference = reference; }
+    /**
+     * Get the mode of this Insurance.
+     *
+     * @return the mode of the Insurance
+     */
+    public String getMode() {
+        return mode;
+    }
 
-	public Address getToAddress() { return toAddress; }
-	public void setToAddress(Address toAddress) { this.toAddress = toAddress; }
+    /**
+     * Set the mode of this Insurance.
+     *
+     * @param mode the mode of the Insurance
+     */
+    public void setMode(final String mode) {
+        this.mode = mode;
+    }
 
-	public Address getFromAddress() { return fromAddress; }
-	public void setFromAddress(Address fromAddress) { this.fromAddress = fromAddress; }
+    /**
+     * Get the reference of this Insurance.
+     *
+     * @return the reference of the Insurance
+     */
+    public String getReference() {
+        return reference;
+    }
 
-	public Tracker getTracker() { return tracker; }
-	public void setTracker(Tracker tracker) { this.tracker = tracker; }
+    /**
+     * Set the reference of this Insurance.
+     *
+     * @param reference the reference of the Insurance
+     */
+    public void setReference(final String reference) {
+        this.reference = reference;
+    }
 
-	public String getProvider() { return provider; }
-	public void setProvider(String provider) { this.provider = provider; }
+    /**
+     * Get the to address of this Insurance.
+     *
+     * @return the to address of the Insurance
+     */
+    public Address getToAddress() {
+        return toAddress;
+    }
 
-	public String getProviderId() { return providerId; }
-	public void setProviderId(String providerId) { this.providerId = providerId; }
+    /**
+     * Set the to address of this Insurance.
+     *
+     * @param toAddress the to address of the Insurance
+     */
+    public void setToAddress(final Address toAddress) {
+        this.toAddress = toAddress;
+    }
 
-	public String getTrackingCode() { return trackingCode; }
-	public void setTrackingCode(String trackingCode) { this.trackingCode = trackingCode; }
+    /**
+     * Get the from address of this Insurance.
+     *
+     * @return the from address of the Insurance
+     */
+    public Address getFromAddress() {
+        return fromAddress;
+    }
 
-	public String getStatus() { return status; }
-	public void setStatus(String status) { this.status = status; }
+    /**
+     * Set the from address of this Insurance.
+     *
+     * @param fromAddress the from address of the Insurance
+     */
+    public void setFromAddress(final Address fromAddress) {
+        this.fromAddress = fromAddress;
+    }
 
-	public String getShipmentId() { return shipmentId; }
-	public void setShipmentId(String shipmentId) { this.shipmentId = shipmentId; }
+    /**
+     * Get the tracker of this Insurance.
+     *
+     * @return Tracker object
+     */
+    public Tracker getTracker() {
+        return tracker;
+    }
 
-	public Float getAmount() { return amount; }
-	public void setAmount(Float amount) { this.amount = amount; }
+    /**
+     * Set the tracker of this Insurance.
+     *
+     * @param tracker Tracker object
+     */
+    public void setTracker(final Tracker tracker) {
+        this.tracker = tracker;
+    }
 
-	public List<String> getMessages() { return messages; }
-	public void setMessages(List<String> messages) { this.messages = messages; }
+    /**
+     * Get the provider of this Insurance.
+     *
+     * @return the provider of the Insurance
+     */
+    public String getProvider() {
+        return provider;
+    }
 
-	// create
-	public static Insurance create(Map<String, Object> params) throws EasyPostException {
-		return create(params, null);
-	}
-	public static Insurance create(Map<String, Object> params, String apiKey) throws EasyPostException {
-		Map<String, Object> wrappedParams = new HashMap<String, Object>();
-		wrappedParams.put("insurance", params);
+    /**
+     * Set the provider of this Insurance.
+     *
+     * @param provider the provider of the Insurance
+     */
+    public void setProvider(final String provider) {
+        this.provider = provider;
+    }
 
-		return request(RequestMethod.POST, classURL(Insurance.class), wrappedParams, Insurance.class, apiKey);
-	}
+    /**
+     * Get the provider ID of this Insurance.
+     *
+     * @return the provider ID of the Insurance
+     */
+    public String getProviderId() {
+        return providerId;
+    }
 
-	// retrieve
-	public static Insurance retrieve(String id) throws EasyPostException {
-		return retrieve(id, null);
-	}
-	public static Insurance retrieve(String id, String apiKey) throws EasyPostException {
-		return request(RequestMethod.GET, instanceURL(Insurance.class, id), null, Insurance.class, apiKey);
-	}
+    /**
+     * Set the provider ID of this Insurance.
+     *
+     * @param providerId the provider ID of the Insurance
+     */
+    public void setProviderId(final String providerId) {
+        this.providerId = providerId;
+    }
 
-	// all
-	public static InsuranceCollection all(Map<String, Object> params) throws EasyPostException {
-		return all(params, null);
-	}
-	public static InsuranceCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-		return request(RequestMethod.GET, classURL(Insurance.class), params, InsuranceCollection.class, apiKey);
-	}
+    /**
+     * Get the tracking code of this Insurance.
+     *
+     * @return the tracking code of the Insurance
+     */
+    public String getTrackingCode() {
+        return trackingCode;
+    }
 
-	// refresh
-	public Insurance refresh() throws EasyPostException {
-		return this.refresh(null, null);
-	}
-	public Insurance refresh(Map<String, Object> params) throws EasyPostException {
-		return this.refresh(params, null);
-	}
-	public Insurance refresh(String apiKey) throws EasyPostException {
-		return this.refresh((Map<String, Object>) null, apiKey);
-	}
-	public Insurance refresh(Map<String, Object> params, String apiKey) throws EasyPostException {
-		return request(
-			RequestMethod.GET,
-			String.format("%s", instanceURL(Insurance.class, this.getId())), params, Insurance.class, apiKey);
-	}
+    /**
+     * Set the tracking code of this Insurance.
+     *
+     * @param trackingCode the tracking code of the Insurance
+     */
+    public void setTrackingCode(final String trackingCode) {
+        this.trackingCode = trackingCode;
+    }
+
+    /**
+     * Get the status of this Insurance.
+     *
+     * @return the status of the Insurance
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * Set the status of this Insurance.
+     *
+     * @param status the status of the Insurance
+     */
+    public void setStatus(final String status) {
+        this.status = status;
+    }
+
+    /**
+     * Get the shipment ID of this Insurance.
+     *
+     * @return the shipment ID of the Insurance
+     */
+    public String getShipmentId() {
+        return shipmentId;
+    }
+
+    /**
+     * Set the shipment ID of this Insurance.
+     *
+     * @param shipmentId the shipment ID of the Insurance
+     */
+    public void setShipmentId(final String shipmentId) {
+        this.shipmentId = shipmentId;
+    }
+
+    /**
+     * Get the amount of this Insurance.
+     *
+     * @return the amount of the Insurance
+     */
+    public Float getAmount() {
+        return amount;
+    }
+
+    /**
+     * Set the amount of this Insurance.
+     *
+     * @param amount the amount of the Insurance
+     */
+    public void setAmount(final Float amount) {
+        this.amount = amount;
+    }
+
+    /**
+     * Get the messages of this Insurance.
+     *
+     * @return list of messages of the Insurance
+     */
+    public List<String> getMessages() {
+        return messages;
+    }
+
+    /**
+     * Set the messages of this Insurance.
+     *
+     * @param messages list of messages of the Insurance
+     */
+    public void setMessages(final List<String> messages) {
+        this.messages = messages;
+    }
+
+    /**
+     * Create a new Insurance object from a map of parameters.
+     *
+     * @param params map of parameters
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Insurance create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a new Insurance object from a map of parameters.
+     *
+     * @param params a map of parameters
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Insurance create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("insurance", params);
+
+        return request(RequestMethod.POST, classURL(Insurance.class), wrappedParams, Insurance.class, apiKey);
+    }
+
+    /**
+     * Retrieve an Insurance from the API.
+     *
+     * @param id the id of the Insurance to retrieve
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Insurance retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve an Insurance from the API.
+     *
+     * @param id     the id of the Insurance to retrieve
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Insurance retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Insurance.class, id), null, Insurance.class, apiKey);
+    }
+
+    /**
+     * Get a list of Insurances.
+     *
+     * @param params a map of parameters
+     * @return InsuranceCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static InsuranceCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * Get a list of Insurances.
+     *
+     * @param params a map of parameters
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return InsuranceCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static InsuranceCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Insurance.class), params, InsuranceCollection.class, apiKey);
+    }
+
+    /**
+     * Refresh this Insurance.
+     *
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public Insurance refresh() throws EasyPostException {
+        return this.refresh(null, null);
+    }
+
+    /**
+     * Refresh this Insurance.
+     *
+     * @param params a map of parameters
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public Insurance refresh(final Map<String, Object> params) throws EasyPostException {
+        return this.refresh(params, null);
+    }
+
+    /**
+     * Refresh this Insurance.
+     *
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public Insurance refresh(final String apiKey) throws EasyPostException {
+        return this.refresh((Map<String, Object>) null, apiKey);
+    }
+
+    /**
+     * Refresh this Insurance.
+     *
+     * @param params a map of parameters
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public Insurance refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, String.format("%s", instanceURL(Insurance.class, this.getId())), params,
+                Insurance.class, apiKey);
+    }
 }

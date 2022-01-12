@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class BatchManifestExample {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(final String[] args) throws InterruptedException {
         EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
 
         try {
@@ -43,10 +43,10 @@ public class BatchManifestExample {
             Batch batch = Batch.create();
 
             // wait until batch is created asynchronously
-            while(true) {
+            while (true) {
                 batch = batch.refresh();
 
-                if (batch.getState() == "created") {
+                if (batch.getState().equals("created")) {
                     break;
                 }
 
@@ -63,7 +63,7 @@ public class BatchManifestExample {
             batch.createScanForm();
 
             // batch label creation is asyncronou
-            while(true) {
+            while (true) {
                 batch = batch.refresh();
 
                 if (batch.getScanForm() != null) {

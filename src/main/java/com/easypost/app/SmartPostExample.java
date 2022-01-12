@@ -14,9 +14,9 @@ import java.util.Map;
 
 public class SmartPostExample {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
-        
+
         Map<String, Object> fromAddressMap = new HashMap<String, Object>();
         fromAddressMap.put("name", "Simpler Postage Inc");
         fromAddressMap.put("street1", "388 Townsend St");
@@ -59,7 +59,7 @@ public class SmartPostExample {
             shipmentOptions.put("smartpost_hub", 5552);
             shipmentOptions.put("smartpost_manifest", "123456789");
             shipmentMap.put("options", shipmentOptions);
-            
+
             Shipment shipment = Shipment.create(shipmentMap);
 
             // buy postage
@@ -78,7 +78,7 @@ public class SmartPostExample {
             shipment = shipment.label(labelMap);
 
             System.out.println(shipment.prettyPrint());
-            
+
         } catch (EasyPostException e) {
             e.printStackTrace();
         }

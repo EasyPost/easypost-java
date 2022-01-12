@@ -1,3 +1,10 @@
+/**
+ * Tracker.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2022 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -9,160 +16,380 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Tracker extends EasyPostResource {
-    public String id;
-    String mode;
-    String trackingCode;
-    String status;
-    String shipmentId;
-    String carrier;
-    List<TrackingDetail> trackingDetails;
-    float weight;
-    Date estDeliveryDate;
-    String signedBy;
-    CarrierDetail carrierDetail;
-    String publicUrl;
-    String statusDetail;
+public final class Tracker extends EasyPostResource {
+    private String id;
+    private String mode;
+    private String trackingCode;
+    private String status;
+    private String shipmentId;
+    private String carrier;
+    private List<TrackingDetail> trackingDetails;
+    private float weight;
+    private Date estDeliveryDate;
+    private String signedBy;
+    private CarrierDetail carrierDetail;
+    private String publicUrl;
+    private String statusDetail;
 
+    /**
+     * Get the ID of the Tracker.
+     *
+     * @return the ID of the Tracker.
+     */
     public String getId() {
         return id;
     }
-    public void setId(String id) {
+
+    /**
+     * Set the ID of the Tracker.
+     *
+     * @param id the ID of the Tracker.
+     */
+    public void setId(final String id) {
         this.id = id;
     }
 
+    /**
+     * Get the mode of the Tracker.
+     *
+     * @return the mode of the Tracker.
+     */
     public String getMode() {
         return mode;
     }
-    public void setMode(String mode) {
+
+    /**
+     * Set the mode of the Tracker.
+     *
+     * @param mode the mode of the Tracker.
+     */
+    public void setMode(final String mode) {
         this.mode = mode;
     }
 
+    /**
+     * Get the ID of the shipment associated with this tracker.
+     *
+     * @return the ID of the shipment associated with this tracker.
+     */
     public String getShipmentId() {
         return shipmentId;
     }
-    public void setShipmentId(String shipmentId) {
+
+    /**
+     * Set the ID of the shipment associated with this tracker.
+     *
+     * @param shipmentId the ID of the shipment associated with this tracker.
+     */
+    public void setShipmentId(final String shipmentId) {
         this.shipmentId = shipmentId;
     }
 
+    /**
+     * Get the carrier of the Tracker.
+     *
+     * @return the carrier of the Tracker.
+     */
     public String getCarrier() {
         return carrier;
     }
-    public void setCarrier(String carrier) {
+
+    /**
+     * Set the carrier of the Tracker.
+     *
+     * @param carrier the carrier of the Tracker.
+     */
+    public void setCarrier(final String carrier) {
         this.carrier = carrier;
     }
 
+    /**
+     * Get the tracking code of the Tracker.
+     *
+     * @return the tracking code of the Tracker.
+     */
     public String getTrackingCode() {
         return trackingCode;
     }
-    public void setTrackingCode(String trackingCode) {
+
+    /**
+     * Set the tracking code of the Tracker.
+     *
+     * @param trackingCode the tracking code of the Tracker.
+     */
+    public void setTrackingCode(final String trackingCode) {
         this.trackingCode = trackingCode;
     }
 
+    /**
+     * Get the status of the Tracker.
+     *
+     * @return the status of the Tracker.
+     */
     public String getStatus() {
         return status;
     }
-    public void setStatus(String status) {
+
+    /**
+     * Set the status of the Tracker.
+     *
+     * @param status the status of the Tracker.
+     */
+    public void setStatus(final String status) {
         this.status = status;
     }
 
+    /**
+     * Get the tracking details of the Tracker.
+     *
+     * @return List of TrackingDetail objects.
+     */
     public List<TrackingDetail> getTrackingDetails() {
         return trackingDetails;
     }
-    public void setTrackingDetails(List<TrackingDetail> trackingDetails) {
+
+    /**
+     * Set the tracking details of the Tracker.
+     *
+     * @param trackingDetails List of TrackingDetail objects.
+     */
+    public void setTrackingDetails(final List<TrackingDetail> trackingDetails) {
         this.trackingDetails = trackingDetails;
     }
 
+    /**
+     * Get the weight of the Tracker.
+     *
+     * @return the weight of the Tracker.
+     */
     public float getWeight() {
         return weight;
     }
-    public void setWeight(float weight) {
+
+    /**
+     * Set the weight of the Tracker.
+     *
+     * @param weight the weight of the Tracker.
+     */
+    public void setWeight(final float weight) {
         this.weight = weight;
     }
 
+    /**
+     * Get the estimated delivery date of the Tracker.
+     *
+     * @return the estimated delivery date of the Tracker.
+     */
     public Date getEstDeliveryDate() {
         return estDeliveryDate;
     }
-    public void setEstDeliveryDate(Date estDeliveryDate) {
+
+    /**
+     * Set the estimated delivery date of the Tracker.
+     *
+     * @param estDeliveryDate the estimated delivery date of the Tracker.
+     */
+    public void setEstDeliveryDate(final Date estDeliveryDate) {
         this.estDeliveryDate = estDeliveryDate;
     }
 
+    /**
+     * Get who signed for the package associated Tracker.
+     *
+     * @return who signed for the package associated Tracker.
+     */
     public String getSignedBy() {
         return signedBy;
     }
-    public void setSignedBy(String signedBy) {
+
+    /**
+     * Set who signed for the package associated Tracker.
+     *
+     * @param signedBy who signed for the package associated Tracker.
+     */
+    public void setSignedBy(final String signedBy) {
         this.signedBy = signedBy;
     }
 
-    public CarrierDetail getCarrierDetail() { return carrierDetail; }
-    public void setCarrierDetail(CarrierDetail carrierDetail) { this.carrierDetail = carrierDetail; }
+    /**
+     * Get details about the carrier associated with the Tracker.
+     *
+     * @return CarrierDetail object.
+     */
+    public CarrierDetail getCarrierDetail() {
+        return carrierDetail;
+    }
+
+    /**
+     * Set details about the carrier associated with the Tracker.
+     *
+     * @param carrierDetail details about the carrier associated with the Tracker.
+     */
+    public void setCarrierDetail(final CarrierDetail carrierDetail) {
+        this.carrierDetail = carrierDetail;
+    }
 
     // This method is a misspelling, but it persists to avoid breaking backwards compatibility
+
+    /**
+     * Get when the tracker was updated.
+     *
+     * @return when the tracker was updated.
+     */
     public Date getUpdateAt() {
         return getUpdatedAt();
     }
-    public void setUpdateAt(Date updatedAt) {
+
+    /**
+     * Set when the tracker was updated.
+     *
+     * @param updatedAt when the tracker was updated.
+     */
+    public void setUpdateAt(final Date updatedAt) {
         setUpdatedAt(updatedAt);
     }
 
-    public String getPublicUrl() { return publicUrl; }
-    public void setPublicUrl(String publicUrl) { this.publicUrl = publicUrl; }
+    /**
+     * Get the public URL of the Tracker.
+     *
+     * @return the public URL of the Tracker.
+     */
+    public String getPublicUrl() {
+        return publicUrl;
+    }
 
+    /**
+     * Set the public URL of the Tracker.
+     *
+     * @param publicUrl the public URL of the Tracker.
+     */
+    public void setPublicUrl(final String publicUrl) {
+        this.publicUrl = publicUrl;
+    }
+
+    /**
+     * Get the status of the Tracker.
+     *
+     * @return the status of the Tracker.
+     */
     public String getStatusDetail() {
         return statusDetail;
     }
-    public void setStatusDetail(String statusDetail) {
+
+    /**
+     * Set the status of the Tracker.
+     *
+     * @param statusDetail the status of the Tracker.
+     */
+    public void setStatusDetail(final String statusDetail) {
         this.statusDetail = statusDetail;
     }
 
-    // create
-    public static Tracker create(Map<String, Object> params) throws EasyPostException {
+    /**
+     * Create a new Tracker object using a map of parameters.
+     *
+     * @param params Map of parameters used to create the Tracker.
+     * @return Tracker object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Tracker create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
     }
-    public static Tracker create(Map<String, Object> params, String apiKey) throws EasyPostException {
+
+    /**
+     * Create a new Tracker object using a map of parameters.
+     *
+     * @param params Map of parameters used to create the Tracker.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Tracker object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Tracker create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("tracker", params);
 
         return request(RequestMethod.POST, classURL(Tracker.class), wrappedParams, Tracker.class, apiKey);
     }
 
-    // retrieve
-    public static Tracker retrieve(String id) throws EasyPostException {
+    /**
+     * Retrieve a Tracker object from the API.
+     *
+     * @param id ID of the Tracker to retrieve.
+     * @return Tracker object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Tracker retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
     }
-    public static Tracker retrieve(String id, String apiKey) throws EasyPostException {
+
+    /**
+     * Retrieve a Tracker object from the API.
+     *
+     * @param id     ID of the Tracker to retrieve.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Tracker object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Tracker retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Tracker.class, id), null, Tracker.class, apiKey);
     }
 
-    // all
-    public static TrackerCollection all(Map<String, Object> params) throws EasyPostException {
+    /**
+     * Get a list of all Tracker objects.
+     *
+     * @param params Map of parameters used to filter the list of Trackers.
+     * @return TrackerCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static TrackerCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
     }
-    public static TrackerCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
+
+    /**
+     * Get a list of all Tracker objects.
+     *
+     * @param params Map of parameters used to filter the list of Trackers.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return TrackerCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static TrackerCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
         return request(RequestMethod.GET, classURL(Tracker.class), params, TrackerCollection.class, apiKey);
     }
 
-    // createList
-    public static boolean createList(Map<String, Object> params) throws EasyPostException {
+    /**
+     * Create a list of Trackers.
+     *
+     * @param params Map of parameters used to create the Trackers.
+     * @return whether the creation was successful.
+     * @throws EasyPostException when the request fails.
+     */
+    public static boolean createList(final Map<String, Object> params) throws EasyPostException {
         return createList(params, null);
     }
-    public static boolean createList(Map<String, Object> params, String apiKey) throws EasyPostException {
-        try {
-            String createListUrl = String.format("%s/create_list", classURL(Tracker.class));
 
-            int count = 0;
-            Map<String, Object> newParams = new HashMap<String, Object>();
-            Map<String, Object> trackers = new HashMap<String, Object>();
-            for (Object tracker : (ArrayList) params.get("trackers")) {
-                trackers.put(String.valueOf(count), tracker);
-                count++;
-            }
-            newParams.put("trackers", trackers);
+    /**
+     * Create a list of Trackers.
+     *
+     * @param params Map of parameters used to create the Trackers.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return whether the creation was successful.
+     * @throws EasyPostException when the request fails.
+     */
+    public static boolean createList(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        String createListUrl = String.format("%s/create_list", classURL(Tracker.class));
 
-            request(RequestMethod.POST, createListUrl, newParams, Object.class, apiKey);
-            return true;
-        } catch (Exception e) {
-            throw new EasyPostException("Cannot create list of trackers", e);
+        int count = 0;
+        Map<String, Object> newParams = new HashMap<String, Object>();
+        Map<String, Object> trackers = new HashMap<String, Object>();
+        for (Object tracker : (ArrayList) params.get("trackers")) {
+            trackers.put(String.valueOf(count), tracker);
+            count++;
         }
+        newParams.put("trackers", trackers);
+
+        request(RequestMethod.POST, createListUrl, newParams, Object.class, apiKey);
+        return true;
     }
 }

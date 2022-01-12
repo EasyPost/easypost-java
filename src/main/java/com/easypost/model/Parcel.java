@@ -1,3 +1,10 @@
+/**
+ * Parcel.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2022 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -6,82 +13,191 @@ import com.easypost.net.EasyPostResource;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Parcel extends EasyPostResource {
-	public String id;
-	String predefinedPackage;
-	Float weight;
-	Float length;
-	Float width;
-	Float height;
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+public final class Parcel extends EasyPostResource {
+    private String id;
+    private String predefinedPackage;
+    private Float weight;
+    private Float length;
+    private Float width;
+    private Float height;
 
-	public String getPredefinedPackage() {
-		return predefinedPackage;
-	}
-	public void setPredefinedPackage(String predefinedPackage) {
-		this.predefinedPackage = predefinedPackage;
-	}
+    /**
+     * Get the ID of this Parcel.
+     *
+     * @return the ID of this Parcel.
+     */
+    public String getId() {
+        return id;
+    }
 
-	public Float getWeight() {
-		return weight;
-	}
-	public void setWeight(Float weight) {
-		this.weight = weight;
-	}
+    /**
+     * Set the ID of this Parcel.
+     *
+     * @param id the ID of this Parcel.
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
 
-	public Float getLength() {
-		return length;
-	}
-	public void setLength(Float length) {
-		this.length = length;
-	}
+    /**
+     * Get the predefined package of this Parcel.
+     *
+     * @return the predefined package of this Parcel.
+     */
+    public String getPredefinedPackage() {
+        return predefinedPackage;
+    }
 
-	public Float getWidth() {
-		return width;
-	}
-	public void setWidth(Float width) {
-		this.width = width;
-	}
+    /**
+     * Set the predefined package of this Parcel.
+     *
+     * @param predefinedPackage the predefined package of this Parcel.
+     */
+    public void setPredefinedPackage(final String predefinedPackage) {
+        this.predefinedPackage = predefinedPackage;
+    }
 
-	public Float getHeight() {
-		return height;
-	}
-	public void setHeight(Float height) {
-		this.height = height;
-	}
+    /**
+     * Get the weight of this Parcel.
+     *
+     * @return the weight of this Parcel.
+     */
+    public Float getWeight() {
+        return weight;
+    }
 
+    /**
+     * Set the weight of this Parcel.
+     *
+     * @param weight the weight of this Parcel.
+     */
+    public void setWeight(final Float weight) {
+        this.weight = weight;
+    }
 
-	// create
-	public static Parcel create(Map<String, Object> params) throws EasyPostException {
-		return create(params, null);
-	}
-	public static Parcel create(Map<String, Object> params, String apiKey) throws EasyPostException {
-		Map<String, Object> wrappedParams = new HashMap<String, Object>();
-		wrappedParams.put("parcel", params);
-		
-		return request(RequestMethod.POST, classURL(Parcel.class), wrappedParams, Parcel.class, apiKey);
-	}
+    /**
+     * Get the length of this Parcel.
+     *
+     * @return the length of this Parcel.
+     */
+    public Float getLength() {
+        return length;
+    }
 
-	// retrieve
-	public static Parcel retrieve(String id) throws EasyPostException {
-		return retrieve(id, null);
-	}
-	public static Parcel retrieve(String id, String apiKey) throws EasyPostException {
-		return request(RequestMethod.GET, instanceURL(Parcel.class, id), null, Parcel.class, apiKey);
-	}
+    /**
+     * Set the length of this Parcel.
+     *
+     * @param length the length of this Parcel.
+     */
+    public void setLength(final Float length) {
+        this.length = length;
+    }
 
-	// all
-	public static ParcelCollection all(Map<String, Object> params) throws EasyPostException {
-		return all(params, null);
-	}
-	public static ParcelCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
-		return request(RequestMethod.GET, classURL(Parcel.class), params, ParcelCollection.class, apiKey);
-	}
+    /**
+     * Get the width of this Parcel.
+     *
+     * @return the width of this Parcel.
+     */
+    public Float getWidth() {
+        return width;
+    }
 
+    /**
+     * Set the width of this Parcel.
+     *
+     * @param width the width of this Parcel.
+     */
+    public void setWidth(final Float width) {
+        this.width = width;
+    }
+
+    /**
+     * Get the height of this Parcel.
+     *
+     * @return the height of this Parcel.
+     */
+    public Float getHeight() {
+        return height;
+    }
+
+    /**
+     * Set the height of this Parcel.
+     *
+     * @param height the height of this Parcel.
+     */
+    public void setHeight(final Float height) {
+        this.height = height;
+    }
+
+    /**
+     * Create a Parcel from a map of parameters.
+     *
+     * @param params the map of the parameters to create a Parcel from.
+     * @return Parcel object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Parcel create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a Parcel from a map of parameters.
+     *
+     * @param params the map of the parameters to create a Parcel from.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Parcel object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Parcel create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("parcel", params);
+
+        return request(RequestMethod.POST, classURL(Parcel.class), wrappedParams, Parcel.class, apiKey);
+    }
+
+    /**
+     * Retrieve a Parcel from the API.
+     *
+     * @param id the ID of the Parcel to retrieve.
+     * @return Parcel object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Parcel retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a Parcel from the API.
+     *
+     * @param id     the ID of the Parcel to retrieve.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Parcel object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Parcel retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Parcel.class, id), null, Parcel.class, apiKey);
+    }
+
+    /**
+     * Get a list of Parcels.
+     *
+     * @param params the parameters to filter the list with.
+     * @return ParcelCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static ParcelCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * Get a list of Parcels.
+     *
+     * @param params the parameters to filter the list with.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return ParcelCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static ParcelCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Parcel.class), params, ParcelCollection.class, apiKey);
+    }
 }

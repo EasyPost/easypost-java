@@ -1,44 +1,106 @@
+/**
+ * Form.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2022 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
-public class Form {
-  public String id;
-  String mode;
-  String formType;
-  String formUrl;
-  Boolean submittedElectronically;
+public final class Form {
+    private String id;
+    private String mode;
+    private String formType;
+    private String formUrl;
+    private Boolean submittedElectronically;
 
-  public String getId() {
-    return id;
-  }
-  public void setId(String id) {
-    this.id = id;
-  }
+    /**
+     * Get the ID of the Form.
+     *
+     * @return the ID of the Form.
+     */
+    public String getId() {
+        return id;
+    }
 
-  public String getMode() {
-    return mode;
-  }
-  public void setMode(String mode) {
-    this.mode = mode;
-  }
+    /**
+     * Set the ID of the Form.
+     *
+     * @param id the ID of the Form.
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
 
-  public String getFormType() {
-    return formType;
-  }
-  public void setFormType(String formType) {
-    this.formType = formType;
-  }
+    /**
+     * Get the mode of the Form.
+     *
+     * @return the mode of the Form.
+     */
+    public String getMode() {
+        return mode;
+    }
 
-  public String getFormUrl() {
-    return formUrl;
-  }
-  public void setFormUrl(String formUrl) {
-    this.formUrl = formUrl;
-  }
+    /**
+     * Set the mode of the Form.
+     *
+     * @param mode the mode of the Form.
+     */
+    public void setMode(final String mode) {
+        this.mode = mode;
+    }
 
-  public Boolean getSubmittedElectronically() {
-    return submittedElectronically;
-  }
-  public void setSubmittedElectronically(Boolean submittedElectronically) {
-    this.submittedElectronically = submittedElectronically;
-  }
+    /**
+     * Get the form type of the Form.
+     *
+     * @return the form type of the Form.
+     */
+    public String getFormType() {
+        return formType;
+    }
+
+    /**
+     * Set the form type of the Form.
+     *
+     * @param formType the form type of the Form.
+     */
+    public void setFormType(final String formType) {
+        this.formType = formType;
+    }
+
+    /**
+     * Get the form url of the Form.
+     *
+     * @return the form url of the Form.
+     */
+    public String getFormUrl() {
+        return formUrl;
+    }
+
+    /**
+     * Set the form url of the Form.
+     *
+     * @param formUrl the form url of the Form.
+     */
+    public void setFormUrl(final String formUrl) {
+        this.formUrl = formUrl;
+    }
+
+    /**
+     * Get whether the Form is submitted electronically.
+     *
+     * @return whether the Form is submitted electronically.
+     */
+    public Boolean getSubmittedElectronically() {
+        return submittedElectronically;
+    }
+
+    /**
+     * Set whether the Form is submitted electronically.
+     *
+     * @param submittedElectronically if the Form is submitted electronically.
+     */
+    public void setSubmittedElectronically(final Boolean submittedElectronically) {
+        this.submittedElectronically = submittedElectronically;
+    }
 }

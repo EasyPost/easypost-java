@@ -6,9 +6,9 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.model.Event;
 import com.easypost.net.EasyPostResource;
 
-public class Webhook {
+public class WebhookExample {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
 
         try {

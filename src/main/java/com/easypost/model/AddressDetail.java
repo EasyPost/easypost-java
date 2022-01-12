@@ -1,31 +1,68 @@
+/**
+ * AddressDetail.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2022 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
-public class AddressDetail {
-  Float latitude;
-  Float longitude;
-  String timeZone;
+public final class AddressDetail {
+    private Float latitude;
+    private Float longitude;
+    private String timeZone;
 
-  public Float getLatitude() {
-    return latitude;
-  }
+    /**
+     * Get latitude of the address.
+     *
+     * @return latitude of the address.
+     */
+    public Float getLatitude() {
+        return latitude;
+    }
 
-  public void setLatitude(Float latitude) {
-    this.latitude = latitude;
-  }
+    /**
+     * Set latitude of the address.
+     *
+     * @param latitude latitude of the address.
+     */
+    public void setLatitude(final Float latitude) {
+        this.latitude = latitude;
+    }
 
-  public Float getLongitude() {
-    return longitude;
-  }
+    /**
+     * Get longitude of the address.
+     *
+     * @return longitude of the address.
+     */
+    public Float getLongitude() {
+        return longitude;
+    }
 
-  public void setLongitude(Float longitude) {
-    this.longitude = longitude;
-  }
+    /**
+     * Set longitude of the address.
+     *
+     * @param longitude longitude of the address.
+     */
+    public void setLongitude(final Float longitude) {
+        this.longitude = longitude;
+    }
 
-  public String getTimeZone() {
-    return timeZone;
-  }
+    /**
+     * Get time zone of the address.
+     *
+     * @return time zone of the address.
+     */
+    public String getTimeZone() {
+        return timeZone;
+    }
 
-  public void setCode(String timeZone) {
-    this.timeZone = timeZone;
-  }
+    /**
+     * Set time zone of the address.
+     *
+     * @param timeZone time zone of the address.
+     */
+    public void setCode(final String timeZone) {
+        this.timeZone = timeZone;
+    }
 }

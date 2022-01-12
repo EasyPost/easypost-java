@@ -1,3 +1,10 @@
+/**
+ * Webhook.java
+ * This file is a part of EasyPost API SDK.
+ * (c) 2022 EasyPost
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
@@ -7,92 +14,224 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Webhook extends EasyPostResource {
-    public String id;
-    String mode;
-    String url;
-    Date disabledAt;
+public final class Webhook extends EasyPostResource {
+    private String id;
+    private String mode;
+    private String url;
+    private Date disabledAt;
 
+    /**
+     * Get the ID of the webhook.
+     *
+     * @return the ID of the webhook
+     */
     public String getId() {
         return id;
     }
-    public void setId(String id) {
+
+    /**
+     * Set the ID of the webhook.
+     *
+     * @param id the ID of the webhook
+     */
+    public void setId(final String id) {
         this.id = id;
     }
 
+    /**
+     * Get the mode of the webhook.
+     *
+     * @return the mode of the webhook
+     */
     public String getMode() {
         return mode;
     }
-    public void setMode(String mode) {
+
+    /**
+     * Set the mode of the webhook.
+     *
+     * @param mode the mode of the webhook
+     */
+    public void setMode(final String mode) {
         this.mode = mode;
     }
 
+    /**
+     * Get the URL of the webhook.
+     *
+     * @return the URL of the webhook
+     */
     public String getUrl() {
         return url;
     }
-    public void setUrl(String url) {
+
+    /**
+     * Set the URL of the webhook.
+     *
+     * @param url the URL of the webhook
+     */
+    public void setUrl(final String url) {
         this.url = url;
     }
 
+    /**
+     * Get the date and time when the webhook was disabled.
+     *
+     * @return the date and time when the webhook was disabled
+     */
     public Date getDisabledAt() {
         return disabledAt;
     }
-    public void setDisabledAt(Date disabledAt) {
+
+    /**
+     * Set the date and time when the webhook was disabled.
+     *
+     * @param disabledAt the date and time when the webhook was disabled
+     */
+    public void setDisabledAt(final Date disabledAt) {
         this.disabledAt = disabledAt;
     }
 
-    // create
-    public static Webhook create(Map<String, Object> params) throws EasyPostException {
+    /**
+     * Create a Webhook object from a map of parameters.
+     *
+     * @param params the map of parameters
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Webhook create(final Map<String, Object> params) throws EasyPostException {
         return create(params, null);
     }
-    public static Webhook create(Map<String, Object> params, String apiKey) throws EasyPostException {
+
+    /**
+     * Create a Webhook object from a map of parameters.
+     *
+     * @param params the map of parameters
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Webhook create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("webhook", params);
 
         return request(RequestMethod.POST, classURL(Webhook.class), wrappedParams, Webhook.class, apiKey);
     }
 
-    // retrieve
-    public static Webhook retrieve(String id) throws EasyPostException {
+    /**
+     * Retrieve a Webhook object from the API.
+     *
+     * @param id the ID of the Webhook to retrieve
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Webhook retrieve(final String id) throws EasyPostException {
         return retrieve(id, null);
     }
-    public static Webhook retrieve(String id, String apiKey) throws EasyPostException {
+
+    /**
+     * Retrieve a Webhook object from the API.
+     *
+     * @param id     the ID of the Webhook to retrieve
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Webhook retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Webhook.class, id), null, Webhook.class, apiKey);
     }
 
-    // all
+    /**
+     * Get a list of all Webhook objects.
+     *
+     * @return WebhookCollection object
+     * @throws EasyPostException when the request fails.
+     */
     public static WebhookCollection all() throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         return all(params, null);
     }
-    public static WebhookCollection all(Map<String, Object> params) throws EasyPostException {
+
+    /**
+     * Get a list of all Webhook objects.
+     *
+     * @param params params for request
+     * @return WebhookCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static WebhookCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
     }
-    public static WebhookCollection all(Map<String, Object> params, String apiKey) throws EasyPostException {
+
+    /**
+     * Get a list of all Webhook objects.
+     *
+     * @param params params for request
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return WebhookCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static WebhookCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
         return request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
     }
 
-    // delete
+    /**
+     * Delete this Webhook.
+     *
+     * @throws EasyPostException when the request fails.
+     */
     public void delete() throws EasyPostException {
         this.delete(null);
     }
-    public void delete(String apiKey) throws EasyPostException {
+
+    /**
+     * Delete this Webhook.
+     *
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @throws EasyPostException when the request fails.
+     */
+    public void delete(final String apiKey) throws EasyPostException {
         request(RequestMethod.DELETE, instanceURL(Webhook.class, this.getId()), null, Webhook.class, apiKey);
     }
 
-    // update
+    /**
+     * Update this webhook.
+     *
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
     public Webhook update() throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         return this.update(params, null);
     }
-    public Webhook update(Map<String, Object> params) throws EasyPostException {
+
+    /**
+     * Update this webhook.
+     *
+     * @param params the map of parameters
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public Webhook update(final Map<String, Object> params) throws EasyPostException {
         return this.update(params, null);
     }
-    public Webhook update(Map<String, Object> params, String apiKey) throws EasyPostException {
+
+    /**
+     * Update this webhook.
+     *
+     * @param params the map of parameters
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public Webhook update(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("webhook", params);
 
-        Webhook response = request(RequestMethod.PUT, instanceURL(Webhook.class, this.getId()), wrappedParams, Webhook.class, apiKey);
+        Webhook response =
+                request(RequestMethod.PUT, instanceURL(Webhook.class, this.getId()), wrappedParams, Webhook.class,
+                        apiKey);
 
         this.merge(this, response);
         return this;

@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class BatchExample {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(final String[] args) throws InterruptedException {
         EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
 
         try {
@@ -88,7 +88,7 @@ public class BatchExample {
             List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
             Map<String, Object> shipment = new HashMap<String, Object>();
             Map<String, Object> toAddressMap = new HashMap<String, Object>();
-            for(Map<String, Object> order : orders) {
+            for (Map<String, Object> order : orders) {
                 toAddressMap.put("name", order.get("name"));
                 toAddressMap.put("street1", order.get("street1"));
                 toAddressMap.put("street2", order.get("street2"));
@@ -129,7 +129,7 @@ public class BatchExample {
 
             // request a batch label of type pdf (other options are epl2 or zpl)
             batch = batch.refresh();
-            if (batch.status.getPostagePurchased() == batch.getShipments().size()) {
+            if (batch.getBatchStatus().getPostagePurchased() == batch.getShipments().size()) {
                 Map<String, Object> labelMap = new HashMap<String, Object>();
                 labelMap.put("file_format", "pdf");
 
@@ -141,7 +141,7 @@ public class BatchExample {
             }
 
             // batch label creation is asyncronous; wait for it to be done before continuing
-            while(true) {
+            while (true) {
                 batch = batch.refresh();
 
                 if (batch.getLabelUrl() != null) {
