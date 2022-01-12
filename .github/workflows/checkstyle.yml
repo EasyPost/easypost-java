@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Check for EasyPost style compliance
+      - name: Run Checkstyle
         uses: nikitasavinov/checkstyle-action@master
         with:
           # github_token: ${{ secrets.GITHUB_TOKEN }}
