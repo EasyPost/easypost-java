@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run CheckStyle checks
-        uses: nikitasavinov/checkstyle-action@master
+        uses: nikitasavinov/checkstyle-action@0.4.0
         with:
           checkstyle_config: easypost_java_style.xml
           tool_name: 'style_enforcer'
