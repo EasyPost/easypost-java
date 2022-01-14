@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-          javaversion: ['7', '7.0.181', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17']
+          javaversion: ['7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17']
     steps:
       - uses: actions/checkout@v2
       - name: Set up Java ${{ matrix.javaversion }}
@@ -19,7 +19,7 @@ jobs:
           java-version: ${{ matrix.javaversion }}
       - name: Build with Maven
         run: mvn --batch-mode install -Dgpg.skip=true -DskipTests=true
-        continue-on-error: true
+        # continue-on-error: true
   lint:
     runs-on: ubuntu-latest
     steps:
