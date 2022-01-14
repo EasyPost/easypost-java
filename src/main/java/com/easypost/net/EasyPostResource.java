@@ -169,7 +169,8 @@ public abstract class EasyPostResource {
     static Map<String, String> getHeaders(String apiKey) {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Accept-Charset", CHARSET);
-        headers.put("User-Agent", String.format("EasyPost/v2 JavaClient/%s", EasyPost.VERSION));
+        headers.put("User-Agent", String.format("EasyPost/v2 JavaClient/%s Java/%s"
+                                , EasyPost.VERSION, System.getProperty("java.version")));
 
         if (apiKey == null) {
             apiKey = EasyPost.apiKey;
