@@ -1,9 +1,17 @@
 # CHANGELOG
 
 
-## NEXT RELEASE
+## 5.0.0 2022-01-14
 
-* Removes `items` and `containers` which have not been supported for some time
+* Bump minimum Java version from 1.5 to 8
+* Changed PUT/POST request bodies from url-form encoded to JSON encoded
+* Added support for `SmartRate`
+* Added support for `Tax Identifiers`
+* Added `Checkstyle` as a plugin and linted the project
+* Added new `rerate` shipment function
+* Bumped project dependencies
+* Include Java version in User-Agent header
+* Remove `items` and `containers` which have not been supported for some time
 * Corrects references of `contact@easypost.com` to `support@easypost.com`
 * Updates the connection timeout to 30 seconds from 20 and the request timeout to 60 from 40
 
