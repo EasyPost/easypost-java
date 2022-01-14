@@ -202,7 +202,7 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[1.6.0,17.0.1]</version>
+                                    <version>[1.6.0,)</version>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
