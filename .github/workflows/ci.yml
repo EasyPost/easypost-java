@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-          javaversion: ['1.6', '6.0.83', '7', '7.0.181', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17']
+          javaversion: ['7', '7.0.181', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17']
     steps:
       - uses: actions/checkout@v2
       - name: Set up Java ${{ matrix.javaversion }}
