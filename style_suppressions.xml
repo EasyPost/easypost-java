@@ -15,4 +15,7 @@
     <!-- Don't do any CheckStyle checks on com.easypost.EasyPost. -->
     <suppress checks="[a-zA-Z0-9]*"
               files="EasyPost.java"/>
+    <!-- Don't do any CheckStyle checks on any non-Java files. -->
+    <suppress files=".+\.(?:txt|xml|csv|sh|thrift|html|sql|eot|ttf|woff|css|png)$"
+              checks=".*"/>
 </suppressions>
