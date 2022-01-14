@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-          javaversion: ['8', '9', '10', '11']
+        javaversion: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17']
     steps:
       - uses: actions/checkout@v2
       - name: Set up Java ${{ matrix.javaversion }}
@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: ${{ matrix.javaversion }}
       - name: Build with Maven
-        run: mvn --batch-mode install -Dgpg.skip=true -DskipTests=true
+        run: mvn --batch-mode install -Dgpg.skip=true -DskipTests=true -Dcheckstyle.skip=true
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -26,6 +26,8 @@ jobs:
       - name: Run CheckStyle checks
         uses: nikitasavinov/checkstyle-action@0.4.0
         with:
+          level: error
+          fail_on_error: true
           checkstyle_config: easypost_java_style.xml
           tool_name: 'style_enforcer'
 
