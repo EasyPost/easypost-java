@@ -2,11 +2,6 @@
 
 EasyPost is a simple shipping API. You can sign up for an account at https://easypost.com
 
-## Requirements
-
-* Java 1.5 and later.
-* [Google Gson](http://code.google.com/p/google-gson/)
-
 ## Installation
 
 ```sh
@@ -15,10 +10,11 @@ mvn package
 
 or build the jar from src!
 
+NOTE: [Google Gson](http://code.google.com/p/google-gson/) is required.
+
 ## Example
 
 ```java
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -126,7 +122,6 @@ public class Readme {
         }
     }
 }
-
 ```
 
 ## Documentation
