@@ -43,6 +43,8 @@ public final class Shipment extends EasyPostResource {
     private Map<String, Object> options;
     private List<ShipmentMessage> messages;
     private List<TaxIdentifier> taxIdentifiers;
+    private List<CarrierAccount> carrierAccounts;
+    private String service;
 
     /**
      * Get the ID of this Shipment.
@@ -546,6 +548,38 @@ public final class Shipment extends EasyPostResource {
      */
     public void setTaxIdentifiers(final List<TaxIdentifier> taxIdentifiers) {
         this.taxIdentifiers = taxIdentifiers;
+    }
+
+    /**
+     * Get the carrier accounts list.
+     * @return List of carrier account.
+     */
+    public List<CarrierAccount> getCarrierAccounts() {
+        return carrierAccounts;
+    }
+
+    /**
+     *
+     * @param carrierAccounts the list of carrier account.
+     */
+    public void setCarriersAccount(final List<CarrierAccount> carrierAccounts) {
+        this.carrierAccounts = carrierAccounts;
+    }
+
+    /**
+     *
+     * @return the service for one call buy.
+     */
+    public String getService() {
+        return service;
+    }
+
+    /**
+     *
+     * @param service the service for one call buy.
+     */
+    public void setService(final String service) {
+        this.service = service;
     }
 
     /**
