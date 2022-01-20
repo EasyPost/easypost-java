@@ -606,7 +606,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Shipment create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("shipment", params);
 
         return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
@@ -688,7 +688,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment refresh(final String apiKey) throws EasyPostException {
-        return this.refresh((Map<String, Object>) null, apiKey);
+        return this.refresh(null, apiKey);
     }
 
     /**
@@ -733,7 +733,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment newRates(final String apiKey) throws EasyPostException {
-        return this.newRates((Map<String, Object>) null, apiKey);
+        return this.newRates(null, apiKey);
     }
 
     /**
@@ -782,7 +782,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public List<Rate> getSmartrates(final String apiKey) throws EasyPostException {
-        return this.getSmartrates((Map<String, Object>) null, apiKey);
+        return this.getSmartrates(null, apiKey);
     }
 
     /**
@@ -794,7 +794,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public List<Rate> getSmartrates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        SmartrateCollection smartrateCollection = (SmartrateCollection) request(RequestMethod.GET,
+        SmartrateCollection smartrateCollection = request(RequestMethod.GET,
                 String.format("%s/smartrate", instanceURL(Shipment.class, this.getId())), params,
                 SmartrateCollection.class, apiKey);
 
@@ -830,7 +830,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final String apiKey) throws EasyPostException {
-        return this.buy((Map<String, Object>) null, apiKey);
+        return this.buy(null, apiKey);
     }
 
     /**
@@ -841,7 +841,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final Rate rate) throws EasyPostException {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("rate", rate);
 
         return this.buy(params, null);
@@ -893,7 +893,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final String apiKey) throws EasyPostException {
-        return this.refund((Map<String, Object>) null, apiKey);
+        return this.refund(null, apiKey);
     }
 
     /**
@@ -938,7 +938,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment label(final String apiKey) throws EasyPostException {
-        return this.label((Map<String, Object>) null, apiKey);
+        return this.label(null, apiKey);
     }
 
     /**
@@ -987,7 +987,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment insure(final String apiKey) throws EasyPostException {
-        return this.insure((Map<String, Object>) null, apiKey);
+        return this.insure(null, apiKey);
     }
 
     /**
@@ -1047,20 +1047,18 @@ public final class Shipment extends EasyPostResource {
             }
         }
 
-        for (int i = 0; i < this.rates.size(); i++) {
-            if (carriers != null && carriers.size() > 0 &&
-                    !carriers.contains(this.rates.get(i).getCarrier().toLowerCase()) &&
-                    !carriers.contains(this.rates.get(i).getServiceCode().toLowerCase())) {
+        for (Rate rate : this.rates) {
+            if (carriers != null && carriers.size() > 0 && !carriers.contains(rate.getCarrier().toLowerCase()) &&
+                    !carriers.contains(rate.getServiceCode().toLowerCase())) {
                 continue;
             }
-            if (services != null && services.size() > 0 &&
-                    !services.contains(this.rates.get(i).getService().toLowerCase()) &&
-                    !services.contains(this.rates.get(i).getService().toLowerCase())) {
+            if (services != null && services.size() > 0 && !services.contains(rate.getService().toLowerCase()) &&
+                    !services.contains(rate.getService().toLowerCase())) {
                 continue;
             }
 
-            if (lowestRate == null || lowestRate.getRate() > this.rates.get(i).getRate()) {
-                lowestRate = this.rates.get(i);
+            if (lowestRate == null || lowestRate.getRate() > rate.getRate()) {
+                lowestRate = rate;
             }
         }
 
