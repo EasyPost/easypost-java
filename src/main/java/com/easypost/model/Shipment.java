@@ -552,31 +552,35 @@ public final class Shipment extends EasyPostResource {
 
     /**
      * Get the carrier accounts list.
-     * @return List of carrier account.
+     *
+     * @return List of carrier accounts.
      */
     public List<CarrierAccount> getCarrierAccounts() {
         return carrierAccounts;
     }
 
     /**
+     * Set the carrier accounts list.
      *
-     * @param carrierAccounts the list of carrier account.
+     * @param carrierAccounts the list of carrier accounts.
      */
     public void setCarriersAccount(final List<CarrierAccount> carrierAccounts) {
         this.carrierAccounts = carrierAccounts;
     }
 
     /**
+     * Get the service used for one-call buys.
      *
-     * @return the service for one call buy.
+     * @return the service used for one-call buys.
      */
     public String getService() {
         return service;
     }
 
     /**
+     * Set the service used for one-call buys.
      *
-     * @param service the service for one call buy.
+     * @param service the service for one-call buys.
      */
     public void setService(final String service) {
         this.service = service;
