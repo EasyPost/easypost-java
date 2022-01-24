@@ -551,7 +551,7 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get the carriers accounts of this shipment.
+     * Get the carrier accounts of this shipment.
      *
      * Get the carrier accounts list.
      *
