@@ -20,82 +20,93 @@ public final class CarrierType extends EasyPostResource {
     private Map<String, Object> fields;
 
     /**
-     * @return type of a carrier
+     * Get the type of the carrier.
+     *
+     * @return type of a carrier.
      */
     public String getType() {
         return type;
     }
 
     /**
+     * Set the type of carrier.
      *
-     * @param type type of a carrier
+     * @param type type of a carrier.
      */
     public void setType(final String type) {
         this.type = type;
     }
 
     /**
+     * Get the readable of the carrier.
      *
-     * @return return readable from a carrier
+     * @return return readable from a carrier.
      */
     public String getReadable() {
         return readable;
     }
 
     /**
+     * Set the readable of carrier.
      *
-     * @param readable readable for a carrier
+     * @param readable readable for a carrier.
      */
     public void setReadable(final String readable) {
         this.readable = readable;
     }
 
     /**
+     * Get the logo of the carrier.
      *
-     * @return logo of a carrier
+     * @return logo of a carrier.
      */
     public String getLogo() {
         return logo;
     }
 
     /**
+     * Set the logo of carrier.
      *
-     * @param logo logo of a carrier
+     * @param logo logo of a carrier.
      */
     public void setLogo(final String logo) {
         this.logo = logo;
     }
 
     /**
+     * Get the fields of the carrier.
      *
-     * @return fields from a carrier
+     * @return fields from a carrier.
      */
     public Map<String, Object> getFields() {
         return fields;
     }
 
     /**
+     * Set the fields of carrier.
      *
-     * @param fields fields for a carrier
+     * @param fields fields for a carrier.
      */
     public void setFields(final Map<String, Object> fields) {
         this.fields = fields;
     }
 
     /**
+     * Retrieve a list of available carrier for the account.
      *
-     * @return list of carrier type that is available to the account
-     * @throws EasyPostException
+     * @return list of carrier type that is available to the account.
+     * @throws EasyPostException when the request fails.
      */
     public static List<CarrierType> all() throws EasyPostException {
         return all(null);
     }
 
     /**
+     * Retrieve a list of available carrier for the given account API key.
      *
-     * @param apikey the API key from the user input
-     * @return list of carrier type that is available to the account of the given API key
-     * @throws EasyPostException
+     * @param apikey the API key from the user input.
+     * @return list of carrier type that is available to the account of the given API key.
+     * @throws EasyPostException when the request fails.
      */
     public static List<CarrierType> all(final String apikey) throws EasyPostException {
         CarrierType[] ret = request(RequestMethod.GET, classURL(CarrierType.class), null, CarrierType[].class, apikey);
