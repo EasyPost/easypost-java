@@ -551,6 +551,8 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
+     * Get the carriers accounts of this shipment.
+     *
      * Get the carrier accounts list.
      *
      * @return List of carrier accounts.
@@ -560,16 +562,24 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
+<<<<<<< HEAD
      * Set the carrier accounts list.
+=======
+     * Set the carriers accounts of this shipment.
+>>>>>>> 5dc59b5 (fixed typo for getter function and add description to each function in docstring.)
      *
      * @param carrierAccounts the list of carrier accounts.
      */
-    public void setCarriersAccount(final List<CarrierAccount> carrierAccounts) {
+    public void setCarriersAccounts(final List<CarrierAccount> carrierAccounts) {
         this.carrierAccounts = carrierAccounts;
     }
 
     /**
+<<<<<<< HEAD
      * Get the service used for one-call buys.
+=======
+     * Get the service of this shipment.
+>>>>>>> 5dc59b5 (fixed typo for getter function and add description to each function in docstring.)
      *
      * @return the service used for one-call buys.
      */
@@ -578,7 +588,11 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
+<<<<<<< HEAD
      * Set the service used for one-call buys.
+=======
+     * Set the service of this shipment.
+>>>>>>> 5dc59b5 (fixed typo for getter function and add description to each function in docstring.)
      *
      * @param service the service for one-call buys.
      */
