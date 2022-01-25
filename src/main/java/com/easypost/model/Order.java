@@ -17,6 +17,7 @@ import java.util.Map;
 public final class Order extends EasyPostResource {
     private String id;
     private String mode;
+    private String service;
     private String reference;
     private Boolean isReturn;
     private Address toAddress;
@@ -63,6 +64,24 @@ public final class Order extends EasyPostResource {
      */
     public void setMode(final String mode) {
         this.mode = mode;
+    }
+
+    /**
+     * Get the service of the Order.
+     *
+     * @return the service of the Order.
+     */
+    public String getService() {
+        return service;
+    }
+
+    /**
+     * Set the service of the Order.
+     *
+     * @param service the service of the Order.
+     */
+    public void setService(final String service) {
+        this.service = service;
     }
 
     /**
