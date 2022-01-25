@@ -566,7 +566,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @param carrierAccounts the list of carrier accounts.
      */
-    public void setCarriersAccounts(final List<CarrierAccount> carrierAccounts) {
+    public void setCarrierAccounts(final List<CarrierAccount> carrierAccounts) {
         this.carrierAccounts = carrierAccounts;
     }
 
