@@ -29,6 +29,7 @@ public final class Order extends EasyPostResource {
     private List<Rate> rates;
     private Map<String, Object> options;
     private List<ShipmentMessage> messages;
+    private List<CarrierAccount> carrierAccounts;
 
     /**
      * Get the ID of the Order.
@@ -280,6 +281,24 @@ public final class Order extends EasyPostResource {
      */
     public void setMessages(final List<ShipmentMessage> messages) {
         this.messages = messages;
+    }
+
+    /**
+     * Get the list of carrier accounts of the Order.
+     *
+     * @return List of CarrierAccount object.
+     */
+    public List<CarrierAccount> getCarrierAccounts() {
+        return carrierAccounts;
+    }
+
+    /**
+     * Set the carrier accounts of the Order.
+     *
+     * @param carrierAccounts List of CarrierAccount objects
+     */
+    public void setCarrierAccounts(List<CarrierAccount> carrierAccounts) {
+        this.carrierAccounts = carrierAccounts;
     }
 
     /**
