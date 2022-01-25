@@ -109,7 +109,8 @@ public final class CarrierType extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static List<CarrierType> all(final String apikey) throws EasyPostException {
-        CarrierType[] ret = request(RequestMethod.GET, classURL(CarrierType.class), null, CarrierType[].class, apikey);
-        return Arrays.asList(ret);
+        CarrierType[] response = request(RequestMethod.GET, classURL(CarrierType.class),
+                                    null, CarrierType[].class, apikey);
+        return Arrays.asList(response);
     }
 }
