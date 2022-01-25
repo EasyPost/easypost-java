@@ -571,18 +571,18 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get the service used for one-call buys.
+     * Get the service used.
      *
-     * @return the service used for one-call buys.
+     * @return the service used.
      */
     public String getService() {
         return service;
     }
 
     /**
-     * Set the service used for one-call buys.
+     * Set the service used.
      *
-     * @param service the service for one-call buys.
+     * @param service the service.
      */
     public void setService(final String service) {
         this.service = service;
