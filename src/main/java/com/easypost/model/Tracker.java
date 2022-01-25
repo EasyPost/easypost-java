@@ -229,26 +229,6 @@ public final class Tracker extends EasyPostResource {
         this.carrierDetail = carrierDetail;
     }
 
-    // This method is a misspelling, but it persists to avoid breaking backwards compatibility
-
-    /**
-     * Get when the tracker was updated.
-     *
-     * @return when the tracker was updated.
-     */
-    public Date getUpdateAt() {
-        return getUpdatedAt();
-    }
-
-    /**
-     * Set when the tracker was updated.
-     *
-     * @param updatedAt when the tracker was updated.
-     */
-    public void setUpdateAt(final Date updatedAt) {
-        setUpdatedAt(updatedAt);
-    }
-
     /**
      * Get the public URL of the Tracker.
      *
