@@ -40,16 +40,16 @@ public final class CarrierType extends EasyPostResource {
     /**
      * Get the readable of the carrier.
      *
-     * @return return readable from a carrier.
+     * @return return readable name of the carrier.
      */
     public String getReadable() {
         return readable;
     }
 
     /**
-     * Set the readable of carrier.
+     * Set the readable name of the carrier.
      *
-     * @param readable readable for a carrier.
+     * @param readable readable name of the carrier.
      */
     public void setReadable(final String readable) {
         this.readable = readable;
@@ -92,9 +92,9 @@ public final class CarrierType extends EasyPostResource {
     }
 
     /**
-     * Retrieve a list of available carrier for the account.
+     * Retrieve a list of available carriers for the account.
      *
-     * @return list of carrier type that is available to the account.
+     * @return list of carrier types that are available to the account.
      * @throws EasyPostException when the request fails.
      */
     public static List<CarrierType> all() throws EasyPostException {
@@ -102,10 +102,10 @@ public final class CarrierType extends EasyPostResource {
     }
 
     /**
-     * Retrieve a list of available carrier for the given account API key.
+     * Retrieve a list of available carriers for the given account.
      *
      * @param apikey the API key from the user input.
-     * @return list of carrier type that is available to the account of the given API key.
+     * @return list of carrier types that are available for the given account.
      * @throws EasyPostException when the request fails.
      */
     public static List<CarrierType> all(final String apikey) throws EasyPostException {
