@@ -17,6 +17,7 @@ import java.util.Map;
 public final class Order extends EasyPostResource {
     private String id;
     private String mode;
+    private String service;
     private String reference;
     private Boolean isReturn;
     private Address toAddress;
@@ -28,6 +29,7 @@ public final class Order extends EasyPostResource {
     private List<Rate> rates;
     private Map<String, Object> options;
     private List<ShipmentMessage> messages;
+    private List<CarrierAccount> carrierAccounts;
 
     /**
      * Get the ID of the Order.
@@ -63,6 +65,24 @@ public final class Order extends EasyPostResource {
      */
     public void setMode(final String mode) {
         this.mode = mode;
+    }
+
+    /**
+     * Get the service of the Order.
+     *
+     * @return the service of the Order.
+     */
+    public String getService() {
+        return service;
+    }
+
+    /**
+     * Set the service of the Order.
+     *
+     * @param service the service of the Order.
+     */
+    public void setService(final String service) {
+        this.service = service;
     }
 
     /**
@@ -261,6 +281,24 @@ public final class Order extends EasyPostResource {
      */
     public void setMessages(final List<ShipmentMessage> messages) {
         this.messages = messages;
+    }
+
+    /**
+     * Get the list of carrier accounts of the Order.
+     *
+     * @return List of CarrierAccount object.
+     */
+    public List<CarrierAccount> getCarrierAccounts() {
+        return carrierAccounts;
+    }
+
+    /**
+     * Set the carrier accounts of the Order.
+     *
+     * @param carrierAccounts List of CarrierAccount objects
+     */
+    public void setCarrierAccounts(List<CarrierAccount> carrierAccounts) {
+        this.carrierAccounts = carrierAccounts;
     }
 
     /**
