@@ -38,7 +38,7 @@ public final class CarrierType extends EasyPostResource {
     }
 
     /**
-     * Get the readable of the carrier.
+     * Get the readable name of the carrier.
      *
      * @return return readable name of the carrier.
      */
