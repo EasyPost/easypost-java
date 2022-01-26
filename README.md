@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/EasyPost/easypost-java/workflows/CI/badge.svg)](https://github.com/EasyPost/easypost-java/actions?query=workflow%3ACI)
 [![CheckStyle](https://github.com/EasyPost/easypost-java/workflows/CheckStyle/badge.svg)](https://github.com/EasyPost/easypost-java/actions?query=workflow%3ACheckStyle)
-
+[![Maven Central](https://img.shields.io/maven-central/v/com.easypost/easypost-api-client?label=Maven%20Central)](https://search.maven.org/search?q=com.easypost.easypost-api-client)
 EasyPost is a simple shipping API. You can sign up for an account at https://easypost.com
 
 ## Installation
