@@ -1,7 +1,7 @@
 # EasyPost Java Client Library
 
-[![CI](https://img.shields.io/github/workflow/status/EasyPost/easypost-java/CI?label=CI%20Tests&style=plastic)](https://github.com/EasyPost/easypost-java/actions?query=workflow%3ACI)
-[![CheckStyle](https://img.shields.io/github/workflow/status/EasyPost/easypost-java/CheckStyle?label=CheckStyle&style=plastic)](https://github.com/EasyPost/easypost-java/actions?query=workflow%3ACheckStyle)
+[![CI](https://github.com/EasyPost/easypost-java/workflows/CI/badge.svg)](https://github.com/EasyPost/easypost-java/actions?query=workflow%3ACI)
+[![CheckStyle](https://github.com/EasyPost/easypost-java/workflows/CheckStyle/badge.svg)](https://github.com/EasyPost/easypost-java/actions?query=workflow%3ACheckStyle)
 
 EasyPost is a simple shipping API. You can sign up for an account at https://easypost.com
 
