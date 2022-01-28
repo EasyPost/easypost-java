@@ -1,30 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.Address;
-import com.easypost.model.AddressVerification;
-import com.easypost.model.Batch;
-import com.easypost.model.CustomsItem;
-import com.easypost.model.Fee;
-import com.easypost.model.Insurance;
-import com.easypost.model.InsuranceCollection;
-import com.easypost.model.Order;
-import com.easypost.model.Pickup;
-import com.easypost.model.PostageLabel;
-import com.easypost.model.Rate;
-import com.easypost.model.Report;
-import com.easypost.model.ReportCollection;
-import com.easypost.model.ScanForm;
-import com.easypost.model.ScanFormCollection;
-import com.easypost.model.Shipment;
-import com.easypost.model.TaxIdentifier;
-import com.easypost.model.TimeInTransit;
-import com.easypost.model.Tracker;
-import com.easypost.model.TrackerCollection;
-import com.easypost.model.TrackingDetail;
-import com.easypost.model.TrackingLocation;
-import com.easypost.model.Webhook;
-import com.easypost.model.WebhookCollection;
+import com.easypost.model.*;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -78,7 +55,7 @@ public class EasyPostTest {
 
     @BeforeClass
     public static void setUp() {
-        EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi"; // easypost public test key
+        EasyPost.apiKey = "EZTK8e929c774101498cb68655afa40fdc26rs59z07bEEt4tY0tTGwZVA"; // easypost public test key
 
         defaultFromAddress.put("name", "EasyPost");
         defaultFromAddress.put("street1", "164 Townsend St");
@@ -815,6 +792,28 @@ public class EasyPostTest {
         assertNotNull(order.getShipments().get(1).getPostageLabel().getLabelUrl());
 
         assertEquals(order.getShipments().get(0).getOrderId(), order.getId());
+    }
+
+    @Test
+    public void testOneCallBuyOrder() throws EasyPostException{
+        Map<String, Object> shipment = orderShipment();
+        List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
+        shipments.add(shipment);
+
+        Map<String, Object> orderParams = new HashMap<String, Object>();
+        orderParams.put("shipments", shipments);
+        orderParams.put("from_address", defaultFromAddress);
+        orderParams.put("to_address", defaultToAddress);
+        orderParams.put("carrier_accounts", "ca_342a9e6052f840548691b6c6101e0437");
+        orderParams.put("service", "Priority");
+        Order order = Order.create(orderParams);
+        order.setService("nextDayAir");
+        List<CarrierAccount> carrierAccounts = new ArrayList<>();
+        CarrierAccount c = new CarrierAccount();
+        carrierAccounts.add(c);
+        order.setCarrierAccounts(carrierAccounts);
+        System.out.println(order.getCarrierAccounts().size());
+        System.out.println(order.getService());
     }
 
     @Test
