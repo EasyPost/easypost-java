@@ -38,7 +38,7 @@ public class EasyPostException extends Exception {
      *
      * @param message the exception message
      * @param param   the parameter name
-     * @param ex       the exception cause
+     * @param ex      the exception cause
      */
     public EasyPostException(final String message, final String param, final Throwable ex) {
         super(message, ex);

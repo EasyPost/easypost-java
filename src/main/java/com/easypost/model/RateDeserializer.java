@@ -116,8 +116,7 @@ public final class RateDeserializer implements JsonDeserializer<Rate> {
         if (timeInTransitJsonElement == null || timeInTransitJsonElement.isJsonNull()) {
             timeInTransit = null;
         } else {
-            timeInTransit =
-                    (TimeInTransit) EasyPostResource.GSON.fromJson(timeInTransitJsonElement, TimeInTransit.class);
+            timeInTransit = EasyPostResource.GSON.fromJson(timeInTransitJsonElement, TimeInTransit.class);
         }
 
         Rate rate = new Rate();

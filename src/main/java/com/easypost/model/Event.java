@@ -19,6 +19,51 @@ public final class Event extends EasyPostResource {
     private EasyPostResource result;
     private Map<String, Object> previousAttributes;
 
+    /**
+     * Retrieve a Event from the API.
+     *
+     * @param id ID of the Event to retrieve
+     * @return Event object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Event retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a Event from the API.
+     *
+     * @param id     ID of the Event to retrieve
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Event object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Event retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, apiKey);
+    }
+
+    /**
+     * Get a list of Events.
+     *
+     * @param params A map of parameters to pass to the API.
+     * @return EventCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static EventCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * Get a list of Events.
+     *
+     * @param params A map of parameters to pass to the API.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return EventCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static EventCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Event.class), params, EventCollection.class, apiKey);
+    }
 
     /**
      * Get this Event's ID.
@@ -108,51 +153,5 @@ public final class Event extends EasyPostResource {
      */
     public void setPreviousAttributes(final Map<String, Object> previousAttributes) {
         this.previousAttributes = previousAttributes;
-    }
-
-    /**
-     * Retrieve a Event from the API.
-     *
-     * @param id ID of the Event to retrieve
-     * @return Event object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Event retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Event from the API.
-     *
-     * @param id     ID of the Event to retrieve
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Event object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Event retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, apiKey);
-    }
-
-    /**
-     * Get a list of Events.
-     *
-     * @param params A map of parameters to pass to the API.
-     * @return EventCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static EventCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * Get a list of Events.
-     *
-     * @param params A map of parameters to pass to the API.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return EventCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static EventCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Event.class), params, EventCollection.class, apiKey);
     }
 }

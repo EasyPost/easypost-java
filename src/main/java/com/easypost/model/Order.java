@@ -32,6 +32,55 @@ public final class Order extends EasyPostResource {
     private List<CarrierAccount> carrierAccounts;
 
     /**
+     * Create an Order object from a map of paramters.
+     *
+     * @param params map of parameters.
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Order create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create an Order object from a map of paramters.
+     *
+     * @param params map of parameters.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Order create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("order", params);
+
+        return request(RequestMethod.POST, classURL(Order.class), wrappedParams, Order.class, apiKey);
+    }
+
+    /**
+     * Retrieve an Order object from the API.
+     *
+     * @param id ID of the Order to retrieve.
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Order retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve an Order object from the API.
+     *
+     * @param id     ID of the Order to retrieve.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Order object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Order retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, apiKey);
+    }
+
+    /**
      * Get the ID of the Order.
      *
      * @return the ID of the Order.
@@ -302,55 +351,6 @@ public final class Order extends EasyPostResource {
     }
 
     /**
-     * Create an Order object from a map of paramters.
-     *
-     * @param params map of parameters.
-     * @return Order object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Order create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create an Order object from a map of paramters.
-     *
-     * @param params map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Order object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Order create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("order", params);
-
-        return request(RequestMethod.POST, classURL(Order.class), wrappedParams, Order.class, apiKey);
-    }
-
-    /**
-     * Retrieve an Order object from the API.
-     *
-     * @param id ID of the Order to retrieve.
-     * @return Order object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Order retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve an Order object from the API.
-     *
-     * @param id     ID of the Order to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Order object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Order retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, apiKey);
-    }
-
-    /**
      * Refresh this Order object.
      *
      * @return Order object.
@@ -379,7 +379,7 @@ public final class Order extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Order refresh(final String apiKey) throws EasyPostException {
-        return this.refresh((Map<String, Object>) null, apiKey);
+        return this.refresh(null, apiKey);
     }
 
     /**
@@ -424,7 +424,7 @@ public final class Order extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Order newRates(final String apiKey) throws EasyPostException {
-        return this.newRates((Map<String, Object>) null, apiKey);
+        return this.newRates(null, apiKey);
     }
 
     /**

@@ -60,6 +60,10 @@ public class EasyPostTest {
     static Map<String, Object> defaultCustomsItem = new HashMap<String, Object>();
     static Map<String, Object> defaultCustomsInfo = new HashMap<String, Object>();
     static Map<String, Object> canadaToAddress = new HashMap<String, Object>();
+    @Rule
+    public ExpectedException verifyStrictException = ExpectedException.none();
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     static Shipment createDefaultShipmentDomestic() throws EasyPostException {
         Map<String, Object> shipmentMap = new HashMap<String, Object>();
@@ -157,7 +161,7 @@ public class EasyPostTest {
         assertNotNull(timeInTransit.getPercentile97());
         assertNotNull(timeInTransit.getPercentile99());
     }
-  
+
     @Test
     public void testShipmentWithPostageLabelWithOptions() throws EasyPostException {
         // create and buy shipment
@@ -544,9 +548,6 @@ public class EasyPostTest {
         assertEquals("Verification error did not have a code.", "E.ADDRESS.NOT_FOUND", errors.get(0).getCode());
     }
 
-    @Rule
-    public ExpectedException verifyStrictException = ExpectedException.none();
-
     @Test
     public void testAddressCreateWithVerifyStrictFails() throws EasyPostException {
         Map<String, Object> addressHash = new HashMap<String, Object>();
@@ -567,9 +568,6 @@ public class EasyPostTest {
 
         Address address = Address.create(addressHash);
     }
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void testAddressErrorParses() throws EasyPostException {
@@ -1002,7 +1000,7 @@ public class EasyPostTest {
     public void testWebhookCRUD() throws EasyPostException {
         // Define request params
         Map<String, Object> paramMap = new HashMap<String, Object>();
-        String url = "https://example.com/" + UUID.randomUUID().toString();
+        String url = "https://example.com/" + UUID.randomUUID();
         paramMap.put("url", url);
 
         // Create a webhook

@@ -21,78 +21,6 @@ public final class Webhook extends EasyPostResource {
     private Date disabledAt;
 
     /**
-     * Get the ID of the webhook.
-     *
-     * @return the ID of the webhook
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of the webhook.
-     *
-     * @param id the ID of the webhook
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of the webhook.
-     *
-     * @return the mode of the webhook
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of the webhook.
-     *
-     * @param mode the mode of the webhook
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
-    }
-
-    /**
-     * Get the URL of the webhook.
-     *
-     * @return the URL of the webhook
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * Set the URL of the webhook.
-     *
-     * @param url the URL of the webhook
-     */
-    public void setUrl(final String url) {
-        this.url = url;
-    }
-
-    /**
-     * Get the date and time when the webhook was disabled.
-     *
-     * @return the date and time when the webhook was disabled
-     */
-    public Date getDisabledAt() {
-        return disabledAt;
-    }
-
-    /**
-     * Set the date and time when the webhook was disabled.
-     *
-     * @param disabledAt the date and time when the webhook was disabled
-     */
-    public void setDisabledAt(final Date disabledAt) {
-        this.disabledAt = disabledAt;
-    }
-
-    /**
      * Create a Webhook object from a map of parameters.
      *
      * @param params the map of parameters
@@ -174,6 +102,78 @@ public final class Webhook extends EasyPostResource {
     public static WebhookCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
         return request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
+    }
+
+    /**
+     * Get the ID of the webhook.
+     *
+     * @return the ID of the webhook
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set the ID of the webhook.
+     *
+     * @param id the ID of the webhook
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the mode of the webhook.
+     *
+     * @return the mode of the webhook
+     */
+    public String getMode() {
+        return mode;
+    }
+
+    /**
+     * Set the mode of the webhook.
+     *
+     * @param mode the mode of the webhook
+     */
+    public void setMode(final String mode) {
+        this.mode = mode;
+    }
+
+    /**
+     * Get the URL of the webhook.
+     *
+     * @return the URL of the webhook
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Set the URL of the webhook.
+     *
+     * @param url the URL of the webhook
+     */
+    public void setUrl(final String url) {
+        this.url = url;
+    }
+
+    /**
+     * Get the date and time when the webhook was disabled.
+     *
+     * @return the date and time when the webhook was disabled
+     */
+    public Date getDisabledAt() {
+        return disabledAt;
+    }
+
+    /**
+     * Set the date and time when the webhook was disabled.
+     *
+     * @param disabledAt the date and time when the webhook was disabled
+     */
+    public void setDisabledAt(final Date disabledAt) {
+        this.disabledAt = disabledAt;
     }
 
     /**

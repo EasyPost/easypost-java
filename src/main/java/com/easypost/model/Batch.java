@@ -26,6 +26,114 @@ public final class Batch extends EasyPostResource {
     private String reference;
 
     /**
+     * Create a Batch object.
+     *
+     * @return Batch object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Batch create() throws EasyPostException {
+        return create(null, null);
+    }
+
+    /**
+     * Create a Batch object.
+     *
+     * @param params Map of parameters.
+     * @return Batch object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Batch create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a Batch object.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Batch object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Batch create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("batch", params);
+
+        return request(RequestMethod.POST, classURL(Batch.class), wrappedParams, Batch.class, apiKey);
+    }
+
+    /**
+     * Retrieve a Batch object from the API.
+     *
+     * @param id ID of the Batch to retrieve.
+     * @return Batch object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Batch retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a Batch object from the API.
+     *
+     * @param id     ID of the Batch to retrieve.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Batch object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Batch retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Batch.class, id), null, Batch.class, apiKey);
+    }
+
+    /**
+     * List all Batch objects.
+     *
+     * @param params Map of parameters.
+     * @return BatchCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static BatchCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * List all Batch objects.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return BatchCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static BatchCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Batch.class), params, BatchCollection.class, apiKey);
+    }
+
+    /**
+     * Create and buy a Batch object in one step.
+     *
+     * @param params Map of parameters.
+     * @return Batch object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Batch createAndBuy(final Map<String, Object> params) throws EasyPostException {
+        return createAndBuy(params, null);
+    }
+
+    /**
+     * Create and buy a Batch object in one step.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (ovverides default API key).
+     * @return Batch object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Batch createAndBuy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("batch", params);
+
+        return request(RequestMethod.POST, classURL(Batch.class), wrappedParams, Batch.class, apiKey);
+    }
+
+    /**
      * Get ID of this batch.
      *
      * @return ID of this batch.
@@ -188,114 +296,6 @@ public final class Batch extends EasyPostResource {
     }
 
     /**
-     * Create a Batch object.
-     *
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Batch create() throws EasyPostException {
-        return create(null, null);
-    }
-
-    /**
-     * Create a Batch object.
-     *
-     * @param params Map of parameters.
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Batch create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a Batch object.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Batch create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("batch", params);
-
-        return request(RequestMethod.POST, classURL(Batch.class), wrappedParams, Batch.class, apiKey);
-    }
-
-    /**
-     * Retrieve a Batch object from the API.
-     *
-     * @param id ID of the Batch to retrieve.
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Batch retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Batch object from the API.
-     *
-     * @param id     ID of the Batch to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Batch retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Batch.class, id), null, Batch.class, apiKey);
-    }
-
-    /**
-     * List all Batch objects.
-     *
-     * @param params Map of parameters.
-     * @return BatchCollection object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static BatchCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * List all Batch objects.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return BatchCollection object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static BatchCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Batch.class), params, BatchCollection.class, apiKey);
-    }
-
-    /**
-     * Create and buy a Batch object in one step.
-     *
-     * @param params Map of parameters.
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Batch createAndBuy(final Map<String, Object> params) throws EasyPostException {
-        return createAndBuy(params, null);
-    }
-
-    /**
-     * Create and buy a Batch object in one step.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Batch createAndBuy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("batch", params);
-
-        return request(RequestMethod.POST, classURL(Batch.class), wrappedParams, Batch.class, apiKey);
-    }
-
-    /**
      * Refresh this Batch object.
      *
      * @return Batch object.
@@ -324,7 +324,7 @@ public final class Batch extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Batch refresh(final String apiKey) throws EasyPostException {
-        return this.refresh((Map<String, Object>) null, apiKey);
+        return this.refresh(null, apiKey);
     }
 
     /**
