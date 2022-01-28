@@ -128,7 +128,7 @@ public class EasyPostTest {
         canadaToAddress.put("zip", "t8n2m4");
         canadaToAddress.put("country", "CA");
     }
-
+  
     @Test
     public void testShipmentWithTracker() throws EasyPostException {
         // create and buy shipment
@@ -1068,6 +1068,17 @@ public class EasyPostTest {
         indexMap.put("page_size", 2);
         ScanFormCollection scanForms = ScanForm.all(indexMap);
         assertEquals("IDs do not match", scanForms.getScanForms().get(0).getId(), scanForm.getId());
+    }
+
+    @Test
+    public void testClientTimeout() throws EasyPostException {
+        int timeout = 1;
+        Order.setConnectTimeoutMilliseconds(timeout);
+        Order.setReadTimeoutMilliseconds(timeout);
+        Order.setAppEngineTimeoutSeconds((double) timeout);
+        assertEquals(Order.getConnectTimeoutMilliseconds(), timeout);
+        assertEquals(Order.getReadTimeoutMilliseconds(), timeout);
+        assertEquals(Order.getAppEngineTimeoutSeconds(), timeout, 0.001);
     }
 
 
