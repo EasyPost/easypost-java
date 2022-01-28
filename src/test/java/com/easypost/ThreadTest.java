@@ -46,29 +46,6 @@ public class ThreadTest {
         defaultParcel.put("weight", 10);
     }
 
-    private static class CreateOrders implements Runnable {
-        List<Map<String, Object>> orders;
-
-        public CreateOrders(List<Map<String, Object>> orders) {
-            this.orders = orders;
-        }
-
-        public void run() {
-            try {
-                for (int i = 0; i < this.orders.size(); i++) {
-                    System.out.format("Thread %s: starting order creation...%n", Thread.currentThread().getName());
-
-                    Order order = Order.create(this.orders.get(i));
-                    // save order id to database or buy now
-
-                    System.out.format("Thread %s: created order %s%n", Thread.currentThread().getName(), order.getId());
-                }
-            } catch (EasyPostException e) {
-                System.out.println("EasyPost Exception caught creating order.");
-            }
-        }
-    }
-
     @Test
     public void testThreadOrderCreation() throws EasyPostException, InterruptedException {
 
@@ -105,6 +82,29 @@ public class ThreadTest {
         // for more information on threads including adding timeouts and interrupts see:
         // http://docs.oracle.com/javase/tutorial/essential/concurrency/index.html
 
+    }
+
+    private static class CreateOrders implements Runnable {
+        List<Map<String, Object>> orders;
+
+        public CreateOrders(List<Map<String, Object>> orders) {
+            this.orders = orders;
+        }
+
+        public void run() {
+            try {
+                for (int i = 0; i < this.orders.size(); i++) {
+                    System.out.format("Thread %s: starting order creation...%n", Thread.currentThread().getName());
+
+                    Order order = Order.create(this.orders.get(i));
+                    // save order id to database or buy now
+
+                    System.out.format("Thread %s: created order %s%n", Thread.currentThread().getName(), order.getId());
+                }
+            } catch (EasyPostException e) {
+                System.out.println("EasyPost Exception caught creating order.");
+            }
+        }
     }
 }
 

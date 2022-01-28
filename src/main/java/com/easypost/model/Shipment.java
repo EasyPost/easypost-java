@@ -47,6 +47,79 @@ public final class Shipment extends EasyPostResource {
     private String service;
 
     /**
+     * Create a new Shipment object from a map of parameters.
+     *
+     * @param params the map of parameters.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Shipment create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a new Shipment object from a map of parameters.
+     *
+     * @param params the map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Shipment create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("shipment", params);
+
+        return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
+    }
+
+    /**
+     * Retrieve a Shipment from the API.
+     *
+     * @param id the id of the Shipment to retrieve.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Shipment retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a Shipment from the API.
+     *
+     * @param id     the id of the Shipment to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Shipment retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Shipment.class, id), null, Shipment.class, apiKey);
+    }
+
+    /**
+     * Get a list of all Shipment objects.
+     *
+     * @param params the options for the query.
+     * @return ShipmentCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static ShipmentCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * Get a list of all Shipment objects.
+     *
+     * @param params the options for the query.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return ShipmentCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static ShipmentCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Shipment.class), params, ShipmentCollection.class, apiKey);
+    }
+
+    /**
      * Get the ID of this Shipment.
      *
      * @return the ID of this Shipment.
@@ -553,8 +626,6 @@ public final class Shipment extends EasyPostResource {
     /**
      * Get the carrier accounts of this shipment.
      *
-     * Get the carrier accounts list.
-     *
      * @return List of carrier accounts.
      */
     public List<CarrierAccount> getCarrierAccounts() {
@@ -589,79 +660,6 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Create a new Shipment object from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Shipment create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a new Shipment object from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Shipment create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("shipment", params);
-
-        return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
-    }
-
-    /**
-     * Retrieve a Shipment from the API.
-     *
-     * @param id the id of the Shipment to retrieve.
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Shipment retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Shipment from the API.
-     *
-     * @param id     the id of the Shipment to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Shipment retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Shipment.class, id), null, Shipment.class, apiKey);
-    }
-
-    /**
-     * Get a list of all Shipment objects.
-     *
-     * @param params the options for the query.
-     * @return ShipmentCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static ShipmentCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * Get a list of all Shipment objects.
-     *
-     * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return ShipmentCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static ShipmentCollection all(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Shipment.class), params, ShipmentCollection.class, apiKey);
-    }
-
-    /**
      * Refresh this Shipment.
      *
      * @return Shipment object
@@ -685,19 +683,19 @@ public final class Shipment extends EasyPostResource {
     /**
      * Refresh this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
     public Shipment refresh(final String apiKey) throws EasyPostException {
-        return this.refresh((Map<String, Object>) null, apiKey);
+        return this.refresh(null, apiKey);
     }
 
     /**
      * Refresh this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -730,19 +728,19 @@ public final class Shipment extends EasyPostResource {
     /**
      * Get new rates for this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
     public Shipment newRates(final String apiKey) throws EasyPostException {
-        return this.newRates((Map<String, Object>) null, apiKey);
+        return this.newRates(null, apiKey);
     }
 
     /**
      * Get new rates for this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -779,24 +777,24 @@ public final class Shipment extends EasyPostResource {
     /**
      * Get smart rates for this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return List of Rate objects
      * @throws EasyPostException when the request fails.
      */
     public List<Rate> getSmartrates(final String apiKey) throws EasyPostException {
-        return this.getSmartrates((Map<String, Object>) null, apiKey);
+        return this.getSmartrates(null, apiKey);
     }
 
     /**
      * Get smart rates for this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return List of Rate objects
      * @throws EasyPostException when the request fails.
      */
     public List<Rate> getSmartrates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        SmartrateCollection smartrateCollection = (SmartrateCollection) request(RequestMethod.GET,
+        SmartrateCollection smartrateCollection = request(RequestMethod.GET,
                 String.format("%s/smartrate", instanceURL(Shipment.class, this.getId())), params,
                 SmartrateCollection.class, apiKey);
 
@@ -827,12 +825,12 @@ public final class Shipment extends EasyPostResource {
     /**
      * Buy this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final String apiKey) throws EasyPostException {
-        return this.buy((Map<String, Object>) null, apiKey);
+        return this.buy(null, apiKey);
     }
 
     /**
@@ -853,7 +851,7 @@ public final class Shipment extends EasyPostResource {
      * Buy this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -890,19 +888,19 @@ public final class Shipment extends EasyPostResource {
     /**
      * Refund this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final String apiKey) throws EasyPostException {
-        return this.refund((Map<String, Object>) null, apiKey);
+        return this.refund(null, apiKey);
     }
 
     /**
      * Refund this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -935,19 +933,19 @@ public final class Shipment extends EasyPostResource {
     /**
      * Label this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
     public Shipment label(final String apiKey) throws EasyPostException {
-        return this.label((Map<String, Object>) null, apiKey);
+        return this.label(null, apiKey);
     }
 
     /**
      * Label this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -984,19 +982,19 @@ public final class Shipment extends EasyPostResource {
     /**
      * Insure this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
     public Shipment insure(final String apiKey) throws EasyPostException {
-        return this.insure((Map<String, Object>) null, apiKey);
+        return this.insure(null, apiKey);
     }
 
     /**
      * Insure this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */

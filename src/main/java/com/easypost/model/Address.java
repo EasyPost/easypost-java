@@ -35,6 +35,175 @@ public final class Address extends EasyPostResource {
     private Map<String, AddressVerification> verifications;
 
     /**
+     * Create Address object from parameter map.
+     *
+     * @param params Map of address parameters.
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create Address object from parameter map.
+     *
+     * @param params Map of address parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        String url = classURL(Address.class);
+
+        List<String> verifyList = (List<String>) params.remove("verify");
+        List<String> verifyStrictList = (List<String>) params.remove("verify_strict");
+
+        if ((verifyList != null && verifyList.size() >= 1) ||
+                (verifyStrictList != null && verifyStrictList.size() >= 1)) {
+            url += "?";
+
+            if (verifyList != null && verifyList.size() >= 1) {
+                for (String verification : verifyList) {
+                    url += "verify[]=" + verification + "&";
+                }
+            }
+
+            if (verifyStrictList != null && verifyStrictList.size() >= 1) {
+                for (String strictVerification : verifyStrictList) {
+                    url += "verify_strict[]=" + strictVerification + "&";
+                }
+            }
+        }
+
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("address", params);
+
+        return request(RequestMethod.POST, url, wrappedParams, Address.class, apiKey);
+    }
+
+    /**
+     * Retrieve Address object from API.
+     *
+     * @param id ID of address to retrieve.
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve Address object from API.
+     *
+     * @param id     ID of address to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Address.class, id), null, Address.class, apiKey);
+    }
+
+    /**
+     * List all Address objects.
+     *
+     * @param params Map of parameters.
+     * @return AddressCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static AddressCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * List all Address objects.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return AddressCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static AddressCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Address.class), params, AddressCollection.class, apiKey);
+    }
+
+    /**
+     * Create Address object from parameter map and immediately verify it.
+     *
+     * @param params Map of address parameters.
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address createAndVerify(final Map<String, Object> params) throws EasyPostException {
+        return createAndVerify(params, null);
+    }
+
+    /**
+     * Create Address object from parameter map and immediately verify it.
+     *
+     * @param params Map of address parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address createAndVerify(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("address", params);
+
+        AddressVerifyResponse response;
+        response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
+                wrappedParams, AddressVerifyResponse.class, apiKey);
+
+        if (response.getMessage() != null) {
+            response.getAddress().setMessage(response.getMessage());
+        }
+        return response.getAddress();
+    }
+
+    /**
+     * Create Address object from parameter map
+     * and immediately verify it with a specific carrier.
+     *
+     * @param params  Map of address parameters.
+     * @param carrier Carrier to verify address with.
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier)
+            throws EasyPostException {
+        return createAndVerifyWithCarrier(params, carrier, null);
+    }
+
+    /**
+     * Create Address object from parameter map
+     * and immediately verify it with a specific carrier.
+     *
+     * @param params  Map of address parameters.
+     * @param carrier Carrier to verify address with.
+     * @param apiKey  API key to use in request (overrides default API key).
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier,
+                                                     final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("address", params);
+        wrappedParams.put("carrier", carrier);
+
+        AddressVerifyResponse response;
+        response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
+                wrappedParams, AddressVerifyResponse.class, apiKey);
+
+        if (response.getMessage() != null) {
+            response.getAddress().setMessage(response.getMessage());
+        }
+        return response.getAddress();
+    }
+
+    /**
      * Get Address ID.
      *
      * @return Address ID
@@ -341,175 +510,6 @@ public final class Address extends EasyPostResource {
     }
 
     /**
-     * Create Address object from parameter map.
-     *
-     * @param params Map of address parameters.
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create Address object from parameter map.
-     *
-     * @param params Map of address parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        String url = classURL(Address.class);
-
-        List<String> verifyList = (List<String>) params.remove("verify");
-        List<String> verifyStrictList = (List<String>) params.remove("verify_strict");
-
-        if ((verifyList != null && verifyList.size() >= 1) ||
-                (verifyStrictList != null && verifyStrictList.size() >= 1)) {
-            url += "?";
-
-            if (verifyList != null && verifyList.size() >= 1) {
-                for (String verification : verifyList) {
-                    url += "verify[]=" + verification + "&";
-                }
-            }
-
-            if (verifyStrictList != null && verifyStrictList.size() >= 1) {
-                for (String strictVerification : verifyStrictList) {
-                    url += "verify_strict[]=" + strictVerification + "&";
-                }
-            }
-        }
-
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("address", params);
-
-        return request(RequestMethod.POST, url, wrappedParams, Address.class, apiKey);
-    }
-
-    /**
-     * Retrieve Address object from API.
-     *
-     * @param id ID of address to retrieve.
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve Address object from API.
-     *
-     * @param id     ID of address to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Address.class, id), null, Address.class, apiKey);
-    }
-
-    /**
-     * List all Address objects.
-     *
-     * @param params Map of parameters.
-     * @return AddressCollection object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static AddressCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * List all Address objects.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return AddressCollection object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static AddressCollection all(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Address.class), params, AddressCollection.class, apiKey);
-    }
-
-    /**
-     * Create Address object from parameter map and immediately verify it.
-     *
-     * @param params Map of address parameters.
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address createAndVerify(final Map<String, Object> params) throws EasyPostException {
-        return createAndVerify(params, null);
-    }
-
-    /**
-     * Create Address object from parameter map and immediately verify it.
-     *
-     * @param params Map of address parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address createAndVerify(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("address", params);
-
-        AddressVerifyResponse response;
-        response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
-                wrappedParams, AddressVerifyResponse.class, apiKey);
-
-        if (response.getMessage() != null) {
-            response.getAddress().setMessage(response.getMessage());
-        }
-        return response.getAddress();
-    }
-
-    /**
-     * Create Address object from parameter map
-     * and immediately verify it with a specific carrier.
-     *
-     * @param params  Map of address parameters.
-     * @param carrier Carrier to verify address with.
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier)
-            throws EasyPostException {
-        return createAndVerifyWithCarrier(params, carrier, null);
-    }
-
-    /**
-     * Create Address object from parameter map
-     * and immediately verify it with a specific carrier.
-     *
-     * @param params  Map of address parameters.
-     * @param carrier Carrier to verify address with.
-     * @param apiKey  API key to use in request (ovverides default API key).
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier,
-                                                     final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("address", params);
-        wrappedParams.put("carrier", carrier);
-
-        AddressVerifyResponse response;
-        response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
-                wrappedParams, AddressVerifyResponse.class, apiKey);
-
-        if (response.getMessage() != null) {
-            response.getAddress().setMessage(response.getMessage());
-        }
-        return response.getAddress();
-    }
-
-    /**
      * Verify this Address object.
      *
      * @return Address object.
@@ -522,7 +522,7 @@ public final class Address extends EasyPostResource {
     /**
      * Verify this Address object.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Address object.
      * @throws EasyPostException when the request fails.
      */
@@ -553,7 +553,7 @@ public final class Address extends EasyPostResource {
      * Verify this Address object with a specific carrier.
      *
      * @param carrier Carrier to verify address with.
-     * @param apiKey  API key to use in request (ovverides default API key).
+     * @param apiKey  API key to use in request (overrides default API key).
      * @return Address object.
      * @throws EasyPostException when the request fails.
      */

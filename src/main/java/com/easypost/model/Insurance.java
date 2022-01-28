@@ -30,6 +30,79 @@ public final class Insurance extends EasyPostResource {
     private List<String> messages;
 
     /**
+     * Create a new Insurance object from a map of parameters.
+     *
+     * @param params map of parameters
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Insurance create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a new Insurance object from a map of parameters.
+     *
+     * @param params a map of parameters
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Insurance create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("insurance", params);
+
+        return request(RequestMethod.POST, classURL(Insurance.class), wrappedParams, Insurance.class, apiKey);
+    }
+
+    /**
+     * Retrieve an Insurance from the API.
+     *
+     * @param id the id of the Insurance to retrieve
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Insurance retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve an Insurance from the API.
+     *
+     * @param id     the id of the Insurance to retrieve
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Insurance retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Insurance.class, id), null, Insurance.class, apiKey);
+    }
+
+    /**
+     * Get a list of Insurances.
+     *
+     * @param params a map of parameters
+     * @return InsuranceCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static InsuranceCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * Get a list of Insurances.
+     *
+     * @param params a map of parameters
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return InsuranceCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static InsuranceCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Insurance.class), params, InsuranceCollection.class, apiKey);
+    }
+
+    /**
      * Get the ID of this Insurance.
      *
      * @return the ID of the Insurance
@@ -264,79 +337,6 @@ public final class Insurance extends EasyPostResource {
     }
 
     /**
-     * Create a new Insurance object from a map of parameters.
-     *
-     * @param params map of parameters
-     * @return Insurance object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Insurance create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a new Insurance object from a map of parameters.
-     *
-     * @param params a map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Insurance object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Insurance create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("insurance", params);
-
-        return request(RequestMethod.POST, classURL(Insurance.class), wrappedParams, Insurance.class, apiKey);
-    }
-
-    /**
-     * Retrieve an Insurance from the API.
-     *
-     * @param id the id of the Insurance to retrieve
-     * @return Insurance object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Insurance retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve an Insurance from the API.
-     *
-     * @param id     the id of the Insurance to retrieve
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Insurance object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Insurance retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Insurance.class, id), null, Insurance.class, apiKey);
-    }
-
-    /**
-     * Get a list of Insurances.
-     *
-     * @param params a map of parameters
-     * @return InsuranceCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static InsuranceCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * Get a list of Insurances.
-     *
-     * @param params a map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return InsuranceCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static InsuranceCollection all(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Insurance.class), params, InsuranceCollection.class, apiKey);
-    }
-
-    /**
      * Refresh this Insurance.
      *
      * @return Insurance object
@@ -360,19 +360,19 @@ public final class Insurance extends EasyPostResource {
     /**
      * Refresh this Insurance.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Insurance object
      * @throws EasyPostException when the request fails.
      */
     public Insurance refresh(final String apiKey) throws EasyPostException {
-        return this.refresh((Map<String, Object>) null, apiKey);
+        return this.refresh(null, apiKey);
     }
 
     /**
      * Refresh this Insurance.
      *
      * @param params a map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Insurance object
      * @throws EasyPostException when the request fails.
      */

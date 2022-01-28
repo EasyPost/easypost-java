@@ -9,6 +9,7 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,29 @@ public final class CarrierType extends EasyPostResource {
     private String readable;
     private String logo;
     private Map<String, Object> fields;
+
+    /**
+     * Retrieve a list of available carriers for the account.
+     *
+     * @return list of carrier types that are available to the account.
+     * @throws EasyPostException when the request fails.
+     */
+    public static List<CarrierType> all() throws EasyPostException {
+        return all(null);
+    }
+
+    /**
+     * Retrieve a list of available carriers for the given account.
+     *
+     * @param apikey the API key from the user input.
+     * @return list of carrier types that are available for the given account.
+     * @throws EasyPostException when the request fails.
+     */
+    public static List<CarrierType> all(final String apikey) throws EasyPostException {
+        CarrierType[] response =
+                request(RequestMethod.GET, classURL(CarrierType.class), null, CarrierType[].class, apikey);
+        return Arrays.asList(response);
+    }
 
     /**
      * Get the type of the carrier.
@@ -89,28 +113,5 @@ public final class CarrierType extends EasyPostResource {
      */
     public void setFields(final Map<String, Object> fields) {
         this.fields = fields;
-    }
-
-    /**
-     * Retrieve a list of available carriers for the account.
-     *
-     * @return list of carrier types that are available to the account.
-     * @throws EasyPostException when the request fails.
-     */
-    public static List<CarrierType> all() throws EasyPostException {
-        return all(null);
-    }
-
-    /**
-     * Retrieve a list of available carriers for the given account.
-     *
-     * @param apikey the API key from the user input.
-     * @return list of carrier types that are available for the given account.
-     * @throws EasyPostException when the request fails.
-     */
-    public static List<CarrierType> all(final String apikey) throws EasyPostException {
-        CarrierType[] response = request(RequestMethod.GET, classURL(CarrierType.class),
-                                    null, CarrierType[].class, apikey);
-        return Arrays.asList(response);
     }
 }

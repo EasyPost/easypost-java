@@ -25,6 +25,76 @@ public class ScanForm extends EasyPostResource {
     private String batchId;
 
     /**
+     * Create a ScanForm from a map of parameters.
+     *
+     * @param params the map of parameters.
+     * @return ScanForm object.
+     * @throws EasyPostException when the request fails. when the request fails.
+     */
+    public static ScanForm create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a ScanForm from a map of parameters.
+     *
+     * @param params the map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return ScanForm object.
+     * @throws EasyPostException when the request fails. when the request fails.
+     */
+    public static ScanForm create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.POST, classURL(ScanForm.class), params, ScanForm.class, apiKey);
+    }
+
+    /**
+     * Retrieve a ScanForm from the API.
+     *
+     * @param id the id of the ScanForm to retrieve.
+     * @return ScanForm object.
+     * @throws EasyPostException when the request fails. when the request fails.
+     */
+    public static ScanForm retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a ScanForm from the API.
+     *
+     * @param id     the id of the ScanForm to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return ScanForm object.
+     * @throws EasyPostException when the request fails. when the request fails.
+     */
+    public static ScanForm retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(ScanForm.class, id), null, ScanForm.class, apiKey);
+    }
+
+    /**
+     * Get a list of ScanForms from the API.
+     *
+     * @param params the parameters to send to the API.
+     * @return ScanFormCollection object.
+     * @throws EasyPostException when the request fails. when the request fails.
+     */
+    public static ScanFormCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * Get a list of ScanForms from the API.
+     *
+     * @param params the parameters to send to the API.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return ScanFormCollection object.
+     * @throws EasyPostException when the request fails. when the request fails.
+     */
+    public static ScanFormCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(ScanForm.class), params, ScanFormCollection.class, apiKey);
+    }
+
+    /**
      * Get the ID of the ScanForm.
      *
      * @return the ID of the ScanForm.
@@ -202,75 +272,5 @@ public class ScanForm extends EasyPostResource {
      */
     public void setBatchId(final String batchId) {
         this.batchId = batchId;
-    }
-
-    /**
-     * Create a ScanForm from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @return ScanForm object.
-     * @throws EasyPostException when the request fails. when the request fails.
-     */
-    public static ScanForm create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a ScanForm from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return ScanForm object.
-     * @throws EasyPostException when the request fails. when the request fails.
-     */
-    public static ScanForm create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, classURL(ScanForm.class), params, ScanForm.class, apiKey);
-    }
-
-    /**
-     * Retrieve a ScanForm from the API.
-     *
-     * @param id the id of the ScanForm to retrieve.
-     * @return ScanForm object.
-     * @throws EasyPostException when the request fails. when the request fails.
-     */
-    public static ScanForm retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a ScanForm from the API.
-     *
-     * @param id     the id of the ScanForm to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return ScanForm object.
-     * @throws EasyPostException when the request fails. when the request fails.
-     */
-    public static ScanForm retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(ScanForm.class, id), null, ScanForm.class, apiKey);
-    }
-
-    /**
-     * Get a list of ScanForms from the API.
-     *
-     * @param params the parameters to send to the API.
-     * @return ScanFormCollection object.
-     * @throws EasyPostException when the request fails. when the request fails.
-     */
-    public static ScanFormCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * Get a list of ScanForms from the API.
-     *
-     * @param params the parameters to send to the API.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return ScanFormCollection object.
-     * @throws EasyPostException when the request fails. when the request fails.
-     */
-    public static ScanFormCollection all(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, classURL(ScanForm.class), params, ScanFormCollection.class, apiKey);
     }
 }

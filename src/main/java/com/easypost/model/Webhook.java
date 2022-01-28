@@ -21,6 +21,90 @@ public final class Webhook extends EasyPostResource {
     private Date disabledAt;
 
     /**
+     * Create a Webhook object from a map of parameters.
+     *
+     * @param params the map of parameters
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Webhook create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a Webhook object from a map of parameters.
+     *
+     * @param params the map of parameters
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Webhook create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("webhook", params);
+
+        return request(RequestMethod.POST, classURL(Webhook.class), wrappedParams, Webhook.class, apiKey);
+    }
+
+    /**
+     * Retrieve a Webhook object from the API.
+     *
+     * @param id the ID of the Webhook to retrieve
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Webhook retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a Webhook object from the API.
+     *
+     * @param id     the ID of the Webhook to retrieve
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Webhook retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Webhook.class, id), null, Webhook.class, apiKey);
+    }
+
+    /**
+     * Get a list of all Webhook objects.
+     *
+     * @return WebhookCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static WebhookCollection all() throws EasyPostException {
+        Map<String, Object> params = new HashMap<String, Object>();
+        return all(params, null);
+    }
+
+    /**
+     * Get a list of all Webhook objects.
+     *
+     * @param params params for request
+     * @return WebhookCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static WebhookCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * Get a list of all Webhook objects.
+     *
+     * @param params params for request
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return WebhookCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static WebhookCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
+    }
+
+    /**
      * Get the ID of the webhook.
      *
      * @return the ID of the webhook
@@ -93,90 +177,6 @@ public final class Webhook extends EasyPostResource {
     }
 
     /**
-     * Create a Webhook object from a map of parameters.
-     *
-     * @param params the map of parameters
-     * @return Webhook object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Webhook create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a Webhook object from a map of parameters.
-     *
-     * @param params the map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Webhook object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Webhook create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("webhook", params);
-
-        return request(RequestMethod.POST, classURL(Webhook.class), wrappedParams, Webhook.class, apiKey);
-    }
-
-    /**
-     * Retrieve a Webhook object from the API.
-     *
-     * @param id the ID of the Webhook to retrieve
-     * @return Webhook object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Webhook retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Webhook object from the API.
-     *
-     * @param id     the ID of the Webhook to retrieve
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Webhook object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Webhook retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Webhook.class, id), null, Webhook.class, apiKey);
-    }
-
-    /**
-     * Get a list of all Webhook objects.
-     *
-     * @return WebhookCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static WebhookCollection all() throws EasyPostException {
-        Map<String, Object> params = new HashMap<String, Object>();
-        return all(params, null);
-    }
-
-    /**
-     * Get a list of all Webhook objects.
-     *
-     * @param params params for request
-     * @return WebhookCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static WebhookCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * Get a list of all Webhook objects.
-     *
-     * @param params params for request
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return WebhookCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static WebhookCollection all(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
-    }
-
-    /**
      * Delete this Webhook.
      *
      * @throws EasyPostException when the request fails.
@@ -188,7 +188,7 @@ public final class Webhook extends EasyPostResource {
     /**
      * Delete this Webhook.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String apiKey) throws EasyPostException {
@@ -221,7 +221,7 @@ public final class Webhook extends EasyPostResource {
      * Update this webhook.
      *
      * @param params the map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Webhook object
      * @throws EasyPostException when the request fails.
      */

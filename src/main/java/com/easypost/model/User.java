@@ -27,6 +27,86 @@ public class User extends EasyPostResource {
     private List<User> children;
 
     /**
+     * Retrieve a User from the API.
+     *
+     * @param id The ID of the User to retrieve.
+     * @return User object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static User retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a User from the API.
+     *
+     * @param id     The ID of the User to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return User object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static User retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(User.class, id), null, User.class, apiKey);
+    }
+
+    /**
+     * Retrieve your User from the API.
+     *
+     * @return User object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static User retrieveMe() throws EasyPostException {
+        return retrieveMe(null);
+    }
+
+    /**
+     * Retrieve your User from the API.
+     *
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return User object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static User retrieveMe(final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, classURL(User.class), null, User.class, apiKey);
+    }
+
+    /**
+     * Create a User object with a map of parameters.
+     *
+     * @return User object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static User create() throws EasyPostException {
+        return create(null, null);
+    }
+
+    /**
+     * Create a User object with a map of parameters.
+     *
+     * @param params map of User parameters.
+     * @return User object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static User create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a User object with a map of parameters.
+     *
+     * @param params map of User parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return User object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static User create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("user", params);
+
+        return request(RequestMethod.POST, classURL(User.class), wrappedParams, User.class, apiKey, false);
+    }
+
+    /**
      * Get the ID of the User.
      *
      * @return the ID of the User.
@@ -189,86 +269,6 @@ public class User extends EasyPostResource {
     }
 
     /**
-     * Retrieve a User from the API.
-     *
-     * @param id The ID of the User to retrieve.
-     * @return User object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static User retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a User from the API.
-     *
-     * @param id     The ID of the User to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return User object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static User retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(User.class, id), null, User.class, apiKey);
-    }
-
-    /**
-     * Retrieve your User from the API.
-     *
-     * @return User object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static User retrieveMe() throws EasyPostException {
-        return retrieveMe(null);
-    }
-
-    /**
-     * Retrieve your User from the API.
-     *
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return User object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static User retrieveMe(final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(User.class), null, User.class, apiKey);
-    }
-
-    /**
-     * Create a User object with a map of parameters.
-     *
-     * @return User object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static User create() throws EasyPostException {
-        return create(null, null);
-    }
-
-    /**
-     * Create a User object with a map of parameters.
-     *
-     * @param params map of User parameters.
-     * @return User object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static User create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a User object with a map of parameters.
-     *
-     * @param params map of User parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return User object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static User create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("user", params);
-
-        return request(RequestMethod.POST, classURL(User.class), wrappedParams, User.class, apiKey, false);
-    }
-
-    /**
      * Update this User.
      *
      * @param params map of User parameters.
@@ -283,7 +283,7 @@ public class User extends EasyPostResource {
      * Update this User.
      *
      * @param params map of User parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return User object.
      * @throws EasyPostException when the request fails.
      */
@@ -310,7 +310,7 @@ public class User extends EasyPostResource {
     /**
      * Delete this User.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String apiKey) throws EasyPostException {

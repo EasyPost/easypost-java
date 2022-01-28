@@ -46,54 +46,26 @@ import java.util.Scanner;
 
 public abstract class EasyPostResource {
     public static final String EASYPOST_SUPPORT_EMAIL = "support@easypost.com";
-
-    private static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
-    private static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
-    private static final double APP_ENGINE_DEFAULT_TIMEOUT_SECONDS = 20.0;
-
     public static final Gson GSON =
             new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .registerTypeAdapter(Event.class, new EventDeserializer())
                     .registerTypeAdapter(Rate.class, new RateDeserializer())
                     .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer()).create();
-
     public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .registerTypeAdapter(Event.class, new EventDeserializer()).create();
-
-    /**
-     * Returns a string representation of the object.
-     */
-    @Override
-    public String toString() {
-
-        return (String) this.getIdString();
-    }
-
-    /**
-     * Pretty print the JSON representation of the object.
-     *
-     * @return the JSON representation of the object.
-     */
-    public String prettyPrint() {
-        return String.format("<%s@%s id=%s> JSON: %s", this.getClass().getName(), System.identityHashCode(this),
-                this.getIdString(), PRETTY_PRINT_GSON.toJson(this));
-    }
-
-    private Object getIdString() {
-        try {
-            Field idField = this.getClass().getDeclaredField("id");
-            return idField.get(this);
-        } catch (SecurityException e) {
-            return "";
-        } catch (NoSuchFieldException e) {
-            return "";
-        } catch (IllegalArgumentException e) {
-            return "";
-        } catch (IllegalAccessException e) {
-            return "";
-        }
-    }
+    public static final String CHARSET = "UTF-8";
+    public static final ArrayList<String> GLOBAL_FIELD_ACCESSORS =
+            new ArrayList<>(Arrays.asList("getCreatedAt", "getUpdatedAt", "getFees"));
+    private static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
+    private static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
+    private static final double APP_ENGINE_DEFAULT_TIMEOUT_SECONDS = 20.0;
+    private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
+    // Set this property to override your environment's default URLStreamHandler.
+    private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
+    private Date createdAt;
+    private Date updatedAt;
+    private ArrayList<Fee> fees;
 
     private static String className(final Class<?> clazz) {
         return clazz.getSimpleName().replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase().replace("$", "");
@@ -117,51 +89,6 @@ public abstract class EasyPostResource {
         return String.format("%s/%s", classURL(clazz), id);
     }
 
-    /**
-     * Merge two EasyPostResource objects.
-     *
-     * @param obj    the base object
-     * @param update the object to merge
-     */
-    public void merge(final EasyPostResource obj, final EasyPostResource update) {
-        if (!obj.getClass().isAssignableFrom(update.getClass())) {
-            return;
-        }
-
-        Method[] methods = obj.getClass().getMethods();
-
-        for (Method fromMethod : methods) {
-            if ((fromMethod.getDeclaringClass().equals(obj.getClass()) && fromMethod.getName().startsWith("get")) ||
-                    GLOBAL_FIELD_ACCESSORS.contains(fromMethod.getName())) {
-
-                String fromName = fromMethod.getName();
-                String toName = fromName.replace("get", "set");
-
-                try {
-                    Object value = fromMethod.invoke(update, (Object[]) null);
-                    if (value != null) {
-                        Method toMethod = obj.getClass().getMethod(toName, fromMethod.getReturnType());
-                        toMethod.invoke(obj, value);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public static final String CHARSET = "UTF-8";
-
-    private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
-
-
-    // Set this property to override your environment's default URLStreamHandler.
-    private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
-
-    protected enum RequestMethod {
-        GET, POST, DELETE, PUT
-    }
-
     private static String urlEncodePair(final String key, final String value) throws UnsupportedEncodingException {
         return String.format("%s=%s", URLEncoder.encode(key, CHARSET), URLEncoder.encode(value, CHARSET));
     }
@@ -169,8 +96,8 @@ public abstract class EasyPostResource {
     static Map<String, String> getHeaders(String apiKey) {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Accept-Charset", CHARSET);
-        headers.put("User-Agent", String.format("EasyPost/v2 JavaClient/%s Java/%s"
-                                , EasyPost.VERSION, System.getProperty("java.version")));
+        headers.put("User-Agent", String.format("EasyPost/v2 JavaClient/%s Java/%s", EasyPost.VERSION,
+                System.getProperty("java.version")));
 
         if (apiKey == null) {
             apiKey = EasyPost.apiKey;
@@ -343,40 +270,6 @@ public abstract class EasyPostResource {
         return flatParams;
     }
 
-    // represents Errors returned as JSON
-    private static class ErrorContainer {
-        private EasyPostResource.Error error;
-    }
-
-    private static class Error {
-        @SuppressWarnings ("unused")
-        private String type;
-        private String message;
-        private String code;
-        private String param;
-        private String error;
-
-        public String getType() {
-            return type;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public String getParam() {
-            return param;
-        }
-
-        public String getError() {
-            return error;
-        }
-    }
-
     private static String getResponseBody(final InputStream responseStream) throws IOException {
         String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next();
         responseStream.close();
@@ -461,10 +354,10 @@ public abstract class EasyPostResource {
         }
     }
 
-    @SuppressWarnings("checkstyle:methodname")
+    @SuppressWarnings ("checkstyle:methodname")
     protected static <T> T _request(final EasyPostResource.RequestMethod method, final String url,
-                                       final Map<String, Object> params, final Class<T> clazz, String apiKey,
-                                       final boolean apiKeyRequired) throws EasyPostException {
+                                    final Map<String, Object> params, final Class<T> clazz, String apiKey,
+                                    final boolean apiKeyRequired) throws EasyPostException {
         if ((EasyPost.apiKey == null || EasyPost.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
             if (apiKeyRequired) {
                 throw new EasyPostException(String.format(
@@ -586,8 +479,7 @@ public abstract class EasyPostResource {
 
             if ((method == RequestMethod.POST || method == RequestMethod.PUT) && body != null) {
                 String bodyString = body.toString();
-                requestClass.getDeclaredMethod("setPayload", byte[].class)
-                        .invoke(request, (Object) bodyString.getBytes());
+                requestClass.getDeclaredMethod("setPayload", byte[].class).invoke(request, bodyString.getBytes());
             }
 
             for (Map.Entry<String, String> header : getHeaders(apiKey).entrySet()) {
@@ -633,11 +525,72 @@ public abstract class EasyPostResource {
         }
     }
 
-    public static final ArrayList<String> GLOBAL_FIELD_ACCESSORS =
-            new ArrayList<>(Arrays.asList("getCreatedAt", "getUpdatedAt", "getFees"));
-    private Date createdAt;
-    private Date updatedAt;
-    private ArrayList<Fee> fees;
+    /**
+     * Returns a string representation of the object.
+     */
+    @Override
+    public String toString() {
+
+        return (String) this.getIdString();
+    }
+
+    /**
+     * Pretty print the JSON representation of the object.
+     *
+     * @return the JSON representation of the object.
+     */
+    public String prettyPrint() {
+        return String.format("<%s@%s id=%s> JSON: %s", this.getClass().getName(), System.identityHashCode(this),
+                this.getIdString(), PRETTY_PRINT_GSON.toJson(this));
+    }
+
+    private Object getIdString() {
+        try {
+            Field idField = this.getClass().getDeclaredField("id");
+            return idField.get(this);
+        } catch (SecurityException e) {
+            return "";
+        } catch (NoSuchFieldException e) {
+            return "";
+        } catch (IllegalArgumentException e) {
+            return "";
+        } catch (IllegalAccessException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Merge two EasyPostResource objects.
+     *
+     * @param obj    the base object
+     * @param update the object to merge
+     */
+    public void merge(final EasyPostResource obj, final EasyPostResource update) {
+        if (!obj.getClass().isAssignableFrom(update.getClass())) {
+            return;
+        }
+
+        Method[] methods = obj.getClass().getMethods();
+
+        for (Method fromMethod : methods) {
+            if ((fromMethod.getDeclaringClass().equals(obj.getClass()) && fromMethod.getName().startsWith("get")) ||
+                    GLOBAL_FIELD_ACCESSORS.contains(fromMethod.getName())) {
+
+                String fromName = fromMethod.getName();
+                String toName = fromName.replace("get", "set");
+
+                try {
+                    Object value = fromMethod.invoke(update, (Object[]) null);
+                    if (value != null) {
+                        Method toMethod = obj.getClass().getMethod(toName, fromMethod.getReturnType());
+                        toMethod.invoke(obj, value);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     /**
      * @return the Date this object was created
@@ -701,8 +654,6 @@ public abstract class EasyPostResource {
         return "";
     }
 
-    // Batch
-
     /**
      * @return the list of shipments in this batch
      */
@@ -716,8 +667,6 @@ public abstract class EasyPostResource {
     public String getLabelUrl() {
         return "";
     }
-
-    // Tracker
 
     /**
      * @return the ID of this shipment
@@ -745,6 +694,47 @@ public abstract class EasyPostResource {
      */
     public List<TrackingDetail> getTrackingDetails() {
         return new ArrayList<TrackingDetail>();
+    }
+
+    protected enum RequestMethod {
+        GET,
+        POST,
+        DELETE,
+        PUT
+    }
+
+    // represents Errors returned as JSON
+    private static class ErrorContainer {
+        private EasyPostResource.Error error;
+    }
+
+    private static class Error {
+        @SuppressWarnings ("unused")
+        private String type;
+        private String message;
+        private String code;
+        private String param;
+        private String error;
+
+        public String getType() {
+            return type;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getParam() {
+            return param;
+        }
+
+        public String getError() {
+            return error;
+        }
     }
 
 }

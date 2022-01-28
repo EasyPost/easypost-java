@@ -32,11 +32,7 @@ public class EventTest {
         eventWrapper.put("mode", "production");
         eventWrapper.put("previous_attributes", null);
         eventWrapper.put("pending_urls", new ArrayList<String>(
-                Arrays.asList(
-                        "hook_4ed7ff31c6974ff180e2463bb2912345",
-                        "hook_b43bc6d4eb3848bfaaee8e131f712345")
-                )
-        );
+                Arrays.asList("hook_4ed7ff31c6974ff180e2463bb2912345", "hook_b43bc6d4eb3848bfaaee8e131f712345")));
         eventWrapper.put("completed_urls", null);
         eventWrapper.put("id", "evt_5786b354576049bb91e845b6d5712345");
         eventWrapper.put("user_id", "user_7b4c654836a743a492e59573a0512345");

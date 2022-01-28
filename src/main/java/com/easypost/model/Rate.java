@@ -30,6 +30,32 @@ public final class Rate extends EasyPostResource {
     private TimeInTransit timeInTransit;
 
     /**
+     * Retrieve a Rate from the API.
+     *
+     * @param id ID of the Rate to retrieve.
+     * @return Rate object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Rate retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a Rate from the API.
+     *
+     * @param id     ID of the Rate to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Rate object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Rate retrieve(final String id, final String apiKey) throws EasyPostException {
+        Rate response;
+        response = request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
+
+        return response;
+    }
+
+    /**
      * Get the ID of this Rate.
      *
      * @return ID of this Rate.
@@ -333,31 +359,5 @@ public final class Rate extends EasyPostResource {
      */
     public void setTimeInTransit(final TimeInTransit timeInTransit) {
         this.timeInTransit = timeInTransit;
-    }
-
-    /**
-     * Retrieve a Rate from the API.
-     *
-     * @param id ID of the Rate to retrieve.
-     * @return Rate object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Rate retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Rate from the API.
-     *
-     * @param id     ID of the Rate to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
-     * @return Rate object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Rate retrieve(final String id, final String apiKey) throws EasyPostException {
-        Rate response;
-        response = request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
-
-        return response;
     }
 }
