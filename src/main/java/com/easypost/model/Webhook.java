@@ -35,7 +35,7 @@ public final class Webhook extends EasyPostResource {
      * Create a Webhook object from a map of parameters.
      *
      * @param params the map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Webhook object
      * @throws EasyPostException when the request fails.
      */
@@ -61,7 +61,7 @@ public final class Webhook extends EasyPostResource {
      * Retrieve a Webhook object from the API.
      *
      * @param id     the ID of the Webhook to retrieve
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Webhook object
      * @throws EasyPostException when the request fails.
      */
@@ -95,7 +95,7 @@ public final class Webhook extends EasyPostResource {
      * Get a list of all Webhook objects.
      *
      * @param params params for request
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return WebhookCollection object
      * @throws EasyPostException when the request fails.
      */
@@ -188,7 +188,7 @@ public final class Webhook extends EasyPostResource {
     /**
      * Delete this Webhook.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String apiKey) throws EasyPostException {
@@ -221,7 +221,7 @@ public final class Webhook extends EasyPostResource {
      * Update this webhook.
      *
      * @param params the map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Webhook object
      * @throws EasyPostException when the request fails.
      */

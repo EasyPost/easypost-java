@@ -41,7 +41,7 @@ public final class Report extends EasyPostResource {
      * Create a Report from a map of parameters.
      *
      * @param params a map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Report object.
      * @throws EasyPostException when the request fails.
      */
@@ -70,7 +70,7 @@ public final class Report extends EasyPostResource {
      * Retrieve a Report from the API.
      *
      * @param id     the ID of the Report to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Report object.
      * @throws EasyPostException when the request fails.
      */
@@ -93,7 +93,7 @@ public final class Report extends EasyPostResource {
      * Get a list of Reports from the API.
      *
      * @param params a map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return ReportCollection object.
      * @throws EasyPostException when the request fails.
      */

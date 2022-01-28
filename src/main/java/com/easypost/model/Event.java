@@ -34,7 +34,7 @@ public final class Event extends EasyPostResource {
      * Retrieve a Event from the API.
      *
      * @param id     ID of the Event to retrieve
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Event object
      * @throws EasyPostException when the request fails.
      */
@@ -57,7 +57,7 @@ public final class Event extends EasyPostResource {
      * Get a list of Events.
      *
      * @param params A map of parameters to pass to the API.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return EventCollection object
      * @throws EasyPostException when the request fails.
      */

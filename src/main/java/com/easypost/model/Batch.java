@@ -50,7 +50,7 @@ public final class Batch extends EasyPostResource {
      * Create a Batch object.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -76,7 +76,7 @@ public final class Batch extends EasyPostResource {
      * Retrieve a Batch object from the API.
      *
      * @param id     ID of the Batch to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -99,7 +99,7 @@ public final class Batch extends EasyPostResource {
      * List all Batch objects.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return BatchCollection object.
      * @throws EasyPostException when the request fails.
      */
@@ -122,7 +122,7 @@ public final class Batch extends EasyPostResource {
      * Create and buy a Batch object in one step.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -319,7 +319,7 @@ public final class Batch extends EasyPostResource {
     /**
      * Refresh this Batch object.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -331,7 +331,7 @@ public final class Batch extends EasyPostResource {
      * Refresh this Batch object.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -365,7 +365,7 @@ public final class Batch extends EasyPostResource {
      * Label this Batch object.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -391,7 +391,7 @@ public final class Batch extends EasyPostResource {
      * Add shipments to this Batch object.
      *
      * @param shipments List of Shipment objects.
-     * @param apiKey    API key to use in request (ovverides default API key).
+     * @param apiKey    API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -416,7 +416,7 @@ public final class Batch extends EasyPostResource {
      * Add shipments to this Batch object.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -442,7 +442,7 @@ public final class Batch extends EasyPostResource {
      * Remove shipments from this Batch object.
      *
      * @param shipments List of Shipment objects.
-     * @param apiKey    API key to use in request (ovverides default API key).
+     * @param apiKey    API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -467,7 +467,7 @@ public final class Batch extends EasyPostResource {
      * Remove shipments from this Batch object.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -501,7 +501,7 @@ public final class Batch extends EasyPostResource {
      * Buy this batch.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
@@ -535,7 +535,7 @@ public final class Batch extends EasyPostResource {
      * Create a scan form for this batch.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */

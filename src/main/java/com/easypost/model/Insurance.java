@@ -44,7 +44,7 @@ public final class Insurance extends EasyPostResource {
      * Create a new Insurance object from a map of parameters.
      *
      * @param params a map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Insurance object
      * @throws EasyPostException when the request fails.
      */
@@ -70,7 +70,7 @@ public final class Insurance extends EasyPostResource {
      * Retrieve an Insurance from the API.
      *
      * @param id     the id of the Insurance to retrieve
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Insurance object
      * @throws EasyPostException when the request fails.
      */
@@ -93,7 +93,7 @@ public final class Insurance extends EasyPostResource {
      * Get a list of Insurances.
      *
      * @param params a map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return InsuranceCollection object
      * @throws EasyPostException when the request fails.
      */
@@ -360,7 +360,7 @@ public final class Insurance extends EasyPostResource {
     /**
      * Refresh this Insurance.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Insurance object
      * @throws EasyPostException when the request fails.
      */
@@ -372,7 +372,7 @@ public final class Insurance extends EasyPostResource {
      * Refresh this Insurance.
      *
      * @param params a map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Insurance object
      * @throws EasyPostException when the request fails.
      */

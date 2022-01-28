@@ -37,7 +37,7 @@ public final class CarrierAccount extends EasyPostResource {
      * Create a carrier account.
      *
      * @param params parameters to create.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return created CarrierAccount object.
      * @throws EasyPostException when the request fails.
      */
@@ -64,7 +64,7 @@ public final class CarrierAccount extends EasyPostResource {
      * Retrieve a carrier account from the API.
      *
      * @param id     id of the carrier account.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return CarrierAccount object.
      * @throws EasyPostException when the request fails.
      */
@@ -87,7 +87,7 @@ public final class CarrierAccount extends EasyPostResource {
      * List all carrier accounts.
      *
      * @param params filters to apply to the list.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return List of CarrierAccount objects.
      * @throws EasyPostException when the request fails.
      */
@@ -203,7 +203,7 @@ public final class CarrierAccount extends EasyPostResource {
      * Update this carrier account.
      *
      * @param params parameters to update.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return updated CarrierAccount object.
      * @throws EasyPostException when the request fails.
      */
@@ -231,7 +231,7 @@ public final class CarrierAccount extends EasyPostResource {
     /**
      * Delete this carrier account.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String apiKey) throws EasyPostException {

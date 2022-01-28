@@ -479,8 +479,7 @@ public abstract class EasyPostResource {
 
             if ((method == RequestMethod.POST || method == RequestMethod.PUT) && body != null) {
                 String bodyString = body.toString();
-                requestClass.getDeclaredMethod("setPayload", byte[].class)
-                        .invoke(request, bodyString.getBytes());
+                requestClass.getDeclaredMethod("setPayload", byte[].class).invoke(request, bodyString.getBytes());
             }
 
             for (Map.Entry<String, String> header : getHeaders(apiKey).entrySet()) {
@@ -676,8 +675,6 @@ public abstract class EasyPostResource {
         return "";
     }
 
-    // Batch
-
     /**
      * @return the tracking code of this shipment
      */
@@ -692,8 +689,6 @@ public abstract class EasyPostResource {
         return "";
     }
 
-    // Tracker
-
     /**
      * @return the tracking details of this shipment
      */
@@ -702,7 +697,10 @@ public abstract class EasyPostResource {
     }
 
     protected enum RequestMethod {
-        GET, POST, DELETE, PUT
+        GET,
+        POST,
+        DELETE,
+        PUT
     }
 
     // represents Errors returned as JSON

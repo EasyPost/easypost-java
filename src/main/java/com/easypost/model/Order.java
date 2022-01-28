@@ -46,7 +46,7 @@ public final class Order extends EasyPostResource {
      * Create an Order object from a map of paramters.
      *
      * @param params map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */
@@ -72,7 +72,7 @@ public final class Order extends EasyPostResource {
      * Retrieve an Order object from the API.
      *
      * @param id     ID of the Order to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */
@@ -374,7 +374,7 @@ public final class Order extends EasyPostResource {
     /**
      * Refresh this Order object.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */
@@ -386,7 +386,7 @@ public final class Order extends EasyPostResource {
      * Refresh this Order object.
      *
      * @param params map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */
@@ -419,7 +419,7 @@ public final class Order extends EasyPostResource {
     /**
      * Get new rates for this Order.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */
@@ -431,7 +431,7 @@ public final class Order extends EasyPostResource {
      * Get new rates for this Order.
      *
      * @param params map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */
@@ -474,7 +474,7 @@ public final class Order extends EasyPostResource {
      * Buy this Order.
      *
      * @param params map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */

@@ -39,7 +39,7 @@ public class ScanForm extends EasyPostResource {
      * Create a ScanForm from a map of parameters.
      *
      * @param params the map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return ScanForm object.
      * @throws EasyPostException when the request fails. when the request fails.
      */
@@ -62,7 +62,7 @@ public class ScanForm extends EasyPostResource {
      * Retrieve a ScanForm from the API.
      *
      * @param id     the id of the ScanForm to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return ScanForm object.
      * @throws EasyPostException when the request fails. when the request fails.
      */
@@ -85,7 +85,7 @@ public class ScanForm extends EasyPostResource {
      * Get a list of ScanForms from the API.
      *
      * @param params the parameters to send to the API.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return ScanFormCollection object.
      * @throws EasyPostException when the request fails. when the request fails.
      */

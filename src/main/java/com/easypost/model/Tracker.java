@@ -46,7 +46,7 @@ public final class Tracker extends EasyPostResource {
      * Create a new Tracker object using a map of parameters.
      *
      * @param params Map of parameters used to create the Tracker.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Tracker object.
      * @throws EasyPostException when the request fails.
      */
@@ -72,7 +72,7 @@ public final class Tracker extends EasyPostResource {
      * Retrieve a Tracker object from the API.
      *
      * @param id     ID of the Tracker to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Tracker object.
      * @throws EasyPostException when the request fails.
      */
@@ -95,7 +95,7 @@ public final class Tracker extends EasyPostResource {
      * Get a list of all Tracker objects.
      *
      * @param params Map of parameters used to filter the list of Trackers.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return TrackerCollection object.
      * @throws EasyPostException when the request fails.
      */
@@ -119,7 +119,7 @@ public final class Tracker extends EasyPostResource {
      * Create a list of Trackers.
      *
      * @param params Map of parameters used to create the Trackers.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return whether the creation was successful.
      * @throws EasyPostException when the request fails.
      */
@@ -265,8 +265,6 @@ public final class Tracker extends EasyPostResource {
         this.trackingDetails = trackingDetails;
     }
 
-    // This method is a misspelling, but it persists to avoid breaking backwards compatibility
-
     /**
      * Get the weight of the Tracker.
      *
@@ -344,6 +342,7 @@ public final class Tracker extends EasyPostResource {
      *
      * @return when the tracker was updated.
      */
+    // This method is a misspelling, but it persists to avoid breaking backwards compatibility
     public Date getUpdateAt() {
         return getUpdatedAt();
     }

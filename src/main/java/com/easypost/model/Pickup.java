@@ -45,7 +45,7 @@ public final class Pickup extends EasyPostResource {
      * Create a new Pickup object from a map of parameters.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
@@ -71,7 +71,7 @@ public final class Pickup extends EasyPostResource {
      * Retrieve a Pickup from the API.
      *
      * @param id     ID of Pickup to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
@@ -337,7 +337,7 @@ public final class Pickup extends EasyPostResource {
     /**
      * Refresh this Pickup.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
@@ -349,7 +349,7 @@ public final class Pickup extends EasyPostResource {
      * Refresh this Pickup.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
@@ -382,7 +382,7 @@ public final class Pickup extends EasyPostResource {
     /**
      * Buy this Pickup.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
@@ -408,7 +408,7 @@ public final class Pickup extends EasyPostResource {
      * Buy this Pickup.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
@@ -445,7 +445,7 @@ public final class Pickup extends EasyPostResource {
     /**
      * Cancel this Pickup.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
@@ -457,7 +457,7 @@ public final class Pickup extends EasyPostResource {
      * Cancel this Pickup.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */

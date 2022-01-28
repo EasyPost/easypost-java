@@ -49,7 +49,7 @@ public final class Address extends EasyPostResource {
      * Create Address object from parameter map.
      *
      * @param params Map of address parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Address object.
      * @throws EasyPostException when the request fails.
      */
@@ -97,7 +97,7 @@ public final class Address extends EasyPostResource {
      * Retrieve Address object from API.
      *
      * @param id     ID of address to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Address object.
      * @throws EasyPostException when the request fails.
      */
@@ -120,7 +120,7 @@ public final class Address extends EasyPostResource {
      * List all Address objects.
      *
      * @param params Map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return AddressCollection object.
      * @throws EasyPostException when the request fails.
      */
@@ -144,7 +144,7 @@ public final class Address extends EasyPostResource {
      * Create Address object from parameter map and immediately verify it.
      *
      * @param params Map of address parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Address object.
      * @throws EasyPostException when the request fails.
      */
@@ -183,7 +183,7 @@ public final class Address extends EasyPostResource {
      *
      * @param params  Map of address parameters.
      * @param carrier Carrier to verify address with.
-     * @param apiKey  API key to use in request (ovverides default API key).
+     * @param apiKey  API key to use in request (overrides default API key).
      * @return Address object.
      * @throws EasyPostException when the request fails.
      */
@@ -522,7 +522,7 @@ public final class Address extends EasyPostResource {
     /**
      * Verify this Address object.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Address object.
      * @throws EasyPostException when the request fails.
      */
@@ -553,7 +553,7 @@ public final class Address extends EasyPostResource {
      * Verify this Address object with a specific carrier.
      *
      * @param carrier Carrier to verify address with.
-     * @param apiKey  API key to use in request (ovverides default API key).
+     * @param apiKey  API key to use in request (overrides default API key).
      * @return Address object.
      * @throws EasyPostException when the request fails.
      */

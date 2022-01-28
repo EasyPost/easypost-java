@@ -40,7 +40,7 @@ public final class CustomsInfo extends EasyPostResource {
      * Create a CustomsInfo from a map of parameters.
      *
      * @param params the map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return CustomsInfo object.
      * @throws EasyPostException when the request fails.
      */
@@ -66,7 +66,7 @@ public final class CustomsInfo extends EasyPostResource {
      * Retrieve a CustomsInfo from the API.
      *
      * @param id     the ID of the CustomsInfo to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return CustomsInfo object.
      * @throws EasyPostException when the request fails.
      */

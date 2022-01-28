@@ -61,7 +61,7 @@ public final class Shipment extends EasyPostResource {
      * Create a new Shipment object from a map of parameters.
      *
      * @param params the map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -87,7 +87,7 @@ public final class Shipment extends EasyPostResource {
      * Retrieve a Shipment from the API.
      *
      * @param id     the id of the Shipment to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -110,7 +110,7 @@ public final class Shipment extends EasyPostResource {
      * Get a list of all Shipment objects.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return ShipmentCollection object
      * @throws EasyPostException when the request fails.
      */
@@ -625,8 +625,6 @@ public final class Shipment extends EasyPostResource {
 
     /**
      * Get the carrier accounts of this shipment.
-     * <p>
-     * Get the carrier accounts list.
      *
      * @return List of carrier accounts.
      */
@@ -685,7 +683,7 @@ public final class Shipment extends EasyPostResource {
     /**
      * Refresh this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -697,7 +695,7 @@ public final class Shipment extends EasyPostResource {
      * Refresh this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -730,7 +728,7 @@ public final class Shipment extends EasyPostResource {
     /**
      * Get new rates for this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -742,7 +740,7 @@ public final class Shipment extends EasyPostResource {
      * Get new rates for this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -779,7 +777,7 @@ public final class Shipment extends EasyPostResource {
     /**
      * Get smart rates for this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return List of Rate objects
      * @throws EasyPostException when the request fails.
      */
@@ -791,7 +789,7 @@ public final class Shipment extends EasyPostResource {
      * Get smart rates for this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return List of Rate objects
      * @throws EasyPostException when the request fails.
      */
@@ -827,7 +825,7 @@ public final class Shipment extends EasyPostResource {
     /**
      * Buy this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -853,7 +851,7 @@ public final class Shipment extends EasyPostResource {
      * Buy this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -890,7 +888,7 @@ public final class Shipment extends EasyPostResource {
     /**
      * Refund this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -902,7 +900,7 @@ public final class Shipment extends EasyPostResource {
      * Refund this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -935,7 +933,7 @@ public final class Shipment extends EasyPostResource {
     /**
      * Label this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -947,7 +945,7 @@ public final class Shipment extends EasyPostResource {
      * Label this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -984,7 +982,7 @@ public final class Shipment extends EasyPostResource {
     /**
      * Insure this Shipment.
      *
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -996,7 +994,7 @@ public final class Shipment extends EasyPostResource {
      * Insure this Shipment.
      *
      * @param params the options for the query.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */

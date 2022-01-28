@@ -39,7 +39,7 @@ public final class CustomsItem extends EasyPostResource {
      * Create a CustomsItem from a map of parameters.
      *
      * @param params the map of parameters.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return CustomsItem object.
      * @throws EasyPostException when the request fails.
      */
@@ -65,7 +65,7 @@ public final class CustomsItem extends EasyPostResource {
      * Retrieve a CustomsItem from the API.
      *
      * @param id     the ID of the CustomsItem to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return CustomsItem object.
      * @throws EasyPostException when the request fails.
      */

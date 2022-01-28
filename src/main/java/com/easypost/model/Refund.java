@@ -37,7 +37,7 @@ public final class Refund extends EasyPostResource {
      * Create a Refund object from a map of parameters.
      *
      * @param params Map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Refund object
      * @throws EasyPostException when the request fails.
      */
@@ -63,7 +63,7 @@ public final class Refund extends EasyPostResource {
      * Retrieve a Refund object from the API.
      *
      * @param id     ID of refund to retrieve
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Refund object
      * @throws EasyPostException when the request fails.
      */
@@ -86,7 +86,7 @@ public final class Refund extends EasyPostResource {
      * List all Refunds objects.
      *
      * @param params Map of parameters
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return RefundCollection object
      * @throws EasyPostException when the request fails.
      */

@@ -44,7 +44,7 @@ public final class Rate extends EasyPostResource {
      * Retrieve a Rate from the API.
      *
      * @param id     ID of the Rate to retrieve.
-     * @param apiKey API key to use in request (ovverides default API key).
+     * @param apiKey API key to use in request (overrides default API key).
      * @return Rate object.
      * @throws EasyPostException when the request fails.
      */
