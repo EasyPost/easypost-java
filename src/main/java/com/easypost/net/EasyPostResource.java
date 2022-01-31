@@ -530,6 +530,7 @@ public abstract class EasyPostResource {
 
     /**
      * Get the timeout in milliseconds for normal API requests.
+     *
      * @return the timeout in milliseconds
      */
     public static int getConnectTimeoutMilliseconds() {
@@ -538,6 +539,7 @@ public abstract class EasyPostResource {
 
     /**
      * Set the timeout in milliseconds for normal API requests.
+     *
      * @param milliseconds the timeout in milliseconds
      */
     public static void setConnectTimeoutMilliseconds(int milliseconds) {
@@ -546,6 +548,7 @@ public abstract class EasyPostResource {
 
     /**
      * Get the timeout in milliseconds for reading API responses.
+     *
      * @return the timeout in milliseconds
      */
     public static int getReadTimeoutMilliseconds() {
@@ -554,6 +557,7 @@ public abstract class EasyPostResource {
 
     /**
      * Set the timeout in milliseconds for reading API responses.
+     *
      * @param milliseconds the timeout in milliseconds
      */
     public static void setReadTimeoutMilliseconds(int milliseconds) {
@@ -562,6 +566,7 @@ public abstract class EasyPostResource {
 
     /**
      * Get the timeout in milliseconds for App Engine API requests.
+     *
      * @return the timeout in milliseconds
      */
     public static double getAppEngineTimeoutSeconds() {
@@ -570,6 +575,7 @@ public abstract class EasyPostResource {
 
     /**
      * Set the timeout in seconds for App Engine API requests.
+     *
      * @param seconds the timeout in seconds
      */
     public static void setAppEngineTimeoutSeconds(double seconds) {

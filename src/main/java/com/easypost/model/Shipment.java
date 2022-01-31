@@ -787,9 +787,9 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public List<Rate> getSmartrates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        SmartrateCollection smartrateCollection = request(RequestMethod.GET,
-                String.format("%s/smartrate", instanceURL(Shipment.class, this.getId())), params,
-                SmartrateCollection.class, apiKey);
+        SmartrateCollection smartrateCollection =
+                request(RequestMethod.GET, String.format("%s/smartrate", instanceURL(Shipment.class, this.getId())),
+                        params, SmartrateCollection.class, apiKey);
 
         return smartrateCollection.getRates();
     }
