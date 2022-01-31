@@ -359,10 +359,10 @@ public class EasyPostTest {
         HashMap<String, Object> trackingCodeParams = new HashMap<String, Object>();
 
         for (int i = 0; i < trackingCodes.length; i++) {
-            HashMap<String, Object> tracker = new HashMap<String, Object>();
-            tracker.put("tracking_code", trackingCodes[i]);
-            tracker.put("carrier", "USPS");
-            trackingCodeParams.put(String.valueOf(i), tracker);
+            HashMap<String, Object> code = new HashMap<String, Object>();
+            code.put("tracking_code", trackingCodes[i]);
+            code.put("carrier", "USPS");
+            trackingCodeParams.put(String.valueOf(i), code);
         }
 
         Tracker.createList(trackingCodeParams);
