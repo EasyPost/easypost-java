@@ -529,7 +529,7 @@ public abstract class EasyPostResource {
     }
 
     /**
-     * Get the timeout in milliseconds for normal API requests.
+     * Get the timeout in milliseconds for connecting to the API.
      *
      * @return the timeout in milliseconds
      */
