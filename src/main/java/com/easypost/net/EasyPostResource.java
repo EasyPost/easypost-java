@@ -538,7 +538,7 @@ public abstract class EasyPostResource {
     }
 
     /**
-     * Set the timeout in milliseconds for normal API requests.
+     * Set the timeout in milliseconds for connecting to the API.
      *
      * @param milliseconds the timeout in milliseconds
      */
