@@ -128,7 +128,7 @@ public class EasyPostTest {
         canadaToAddress.put("zip", "t8n2m4");
         canadaToAddress.put("country", "CA");
     }
-  
+
     @Test
     public void testShipmentWithTracker() throws EasyPostException {
         // create and buy shipment
@@ -1075,7 +1075,7 @@ public class EasyPostTest {
         int timeout = 1;
         Order.setConnectTimeoutMilliseconds(timeout);
         Order.setReadTimeoutMilliseconds(timeout);
-        Order.setAppEngineTimeoutSeconds((double) timeout);
+        Order.setAppEngineTimeoutSeconds(timeout);
         assertEquals(Order.getConnectTimeoutMilliseconds(), timeout);
         assertEquals(Order.getReadTimeoutMilliseconds(), timeout);
         assertEquals(Order.getAppEngineTimeoutSeconds(), timeout, 0.001);
