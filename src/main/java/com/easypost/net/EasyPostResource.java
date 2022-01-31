@@ -760,7 +760,6 @@ public abstract class EasyPostResource {
         PUT
     }
 
-    // represents Errors returned as JSON
     private static class ErrorContainer {
         private EasyPostResource.Error error;
     }
