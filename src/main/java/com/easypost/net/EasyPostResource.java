@@ -61,7 +61,6 @@ public abstract class EasyPostResource {
     private static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
     private static final double DEFAULT_APP_ENGINE_TIMEOUT_SECONDS = 20.0;
     private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
-    // Set this property to override your environment's default URLStreamHandler.
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
     private static int connectTimeoutMilliseconds = DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;
     private static int readTimeoutMilliseconds = DEFAULT_READ_TIMEOUT_MILLISECONDS;
