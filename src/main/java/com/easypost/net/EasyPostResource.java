@@ -59,10 +59,12 @@ public abstract class EasyPostResource {
             new ArrayList<>(Arrays.asList("getCreatedAt", "getUpdatedAt", "getFees"));
     private static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
     private static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
-    private static final double APP_ENGINE_DEFAULT_TIMEOUT_SECONDS = 20.0;
+    private static final double DEFAULT_APP_ENGINE_TIMEOUT_SECONDS = 20.0;
     private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
-    // Set this property to override your environment's default URLStreamHandler.
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
+    private static int connectTimeoutMilliseconds = DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;
+    private static int readTimeoutMilliseconds = DEFAULT_READ_TIMEOUT_MILLISECONDS;
+    private static double appEngineTimeoutSeconds = DEFAULT_APP_ENGINE_TIMEOUT_SECONDS;
     private Date createdAt;
     private Date updatedAt;
     private ArrayList<Fee> fees;
@@ -150,13 +152,13 @@ public abstract class EasyPostResource {
             easypostURL = new URL(url);
         }
         javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) easypostURL.openConnection();
-        conn.setConnectTimeout(DEFAULT_CONNECT_TIMEOUT_MILLISECONDS);
+        conn.setConnectTimeout(getConnectTimeoutMilliseconds());
 
         int readTimeout;
         if (EasyPost.readTimeout != 0) {
             readTimeout = EasyPost.readTimeout;
         } else {
-            readTimeout = DEFAULT_READ_TIMEOUT_MILLISECONDS;
+            readTimeout = getReadTimeoutMilliseconds();
         }
         conn.setReadTimeout(readTimeout);
 
@@ -470,7 +472,7 @@ public abstract class EasyPostResource {
 
             // Heroku times out after 30s, so leave some time for the API to return a response
             fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class)
-                    .invoke(fetchOptions, APP_ENGINE_DEFAULT_TIMEOUT_SECONDS);
+                    .invoke(fetchOptions, getAppEngineTimeoutSeconds());
 
             Class<?> requestClass = Class.forName("com.google.appengine.api.urlfetch.HTTPRequest");
 
@@ -523,6 +525,60 @@ public abstract class EasyPostResource {
         } catch (UnsupportedEncodingException e) {
             throw new EasyPostException(unknownErrorMessage, e);
         }
+    }
+
+    /**
+     * Get the timeout in milliseconds for connecting to the API.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static int getConnectTimeoutMilliseconds() {
+        return connectTimeoutMilliseconds;
+    }
+
+    /**
+     * Set the timeout in milliseconds for connecting to the API.
+     *
+     * @param milliseconds the timeout in milliseconds
+     */
+    public static void setConnectTimeoutMilliseconds(int milliseconds) {
+        connectTimeoutMilliseconds = milliseconds;
+    }
+
+    /**
+     * Get the timeout in milliseconds for reading API responses.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static int getReadTimeoutMilliseconds() {
+        return readTimeoutMilliseconds;
+    }
+
+    /**
+     * Set the timeout in milliseconds for reading API responses.
+     *
+     * @param milliseconds the timeout in milliseconds
+     */
+    public static void setReadTimeoutMilliseconds(int milliseconds) {
+        readTimeoutMilliseconds = milliseconds;
+    }
+
+    /**
+     * Get the timeout in milliseconds for App Engine API requests.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static double getAppEngineTimeoutSeconds() {
+        return appEngineTimeoutSeconds;
+    }
+
+    /**
+     * Set the timeout in seconds for App Engine API requests.
+     *
+     * @param seconds the timeout in seconds
+     */
+    public static void setAppEngineTimeoutSeconds(double seconds) {
+        appEngineTimeoutSeconds = seconds;
     }
 
     /**
@@ -703,7 +759,6 @@ public abstract class EasyPostResource {
         PUT
     }
 
-    // represents Errors returned as JSON
     private static class ErrorContainer {
         private EasyPostResource.Error error;
     }

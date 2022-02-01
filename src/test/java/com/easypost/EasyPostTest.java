@@ -1063,6 +1063,17 @@ public class EasyPostTest {
         assertEquals("IDs do not match", scanForms.getScanForms().get(0).getId(), scanForm.getId());
     }
 
+    @Test
+    public void testClientTimeout() throws EasyPostException {
+        int timeout = 1;
+        Order.setConnectTimeoutMilliseconds(timeout);
+        Order.setReadTimeoutMilliseconds(timeout);
+        Order.setAppEngineTimeoutSeconds(timeout);
+        assertEquals(Order.getConnectTimeoutMilliseconds(), timeout);
+        assertEquals(Order.getReadTimeoutMilliseconds(), timeout);
+        assertEquals(Order.getAppEngineTimeoutSeconds(), timeout, 0.001);
+    }
+
 
     //This test needs to have new set of dates to avoid "report already exists" error
   /*

@@ -89,8 +89,8 @@ public class EventDeserializer implements JsonDeserializer<Event> {
         } else if (element.isJsonArray()) {
             return deserializeJsonArray(element.getAsJsonArray());
         } else {
-            System.err.printf("Unknown JSON element type for element %s. Please email us at %s.%n",
-                    element.toString(), EasyPostResource.EASYPOST_SUPPORT_EMAIL);
+            System.err.printf("Unknown JSON element type for element %s. Please email us at %s.%n", element,
+                    EasyPostResource.EASYPOST_SUPPORT_EMAIL);
             return null;
         }
     }
