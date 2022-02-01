@@ -3,7 +3,6 @@ package com.easypost.model;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -119,16 +118,11 @@ public final class Tracker extends EasyPostResource {
     public static boolean createList(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         String createListUrl = String.format("%s/create_list", classURL(Tracker.class));
 
-        int count = 0;
         Map<String, Object> newParams = new HashMap<String, Object>();
-        Map<String, Object> trackers = new HashMap<String, Object>();
-        for (Object tracker : (ArrayList) params.get("trackers")) {
-            trackers.put(String.valueOf(count), tracker);
-            count++;
-        }
-        newParams.put("trackers", trackers);
+        newParams.put("trackers", params);
 
         request(RequestMethod.POST, createListUrl, newParams, Object.class, apiKey);
+        // This endpoint does not return a response so we return true here
         return true;
     }
 

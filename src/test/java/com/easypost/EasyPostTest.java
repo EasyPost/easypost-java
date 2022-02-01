@@ -354,25 +354,18 @@ public class EasyPostTest {
 
     @Test
     public void testBatchTrackerCreate() throws EasyPostException {
-        List<String> trackingCodes = new ArrayList<String>();
-        trackingCodes.add("EZ1000000001");
-        trackingCodes.add("EZ2000000002");
-        trackingCodes.add("EZ3000000003");
 
-        List<HashMap<String, Object>> trackingCodeParams = new ArrayList<HashMap<String, Object>>();
-        HashMap<String, Object> code;
+        String[] trackingCodes = new String[]{"EZ1000000001", "EZ1000000002", "EZ1000000003"};
+        HashMap<String, Object> trackingCodeParams = new HashMap<String, Object>();
 
-        for (int i = 0; i < trackingCodes.size(); i++) {
-            code = new HashMap<String, Object>();
-            code.put("tracking_code", trackingCodes.get(i));
+        for (int i = 0; i < trackingCodes.length; i++) {
+            HashMap<String, Object> code = new HashMap<String, Object>();
+            code.put("tracking_code", trackingCodes[i]);
             code.put("carrier", "USPS");
-            trackingCodeParams.add(code);
+            trackingCodeParams.put(String.valueOf(i), code);
         }
 
-        Map createListParams = new HashMap<String, Object>();
-        createListParams.put("trackers", trackingCodeParams);
-
-        Tracker.createList(createListParams);
+        Tracker.createList(trackingCodeParams);
     }
 
     @Test
@@ -1098,7 +1091,7 @@ public class EasyPostTest {
     assertEquals("Incorrect ShipmentReport start_date", "Sun Oct 01 00:00:00 PDT 2017", shipmentReport2.getStartDate().toString());
     assertEquals("Incorrect ShipmentReport end_date", "Mon Oct 30 00:00:00 PDT 2017", shipmentReport2.getEndDate().toString());
   }*/
-  
+
 
   /*
    // This test requires a FedExSameDayCity account
