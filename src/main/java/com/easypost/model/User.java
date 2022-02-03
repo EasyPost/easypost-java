@@ -353,8 +353,10 @@ public class User extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Brand updateBrand(Map<String, Object> params, String apiKey) throws EasyPostException {
-        String updateBrandUrl = String.format("%s/brand", classURL(User.class));
-        return request(RequestMethod.PUT, updateBrandUrl, params, Brand.class, apiKey);
+        String updateBrandUrl = String.format("%s/brand", instanceURL(User.class, id));
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("brand", params);
+        return request(RequestMethod.PUT, updateBrandUrl, wrappedParams, Brand.class, apiKey);
     }
 }
 
