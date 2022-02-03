@@ -25,6 +25,7 @@ import com.easypost.model.TrackingDetail;
 import com.easypost.model.TrackingLocation;
 import com.easypost.model.Webhook;
 import com.easypost.model.WebhookCollection;
+import com.easypost.net.EasyPostResource;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -355,7 +356,7 @@ public class EasyPostTest {
     @Test
     public void testBatchTrackerCreate() throws EasyPostException {
 
-        String[] trackingCodes = new String[]{"EZ1000000001", "EZ1000000002", "EZ1000000003"};
+        String[] trackingCodes = new String[] { "EZ1000000001", "EZ1000000002", "EZ1000000003" };
         HashMap<String, Object> trackingCodeParams = new HashMap<String, Object>();
 
         for (int i = 0; i < trackingCodes.length; i++) {
@@ -1072,6 +1073,10 @@ public class EasyPostTest {
         assertEquals(Order.getConnectTimeoutMilliseconds(), timeout);
         assertEquals(Order.getReadTimeoutMilliseconds(), timeout);
         assertEquals(Order.getAppEngineTimeoutSeconds(), timeout, 0.001);
+        // Need to reset these timeouts to default values for other tests to run correctly
+        Order.setConnectTimeoutMilliseconds(EasyPostResource.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS);
+        Order.setReadTimeoutMilliseconds(EasyPostResource.DEFAULT_READ_TIMEOUT_MILLISECONDS);
+        Order.setAppEngineTimeoutSeconds(EasyPostResource.DEFAULT_APP_ENGINE_TIMEOUT_SECONDS);
     }
 
 
