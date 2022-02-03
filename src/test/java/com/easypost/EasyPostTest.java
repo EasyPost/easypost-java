@@ -1072,9 +1072,6 @@ public class EasyPostTest {
         assertEquals(Order.getConnectTimeoutMilliseconds(), timeout);
         assertEquals(Order.getReadTimeoutMilliseconds(), timeout);
         assertEquals(Order.getAppEngineTimeoutSeconds(), timeout, 0.001);
-        Order.resetConnectTimeoutMilliseconds();
-        Order.resetReadTimeoutMilliseconds();
-        Order.resetAppEngineTimeoutSeconds();
     }
 
 

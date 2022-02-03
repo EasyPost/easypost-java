@@ -546,13 +546,6 @@ public abstract class EasyPostResource {
     }
 
     /**
-     * Reset the API connection timeout to the default value.
-     */
-    public static void resetConnectTimeoutMilliseconds() {
-        setConnectTimeoutMilliseconds(DEFAULT_CONNECT_TIMEOUT_MILLISECONDS);
-    }
-
-    /**
      * Get the timeout in milliseconds for reading API responses.
      *
      * @return the timeout in milliseconds
@@ -571,13 +564,6 @@ public abstract class EasyPostResource {
     }
 
     /**
-     * Reset the API response reading timeout to the default value.
-     */
-    public static void resetReadTimeoutMilliseconds() {
-        setReadTimeoutMilliseconds(DEFAULT_READ_TIMEOUT_MILLISECONDS);
-    }
-
-    /**
      * Get the timeout in milliseconds for App Engine API requests.
      *
      * @return the timeout in milliseconds
@@ -593,13 +579,6 @@ public abstract class EasyPostResource {
      */
     public static void setAppEngineTimeoutSeconds(double seconds) {
         appEngineTimeoutSeconds = seconds;
-    }
-
-    /**
-     * Reset the App Engine API request timeout to the default value.
-     */
-    public static void resetAppEngineTimeoutSeconds() {
-        setAppEngineTimeoutSeconds(DEFAULT_APP_ENGINE_TIMEOUT_SECONDS);
     }
 
     /**
