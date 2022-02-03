@@ -6,6 +6,7 @@
 * Added support for `Retrieve Carrier Types`
 * Added support for `One Call Buy an Order`
 * Allow user to override default API timeouts
+* Added support for `Update User Brand`
 
 ## 5.0.0 2022-01-14
 

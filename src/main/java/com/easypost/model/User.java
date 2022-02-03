@@ -332,5 +332,31 @@ public class User extends EasyPostResource {
         throw new EasyPostException(
                 String.format("Unable to find api key. Please contact %s.", EasyPostResource.EASYPOST_SUPPORT_EMAIL));
     }
+
+    /**
+     * Update the user brand.
+     *
+     * @param params Map of parameters.
+     * @return Brand object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Brand updateBrand(Map<String, Object> params) throws EasyPostException {
+        return updateBrand(params, null);
+    }
+
+    /**
+     * Update the user brand.
+     *
+     * @param params Map of parameters.
+     * @param apiKey User API key.
+     * @return Brand object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Brand updateBrand(Map<String, Object> params, String apiKey) throws EasyPostException {
+        String updateBrandUrl = String.format("%s/brand", instanceURL(User.class, id));
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("brand", params);
+        return request(RequestMethod.PUT, updateBrandUrl, wrappedParams, Brand.class, apiKey);
+    }
 }
 
