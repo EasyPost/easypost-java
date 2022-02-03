@@ -10,7 +10,7 @@ public class Brand extends EasyPostResource {
     private String ad;
     private String adHref;
     private String name;
-    private User userID;
+    private String userID;
     private String theme;
 
     /**
@@ -122,18 +122,18 @@ public class Brand extends EasyPostResource {
     }
 
     /**
-     * Get the name of the Brand.
+     * Get the name of the User.
      *
-     * @return the name of the Brand.
+     * @return the name of the User.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Set the name of the Brand.
+     * Set the name of the User.
      *
-     * @param name the name of the Brand.
+     * @param name the name of the User.
      */
     public void setName(String name) {
         this.name = name;
@@ -144,7 +144,7 @@ public class Brand extends EasyPostResource {
      *
      * @return the user ID of the Brand.
      */
-    public User getUserID() {
+    public String getUserID() {
         return this.userID;
     }
 
@@ -153,7 +153,7 @@ public class Brand extends EasyPostResource {
      *
      * @param userID the user ID of the Brand.
      */
-    public void setUserID(User userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
