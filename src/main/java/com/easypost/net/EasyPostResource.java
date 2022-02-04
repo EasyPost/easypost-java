@@ -57,9 +57,9 @@ public abstract class EasyPostResource {
     public static final String CHARSET = "UTF-8";
     public static final ArrayList<String> GLOBAL_FIELD_ACCESSORS =
             new ArrayList<>(Arrays.asList("getCreatedAt", "getUpdatedAt", "getFees"));
-    private static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
-    private static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
-    private static final double DEFAULT_APP_ENGINE_TIMEOUT_SECONDS = 20.0;
+    public static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
+    public static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
+    public static final double DEFAULT_APP_ENGINE_TIMEOUT_SECONDS = 20.0;
     private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
     private static int connectTimeoutMilliseconds = DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;
