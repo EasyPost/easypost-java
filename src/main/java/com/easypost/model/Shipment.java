@@ -1047,7 +1047,6 @@ public final class Shipment extends EasyPostResource {
                 continue;
             }
             if (services != null && services.size() > 0 &&
-                    !services.contains(this.rates.get(i).getService().toLowerCase()) &&
                     !services.contains(this.rates.get(i).getService().toLowerCase())) {
                 continue;
             }
