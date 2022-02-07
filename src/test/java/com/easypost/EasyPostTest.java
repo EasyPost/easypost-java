@@ -1079,6 +1079,15 @@ public class EasyPostTest {
         Order.setAppEngineTimeoutSeconds(EasyPostResource.DEFAULT_APP_ENGINE_TIMEOUT_SECONDS);
     }
 
+    @Test
+    public void testGetShipmentRate() throws EasyPostException {
+        Shipment shipment = createDefaultShipmentDomestic();
+        Shipment shipmentRates = shipment.getShipmentRate();
+
+        assertNotNull(shipmentRates);
+        assertTrue(shipmentRates.getRates().size() > 0);
+    }
+
 
     //This test needs to have new set of dates to avoid "report already exists" error
   /*
