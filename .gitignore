@@ -12,9 +12,7 @@ Icon
 target
 
 .idea/
-src/main/main.iml
-src/test/test.iml
-easypost-api-client.iml
+*.iml
 
 *.class
 settings.xml

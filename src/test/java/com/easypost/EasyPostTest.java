@@ -1080,9 +1080,9 @@ public class EasyPostTest {
     }
 
     @Test
-    public void testGetShipmentRate() throws EasyPostException {
+    public void testRetrieveRates() throws EasyPostException {
         Shipment shipment = createDefaultShipmentDomestic();
-        Shipment shipmentRates = shipment.getShipmentRate();
+        Shipment shipmentRates = shipment.retrieveRates();
 
         assertNotNull(shipmentRates);
         assertTrue(shipmentRates.getRates().size() > 0);

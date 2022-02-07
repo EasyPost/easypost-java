@@ -1069,8 +1069,8 @@ public final class Shipment extends EasyPostResource {
      * @return Shipment object
      * @throws EasyPostException
      */
-    public Shipment getShipmentRate() throws EasyPostException {
-        return getShipmentRate(null);
+    public Shipment retrieveRates() throws EasyPostException {
+        return retrieveRates(null);
     }
 
     /**
@@ -1080,7 +1080,7 @@ public final class Shipment extends EasyPostResource {
      * @return Shipment object
      * @throws EasyPostException
      */
-    public Shipment getShipmentRate(String apiKey) throws EasyPostException {
+    public Shipment retrieveRates(String apiKey) throws EasyPostException {
         Shipment response = request(RequestMethod.GET, String.format("%s/rates",
                         instanceURL(Shipment.class, this.getId())), null, Shipment.class, apiKey);
         this.setRates(response.getRates());
