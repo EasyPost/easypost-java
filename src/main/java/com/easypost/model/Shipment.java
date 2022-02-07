@@ -1064,26 +1064,23 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get rate for a shipment.
+     * Update the rates of a shipment.
      *
-     * @return Shipment object
      * @throws EasyPostException
      */
-    public Shipment retrieveRates() throws EasyPostException {
-        return retrieveRates(null);
+    public void retrieveRates() throws EasyPostException {
+        this.retrieveRates(null);
     }
 
     /**
-     * Get rate for a shipment.
+     * Update the rates of a shipment.
      *
      * @param apiKey API key to use in request (overrides default API key).
-     * @return Shipment object
      * @throws EasyPostException
      */
-    public Shipment retrieveRates(String apiKey) throws EasyPostException {
+    public void retrieveRates(String apiKey) throws EasyPostException {
         Shipment response = request(RequestMethod.GET, String.format("%s/rates",
                         instanceURL(Shipment.class, this.getId())), null, Shipment.class, apiKey);
         this.setRates(response.getRates());
-        return response;
     }
 }
