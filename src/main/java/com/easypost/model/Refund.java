@@ -3,6 +3,7 @@ package com.easypost.model;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,8 @@ public final class Refund extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("refund", params);
 
-        return request(RequestMethod.POST, classURL(Refund.class), wrappedParams, List.class, apiKey);
+        Refund[] response = request(RequestMethod.POST, classURL(Refund.class), wrappedParams, Refund[].class, apiKey);
+        return Arrays.asList(response);
     }
 
     /**

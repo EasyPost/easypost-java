@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Next Release
+
+* Add getter and setter for eel_pfc in CustomsInfo class
+* Add getter and setter for id in Brand class
+* Fix bug for `create()` method in Refund class
+* Add test suite and upgrade JUnit4 to JUnit5
+* Fix typo in the AddressCollection class where the Batch should be Address
+
 ## v5.1.0 (2022-02-09)
 
 * Adds support to one-call buy a Shipment by passing a `service` and `carrierAccounts` key

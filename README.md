@@ -136,5 +136,7 @@ Up-to-date documentation at: https://easypost.com/docs
 ### Tests
 
 ```bash
+# Run tests
 mvn test -B
-```
+# Run tests with coverage
+mvn clean test jacoco:report

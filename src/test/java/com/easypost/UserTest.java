@@ -1,64 +1,145 @@
-/*
 package com.easypost;
 
 import com.easypost.model.*;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-import java.lang.InterruptedException;
 
 import com.easypost.exception.EasyPostException;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
+    private static User globalUser;
 
-  @BeforeClass
-  public static void setUp() {
-    EasyPost.apiKey = "PROD_KEY"; // PROD KEY REQUIRED
-  }
+    /**
+     * Setup the testing environment for this file.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @BeforeAll
+    public static void setUp() throws EasyPostException{
+        EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");
+        globalUser = User.retrieveMe();
+    }
 
-  @Test
-  public void testRetrieveMe() throws EasyPostException {
-    User me = User.retrieveMe();
+    /**
+     * Test creating a child user.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    @Disabled // This endpoint returns the child user keys in plain text, do not run this test.
+    public void testCreate() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
 
-    assertNotNull(me.getName());
-    assertNotNull(me.getEmail());
-  }
+        params.put("name", "Test User");
 
-  @Test
-  public void testCreateChild() throws EasyPostException {
-    User child = User.create();
-    assertNotNull(child.getName());
-    assertNotNull(child.getEmail());
+        User user = User.create(params);
 
-    List<ApiKey> childKeys = child.apiKeys();
-    assertNotNull(childKeys.get(0).getKey()); // one is test and one is prod
-    assertNotNull(childKeys.get(1).getKey()); // check getMode()
-  }
+        assertTrue(user instanceof User);
+        assertTrue(user.getId().startsWith("user_"));
+    }
 
-  @Test
-  public void testEditUser() throws EasyPostException {
-    User me = User.retrieveMe();
+    /**
+     * Test retrieving a user.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testRetrieve() throws EasyPostException {
+        User user = User.retrieve(Fixture.childUserID());
 
-    Map<String, Object> params = new HashMap<String, Object>();
-    params.put("name", "New Name2736");
-    me.update(params);
+        assertTrue(user instanceof User);
+        assertTrue(user.getId().startsWith("user_"));
+    }
 
-    assertEquals("User was not updated successfully", "New Name2736", me.getName());
-    System.out.println(me.prettyPrint());
-  }
+    /**
+     * Test retrieving user itself.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testRetrieveMe() throws EasyPostException {
+        User user = User.retrieveMe();
+
+        assertTrue(user instanceof User);
+        assertTrue(user.getId().startsWith("user_"));
+    }
+
+    /**
+     * Test updating a user.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testUpdate() throws EasyPostException {
+        String testPhone = "5555555555";
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("phone", testPhone);
+        
+        globalUser.update(params);
+
+        assertTrue(globalUser instanceof User);
+        assertTrue(globalUser.getId().startsWith("user_"));
+        assertEquals(testPhone, globalUser.getPhoneNumber());
+    }
+
+    /**
+     * Test deleting a user.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    @Disabled // Due to our inability to create child users securely, we must also skip deleting them as we cannot replace the deleted ones easily.
+    public void testDelete() throws EasyPostException {
+        globalUser.delete();
+    }
+
+    /**
+     * Test retrieving all API keys.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    @Disabled // API keys are returned as plaintext, do not run this test.
+    public void testAppApiKeys() throws EasyPostException {
+        ApiKeys apikeys = ApiKeys.all();
+
+        assertTrue(apikeys instanceof ApiKeys);
+    }
+
+    /**
+     * Test retrieving all API keys for a user.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    @Disabled // API keys are returned as plaintext, do not run this test.
+    public void testApiKeys() throws EasyPostException {
+        globalUser.apiKeys();
+    }
+
+    /**
+     * Test updating a brand.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testUpdateBrand() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        String color = "#123456";
+
+        params.put("color", color);
+
+        Brand brand = globalUser.updateBrand(params);
+
+        assertTrue(brand instanceof Brand);
+        assertTrue(brand.getId().startsWith("brd_"));
+        assertEquals(color, brand.getColor());
+    }
 }
-*/
-

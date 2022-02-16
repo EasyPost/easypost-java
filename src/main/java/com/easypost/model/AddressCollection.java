@@ -5,7 +5,7 @@ import com.easypost.net.EasyPostResource;
 import java.util.List;
 
 public final class AddressCollection extends EasyPostResource {
-    private List<Batch> addresses;
+    private List<Address> addresses;
     private Boolean hasMore;
 
     /**
@@ -13,7 +13,7 @@ public final class AddressCollection extends EasyPostResource {
      *
      * @return List of Batch objects
      */
-    public List<Batch> getAddresses() {
+    public List<Address> getAddresses() {
         return addresses;
     }
 
@@ -22,7 +22,7 @@ public final class AddressCollection extends EasyPostResource {
      *
      * @param addresses List of Batch objects
      */
-    public void setAddresses(final List<Batch> addresses) {
+    public void setAddresses(final List<Address> addresses) {
         this.addresses = addresses;
     }
 

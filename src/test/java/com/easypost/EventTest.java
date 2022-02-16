@@ -1,47 +1,61 @@
 package com.easypost;
 
-import com.easypost.model.Event;
-import com.easypost.net.EasyPostResource;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertNull;
+import com.easypost.exception.EasyPostException;
+import com.easypost.model.Event;
+import com.easypost.model.EventCollection;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EventTest {
+    private static EventCollection globalEvents;
+    private static Map<String, Object> params = new HashMap<>();
 
+    /**
+     * Setup the testing environment for this file.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @BeforeAll
+    public static void setup() throws EasyPostException{
+        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+
+        params.put("page_size", Fixture.pageSize());
+
+        globalEvents = Event.all(params);
+    }
+
+    /**
+     * Test retrieving all events.
+     *
+     * @throws EasyPostException when the request fails.
+     */
     @Test
-    public void testEventWithNullPreviousAttributes() {
-        Map<String, String> eventData = new HashMap<String, String>();
-        eventData.put("id", "rfnd_b550a6f968be4c61a2306e3c10c12345");
-        eventData.put("object", "Refund");
-        eventData.put("created_at", "2019-12-12T00:10:49Z");
-        eventData.put("updated_at", "2019-12-12T00:10:49Z");
-        eventData.put("tracking_code", "778827012345");
-        eventData.put("confirmation_number", null);
-        eventData.put("status", "refunded");
-        eventData.put("carrier", "FedEx");
-        eventData.put("shipment_id", "shp_b4fba1b233d94ecabfbb455ff9112345");
+    public void testAll() throws EasyPostException {
+        EventCollection events = Event.all(params);
 
-        Map<String, Object> eventWrapper = new HashMap<>();
-        eventWrapper.put("result", eventData);
-        eventWrapper.put("description", "refund.successful");
-        eventWrapper.put("mode", "production");
-        eventWrapper.put("previous_attributes", null);
-        eventWrapper.put("pending_urls", new ArrayList<String>(
-                Arrays.asList("hook_4ed7ff31c6974ff180e2463bb2912345", "hook_b43bc6d4eb3848bfaaee8e131f712345")));
-        eventWrapper.put("completed_urls", null);
-        eventWrapper.put("id", "evt_5786b354576049bb91e845b6d5712345");
-        eventWrapper.put("user_id", "user_7b4c654836a743a492e59573a0512345");
-        eventWrapper.put("status", "pending");
-        eventWrapper.put("object", "Event");
+        assertTrue(events.getEvents().size() <= Fixture.pageSize());
+        assertNotNull(events.getHasMore());
+        for(Event event: events.getEvents()) {
+            assertTrue(event instanceof Event);
+        }
+    }
 
-        String eventJson = EasyPostResource.GSON.toJson(eventWrapper);
+    /**
+     * Test retrieving an event.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testRetrieve() throws EasyPostException {
+        Event retrievedEvent = Event.retrieve(globalEvents.getEvents().get(0).getId());
 
-        Event event = EasyPostResource.GSON.fromJson(eventJson, Event.class);
-        assertNull(event.getPreviousAttributes());
+        assertTrue(retrievedEvent instanceof Event);
+        assertTrue(retrievedEvent.getId().startsWith("evt_"));
+        assertEquals(globalEvents.getEvents().get(0).getId(), retrievedEvent.getId());
     }
 }

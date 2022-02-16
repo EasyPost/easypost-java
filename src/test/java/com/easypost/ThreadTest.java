@@ -2,8 +2,8 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Order;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,9 +21,14 @@ public class ThreadTest {
         return shipmentMap;
     }
 
-    @BeforeClass
+    /**
+     * Setup the testing environment for this file.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @BeforeAll
     public static void setUp() {
-        EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
+        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
 
         defaultFromAddress.put("name", "EasyPost");
         defaultFromAddress.put("street1", "164 Townsend St");
@@ -46,6 +51,11 @@ public class ThreadTest {
         defaultParcel.put("weight", 10);
     }
 
+    /**
+     * Test thread to create order.
+     *
+     * @throws EasyPostException when the request fails.
+     */
     @Test
     public void testThreadOrderCreation() throws EasyPostException, InterruptedException {
 
@@ -81,9 +91,13 @@ public class ThreadTest {
 
         // for more information on threads including adding timeouts and interrupts see:
         // http://docs.oracle.com/javase/tutorial/essential/concurrency/index.html
-
     }
 
+    /**
+     * Test creating orders.
+     *
+     * @throws EasyPostException when the request fails.
+     */
     private static class CreateOrders implements Runnable {
         List<Map<String, Object>> orders;
 
