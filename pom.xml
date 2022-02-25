@@ -6,7 +6,7 @@
     <groupId>com.easypost</groupId>
     <artifactId>easypost-api-client</artifactId>
 
-    <version>5.1.0</version>
+    <version>5.2.0</version>
     <packaging>jar</packaging>
 
     <name>com.easypost:easypost-api-client</name>
@@ -93,8 +93,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <properties>
-                        <configurationParameters>
-                            junit.jupiter.execution.order.random.seed=99
+                        <configurationParameters> junit.jupiter.execution.order.random.seed=99
                         </configurationParameters>
                     </properties>
                 </configuration>
