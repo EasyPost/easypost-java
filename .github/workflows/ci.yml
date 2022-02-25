@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request: ~
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        javaversion: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17']
+        javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Java ${{ matrix.javaversion }}
@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: ${{ matrix.javaversion }}
       - name: Build and test with Maven
-        run: EASYPOST_TEST_API_KEY=${{ secrets.EASYPOST_TEST_API_KEY }} EASYPOST_PROD_API_KEY=${{ secrets.EASYPOST_PROD_API_KEY }} mvn --batch-mode install -Dgpg.skip=true -Dcheckstyle.skip=true
+        run: EASYPOST_TEST_API_KEY=${{ secrets.EASYPOST_TEST_API_KEY }} EASYPOST_PROD_API_KEY=${{ secrets.EASYPOST_PROD_API_KEY }} mvn --batch-mode install -Dgpg.skip=true -DskipTests=true -Dcheckstyle.skip=true
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -29,5 +29,4 @@ jobs:
           level: error
           fail_on_error: true
           checkstyle_config: easypost_java_style.xml
-          tool_name: 'style_enforcer'
-
+          tool_name: "style_enforcer"
