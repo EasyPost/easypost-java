@@ -1,12 +1,12 @@
 # CHANGELOG
 
-## Next Release
+## v5.2.0 (2022-02-25)
 
-* Add getter and setter for eel_pfc in CustomsInfo class
-* Add getter and setter for id in Brand class
-* Fix bug for `create()` method in Refund class
-* Add test suite and upgrade JUnit4 to JUnit5
-* Fix typo in the AddressCollection class where the Batch should be Address
+* Adds a getter and setter for `eel_pfc` on the `CustomsInfo` object
+* Adds a getter and setter for `id` on the `Brand` object
+* Fixes a bug that didn't allow Refunds to be created
+* Adds a complete test suite and upgrade JUnit4 to JUnit5
+* Fixes the `AddressCollection` to return a list of `Address` objects instead of `Batch` objects
 
 ## v5.1.0 (2022-02-09)
 
