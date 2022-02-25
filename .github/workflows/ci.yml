@@ -17,8 +17,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.javaversion }}
-      - name: Build with Maven
-        run: mvn --batch-mode install -Dgpg.skip=true -DskipTests=true -Dcheckstyle.skip=true
+      - name: Build and test with Maven
+        run: EASYPOST_TEST_API_KEY=${{ secrets.EASYPOST_TEST_API_KEY }} EASYPOST_PROD_API_KEY=${{ secrets.EASYPOST_PROD_API_KEY }} mvn --batch-mode install -Dgpg.skip=true -Dcheckstyle.skip=true
   lint:
     runs-on: ubuntu-latest
     steps:

@@ -17,6 +17,7 @@ public final class CustomsInfo extends EasyPostResource {
     private String restrictionType;
     private String restrictionComments;
     private List<CustomsItem> customsItems;
+    private String eelPfc;
 
     /**
      * Create a CustomsInfo from a map of parameters.
@@ -227,5 +228,23 @@ public final class CustomsInfo extends EasyPostResource {
      */
     public void setCustomsItems(final List<CustomsItem> customsItems) {
         this.customsItems = customsItems;
+    }
+
+    /**
+     * Get this CustomsInfo's EEL or PFC.
+     *
+     * @return the EEL or PFC of this CustomsInfo.
+     */
+    public String getEelPfc() {
+        return eelPfc;
+    }
+
+    /**
+     * Set this CustomsInfo's EEL or PFC.
+     *
+     * @param eelPfc the EEL or PFC of this CustomsInfo.
+     */
+    public void setEelPfc(String eelPfc) {
+        this.eelPfc = eelPfc;
     }
 }
