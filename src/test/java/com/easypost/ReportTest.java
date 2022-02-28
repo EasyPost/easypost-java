@@ -2,6 +2,7 @@ package com.easypost;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Report;
@@ -217,11 +218,11 @@ public class ReportTest {
 
         ReportCollection reports = Report.all(params);
 
-        assertTrue(reports.getReports().size() <= Fixture.pageSize());
+        List<Report> reportsList = reports.getReports();
+
+        assertTrue(reportsList.size() <= Fixture.pageSize());
         assertNotNull(reports.getHasMore());
-        for(Report report: reports.getReports()) {
-            assertTrue(report instanceof Report);
-        }
+        assertTrue(reportsList.stream().allMatch(report -> report instanceof Report));
     }
 
     /**

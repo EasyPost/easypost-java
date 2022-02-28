@@ -83,9 +83,7 @@ public class CarrierAccountTest {
     public void testAll() throws EasyPostException {
         List<CarrierAccount> carrierAccounts = CarrierAccount.all(null);
 
-        for(CarrierAccount carrierAccount: carrierAccounts) {
-            assertTrue(carrierAccount instanceof CarrierAccount);
-        }
+        assertTrue(carrierAccounts.stream().allMatch(carrier -> carrier instanceof CarrierAccount));
     }
 
     /**

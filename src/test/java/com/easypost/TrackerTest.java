@@ -2,6 +2,7 @@ package com.easypost;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Tracker;
@@ -70,11 +71,11 @@ public class TrackerTest {
 
         TrackerCollection trackers = globalTracker.all(params);
 
+        List<Tracker> trackersList = trackers.getTrackers();
+
+        assertTrue(trackersList.size() <= Fixture.pageSize());
         assertNotNull(trackers.getHasMore());
-        assertTrue(trackers.getTrackers().size() <= Fixture.pageSize());
-        for (Tracker tracker: trackers.getTrackers()) {
-            assertTrue(tracker instanceof Tracker);
-        }
+        assertTrue(trackersList.stream().allMatch(tracker -> tracker instanceof Tracker));
     }
 
     /**

@@ -73,11 +73,11 @@ public class ShipmentTest {
 
         ShipmentCollection shipments = Shipment.all(params);
 
+        List<Shipment> shipmentsList = shipments.getShipments();
+
+        assertTrue(shipmentsList.size() <= Fixture.pageSize());
         assertNotNull(shipments.getHasMore());
-        assertTrue(shipments.getShipments().size() <= Fixture.pageSize());
-        for(Shipment shipment: shipments.getShipments()) {
-            assertTrue(shipment instanceof Shipment);
-        }
+        assertTrue(shipmentsList.stream().allMatch(shipment -> shipment instanceof Shipment));
     }
 
     /**

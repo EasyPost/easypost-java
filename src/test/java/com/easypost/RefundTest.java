@@ -67,11 +67,11 @@ public class RefundTest {
 
         RefundCollection refunds = Refund.all(params);
 
-        assertTrue(refunds.getRefunds().size() <= Fixture.pageSize());
+        List<Refund> refundsList = refunds.getRefunds();
+
+        assertTrue(refundsList.size() <= Fixture.pageSize());
         assertNotNull(refunds.getHasMore());
-        for(Refund refund: refunds.getRefunds()) {
-            assertTrue(refund instanceof Refund);
-        }
+        assertTrue(refundsList.stream().allMatch(refund -> refund instanceof Refund));
     }
 
     /**

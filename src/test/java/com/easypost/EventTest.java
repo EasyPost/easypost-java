@@ -2,6 +2,7 @@ package com.easypost;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Event;
@@ -38,11 +39,11 @@ public class EventTest {
     public void testAll() throws EasyPostException {
         EventCollection events = Event.all(params);
 
-        assertTrue(events.getEvents().size() <= Fixture.pageSize());
+        List<Event> eventsList = events.getEvents();
+
+        assertTrue(eventsList.size() <= Fixture.pageSize());
         assertNotNull(events.getHasMore());
-        for(Event event: events.getEvents()) {
-            assertTrue(event instanceof Event);
-        }
+        assertTrue(eventsList.stream().allMatch(event -> event instanceof Event));
     }
 
     /**
