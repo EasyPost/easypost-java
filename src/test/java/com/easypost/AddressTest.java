@@ -90,13 +90,11 @@ public class AddressTest {
 
         AddressCollection addresses = Address.all(params);
 
-        List<Address> addressesArray = addresses.getAddresses();
+        List<Address> addressesList = addresses.getAddresses();
 
-        assertTrue(addressesArray.size() <= Fixture.pageSize());
+        assertTrue(addressesList.size() <= Fixture.pageSize());
         assertNotNull(addresses.getHasMore());
-        for(Address address: addressesArray) {
-            assertTrue(address instanceof Address);
-        }
+        assertTrue(addressesList.stream().allMatch(address -> address instanceof Address));
     }
 
     /**

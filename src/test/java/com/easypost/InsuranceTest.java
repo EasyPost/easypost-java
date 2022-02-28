@@ -2,6 +2,7 @@ package com.easypost;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Insurance;
@@ -77,11 +78,10 @@ public class InsuranceTest {
 
         InsuranceCollection insurances = Insurance.all(params);
 
-        assertTrue(insurances instanceof InsuranceCollection);
+        List<Insurance> insurancesList = insurances.getInsurances();
+
+        assertTrue(insurancesList.size() <= Fixture.pageSize());
         assertNotNull(insurances.getHasMore());
-        assertTrue(insurances.getInsurances().size() <= Fixture.pageSize());
-        for(Insurance insurance: insurances.getInsurances()) {
-            assertTrue(insurance instanceof Insurance);
-        }
+        assertTrue(insurancesList.stream().allMatch(insurance -> insurance instanceof Insurance));
     }
 }

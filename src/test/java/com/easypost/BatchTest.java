@@ -76,11 +76,11 @@ public class BatchTest {
 
         BatchCollection batches = Batch.all(params);
 
-        assertTrue(batches.getBatches().size() <= Fixture.pageSize());
+        List<Batch> batchesList = batches.getBatches();
+
+        assertTrue(batchesList.size() <= Fixture.pageSize());
         assertNotNull(batches.getHasMore());
-        for(Batch batch: batches.getBatches()) {
-            assertTrue(batch instanceof Batch);
-        }
+        assertTrue(batchesList.stream().allMatch(batch -> batch instanceof Batch));
     }
 
     /**

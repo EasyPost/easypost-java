@@ -87,10 +87,9 @@ public class ScanFormTest {
 
         ScanFormCollection scanForms = ScanForm.all(params);
 
+        List<ScanForm> scanFormsList = scanForms.getScanForms();
+        assertTrue(scanFormsList.size() <= Fixture.pageSize());
         assertNotNull(scanForms.getHasMore());
-        assertTrue(scanForms.getScanForms().size() <= Fixture.pageSize());
-        for(ScanForm scanForm: scanForms.getScanForms()) {
-            assertTrue(scanForm instanceof ScanForm);
-        }
+        assertTrue(scanFormsList.stream().allMatch(scanForm -> scanForm instanceof ScanForm));
     }
 }

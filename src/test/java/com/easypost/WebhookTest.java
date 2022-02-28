@@ -2,6 +2,7 @@ package com.easypost;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Webhook;
@@ -86,10 +87,10 @@ public class WebhookTest {
 
         WebhookCollection webhooks = Webhook.all(params);
 
-        assertTrue(webhooks.getWebhooks().size() <= Fixture.pageSize());
-        for (Webhook webhook: webhooks.getWebhooks()) {
-            assertTrue(webhook instanceof Webhook);
-        }
+        List<Webhook> webhooksList = webhooks.getWebhooks();
+
+        assertTrue(webhooksList.size() <= Fixture.pageSize());
+        assertTrue(webhooksList.stream().allMatch(webhook -> webhook instanceof Webhook));
     }
 
     /**
