@@ -1,13 +1,16 @@
 package com.easypost;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.Shipment;
+import com.easypost.model.Address;
+import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
+import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
 
 import org.junit.jupiter.api.Test;
@@ -91,7 +94,7 @@ public class ShipmentTest {
 
         Shipment boughtShipment = shipment.buy(shipment.lowestRate());
 
-        assertNotNull(boughtShipment.getPostageLabel());;
+        assertNotNull(boughtShipment.getPostageLabel());
     }
 
     /**
@@ -106,7 +109,7 @@ public class ShipmentTest {
         List<Rate> rates = shipmentWithNewRates.getRates();
 
         assertTrue(rates instanceof List);
-        for(Rate rate: rates) {
+        for (Rate rate : rates) {
             assertTrue(rate instanceof Rate);
         }
     }
@@ -123,7 +126,7 @@ public class ShipmentTest {
         params.put("file_format", "ZPL");
 
         Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
-        
+
         Shipment shipmentWithLabel = shipment.label(params);
 
         assertNotNull(shipmentWithLabel.getPostageLabel().getLabelZplUrl());
@@ -132,8 +135,10 @@ public class ShipmentTest {
     /**
      * Test insuring a Shipment.
      *
-     * If the shipment was purchased with a USPS rate, it must have had its insurance set to `0` when bought
-     * so that USPS doesn't automatically insure it so we could manually insure it here.
+     * If the shipment was purchased with a USPS rate, it must have had its
+     * insurance set to `0` when bought
+     * so that USPS doesn't automatically insure it so we could manually insure it
+     * here.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -144,7 +149,8 @@ public class ShipmentTest {
 
         insuranceData.put("amount", "100");
         shipmentData.put("insurance", 0);
-        // Set to 0 so USPS doesn't insure this automatically and we can insure the shipment manually.
+        // Set to 0 so USPS doesn't insure this automatically and we can insure the
+        // shipment manually.
 
         Shipment shipment = Shipment.create(shipmentData);
 
@@ -156,8 +162,10 @@ public class ShipmentTest {
     /**
      * Test refunding a Shipment.
      *
-     * Refunding a test shipment must happen within seconds of the shipment being created as test shipments naturally
-     * follow a flow of created -> delivered to cycle through tracking events in test mode - as such anything older
+     * Refunding a test shipment must happen within seconds of the shipment being
+     * created as test shipments naturally
+     * follow a flow of created -> delivered to cycle through tracking events in
+     * test mode - as such anything older
      * than a few seconds in test mode may not be refundable.
      *
      * @throws EasyPostException when the request fails.
@@ -231,5 +239,31 @@ public class ShipmentTest {
         assertTrue(shipmentWithTaxIdentifiers instanceof Shipment);
         assertTrue(shipmentWithTaxIdentifiers.getId().startsWith("shp_"));
         assertEquals("IOSS", shipmentWithTaxIdentifiers.getTaxIdentifiers().get(0).getTaxIdType());
+    }
+
+    /**
+     * Test creating a shipment when only IDs are used.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateWithIds() throws EasyPostException {
+        Address fromAddress = Address.create(Fixture.basicAddress());
+        Address toAddress = Address.create(Fixture.basicAddress());
+        Parcel parcel = Parcel.create(Fixture.basicParcel());
+
+        Map<String, Object> shipmentData = Fixture.basicShipment();
+        shipmentData.put("from_address", Collections.singletonMap("id", fromAddress.getId()));
+        shipmentData.put("to_address", Collections.singletonMap("id", toAddress.getId()));
+        shipmentData.put("parcel", Collections.singletonMap("id", parcel.getId()));
+
+        Shipment shipment = Shipment.create(shipmentData);
+
+        assertTrue(shipment instanceof Shipment);
+        assertTrue(shipment.getId().startsWith("shp_"));
+        assertTrue(shipment.getToAddress().getId().startsWith("adr_"));
+        assertTrue(shipment.getFromAddress().getId().startsWith("adr_"));
+        assertTrue(shipment.getParcel().getId().startsWith("prcl_"));
+        assertEquals("388 Townsend St", shipment.getFromAddress().getStreet1());
     }
 }
