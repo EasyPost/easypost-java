@@ -1,5 +1,7 @@
 package com.easypost;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -65,15 +67,58 @@ public class ReportTest {
     }
 
     /**
+     * Test creating a report with additional columns.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateReportWithAdditionalColumns() throws EasyPostException {
+        Map<String, Object> reportWithAdditionalColumnsParam = new HashMap<>();
+
+        List<String> additionalColumns = new ArrayList<>(Arrays.asList("from_name", "from_company"));
+
+        reportWithAdditionalColumnsParam.put("start_date", Fixture.reportStartDate());
+        reportWithAdditionalColumnsParam.put("end_date", Fixture.reportEndDate());
+        reportWithAdditionalColumnsParam.put("type", "shipment");
+        reportWithAdditionalColumnsParam.put("additional_columns", additionalColumns);
+
+        Report reportWithAdditionalColumns = Report.create(reportWithAdditionalColumnsParam);
+
+        // Reports are queued, so we can't wait for completion. Verifying columns would require parsing CSV.
+        assertTrue(reportWithAdditionalColumns instanceof Report);
+    }
+
+    /**
+     * Test creating a report with columns.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateReportWithColumns() throws EasyPostException {
+        Map<String, Object> reportWithAdditionalColumnsParam = new HashMap<>();
+
+        List<String> columns = new ArrayList<>(Arrays.asList("usps_zone"));
+
+        reportWithAdditionalColumnsParam.put("start_date", Fixture.reportStartDate());
+        reportWithAdditionalColumnsParam.put("end_date", Fixture.reportEndDate());
+        reportWithAdditionalColumnsParam.put("type", "shipment");
+        reportWithAdditionalColumnsParam.put("columns", columns);
+
+        Report reportWithColumns = Report.create(reportWithAdditionalColumnsParam);
+
+        // Reports are queued, so we can't wait for completion. Verifying columns would require parsing CSV.
+        assertTrue(reportWithColumns instanceof Report);
+    }
+
+    /**
      * Test creating a Payment Log report.
      *
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testCreateAndRetrievePaymentLogReport() throws EasyPostException {
+    public void testCreatePaymentLogReport() throws EasyPostException {
         Report paymentLogReport = Report.create(paymentLogReportParams);
 
-        assertNotNull(paymentLogReport);
         assertTrue(paymentLogReport instanceof Report);
         assertTrue(paymentLogReport.getId().startsWith("plrep_"));
     }
@@ -87,7 +132,6 @@ public class ReportTest {
     public void testCreateRefundReport() throws EasyPostException {
         Report refundReport = Report.create(refundParams);
 
-        assertNotNull(refundReport);
         assertTrue(refundReport instanceof Report);
         assertTrue(refundReport.getId().startsWith("refrep_"));
     }
@@ -101,7 +145,6 @@ public class ReportTest {
     public void testCreateShipmentReport() throws EasyPostException {
         Report shipmentReport = Report.create(shipmentParams);
 
-        assertNotNull(shipmentReport);
         assertTrue(shipmentReport instanceof Report);
         assertTrue(shipmentReport.getId().startsWith("shprep_"));
     }
@@ -115,7 +158,6 @@ public class ReportTest {
     public void testCreateShipmentInvoiceReport() throws EasyPostException {
         Report shipmentInvoiceReport = Report.create(shipmentInvoiceParams);
 
-        assertNotNull(shipmentInvoiceReport);
         assertTrue(shipmentInvoiceReport instanceof Report);
         assertTrue(shipmentInvoiceReport.getId().startsWith("shpinvrep_"));
     }
@@ -129,7 +171,6 @@ public class ReportTest {
     public void testCreateTrackerReport() throws EasyPostException {
         Report trackerReport = Report.create(trackerParams);
 
-        assertNotNull(trackerReport);
         assertTrue(trackerReport instanceof Report);
         assertTrue(trackerReport.getId().startsWith("trkrep_"));
     }

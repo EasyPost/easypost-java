@@ -8,6 +8,8 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 public final class Report extends EasyPostResource {
     private String id;
@@ -39,13 +41,33 @@ public final class Report extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Report create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        String type = (String) params.get("type");
+        String url = reportURL(type) + "?";
+
+        if (params.containsKey("columns")) {
+            List<String> columns = (ArrayList<String>) params.get("columns");
+            for (int i = 0; i < columns.size(); i++) {
+                url += "columns[]=" + columns.get(i) + "&";
+            }
+            // Delete the columns from the param since it's added to the url query.
+            params.remove("columns");
+        }
+
+        if (params.containsKey("additional_columns")) {
+            List<String> additionalColumns = (ArrayList<String>) params.get("additional_columns");
+            for (int i = 0; i < additionalColumns.size(); i++) {
+                url += "additional_columns[]=" + additionalColumns.get(i) + "&";
+            }
+            // Delete the additional columns from the param since it's added to the url query.
+            params.remove("additional_columns");
+        }
+
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("report", params);
         wrappedParams.put("start_date", params.get("start_date"));
         wrappedParams.put("end_date", params.get("end_date"));
 
-        String type = (String) params.get("type");
-        return request(RequestMethod.POST, reportURL(type), wrappedParams, Report.class, apiKey);
+        return request(RequestMethod.POST, url, wrappedParams, Report.class, apiKey);
     }
 
     /**
