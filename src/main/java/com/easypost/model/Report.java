@@ -8,7 +8,6 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ArrayList;
 
 public final class Report extends EasyPostResource {
     private String id;
@@ -40,22 +39,14 @@ public final class Report extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Report create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        String type = (String) params.get("type");
-
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("report", params);
-        wrappedParams.put("start_date", params.get("start_date"));
-        wrappedParams.put("end_date", params.get("end_date"));
-
-        if (params.containsKey("columns")) {
-            wrappedParams.put("columns", params.get("columns"));
+        if (params.containsKey("type")) {
+            HashMap<String, Object> paramsWithoutType = new HashMap<>(params);
+            paramsWithoutType.remove("type");
+            return request(RequestMethod.POST, reportURL((String) params.get("type")),
+                    paramsWithoutType, Report.class, apiKey);
+        } else {
+            throw new EasyPostException("Report type is required.");
         }
-
-        if (params.containsKey("additional_columns")) {
-            wrappedParams.put("additional_columns", params.get("additional_columns"));
-        }
-
-        return request(RequestMethod.POST, reportURL(type), wrappedParams, Report.class, apiKey);
     }
 
     /**
