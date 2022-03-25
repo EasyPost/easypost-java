@@ -12,7 +12,7 @@ jobs:
       matrix:
         javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Java ${{ matrix.javaversion }}
         uses: actions/setup-java@v1
         with:
@@ -22,7 +22,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run CheckStyle checks
         uses: nikitasavinov/checkstyle-action@0.4.0
         with:
