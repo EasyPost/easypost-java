@@ -12,19 +12,20 @@ jobs:
       matrix:
         javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Java ${{ matrix.javaversion }}
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
+          distribution: "zulu"
           java-version: ${{ matrix.javaversion }}
       - name: Build and test with Maven
         run: EASYPOST_TEST_API_KEY=${{ secrets.EASYPOST_TEST_API_KEY }} EASYPOST_PROD_API_KEY=${{ secrets.EASYPOST_PROD_API_KEY }} mvn --batch-mode install -Dgpg.skip=true -DskipTests=true -Dcheckstyle.skip=true
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run CheckStyle checks
-        uses: nikitasavinov/checkstyle-action@0.4.0
+        uses: nikitasavinov/checkstyle-action@0.5.0
         with:
           level: error
           fail_on_error: true
