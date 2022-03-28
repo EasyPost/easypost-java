@@ -211,6 +211,7 @@ public class ShipmentTest {
         shipmentData.put("options", null);
         shipmentData.put("tax_identifiers", null);
         shipmentData.put("reference", "");
+        shipmentData.put("customs_info", null);
 
         Shipment shipment = Shipment.create(shipmentData);
 
@@ -218,6 +219,7 @@ public class ShipmentTest {
         assertTrue(shipment.getId().startsWith("shp_"));
         assertNull(shipment.getReference());
         assertNull(shipment.getCustomsInfo());
+        assertNull(shipment.getTaxIdentifiers());
         assertNotNull(shipment.getOptions()); // The EasyPost API populates some default values here
     }
 
