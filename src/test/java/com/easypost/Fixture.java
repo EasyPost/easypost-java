@@ -106,9 +106,9 @@ final class Fixture {
 
         verificationList.add("delivery");
         address.put("verify", verificationList);
-        address.put("street1", "417 Montgomery Street");
-        address.put("street2", "5th Floor");
-        address.put("city", "SF");
+        address.put("street1", "417 montgomery street");
+        address.put("street2", "FL 5");
+        address.put("city", "San Francisco");
         address.put("state", "CA");
         address.put("zip", "94104");
         address.put("country", "US");

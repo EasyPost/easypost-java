@@ -3,6 +3,7 @@
 ## Next release
 * Add support for `columns` and `additional_columns` on Report creation
 * Add `declaraction` attribute in CustomsInfo class
+* Remove the dead `message` conditional check in `Address.createAndVerify()`
 
 ## v5.2.0 (2022-02-25)
 

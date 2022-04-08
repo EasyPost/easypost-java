@@ -109,7 +109,7 @@ public class AddressTest {
 
         assertTrue(address instanceof Address);
         assertTrue(address.getId().startsWith("adr_"));
-        assertEquals("417 MONTGOMERY ST STE 500", address.getStreet1());
+        assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
     }
 
     /**
@@ -124,7 +124,7 @@ public class AddressTest {
 
         assertTrue(address instanceof Address);
         assertTrue(address.getId().startsWith("adr_"));
-        assertEquals("417 MONTGOMERY ST STE 500", address.getStreet1());
+        assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
     }
 
     /**

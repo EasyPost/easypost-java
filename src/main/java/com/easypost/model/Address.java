@@ -146,13 +146,9 @@ public final class Address extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("address", params);
 
-        AddressVerifyResponse response;
-        response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
-                wrappedParams, AddressVerifyResponse.class, apiKey);
+        AddressVerifyResponse response = request(RequestMethod.POST, String.format("%s/create_and_verify",
+                        classURL(Address.class)), wrappedParams, AddressVerifyResponse.class, apiKey);
 
-        if (response.getMessage() != null) {
-            response.getAddress().setMessage(response.getMessage());
-        }
         return response.getAddress();
     }
 
