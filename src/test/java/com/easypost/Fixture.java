@@ -16,7 +16,8 @@ final class Fixture {
      * @return Number of page size.
      */
     public static int pageSize() {
-        return 5;
+        Integer pageSize = 5;
+        return pageSize;
     }
 
     /**
@@ -296,7 +297,7 @@ final class Fixture {
     }
 
     /**
-     * A basic carrier account data structure
+     * A basic carrier account data structure.
      *
      * @return a map with the carrier account data filled in.
      */
@@ -318,7 +319,7 @@ final class Fixture {
      * A basic insurance data structure
      * This fixture will require you to add a `tracking_code` key with the tracking
      * code of a shipment.
-     * 
+     *
      * @return a map with the insurance data filled in.
      */
     public static Map<String, Object> basicInsurance() {
