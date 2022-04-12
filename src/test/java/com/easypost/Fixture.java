@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 final class Fixture {
-    static final int PAGE_SIZE_NUMBER = 5;
+    public static final int PAGE_SIZE = 5;
 
     private Fixture() {
-    // Prevent instantiation
+        // Prevent instantiation
     }
 
     /**
@@ -18,25 +18,18 @@ final class Fixture {
      * @return Number of page size.
      */
     public static int pageSize() {
-        return PAGE_SIZE_NUMBER;
+        return PAGE_SIZE;
     }
 
     /**
-     * USPS Carrier Account ID for Java Test User.
+     * USPS Carrier Account ID.
      *
      * @return USPS Carrier Account ID.
      */
     public static String uspsCarrierAccountID() {
-        return "ca_f09befdb2e9c410e95c7622ea912c18c";
-    }
-
-    /**
-     * Child User ID for Java Test User.
-     *
-     * @return Child User ID.
-     */
-    public static String childUserID() {
-        return "user_feab33e9b65e4ba3b41cc1f1f2b27bea";
+        // Fallback to the EasyPost Java Client Library Test User USPS carrier account
+        return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID")
+                : "ca_f09befdb2e9c410e95c7622ea912c18c";
     }
 
     /**
@@ -58,27 +51,45 @@ final class Fixture {
     }
 
     /**
+     * The pickup service to use.
+     *
+     * @return USPS `NextDay` service.
+     */
+    public static String pickupService() {
+        return "NextDay";
+    }
+
+    /**
+     * Report type.
+     *
+     * @return report type.
+     */
+    public static String reportType() {
+        return "shipment";
+    }
+
+    /**
      * Report start date for ReportTest.
      *
      * @return start date for report.
      */
-    public static String reportStartDate() {
-        return "2022-02-16";
+    public static String reportDate() {
+        return "2022-04-12";
     }
 
     /**
-     * Report end date for ReportTest.
+     * Webhook URL.
      *
-     * @return end date for report.
+     * @return webhook URL.
      */
-    public static String reportEndDate() {
-        return "2022-02-18";
+    public static String webhookUrl() {
+        return "http://example.com";
     }
 
     /**
      * Basic address that is reusable in all test coverage.
      *
-     * @return A map that have the address info filled.
+     * @return A map that has the address info filled.
      */
     public static Map<String, Object> basicAddress() {
         Map<String, Object> address = new HashMap<>();
@@ -98,7 +109,7 @@ final class Fixture {
     /**
      * Address that is incorrect and had addtional key to verify the address.
      *
-     * @return A map that have the address info filled and verify key and value.
+     * @return A map that has the address info filled and verify key and value.
      */
     public static Map<String, Object> incorrectAddressToVerify() {
         Map<String, Object> address = new HashMap<>();
@@ -121,7 +132,7 @@ final class Fixture {
     /**
      * Pickup address that is reusable in all test coverage.
      *
-     * @return A map that have the pickup address info filled.
+     * @return A map that has the pickup address info filled.
      */
     public static Map<String, Object> pickupAddress() {
         Map<String, Object> pickupAddress = new HashMap<>();
@@ -140,7 +151,7 @@ final class Fixture {
     /**
      * Basic parcel that is reusable in all test coverage.
      *
-     * @return A map that have the parcel info filled.
+     * @return A map that has the parcel info filled.
      */
     public static Map<String, Object> basicParcel() {
         Map<String, Object> basicParcel = new HashMap<>();
@@ -156,7 +167,7 @@ final class Fixture {
     /**
      * Basic customs item that is reusable in all test coverage.
      *
-     * @return A map that have the customs item info filled.
+     * @return A map that has the customs item info filled.
      */
     public static Map<String, Object> basicCustomsItem() {
         Map<String, Object> customsItem = new HashMap<>();
@@ -174,7 +185,7 @@ final class Fixture {
     /**
      * Basic customs Info that is reusable in all test coverage.
      *
-     * @return A map that have the customs Info info filled.
+     * @return A map that has the customs Info info filled.
      */
     public static Map<String, Object> basicCustomsInfo() {
         Map<String, Object> customsInfo = new HashMap<>();
@@ -194,7 +205,7 @@ final class Fixture {
     /**
      * Basic tax identifier that is reusable in all test coverage.
      *
-     * @return A map that have the tax identifier info filled.
+     * @return A map that has the tax identifier info filled.
      */
     public static Map<String, Object> taxIdentifier() {
         Map<String, Object> taxIdentifier = new HashMap<>();
@@ -210,7 +221,7 @@ final class Fixture {
     /**
      * Basic shipment that is reusable in all test coverage.
      *
-     * @return A map that have the shipment info filled.
+     * @return A map that has the shipment info filled.
      */
     public static Map<String, Object> basicShipment() {
         Map<String, Object> basicShipment = new HashMap<>();
@@ -225,7 +236,7 @@ final class Fixture {
     /**
      * Shipment that has all detail and is reusable in all test coverage.
      *
-     * @return A map that have the shipment info filled in detail.
+     * @return A map that has the shipment info filled in detail.
      */
     public static Map<String, Object> fullShipment() {
         Map<String, Object> fullShipment = new HashMap<>();
@@ -246,7 +257,7 @@ final class Fixture {
     /**
      * Shipment with one call buy that is reusable in all test coverage.
      *
-     * @return A map that have the shipment info filled for one call buy.
+     * @return A map that has the shipment info filled for one call buy.
      */
     public static Map<String, Object> oneCallBuyShipment() {
         Map<String, Object> oneCallBuyShipment = new HashMap<>();
@@ -264,18 +275,75 @@ final class Fixture {
     }
 
     /**
-     * Basic pickup that is reusable in all test coverage.
+     * This fixture will require you to add a `shipment` key with a Shipment object
+     * from a test.
+     * If you need to re-record cassettes, increment the date below and ensure it is
+     * one day in the future,
+     * USPS only does "next-day" pickups including Saturday but not Sunday or
+     * Holidays.
      *
-     * @return A map that have the pickup info filled.
+     * @return A map that has the pickup.
      */
     public static Map<String, Object> basicPickup() {
         Map<String, Object> basicPickup = new HashMap<>();
 
+        String pickupDate = "2022-04-13";
+
         basicPickup.put("address", basicAddress());
-        basicPickup.put("min_datetime", "2022-02-23");
-        basicPickup.put("max_datetime", "2022-02-24");
+        basicPickup.put("min_datetime", pickupDate);
+        basicPickup.put("max_datetime", pickupDate);
         basicPickup.put("instructions", "Pickup at front door");
 
         return basicPickup;
+    }
+
+    /**
+     * A basic carrier account data structure.
+     *
+     * @return a map with the carrier account data filled in.
+     */
+    public static Map<String, Object> basicCarrierAccount() {
+        Map<String, Object> carrierAccount = new HashMap<>();
+        Map<String, Object> credentials = new HashMap<>();
+
+        credentials.put("account_number", "A1A1A1");
+        credentials.put("user_id", "USERID");
+        credentials.put("password", "PASSWORD");
+        credentials.put("access_license_number", "ALN");
+        carrierAccount.put("type", "UpsAccount");
+        carrierAccount.put("credentials", credentials);
+
+        return carrierAccount;
+    }
+
+    /**
+     * A basic insurance data structure
+     * This fixture will require you to add a `tracking_code` key with the tracking
+     * code of a shipment.
+     *
+     * @return a map with the insurance data filled in.
+     */
+    public static Map<String, Object> basicInsurance() {
+        Map<String, Object> insurance = new HashMap<>();
+
+        insurance.put("to_address", Fixture.basicAddress());
+        insurance.put("from_address", Fixture.basicAddress());
+        insurance.put("carrier", Fixture.usps());
+        insurance.put("amount", "100");
+
+        return insurance;
+    }
+
+    public static Map<String, Object> basicOrder() {
+        Map<String, Object> order = new HashMap<>();
+        List<Object> shipments = new ArrayList<>();
+
+        shipments.add(Fixture.basicShipment());
+
+        order.put("to_address", Fixture.basicAddress());
+        order.put("from_address", Fixture.basicAddress());
+        order.put("shipments", shipments);
+
+        return order;
     }
 }

@@ -69,7 +69,7 @@ public class TrackerTest {
 
         params.put("page_size", Fixture.pageSize());
 
-        TrackerCollection trackers = globalTracker.all(params);
+        TrackerCollection trackers = Tracker.all(params);
 
         List<Tracker> trackersList = trackers.getTrackers();
 
@@ -86,9 +86,9 @@ public class TrackerTest {
     @Test
     public void testCreateList() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
-        String[] trackingCodes = new String[]{"EZ1000000001", "EZ1000000002", "EZ1000000003"};
+        String[] trackingCodes = new String[] { "EZ1000000001", "EZ1000000002", "EZ1000000003" };
 
-        for (int i =0; i < trackingCodes.length; i++) {
+        for (int i = 0; i < trackingCodes.length; i++) {
             Map<String, Object> tracker = new HashMap<>();
 
             tracker.put("tracking_code", trackingCodes[i]);

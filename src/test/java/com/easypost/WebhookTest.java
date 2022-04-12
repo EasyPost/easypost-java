@@ -10,7 +10,6 @@ import com.easypost.model.WebhookCollection;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer;
@@ -43,18 +42,20 @@ public class WebhookTest {
      */
     @Test
     @Order(1)
-    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI test.
+    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI
+              // test.
     public void testCreate() throws EasyPostException {
         Map<String, Object> p = new HashMap<>();
-        p.put("url", "http://examples.com");
+        p.put("url", Fixture.webhookUrl());
 
         Webhook webhook = Webhook.create(p);
 
         assertTrue(webhook instanceof Webhook);
         assertTrue(webhook.getId().startsWith("hook_"));
-        assertEquals("http://examples.com", webhook.getUrl());
+        assertEquals(Fixture.webhookUrl(), webhook.getUrl());
 
-        webhook.delete(); // we are deleting the webhook here so we don't keep sending events to a dead webhook.
+        webhook.delete(); // we are deleting the webhook here so we don't keep sending events to a dead
+                          // webhook.
     }
 
     /**
@@ -64,7 +65,8 @@ public class WebhookTest {
      */
     @Test
     @Order(2)
-    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI test.
+    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI
+              // test.
     public void testRetrieve() throws EasyPostException {
         Webhook retrievedWebhook = Webhook.retrieve(globalWebhook.getId());
 
@@ -79,7 +81,8 @@ public class WebhookTest {
      */
     @Test
     @Order(3)
-    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI test.
+    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI
+              // test.
     public void testAll() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
 
@@ -111,9 +114,11 @@ public class WebhookTest {
      */
     @Test
     @Order(4)
-    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI test.
+    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI
+              // test.
     public void testDelete() throws EasyPostException {
-        // This endpoint/method does not return anything, just make sure the request doesn't fail.
+        // This endpoint/method does not return anything, just make sure the request
+        // doesn't fail.
         globalWebhook.delete();
     }
 }

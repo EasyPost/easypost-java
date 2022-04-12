@@ -15,26 +15,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class InsuranceTest {
     private static Insurance globalInsurance;
-    private static Map<String, Object> params = new HashMap<>();
+    private static Map<String, Object> insuranceData = Fixture.basicInsurance();
 
-    /** 
+    /**
      * Setup the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
-     */    
+     */
     @BeforeAll
     public static void setup() throws EasyPostException {
         EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
 
         Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
 
-        params.put("to_address", Fixture.basicAddress());
-        params.put("from_address", Fixture.basicAddress());
-        params.put("tracking_code", shipment.getTrackingCode());
-        params.put("carrier", Fixture.usps());
-        params.put("amount", "100");
+        insuranceData.put("tracking_code", shipment.getTrackingCode());
 
-        globalInsurance = Insurance.create(params);
+        globalInsurance = Insurance.create(insuranceData);
     }
 
     /**
@@ -44,7 +40,11 @@ public class InsuranceTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        Insurance insurance = Insurance.create(params);
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+
+        insuranceData.put("tracking_code", shipment.getTrackingCode());
+
+        Insurance insurance = Insurance.create(insuranceData);
 
         assertTrue(insurance instanceof Insurance);
         assertTrue(insurance.getId().startsWith("ins_"));
