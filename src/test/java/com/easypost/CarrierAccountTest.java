@@ -19,7 +19,6 @@ import static org.assertj.core.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CarrierAccountTest {
     private static CarrierAccount globalCarrierAccount;
-    private static Map<String, Object> params = new HashMap<>();
 
     /**
      * Setup the testing environment for this file.
@@ -30,16 +29,7 @@ public class CarrierAccountTest {
     public static void setup() throws EasyPostException {
         EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");
 
-        Map<String, Object> credentials = new HashMap<>();
-
-        credentials.put("account_number", "A1A1A1");
-        credentials.put("user_id", "USERID");
-        credentials.put("password", "PASSWORD");
-        credentials.put("access_license_number", "ALN");
-        params.put("type", "UpsAccount");
-        params.put("credentials", credentials);
-
-        globalCarrierAccount = CarrierAccount.create(params);
+        globalCarrierAccount = CarrierAccount.create(Fixture.basicCarrierAccount());
     }
 
     /**
@@ -50,7 +40,7 @@ public class CarrierAccountTest {
     @Test
     @Order(1)
     public void testCreate() throws EasyPostException {
-        CarrierAccount carrierAccount = CarrierAccount.create(params);
+        CarrierAccount carrierAccount = CarrierAccount.create(Fixture.basicCarrierAccount());
 
         assertTrue(carrierAccount instanceof CarrierAccount);
         assertTrue(carrierAccount.getId().startsWith("ca_"));
@@ -99,8 +89,6 @@ public class CarrierAccountTest {
 
         updateParams.put("description", testDescription);
 
-        globalCarrierAccount = CarrierAccount.create(params);
-
         CarrierAccount updatedCarrierAccount = globalCarrierAccount.update(updateParams);
 
         assertTrue(updatedCarrierAccount instanceof CarrierAccount);
@@ -127,7 +115,7 @@ public class CarrierAccountTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testTypes() throws EasyPostException{
+    public void testTypes() throws EasyPostException {
         List<CarrierType> types = CarrierType.all();
 
         assertTrue(types instanceof List);

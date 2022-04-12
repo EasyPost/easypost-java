@@ -1,6 +1,5 @@
 package com.easypost;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OrderTest {
-    private static Map<String, Object> params = new HashMap<>();
     private static Order globalOrder;
 
     /**
@@ -24,18 +22,10 @@ public class OrderTest {
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() throws EasyPostException{
+    public static void setup() throws EasyPostException {
         EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
 
-        List<Shipment> shipments = new ArrayList<>();
-
-        shipments.add(Shipment.create(Fixture.basicShipment()));
-
-        params.put("to_address", Fixture.basicAddress());
-        params.put("from_address", Fixture.basicAddress());
-        params.put("shipments", shipments);
-
-        globalOrder = Order.create(params);
+        globalOrder = Order.create(Fixture.basicOrder());
     }
 
     /**
@@ -45,7 +35,7 @@ public class OrderTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        Order order = Order.create(params);
+        Order order = Order.create(Fixture.basicOrder());
 
         assertTrue(order instanceof Order);
         assertTrue(order.getId().startsWith("order_"));
@@ -75,7 +65,7 @@ public class OrderTest {
         List<Rate> rates = globalOrder.getRates();
 
         assertNotNull(rates);
-        for(Rate rate: rates) {
+        for (Rate rate : rates) {
             assertTrue(rate instanceof Rate);
             assertTrue(rate.getId().startsWith("rate_"));
         }
@@ -98,7 +88,7 @@ public class OrderTest {
         List<Shipment> shipments = globalOrder.getShipments();
 
         assertTrue(globalOrder instanceof Order);
-        for(Shipment shipment: shipments) {
+        for (Shipment shipment : shipments) {
             assertNotNull(shipment.getPostageLabel());
         }
     }

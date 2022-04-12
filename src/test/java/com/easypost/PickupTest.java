@@ -23,12 +23,11 @@ public class PickupTest {
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() throws EasyPostException{
+    public static void setup() throws EasyPostException {
         EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
 
         Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
 
-        pickupData = Fixture.basicPickup();
         pickupData.put("shipment", shipment);
 
         globalPickup = Pickup.create(pickupData);
@@ -73,7 +72,7 @@ public class PickupTest {
         Map<String, Object> params = new HashMap<>();
 
         params.put("carrier", Fixture.usps());
-        params.put("service", "NextDay");
+        params.put("service", Fixture.pickupService());
 
         Pickup boughtPickup = globalPickup.buy(params);
 

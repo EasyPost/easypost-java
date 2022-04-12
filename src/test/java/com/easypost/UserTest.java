@@ -21,7 +21,7 @@ public class UserTest {
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setUp() throws EasyPostException{
+    public static void setUp() throws EasyPostException {
         EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");
         globalUser = User.retrieveMe();
     }
@@ -32,7 +32,8 @@ public class UserTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // This endpoint returns the child user keys in plain text, do not run this test.
+    @Disabled // This endpoint returns the child user keys in plain text, do not run this
+              // test.
     public void testCreate() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
 
@@ -51,7 +52,9 @@ public class UserTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        User user = User.retrieve(Fixture.childUserID());
+        User authenticatedUser = User.retrieveMe();
+
+        User user = User.retrieve(authenticatedUser.getChildren().get(0).getId());
 
         assertTrue(user instanceof User);
         assertTrue(user.getId().startsWith("user_"));
@@ -81,7 +84,7 @@ public class UserTest {
         Map<String, Object> params = new HashMap<>();
 
         params.put("phone", testPhone);
-        
+
         globalUser.update(params);
 
         assertTrue(globalUser instanceof User);
@@ -95,7 +98,8 @@ public class UserTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // Due to our inability to create child users securely, we must also skip deleting them as we cannot replace the deleted ones easily.
+    @Disabled // Due to our inability to create child users securely, we must also skip
+              // deleting them as we cannot replace the deleted ones easily.
     public void testDelete() throws EasyPostException {
         globalUser.delete();
     }
