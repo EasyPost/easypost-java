@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 final class Fixture {
+    public static final int PAGE_SIZE = 5;
+
     private Fixture() {
         // Prevent instantiation
     }
@@ -16,8 +18,7 @@ final class Fixture {
      * @return Number of page size.
      */
     public static int pageSize() {
-        Integer pageSize = 5;
-        return pageSize;
+        return PAGE_SIZE;
     }
 
     /**
