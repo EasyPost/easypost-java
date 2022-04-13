@@ -51,9 +51,9 @@ public class AddressTest {
     @Test
     public void testCreateVerifyStrict() throws EasyPostException {
         Map<String, Object> addressData = Fixture.basicAddress();
-        List<String> verificationList = new ArrayList<>();
+        List<Boolean> verificationList = new ArrayList<>();
         
-        verificationList.add("true");
+        verificationList.add(true);
         addressData.put("verify_strict", verificationList);
 
         Address address = Address.create(addressData);
@@ -105,7 +105,13 @@ public class AddressTest {
      */
     @Test
     public void testCreateVerify() throws EasyPostException {
-        Address address = Address.create(Fixture.incorrectAddressToVerify());
+        List<Boolean> verificationList = new ArrayList<>();
+        verificationList.add(true);
+
+        Map<String, Object> addressData = Fixture.incorrectAddressToVerify();
+        addressData.put("verify", verificationList);
+
+        Address address = Address.create(addressData);
 
         assertTrue(address instanceof Address);
         assertTrue(address.getId().startsWith("adr_"));

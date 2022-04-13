@@ -46,7 +46,19 @@ public final class Address extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Address create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, classURL(Address.class), params, Address.class, apiKey);
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+
+        if (params.containsKey("verify")) {
+            wrappedParams.put("verify", params.remove("verify"));
+        }
+
+        if (params.containsKey("verify_strict")) {
+            wrappedParams.put("verify_strict", params.remove("verify_strict"));
+        }
+
+        wrappedParams.put("address", params);
+
+        return request(RequestMethod.POST, classURL(Address.class), wrappedParams, Address.class, apiKey);
     }
 
     /**
