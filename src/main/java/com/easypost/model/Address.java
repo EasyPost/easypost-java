@@ -4,7 +4,6 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public final class Address extends EasyPostResource {
@@ -47,32 +46,7 @@ public final class Address extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Address create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        String url = classURL(Address.class);
-
-        List<String> verifyList = (List<String>) params.remove("verify");
-        List<String> verifyStrictList = (List<String>) params.remove("verify_strict");
-
-        if ((verifyList != null && verifyList.size() >= 1) ||
-                (verifyStrictList != null && verifyStrictList.size() >= 1)) {
-            url += "?";
-
-            if (verifyList != null && verifyList.size() >= 1) {
-                for (String verification : verifyList) {
-                    url += "verify[]=" + verification + "&";
-                }
-            }
-
-            if (verifyStrictList != null && verifyStrictList.size() >= 1) {
-                for (String strictVerification : verifyStrictList) {
-                    url += "verify_strict[]=" + strictVerification + "&";
-                }
-            }
-        }
-
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("address", params);
-
-        return request(RequestMethod.POST, url, wrappedParams, Address.class, apiKey);
+        return request(RequestMethod.POST, classURL(Address.class), params, Address.class, apiKey);
     }
 
     /**
