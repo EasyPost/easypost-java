@@ -2,6 +2,7 @@ package com.easypost.model;
 
 public final class ShipmentMessage {
     private String carrier;
+    private String carrierAccountId;
     private String type;
     private Object message;
 
@@ -21,6 +22,25 @@ public final class ShipmentMessage {
      */
     public void setCarrier(final String carrier) {
         this.carrier = carrier;
+    }
+
+    /**
+     * Get the carrier account id associated with this message.
+     *
+     * @return the carrier account id associated with this message.
+     */
+    public String getCarrierAccountId() {
+        return carrierAccountId;
+    }
+
+    /**
+     * Set the carrier account id associated with this message.
+     *
+     * @param carrierAccountId the carrier account id associated with this message.
+     */
+
+    public void setCarrierAccountId(final String carrierAccountId) {
+        this.carrierAccountId = carrierAccountId;
     }
 
     /**
