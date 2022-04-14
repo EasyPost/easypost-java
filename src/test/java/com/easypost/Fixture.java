@@ -113,10 +113,7 @@ final class Fixture {
      */
     public static Map<String, Object> incorrectAddressToVerify() {
         Map<String, Object> address = new HashMap<>();
-        List<String> verificationList = new ArrayList<>();
 
-        verificationList.add("delivery");
-        address.put("verify", verificationList);
         address.put("street1", "417 montgomery street");
         address.put("street2", "FL 5");
         address.put("city", "San Francisco");
