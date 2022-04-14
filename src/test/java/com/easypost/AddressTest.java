@@ -116,6 +116,7 @@ public class AddressTest {
         assertTrue(address instanceof Address);
         assertTrue(address.getId().startsWith("adr_"));
         assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
+        assertEquals("Invalid secondary information(Apt/Suite#)", address.getVerifications().getZip4().getErrors().get(0).getMessage());
     }
 
     /**
