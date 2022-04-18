@@ -24,7 +24,7 @@ public final class Address extends EasyPostResource {
     private String carrierFacility;
     private String federalTaxId;
     private Boolean residential;
-    private Map<String, AddressVerification> verifications;
+    private AddressVerifications verifications;
 
     /**
      * Create Address object from parameter map.
@@ -471,7 +471,7 @@ public final class Address extends EasyPostResource {
      *
      * @return address verifications
      */
-    public Map<String, AddressVerification> getVerifications() {
+    public AddressVerifications getVerifications() {
         return verifications;
     }
 
@@ -480,7 +480,7 @@ public final class Address extends EasyPostResource {
      *
      * @param verifications address verifications
      */
-    public void setVerifications(final Map<String, AddressVerification> verifications) {
+    public void setVerifications(final AddressVerifications verifications) {
         this.verifications = verifications;
     }
 
