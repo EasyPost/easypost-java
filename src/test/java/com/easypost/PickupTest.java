@@ -1,10 +1,14 @@
 package com.easypost;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Pickup;
+import com.easypost.model.PickupRate;
 import com.easypost.model.Shipment;
 
 import org.junit.jupiter.api.Test;
@@ -96,5 +100,38 @@ public class PickupTest {
         assertTrue(cancelledPickup instanceof Pickup);
         assertTrue(cancelledPickup.getId().startsWith("pickup_"));
         assertEquals("canceled", cancelledPickup.getStatus());
+    }
+
+    /**
+     * Test getting lowest rate of a pickup.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testLowestRate() throws EasyPostException {
+        Map<String, Object> pickupData = Fixture.basicPickup();
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+
+        pickupData.put("shipment", shipment);
+
+        Pickup pickup = Pickup.create(pickupData);
+
+        // Test lowest rate with no filters
+        PickupRate lowestRate = pickup.lowestRate();
+        assertEquals("NextDay", lowestRate.getService());
+        assertEquals(0.00, lowestRate.getRate(), 0.01);
+        assertEquals("USPS", lowestRate.getCarrier());
+
+        // Test lowest rate with service filter (should error due to bad service)
+        List<String> service = new ArrayList<>(Arrays.asList("BAD SERVICE"));
+        assertThrows(EasyPostException.class, () -> {
+            pickup.lowestRate(null, service);
+        });
+
+        // Test lowest rate with carrier filter (should error due to bad carrier)
+        List<String> carrier = new ArrayList<>(Arrays.asList("BAD CARRIER"));
+        assertThrows(EasyPostException.class, () -> {
+            pickup.lowestRate(carrier);
+        });
     }
 }

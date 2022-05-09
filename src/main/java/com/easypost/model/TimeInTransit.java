@@ -1,5 +1,6 @@
 package com.easypost.model;
 
+import com.easypost.exception.EasyPostException;
 import com.google.gson.annotations.SerializedName;
 
 public final class TimeInTransit {
@@ -143,5 +144,33 @@ public final class TimeInTransit {
      */
     public void setPercentile99(final Integer percentile99) {
         this.percentile99 = percentile99;
+    }
+
+    /**
+     * Get the delivery day of specific delivery accuracy of this TimeInTransit.
+     *
+     * @param percentile the percentile of this TimeInTransit
+     * @return the delivery day of specific percentile of this TimeInTransit
+     * @throws EasyPostException when the percentile does not exist.
+     */
+    public int getSmartRateAccuracy(final String percentile) throws EasyPostException {
+        switch (percentile) {
+            case "percentile_50":
+                return this.percentile50;
+            case "percentile_75":
+                return this.percentile75;
+            case "percentile_85":
+                return this.percentile85;
+            case "percentile_90":
+                return this.percentile90;
+            case "percentile_95":
+                return this.percentile95;
+            case "percentile_97":
+                return this.percentile97;
+            case "percentile_99":
+                return this.percentile99;
+            default:
+                throw new EasyPostException("Invalid percentile value");
+          }
     }
 }

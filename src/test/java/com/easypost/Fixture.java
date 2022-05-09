@@ -284,7 +284,7 @@ final class Fixture {
     public static Map<String, Object> basicPickup() {
         Map<String, Object> basicPickup = new HashMap<>();
 
-        String pickupDate = "2022-04-13";
+        String pickupDate = "2022-05-11";
 
         basicPickup.put("address", basicAddress());
         basicPickup.put("min_datetime", pickupDate);

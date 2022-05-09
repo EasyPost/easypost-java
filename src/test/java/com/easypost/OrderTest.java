@@ -1,8 +1,10 @@
 package com.easypost;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.Arrays;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Order;
@@ -91,5 +93,34 @@ public class OrderTest {
         for (Shipment shipment : shipments) {
             assertNotNull(shipment.getPostageLabel());
         }
+    }
+
+    /**
+     * Test getting lowest rate of an Order.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testLowestRate() throws EasyPostException {
+        Order order = Order.create(Fixture.basicOrder());
+
+        // Test lowest rate with no filters
+        Rate lowestRate = order.lowestRate();
+        assertEquals("First", lowestRate.getService());
+        assertEquals(5.49, lowestRate.getRate(), 0.01);
+        assertEquals("USPS", lowestRate.getCarrier());
+
+        // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
+        List<String> service = new ArrayList<>(Arrays.asList("Priority"));
+        Rate lowestRateService = order.lowestRate(null, service);
+        assertEquals("Priority", lowestRateService.getService());
+        assertEquals(7.37, lowestRateService.getRate(), 0.01);
+        assertEquals("USPS", lowestRateService.getCarrier());
+
+        // Test lowest rate with carrier filter (should error due to bad carrier)
+        List<String> carrier = new ArrayList<>(Arrays.asList("BAD CARRIER"));
+        assertThrows(EasyPostException.class, () -> {
+            order.lowestRate(carrier);
+        });
     }
 }

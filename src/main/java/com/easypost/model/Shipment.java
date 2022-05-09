@@ -3,7 +3,9 @@ package com.easypost.model;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -997,13 +999,73 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
+     * Get the lowest smartrate from a shipment object.
+     *
+     * @param deliveryDay Delivery days restriction to use when filtering.
+     * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
+     * @return Rate object
+     * @throws EasyPostException when the request fails.
+     */
+    public Rate lowestSmartRate(int deliveryDay, String deliveryAccuracy) throws EasyPostException {
+        List<Rate> smartrates = this.getSmartrates();
+
+        Rate lowestSmartrate = getLowestSmartRate(smartrates, deliveryDay, deliveryAccuracy);
+
+        return lowestSmartrate;
+    }
+
+    /**
+     * Get the lowest smartrate from a shipment object.
+     *
+     * @param smartrates Smartrates to filter from.
+     * @param deliveryDay Delivery days restriction to use when filtering.
+     * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
+     * @return Rate object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Rate getLowestSmartRate(final List<Rate> smartrates, int deliveryDay, String deliveryAccuracy)
+        throws EasyPostException {
+        Rate lowestSmartrate = null;
+
+        HashSet<String> validDeliveryAccuracies = new HashSet<String>(Arrays.asList(
+                "percentile_50",
+                "percentile_75",
+                "percentile_85",
+                "percentile_90",
+                "percentile_95",
+                "percentile_97",
+                "percentile_99"
+        ));
+
+        if (!validDeliveryAccuracies.contains(deliveryAccuracy.toLowerCase())) {
+            throw new EasyPostException("Invalid delivery_accuracy value, must be one of: " + validDeliveryAccuracies);
+        }
+
+        for (Rate rate : smartrates) {
+            int smartrateDeliveryDay = rate.getTimeInTransit().getSmartRateAccuracy(deliveryAccuracy);
+
+            if (smartrateDeliveryDay > deliveryDay) {
+                continue;
+            } else if (lowestSmartrate == null || rate.getRate() < lowestSmartrate.getRate()) {
+                lowestSmartrate = rate;
+            }
+        }
+
+        if (lowestSmartrate == null) {
+            throw new EasyPostException("No rates found.");
+        }
+
+        return lowestSmartrate;
+    }
+
+    /**
      * Get the lowest rate for this shipment.
      *
      * @return Rate object
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate() throws EasyPostException {
-        return this.lowestRate(null, null);
+        return Utilities.getLowestObjectRate(this.rates, null, null);
     }
 
     /**
@@ -1014,7 +1076,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate(final List<String> carriers) throws EasyPostException {
-        return this.lowestRate(carriers, null);
+        return Utilities.getLowestObjectRate(this.rates, carriers, null);
     }
 
     /**
@@ -1026,40 +1088,6 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate(final List<String> carriers, final List<String> services) throws EasyPostException {
-        Rate lowestRate = null;
-
-        if (carriers != null) {
-            for (int i = 0; i < carriers.size(); i++) {
-                carriers.set(i, carriers.get(i).toLowerCase());
-            }
-        }
-
-        if (services != null) {
-            for (int i = 0; i < services.size(); i++) {
-                services.set(i, services.get(i).toLowerCase());
-            }
-        }
-
-        for (int i = 0; i < this.rates.size(); i++) {
-            if (carriers != null && carriers.size() > 0 &&
-                    !carriers.contains(this.rates.get(i).getCarrier().toLowerCase()) &&
-                    !carriers.contains(this.rates.get(i).getServiceCode().toLowerCase())) {
-                continue;
-            }
-            if (services != null && services.size() > 0 &&
-                    !services.contains(this.rates.get(i).getService().toLowerCase())) {
-                continue;
-            }
-
-            if (lowestRate == null || lowestRate.getRate() > this.rates.get(i).getRate()) {
-                lowestRate = this.rates.get(i);
-            }
-        }
-
-        if (lowestRate == null) {
-            throw new EasyPostException("Unable to find lowest rate matching required criteria.");
-        }
-
-        return lowestRate;
+        return Utilities.getLowestObjectRate(this.rates, carriers, services);
     }
 }
