@@ -999,7 +999,7 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get the lowest smartrate from a shipment object.
+     * Get the lowest smart from a shipment object.
      *
      * @param deliveryDay Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
@@ -1027,15 +1027,8 @@ public final class Shipment extends EasyPostResource {
         throws EasyPostException {
         Rate lowestSmartrate = null;
 
-        HashSet<String> validDeliveryAccuracies = new HashSet<String>(Arrays.asList(
-                "percentile_50",
-                "percentile_75",
-                "percentile_85",
-                "percentile_90",
-                "percentile_95",
-                "percentile_97",
-                "percentile_99"
-        ));
+        HashSet<String> validDeliveryAccuracies = new HashSet<String>(Arrays.asList("percentile_50",
+            "percentile_75", "percentile_85", "percentile_90", "percentile_95", "percentile_97", "percentile_99"));
 
         if (!validDeliveryAccuracies.contains(deliveryAccuracy.toLowerCase())) {
             throw new EasyPostException("Invalid delivery_accuracy value, must be one of: " + validDeliveryAccuracies);

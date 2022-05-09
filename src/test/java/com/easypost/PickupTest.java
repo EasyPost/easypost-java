@@ -103,7 +103,7 @@ public class PickupTest {
     }
 
     /**
-     * Test getting lowest rate of a pickup.
+     * Test getting the lowest rate of a pickup.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -123,15 +123,15 @@ public class PickupTest {
         assertEquals("USPS", lowestRate.getCarrier());
 
         // Test lowest rate with service filter (should error due to bad service)
-        List<String> service = new ArrayList<>(Arrays.asList("BAD SERVICE"));
+        List<String> services = new ArrayList<>(Arrays.asList("BAD SERVICE"));
         assertThrows(EasyPostException.class, () -> {
-            pickup.lowestRate(null, service);
+            pickup.lowestRate(null, services);
         });
 
         // Test lowest rate with carrier filter (should error due to bad carrier)
-        List<String> carrier = new ArrayList<>(Arrays.asList("BAD CARRIER"));
+        List<String> carriers = new ArrayList<>(Arrays.asList("BAD CARRIER"));
         assertThrows(EasyPostException.class, () -> {
-            pickup.lowestRate(carrier);
+            pickup.lowestRate(carriers, null);
         });
     }
 }
