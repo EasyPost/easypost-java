@@ -128,6 +128,7 @@ public abstract class EasyPostResource {
         if (customURLStreamHandlerClassName != null) {
             // instantiate the custom handler provided
             try {
+                @SuppressWarnings("unchecked")
                 Class<URLStreamHandler> clazz =
                         (Class<URLStreamHandler>) Class.forName(customURLStreamHandlerClassName);
                 Constructor<URLStreamHandler> constructor = clazz.getConstructor();
@@ -273,6 +274,7 @@ public abstract class EasyPostResource {
     }
 
     private static String getResponseBody(final InputStream responseStream) throws IOException {
+        @SuppressWarnings("resource")
         String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next();
         responseStream.close();
         return rBody;
@@ -759,18 +761,19 @@ public abstract class EasyPostResource {
         PUT
     }
 
+    @SuppressWarnings("unused")
     private static class ErrorContainer {
         private EasyPostResource.Error error;
     }
 
     private static class Error {
-        @SuppressWarnings ("unused")
         private String type;
         private String message;
         private String code;
         private String param;
         private String error;
 
+        @SuppressWarnings("unused")
         public String getType() {
             return type;
         }
@@ -779,6 +782,7 @@ public abstract class EasyPostResource {
             return message;
         }
 
+        @SuppressWarnings("unused")
         public String getCode() {
             return code;
         }

@@ -67,7 +67,7 @@ public class Readme {
 
 
             try {
-                Address verified = toAddress.verify();
+                toAddress.verify();
             } catch (EasyPostException e) {
                 System.out.println(e.getMessage());
             }

@@ -99,7 +99,7 @@ Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_G
 
 ```bash
 # Build project
-mvn clean install -DskipTests
+mvn clean install -DskipTests -Dgpg.skip
 
 # Run tests
 EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... mvn clean test -B

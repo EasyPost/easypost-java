@@ -74,7 +74,6 @@ public class PickupTest {
     @Test
     @Disabled // This test is ignored for now because it relies on the pickup min and max date
     public void testBuy() throws EasyPostException {
-        // TODO We will revisit this once we have VCR.
         Map<String, Object> params = new HashMap<>();
 
         params.put("carrier", Fixture.usps());
@@ -96,7 +95,6 @@ public class PickupTest {
     @Test
     @Disabled // This test is ignored for now because it relies on the pickup min and max date
     public void testCancel() throws EasyPostException {
-        // TODO We will revisit this once we have VCR.
         Pickup cancelledPickup = globalPickup.cancel();
 
         assertTrue(cancelledPickup instanceof Pickup);

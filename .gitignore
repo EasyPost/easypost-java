@@ -9,6 +9,7 @@ Icon
 .classpath
 .project
 .settings
+.vscode
 target
 
 .idea/

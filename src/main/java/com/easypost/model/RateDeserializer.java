@@ -85,7 +85,7 @@ public final class RateDeserializer implements JsonDeserializer<Rate> {
         if (deliveryDateGuaranteedJsonElement == null || deliveryDateGuaranteedJsonElement.isJsonNull()) {
             deliveryDateGuaranteed = false;
         } else {
-            deliveryDateGuaranteed = new Boolean(jo.get("delivery_date_guaranteed").getAsString());
+            deliveryDateGuaranteed = jo.get("delivery_date_guaranteed").getAsBoolean();
         }
 
         Number estDeliveryDays;
@@ -104,6 +104,7 @@ public final class RateDeserializer implements JsonDeserializer<Rate> {
             shipmentID = jo.get("shipment_id").getAsString();
         }
 
+        @SuppressWarnings("unused")
         TimeInTransit timeInTransit;
         JsonElement timeInTransitJsonElement = jo.get("time_in_transit");
         if (timeInTransitJsonElement == null || timeInTransitJsonElement.isJsonNull()) {
