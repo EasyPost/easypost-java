@@ -787,7 +787,7 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get smart rates for this Shipment.
+     * Get Smartrates for this Shipment.
      *
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
@@ -797,7 +797,7 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get smart rates for this Shipment.
+     * Get Smartrates for this Shipment.
      *
      * @param params the options for the query.
      * @return List of Smartrate objects
@@ -808,7 +808,7 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get smart rates for this Shipment.
+     * Get Smartrates for this Shipment.
      *
      * @param apiKey API key to use in request (overrides default API key).
      * @return List of Smartrate objects
@@ -819,7 +819,7 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get smart rates for this Shipment.
+     * Get Smartrates for this Shipment.
      *
      * @param params the options for the query.
      * @param apiKey API key to use in request (overrides default API key).

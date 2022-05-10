@@ -186,7 +186,7 @@ public class ShipmentTest {
     }
 
     /**
-     * Test getting smart rate from a shipment.
+     * Test getting Smartrates from a shipment.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -305,7 +305,7 @@ public class ShipmentTest {
     }
 
     /**
-     * Test getting the lowest smart rate of a shipment.
+     * Test getting the lowest Smartrate of a shipment.
      *
      * @throws EasyPostException when the request fails.
      */
