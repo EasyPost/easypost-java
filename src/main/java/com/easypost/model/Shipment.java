@@ -5,7 +5,6 @@ import com.easypost.net.EasyPostResource;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -127,12 +126,18 @@ public final class Shipment extends EasyPostResource {
             throws EasyPostException {
         Rate lowestSmartrate = null;
 
-        HashSet<String> validDeliveryAccuracies = new HashSet<String>(
-                Arrays.asList("percentile_50", "percentile_75", "percentile_85", "percentile_90", "percentile_95",
-                        "percentile_97", "percentile_99"));
+        String[] validDeliveryAccuracies = new String[] {
+                "percentile_50",
+                "percentile_75",
+                "percentile_85",
+                "percentile_90",
+                "percentile_95",
+                "percentile_97",
+                "percentile_99"
+        };
 
-        if (!validDeliveryAccuracies.contains(deliveryAccuracy.toLowerCase())) {
-            throw new EasyPostException("Invalid delivery_accuracy value, must be one of: " + validDeliveryAccuracies);
+        if (Arrays.stream(validDeliveryAccuracies).noneMatch(deliveryAccuracy::equals)) {
+            throw new EasyPostException("Invalid delivery_accuracy value");
         }
 
         for (Rate rate : smartrates) {
