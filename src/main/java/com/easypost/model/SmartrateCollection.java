@@ -4,39 +4,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class SmartrateCollection {
-    private final List<Rate> rates;
+    private List<Smartrate> smartrates;
 
     /**
      * Constructor.
      */
     public SmartrateCollection() {
-        this.rates = new ArrayList<Rate>();
+        this.smartrates = new ArrayList<Smartrate>();
     }
 
     /**
      * Create a SmartrateCollection from a list of rates.
      *
-     * @param rates List of Rate objects
+     * @param smartrates List of Smartrate objects
      */
-    public SmartrateCollection(final List<Rate> rates) {
-        this.rates = rates;
+    public SmartrateCollection(final List<Smartrate> smartrates) {
+        setSmartrates(smartrates);
     }
 
     /**
-     * Get the Rate objects in this SmartrateCollection.
+     * Get this SmartrateCollection's Smartrate objects.
      *
-     * @return List of Rate objects
+     * @return List of Smartrate objects.
      */
-    public List<Rate> getRates() {
-        return rates;
+    public List<Smartrate> getSmartrates() {
+        return this.smartrates;
     }
 
     /**
-     * Add a Rate object to this SmartrateCollection.
+     * Set this SmartrateCollection's Smartrate objects.
+     *
+     * @param smartrates List of Smartrate objects.
+     */
+    public void setSmartrates(final List<Smartrate> smartrates) {
+        this.smartrates = smartrates;
+    }
+
+    /**
+     * Add a SmartRate object to this SmartrateCollection.
      *
      * @param rate Rate object
      */
-    public void addRate(final Rate rate) {
-        rates.add(rate);
+    public void addRate(final Smartrate rate) {
+        smartrates.add(rate);
     }
 }
