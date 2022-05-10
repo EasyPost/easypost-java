@@ -3,6 +3,7 @@ package com.easypost.model;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -457,5 +458,44 @@ public final class Pickup extends EasyPostResource {
     public Pickup cancel(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.POST, String.format("%s/cancel", instanceURL(Pickup.class, this.getId())), params,
                 Pickup.class, apiKey);
+    }
+
+    /**
+     * Get the lowest rate for this Pickup.
+     *
+     * @return lowest PickupRate object
+     * @throws EasyPostException when the request fails.
+     */
+    public PickupRate lowestRate() throws EasyPostException {
+        return this.lowestRate(null, null);
+    }
+
+    /**
+     * Get the lowest rate for this pickup.
+     *
+     * @param carriers the carriers to use in the query.
+     * @return PickupRate object
+     * @throws EasyPostException when the request fails.
+     */
+    public PickupRate lowestRate(final List<String> carriers) throws EasyPostException {
+        return this.lowestRate(carriers, null);
+    }
+
+    /**
+     * Get the lowest rate for this Pickup.
+     *
+     * @param carriers the carriers to use in the filter.
+     * @param services the services to use in the filter.
+     * @return lowest PickupRate object
+     * @throws EasyPostException when the request fails.
+     */
+    public PickupRate lowestRate(final List<String> carriers, final List<String> services) throws EasyPostException {
+        List<Rate> rates = new ArrayList<Rate>();
+
+        for (PickupRate rate : this.getPickupRates()) {
+            rates.add((Rate) rate);
+        }
+
+        return (PickupRate) Utilities.getLowestObjectRate(rates, carriers, services);
     }
 }

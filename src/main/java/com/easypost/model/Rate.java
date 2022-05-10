@@ -3,7 +3,7 @@ package com.easypost.model;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
-public final class Rate extends EasyPostResource {
+public class Rate extends EasyPostResource {
     private String id;
     private String carrier;
     private String service;

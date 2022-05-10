@@ -6,6 +6,8 @@
 -   Add `declaraction` attribute in CustomsInfo class
 -   Remove the dead `message` conditional check in `Address.createAndVerify()`
 -   Add `AddressVerifications` class
+-   Adds a `lowestRate()` function to Orders and Pickups
+-   Adds a `Shipment.getLowestSmartrate()` function and a `shipment.lowestSmartrate()` function
 
 ## v5.2.0 (2022-02-25)
 

@@ -1,22 +1,27 @@
 package com.easypost;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Address;
 import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShipmentTest {
     private static Shipment globalShipment;
@@ -267,5 +272,88 @@ public class ShipmentTest {
         assertTrue(shipment.getFromAddress().getId().startsWith("adr_"));
         assertTrue(shipment.getParcel().getId().startsWith("prcl_"));
         assertEquals("388 Townsend St", shipment.getFromAddress().getStreet1());
+    }
+
+    /**
+     * Test getting the lowest rate of a shipment.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testLowestRate() throws EasyPostException {
+        Shipment shipment = Shipment.create(Fixture.fullShipment());
+
+        // Test lowest rate with no filters
+        Rate lowestRate = shipment.lowestRate();
+        assertEquals("First", lowestRate.getService());
+        assertEquals(5.49, lowestRate.getRate(), 0.01);
+        assertEquals("USPS", lowestRate.getCarrier());
+
+        // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
+        List<String> service = new ArrayList<>(Arrays.asList("Priority"));
+        Rate lowestRateService = shipment.lowestRate(null, service);
+        assertEquals("Priority", lowestRateService.getService());
+        assertEquals(7.37, lowestRateService.getRate(), 0.01);
+        assertEquals("USPS", lowestRateService.getCarrier());
+
+        // Test lowest rate with carrier filter (should error due to bad carrier)
+        List<String> carrier = new ArrayList<>(Arrays.asList("BAD CARRIER"));
+        assertThrows(EasyPostException.class, () -> {
+            shipment.lowestRate(null, carrier);
+        });
+    }
+
+    /**
+     * Test getting the lowest smart rate of a shipment.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testLowestSmartRate() throws EasyPostException {
+        Shipment shipment = Shipment.create(Fixture.basicShipment());
+        Rate lowestSmartRateFilters = shipment.lowestSmartRate(1, "percentile_90");
+        
+        // Test lowest smartrate with valid filters
+        assertEquals("Priority", lowestSmartRateFilters.getService());
+        assertEquals(7.37, lowestSmartRateFilters.getRate(), 0.01);
+        assertEquals("USPS", lowestSmartRateFilters.getCarrier());
+
+        // Test lowest smartrate with invalid filters (should error due to strict delivery days)
+        assertThrows(EasyPostException.class, () -> {
+            shipment.lowestSmartRate(0, "percentile_90");
+        });
+
+        // Test lowest smartrate with invalid filters (should error due to invalid delivery accuracy)
+        assertThrows(EasyPostException.class, () -> {
+            shipment.lowestSmartRate(1, "BAD ACCURACY");
+        });
+    }
+
+    /**
+     * Test getting the lowest smartrate from a list of smartrates.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetLowestSmartRates() throws EasyPostException {
+        Shipment shipment = Shipment.create(Fixture.basicShipment());
+
+        List<Rate> smartrates = shipment.getSmartrates();
+
+        // Test lowest smartrate with valid filters
+        Rate lowest_Smartrate_filters = Shipment.getLowestSmartRate(smartrates, 1, "percentile_90");
+        assertEquals("Priority", lowest_Smartrate_filters.getService());
+        assertEquals(7.37, lowest_Smartrate_filters.getRate(), 0.01);
+        assertEquals("USPS", lowest_Smartrate_filters.getCarrier());
+
+        // Test lowest smartrate with invalid filters (should error due to strict delivery days)
+        assertThrows(EasyPostException.class, () -> {
+            Shipment.getLowestSmartRate(smartrates, 0, "percentile_90");
+        });
+
+        // Test lowest smartrate with invalid filters (should error due to bad delivery accuracy)
+        assertThrows(EasyPostException.class, () -> {
+            Shipment.getLowestSmartRate(smartrates, 1, "BAD ACCURACY");
+        });
     }
 }
