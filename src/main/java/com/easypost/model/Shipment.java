@@ -1070,7 +1070,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate(final List<String> carriers) throws EasyPostException {
-        return this.lowestRate(null, null);
+        return this.lowestRate(carriers, null);
     }
 
     /**
