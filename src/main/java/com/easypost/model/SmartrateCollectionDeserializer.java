@@ -33,7 +33,7 @@ public final class SmartrateCollectionDeserializer implements JsonDeserializer<S
         // the JsonDeserializationContext should have access to the other type adapters,
         // so we can tap into the RateDeserializer from here
         results.getAsJsonArray().forEach(rateData -> {
-            smartrateCollection.addRate(context.deserialize(rateData, Rate.class));
+            smartrateCollection.addRate(context.deserialize(rateData, Smartrate.class));
         });
 
         return smartrateCollection;

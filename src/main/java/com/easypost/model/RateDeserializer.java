@@ -131,7 +131,6 @@ public final class RateDeserializer implements JsonDeserializer<Rate> {
         rate.setEstDeliveryDays(estDeliveryDays);
         rate.setShipmentId(shipmentID);
         rate.setCarrierAccountId(jo.get("carrier_account_id").getAsString());
-        rate.setTimeInTransit(timeInTransit);
 
         return rate;
     }

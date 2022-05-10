@@ -119,12 +119,12 @@ public final class Shipment extends EasyPostResource {
      * @param smartrates       List of smartrates to filter from.
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
-     * @return lowest Rate object
+     * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      */
-    public static Rate getLowestSmartRate(final List<Rate> smartrates, int deliveryDay, String deliveryAccuracy)
-            throws EasyPostException {
-        Rate lowestSmartrate = null;
+    public static Smartrate getLowestSmartRate(final List<Smartrate> smartrates, int deliveryDay,
+                                               String deliveryAccuracy) throws EasyPostException {
+        Smartrate lowestSmartrate = null;
 
         String[] validDeliveryAccuracies = new String[] {
                 "percentile_50",
@@ -140,7 +140,7 @@ public final class Shipment extends EasyPostResource {
             throw new EasyPostException("Invalid delivery_accuracy value");
         }
 
-        for (Rate rate : smartrates) {
+        for (Smartrate rate : smartrates) {
             int smartrateDeliveryDay = rate.getTimeInTransit().getSmartRateAccuracy(deliveryAccuracy);
 
             if (smartrateDeliveryDay > deliveryDay) {
@@ -794,10 +794,10 @@ public final class Shipment extends EasyPostResource {
     /**
      * Get smart rates for this Shipment.
      *
-     * @return List of Rate objects
+     * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<Rate> getSmartrates() throws EasyPostException {
+    public List<Smartrate> getSmartrates() throws EasyPostException {
         return this.getSmartrates(null, null);
     }
 
@@ -805,10 +805,10 @@ public final class Shipment extends EasyPostResource {
      * Get smart rates for this Shipment.
      *
      * @param params the options for the query.
-     * @return List of Rate objects
+     * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<Rate> getSmartrates(final Map<String, Object> params) throws EasyPostException {
+    public List<Smartrate> getSmartrates(final Map<String, Object> params) throws EasyPostException {
         return this.getSmartrates(params, null);
     }
 
@@ -816,10 +816,10 @@ public final class Shipment extends EasyPostResource {
      * Get smart rates for this Shipment.
      *
      * @param apiKey API key to use in request (overrides default API key).
-     * @return List of Rate objects
+     * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<Rate> getSmartrates(final String apiKey) throws EasyPostException {
+    public List<Smartrate> getSmartrates(final String apiKey) throws EasyPostException {
         return this.getSmartrates(null, apiKey);
     }
 
@@ -828,15 +828,15 @@ public final class Shipment extends EasyPostResource {
      *
      * @param params the options for the query.
      * @param apiKey API key to use in request (overrides default API key).
-     * @return List of Rate objects
+     * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<Rate> getSmartrates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+    public List<Smartrate> getSmartrates(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
         SmartrateCollection smartrateCollection =
                 request(RequestMethod.GET, String.format("%s/smartrate", instanceURL(Shipment.class, this.getId())),
                         params, SmartrateCollection.class, apiKey);
-
-        return smartrateCollection.getRates();
+        return smartrateCollection.getSmartrates();
     }
 
     /**
@@ -1046,13 +1046,13 @@ public final class Shipment extends EasyPostResource {
      *
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
-     * @return lowest Rate object
+     * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      */
-    public Rate lowestSmartRate(int deliveryDay, String deliveryAccuracy) throws EasyPostException {
-        List<Rate> smartrates = this.getSmartrates();
+    public Smartrate lowestSmartRate(int deliveryDay, String deliveryAccuracy) throws EasyPostException {
+        List<Smartrate> smartrates = this.getSmartrates();
 
-        Rate lowestSmartrate = getLowestSmartRate(smartrates, deliveryDay, deliveryAccuracy);
+        Smartrate lowestSmartrate = getLowestSmartRate(smartrates, deliveryDay, deliveryAccuracy);
 
         return lowestSmartrate;
     }

@@ -20,7 +20,6 @@ public class Rate extends EasyPostResource {
     private Number estDeliveryDays;
     private String shipmentId;
     private String carrierAccountId;
-    private TimeInTransit timeInTransit;
 
     /**
      * Retrieve a Rate from the API.
@@ -334,23 +333,5 @@ public class Rate extends EasyPostResource {
      */
     public void setCarrierAccountId(final String carrierAccountId) {
         this.carrierAccountId = carrierAccountId;
-    }
-
-    /**
-     * Get the TimeInTransit of this Rate.
-     *
-     * @return TimeInTransit object.
-     */
-    public TimeInTransit getTimeInTransit() {
-        return timeInTransit;
-    }
-
-    /**
-     * Set the TimeInTransit of this Rate.
-     *
-     * @param timeInTransit TimeInTransit object.
-     */
-    public void setTimeInTransit(final TimeInTransit timeInTransit) {
-        this.timeInTransit = timeInTransit;
     }
 }

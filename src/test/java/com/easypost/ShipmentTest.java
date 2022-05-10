@@ -6,6 +6,7 @@ import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
+import com.easypost.model.Smartrate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -191,7 +192,7 @@ public class ShipmentTest {
      */
     @Test
     public void testSmartRate() throws EasyPostException {
-        List<Rate> smartRates = globalShipment.getSmartrates();
+        List<Smartrate> smartRates = globalShipment.getSmartrates();
 
         assertTrue(smartRates instanceof List);
         assertEquals(globalShipment.getRates().get(0).getId(), smartRates.get(0).getId());
@@ -311,7 +312,7 @@ public class ShipmentTest {
     @Test
     public void testLowestSmartRate() throws EasyPostException {
         Shipment shipment = Shipment.create(Fixture.basicShipment());
-        Rate lowestSmartRateFilters = shipment.lowestSmartRate(1, "percentile_90");
+        Smartrate lowestSmartRateFilters = shipment.lowestSmartRate(1, "percentile_90");
         
         // Test lowest smartrate with valid filters
         assertEquals("Priority", lowestSmartRateFilters.getService());
@@ -338,10 +339,10 @@ public class ShipmentTest {
     public void testGetLowestSmartRates() throws EasyPostException {
         Shipment shipment = Shipment.create(Fixture.basicShipment());
 
-        List<Rate> smartrates = shipment.getSmartrates();
+        List<Smartrate> smartrates = shipment.getSmartrates();
 
         // Test lowest smartrate with valid filters
-        Rate lowest_Smartrate_filters = Shipment.getLowestSmartRate(smartrates, 1, "percentile_90");
+        Smartrate lowest_Smartrate_filters = Shipment.getLowestSmartRate(smartrates, 1, "percentile_90");
         assertEquals("Priority", lowest_Smartrate_filters.getService());
         assertEquals(7.37, lowest_Smartrate_filters.getRate(), 0.01);
         assertEquals("USPS", lowest_Smartrate_filters.getCarrier());
