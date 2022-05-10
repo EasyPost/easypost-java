@@ -999,7 +999,7 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get the lowest smart from a shipment object.
+     * Get the lowest smartrate from a shipment object.
      *
      * @param deliveryDay Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
