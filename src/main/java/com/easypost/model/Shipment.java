@@ -115,6 +115,44 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
+     * Get the lowest smartrate from a list of smartrates.
+     *
+     * @param smartrates       List of smartrates to filter from.
+     * @param deliveryDay      Delivery days restriction to use when filtering.
+     * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
+     * @return lowest Rate object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Rate getLowestSmartRate(final List<Rate> smartrates, int deliveryDay, String deliveryAccuracy)
+            throws EasyPostException {
+        Rate lowestSmartrate = null;
+
+        HashSet<String> validDeliveryAccuracies = new HashSet<String>(
+                Arrays.asList("percentile_50", "percentile_75", "percentile_85", "percentile_90", "percentile_95",
+                        "percentile_97", "percentile_99"));
+
+        if (!validDeliveryAccuracies.contains(deliveryAccuracy.toLowerCase())) {
+            throw new EasyPostException("Invalid delivery_accuracy value, must be one of: " + validDeliveryAccuracies);
+        }
+
+        for (Rate rate : smartrates) {
+            int smartrateDeliveryDay = rate.getTimeInTransit().getSmartRateAccuracy(deliveryAccuracy);
+
+            if (smartrateDeliveryDay > deliveryDay) {
+                continue;
+            } else if (lowestSmartrate == null || rate.getRate() < lowestSmartrate.getRate()) {
+                lowestSmartrate = rate;
+            }
+        }
+
+        if (lowestSmartrate == null) {
+            throw new EasyPostException("No rates found.");
+        }
+
+        return lowestSmartrate;
+    }
+
+    /**
      * Get the ID of this Shipment.
      *
      * @return the ID of this Shipment.
@@ -999,11 +1037,11 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get the lowest smartrate from a shipment object.
+     * Get the lowest smartrate for this Shipment.
      *
-     * @param deliveryDay Delivery days restriction to use when filtering.
+     * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
-     * @return Rate object
+     * @return lowest Rate object
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestSmartRate(int deliveryDay, String deliveryAccuracy) throws EasyPostException {
@@ -1015,50 +1053,13 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get the lowest smartrate from a shipment object.
+     * Get the lowest rate for this Shipment.
      *
-     * @param smartrates Smartrates to filter from.
-     * @param deliveryDay Delivery days restriction to use when filtering.
-     * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
-     * @return Rate object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Rate getLowestSmartRate(final List<Rate> smartrates, int deliveryDay, String deliveryAccuracy)
-        throws EasyPostException {
-        Rate lowestSmartrate = null;
-
-        HashSet<String> validDeliveryAccuracies = new HashSet<String>(Arrays.asList("percentile_50",
-            "percentile_75", "percentile_85", "percentile_90", "percentile_95", "percentile_97", "percentile_99"));
-
-        if (!validDeliveryAccuracies.contains(deliveryAccuracy.toLowerCase())) {
-            throw new EasyPostException("Invalid delivery_accuracy value, must be one of: " + validDeliveryAccuracies);
-        }
-
-        for (Rate rate : smartrates) {
-            int smartrateDeliveryDay = rate.getTimeInTransit().getSmartRateAccuracy(deliveryAccuracy);
-
-            if (smartrateDeliveryDay > deliveryDay) {
-                continue;
-            } else if (lowestSmartrate == null || rate.getRate() < lowestSmartrate.getRate()) {
-                lowestSmartrate = rate;
-            }
-        }
-
-        if (lowestSmartrate == null) {
-            throw new EasyPostException("No rates found.");
-        }
-
-        return lowestSmartrate;
-    }
-
-    /**
-     * Get the lowest rate for this shipment.
-     *
-     * @return Rate object
+     * @return lowest Rate object
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate() throws EasyPostException {
-        return Utilities.getLowestObjectRate(this.rates, null, null);
+        return this.lowestRate(null, null);
     }
 
     /**
@@ -1069,15 +1070,15 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate(final List<String> carriers) throws EasyPostException {
-        return Utilities.getLowestObjectRate(this.rates, carriers, null);
+        return this.lowestRate(null, null);
     }
 
     /**
-     * Get the lowest rate for this shipment.
+     * Get the lowest rate for this Shipment.
      *
-     * @param carriers the carriers to use in the query.
-     * @param services the services to use in the query.
-     * @return Rate object
+     * @param carriers the carriers to use in the filter.
+     * @param services the services to use in the filter.
+     * @return lowest Rate object
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate(final List<String> carriers, final List<String> services) throws EasyPostException {

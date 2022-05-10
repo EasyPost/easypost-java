@@ -461,19 +461,13 @@ public final class Pickup extends EasyPostResource {
     }
 
     /**
-     * Get the lowest rate for this pickup.
+     * Get the lowest rate for this Pickup.
      *
-     * @return PickupRate object
+     * @return lowest PickupRate object
      * @throws EasyPostException when the request fails.
      */
     public PickupRate lowestRate() throws EasyPostException {
-        List<Rate> rates = new ArrayList<Rate>();
-
-        for (PickupRate rate : this.getPickupRates()) {
-            rates.add((Rate) rate);
-        }
-
-        return (PickupRate) Utilities.getLowestObjectRate(rates, null, null);
+        return this.lowestRate(null, null);
     }
 
     /**
@@ -484,21 +478,15 @@ public final class Pickup extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public PickupRate lowestRate(final List<String> carriers) throws EasyPostException {
-        List<Rate> rates = new ArrayList<Rate>();
-
-        for (PickupRate rate : this.getPickupRates()) {
-            rates.add((Rate) rate);
-        }
-
-        return (PickupRate) Utilities.getLowestObjectRate(rates, carriers, null);
+        return this.lowestRate(carriers, null);
     }
 
     /**
-     * Get the lowest rate for this pickup.
+     * Get the lowest rate for this Pickup.
      *
-     * @param carriers the carriers to use in the query.
-     * @param services the services to use in the query.
-     * @return PickupRate object
+     * @param carriers the carriers to use in the filter.
+     * @param services the services to use in the filter.
+     * @return lowest PickupRate object
      * @throws EasyPostException when the request fails.
      */
     public PickupRate lowestRate(final List<String> carriers, final List<String> services) throws EasyPostException {

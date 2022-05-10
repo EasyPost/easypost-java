@@ -1,25 +1,26 @@
 package com.easypost.model;
 
-import java.util.List;
-
 import com.easypost.exception.EasyPostException;
+
+import java.util.List;
 
 public final class Utilities {
     private Utilities() {
         // Do not instantiate this class.
         throw new IllegalStateException("Cannot be instantiated");
-     }
+    }
+
     /**
      * Get the lowest rate from a list of rates.
      *
-     * @param rates the list of rates.
-     * @param carriers the carriers to use in the query.
-     * @param services the services to use in the query.
-     * @return Rate object
+     * @param rates    the list of rates.
+     * @param carriers the carriers to use in the filter.
+     * @param services the services to use in the filter.
+     * @return lowest Rate object
      * @throws EasyPostException when the request fails.
      */
     public static Rate getLowestObjectRate(List<Rate> rates, List<String> carriers, List<String> services)
-        throws EasyPostException {
+            throws EasyPostException {
         Rate lowestRate = null;
 
         if (carriers != null) {
@@ -36,7 +37,7 @@ public final class Utilities {
 
         for (Rate rate : rates) {
             if ((carriers != null && !carriers.contains(rate.getCarrier().toLowerCase())) ||
-            (services != null && !services.contains(rate.getService().toLowerCase()))) {
+                    (services != null && !services.contains(rate.getService().toLowerCase()))) {
                 continue;
             }
 

@@ -147,11 +147,11 @@ public final class TimeInTransit {
     }
 
     /**
-     * Get the delivery day of specific delivery accuracy of this TimeInTransit.
+     * Get the delivery accuracy of a specific percentile of this TimeInTransit.
      *
-     * @param percentile the percentile of this TimeInTransit
-     * @return the delivery day of specific percentile of this TimeInTransit
-     * @throws EasyPostException when the percentile does not exist.
+     * @param percentile the percentile to find the corresponding accuracy for
+     * @return the delivery accuracy of the specified percentile
+     * @throws EasyPostException when the percentile is not valid
      */
     public int getSmartRateAccuracy(final String percentile) throws EasyPostException {
         switch (percentile) {

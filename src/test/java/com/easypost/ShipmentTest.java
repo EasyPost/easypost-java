@@ -1,23 +1,27 @@
 package com.easypost;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Address;
 import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShipmentTest {
     private static Shipment globalShipment;
@@ -271,7 +275,7 @@ public class ShipmentTest {
     }
 
     /**
-     * Test getting lowest rate of a shipment.
+     * Test getting the lowest rate of a shipment.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -300,7 +304,7 @@ public class ShipmentTest {
     }
 
     /**
-     * Test getting lowest smart rate of a shipment object.
+     * Test getting the lowest smart rate of a shipment.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -326,7 +330,7 @@ public class ShipmentTest {
     }
 
     /**
-     * Test getting lowest rate of a shipment.
+     * Test getting the lowest smartrate from a list of smartrates.
      *
      * @throws EasyPostException when the request fails.
      */

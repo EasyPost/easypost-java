@@ -1,21 +1,23 @@
 package com.easypost;
 
+import com.easypost.exception.EasyPostException;
+import com.easypost.model.Pickup;
+import com.easypost.model.PickupRate;
+import com.easypost.model.Shipment;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.model.Pickup;
-import com.easypost.model.PickupRate;
-import com.easypost.model.Shipment;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PickupTest {
     private static Pickup globalPickup;

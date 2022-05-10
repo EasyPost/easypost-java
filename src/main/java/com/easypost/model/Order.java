@@ -481,13 +481,13 @@ public final class Order extends EasyPostResource {
     }
 
     /**
-     * Get the lowest rate for this order.
+     * Get the lowest rate for this Order.
      *
-     * @return Rate object
+     * @return lowest Rate object
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate() throws EasyPostException {
-        return Utilities.getLowestObjectRate(this.rates, null, null);
+        return this.lowestRate(null, null);
     }
 
     /**
@@ -498,15 +498,15 @@ public final class Order extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate(final List<String> carriers) throws EasyPostException {
-        return Utilities.getLowestObjectRate(this.rates, carriers, null);
+        return this.lowestRate(carriers, null);
     }
 
     /**
-     * Get the lowest rate for this order.
+     * Get the lowest rate for this Order.
      *
-     * @param carriers the carriers to use in the query.
-     * @param services the services to use in the query.
-     * @return Rate object
+     * @param carriers the carriers to use in the filter.
+     * @param services the services to use in the filter.
+     * @return lowest Rate object
      * @throws EasyPostException when the request fails.
      */
     public Rate lowestRate(final List<String> carriers, final List<String> services) throws EasyPostException {
