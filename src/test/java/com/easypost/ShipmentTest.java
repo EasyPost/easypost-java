@@ -76,7 +76,7 @@ public class ShipmentTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        Map<String, Object> params = new HashMap();
+        Map<String, Object> params = new HashMap<String, Object>();
 
         params.put("page_size", Fixture.pageSize());
 
