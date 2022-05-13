@@ -2,25 +2,14 @@ package com.easypost.model.beta;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.model.BaseAddress;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class EndShipper extends EasyPostResource {
-    private String id;
-    private String name;
-    private String company;
-    private String street1;
-    private String street2;
-    private String zip;
-    private String state;
-    private String country;
-    private String phone;
-    private String email;
-
+public final class EndShipper extends BaseAddress {
     /**
      * Create EndShipper object from parameter map.
      *
@@ -128,187 +117,6 @@ public final class EndShipper extends EasyPostResource {
         EndShipper response = request(RequestMethod.PUT, String.format("%s/%s/%s", EasyPost.BETA_API_BASE,
             "end_shippers", this.getId()), wrappedParams, EndShipper.class, apiKey);
 
-        this.merge(this, response);
-        return this;
-    }
-
-    /**
-     * Get EndShipper ID.
-     *
-     * @return EndShipper ID
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set EndShipper ID.
-     *
-     * @param id EndShipper ID
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get name of EndShipper.
-     *
-     * @return EndShipper name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Set name of EndShipper.
-     *
-     * @param name EndShipper name
-     */
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    /**
-     * Get company of EndShipper.
-     *
-     * @return EndShipper company
-     */
-    public String getCompany() {
-        return company;
-    }
-
-    /**
-     * Set company of EndShipper.
-     *
-     * @param company EndShipper company
-     */
-    public void setCompany(final String company) {
-        this.company = company;
-    }
-
-    /**
-     * Get first line of EndShipper street.
-     *
-     * @return first line of EndShipper street
-     */
-    public String getStreet1() {
-        return street1;
-    }
-
-    /**
-     * Set first line of EndShipper street.
-     *
-     * @param street1 first line of EndShipper street
-     */
-    public void setStreet1(final String street1) {
-        this.street1 = street1;
-    }
-
-    /**
-     * Get second line of EndShipper street.
-     *
-     * @return second line of EndShipper street
-     */
-    public String getStreet2() {
-        return street2;
-    }
-
-    /**
-     * Set second line of EndShipper street.
-     *
-     * @param street2 second line of EndShipper street
-     */
-    public void setStreet2(final String street2) {
-        this.street2 = street2;
-    }
-
-    /**
-     * Get zip code of EndShipper.
-     *
-     * @return EndShipper zip code
-     */
-    public String getZip() {
-        return zip;
-    }
-
-    /**
-     * Set zip code of EndShipper.
-     *
-     * @param zip EndShipper zip code
-     */
-    public void setZip(final String zip) {
-        this.zip = zip;
-    }
-
-    /**
-     * Get state of EndShipper.
-     *
-     * @return EndShipper state
-     */
-    public String getState() {
-        return state;
-    }
-
-    /**
-     * Set state of EndShipper.
-     *
-     * @param state EndShipper state
-     */
-    public void setState(final String state) {
-        this.state = state;
-    }
-
-    /**
-     * Get country of EndShipper.
-     *
-     * @return EndShipper country
-     */
-    public String getCountry() {
-        return country;
-    }
-
-    /**
-     * Set country of EndShipper.
-     *
-     * @param country EndShipper country
-     */
-    public void setCountry(final String country) {
-        this.country = country;
-    }
-
-    /**
-     * Get phone number of EndShipper.
-     *
-     * @return EndShipper phone number
-     */
-    public String getPhone() {
-        return phone;
-    }
-
-    /**
-     * Set phone number of EndShipper.
-     *
-     * @param phone EndShipper phone number
-     */
-    public void setPhone(final String phone) {
-        this.phone = phone;
-    }
-
-    /**
-     * Get email of EndShipper.
-     *
-     * @return EndShipper email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Set email of EndShipper.
-     *
-     * @param email EndShipper email
-     */
-    public void setEmail(final String email) {
-        this.email = email;
+        return response;
     }
 }
