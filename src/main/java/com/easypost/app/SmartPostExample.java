@@ -15,7 +15,7 @@ import java.util.Map;
 public class SmartPostExample {
 
     public static void main(final String[] args) {
-        EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
+        EasyPost.apiKey = System.getenv("EASYPOST_API_KEY");
 
         Map<String, Object> fromAddressMap = new HashMap<String, Object>();
         fromAddressMap.put("name", "Simpler Postage Inc");

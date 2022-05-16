@@ -17,7 +17,7 @@ import java.util.Map;
 public class BatchExample {
 
     public static void main(final String[] args) throws InterruptedException {
-        EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
+        EasyPost.apiKey = System.getenv("EASYPOST_API_KEY");
 
         try {
             Map<String, Object> fromAddressMap = new HashMap<String, Object>();
@@ -112,8 +112,10 @@ public class BatchExample {
             batchMap.put("shipment", shipments);
             Batch batch = Batch.create(batchMap);
 
-            // ** below this point should be a seperate script so that batch creation isn't duplicated
-            // ** store batch.id and use it in a new script with Batch.retrieve("{BATCH_ID}");
+            // ** below this point should be a seperate script so that batch creation isn't
+            // duplicated
+            // ** store batch.id and use it in a new script with
+            // Batch.retrieve("{BATCH_ID}");
 
             // loop through each shipment in the batch, purchasing the lowest rate for each
             for (Shipment createdShipment : batch.getShipments()) {
@@ -135,7 +137,8 @@ public class BatchExample {
 
                 batch.label(labelMap);
             } else {
-                // something went wrong, one of the shipments wasn't purchased successfully in the above loop
+                // something went wrong, one of the shipments wasn't purchased successfully in
+                // the above loop
                 // probably wouldn't ever happen, shipment.buy above would throw an error
                 System.out.println("Uh oh");
             }

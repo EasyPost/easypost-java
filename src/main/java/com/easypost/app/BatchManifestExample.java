@@ -13,7 +13,7 @@ import java.util.Map;
 public class BatchManifestExample {
 
     public static void main(final String[] args) throws InterruptedException {
-        EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
+        EasyPost.apiKey = System.getenv("EASYPOST_API_KEY");
 
         try {
             Map<String, Object> addressMap = new HashMap<String, Object>();
