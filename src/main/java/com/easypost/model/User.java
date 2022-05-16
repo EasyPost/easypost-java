@@ -96,7 +96,7 @@ public class User extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
-        return request(RequestMethod.POST, classURL(User.class), wrappedParams, User.class, apiKey, false);
+        return request(RequestMethod.POST, classURL(User.class), wrappedParams, User.class, apiKey);
     }
 
     /**
@@ -284,8 +284,8 @@ public class User extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
-        User response =
-                request(RequestMethod.PUT, instanceURL(User.class, this.getId()), wrappedParams, User.class, apiKey);
+        User response = request(RequestMethod.PUT, instanceURL(User.class, this.getId()), wrappedParams, User.class,
+                apiKey);
 
         this.merge(this, response);
         return this;
@@ -359,4 +359,3 @@ public class User extends EasyPostResource {
         return request(RequestMethod.PUT, updateBrandUrl, wrappedParams, Brand.class, apiKey);
     }
 }
-

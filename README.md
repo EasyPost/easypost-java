@@ -3,11 +3,11 @@
 [![CI](https://github.com/EasyPost/easypost-java/workflows/CI/badge.svg)](https://github.com/EasyPost/easypost-java/actions?query=workflow%3ACI)
 [![Maven Central](https://img.shields.io/maven-central/v/com.easypost/easypost-api-client?label=Maven%20Central)](https://search.maven.org/artifact/com.easypost/easypost-api-client)
 
-EasyPost, the simple shipping solution. You can sign up for an account at https://easypost.com.
+EasyPost, the simple shipping solution. You can sign up for an account at <https://easypost.com>.
 
 ## Install
 
-**Maven**
+### Maven
 
 Add this to your project's POM:
 
@@ -19,7 +19,7 @@ Add this to your project's POM:
 </dependency>
 ```
 
-**Gradle**
+### Gradle
 
 Add this to your project's build file:
 
@@ -89,7 +89,7 @@ public class CreateShipment {
 
 ## Documentation
 
-API Documentation can be found at: https://easypost.com/docs/api.
+API Documentation can be found at: <https://easypost.com/docs/api>.
 
 Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_GUIDE.md).
 
@@ -110,7 +110,7 @@ EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... mvn clean test -B jaco
 
 ### Testing
 
-The test suite in this project was specifically built to produce consistent results on every run, regardless of when they run or who is running them. <s>This project uses [EasyVCR]() to record and replay HTTP requests and responses via "cassettes". When the suite is run, the HTTP requests and responses for each test function will be saved to a cassette if they do not exist already and replayed from this saved file if they do, which saves the need to make live API calls on every test run.</s>
+The test suite in this project was specifically built to produce consistent results on every run, regardless of when they run or who is running them. <s>This project uses [EasyVCR](https://github.com/EasyPost/easyvcr-java) to record and replay HTTP requests and responses via "cassettes". When the suite is run, the HTTP requests and responses for each test function will be saved to a cassette if they do not exist already and replayed from this saved file if they do, which saves the need to make live API calls on every test run.</s>
 
 <s>If you make an addition to this project, the request/response will get recorded automatically for you. When making changes to this project, you'll need to re-record the associated cassette to force a new live API call for that test which will then record the request/response used on the next run.</s>
 

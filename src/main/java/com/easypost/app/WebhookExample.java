@@ -9,10 +9,10 @@ import com.easypost.net.EasyPostResource;
 public class WebhookExample {
 
     public static void main(final String[] args) {
-        EasyPost.apiKey = "cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi";
+        EasyPost.apiKey = System.getenv("EASYPOST_API_KEY");
 
         try {
-            Event event = Event.retrieve("evt_ZzMEqURE");
+            Event event = Event.retrieve("evt_123");
             EasyPostResource tracker = event.getResult();
 
             System.out.println(event.getDescription());
