@@ -5,12 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-final class Fixture {
+public abstract class Fixture {
     public static final int PAGE_SIZE = 5;
-
-    private Fixture() {
-        // Prevent instantiation
-    }
 
     /**
      * We keep the page size of retrieving `all` records small.
@@ -284,7 +280,7 @@ final class Fixture {
     public static Map<String, Object> basicPickup() {
         Map<String, Object> basicPickup = new HashMap<>();
 
-        String pickupDate = "2022-05-12";
+        String pickupDate = "2022-05-14";
 
         basicPickup.put("address", basicAddress());
         basicPickup.put("min_datetime", pickupDate);
@@ -331,6 +327,11 @@ final class Fixture {
         return insurance;
     }
 
+    /**
+     * A basic order data structure.
+     *
+     * @return a map with the insurance data filled in.
+     */
     public static Map<String, Object> basicOrder() {
         Map<String, Object> order = new HashMap<>();
         List<Object> shipments = new ArrayList<>();
@@ -342,5 +343,27 @@ final class Fixture {
         order.put("shipments", shipments);
 
         return order;
+    }
+
+    /**
+     * Basic EndShipper address that is reusable in all test coverage.
+     *
+     * @return A map that has the EndShipper address info filled.
+     */
+    public static Map<String, Object> endShipperAddress() {
+        Map<String, Object> address = new HashMap<>();
+
+        address.put("name", "Jack Sparrow");
+        address.put("company", "EasyPost");
+        address.put("street1", "388 Townsend St");
+        address.put("street2", "Apt 20");
+        address.put("city", "San Francisco");
+        address.put("state", "CA");
+        address.put("zip", "94107");
+        address.put("phone", "5555555555");
+        address.put("country", "US");
+        address.put("email", "test@example.com");
+
+        return address;
     }
 }

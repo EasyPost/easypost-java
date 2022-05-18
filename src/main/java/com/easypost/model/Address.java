@@ -1,25 +1,13 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public final class Address extends EasyPostResource {
+public final class Address extends BaseAddress {
 
-    private String id;
     private String mode;
-    private String name;
-    private String company;
-    private String street1;
-    private String street2;
-    private String zip;
-    private String city;
-    private String state;
-    private String country;
-    private String phone;
-    private String email;
     private String message;
     private String carrierFacility;
     private String federalTaxId;
@@ -179,24 +167,6 @@ public final class Address extends EasyPostResource {
     }
 
     /**
-     * Get Address ID.
-     *
-     * @return Address ID
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set address ID.
-     *
-     * @param id address ID
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
      * Get address mode.
      *
      * @return address mode
@@ -212,186 +182,6 @@ public final class Address extends EasyPostResource {
      */
     public void setMode(final String mode) {
         this.mode = mode;
-    }
-
-    /**
-     * Get name of address.
-     *
-     * @return address name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Set name of address.
-     *
-     * @param name address name
-     */
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    /**
-     * Get company of address.
-     *
-     * @return address company
-     */
-    public String getCompany() {
-        return company;
-    }
-
-    /**
-     * Set company of address.
-     *
-     * @param company address company
-     */
-    public void setCompany(final String company) {
-        this.company = company;
-    }
-
-    /**
-     * Get first line of address street.
-     *
-     * @return first line of address street
-     */
-    public String getStreet1() {
-        return street1;
-    }
-
-    /**
-     * Set first line of address street.
-     *
-     * @param street1 first line of address street
-     */
-    public void setStreet1(final String street1) {
-        this.street1 = street1;
-    }
-
-    /**
-     * Get second line of address street.
-     *
-     * @return second line of address street
-     */
-    public String getStreet2() {
-        return street2;
-    }
-
-    /**
-     * Set second line of address street.
-     *
-     * @param street2 second line of address street
-     */
-    public void setStreet2(final String street2) {
-        this.street2 = street2;
-    }
-
-    /**
-     * Get zip code of address.
-     *
-     * @return address zip code
-     */
-    public String getZip() {
-        return zip;
-    }
-
-    /**
-     * Set zip code of address.
-     *
-     * @param zip address zip code
-     */
-    public void setZip(final String zip) {
-        this.zip = zip;
-    }
-
-    /**
-     * Get city of address.
-     *
-     * @return address city
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     * Set city of address.
-     *
-     * @param city address city
-     */
-    public void setCity(final String city) {
-        this.city = city;
-    }
-
-    /**
-     * Get state of address.
-     *
-     * @return address state
-     */
-    public String getState() {
-        return state;
-    }
-
-    /**
-     * Set state of address.
-     *
-     * @param state address state
-     */
-    public void setState(final String state) {
-        this.state = state;
-    }
-
-    /**
-     * Get country of address.
-     *
-     * @return address country
-     */
-    public String getCountry() {
-        return country;
-    }
-
-    /**
-     * Set country of address.
-     *
-     * @param country address country
-     */
-    public void setCountry(final String country) {
-        this.country = country;
-    }
-
-    /**
-     * Get phone number of address.
-     *
-     * @return address phone number
-     */
-    public String getPhone() {
-        return phone;
-    }
-
-    /**
-     * Set phone number of address.
-     *
-     * @param phone address phone number
-     */
-    public void setPhone(final String phone) {
-        this.phone = phone;
-    }
-
-    /**
-     * Get email of address.
-     *
-     * @return address email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Set email of address.
-     *
-     * @param email address email
-     */
-    public void setEmail(final String email) {
-        this.email = email;
     }
 
     /**

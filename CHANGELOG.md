@@ -10,6 +10,7 @@
 - Adds a `Shipment.getLowestSmartrate()` function and a `shipment.lowestSmartrate()` function
 - Add `Smartrate` class
   - All SmartRate-related functions now return lists of Smartrate objects rather than lists of Rate objects
+- Adds the `EndShipper` Beta class with `create`, `retrieve`, `all`, and `update` functions
 
 ## v5.2.0 (2022-02-25)
 
