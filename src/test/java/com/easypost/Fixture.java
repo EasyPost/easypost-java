@@ -394,7 +394,7 @@ public abstract class Fixture {
         Map<String, String> creditCardDetails = new HashMap<String, String>();
 
         creditCardDetails.put("number", "4536410136126170");
-        creditCardDetails.put("expiration_month", "5");
+        creditCardDetails.put("expiration_month", "05");
         creditCardDetails.put("expiration_year", "2028");
         creditCardDetails.put("cvc", "778");
 

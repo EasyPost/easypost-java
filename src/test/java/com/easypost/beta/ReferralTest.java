@@ -9,7 +9,6 @@ import com.easypost.Fixture;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.beta.CreditCard;
 import com.easypost.model.beta.Referral;
-import com.easypost.model.beta.Referral.Priority;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,7 +25,7 @@ public class ReferralTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");;
+        EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");
     }
 
     /**

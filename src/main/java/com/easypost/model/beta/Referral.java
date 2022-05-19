@@ -4,13 +4,13 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.EasyPost;
 import com.easypost.model.ApiKey;
 import com.easypost.model.BaseUser;
+import com.easypost.model.Utilities;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -152,7 +152,7 @@ public class Referral extends BaseUser {
             throw new Exception("Could not send card details to Stripe, please try again later", e);
         }
 
-        return createEasypostCreditCard(referralApiKey, stripeToken, priority.toString());
+        return createEasypostCreditCard(referralApiKey, stripeToken, priority.toString().toLowerCase());
     }
 
     /**
@@ -196,7 +196,7 @@ public class Referral extends BaseUser {
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
 
-        String encodedURL = getEncodedURL(params, "card");
+        String encodedURL = Utilities.getEncodedURL(params, "card");
         byte[] postData = encodedURL.getBytes(StandardCharsets.UTF_8);
 
         try (DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
@@ -249,38 +249,6 @@ public class Referral extends BaseUser {
 
         return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "credit_cards"),
         wrappedParams, CreditCard.class, referralApiKey);
-    }
-
-    /**
-     * Create Encoded URL from a Map.
-     *
-     * @param params Map of parameters to be encoded.
-     * @param parentKey Parent key in the encoded URL.
-     * @return Encoded URL for Stripe API call.
-     * @throws Exception
-     */
-    private static String getEncodedURL(Map<String, String> params, String parentKey)
-        throws Exception {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-
-        try {
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                if (first) {
-                    first = false;
-                } else {
-                    result.append("&");
-                }
-
-                result.append(URLEncoder.encode(parentKey + "[" + entry.getKey() + "]", "UTF-8"));
-                result.append("=");
-                result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-            }
-        } catch (Exception e) {
-            throw new Exception("Something went wrong during the URL encoding.");
-        }
-
-        return result.toString();
     }
 
     /**
