@@ -13,6 +13,15 @@ public class BaseUser extends EasyPostResource {
     private String rechargeAmount;
     private String secondaryRechargeAmount;
     private String rechargeThreshold;
+    private String object;
+    private String parentId;
+    private boolean verified;
+    private String pricePerShipment;
+    private boolean hasBillingMethod;
+    private String ccFeeRate;
+    private String defaultInsuranceAmount;
+    private String insuranceFeeRate;
+    private String insuranceFeeMinimum;
     private List<User> children;
 
     /**
@@ -175,5 +184,167 @@ public class BaseUser extends EasyPostResource {
      */
     public void setChildren(final List<User> children) {
         this.children = children;
+    }
+
+    /**
+     * Get the object of the User.
+     *
+     * @return the object of the User.
+     */
+    public String getObject() {
+        return object;
+    }
+
+    /**
+     * Set the object of the User.
+     *
+     * @param object the object of the User.
+     */
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    /**
+     * Get the parent ID of the User.
+     *
+     * @return the parent ID of the User.
+     */
+    public String getParentId() {
+        return parentId;
+    }
+
+    /**
+     * Set the parent ID of the User.
+     *
+     * @param parentId the parent ID of the User.
+     */
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    /**
+     * Get the verified of the User.
+     *
+     * @return the verified of the User.
+     */
+    public boolean getVerified() {
+        return verified;
+    }
+
+    /**
+     * Set the verified of the User.
+     *
+     * @param verified the verified of the User.
+     */
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    /**
+     * Get the price per shipment of the User.
+     *
+     * @return the price per shipment of the User.
+     */
+    public String getPricePerShipment() {
+        return pricePerShipment;
+    }
+
+    /**
+     * Set the price per shipment of the User.
+     *
+     * @param pricePerShipment the price per shipment of the User.
+     */
+    public void setPricePerShipment(String pricePerShipment) {
+        this.pricePerShipment = pricePerShipment;
+    }
+
+    /**
+     * Get the has billing method of the User.
+     *
+     * @return the has billing method of the User.
+     */
+    public boolean getHasBillingMethod() {
+        return hasBillingMethod;
+    }
+
+    /**
+     * Set the has billing method of the User.
+     *
+     * @param hasBillingMethod the has billing method of the User.
+     */
+    public void setHasBillingMethod(boolean hasBillingMethod) {
+        this.hasBillingMethod = hasBillingMethod;
+    }
+
+    /**
+     * Get the cc fee rate of the User.
+     *
+     * @return the cc fee rate of the User.
+     */
+    public String getCcFeeRate() {
+        return ccFeeRate;
+    }
+
+    /**
+     * Set the cc fee rate of the User.
+     *
+     * @param ccFeeRate the cc fee rate of the User.
+     */
+    public void setCcFeeRate(String ccFeeRate) {
+        this.ccFeeRate = ccFeeRate;
+    }
+
+    /**
+     * Get the default insurance amount of the User.
+     *
+     * @return the default insurance amount of the User.
+     */
+    public String getDefaultInsuranceAmount() {
+        return defaultInsuranceAmount;
+    }
+
+    /**
+     * Set the default insurance amount of the User.
+     *
+     * @param defaultInsuranceAmount the default insurance amount of the User.
+     */
+    public void setDefaultInsuranceAmount(String defaultInsuranceAmount) {
+        this.defaultInsuranceAmount = defaultInsuranceAmount;
+    }
+
+    /**
+     * Get the insurance fee rate of the User.
+     *
+     * @return the insurance fee rate of the User.
+     */
+    public String getInsuranceFeeRate() {
+        return insuranceFeeRate;
+    }
+
+    /**
+     * Set the insurance fee rate of the User.
+     *
+     * @param insuranceFeeRate the insurance fee rate of the User.
+     */
+    public void setInsuranceFeeRate(String insuranceFeeRate) {
+        this.insuranceFeeRate = insuranceFeeRate;
+    }
+
+    /**
+     * Get the insurance fee minimum of the User.
+     *
+     * @return the insurance fee minimum of the User.
+     */
+    public String getInsuranceFeeMinimum() {
+        return insuranceFeeMinimum;
+    }
+
+    /**
+     * Set the insurance fee minimum of the User.
+     *
+     * @param insuranceFeeMinimum the insurance fee minimum of the User.
+     */
+    public void setInsuranceFeeMinimum(String insuranceFeeMinimum) {
+        this.insuranceFeeMinimum = insuranceFeeMinimum;
     }
 }
