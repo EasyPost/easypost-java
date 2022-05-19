@@ -11,6 +11,8 @@
 - Add `Smartrate` class
   - All SmartRate-related functions now return lists of Smartrate objects rather than lists of Rate objects
 - Adds the `EndShipper` Beta class with `create`, `retrieve`, `all`, and `update` functions
+- Adds beta Referral class for White Label API with these new functions: `create()`, `updateEmail()`, `all()`, and `addCreditCard()`
+- Add `CreditCard` class for `addCreditCard()` function return type
 
 ## v5.2.0 (2022-02-25)
 
