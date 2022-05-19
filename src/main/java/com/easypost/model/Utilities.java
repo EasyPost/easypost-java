@@ -2,7 +2,9 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 public final class Utilities {
     private Utilities() {
@@ -51,5 +53,37 @@ public final class Utilities {
         }
 
         return lowestRate;
+    }
+
+    /**
+     * Create Encoded URL from a Map.
+     *
+     * @param params Map of parameters to be encoded.
+     * @param parentKey Parent key in the encoded URL.
+     * @return Encoded URL for Stripe API call.
+     * @throws Exception
+     */
+    public static String getEncodedURL(Map<String, String> params, String parentKey)
+        throws Exception {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        try {
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                if (first) {
+                    first = false;
+                } else {
+                    result.append("&");
+                }
+
+                result.append(URLEncoder.encode(parentKey + "[" + entry.getKey() + "]", "UTF-8"));
+                result.append("=");
+                result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+            }
+        } catch (Exception e) {
+            throw new Exception("Something went wrong during the URL encoding.");
+        }
+
+        return result.toString();
     }
 }

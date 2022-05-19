@@ -366,4 +366,38 @@ public abstract class Fixture {
 
         return address;
     }
+
+    /**
+     * Basic Referral user that is reusable in all test coverage.
+     *
+     * @return A map that has the Referral detail info filled.
+     */
+    public static Map<String, Object> referralUser() {
+        Map<String, Object> referralUser = new HashMap<>();
+
+        referralUser.put("name", "test test");
+        referralUser.put("email", "test@test.com");
+        referralUser.put("phone", "8888888888");
+
+        return referralUser;
+    }
+
+    /**
+     * Basic credit card that is reusable in all test coverage.
+     *
+     * @return A map that has the credit card info filled.
+     */
+    public static Map<String, String> creditCardDetails() {
+        // The credit card details below are for a valid proxy card usable
+        // for tests only and cannot be used for real transactions.
+        // DO NOT alter these details with real credit card information.
+        Map<String, String> creditCardDetails = new HashMap<String, String>();
+
+        creditCardDetails.put("number", "4536410136126170");
+        creditCardDetails.put("expiration_month", "05");
+        creditCardDetails.put("expiration_year", "2028");
+        creditCardDetails.put("cvc", "778");
+
+        return creditCardDetails;
+    }
 }
