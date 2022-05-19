@@ -1,18 +1,17 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## v5.3.0 (2022-05-19)
 
-- Add support for `columns` and `additional_columns` on Report creation
-- Add `declaraction` attribute in CustomsInfo class
-- Remove the dead `message` conditional check in `Address.createAndVerify()`
-- Add `AddressVerifications` class
+- Adds the `EndShipper` Beta class with `create`, `retrieve`, `all`, and `update` functions
+- Adds support for `columns` and `additional_columns` on Report creation
+- Adds `declaraction` attribute in CustomsInfo class
+- Adds `AddressVerifications` class
 - Adds a `lowestRate()` function to Orders and Pickups
 - Adds a `Shipment.getLowestSmartrate()` function and a `shipment.lowestSmartrate()` function
-- Add `Smartrate` class
-  - All SmartRate-related functions now return lists of Smartrate objects rather than lists of Rate objects
-- Adds the `EndShipper` Beta class with `create`, `retrieve`, `all`, and `update` functions
 - Adds beta Referral class for White Label API with these new functions: `create()`, `updateEmail()`, `all()`, and `addCreditCard()`
-- Add `CreditCard` class for `addCreditCard()` function return type
+- Adds `CreditCard` class for `addCreditCard()` function return type
+- All SmartRate-related functions now return lists of Smartrate objects rather than lists of Rate objects
+- Remove the dead `message` conditional check in `Address.createAndVerify()`
 
 ## v5.2.0 (2022-02-25)
 
