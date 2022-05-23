@@ -1,0 +1,281 @@
+[
+  {
+    "recordedAt": 1654197774,
+    "request": {
+      "body": "{\n  \"batch\": {\n    \"shipments\": [\n      {\n        \"parcel\": {\n          \"length\": \"10\",\n          \"width\": \"8\",\n          \"weight\": \"15.4\",\n          \"height\": \"4\"\n        },\n        \"carrier\": \"USPS\",\n        \"service\": \"First\",\n        \"to_address\": {\n          \"zip\": \"94107\",\n          \"city\": \"San Francisco\",\n          \"phone\": \"\\u003cREDACTED\\u003e\",\n          \"name\": \"Jack Sparrow\",\n          \"company\": \"EasyPost\",\n          \"street1\": \"388 Townsend St\",\n          \"street2\": \"Apt 20\",\n          \"state\": \"CA\"\n        },\n        \"carrier_accounts\": [\n          \"ca_f09befdb2e9c410e95c7622ea912c18c\"\n        ],\n        \"from_address\": {\n          \"zip\": \"94107\",\n          \"city\": \"San Francisco\",\n          \"phone\": \"\\u003cREDACTED\\u003e\",\n          \"name\": \"Jack Sparrow\",\n          \"company\": \"EasyPost\",\n          \"street1\": \"388 Townsend St\",\n          \"street2\": \"Apt 20\",\n          \"state\": \"CA\"\n        }\n      }\n    ]\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "Content-Type": [
+          "application/json"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/batches"
+    },
+    "response": {
+      "body": "{\n  \"created_at\": \"2022-06-02T19:22:54Z\",\n  \"shipments\": [],\n  \"mode\": \"test\",\n  \"num_shipments\": 1.0,\n  \"updated_at\": \"2022-06-02T19:22:54Z\",\n  \"id\": \"batch_0b8b24d1278a47459ea1736325594e57\",\n  \"state\": \"creating\",\n  \"object\": \"Batch\",\n  \"status\": {\n    \"postage_purchased\": 0.0,\n    \"queued_for_purchase\": 0.0,\n    \"created\": 0.0,\n    \"postage_purchase_failed\": 0.0,\n    \"creation_failed\": 0.0\n  }\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "384"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb8nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "77ca7e7d62990e0ee60e217800ccbd04"
+        ],
+        "x-proxied": [
+          "extlb1nuq 0910011e7e",
+          "intlb1nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.046154"
+        ],
+        "etag": [
+          "W/\"dd75414e7ecf27925836861207f73d8f\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/batches"
+    },
+    "duration": 197
+  },
+  {
+    "recordedAt": 1654197774,
+    "request": {
+      "body": "",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/batches/batch_0b8b24d1278a47459ea1736325594e57/buy"
+    },
+    "response": {
+      "body": "{\n  \"created_at\": \"2022-06-02T19:22:54Z\",\n  \"shipments\": [\n    {\n      \"batch_status\": \"queued_for_purchase\",\n      \"id\": \"shp_4e687145f54a45e09159ce3d79aacca4\"\n    }\n  ],\n  \"mode\": \"test\",\n  \"num_shipments\": 1.0,\n  \"updated_at\": \"2022-06-02T19:22:54Z\",\n  \"id\": \"batch_0b8b24d1278a47459ea1736325594e57\",\n  \"state\": \"created\",\n  \"object\": \"Batch\",\n  \"status\": {\n    \"postage_purchased\": 0.0,\n    \"queued_for_purchase\": 0.0,\n    \"created\": 1.0,\n    \"postage_purchase_failed\": 0.0,\n    \"creation_failed\": 0.0\n  }\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "524"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb5nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "77ca7e7d62990e0ee642b00c00ccbd19"
+        ],
+        "x-proxied": [
+          "extlb1nuq 0910011e7e",
+          "intlb2nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.088757"
+        ],
+        "etag": [
+          "W/\"cf3e82678b3504830bc1f8eff9bdcad7\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/batches/batch_0b8b24d1278a47459ea1736325594e57/buy"
+    },
+    "duration": 192
+  },
+  {
+    "recordedAt": 1654197785,
+    "request": {
+      "body": "",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/batches/batch_0b8b24d1278a47459ea1736325594e57/scan_form"
+    },
+    "response": {
+      "body": "{\n  \"scan_form\": {\n    \"updated_at\": \"2022-06-02T19:23:05Z\",\n    \"batch_id\": \"batch_0b8b24d1278a47459ea1736325594e57\",\n    \"created_at\": \"2022-06-02T19:23:05Z\",\n    \"id\": \"sf_f0f4477400f64a5ba3ab2422746779d1\",\n    \"tracking_codes\": [],\n    \"object\": \"ScanForm\",\n    \"status\": \"creating\"\n  },\n  \"created_at\": \"2022-06-02T19:22:54Z\",\n  \"shipments\": [\n    {\n      \"batch_status\": \"postage_purchased\",\n      \"id\": \"shp_4e687145f54a45e09159ce3d79aacca4\",\n      \"tracking_code\": \"9400100109361122056136\"\n    }\n  ],\n  \"mode\": \"test\",\n  \"num_shipments\": 1.0,\n  \"updated_at\": \"2022-06-02T19:23:05Z\",\n  \"id\": \"batch_0b8b24d1278a47459ea1736325594e57\",\n  \"state\": \"purchased\",\n  \"object\": \"Batch\",\n  \"status\": {\n    \"postage_purchased\": 1.0,\n    \"queued_for_purchase\": 0.0,\n    \"created\": 0.0,\n    \"postage_purchase_failed\": 0.0,\n    \"creation_failed\": 0.0\n  }\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "856"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb7nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-canary": [
+          "direct"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "f5a1f04662990e19e62df2c900e34579"
+        ],
+        "x-proxied": [
+          "extlb2nuq 0910011e7e",
+          "intlb1nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.085051"
+        ],
+        "etag": [
+          "W/\"1c289b35c36fee37405381f2ba7720c4\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/batches/batch_0b8b24d1278a47459ea1736325594e57/scan_form"
+    },
+    "duration": 242
+  }
+]

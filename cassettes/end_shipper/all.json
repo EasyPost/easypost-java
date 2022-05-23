@@ -1,0 +1,93 @@
+[
+  {
+    "recordedAt": 1654197849,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/beta/end_shippers?page_size\u003d5"
+    },
+    "response": {
+      "body": "[\n  {\n    \"zip\": \"94107-1670\",\n    \"country\": \"US\",\n    \"city\": \"SAN FRANCISCO\",\n    \"created_at\": \"2022-05-11T22:49:45+00:00\",\n    \"updated_at\": \"2022-05-11T22:49:45+00:00\",\n    \"phone\": \"\\u003cREDACTED\\u003e\",\n    \"name\": \"JACK SPARROW\",\n    \"company\": \"EASYPOST\",\n    \"street1\": \"388 TOWNSEND ST APT 20\",\n    \"id\": \"es_db92a416bbf343b5b3151465624eb3dc\",\n    \"state\": \"CA\",\n    \"email\": \"TEST@EXAMPLE.COM\",\n    \"object\": \"EndShipper\"\n  },\n  {\n    \"zip\": \"94107-1670\",\n    \"country\": \"US\",\n    \"city\": \"SAN FRANCISCO\",\n    \"created_at\": \"2022-05-11T22:50:28+00:00\",\n    \"updated_at\": \"2022-05-11T22:50:28+00:00\",\n    \"phone\": \"\\u003cREDACTED\\u003e\",\n    \"name\": \"JACK SPARROW\",\n    \"company\": \"EASYPOST\",\n    \"street1\": \"388 TOWNSEND ST APT 20\",\n    \"id\": \"es_e0f5edab6d7c4e27ad74750bdafbde4d\",\n    \"state\": \"CA\",\n    \"email\": \"TEST@EXAMPLE.COM\",\n    \"object\": \"EndShipper\"\n  },\n  {\n    \"zip\": \"94107-1670\",\n    \"country\": \"US\",\n    \"city\": \"SAN FRANCISCO\",\n    \"created_at\": \"2022-05-11T22:50:32+00:00\",\n    \"updated_at\": \"2022-05-11T22:50:32+00:00\",\n    \"phone\": \"\\u003cREDACTED\\u003e\",\n    \"name\": \"JACK SPARROW\",\n    \"company\": \"EASYPOST\",\n    \"street1\": \"388 TOWNSEND ST APT 20\",\n    \"id\": \"es_1509ca3895ef469d9b877244f6e0ac35\",\n    \"state\": \"CA\",\n    \"email\": \"TEST@EXAMPLE.COM\",\n    \"object\": \"EndShipper\"\n  },\n  {\n    \"zip\": \"94107-1670\",\n    \"country\": \"US\",\n    \"city\": \"SAN FRANCISCO\",\n    \"created_at\": \"2022-05-11T23:12:05+00:00\",\n    \"updated_at\": \"2022-05-11T23:12:05+00:00\",\n    \"phone\": \"\\u003cREDACTED\\u003e\",\n    \"name\": \"JACK SPARROW\",\n    \"company\": \"EASYPOST\",\n    \"street1\": \"388 TOWNSEND ST APT 20\",\n    \"id\": \"es_c0453e9c062347699f4abef8d1588f27\",\n    \"state\": \"CA\",\n    \"email\": \"TEST@EXAMPLE.COM\",\n    \"object\": \"EndShipper\"\n  },\n  {\n    \"zip\": \"94107-1670\",\n    \"country\": \"US\",\n    \"city\": \"SAN FRANCISCO\",\n    \"created_at\": \"2022-05-11T23:13:54+00:00\",\n    \"updated_at\": \"2022-05-11T23:13:54+00:00\",\n    \"phone\": \"\\u003cREDACTED\\u003e\",\n    \"name\": \"JACK SPARROW\",\n    \"company\": \"EASYPOST\",\n    \"street1\": \"388 TOWNSEND ST APT 20\",\n    \"id\": \"es_02698cc379434d3db832b0608fa29bc0\",\n    \"state\": \"CA\",\n    \"email\": \"TEST@EXAMPLE.COM\",\n    \"object\": \"EndShipper\"\n  }\n]",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "1801"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb4nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "f5a1f04562990e59e6522d1900e35ffb"
+        ],
+        "x-proxied": [
+          "extlb2nuq 0910011e7e",
+          "intlb2nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.060157"
+        ],
+        "etag": [
+          "W/\"a00181893315998b36ec818f0df23ea0\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/beta/end_shippers?page_size\u003d5"
+    },
+    "duration": 164
+  }
+]

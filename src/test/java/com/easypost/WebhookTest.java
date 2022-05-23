@@ -1,38 +1,60 @@
 package com.easypost;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Webhook;
 import com.easypost.model.WebhookCollection;
-
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class WebhookTest {
-    private static Map<String, Object> params = new HashMap<>();
-    private static Webhook globalWebhook;
+    private static String testWebhookId = null;
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
-    // @BeforeAll
+    @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("webhook", TestUtils.ApiKey.TEST);
+    }
 
-        params.put("url", "http://example.com");
+    @AfterEach
+    public void cleanup() {
+        if (testWebhookId != null) {
+            try {
+                Webhook webhook = Webhook.retrieve(testWebhookId);
+                webhook.delete();
+                testWebhookId = null;
+            } catch (Exception e) {
+                // in case we try to delete something that's already been deleted
+            }
+        }
+    }
+    /**
+     * Create a webhook.
+     */
+    private static Webhook createBasicWebhook() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("url", Fixture.webhookUrl());
 
-        globalWebhook = Webhook.create(params);
+        Webhook webhook = Webhook.create(params);
+        testWebhookId = webhook.getId(); // trigger deletion after test
+        return webhook;
     }
 
     /**
@@ -41,21 +63,14 @@ public class WebhookTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Order(1)
-    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI
-              // test.
     public void testCreate() throws EasyPostException {
-        Map<String, Object> p = new HashMap<>();
-        p.put("url", Fixture.webhookUrl());
+        _vcr.setUpTest("create");
 
-        Webhook webhook = Webhook.create(p);
+        Webhook webhook = createBasicWebhook();
 
-        assertTrue(webhook instanceof Webhook);
+        assertInstanceOf(Webhook.class, webhook);
         assertTrue(webhook.getId().startsWith("hook_"));
         assertEquals(Fixture.webhookUrl(), webhook.getUrl());
-
-        webhook.delete(); // we are deleting the webhook here so we don't keep sending events to a dead
-                          // webhook.
     }
 
     /**
@@ -64,14 +79,15 @@ public class WebhookTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Order(2)
-    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI
-              // test.
     public void testRetrieve() throws EasyPostException {
-        Webhook retrievedWebhook = Webhook.retrieve(globalWebhook.getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(retrievedWebhook instanceof Webhook);
-        assertThat(globalWebhook).usingRecursiveComparison().isEqualTo(retrievedWebhook);
+        Webhook webhook = createBasicWebhook();
+
+        Webhook retrievedWebhook = Webhook.retrieve(webhook.getId());
+
+        assertInstanceOf(Webhook.class, retrievedWebhook);
+        assertThat(webhook).usingRecursiveComparison().isEqualTo(retrievedWebhook);
     }
 
     /**
@@ -80,19 +96,13 @@ public class WebhookTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Order(3)
-    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI
-              // test.
     public void testAll() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
+        _vcr.setUpTest("all");
 
-        params.put("page_size", Fixture.pageSize());
-
-        WebhookCollection webhooks = Webhook.all(params);
+        WebhookCollection webhooks = Webhook.all();
 
         List<Webhook> webhooksList = webhooks.getWebhooks();
 
-        assertTrue(webhooksList.size() <= Fixture.pageSize());
         assertTrue(webhooksList.stream().allMatch(webhook -> webhook instanceof Webhook));
     }
 
@@ -102,9 +112,13 @@ public class WebhookTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled
     public void testUpdate() throws EasyPostException {
-        // Cannot be easily tested - requires a disabled webhook.
+        _vcr.setUpTest("update");
+
+        Webhook webhook = createBasicWebhook();
+
+        webhook.update();
+        // TODO: We should call this something more intuitive in the future, since it doesn't work like the other Update function
     }
 
     /**
@@ -113,12 +127,16 @@ public class WebhookTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Order(4)
-    @Disabled // This test is ignored because we can't run webhook test simultaneously in CI
-              // test.
     public void testDelete() throws EasyPostException {
-        // This endpoint/method does not return anything, just make sure the request
-        // doesn't fail.
-        globalWebhook.delete();
+        _vcr.setUpTest("delete");
+
+        Webhook webhook = createBasicWebhook();
+        Webhook retrievedWebhook = Webhook.retrieve(webhook.getId());
+
+        retrievedWebhook.delete();
+
+        // TODO: endpoint should return boolean to evaluate
+
+        testWebhookId = null; // skip deletion cleanup
     }
 }

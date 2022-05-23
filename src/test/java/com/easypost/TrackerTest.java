@@ -1,33 +1,43 @@
 package com.easypost;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Tracker;
 import com.easypost.model.TrackerCollection;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TrackerTest {
-    private static Map<String, Object> params = new HashMap<>();
-    private static Tracker globalTracker;
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("tracker", TestUtils.ApiKey.TEST);
+    }
 
+    /**
+     * Create a tracker.
+     */
+    private static Tracker createBasicTracker() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("carrier", Fixture.usps());
         params.put("tracking_code", "EZ1000000001");
 
-        globalTracker = Tracker.create(params);
+        // TODO: We shouldn't require end-users to wrap these parameters in a dictionary.
+        return Tracker.create(params);
     }
 
     /**
@@ -37,9 +47,11 @@ public class TrackerTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        Tracker tracker = Tracker.create(params);
+        _vcr.setUpTest("create");
 
-        assertTrue(tracker instanceof Tracker);
+        Tracker tracker = createBasicTracker();
+
+        assertInstanceOf(Tracker.class, tracker);
         assertTrue(tracker.getId().startsWith("trk_"));
         assertEquals("pre_transit", tracker.getStatus());
     }
@@ -51,11 +63,15 @@ public class TrackerTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        Tracker retrievedTracker = Tracker.retrieve(globalTracker.getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(retrievedTracker instanceof Tracker);
+        Tracker tracker = createBasicTracker();
+
+        Tracker retrievedTracker = Tracker.retrieve(tracker.getId());
+
+        assertInstanceOf(Tracker.class, tracker);
         assertTrue(retrievedTracker.getId().startsWith("trk_"));
-        assertEquals(globalTracker.getId(), retrievedTracker.getId());
+        assertEquals(tracker.getId(), retrievedTracker.getId());
     }
 
     /**
@@ -65,8 +81,9 @@ public class TrackerTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
+        _vcr.setUpTest("all");
 
+        Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
 
         TrackerCollection trackers = Tracker.all(params);
@@ -85,6 +102,8 @@ public class TrackerTest {
      */
     @Test
     public void testCreateList() throws EasyPostException {
+        _vcr.setUpTest("create_list");
+
         Map<String, Object> params = new HashMap<>();
         String[] trackingCodes = new String[] { "EZ1000000001", "EZ1000000002", "EZ1000000003" };
 
@@ -95,8 +114,9 @@ public class TrackerTest {
             params.put(String.valueOf(i), tracker);
         }
 
-        Boolean response = Tracker.createList(params);
+        boolean response = Tracker.createList(params);
 
+        // This endpoint returns nothing so we assert the function returns true
         assertTrue(response);
     }
 }

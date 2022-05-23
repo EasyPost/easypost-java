@@ -1,23 +1,25 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.Shipment;
 import com.easypost.model.Rate;
-
-import org.junit.jupiter.api.Test;
+import com.easypost.model.Shipment;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class RateTest {
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("rate", TestUtils.ApiKey.TEST);
     }
 
     /**
@@ -27,10 +29,14 @@ public class RateTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixture.basicShipment());
-        Rate rate = Rate.retrieve(shipment.getRates().get(0).getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(rate instanceof Rate);
-        assertTrue(rate.getId().startsWith("rate_"));
+        Shipment shipment = Shipment.create(Fixture.basicShipment());
+        Rate rate = shipment.getRates().get(0);
+
+        Rate retrievedRate = Rate.retrieve(rate.getId());
+
+        assertInstanceOf(Rate.class, rate);
+        assertThat(rate).usingRecursiveComparison().isEqualTo(retrievedRate);
     }
 }

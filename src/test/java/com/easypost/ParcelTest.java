@@ -2,25 +2,32 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Parcel;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParcelTest {
-    private static Parcel globalParcel;
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException{
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("parcel", TestUtils.ApiKey.TEST);
+    }
 
-        globalParcel = Parcel.create(Fixture.basicParcel());
+    /**
+     * Create a parcel.
+     */
+    private static Parcel createBasicParcel() throws EasyPostException {
+        return Parcel.create(Fixture.basicParcel());
     }
 
     /**
@@ -30,9 +37,11 @@ public class ParcelTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        Parcel parcel = Parcel.create(Fixture.basicParcel());
+        _vcr.setUpTest("create");
 
-        assertTrue(parcel instanceof Parcel);
+        Parcel parcel = createBasicParcel();
+
+        assertInstanceOf(Parcel.class, parcel);
         assertTrue(parcel.getId().startsWith("prcl_"));
         assertEquals(15.4, parcel.getWeight(), 0.01);
     }
@@ -44,9 +53,13 @@ public class ParcelTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        Parcel retrievedParcel = Parcel.retrieve(globalParcel.getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(retrievedParcel instanceof Parcel);
-        assertThat(globalParcel).usingRecursiveComparison().isEqualTo(retrievedParcel);
+        Parcel parcel = createBasicParcel();
+
+        Parcel retrievedParcel = Parcel.retrieve(parcel.getId());
+
+        assertInstanceOf(Parcel.class, retrievedParcel);
+        assertThat(parcel).usingRecursiveComparison().isEqualTo(retrievedParcel);
     }
 }

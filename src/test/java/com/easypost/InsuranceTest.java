@@ -1,36 +1,38 @@
 package com.easypost;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Insurance;
 import com.easypost.model.InsuranceCollection;
-import com.easypost.model.Shipment;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InsuranceTest {
-    private static Insurance globalInsurance;
-    private static Map<String, Object> insuranceData = Fixture.basicInsurance();
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("insurance", TestUtils.ApiKey.TEST);
+    }
 
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
-
-        insuranceData.put("tracking_code", shipment.getTrackingCode());
-
-        globalInsurance = Insurance.create(insuranceData);
+    /**
+     * Create insurance object.
+     */
+    private static Insurance createBasicInsurance() throws EasyPostException {
+        return Insurance.create(Fixture.basicInsurance());
     }
 
     /**
@@ -40,13 +42,11 @@ public class InsuranceTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+        _vcr.setUpTest("create");
 
-        insuranceData.put("tracking_code", shipment.getTrackingCode());
+        Insurance insurance = createBasicInsurance();
 
-        Insurance insurance = Insurance.create(insuranceData);
-
-        assertTrue(insurance instanceof Insurance);
+        assertInstanceOf(Insurance.class, insurance);
         assertTrue(insurance.getId().startsWith("ins_"));
         assertEquals(100.0, insurance.getAmount(), 0.01);
     }
@@ -58,11 +58,15 @@ public class InsuranceTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        Insurance retrievedInsurance = Insurance.retrieve(globalInsurance.getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(retrievedInsurance instanceof Insurance);
-        assertTrue(retrievedInsurance.getId().startsWith("ins_"));
-        assertEquals(globalInsurance.getId(), retrievedInsurance.getId());
+        Insurance insurance = createBasicInsurance();
+
+        Insurance retrievedInsurance = Insurance.retrieve(insurance.getId());
+
+        assertInstanceOf(Insurance.class, insurance);
+        // Must compare IDs since other elements of object may be different
+        assertEquals(insurance.getId(), retrievedInsurance.getId());
     }
 
     /**
@@ -72,16 +76,17 @@ public class InsuranceTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
+        _vcr.setUpTest("all");
 
+        Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
 
-        InsuranceCollection insurances = Insurance.all(params);
+        InsuranceCollection insuranceCollection = Insurance.all(params);
 
-        List<Insurance> insurancesList = insurances.getInsurances();
+        List<Insurance> insurances = insuranceCollection.getInsurances();
 
-        assertTrue(insurancesList.size() <= Fixture.pageSize());
-        assertNotNull(insurances.getHasMore());
-        assertTrue(insurancesList.stream().allMatch(insurance -> insurance instanceof Insurance));
+        assertTrue(insurances.size() <= Fixture.pageSize());
+        assertNotNull(insuranceCollection.getHasMore());
+        assertTrue(insurances.stream().allMatch(insurance -> insurance instanceof Insurance));
     }
 }

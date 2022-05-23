@@ -2,25 +2,32 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.CustomsInfo;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CustomsInfoTest {
-    private static CustomsInfo globalCustomsInfo;
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("customs_info", TestUtils.ApiKey.TEST);
+    }
 
-        globalCustomsInfo = CustomsInfo.create(Fixture.basicCustomsInfo());
+    /**
+     * Create a customs info object.
+     */
+    private static CustomsInfo createBasicCustomsInfo() throws EasyPostException {
+        return CustomsInfo.create(Fixture.basicCustomsInfo());
     }
 
     /**
@@ -29,10 +36,12 @@ public class CustomsInfoTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testCreate() throws EasyPostException{
-        CustomsInfo customsInfo = CustomsInfo.create(Fixture.basicCustomsInfo());
+    public void testCreate() throws EasyPostException {
+        _vcr.setUpTest("create");
 
-        assertTrue(customsInfo instanceof  CustomsInfo);
+        CustomsInfo customsInfo = createBasicCustomsInfo();
+
+        assertInstanceOf(CustomsInfo.class, customsInfo);
         assertTrue(customsInfo.getId().startsWith("cstinfo_"));
         assertEquals("NOEEI 30.37(a)", customsInfo.getEelPfc());
     }
@@ -44,9 +53,13 @@ public class CustomsInfoTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        CustomsInfo retrievedCustomsInfo = CustomsInfo.retrieve(globalCustomsInfo.getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(retrievedCustomsInfo instanceof CustomsInfo);
-        assertThat(globalCustomsInfo).usingRecursiveComparison().isEqualTo(retrievedCustomsInfo);
+        CustomsInfo customsInfo = createBasicCustomsInfo();
+
+        CustomsInfo retrievedCustomsInfo = CustomsInfo.retrieve(customsInfo.getId());
+
+        assertInstanceOf(CustomsInfo.class, retrievedCustomsInfo);
+        assertThat(customsInfo).usingRecursiveComparison().isEqualTo(retrievedCustomsInfo);
     }
 }

@@ -1,29 +1,66 @@
 package com.easypost;
 
-import com.easypost.model.*;
+import com.easypost.exception.EasyPostException;
+import com.easypost.model.ApiKey;
+import com.easypost.model.ApiKeys;
+import com.easypost.model.Brand;
+import com.easypost.model.User;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import com.easypost.exception.EasyPostException;
-
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserTest {
-    private static User globalUser;
+    private static String testUserId = null;
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setUp() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");
-        globalUser = User.retrieveMe();
+        _vcr = new TestUtils.VCR("user", TestUtils.ApiKey.PRODUCTION);
+    }
+
+    @AfterEach
+    public void cleanup() {
+        if (testUserId != null) {
+            try {
+                User user = User.retrieve(testUserId);
+                user.delete();
+                testUserId = null;
+            } catch (Exception e) {
+                // in case we try to delete something that's already been deleted
+            }
+        }
+    }
+
+    /**
+     * Retrieve current user.
+     */
+    private static User retrieveMe() throws EasyPostException {
+        return User.retrieveMe();
+    }
+
+    /**
+     * Create a user.
+     */
+    private static User createUser() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "Test User");
+        User user = User.create(params);
+        testUserId = user.getId(); // trigger deletion after test
+        return user;
     }
 
     /**
@@ -32,17 +69,14 @@ public class UserTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // This endpoint returns the child user keys in plain text, do not run this
-              // test.
     public void testCreate() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
+        _vcr.setUpTest("create");
 
-        params.put("name", "Test User");
+        User user = createUser();
 
-        User user = User.create(params);
-
-        assertTrue(user instanceof User);
+        assertInstanceOf(User.class, user);
         assertTrue(user.getId().startsWith("user_"));
+        assertEquals("Test User", user.getName());
     }
 
     /**
@@ -52,12 +86,17 @@ public class UserTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        User authenticatedUser = User.retrieveMe();
+        _vcr.setUpTest("retrieve");
 
-        User user = User.retrieve(authenticatedUser.getChildren().get(0).getId());
+        User authenticatedUser = retrieveMe();
 
-        assertTrue(user instanceof User);
+        String userId = authenticatedUser.getId();
+
+        User user = User.retrieve(userId);
+
+        assertInstanceOf(User.class, user);
         assertTrue(user.getId().startsWith("user_"));
+        assertEquals(userId, user.getId());
     }
 
     /**
@@ -67,9 +106,11 @@ public class UserTest {
      */
     @Test
     public void testRetrieveMe() throws EasyPostException {
+        _vcr.setUpTest("retrieve_me");
+
         User user = User.retrieveMe();
 
-        assertTrue(user instanceof User);
+        assertInstanceOf(User.class, user);
         assertTrue(user.getId().startsWith("user_"));
     }
 
@@ -80,16 +121,21 @@ public class UserTest {
      */
     @Test
     public void testUpdate() throws EasyPostException {
-        String testPhone = "5555555555";
+        _vcr.setUpTest("update");
+
+        User user = createUser();
+
+        String testName = "New Name";
         Map<String, Object> params = new HashMap<>();
 
-        params.put("phone", testPhone);
+        params.put("name", testName);
 
-        globalUser.update(params);
+        // TODO: Failing because name not overriding on merge?
+        User updatedUser = user.update(params);
 
-        assertTrue(globalUser instanceof User);
-        assertTrue(globalUser.getId().startsWith("user_"));
-        assertEquals(testPhone, globalUser.getPhoneNumber());
+        assertInstanceOf(User.class, updatedUser);
+        assertTrue(updatedUser.getId().startsWith("user_"));
+        assertEquals(testName, updatedUser.getName());
     }
 
     /**
@@ -98,10 +144,16 @@ public class UserTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // Due to our inability to create child users securely, we must also skip
-              // deleting them as we cannot replace the deleted ones easily.
     public void testDelete() throws EasyPostException {
-        globalUser.delete();
+        _vcr.setUpTest("delete");
+
+        User user = createUser();
+
+        user.delete();
+
+        // TODO: endpoint should return boolean to evaluate
+
+        testUserId = null;  // skip deletion cleanup
     }
 
     /**
@@ -110,11 +162,12 @@ public class UserTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // API keys are returned as plaintext, do not run this test.
-    public void testAppApiKeys() throws EasyPostException {
+    public void testAllApiKeys() throws EasyPostException {
+        _vcr.setUpTest("all_api_keys");
+
         ApiKeys apikeys = ApiKeys.all();
 
-        assertTrue(apikeys instanceof ApiKeys);
+        assertInstanceOf(ApiKeys.class, apikeys);
     }
 
     /**
@@ -123,9 +176,13 @@ public class UserTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // API keys are returned as plaintext, do not run this test.
     public void testApiKeys() throws EasyPostException {
-        globalUser.apiKeys();
+        _vcr.setUpTest("api_keys");
+
+        User user = createUser();
+
+        List<ApiKey> apiKeys = user.apiKeys();
+        assertNotNull(apiKeys);
     }
 
     /**
@@ -135,14 +192,18 @@ public class UserTest {
      */
     @Test
     public void testUpdateBrand() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
+        _vcr.setUpTest("update_brand");
+
+        User user = createUser();
+
         String color = "#123456";
 
+        Map<String, Object> params = new HashMap<>();
         params.put("color", color);
 
-        Brand brand = globalUser.updateBrand(params);
+        Brand brand = user.updateBrand(params);
 
-        assertTrue(brand instanceof Brand);
+        assertInstanceOf(Brand.class, brand);
         assertTrue(brand.getId().startsWith("brd_"));
         assertEquals(color, brand.getColor());
     }

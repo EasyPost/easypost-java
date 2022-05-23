@@ -1,43 +1,48 @@
 package com.easypost;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Refund;
 import com.easypost.model.RefundCollection;
 import com.easypost.model.Shipment;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RefundTest {
-
-    private static List<Refund> globalRefunds;
-    private static Map<String, Object> params = new HashMap<>();
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("refund", TestUtils.ApiKey.TEST);
+    }
 
-        Map<String, Object> shipmentData = Fixture.oneCallBuyShipment();
-
-        Shipment shipment = Shipment.create(shipmentData);
+    /**
+     * Create a list of refunds.
+     */
+    private static List<Refund> createBasicRefundList() throws EasyPostException {
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
 
         Shipment retrievedShipment = Shipment.retrieve(shipment.getId()); // We need to retrieve the shipment so that the tracking_code has time to populate
-        
+
+        Map<String, Object> params = new HashMap<>();
         params.put("carrier", Fixture.usps());
         params.put("tracking_codes", retrievedShipment.getTrackingCode());
 
-        globalRefunds = Refund.create(params);
+        return Refund.create(params);
     }
 
     /**
@@ -47,11 +52,16 @@ public class RefundTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        List<Refund> refunds = Refund.create(params);
+        _vcr.setUpTest("create");
 
-        assertTrue(refunds instanceof List);
-        assertTrue(refunds.get(0).getId().startsWith("rfnd_"));
-        assertEquals("submitted", refunds.get(0).getStatus());
+        List<Refund> refunds = createBasicRefundList();
+
+        assertInstanceOf(List.class, refunds);
+        assertTrue(refunds.stream().allMatch(refund -> refund instanceof Refund));
+
+        Refund refund = refunds.get(0);
+        assertTrue(refund.getId().startsWith("rfnd_"));
+        assertEquals("submitted", refund.getStatus());
     }
 
     /**
@@ -61,17 +71,18 @@ public class RefundTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
+        _vcr.setUpTest("all");
 
+        Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
 
-        RefundCollection refunds = Refund.all(params);
+        RefundCollection refundCollection = Refund.all(params);
 
-        List<Refund> refundsList = refunds.getRefunds();
+        List<Refund> refunds = refundCollection.getRefunds();
 
-        assertTrue(refundsList.size() <= Fixture.pageSize());
-        assertNotNull(refunds.getHasMore());
-        assertTrue(refundsList.stream().allMatch(refund -> refund instanceof Refund));
+        assertTrue(refunds.size() <= Fixture.pageSize());
+        assertNotNull(refundCollection.getHasMore());
+        assertTrue(refunds.stream().allMatch(refund -> refund instanceof Refund));
     }
 
     /**
@@ -81,9 +92,14 @@ public class RefundTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        Refund retrievedRefund = Refund.retrieve(globalRefunds.get(0).getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(retrievedRefund instanceof Refund);
-        assertThat(globalRefunds.get(0)).usingRecursiveComparison().isEqualTo(retrievedRefund);
+        List<Refund> refunds = createBasicRefundList();
+        Refund refund = refunds.get(0);
+
+        Refund retrievedRefund = Refund.retrieve(refund.getId());
+
+        assertInstanceOf(Refund.class, retrievedRefund);
+        assertThat(refund).usingRecursiveComparison().isEqualTo(retrievedRefund);
     }
 }

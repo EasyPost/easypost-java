@@ -1,0 +1,93 @@
+[
+  {
+    "recordedAt": 1654197845,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/refunds?page_size\u003d5"
+    },
+    "response": {
+      "body": "{\n  \"has_more\": true,\n  \"refunds\": [\n    {\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-06-02T19:23:44Z\",\n      \"created_at\": \"2022-06-02T19:23:44Z\",\n      \"id\": \"rfnd_80aae37b2e26479dbda1bdfcaa5f57a6\",\n      \"shipment_id\": \"shp_d3282ae33b334de3848ae018007e49de\",\n      \"tracking_code\": \"9400100109361122056259\",\n      \"object\": \"Refund\",\n      \"status\": \"submitted\"\n    },\n    {\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-06-02T18:51:12Z\",\n      \"created_at\": \"2022-06-02T18:51:12Z\",\n      \"id\": \"rfnd_d888821313f9434aa6a8f122631cce14\",\n      \"shipment_id\": \"shp_8d0fd74600414d15ac878a3e3ebf9cfb\",\n      \"tracking_code\": \"9400100109361122052626\",\n      \"object\": \"Refund\",\n      \"status\": \"submitted\"\n    },\n    {\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-06-02T18:51:10Z\",\n      \"created_at\": \"2022-06-02T18:51:10Z\",\n      \"id\": \"rfnd_095a3421d1ba478d9c2db066c43833be\",\n      \"shipment_id\": \"shp_d7b05010b5d741608e979010561b0af6\",\n      \"tracking_code\": \"9400100109361122052572\",\n      \"object\": \"Refund\",\n      \"status\": \"submitted\"\n    },\n    {\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-06-02T18:51:09Z\",\n      \"created_at\": \"2022-06-02T18:51:09Z\",\n      \"id\": \"rfnd_f2ea30f98feb4f40b92aee54da40f044\",\n      \"shipment_id\": \"shp_19f1e2a43c6443259e4bccf41e27c5aa\",\n      \"tracking_code\": \"9400100109361122052558\",\n      \"object\": \"Refund\",\n      \"status\": \"submitted\"\n    },\n    {\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-06-02T18:51:05Z\",\n      \"created_at\": \"2022-06-02T18:51:05Z\",\n      \"id\": \"rfnd_bec9ef50928c49b597a1282a80396098\",\n      \"shipment_id\": \"shp_20b0b4549d47461fb2fb499c98cab332\",\n      \"tracking_code\": \"9400100109361122052428\",\n      \"object\": \"Refund\",\n      \"status\": \"submitted\"\n    }\n  ]\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "1509"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb1nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "f5a1f04462990e55e62df6cb00e35e3a"
+        ],
+        "x-proxied": [
+          "extlb2nuq 0910011e7e",
+          "intlb2nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.042952"
+        ],
+        "etag": [
+          "W/\"027dae6f0605521f1a3e151ea27b99a7\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/refunds?page_size\u003d5"
+    },
+    "duration": 151
+  }
+]

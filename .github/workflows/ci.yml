@@ -19,7 +19,7 @@ jobs:
           distribution: "zulu"
           java-version: ${{ matrix.javaversion }}
       - name: Build and test with Maven
-        run: EASYPOST_TEST_API_KEY=${{ secrets.EASYPOST_TEST_API_KEY }} EASYPOST_PROD_API_KEY=${{ secrets.EASYPOST_PROD_API_KEY }} mvn --batch-mode install -Dgpg.skip=true -DskipTests=true -Dcheckstyle.skip=true
+        run: EASYPOST_TEST_API_KEY=${{ secrets.EASYPOST_TEST_API_KEY }} EASYPOST_PROD_API_KEY=${{ secrets.EASYPOST_PROD_API_KEY }} mvn --batch-mode install -Dgpg.skip=true -Dcheckstyle.skip=true
   lint:
     runs-on: ubuntu-latest
     steps:

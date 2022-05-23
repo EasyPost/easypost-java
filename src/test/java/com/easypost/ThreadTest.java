@@ -2,8 +2,8 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Order;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ThreadTest {
+    private static TestUtils.VCR _vcr;
     static Map<String, Object> defaultFromAddress = new HashMap<String, Object>();
     static Map<String, Object> defaultToAddress = new HashMap<String, Object>();
     static Map<String, Object> defaultParcel = new HashMap<String, Object>();
@@ -22,13 +23,13 @@ public class ThreadTest {
     }
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setUp() {
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("thread", TestUtils.ApiKey.TEST);
 
         defaultFromAddress.put("name", "EasyPost");
         defaultFromAddress.put("street1", "164 Townsend St");
@@ -58,6 +59,7 @@ public class ThreadTest {
      */
     @Test
     public void testThreadOrderCreation() throws EasyPostException, InterruptedException {
+        _vcr.setUpTest("thread_order_creation");
 
         // create a default set of shipment and order params to feed to the threads
         Map<String, Object> shipment_1 = orderShipment();

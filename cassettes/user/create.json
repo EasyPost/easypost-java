@@ -1,0 +1,269 @@
+[
+  {
+    "recordedAt": 1654197837,
+    "request": {
+      "body": "{\n  \"user\": {\n    \"name\": \"Test User\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "Content-Type": [
+          "application/json"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/users"
+    },
+    "response": {
+      "body": "{\n  \"children\": [],\n  \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n  \"name\": \"Test User\",\n  \"verified\": true,\n  \"created_at\": \"2022-06-02T19:23:56Z\",\n  \"phone_number\": \"\\u003cREDACTED\\u003e\",\n  \"id\": \"user_93d4fc86d58e42fc8fec9c01369b5c72\",\n  \"api_keys\": [],\n  \"object\": \"User\"\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 201 Created"
+        ],
+        "content-length": [
+          "634"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb9nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "f5a1f04462990e4ce641b51500e35ad5"
+        ],
+        "x-proxied": [
+          "extlb2nuq 0910011e7e",
+          "intlb1nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.735338"
+        ],
+        "etag": [
+          "W/\"6a11d09ed3555a22da3f1ed9cd56609e\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 201,
+        "message": "Created"
+      },
+      "uri": "https://api.easypost.com/v2/users"
+    },
+    "duration": 844
+  },
+  {
+    "recordedAt": 1654197837,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/users/user_93d4fc86d58e42fc8fec9c01369b5c72"
+    },
+    "response": {
+      "body": "{\n  \"children\": [],\n  \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n  \"name\": \"Test User\",\n  \"verified\": true,\n  \"created_at\": \"2022-06-02T19:23:56Z\",\n  \"phone_number\": \"\\u003cREDACTED\\u003e\",\n  \"id\": \"user_93d4fc86d58e42fc8fec9c01369b5c72\",\n  \"object\": \"User\"\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "227"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb4nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "f5a1f04962990e4de61cf2c700e35b49"
+        ],
+        "x-proxied": [
+          "extlb2nuq 0910011e7e",
+          "intlb2nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.046191"
+        ],
+        "etag": [
+          "W/\"f768dd87998f32af916f2114cc48177f\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/users/user_93d4fc86d58e42fc8fec9c01369b5c72"
+    },
+    "duration": 148
+  },
+  {
+    "recordedAt": 1654197837,
+    "request": {
+      "body": "",
+      "method": "DELETE",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/users/user_93d4fc86d58e42fc8fec9c01369b5c72"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "null": [
+          "HTTP/1.1 204 No Content"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb6nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "f5a1f04862990e4de60ad60b00e35b53"
+        ],
+        "x-proxied": [
+          "extlb2nuq 0910011e7e",
+          "intlb2nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.126073"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 204,
+        "message": "No Content"
+      },
+      "uri": "https://api.easypost.com/v2/users/user_93d4fc86d58e42fc8fec9c01369b5c72"
+    },
+    "duration": 224
+  }
+]

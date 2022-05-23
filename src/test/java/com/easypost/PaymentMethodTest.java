@@ -2,12 +2,15 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.PaymentMethod;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class PaymentMethodTest {
+
+    private static TestUtils.VCR _vcr;
+
     /**
      * Setup the testing environment for this file.
      *
@@ -15,7 +18,7 @@ public class PaymentMethodTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException{
-        EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");
+        _vcr = new TestUtils.VCR("payment_method", TestUtils.ApiKey.PRODUCTION);
     }
 
     /**
@@ -25,9 +28,10 @@ public class PaymentMethodTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        PaymentMethod billing = PaymentMethod.all();
+        _vcr.setUpTest("all");
 
-        assertTrue(billing.getPrimaryPaymentMethod() != null);
-        assertTrue(billing.getSecondaryPaymentMethod() != null);
+        PaymentMethod paymentMethods = PaymentMethod.all();
+
+        assertInstanceOf(PaymentMethod.class, paymentMethods);
     }
 }

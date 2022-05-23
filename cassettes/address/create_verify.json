@@ -1,0 +1,99 @@
+[
+  {
+    "recordedAt": 1654197874,
+    "request": {
+      "body": "{\n  \"address\": {\n    \"zip\": \"94104\",\n    \"country\": \"US\",\n    \"city\": \"San Francisco\",\n    \"phone\": \"\\u003cREDACTED\\u003e\",\n    \"street1\": \"417 montgomery street\",\n    \"company\": \"EasyPost\",\n    \"street2\": \"FL 5\",\n    \"state\": \"CA\"\n  },\n  \"verify\": [\n    true\n  ]\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "Content-Type": [
+          "application/json"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/addresses"
+    },
+    "response": {
+      "body": "{\n  \"zip\": \"94104-1129\",\n  \"country\": \"US\",\n  \"city\": \"SAN FRANCISCO\",\n  \"created_at\": \"2022-06-02T19:24:34+00:00\",\n  \"verifications\": {\n    \"delivery\": {\n      \"success\": true,\n      \"details\": {\n        \"latitude\": 37.79342,\n        \"time_zone\": \"America/Los_Angeles\",\n        \"longitude\": -122.40288\n      },\n      \"errors\": [\n        {\n          \"code\": \"E.SECONDARY_INFORMATION.INVALID\",\n          \"field\": \"street2\",\n          \"message\": \"Invalid secondary information(Apt/Suite#)\"\n        }\n      ]\n    },\n    \"zip4\": {\n      \"success\": true,\n      \"errors\": [\n        {\n          \"code\": \"E.SECONDARY_INFORMATION.INVALID\",\n          \"field\": \"street2\",\n          \"message\": \"Invalid secondary information(Apt/Suite#)\"\n        }\n      ]\n    }\n  },\n  \"mode\": \"test\",\n  \"residential\": false,\n  \"updated_at\": \"2022-06-02T19:24:34+00:00\",\n  \"phone\": \"\\u003cREDACTED\\u003e\",\n  \"company\": \"EASYPOST\",\n  \"street1\": \"417 MONTGOMERY ST FL 5\",\n  \"id\": \"adr_a2c5f9c2e2a911eca58eac1f6bc72124\",\n  \"street2\": \"\",\n  \"state\": \"CA\",\n  \"object\": \"Address\"\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 201 Created"
+        ],
+        "content-length": [
+          "893"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb5nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "f5a1f04a62990e72e6522c7100e36be0"
+        ],
+        "x-proxied": [
+          "extlb2nuq 0910011e7e",
+          "intlb2nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.043001"
+        ],
+        "etag": [
+          "W/\"21ba8329af3c16c26d93907e261dd66a\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "location": [
+          "/api/v2/addresses/adr_a2c5f9c2e2a911eca58eac1f6bc72124"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 201,
+        "message": "Created"
+      },
+      "uri": "https://api.easypost.com/v2/addresses"
+    },
+    "duration": 146
+  }
+]

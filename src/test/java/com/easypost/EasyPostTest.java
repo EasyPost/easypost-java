@@ -2,21 +2,22 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EasyPostTest {
+    private static TestUtils.VCR _vcr;
     
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() {
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("client", TestUtils.ApiKey.TEST);
     }
 
     /**
@@ -26,6 +27,7 @@ public class EasyPostTest {
      */
     @Test
     public void testConnectionTimeout() {
+
         int testTimeout = 1;
 
         EasyPostResource.setConnectTimeoutMilliseconds(testTimeout);

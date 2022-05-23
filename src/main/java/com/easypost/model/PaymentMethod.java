@@ -48,30 +48,12 @@ public class PaymentMethod extends EasyPostResource {
     }
 
     /**
-     * Set ID of this PaymentMethod object.
-     *
-     * @param id ID of this PaymentMethod.
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
      * Get the object of this PaymentMethod object.
      *
      * @return the object of this PaymentMethod.
      */
     public String getObject() {
         return object;
-    }
-
-    /**
-     * Set the object of this PaymentMethod object.
-     *
-     * @param object the object of this PaymentMethod.
-     */
-    public void setObject(String object) {
-        this.object = object;
     }
 
     /**
@@ -84,29 +66,11 @@ public class PaymentMethod extends EasyPostResource {
     }
 
     /**
-     * Set the PrimaryPaymentMethod of this PaymentMethod object.
-     *
-     * @param primaryPaymentMethod the PrimaryPaymentMethod of this PaymentMethod.
-     */
-    public void setPrimaryPaymentMethod(PrimaryPaymentMethod primaryPaymentMethod) {
-        this.primaryPaymentMethod = primaryPaymentMethod;
-    }
-
-    /**
      * Get the SecondaryPaymentMethod of this PaymentMethod object.
      *
      * @return the SecondaryPaymentMethod of this PaymentMethod.
      */
     public SecondaryPaymentMethod getSecondaryPaymentMethod() {
         return secondaryPaymentMethod;
-    }
-
-    /**
-     * Set the SecondaryPaymentMethod of this PaymentMethod object.
-     *
-     * @param secondaryPaymentMethod the SecondaryPaymentMethod of this PaymentMethod.
-     */
-    public void setSecondaryPaymentMethod(SecondaryPaymentMethod secondaryPaymentMethod) {
-        this.secondaryPaymentMethod = secondaryPaymentMethod;
     }
 }

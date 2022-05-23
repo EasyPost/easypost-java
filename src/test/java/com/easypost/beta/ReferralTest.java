@@ -1,31 +1,41 @@
 package com.easypost.beta;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
-import com.easypost.EasyPost;
 import com.easypost.Fixture;
+import com.easypost.TestUtils;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.beta.CreditCard;
 import com.easypost.model.beta.Referral;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ReferralTest {
-    private static String REFERRAL_USER_PROD_API_KEY = System.getenv("REFERRAL_USER_PROD_API_KEY")
-        == null? "123": System.getenv("REFERRAL_USER_PROD_API_KEY");
+    private static TestUtils.VCR _vcr;
+    private static final String REFERRAL_USER_PROD_API_KEY = System.getenv("REFERRAL_USER_PROD_API_KEY")
+        == null ? "123": System.getenv("REFERRAL_USER_PROD_API_KEY");
     
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");
+        _vcr = new TestUtils.VCR("referral", REFERRAL_USER_PROD_API_KEY);
+    }
+
+    /**
+     * Create a referral.
+     */
+    private static Referral createReferral() throws EasyPostException {
+        return Referral.create(Fixture.referralUser());
     }
 
     /**
@@ -35,11 +45,13 @@ public class ReferralTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        Referral referralUser = Referral.create(Fixture.referralUser());
+        _vcr.setUpTest("create");
 
-        assertTrue(referralUser instanceof Referral);
+        Referral referralUser = createReferral();
+
+        assertInstanceOf(Referral.class, referralUser);
         assertTrue(referralUser.getId().startsWith("user_"));
-        assertEquals("8888888888", referralUser.getPhoneNumber());
+        assertEquals(Fixture.referralUser().get("name"), referralUser.getName());
     }
 
     /**
@@ -49,10 +61,12 @@ public class ReferralTest {
      */
     @Test
     public void testUpdate() throws EasyPostException {
-        Referral referralUser = Referral.create(Fixture.referralUser());
+        _vcr.setUpTest("update");
+
+        Referral referralUser = createReferral();
         boolean response = Referral.updateEmail("email@example.com", referralUser.getId());
 
-        assertTrue(response == true);
+        assertTrue(response);
     }
 
     /**
@@ -62,6 +76,8 @@ public class ReferralTest {
      */
     @Test
     public void testAll() throws EasyPostException {
+        _vcr.setUpTest("all");
+
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
 
@@ -78,13 +94,15 @@ public class ReferralTest {
      */
     @Test
     public void testReferralAddCreditCard() throws Exception {
+        _vcr.setUpTest("referral_add_credit_card");
+
         Map<String, String> creditCardDetails = Fixture.creditCardDetails();
         CreditCard creditCard = Referral.addCreditCard(REFERRAL_USER_PROD_API_KEY, creditCardDetails.get("number"),
             Integer.parseInt(creditCardDetails.get("expiration_month")),
             Integer.parseInt(creditCardDetails.get("expiration_year")), creditCardDetails.get("cvc"), Referral.Priority.PRIMARY);
 
-        assertTrue(creditCard instanceof CreditCard);
+        assertInstanceOf(CreditCard.class, creditCard);
         assertTrue(creditCard.getId().startsWith("card_"));
-        assertEquals("6170", creditCard.getLast4());
+        assertEquals(Fixture.creditCardDetails().get("number").substring(12), creditCard.getLast4());
     }
 }

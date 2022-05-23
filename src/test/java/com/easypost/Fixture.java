@@ -1,5 +1,8 @@
 package com.easypost;
 
+import com.easypost.exception.EasyPostException;
+import com.easypost.model.Shipment;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,6 +77,14 @@ public abstract class Fixture {
     }
 
     /**
+     * Prefix for report type.
+     * @return report type prefix
+     */
+    public static String reportIdPrefix() {
+        return "shprep_";
+    }
+
+    /**
      * Webhook URL.
      *
      * @return webhook URL.
@@ -109,6 +120,10 @@ public abstract class Fixture {
      */
     public static Map<String, Object> incorrectAddressToVerify() {
         Map<String, Object> address = new HashMap<>();
+
+        List<Boolean> verify = new ArrayList<>();
+        verify.add(true);
+        address.put("verify", verify);
 
         address.put("street1", "417 montgomery street");
         address.put("street2", "FL 5");
@@ -280,7 +295,7 @@ public abstract class Fixture {
     public static Map<String, Object> basicPickup() {
         Map<String, Object> basicPickup = new HashMap<>();
 
-        String pickupDate = "2022-05-14";
+        String pickupDate = "2022-06-03";
 
         basicPickup.put("address", basicAddress());
         basicPickup.put("min_datetime", pickupDate);
@@ -316,13 +331,16 @@ public abstract class Fixture {
      *
      * @return a map with the insurance data filled in.
      */
-    public static Map<String, Object> basicInsurance() {
+    public static Map<String, Object> basicInsurance() throws EasyPostException {
+        Shipment shipment = Shipment.create(oneCallBuyShipment());
+
         Map<String, Object> insurance = new HashMap<>();
 
         insurance.put("to_address", Fixture.basicAddress());
         insurance.put("from_address", Fixture.basicAddress());
         insurance.put("carrier", Fixture.usps());
         insurance.put("amount", "100");
+        insurance.put("tracking_code", shipment.getTrackingCode());
 
         return insurance;
     }

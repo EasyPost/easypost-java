@@ -1,0 +1,190 @@
+[
+  {
+    "recordedAt": 1654197844,
+    "request": {
+      "body": "{\n  \"customs_info\": {\n    \"restriction_type\": \"none\",\n    \"customs_certify\": true,\n    \"eel_pfc\": \"NOEEI 30.37(a)\",\n    \"customs_signer\": \"Steve Brule\",\n    \"contents_explanation\": \"\",\n    \"non_delivery_option\": \"return\",\n    \"custom_items\": {\n      \"quantity\": \"2\",\n      \"description\": \"Sweet shirts\",\n      \"weight\": \"11\",\n      \"hs_tariff_number\": \"654321\",\n      \"value\": \"23\",\n      \"origin_country\": \"US\"\n    },\n    \"contents_type\": \"merchandise\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "Content-Type": [
+          "application/json"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/customs_infos"
+    },
+    "response": {
+      "body": "{\n  \"restriction_type\": \"none\",\n  \"created_at\": \"2022-06-02T19:24:04Z\",\n  \"mode\": \"test\",\n  \"customs_items\": [],\n  \"updated_at\": \"2022-06-02T19:24:04Z\",\n  \"customs_certify\": true,\n  \"eel_pfc\": \"NOEEI 30.37(a)\",\n  \"customs_signer\": \"Steve Brule\",\n  \"id\": \"cstinfo_59bbce6fc3724751ae21d48e73c38a2c\",\n  \"contents_explanation\": \"\",\n  \"non_delivery_option\": \"return\",\n  \"object\": \"CustomsInfo\",\n  \"contents_type\": \"merchandise\"\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 201 Created"
+        ],
+        "content-length": [
+          "418"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb8nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "f5a1f04762990e54e6545e1800e35dfd"
+        ],
+        "x-proxied": [
+          "extlb2nuq 0910011e7e",
+          "intlb1nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.024665"
+        ],
+        "etag": [
+          "W/\"2ef7513cf657edfed83a0c1bbc22d405\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "location": [
+          "/api/v2/customs_infos/cstinfo_59bbce6fc3724751ae21d48e73c38a2c"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 201,
+        "message": "Created"
+      },
+      "uri": "https://api.easypost.com/v2/customs_infos"
+    },
+    "duration": 143
+  },
+  {
+    "recordedAt": 1654197844,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "\u003cREDACTED\u003e"
+        ],
+        "X-Client-User-Agent": [
+          "\u003cREDACTED\u003e"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/customs_infos/cstinfo_59bbce6fc3724751ae21d48e73c38a2c"
+    },
+    "response": {
+      "body": "{\n  \"restriction_type\": \"none\",\n  \"created_at\": \"2022-06-02T19:24:04Z\",\n  \"mode\": \"test\",\n  \"customs_items\": [],\n  \"updated_at\": \"2022-06-02T19:24:04Z\",\n  \"customs_certify\": true,\n  \"eel_pfc\": \"NOEEI 30.37(a)\",\n  \"customs_signer\": \"Steve Brule\",\n  \"id\": \"cstinfo_59bbce6fc3724751ae21d48e73c38a2c\",\n  \"contents_explanation\": \"\",\n  \"non_delivery_option\": \"return\",\n  \"object\": \"CustomsInfo\",\n  \"contents_type\": \"merchandise\"\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "418"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb4nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "f5a1f04962990e54fc51296000e35e13"
+        ],
+        "x-proxied": [
+          "extlb2nuq 0910011e7e",
+          "intlb1nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.021083"
+        ],
+        "etag": [
+          "W/\"2ef7513cf657edfed83a0c1bbc22d405\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206021850-56a13db81c-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/customs_infos/cstinfo_59bbce6fc3724751ae21d48e73c38a2c"
+    },
+    "duration": 129
+  }
+]
