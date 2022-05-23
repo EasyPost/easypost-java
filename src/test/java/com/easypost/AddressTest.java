@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AddressTest {
-    private static TestUtils.VCR _vcr;
+public final class AddressTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -25,10 +25,16 @@ public class AddressTest {
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() throws EasyPostException{
-        _vcr = new TestUtils.VCR("address", TestUtils.ApiKey.TEST);
+    public static void setup() throws EasyPostException {
+        vcr = new TestUtils.VCR("address", TestUtils.ApiKey.TEST);
     }
 
+    /**
+     * Create a basic address.
+     *
+     * @return basic Address object
+     * @throws EasyPostException
+     */
     public static Address createBasicAddress() throws EasyPostException {
         return Address.create(Fixture.basicAddress());
     }
@@ -40,7 +46,7 @@ public class AddressTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         Address address = createBasicAddress();
 
@@ -56,7 +62,7 @@ public class AddressTest {
      */
     @Test
     public void testCreateVerifyStrict() throws EasyPostException {
-        _vcr.setUpTest("create_verify_strict");
+        vcr.setUpTest("create_verify_strict");
 
         Map<String, Object> addressData = Fixture.basicAddress();
 
@@ -77,8 +83,8 @@ public class AddressTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testRetrieve() throws EasyPostException{
-        _vcr.setUpTest("retrieve");
+    public void testRetrieve() throws EasyPostException {
+        vcr.setUpTest("retrieve");
 
         Address address = createBasicAddress();
         Address retrievedAddress = Address.retrieve(address.getId());
@@ -94,8 +100,8 @@ public class AddressTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testAll() throws EasyPostException{
-        _vcr.setUpTest("all");
+    public void testAll() throws EasyPostException {
+        vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
@@ -113,11 +119,11 @@ public class AddressTest {
      * Test creating a verified address.
      * We purposefully pass in slightly incorrect data to get the corrected address back once verified.
      *
-     *  @throws EasyPostException when the request fails.
+     * @throws EasyPostException when the request fails.
      */
     @Test
     public void testCreateVerify() throws EasyPostException {
-        _vcr.setUpTest("create_verify");
+        vcr.setUpTest("create_verify");
 
         Map<String, Object> addressData = Fixture.incorrectAddressToVerify();
 
@@ -132,11 +138,11 @@ public class AddressTest {
      * Test creating a verified address.
      * We purposefully pass in slightly incorrect data to get the corrected address back once verified.
      *
-     *  @throws EasyPostException when the request fails.
+     * @throws EasyPostException when the request fails.
      */
     @Test
     public void testCreateAndVerify() throws EasyPostException {
-        _vcr.setUpTest("create_and_verify");
+        vcr.setUpTest("create_and_verify");
 
         Map<String, Object> addressData = Fixture.basicAddress();
         List<Boolean> verifications = new ArrayList<>();
@@ -157,7 +163,7 @@ public class AddressTest {
      */
     @Test
     public void testVerify() throws EasyPostException {
-        _vcr.setUpTest("verify");
+        vcr.setUpTest("verify");
 
         Address address = createBasicAddress();
 

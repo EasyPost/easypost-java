@@ -26,8 +26,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ShipmentTest {
-    private static TestUtils.VCR _vcr;
+public final class ShipmentTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -36,11 +36,13 @@ public class ShipmentTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("shipment", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("shipment", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create a basic shipment.
+     *
+     * @return Shipment object
      */
     private static Shipment createBasicShipment() throws EasyPostException {
         return Shipment.create(Fixture.basicShipment());
@@ -48,6 +50,8 @@ public class ShipmentTest {
 
     /**
      * Create a full shipment.
+     *
+     * @return Shipment object
      */
     private static Shipment createFullShipment() throws EasyPostException {
         return Shipment.create(Fixture.fullShipment());
@@ -55,6 +59,8 @@ public class ShipmentTest {
 
     /**
      * Create a one-call-buy shipment.
+     *
+     * @return Shipment object
      */
     private static Shipment createOneCallBuyShipment() throws EasyPostException {
         return Shipment.create(Fixture.oneCallBuyShipment());
@@ -67,7 +73,7 @@ public class ShipmentTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         Shipment shipment = createFullShipment();
 
@@ -86,7 +92,7 @@ public class ShipmentTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         Shipment shipment = createFullShipment();
 
@@ -103,7 +109,7 @@ public class ShipmentTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("page_size", Fixture.pageSize());
@@ -124,7 +130,7 @@ public class ShipmentTest {
      */
     @Test
     public void testBuy() throws EasyPostException {
-        _vcr.setUpTest("buy");
+        vcr.setUpTest("buy");
 
         Shipment shipment = createBasicShipment();
 
@@ -140,7 +146,7 @@ public class ShipmentTest {
      */
     @Test
     public void testRegenerateRates() throws EasyPostException {
-        _vcr.setUpTest("regenerate_rates");
+        vcr.setUpTest("regenerate_rates");
 
         Shipment shipment = createFullShipment();
 
@@ -162,7 +168,7 @@ public class ShipmentTest {
      */
     @Test
     public void testConvertLabel() throws EasyPostException {
-        _vcr.setUpTest("convert_label");
+        vcr.setUpTest("convert_label");
 
         Shipment shipment = createOneCallBuyShipment();
 
@@ -186,7 +192,7 @@ public class ShipmentTest {
      */
     @Test
     public void testInsure() throws EasyPostException {
-        _vcr.setUpTest("insure");
+        vcr.setUpTest("insure");
 
         Map<String, Object> shipmentData = Fixture.oneCallBuyShipment();
         // Set to 0 so USPS doesn't insure this automatically and we can insure the
@@ -217,7 +223,7 @@ public class ShipmentTest {
      */
     @Test
     public void testRefund() throws EasyPostException {
-        _vcr.setUpTest("refund");
+        vcr.setUpTest("refund");
 
         Shipment shipment = createOneCallBuyShipment();
 
@@ -233,7 +239,7 @@ public class ShipmentTest {
      */
     @Test
     public void testSmartRate() throws EasyPostException {
-        _vcr.setUpTest("smart_rate");
+        vcr.setUpTest("smart_rate");
 
         Shipment shipment = createBasicShipment();
 
@@ -261,7 +267,7 @@ public class ShipmentTest {
      */
     @Test
     public void testCreateEmptyObjects() throws EasyPostException {
-        _vcr.setUpTest("create_empty_objects");
+        vcr.setUpTest("create_empty_objects");
 
         Map<String, Object> shipmentData = Fixture.basicShipment();
 
@@ -292,7 +298,7 @@ public class ShipmentTest {
      */
     @Test
     public void testCreateTaxIdentifiers() throws EasyPostException {
-        _vcr.setUpTest("create_tax_identifiers");
+        vcr.setUpTest("create_tax_identifiers");
 
         Map<String, Object> shipmentData = Fixture.basicShipment();
 
@@ -316,7 +322,7 @@ public class ShipmentTest {
     @Disabled
     // TODO: test is for some reason failing to pull a proper recording when playing back. Only test doing this
     public void testCreateWithIds() throws EasyPostException {
-        _vcr.setUpTest("create_with_ids");
+        vcr.setUpTest("create_with_ids");
 
         Address fromAddress = Address.create(Fixture.basicAddress());
         Address toAddress = Address.create(Fixture.basicAddress());
@@ -344,7 +350,7 @@ public class ShipmentTest {
      */
     @Test
     public void testLowestRate() throws EasyPostException {
-        _vcr.setUpTest("lowest_rate");
+        vcr.setUpTest("lowest_rate");
 
         Shipment shipment = createFullShipment();
 
@@ -375,11 +381,11 @@ public class ShipmentTest {
      */
     @Test
     public void testInstanceLowestSmartRate() throws EasyPostException {
-        _vcr.setUpTest("lowest_smartrate");
+        vcr.setUpTest("lowest_smartrate");
 
         Shipment shipment = createBasicShipment();
         Smartrate lowestSmartRateFilters = shipment.lowestSmartRate(1, "percentile_90");
-        
+
         // Test lowest smartrate with valid filters
         assertEquals("First", lowestSmartRateFilters.getService());
         assertEquals(5.49, lowestSmartRateFilters.getRate(), 0.01);
@@ -403,16 +409,16 @@ public class ShipmentTest {
      */
     @Test
     public void testStaticLowestSmartRates() throws EasyPostException {
-        _vcr.setUpTest("lowest_smartrate_list");
+        vcr.setUpTest("lowest_smartrate_list");
 
         Shipment shipment = createBasicShipment();
         List<Smartrate> smartrates = shipment.getSmartrates();
 
         // Test lowest smartrate with valid filters
-        Smartrate lowest_Smartrate_filters = Shipment.getLowestSmartRate(smartrates, 1, "percentile_90");
-        assertEquals("First", lowest_Smartrate_filters.getService());
-        assertEquals(5.49, lowest_Smartrate_filters.getRate(), 0.01);
-        assertEquals("USPS", lowest_Smartrate_filters.getCarrier());
+        Smartrate lowestSmartRate = Shipment.getLowestSmartRate(smartrates, 1, "percentile_90");
+        assertEquals("First", lowestSmartRate.getService());
+        assertEquals(5.49, lowestSmartRate.getRate(), 0.01);
+        assertEquals("USPS", lowestSmartRate.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict delivery days)
         assertThrows(EasyPostException.class, () -> {

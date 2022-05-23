@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ScanFormTest {
-    private static TestUtils.VCR _vcr;
+public final class ScanFormTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -26,12 +26,14 @@ public class ScanFormTest {
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() throws EasyPostException{
-        _vcr = new TestUtils.VCR("scan_form", TestUtils.ApiKey.TEST);
+    public static void setup() throws EasyPostException {
+        vcr = new TestUtils.VCR("scan_form", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create a ScanForm.
+     *
+     * @return ScanForm object
      */
     private static ScanForm getBasicScanForm() throws EasyPostException {
         Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
@@ -53,7 +55,7 @@ public class ScanFormTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         ScanForm scanForm = getBasicScanForm();
 
@@ -68,7 +70,7 @@ public class ScanFormTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         ScanForm scanForm = getBasicScanForm();
 
@@ -85,7 +87,7 @@ public class ScanFormTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());

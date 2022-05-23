@@ -5,9 +5,8 @@
         "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 
 <suppressions>
-    <!-- Don't do any CheckStyle checks on any Test files. -->
-    <suppress checks="[a-zA-Z0-9]*"
-              files="com[\\/]easypost[\\/].*Test.java"/>
+    <!-- Don't enforce MagicNumber checks on unit test files -->
+    <suppress checks="MagicNumber" files="com[\\/]easypost[\\/].*Test.java"/>
     <!-- Don't do any CheckStyle checks on any com.easypost.app files. -->
     <suppress checks="[a-zA-Z0-9]*"
               files="com[\\/]easypost[\\/]app[\\/]"/>

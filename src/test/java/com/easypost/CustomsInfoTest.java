@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CustomsInfoTest {
-    private static TestUtils.VCR _vcr;
+public final class CustomsInfoTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -20,11 +20,13 @@ public class CustomsInfoTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("customs_info", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("customs_info", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create a customs info object.
+     *
+     * @return CustomsInfo object.
      */
     private static CustomsInfo createBasicCustomsInfo() throws EasyPostException {
         return CustomsInfo.create(Fixture.basicCustomsInfo());
@@ -37,7 +39,7 @@ public class CustomsInfoTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         CustomsInfo customsInfo = createBasicCustomsInfo();
 
@@ -53,7 +55,7 @@ public class CustomsInfoTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         CustomsInfo customsInfo = createBasicCustomsInfo();
 

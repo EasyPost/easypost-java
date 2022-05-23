@@ -1,29 +1,24 @@
 package com.easypost;
 
-import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EasyPostTest {
-    private static TestUtils.VCR _vcr;
-    
+public final class EasyPostTest {
+    private static TestUtils.VCR vcr;
+
     /**
      * Set up the testing environment for this file.
-     *
-     * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() {
-        _vcr = new TestUtils.VCR("client", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("client", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Test connection timeout getter and setter.
-     *
-     * @throws EasyPostException when the request fails.
      */
     @Test
     public void testConnectionTimeout() {
@@ -40,8 +35,6 @@ public class EasyPostTest {
 
     /**
      * Test read timeout getter and setter.
-     *
-     * @throws EasyPostException when the request fails.
      */
     @Test
     public void testRequestTimeout() {

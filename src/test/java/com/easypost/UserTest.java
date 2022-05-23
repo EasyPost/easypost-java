@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UserTest {
+public final class UserTest {
     private static String testUserId = null;
-    private static TestUtils.VCR _vcr;
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -29,9 +29,34 @@ public class UserTest {
      */
     @BeforeAll
     public static void setUp() throws EasyPostException {
-        _vcr = new TestUtils.VCR("user", TestUtils.ApiKey.PRODUCTION);
+        vcr = new TestUtils.VCR("user", TestUtils.ApiKey.PRODUCTION);
     }
 
+    /**
+     * Retrieve current user.
+     *
+     * @return User object
+     */
+    private static User retrieveMe() throws EasyPostException {
+        return User.retrieveMe();
+    }
+
+    /**
+     * Create a user.
+     *
+     * @return User object
+     */
+    private static User createUser() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "Test User");
+        User user = User.create(params);
+        testUserId = user.getId(); // trigger deletion after test
+        return user;
+    }
+
+    /**
+     * Clean up test attributes after each unit test.
+     */
     @AfterEach
     public void cleanup() {
         if (testUserId != null) {
@@ -46,31 +71,13 @@ public class UserTest {
     }
 
     /**
-     * Retrieve current user.
-     */
-    private static User retrieveMe() throws EasyPostException {
-        return User.retrieveMe();
-    }
-
-    /**
-     * Create a user.
-     */
-    private static User createUser() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
-        params.put("name", "Test User");
-        User user = User.create(params);
-        testUserId = user.getId(); // trigger deletion after test
-        return user;
-    }
-
-    /**
      * Test creating a child user.
      *
      * @throws EasyPostException when the request fails.
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         User user = createUser();
 
@@ -86,7 +93,7 @@ public class UserTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         User authenticatedUser = retrieveMe();
 
@@ -106,7 +113,7 @@ public class UserTest {
      */
     @Test
     public void testRetrieveMe() throws EasyPostException {
-        _vcr.setUpTest("retrieve_me");
+        vcr.setUpTest("retrieve_me");
 
         User user = User.retrieveMe();
 
@@ -121,7 +128,7 @@ public class UserTest {
      */
     @Test
     public void testUpdate() throws EasyPostException {
-        _vcr.setUpTest("update");
+        vcr.setUpTest("update");
 
         User user = createUser();
 
@@ -129,7 +136,7 @@ public class UserTest {
         Map<String, Object> params = new HashMap<>();
 
         params.put("name", testName);
-        
+
         User updatedUser = user.update(params);
 
         assertInstanceOf(User.class, updatedUser);
@@ -144,7 +151,7 @@ public class UserTest {
      */
     @Test
     public void testDelete() throws EasyPostException {
-        _vcr.setUpTest("delete");
+        vcr.setUpTest("delete");
 
         User user = createUser();
 
@@ -158,7 +165,7 @@ public class UserTest {
      */
     @Test
     public void testAllApiKeys() throws EasyPostException {
-        _vcr.setUpTest("all_api_keys");
+        vcr.setUpTest("all_api_keys");
 
         ApiKeys apikeys = ApiKeys.all();
 
@@ -172,7 +179,7 @@ public class UserTest {
      */
     @Test
     public void testApiKeys() throws EasyPostException {
-        _vcr.setUpTest("api_keys");
+        vcr.setUpTest("api_keys");
 
         User user = createUser();
 
@@ -187,7 +194,7 @@ public class UserTest {
      */
     @Test
     public void testUpdateBrand() throws EasyPostException {
-        _vcr.setUpTest("update_brand");
+        vcr.setUpTest("update_brand");
 
         User user = createUser();
 

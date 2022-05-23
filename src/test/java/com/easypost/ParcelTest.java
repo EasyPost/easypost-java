@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ParcelTest {
-    private static TestUtils.VCR _vcr;
+public final class ParcelTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -19,12 +19,14 @@ public class ParcelTest {
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() throws EasyPostException{
-        _vcr = new TestUtils.VCR("parcel", TestUtils.ApiKey.TEST);
+    public static void setup() throws EasyPostException {
+        vcr = new TestUtils.VCR("parcel", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create a parcel.
+     *
+     * @return Parcel object
      */
     private static Parcel createBasicParcel() throws EasyPostException {
         return Parcel.create(Fixture.basicParcel());
@@ -37,7 +39,7 @@ public class ParcelTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         Parcel parcel = createBasicParcel();
 
@@ -53,7 +55,7 @@ public class ParcelTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         Parcel parcel = createBasicParcel();
 

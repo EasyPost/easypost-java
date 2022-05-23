@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TrackerTest {
-    private static TestUtils.VCR _vcr;
+public final class TrackerTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -25,11 +25,13 @@ public class TrackerTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("tracker", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("tracker", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create a tracker.
+     *
+     * @return Tracker object
      */
     private static Tracker createBasicTracker() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
@@ -46,7 +48,7 @@ public class TrackerTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         Tracker tracker = createBasicTracker();
 
@@ -62,7 +64,7 @@ public class TrackerTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         Tracker tracker = createBasicTracker();
 
@@ -80,7 +82,7 @@ public class TrackerTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
@@ -101,7 +103,7 @@ public class TrackerTest {
      */
     @Test
     public void testCreateList() throws EasyPostException {
-        _vcr.setUpTest("create_list");
+        vcr.setUpTest("create_list");
 
         Map<String, Object> params = new HashMap<>();
         String[] trackingCodes = new String[] { "EZ1000000001", "EZ1000000002", "EZ1000000003" };

@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class EventTest {
-    private static TestUtils.VCR _vcr;
+public final class EventTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -24,12 +24,14 @@ public class EventTest {
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() throws EasyPostException{
-        _vcr = new TestUtils.VCR("event", TestUtils.ApiKey.TEST);
+    public static void setup() throws EasyPostException {
+        vcr = new TestUtils.VCR("event", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Get an event collection.
+     *
+     * @return EventCollection object.
      */
     private static EventCollection getBasicEventCollection() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
@@ -44,7 +46,7 @@ public class EventTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         EventCollection events = getBasicEventCollection();
 
@@ -62,7 +64,7 @@ public class EventTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         EventCollection eventCollection = getBasicEventCollection();
         List<Event> events = eventCollection.getEvents();

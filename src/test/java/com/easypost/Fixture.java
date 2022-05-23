@@ -27,8 +27,8 @@ public abstract class Fixture {
      */
     public static String uspsCarrierAccountID() {
         // Fallback to the EasyPost Java Client Library Test User USPS carrier account
-        return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID")
-                : "ca_f09befdb2e9c410e95c7622ea912c18c";
+        return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID") :
+                "ca_f09befdb2e9c410e95c7622ea912c18c";
     }
 
     /**
