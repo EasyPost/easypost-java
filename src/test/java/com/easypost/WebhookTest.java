@@ -118,7 +118,8 @@ public class WebhookTest {
         Webhook webhook = createBasicWebhook();
 
         webhook.update();
-        // TODO: We should call this something more intuitive in the future, since it doesn't work like the other Update function
+
+        assertInstanceOf(Webhook.class, webhook);
     }
 
     /**
@@ -135,8 +136,6 @@ public class WebhookTest {
 
         retrievedWebhook.delete();
 
-        // TODO: endpoint should return boolean to evaluate
-
-        testWebhookId = null; // skip deletion cleanup
+        testWebhookId = null; // need to disable post-test deletion for test to work
     }
 }

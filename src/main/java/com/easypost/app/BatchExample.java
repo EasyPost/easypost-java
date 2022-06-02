@@ -151,7 +151,7 @@ public class BatchExample {
                     break;
                 }
 
-                Thread.sleep(8000);
+                Thread.sleep(5000);
             }
 
             System.out.println(batch.prettyPrint());

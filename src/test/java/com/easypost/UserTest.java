@@ -129,8 +129,7 @@ public class UserTest {
         Map<String, Object> params = new HashMap<>();
 
         params.put("name", testName);
-
-        // TODO: Failing because name not overriding on merge?
+        
         User updatedUser = user.update(params);
 
         assertInstanceOf(User.class, updatedUser);
@@ -150,10 +149,6 @@ public class UserTest {
         User user = createUser();
 
         user.delete();
-
-        // TODO: endpoint should return boolean to evaluate
-
-        testUserId = null;  // skip deletion cleanup
     }
 
     /**

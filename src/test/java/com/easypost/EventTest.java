@@ -71,7 +71,7 @@ public class EventTest {
         Event retrievedEvent = Event.retrieve(event.getId());
 
         assertInstanceOf(Event.class, retrievedEvent);
-        // Must compare IDs because other elements of objects may be different
+        // Must compare IDs since can't do whole-object comparisons currently
         assertEquals(event.getId(), retrievedEvent.getId());
     }
 }

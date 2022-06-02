@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ErrorTest {
-    // TODO: Need more unit tests for this class.
-
     private static TestUtils.VCR _vcr;
 
     /**

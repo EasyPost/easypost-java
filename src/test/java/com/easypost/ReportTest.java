@@ -62,7 +62,7 @@ public class ReportTest {
         Report report = createBasicReport();
 
         assertInstanceOf(Report.class, report);
-        assertTrue(report.getId().startsWith(Fixture.reportIdPrefix()));
+        assertTrue(report.getId().startsWith("shprep_"));
     }
 
     /**

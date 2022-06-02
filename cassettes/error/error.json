@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1654197838,
+    "recordedAt": 1654210498,
     "request": {
       "body": "{}",
       "method": "POST",
@@ -9,13 +9,13 @@
           "UTF-8"
         ],
         "User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ],
         "Content-Type": [
           "application/json"
         ],
         "X-Client-User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ]
       },
       "uri": "https://api.easypost.com/v2/shipments"
@@ -32,7 +32,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb4nuq"
+          "bigweb5nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -59,23 +59,23 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "f5a1f04362990e4ee653d57200e35bfd"
+          "24678df462993fc2fc4e89a0000e0d1d"
         ],
         "x-proxied": [
-          "extlb2nuq 0910011e7e",
+          "extlb1nuq 0910011e7e",
           "intlb2nuq 570dfcbc0a"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.025501"
+          "0.018144"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206021850-56a13db81c-master"
+          "easypost-202206022117-ecf7ce5035-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -88,6 +88,6 @@
       "errors": "{\n  \"error\": {\n    \"code\": \"SHIPMENT.INVALID_PARAMS\",\n    \"message\": \"Unable to create shipment, one or more parameters were invalid.\",\n    \"errors\": [\n      {\n        \"to_address\": \"Required and missing.\"\n      },\n      {\n        \"from_address\": \"Required and missing.\"\n      }\n    ]\n  }\n}",
       "uri": "https://api.easypost.com/v2/shipments"
     },
-    "duration": 126
+    "duration": 172
   }
 ]

@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1654197839,
+    "recordedAt": 1654210499,
     "request": {
       "body": "",
       "method": "GET",
@@ -9,16 +9,16 @@
           "UTF-8"
         ],
         "User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ],
         "X-Client-User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ]
       },
       "uri": "https://api.easypost.com/v2/scan_forms?page_size\u003d5"
     },
     "response": {
-      "body": "{\n  \"has_more\": true,\n  \"scan_forms\": [\n    {\n      \"address\": {\n        \"zip\": \"94107\",\n        \"country\": \"US\",\n        \"city\": \"San Francisco\",\n        \"created_at\": \"2022-06-02T19:22:54+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"updated_at\": \"2022-06-02T19:22:54+00:00\",\n        \"phone\": \"\\u003cREDACTED\\u003e\",\n        \"name\": \"Jack Sparrow\",\n        \"company\": \"EasyPost\",\n        \"street1\": \"388 Townsend St\",\n        \"id\": \"adr_671626cee2a911ecbbbeac1f6b0a0d1e\",\n        \"street2\": \"Apt 20\",\n        \"state\": \"CA\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2022-06-02T19:23:05Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20220602/3ca26860b7b1489fa7d6e3e8e8665616.pdf\",\n      \"batch_id\": \"batch_0b8b24d1278a47459ea1736325594e57\",\n      \"created_at\": \"2022-06-02T19:23:05Z\",\n      \"id\": \"sf_f0f4477400f64a5ba3ab2422746779d1\",\n      \"tracking_codes\": [\n        \"9400100109361122056136\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"94107\",\n        \"country\": \"US\",\n        \"city\": \"San Francisco\",\n        \"created_at\": \"2022-06-02T18:51:25+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"updated_at\": \"2022-06-02T18:51:25+00:00\",\n        \"phone\": \"\\u003cREDACTED\\u003e\",\n        \"name\": \"Jack Sparrow\",\n        \"company\": \"EasyPost\",\n        \"street1\": \"388 Townsend St\",\n        \"id\": \"adr_00b46b31e2a511ecbfe9ac1f6bc72124\",\n        \"street2\": \"Apt 20\",\n        \"state\": \"CA\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2022-06-02T18:51:26Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20220602/39f4163cf531479e979d96b4dadbb02b.pdf\",\n      \"batch_id\": \"batch_b69beaab70884ed1bd11e36e359d7fac\",\n      \"created_at\": \"2022-06-02T18:51:26Z\",\n      \"id\": \"sf_c7b5202efe454b11b4a982d70e953865\",\n      \"tracking_codes\": [\n        \"9400100109361122052855\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"94107\",\n        \"country\": \"US\",\n        \"city\": \"San Francisco\",\n        \"created_at\": \"2022-06-02T18:51:19+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"updated_at\": \"2022-06-02T18:51:19+00:00\",\n        \"phone\": \"\\u003cREDACTED\\u003e\",\n        \"name\": \"Jack Sparrow\",\n        \"company\": \"EasyPost\",\n        \"street1\": \"388 Townsend St\",\n        \"id\": \"adr_fd185e55e2a411eca5ecac1f6bc7b362\",\n        \"street2\": \"Apt 20\",\n        \"state\": \"CA\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2022-06-02T18:51:20Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20220602/98a288a702db437ca73765ecbcc675df.pdf\",\n      \"batch_id\": \"batch_54521db6889143d4ab69571389d9171e\",\n      \"created_at\": \"2022-06-02T18:51:20Z\",\n      \"id\": \"sf_b4f33d1d3b3e42b6ae97444c7ee15725\",\n      \"tracking_codes\": [\n        \"9400100109361122052770\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"94107\",\n        \"country\": \"US\",\n        \"city\": \"San Francisco\",\n        \"created_at\": \"2022-06-02T18:51:16+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"updated_at\": \"2022-06-02T18:51:16+00:00\",\n        \"phone\": \"\\u003cREDACTED\\u003e\",\n        \"name\": \"Jack Sparrow\",\n        \"company\": \"EasyPost\",\n        \"street1\": \"388 Townsend St\",\n        \"id\": \"adr_fbbf9d48e2a411eca8a2ac1f6b0a0d1e\",\n        \"street2\": \"Apt 20\",\n        \"state\": \"CA\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2022-06-02T18:51:18Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20220602/f4a92570f7fe45cfb11a2dbdfdb2e1a1.pdf\",\n      \"batch_id\": \"batch_0ab5a8b7453c404f9042e00c7b5308ba\",\n      \"created_at\": \"2022-06-02T18:51:18Z\",\n      \"id\": \"sf_2cf5f8c5d69248378f2c7230540bc7b2\",\n      \"tracking_codes\": [\n        \"9400100109361122052749\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"94107\",\n        \"country\": \"US\",\n        \"city\": \"San Francisco\",\n        \"created_at\": \"2022-06-02T18:51:14+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"updated_at\": \"2022-06-02T18:51:14+00:00\",\n        \"phone\": \"\\u003cREDACTED\\u003e\",\n        \"name\": \"Jack Sparrow\",\n        \"company\": \"EasyPost\",\n        \"street1\": \"388 Townsend St\",\n        \"id\": \"adr_fa384a7ae2a411eca518ac1f6bc7b362\",\n        \"street2\": \"Apt 20\",\n        \"state\": \"CA\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2022-06-02T18:51:15Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20220602/aba8e21861c74466923a8aec2e873bd6.pdf\",\n      \"batch_id\": \"batch_5799d836bbf74e24ba5ff95a0f22d60f\",\n      \"created_at\": \"2022-06-02T18:51:15Z\",\n      \"id\": \"sf_46684c47e28f44979ef9b029e753f0d5\",\n      \"tracking_codes\": [\n        \"9400100109361122052718\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    }\n  ]\n}",
+      "body": "{\n  \"has_more\": true,\n  \"scan_forms\": [\n    {\n      \"address\": {\n        \"zip\": \"94107\",\n        \"country\": \"US\",\n        \"city\": \"San Francisco\",\n        \"created_at\": \"2022-06-02T22:54:22+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"updated_at\": \"2022-06-02T22:54:22+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Jack Sparrow\",\n        \"company\": \"EasyPost\",\n        \"street1\": \"388 Townsend St\",\n        \"id\": \"adr_f17721cae2c611ec93a1ac1f6b0a0d1e\",\n        \"street2\": \"Apt 20\",\n        \"state\": \"CA\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2022-06-02T22:54:28Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20220602/4bc5112b1d894152ac7c2fa226ccec25.pdf\",\n      \"batch_id\": \"batch_7cdd61071a7a4cb387a1e653bc548e2a\",\n      \"created_at\": \"2022-06-02T22:54:28Z\",\n      \"id\": \"sf_e9d80a1026c6479c82344dd7229a9e4a\",\n      \"tracking_codes\": [\n        \"9400100109361122074826\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"94107\",\n        \"country\": \"US\",\n        \"city\": \"San Francisco\",\n        \"created_at\": \"2022-06-02T22:54:15+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"updated_at\": \"2022-06-02T22:54:15+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Jack Sparrow\",\n        \"company\": \"EasyPost\",\n        \"street1\": \"388 Townsend St\",\n        \"id\": \"adr_ed9c53b9e2c611ec8ddaac1f6bc7b362\",\n        \"street2\": \"Apt 20\",\n        \"state\": \"CA\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2022-06-02T22:54:22Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20220602/e3bce4a5a54f494ba7d0f00b2ccc60fe.pdf\",\n      \"batch_id\": \"batch_96ee732e3659415e831b3c793bb1401a\",\n      \"created_at\": \"2022-06-02T22:54:21Z\",\n      \"id\": \"sf_767ce42c5fb84be08913907fe03b281a\",\n      \"tracking_codes\": [\n        \"9400100109361122074734\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"94107\",\n        \"country\": \"US\",\n        \"city\": \"San Francisco\",\n        \"created_at\": \"2022-06-02T22:54:15+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"updated_at\": \"2022-06-02T22:54:15+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Jack Sparrow\",\n        \"company\": \"EasyPost\",\n        \"street1\": \"388 Townsend St\",\n        \"id\": \"adr_ed13f5b3e2c611ecb6e6ac1f6bc7bdc6\",\n        \"street2\": \"Apt 20\",\n        \"state\": \"CA\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2022-06-02T22:54:20Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20220602/bb08a8f495854d5296d24b4e1ecb965c.pdf\",\n      \"batch_id\": \"batch_daf3f8971af446d3a42dfb1313cbe54a\",\n      \"created_at\": \"2022-06-02T22:54:20Z\",\n      \"id\": \"sf_e8a3c087f5204b1bac0d06666ea9f365\",\n      \"tracking_codes\": [\n        \"9400100109361122074710\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"94107\",\n        \"country\": \"US\",\n        \"city\": \"San Francisco\",\n        \"created_at\": \"2022-06-02T22:54:10+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"updated_at\": \"2022-06-02T22:54:10+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Jack Sparrow\",\n        \"company\": \"EasyPost\",\n        \"street1\": \"388 Townsend St\",\n        \"id\": \"adr_ea5afae6e2c611ec9236ac1f6b0a0d1e\",\n        \"street2\": \"Apt 20\",\n        \"state\": \"CA\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2022-06-02T22:54:16Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20220602/7962d432ac8e44c9b6236928d6e3830f.pdf\",\n      \"batch_id\": \"batch_89214893458c4ec386381a8751c2b99f\",\n      \"created_at\": \"2022-06-02T22:54:16Z\",\n      \"id\": \"sf_a1314e4befca4751a439f8b9827d2dbc\",\n      \"tracking_codes\": [\n        \"9400100109361122074598\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"94107\",\n        \"country\": \"US\",\n        \"city\": \"San Francisco\",\n        \"created_at\": \"2022-06-02T22:54:06+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"updated_at\": \"2022-06-02T22:54:06+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Jack Sparrow\",\n        \"company\": \"EasyPost\",\n        \"street1\": \"388 Townsend St\",\n        \"id\": \"adr_e80c7496e2c611ec91daac1f6b0a0d1e\",\n        \"street2\": \"Apt 20\",\n        \"state\": \"CA\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2022-06-02T22:54:12Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20220602/338e4bca33f547679ca81bffb964f401.pdf\",\n      \"batch_id\": \"batch_15fe326e84c94fcf84b1a00759b62044\",\n      \"created_at\": \"2022-06-02T22:54:11Z\",\n      \"id\": \"sf_c11a6d02120847d094f22a5b59a1362a\",\n      \"tracking_codes\": [\n        \"9400100109361122074475\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    }\n  ]\n}",
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
@@ -30,7 +30,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb7nuq"
+          "bigweb1nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -50,9 +50,6 @@
         "pragma": [
           "no-cache"
         ],
-        "x-canary": [
-          "direct"
-        ],
         "x-content-type-options": [
           "nosniff"
         ],
@@ -60,26 +57,26 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "f5a1f04762990e4fe640100f00e35c0c"
+          "24678df062993fc3e61bdad1000e0d2b"
         ],
         "x-proxied": [
-          "extlb2nuq 0910011e7e",
-          "intlb1nuq 570dfcbc0a"
+          "extlb1nuq 0910011e7e",
+          "intlb2nuq 570dfcbc0a"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.040623"
+          "0.071051"
         ],
         "etag": [
-          "W/\"386724284bf7cf97d78154431a621759\""
+          "W/\"35f688fc7a962dc90fa9afb076c6923c\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206021850-56a13db81c-master"
+          "easypost-202206022117-ecf7ce5035-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -91,6 +88,6 @@
       },
       "uri": "https://api.easypost.com/v2/scan_forms?page_size\u003d5"
     },
-    "duration": 145
+    "duration": 244
   }
 ]

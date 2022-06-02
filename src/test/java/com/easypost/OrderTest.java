@@ -108,7 +108,6 @@ public class OrderTest {
         params.put("carrier", Fixture.usps());
         params.put("service", Fixture.uspsService());
 
-        // TODO: We shouldn't require the user to wrap these parameters into a dictionary, should just be two parameters
         order.buy(params);
 
         List<Shipment> shipments = order.getShipments();

@@ -135,10 +135,6 @@ public class CarrierAccountTest {
         CarrierAccount carrierAccount = createBasicCarrierAccount();
 
         carrierAccount.delete();
-
-        // TODO: endpoint should return boolean to evaluate
-
-        testCarrierAccountId = null; // skip deletion cleanup
     }
 
     /**

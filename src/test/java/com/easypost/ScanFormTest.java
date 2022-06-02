@@ -42,7 +42,6 @@ public class ScanFormTest {
         Map<String, Object> params = new HashMap<>();
         params.put("shipments", shipments);
 
-        // TODO: We shouldn't require the end-user to wrap these parameters in a dictionary.
         ScanForm scanForm = ScanForm.create(params);
         return scanForm;
     }

@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1654197838,
+    "recordedAt": 1654210498,
     "request": {
       "body": "",
       "method": "GET",
@@ -9,28 +9,28 @@
           "UTF-8"
         ],
         "User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ],
         "X-Client-User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ]
       },
       "uri": "https://api.easypost.com/v2/users"
     },
     "response": {
-      "body": "{\n  \"recharge_amount\": \"100.00\",\n  \"verified\": true,\n  \"created_at\": \"2022-02-02T20:31:53Z\",\n  \"secondary_recharge_amount\": \"100.00\",\n  \"cc_fee_rate\": \"0.0325\",\n  \"recharge_threshold\": \"0.00\",\n  \"balance\": \"0.00000\",\n  \"default_insurance_amount\": \"50.00\",\n  \"children\": [\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-02-17T23:24:17Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_feab33e9b65e4ba3b41cc1f1f2b27bea\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-02-22T19:50:54Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_9c2cfcd11c45495f97b563699c4daac9\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-02-22T19:54:03Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_87ed7e2a4bce4b29b6e7c6ed94ee0874\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-02-22T20:02:02Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_beb2c23c5213451b904a5beace546adb\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-02-22T20:03:54Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_55e9a3b9e8004a9bb3b45b3fe2f1a8a6\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:36:45Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_3b76061e957d44aaa049bf5ee4d62da3\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:36:47Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_1e05fb2bcceb4b82a3fbfa69c7165013\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:38:31Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_fb517924e7cb466f9ed66ee68d8c686d\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:38:32Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_d4f25bb02aee43aa8dc9708776b52c55\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:55:14Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_a38e08dec5e54022a174a6004725c224\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:55:17Z\",\n      \"phone_number\": \"\\u003cREDACTED\\u003e\",\n      \"id\": \"user_b10ab76178f4463988d37f6bb5895dcb\",\n      \"object\": \"User\"\n    }\n  ],\n  \"has_billing_method\": false,\n  \"name\": \"EasyPost Java Client Library Tests\",\n  \"insurance_fee_rate\": \"0.005\",\n  \"price_per_shipment\": \"0.00000\",\n  \"phone_number\": \"\\u003cREDACTED\\u003e\",\n  \"id\": \"user_04ad194774a54f6c97d1385715721091\",\n  \"insurance_fee_minimum\": \"0.25\",\n  \"email\": \"dev+easypost-java@easypost.com\",\n  \"object\": \"User\"\n}",
+      "body": "{\n  \"recharge_amount\": \"100.00\",\n  \"verified\": true,\n  \"created_at\": \"2022-02-02T20:31:53Z\",\n  \"secondary_recharge_amount\": \"100.00\",\n  \"cc_fee_rate\": \"0.0325\",\n  \"recharge_threshold\": \"0.00\",\n  \"balance\": \"0.00000\",\n  \"default_insurance_amount\": \"50.00\",\n  \"children\": [\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-02-17T23:24:17Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_feab33e9b65e4ba3b41cc1f1f2b27bea\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-02-22T19:50:54Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_9c2cfcd11c45495f97b563699c4daac9\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-02-22T19:54:03Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_87ed7e2a4bce4b29b6e7c6ed94ee0874\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-02-22T20:02:02Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_beb2c23c5213451b904a5beace546adb\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-02-22T20:03:54Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_55e9a3b9e8004a9bb3b45b3fe2f1a8a6\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:36:45Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_3b76061e957d44aaa049bf5ee4d62da3\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:36:47Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_1e05fb2bcceb4b82a3fbfa69c7165013\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:38:31Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_fb517924e7cb466f9ed66ee68d8c686d\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:38:32Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_d4f25bb02aee43aa8dc9708776b52c55\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:55:14Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_a38e08dec5e54022a174a6004725c224\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-26T19:55:17Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_b10ab76178f4463988d37f6bb5895dcb\",\n      \"object\": \"User\"\n    },\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"Test User\",\n      \"verified\": true,\n      \"created_at\": \"2022-06-02T19:52:57Z\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_0be0589de73b4266b62e1741ab05ed12\",\n      \"object\": \"User\"\n    }\n  ],\n  \"has_billing_method\": false,\n  \"name\": \"EasyPost Java Client Library Tests\",\n  \"insurance_fee_rate\": \"0.005\",\n  \"price_per_shipment\": \"0.00000\",\n  \"phone_number\": \"REDACTED\",\n  \"id\": \"user_04ad194774a54f6c97d1385715721091\",\n  \"insurance_fee_minimum\": \"0.25\",\n  \"email\": \"dev+easypost-java@easypost.com\",\n  \"object\": \"User\"\n}",
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "3053"
+          "3281"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb4nuq"
+          "bigweb8nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -57,26 +57,26 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "f5a1f04662990e4ee61df24300e35be6"
+          "24678df162993fc2e61fb1b5000e0d08"
         ],
         "x-proxied": [
-          "extlb2nuq 0910011e7e",
+          "extlb1nuq 0910011e7e",
           "intlb1nuq 570dfcbc0a"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.143602"
+          "0.137863"
         ],
         "etag": [
-          "W/\"64756b6343ab9f403ec38c506028e968\""
+          "W/\"62ee45ce345674933ee0cb2ca21771a5\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206021850-56a13db81c-master"
+          "easypost-202206022117-ecf7ce5035-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -88,6 +88,6 @@
       },
       "uri": "https://api.easypost.com/v2/users"
     },
-    "duration": 177
+    "duration": 172
   }
 ]

@@ -18,18 +18,17 @@ public abstract class TestUtils {
 
     private static final java.util.List<String> HEADER_CENSORS = new ArrayList<String>() {{
         add("Authorization");
-        add("X-Client-User-Agent");
         add("User-Agent");
+        add("X-Client-User-Agent");
     }};
 
     private static final List<String> QUERY_CENSORS = new ArrayList<String>() {{
-        add("card[number]");
         add("card[cvc]");
+        add("card[number]");
     }};
 
     private static final List<String> BODY_CENSORS = new ArrayList<String>() {{
         add("api_keys");
-        // add("children");
         add("client_ip");
         add("credentials");
         add("key");
@@ -37,10 +36,16 @@ public abstract class TestUtils {
         add("phone_number");
         add("phone");
         add("test_credentials");
-        // add("created_at"); TODO: Add as ignore in body in future
+        // add("created_at");
         // add("updated_at");
+        // TODO: ^ Add as something to ignore when comparing bodies in a future version of EasyVCR
+        // Timezone difference between local machine and GitHub Actions causing failure on replay
     }};
 
+    /**
+     * Get the directory where the program is currently executing.
+     * @return The directory where the program is currently executing
+     */
     private static String getSourceFileDirectory() {
         try {
             return Paths.get("").toAbsolutePath().toString();
@@ -104,10 +109,8 @@ public abstract class TestUtils {
             advancedSettings.matchRules = MatchRules.regular(); // match by method, url
             // TODO: Change to strict when VCR updated with ignore aspect
             advancedSettings.censors =
-                    new Censors("<REDACTED>").hideHeaders(HEADER_CENSORS).hideQueryParameters(QUERY_CENSORS)
+                    new Censors("REDACTED").hideHeaders(HEADER_CENSORS).hideQueryParameters(QUERY_CENSORS)
                             .hideBodyParameters(BODY_CENSORS);
-            advancedSettings.simulateDelay = false;
-            advancedSettings.manualDelay = 0;
 
             vcr = new com.easypost.easyvcr.VCR(advancedSettings);
 

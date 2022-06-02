@@ -162,7 +162,7 @@ public class BatchTest {
         batch = batch.buy();
 
         if (_vcr.isRecording()) {
-            Thread.sleep(10000); // Wait enough time for processing
+            Thread.sleep(5000); // Wait enough time for processing
         }
 
         Batch batchWithScanForm = batch.createScanForm();
@@ -190,7 +190,6 @@ public class BatchTest {
         shipmentData.add(shipment);
         params.put("shipments", shipmentData);
 
-        // TODO: We shouldn't be requiring users to put the list of shipments in a dictionary first
         Batch batchWithAddedShipment = batch.addShipments(params);
 
         assertEquals(1, batchWithAddedShipment.getNumShipments().intValue());
@@ -214,13 +213,12 @@ public class BatchTest {
         batch = batch.buy();
 
         if (_vcr.isRecording()) {
-            Thread.sleep(10000); // Wait enough time for processing
+            Thread.sleep(5000); // Wait enough time for processing
         }
 
         Map<String, Object> params = new HashMap<>();
         params.put("file_format", "ZPL");
 
-        // TODO: We shouldn't be requiring users to put the format in a dictionary first
         Batch batchWithLabel = batch.label(params);
 
         // We can't assert anything meaningful here because the label gets queued for generation and may not be immediately available

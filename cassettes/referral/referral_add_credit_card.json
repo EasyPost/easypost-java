@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1654197974,
+    "recordedAt": 1654210533,
     "request": {
       "body": "",
       "method": "GET",
@@ -9,10 +9,10 @@
           "UTF-8"
         ],
         "User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ],
         "X-Client-User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ]
       },
       "uri": "https://api.easypost.com/beta/partners/stripe_public_key"
@@ -30,7 +30,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb6nuq"
+          "bigweb8nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -57,17 +57,17 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "f5a1f04362990ed6e61df6a700e397a0"
+          "24678df662993fe5e61c564e000e1833"
         ],
         "x-proxied": [
-          "extlb2nuq 0910011e7e",
-          "intlb2nuq 570dfcbc0a"
+          "extlb1nuq 0910011e7e",
+          "intlb1nuq 570dfcbc0a"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.015578"
+          "0.017024"
         ],
         "etag": [
           "W/\"86cc970265a111486b443bf66ef85e91\""
@@ -76,7 +76,7 @@
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206021850-56a13db81c-master"
+          "easypost-202206022117-ecf7ce5035-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -88,31 +88,31 @@
       },
       "uri": "https://api.easypost.com/beta/partners/stripe_public_key"
     },
-    "duration": 117
+    "duration": 124
   },
   {
-    "recordedAt": 1654197979,
+    "recordedAt": 1654210538,
     "request": {
-      "body": "{\n  \"credit_card\": {\n    \"stripe_object_id\": \"tok_0L6JetDqT4huGUvd5kD8Xki0\",\n    \"priority\": \"primary\"\n  }\n}",
+      "body": "{\n  \"credit_card\": {\n    \"stripe_object_id\": \"tok_0L6MvSDqT4huGUvdK9CimbrH\",\n    \"priority\": \"primary\"\n  }\n}",
       "method": "POST",
       "headers": {
         "Accept-Charset": [
           "UTF-8"
         ],
         "User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ],
         "Content-Type": [
           "application/json"
         ],
         "X-Client-User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ]
       },
       "uri": "https://api.easypost.com/beta/credit_cards"
     },
     "response": {
-      "body": "{\n  \"last4\": \"6170\",\n  \"exp_month\": 5.0,\n  \"id\": \"card_944642e7ff1947e7ac8ec8a313e98423\",\n  \"exp_year\": 2028.0,\n  \"brand\": \"Visa\",\n  \"object\": \"CreditCard\"\n}",
+      "body": "{\n  \"last4\": \"6170\",\n  \"exp_month\": 5.0,\n  \"id\": \"card_680b49fee7074e02b7a78188b7cbd8c3\",\n  \"exp_year\": 2028.0,\n  \"brand\": \"Visa\",\n  \"object\": \"CreditCard\"\n}",
       "headers": {
         "null": [
           "HTTP/1.1 201 Created"
@@ -124,7 +124,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb5nuq"
+          "bigweb7nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -144,6 +144,9 @@
         "pragma": [
           "no-cache"
         ],
+        "x-canary": [
+          "direct"
+        ],
         "x-content-type-options": [
           "nosniff"
         ],
@@ -151,26 +154,26 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "77ca7e7d62990ed7e60cff4c00cd0758"
+          "24678df462993fe6e61f2d93000e188a"
         ],
         "x-proxied": [
           "extlb1nuq 0910011e7e",
-          "intlb1nuq 570dfcbc0a"
+          "intlb2nuq 570dfcbc0a"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "3.369844"
+          "3.718225"
         ],
         "etag": [
-          "W/\"78d3ad8b7641fda13a8d9c7ce17b0215\""
+          "W/\"265a147cbf73c332d66b856d88d5c015\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206021850-56a13db81c-master"
+          "easypost-202206022117-ecf7ce5035-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -182,6 +185,6 @@
       },
       "uri": "https://api.easypost.com/beta/credit_cards"
     },
-    "duration": 3545
+    "duration": 3882
   }
 ]

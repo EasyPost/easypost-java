@@ -95,7 +95,6 @@ public class PickupTest {
         params.put("carrier", Fixture.usps());
         params.put("service", Fixture.pickupService());
 
-        // TODO: We shouldn't be requiring the end user to wrap these parameters in a dictionary
         Pickup boughtPickup = pickup.buy(params);
 
         assertInstanceOf(Pickup.class, boughtPickup);

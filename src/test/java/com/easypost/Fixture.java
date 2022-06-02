@@ -77,14 +77,6 @@ public abstract class Fixture {
     }
 
     /**
-     * Prefix for report type.
-     * @return report type prefix
-     */
-    public static String reportIdPrefix() {
-        return "shprep_";
-    }
-
-    /**
      * Webhook URL.
      *
      * @return webhook URL.

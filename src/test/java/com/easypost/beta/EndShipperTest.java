@@ -107,7 +107,7 @@ public class EndShipperTest {
         updateParams.put("state", "CA");
         updateParams.put("zip", "94107");
         updateParams.put("country", "US");
-        updateParams.put("phone", "1234567890");
+        updateParams.put("phone", "9999999999");
         updateParams.put("email", "test@example.com");
 
         EndShipper updatedEndShipper = endShipper.update(updateParams);

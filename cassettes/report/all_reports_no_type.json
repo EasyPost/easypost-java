@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1654197807,
+    "recordedAt": 1654210463,
     "request": {
       "body": "",
       "method": "GET",
@@ -9,10 +9,10 @@
           "UTF-8"
         ],
         "User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ],
         "X-Client-User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ]
       },
       "uri": "https://api.easypost.com/v2/reports/test/?type\u003dtest"
@@ -29,7 +29,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb8nuq"
+          "bigweb2nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -56,23 +56,23 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "f5a1f04362990e2fe6532fae00e34f2c"
+          "24678df362993f9fe61c6af0000e0467"
         ],
         "x-proxied": [
-          "extlb2nuq 0910011e7e",
+          "extlb1nuq 0910011e7e",
           "intlb1nuq 570dfcbc0a"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.061697"
+          "0.022385"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206021850-56a13db81c-master"
+          "easypost-202206022117-ecf7ce5035-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -85,6 +85,6 @@
       "errors": "{\n  \"error\": {\n    \"code\": \"NOT_FOUND\",\n    \"message\": \"The requested resource could not be found.\",\n    \"errors\": []\n  }\n}",
       "uri": "https://api.easypost.com/v2/reports/test/?type\u003dtest"
     },
-    "duration": 164
+    "duration": 146
   }
 ]

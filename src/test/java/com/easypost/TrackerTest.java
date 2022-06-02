@@ -36,7 +36,6 @@ public class TrackerTest {
         params.put("carrier", Fixture.usps());
         params.put("tracking_code", "EZ1000000001");
 
-        // TODO: We shouldn't require end-users to wrap these parameters in a dictionary.
         return Tracker.create(params);
     }
 

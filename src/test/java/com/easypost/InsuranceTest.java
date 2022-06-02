@@ -65,7 +65,7 @@ public class InsuranceTest {
         Insurance retrievedInsurance = Insurance.retrieve(insurance.getId());
 
         assertInstanceOf(Insurance.class, insurance);
-        // Must compare IDs since other elements of object may be different
+        // Must compare IDs since can't do whole-object comparisons currently
         assertEquals(insurance.getId(), retrievedInsurance.getId());
     }
 

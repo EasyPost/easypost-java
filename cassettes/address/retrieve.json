@@ -1,27 +1,27 @@
 [
   {
-    "recordedAt": 1654197875,
+    "recordedAt": 1654210544,
     "request": {
-      "body": "{\n  \"address\": {\n    \"zip\": \"94107\",\n    \"city\": \"San Francisco\",\n    \"phone\": \"\\u003cREDACTED\\u003e\",\n    \"name\": \"Jack Sparrow\",\n    \"company\": \"EasyPost\",\n    \"street1\": \"388 Townsend St\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\"\n  }\n}",
+      "body": "{\n  \"address\": {\n    \"zip\": \"94107\",\n    \"city\": \"San Francisco\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Jack Sparrow\",\n    \"company\": \"EasyPost\",\n    \"street1\": \"388 Townsend St\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\"\n  }\n}",
       "method": "POST",
       "headers": {
         "Accept-Charset": [
           "UTF-8"
         ],
         "User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ],
         "Content-Type": [
           "application/json"
         ],
         "X-Client-User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ]
       },
       "uri": "https://api.easypost.com/v2/addresses"
     },
     "response": {
-      "body": "{\n  \"zip\": \"94107\",\n  \"country\": \"US\",\n  \"city\": \"San Francisco\",\n  \"created_at\": \"2022-06-02T19:24:35+00:00\",\n  \"verifications\": {},\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-06-02T19:24:35+00:00\",\n  \"phone\": \"\\u003cREDACTED\\u003e\",\n  \"name\": \"Jack Sparrow\",\n  \"company\": \"EasyPost\",\n  \"street1\": \"388 Townsend St\",\n  \"id\": \"adr_a34a8185e2a911eca5baac1f6bc72124\",\n  \"street2\": \"Apt 20\",\n  \"state\": \"CA\",\n  \"object\": \"Address\"\n}",
+      "body": "{\n  \"zip\": \"94107\",\n  \"country\": \"US\",\n  \"city\": \"San Francisco\",\n  \"created_at\": \"2022-06-02T22:55:44+00:00\",\n  \"verifications\": {},\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-06-02T22:55:44+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"Jack Sparrow\",\n  \"company\": \"EasyPost\",\n  \"street1\": \"388 Townsend St\",\n  \"id\": \"adr_227e9796e2c711ecbd71ac1f6bc7bdc6\",\n  \"street2\": \"Apt 20\",\n  \"state\": \"CA\",\n  \"object\": \"Address\"\n}",
       "headers": {
         "null": [
           "HTTP/1.1 201 Created"
@@ -60,29 +60,29 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "f5a1f04a62990e73e61c6b6d00e36c3d"
+          "24678df662993ff0e641b04b000e1b9f"
         ],
         "x-proxied": [
-          "extlb2nuq 0910011e7e",
+          "extlb1nuq 0910011e7e",
           "intlb2nuq 570dfcbc0a"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.026533"
+          "0.032697"
         ],
         "etag": [
-          "W/\"59291a528fd95a5108f54fd7129a5e97\""
+          "W/\"850ab7a3865531a040542d532ef5198d\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "location": [
-          "/api/v2/addresses/adr_a34a8185e2a911eca5baac1f6bc72124"
+          "/api/v2/addresses/adr_227e9796e2c711ecbd71ac1f6bc7bdc6"
         ],
         "x-version-label": [
-          "easypost-202206021850-56a13db81c-master"
+          "easypost-202206022117-ecf7ce5035-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -94,10 +94,10 @@
       },
       "uri": "https://api.easypost.com/v2/addresses"
     },
-    "duration": 128
+    "duration": 172
   },
   {
-    "recordedAt": 1654197875,
+    "recordedAt": 1654210544,
     "request": {
       "body": "",
       "method": "GET",
@@ -106,16 +106,16 @@
           "UTF-8"
         ],
         "User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ],
         "X-Client-User-Agent": [
-          "\u003cREDACTED\u003e"
+          "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/addresses/adr_a34a8185e2a911eca5baac1f6bc72124"
+      "uri": "https://api.easypost.com/v2/addresses/adr_227e9796e2c711ecbd71ac1f6bc7bdc6"
     },
     "response": {
-      "body": "{\n  \"zip\": \"94107\",\n  \"country\": \"US\",\n  \"city\": \"San Francisco\",\n  \"created_at\": \"2022-06-02T19:24:35+00:00\",\n  \"verifications\": {},\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-06-02T19:24:35+00:00\",\n  \"phone\": \"\\u003cREDACTED\\u003e\",\n  \"name\": \"Jack Sparrow\",\n  \"company\": \"EasyPost\",\n  \"street1\": \"388 Townsend St\",\n  \"id\": \"adr_a34a8185e2a911eca5baac1f6bc72124\",\n  \"street2\": \"Apt 20\",\n  \"state\": \"CA\",\n  \"object\": \"Address\"\n}",
+      "body": "{\n  \"zip\": \"94107\",\n  \"country\": \"US\",\n  \"city\": \"San Francisco\",\n  \"created_at\": \"2022-06-02T22:55:44+00:00\",\n  \"verifications\": {},\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-06-02T22:55:44+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"Jack Sparrow\",\n  \"company\": \"EasyPost\",\n  \"street1\": \"388 Townsend St\",\n  \"id\": \"adr_227e9796e2c711ecbd71ac1f6bc7bdc6\",\n  \"street2\": \"Apt 20\",\n  \"state\": \"CA\",\n  \"object\": \"Address\"\n}",
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
@@ -127,7 +127,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb1nuq"
+          "bigweb9nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -154,26 +154,26 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "f5a1f04562990e73e60cfb0700e36c49"
+          "24678df062993ff0e61d7bae000e1ba9"
         ],
         "x-proxied": [
-          "extlb2nuq 0910011e7e",
-          "intlb1nuq 570dfcbc0a"
+          "extlb1nuq 0910011e7e",
+          "intlb2nuq 570dfcbc0a"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.030162"
+          "0.027879"
         ],
         "etag": [
-          "W/\"59291a528fd95a5108f54fd7129a5e97\""
+          "W/\"850ab7a3865531a040542d532ef5198d\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206021850-56a13db81c-master"
+          "easypost-202206022117-ecf7ce5035-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -183,7 +183,7 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/addresses/adr_a34a8185e2a911eca5baac1f6bc72124"
+      "uri": "https://api.easypost.com/v2/addresses/adr_227e9796e2c711ecbd71ac1f6bc7bdc6"
     },
     "duration": 136
   }
