@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds `billingType` attribute to Rate and CarrierAccount classes.
+
 ## v5.4.0
 
 - Adds `PaymentMethod.all()`, `CreditCard.fund()`, and `CreditCard.delete()` functions.
