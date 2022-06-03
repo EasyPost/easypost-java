@@ -14,23 +14,29 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OrderTest {
-    private static Order globalOrder;
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("order", TestUtils.ApiKey.TEST);
+    }
 
-        globalOrder = Order.create(Fixture.basicOrder());
+    /**
+     * Create an order.
+     */
+    private static Order createBasicOrder() throws EasyPostException {
+        return Order.create(Fixture.basicOrder());
     }
 
     /**
@@ -40,9 +46,11 @@ public class OrderTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        Order order = Order.create(Fixture.basicOrder());
+        _vcr.setUpTest("create");
 
-        assertTrue(order instanceof Order);
+        Order order = createBasicOrder();
+
+        assertInstanceOf(Order.class, order);
         assertTrue(order.getId().startsWith("order_"));
         assertNotNull(order.getRates());
     }
@@ -54,10 +62,15 @@ public class OrderTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        Order retrievedOrder = Order.retrieve(globalOrder.getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(retrievedOrder instanceof Order);
-        assertEquals(globalOrder.getId(), retrievedOrder.getId());
+        Order order = createBasicOrder();
+
+        Order retrievedOrder = Order.retrieve(order.getId());
+
+        assertInstanceOf(Order.class, retrievedOrder);
+        // Must compare IDs since other elements of objects may be different
+        assertEquals(order.getId(), retrievedOrder.getId());
     }
 
     /**
@@ -67,11 +80,15 @@ public class OrderTest {
      */
     @Test
     public void testGetRates() throws EasyPostException {
-        List<Rate> rates = globalOrder.getRates();
+        _vcr.setUpTest("get_rates");
+
+        Order order = createBasicOrder();
+
+        List<Rate> rates = order.getRates();
 
         assertNotNull(rates);
         for (Rate rate : rates) {
-            assertTrue(rate instanceof Rate);
+            assertInstanceOf(Rate.class, rate);
             assertTrue(rate.getId().startsWith("rate_"));
         }
     }
@@ -83,16 +100,19 @@ public class OrderTest {
      */
     @Test
     public void testBuy() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
+        _vcr.setUpTest("buy");
 
+        Order order = createBasicOrder();
+
+        Map<String, Object> params = new HashMap<>();
         params.put("carrier", Fixture.usps());
         params.put("service", Fixture.uspsService());
 
-        globalOrder.buy(params);
+        order.buy(params);
 
-        List<Shipment> shipments = globalOrder.getShipments();
+        List<Shipment> shipments = order.getShipments();
 
-        assertTrue(globalOrder instanceof Order);
+        assertInstanceOf(Order.class, order);
         for (Shipment shipment : shipments) {
             assertNotNull(shipment.getPostageLabel());
         }
@@ -105,7 +125,9 @@ public class OrderTest {
      */
     @Test
     public void testLowestRate() throws EasyPostException {
-        Order order = Order.create(Fixture.basicOrder());
+        _vcr.setUpTest("lowest_rate");
+
+        Order order = createBasicOrder();
 
         // Test lowest rate with no filters
         Rate lowestRate = order.lowestRate();

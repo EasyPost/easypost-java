@@ -5,7 +5,6 @@
         "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 
 <suppressions>
-    <!-- TODO: Include Test files -->
     <!-- Don't do any CheckStyle checks on any Test files. -->
     <suppress checks="[a-zA-Z0-9]*"
               files="com[\\/]easypost[\\/].*Test.java"/>

@@ -1,0 +1,375 @@
+[
+  {
+    "recordedAt": 1654210506,
+    "request": {
+      "body": "{\n  \"shipment\": {\n    \"parcel\": {\n      \"length\": \"10\",\n      \"width\": \"8\",\n      \"weight\": \"15.4\",\n      \"height\": \"4\"\n    },\n    \"carrier\": \"USPS\",\n    \"service\": \"First\",\n    \"to_address\": {\n      \"zip\": \"94107\",\n      \"city\": \"San Francisco\",\n      \"phone\": \"REDACTED\",\n      \"name\": \"Jack Sparrow\",\n      \"company\": \"EasyPost\",\n      \"street1\": \"388 Townsend St\",\n      \"street2\": \"Apt 20\",\n      \"state\": \"CA\"\n    },\n    \"carrier_accounts\": [\n      \"ca_f09befdb2e9c410e95c7622ea912c18c\"\n    ],\n    \"from_address\": {\n      \"zip\": \"94107\",\n      \"city\": \"San Francisco\",\n      \"phone\": \"REDACTED\",\n      \"name\": \"Jack Sparrow\",\n      \"company\": \"EasyPost\",\n      \"street1\": \"388 Townsend St\",\n      \"street2\": \"Apt 20\",\n      \"state\": \"CA\"\n    }\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ],
+        "X-Client-User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/shipments"
+    },
+    "response": {
+      "body": "{\n  \"insurance\": \"50.00\",\n  \"fees\": [\n    {\n      \"amount\": \"0.00000\",\n      \"refunded\": false,\n      \"type\": \"LabelFee\",\n      \"charged\": true,\n      \"object\": \"Fee\"\n    },\n    {\n      \"amount\": \"5.49000\",\n      \"refunded\": false,\n      \"type\": \"PostageFee\",\n      \"charged\": true,\n      \"object\": \"Fee\"\n    },\n    {\n      \"amount\": \"0.25000\",\n      \"refunded\": false,\n      \"type\": \"InsuranceFee\",\n      \"charged\": true,\n      \"object\": \"Fee\"\n    }\n  ],\n  \"created_at\": \"2022-06-02T22:55:05Z\",\n  \"mode\": \"test\",\n  \"usps_zone\": 1.0,\n  \"is_return\": false,\n  \"updated_at\": \"2022-06-02T22:55:06Z\",\n  \"selected_rate\": {\n    \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n    \"list_rate\": \"5.49\",\n    \"created_at\": \"2022-06-02T22:55:06Z\",\n    \"delivery_days\": 2.0,\n    \"list_currency\": \"USD\",\n    \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n    \"mode\": \"test\",\n    \"carrier\": \"USPS\",\n    \"delivery_date_guaranteed\": false,\n    \"retail_rate\": \"5.49\",\n    \"retail_currency\": \"USD\",\n    \"updated_at\": \"2022-06-02T22:55:06Z\",\n    \"rate\": \"5.49\",\n    \"service\": \"First\",\n    \"billing_type\": \"easypost\",\n    \"est_delivery_days\": 2.0,\n    \"currency\": \"USD\",\n    \"id\": \"rate_be5d8b4773404211baa3432c0a160109\",\n    \"object\": \"Rate\"\n  },\n  \"options\": {\n    \"date_advance\": 0.0,\n    \"currency\": \"USD\",\n    \"payment\": {\n      \"type\": \"SENDER\"\n    }\n  },\n  \"tracker\": {\n    \"fees\": [],\n    \"created_at\": \"2022-06-02T22:55:06Z\",\n    \"tracking_details\": [],\n    \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n    \"tracking_code\": \"9400100109361122075038\",\n    \"status_detail\": \"unknown\",\n    \"mode\": \"test\",\n    \"public_url\": \"https://track.easypost.com/djE6dHJrXzY3ZTc0Nzk2MTRhZjQyYmE4MjFkMDkyMGUxNWNlMmU1\",\n    \"carrier\": \"USPS\",\n    \"updated_at\": \"2022-06-02T22:55:06Z\",\n    \"id\": \"trk_67e7479614af42ba821d0920e15ce2e5\",\n    \"object\": \"Tracker\",\n    \"status\": \"unknown\"\n  },\n  \"return_address\": {\n    \"zip\": \"94107\",\n    \"country\": \"US\",\n    \"city\": \"San Francisco\",\n    \"created_at\": \"2022-06-02T22:55:05+00:00\",\n    \"verifications\": {},\n    \"mode\": \"test\",\n    \"updated_at\": \"2022-06-02T22:55:05+00:00\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Jack Sparrow\",\n    \"company\": \"EasyPost\",\n    \"street1\": \"388 Townsend St\",\n    \"id\": \"adr_0b33394fe2c711ec93b3ac1f6bc7b362\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\",\n    \"object\": \"Address\"\n  },\n  \"id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n  \"from_address\": {\n    \"zip\": \"94107\",\n    \"country\": \"US\",\n    \"city\": \"San Francisco\",\n    \"created_at\": \"2022-06-02T22:55:05+00:00\",\n    \"verifications\": {},\n    \"mode\": \"test\",\n    \"updated_at\": \"2022-06-02T22:55:05+00:00\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Jack Sparrow\",\n    \"company\": \"EasyPost\",\n    \"street1\": \"388 Townsend St\",\n    \"id\": \"adr_0b33394fe2c711ec93b3ac1f6bc7b362\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\",\n    \"object\": \"Address\"\n  },\n  \"postage_label\": {\n    \"label_resolution\": 300.0,\n    \"date_advance\": 0.0,\n    \"label_size\": \"4x6\",\n    \"integrated_form\": \"none\",\n    \"created_at\": \"2022-06-02T22:55:06Z\",\n    \"label_type\": \"default\",\n    \"label_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/postage_label/20220602/4baf300395fb4562b6cf3712f603710e.png\",\n    \"label_file_type\": \"image/png\",\n    \"updated_at\": \"2022-06-02T22:55:06Z\",\n    \"id\": \"pl_a6e30e7cb0a440feaf4f68ce4081a7ee\",\n    \"label_date\": \"2022-06-02T22:55:06Z\",\n    \"object\": \"PostageLabel\"\n  },\n  \"parcel\": {\n    \"mode\": \"test\",\n    \"updated_at\": \"2022-06-02T22:55:05Z\",\n    \"length\": 10.0,\n    \"width\": 8.0,\n    \"created_at\": \"2022-06-02T22:55:05Z\",\n    \"weight\": 15.4,\n    \"id\": \"prcl_edb259635e1e4d50b977d4e3c1c943da\",\n    \"object\": \"Parcel\",\n    \"height\": 4.0\n  },\n  \"buyer_address\": {\n    \"zip\": \"94107-1670\",\n    \"country\": \"US\",\n    \"city\": \"SAN FRANCISCO\",\n    \"created_at\": \"2022-06-02T22:55:05+00:00\",\n    \"verifications\": {\n      \"delivery\": {\n        \"success\": true,\n        \"details\": {\n          \"latitude\": 37.77551,\n          \"time_zone\": \"America/Los_Angeles\",\n          \"longitude\": -122.39697\n        },\n        \"errors\": []\n      },\n      \"zip4\": {\n        \"success\": true,\n        \"errors\": []\n      }\n    },\n    \"mode\": \"test\",\n    \"residential\": true,\n    \"updated_at\": \"2022-06-02T22:55:05+00:00\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"JACK SPARROW\",\n    \"company\": \"EASYPOST\",\n    \"street1\": \"388 TOWNSEND ST APT 20\",\n    \"id\": \"adr_0b3166a4e2c711ec98fbac1f6b0a0d1e\",\n    \"state\": \"CA\",\n    \"object\": \"Address\"\n  },\n  \"rates\": [\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"23.75\",\n      \"created_at\": \"2022-06-02T22:55:05Z\",\n      \"list_currency\": \"USD\",\n      \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"27.40\",\n      \"retail_currency\": \"USD\",\n      \"updated_at\": \"2022-06-02T22:55:05Z\",\n      \"rate\": \"23.75\",\n      \"service\": \"Express\",\n      \"billing_type\": \"easypost\",\n      \"currency\": \"USD\",\n      \"id\": \"rate_19cc7013031244e083b90bbb8922f4aa\",\n      \"object\": \"Rate\"\n    },\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"7.22\",\n      \"created_at\": \"2022-06-02T22:55:05Z\",\n      \"delivery_days\": 2.0,\n      \"list_currency\": \"USD\",\n      \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"7.22\",\n      \"retail_currency\": \"USD\",\n      \"updated_at\": \"2022-06-02T22:55:05Z\",\n      \"rate\": \"7.22\",\n      \"service\": \"ParcelSelect\",\n      \"billing_type\": \"easypost\",\n      \"est_delivery_days\": 2.0,\n      \"currency\": \"USD\",\n      \"id\": \"rate_911426f79b5746038b565f3b13412cb3\",\n      \"object\": \"Rate\"\n    },\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"7.37\",\n      \"created_at\": \"2022-06-02T22:55:05Z\",\n      \"delivery_days\": 1.0,\n      \"list_currency\": \"USD\",\n      \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"8.70\",\n      \"retail_currency\": \"USD\",\n      \"updated_at\": \"2022-06-02T22:55:05Z\",\n      \"rate\": \"7.37\",\n      \"service\": \"Priority\",\n      \"billing_type\": \"easypost\",\n      \"est_delivery_days\": 1.0,\n      \"currency\": \"USD\",\n      \"id\": \"rate_f99baa40e587490eb1d8702e789b057f\",\n      \"object\": \"Rate\"\n    },\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"5.49\",\n      \"created_at\": \"2022-06-02T22:55:05Z\",\n      \"delivery_days\": 2.0,\n      \"list_currency\": \"USD\",\n      \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"5.49\",\n      \"retail_currency\": \"USD\",\n      \"updated_at\": \"2022-06-02T22:55:05Z\",\n      \"rate\": \"5.49\",\n      \"service\": \"First\",\n      \"billing_type\": \"easypost\",\n      \"est_delivery_days\": 2.0,\n      \"currency\": \"USD\",\n      \"id\": \"rate_be5d8b4773404211baa3432c0a160109\",\n      \"object\": \"Rate\"\n    }\n  ],\n  \"to_address\": {\n    \"zip\": \"94107-1670\",\n    \"country\": \"US\",\n    \"city\": \"SAN FRANCISCO\",\n    \"created_at\": \"2022-06-02T22:55:05+00:00\",\n    \"verifications\": {\n      \"delivery\": {\n        \"success\": true,\n        \"details\": {\n          \"latitude\": 37.77551,\n          \"time_zone\": \"America/Los_Angeles\",\n          \"longitude\": -122.39697\n        },\n        \"errors\": []\n      },\n      \"zip4\": {\n        \"success\": true,\n        \"errors\": []\n      }\n    },\n    \"mode\": \"test\",\n    \"residential\": true,\n    \"updated_at\": \"2022-06-02T22:55:05+00:00\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"JACK SPARROW\",\n    \"company\": \"EASYPOST\",\n    \"street1\": \"388 TOWNSEND ST APT 20\",\n    \"id\": \"adr_0b3166a4e2c711ec98fbac1f6b0a0d1e\",\n    \"state\": \"CA\",\n    \"object\": \"Address\"\n  },\n  \"tracking_code\": \"9400100109361122075038\",\n  \"messages\": [],\n  \"forms\": [],\n  \"status\": \"unknown\",\n  \"object\": \"Shipment\"\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 201 Created"
+        ],
+        "content-length": [
+          "7049"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb1nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "24678df262993fc9e61fa46c000e0f6e"
+        ],
+        "x-proxied": [
+          "extlb1nuq 0910011e7e",
+          "intlb2nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "1.147028"
+        ],
+        "etag": [
+          "W/\"99fb4d8b9e8607ea613677219d2721c1\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "location": [
+          "/api/v2/shipments/shp_e37be17a065348348efaee84aa7642a8"
+        ],
+        "x-version-label": [
+          "easypost-202206022117-ecf7ce5035-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 201,
+        "message": "Created"
+      },
+      "uri": "https://api.easypost.com/v2/shipments"
+    },
+    "duration": 1337
+  },
+  {
+    "recordedAt": 1654210506,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "X-Client-User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/shipments/shp_e37be17a065348348efaee84aa7642a8"
+    },
+    "response": {
+      "body": "{\n  \"insurance\": \"50.00\",\n  \"fees\": [\n    {\n      \"amount\": \"0.00000\",\n      \"refunded\": false,\n      \"type\": \"LabelFee\",\n      \"charged\": true,\n      \"object\": \"Fee\"\n    },\n    {\n      \"amount\": \"5.49000\",\n      \"refunded\": false,\n      \"type\": \"PostageFee\",\n      \"charged\": true,\n      \"object\": \"Fee\"\n    },\n    {\n      \"amount\": \"0.25000\",\n      \"refunded\": false,\n      \"type\": \"InsuranceFee\",\n      \"charged\": true,\n      \"object\": \"Fee\"\n    }\n  ],\n  \"created_at\": \"2022-06-02T22:55:05Z\",\n  \"mode\": \"test\",\n  \"usps_zone\": 1.0,\n  \"is_return\": false,\n  \"updated_at\": \"2022-06-02T22:55:06Z\",\n  \"selected_rate\": {\n    \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n    \"list_rate\": \"5.49\",\n    \"created_at\": \"2022-06-02T22:55:06Z\",\n    \"delivery_days\": 2.0,\n    \"list_currency\": \"USD\",\n    \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n    \"mode\": \"test\",\n    \"carrier\": \"USPS\",\n    \"delivery_date_guaranteed\": false,\n    \"retail_rate\": \"5.49\",\n    \"retail_currency\": \"USD\",\n    \"updated_at\": \"2022-06-02T22:55:06Z\",\n    \"rate\": \"5.49\",\n    \"service\": \"First\",\n    \"billing_type\": \"easypost\",\n    \"est_delivery_days\": 2.0,\n    \"currency\": \"USD\",\n    \"id\": \"rate_be5d8b4773404211baa3432c0a160109\",\n    \"object\": \"Rate\"\n  },\n  \"options\": {\n    \"date_advance\": 0.0,\n    \"currency\": \"USD\",\n    \"payment\": {\n      \"type\": \"SENDER\"\n    }\n  },\n  \"tracker\": {\n    \"fees\": [],\n    \"carrier_detail\": {\n      \"origin_location\": \"HOUSTON TX, 77001\",\n      \"service\": \"First-Class Package Service\",\n      \"origin_tracking_location\": {\n        \"zip\": \"77063\",\n        \"city\": \"HOUSTON\",\n        \"state\": \"TX\",\n        \"object\": \"TrackingLocation\"\n      },\n      \"destination_location\": \"CHARLESTON SC, 29401\",\n      \"object\": \"CarrierDetail\"\n    },\n    \"created_at\": \"2022-06-02T22:55:06Z\",\n    \"tracking_details\": [\n      {\n        \"tracking_location\": {\n          \"object\": \"TrackingLocation\"\n        },\n        \"datetime\": \"2022-05-02T22:55:06Z\",\n        \"source\": \"USPS\",\n        \"message\": \"Pre-Shipment Info Sent to USPS\",\n        \"object\": \"TrackingDetail\",\n        \"status\": \"pre_transit\",\n        \"status_detail\": \"status_update\"\n      },\n      {\n        \"tracking_location\": {\n          \"zip\": \"77063\",\n          \"city\": \"HOUSTON\",\n          \"state\": \"TX\",\n          \"object\": \"TrackingLocation\"\n        },\n        \"datetime\": \"2022-05-03T11:32:06Z\",\n        \"source\": \"USPS\",\n        \"message\": \"Shipping Label Created\",\n        \"object\": \"TrackingDetail\",\n        \"status\": \"pre_transit\",\n        \"status_detail\": \"status_update\"\n      }\n    ],\n    \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n    \"tracking_code\": \"9400100109361122075038\",\n    \"status_detail\": \"status_update\",\n    \"mode\": \"test\",\n    \"public_url\": \"https://track.easypost.com/djE6dHJrXzY3ZTc0Nzk2MTRhZjQyYmE4MjFkMDkyMGUxNWNlMmU1\",\n    \"est_delivery_date\": \"2022-06-02T22:55:06Z\",\n    \"carrier\": \"USPS\",\n    \"updated_at\": \"2022-06-02T22:55:06Z\",\n    \"id\": \"trk_67e7479614af42ba821d0920e15ce2e5\",\n    \"object\": \"Tracker\",\n    \"status\": \"pre_transit\"\n  },\n  \"return_address\": {\n    \"zip\": \"94107\",\n    \"country\": \"US\",\n    \"city\": \"San Francisco\",\n    \"created_at\": \"2022-06-02T22:55:05+00:00\",\n    \"verifications\": {},\n    \"mode\": \"test\",\n    \"updated_at\": \"2022-06-02T22:55:05+00:00\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Jack Sparrow\",\n    \"company\": \"EasyPost\",\n    \"street1\": \"388 Townsend St\",\n    \"id\": \"adr_0b33394fe2c711ec93b3ac1f6bc7b362\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\",\n    \"object\": \"Address\"\n  },\n  \"id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n  \"from_address\": {\n    \"zip\": \"94107\",\n    \"country\": \"US\",\n    \"city\": \"San Francisco\",\n    \"created_at\": \"2022-06-02T22:55:05+00:00\",\n    \"verifications\": {},\n    \"mode\": \"test\",\n    \"updated_at\": \"2022-06-02T22:55:05+00:00\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Jack Sparrow\",\n    \"company\": \"EasyPost\",\n    \"street1\": \"388 Townsend St\",\n    \"id\": \"adr_0b33394fe2c711ec93b3ac1f6bc7b362\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\",\n    \"object\": \"Address\"\n  },\n  \"postage_label\": {\n    \"label_resolution\": 300.0,\n    \"date_advance\": 0.0,\n    \"label_size\": \"4x6\",\n    \"integrated_form\": \"none\",\n    \"created_at\": \"2022-06-02T22:55:06Z\",\n    \"label_type\": \"default\",\n    \"label_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/postage_label/20220602/4baf300395fb4562b6cf3712f603710e.png\",\n    \"label_file_type\": \"image/png\",\n    \"updated_at\": \"2022-06-02T22:55:06Z\",\n    \"id\": \"pl_a6e30e7cb0a440feaf4f68ce4081a7ee\",\n    \"label_date\": \"2022-06-02T22:55:06Z\",\n    \"object\": \"PostageLabel\"\n  },\n  \"parcel\": {\n    \"mode\": \"test\",\n    \"updated_at\": \"2022-06-02T22:55:05Z\",\n    \"length\": 10.0,\n    \"width\": 8.0,\n    \"created_at\": \"2022-06-02T22:55:05Z\",\n    \"weight\": 15.4,\n    \"id\": \"prcl_edb259635e1e4d50b977d4e3c1c943da\",\n    \"object\": \"Parcel\",\n    \"height\": 4.0\n  },\n  \"buyer_address\": {\n    \"zip\": \"94107-1670\",\n    \"country\": \"US\",\n    \"city\": \"SAN FRANCISCO\",\n    \"created_at\": \"2022-06-02T22:55:05+00:00\",\n    \"verifications\": {\n      \"delivery\": {\n        \"success\": true,\n        \"details\": {\n          \"latitude\": 37.77551,\n          \"time_zone\": \"America/Los_Angeles\",\n          \"longitude\": -122.39697\n        },\n        \"errors\": []\n      },\n      \"zip4\": {\n        \"success\": true,\n        \"errors\": []\n      }\n    },\n    \"mode\": \"test\",\n    \"residential\": true,\n    \"updated_at\": \"2022-06-02T22:55:05+00:00\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"JACK SPARROW\",\n    \"company\": \"EASYPOST\",\n    \"street1\": \"388 TOWNSEND ST APT 20\",\n    \"id\": \"adr_0b3166a4e2c711ec98fbac1f6b0a0d1e\",\n    \"state\": \"CA\",\n    \"object\": \"Address\"\n  },\n  \"rates\": [\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"23.75\",\n      \"created_at\": \"2022-06-02T22:55:05Z\",\n      \"list_currency\": \"USD\",\n      \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"27.40\",\n      \"retail_currency\": \"USD\",\n      \"updated_at\": \"2022-06-02T22:55:05Z\",\n      \"rate\": \"23.75\",\n      \"service\": \"Express\",\n      \"billing_type\": \"easypost\",\n      \"currency\": \"USD\",\n      \"id\": \"rate_19cc7013031244e083b90bbb8922f4aa\",\n      \"object\": \"Rate\"\n    },\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"7.22\",\n      \"created_at\": \"2022-06-02T22:55:05Z\",\n      \"delivery_days\": 2.0,\n      \"list_currency\": \"USD\",\n      \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"7.22\",\n      \"retail_currency\": \"USD\",\n      \"updated_at\": \"2022-06-02T22:55:05Z\",\n      \"rate\": \"7.22\",\n      \"service\": \"ParcelSelect\",\n      \"billing_type\": \"easypost\",\n      \"est_delivery_days\": 2.0,\n      \"currency\": \"USD\",\n      \"id\": \"rate_911426f79b5746038b565f3b13412cb3\",\n      \"object\": \"Rate\"\n    },\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"7.37\",\n      \"created_at\": \"2022-06-02T22:55:05Z\",\n      \"delivery_days\": 1.0,\n      \"list_currency\": \"USD\",\n      \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"8.70\",\n      \"retail_currency\": \"USD\",\n      \"updated_at\": \"2022-06-02T22:55:05Z\",\n      \"rate\": \"7.37\",\n      \"service\": \"Priority\",\n      \"billing_type\": \"easypost\",\n      \"est_delivery_days\": 1.0,\n      \"currency\": \"USD\",\n      \"id\": \"rate_f99baa40e587490eb1d8702e789b057f\",\n      \"object\": \"Rate\"\n    },\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"5.49\",\n      \"created_at\": \"2022-06-02T22:55:05Z\",\n      \"delivery_days\": 2.0,\n      \"list_currency\": \"USD\",\n      \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"5.49\",\n      \"retail_currency\": \"USD\",\n      \"updated_at\": \"2022-06-02T22:55:05Z\",\n      \"rate\": \"5.49\",\n      \"service\": \"First\",\n      \"billing_type\": \"easypost\",\n      \"est_delivery_days\": 2.0,\n      \"currency\": \"USD\",\n      \"id\": \"rate_be5d8b4773404211baa3432c0a160109\",\n      \"object\": \"Rate\"\n    }\n  ],\n  \"to_address\": {\n    \"zip\": \"94107-1670\",\n    \"country\": \"US\",\n    \"city\": \"SAN FRANCISCO\",\n    \"created_at\": \"2022-06-02T22:55:05+00:00\",\n    \"verifications\": {\n      \"delivery\": {\n        \"success\": true,\n        \"details\": {\n          \"latitude\": 37.77551,\n          \"time_zone\": \"America/Los_Angeles\",\n          \"longitude\": -122.39697\n        },\n        \"errors\": []\n      },\n      \"zip4\": {\n        \"success\": true,\n        \"errors\": []\n      }\n    },\n    \"mode\": \"test\",\n    \"residential\": true,\n    \"updated_at\": \"2022-06-02T22:55:05+00:00\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"JACK SPARROW\",\n    \"company\": \"EASYPOST\",\n    \"street1\": \"388 TOWNSEND ST APT 20\",\n    \"id\": \"adr_0b3166a4e2c711ec98fbac1f6b0a0d1e\",\n    \"state\": \"CA\",\n    \"object\": \"Address\"\n  },\n  \"tracking_code\": \"9400100109361122075038\",\n  \"messages\": [],\n  \"forms\": [],\n  \"status\": \"unknown\",\n  \"object\": \"Shipment\"\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "8183"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb5nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "24678df062993fcae631c92c000e0ff9"
+        ],
+        "x-proxied": [
+          "extlb1nuq 0910011e7e",
+          "intlb1nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.116671"
+        ],
+        "etag": [
+          "W/\"33d64e10ea1766fe71f51a4835702ed4\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206022117-ecf7ce5035-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/shipments/shp_e37be17a065348348efaee84aa7642a8"
+    },
+    "duration": 256
+  },
+  {
+    "recordedAt": 1654210507,
+    "request": {
+      "body": "{\n  \"refund\": {\n    \"carrier\": \"USPS\",\n    \"tracking_codes\": \"9400100109361122075038\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ],
+        "X-Client-User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/refunds"
+    },
+    "response": {
+      "body": "[\n  {\n    \"carrier\": \"USPS\",\n    \"updated_at\": \"2022-06-02T22:55:07Z\",\n    \"created_at\": \"2022-06-02T22:55:07Z\",\n    \"id\": \"rfnd_5a482204b8934441a52426c3f0b011d0\",\n    \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n    \"tracking_code\": \"9400100109361122075038\",\n    \"object\": \"Refund\",\n    \"status\": \"submitted\"\n  }\n]",
+      "headers": {
+        "null": [
+          "HTTP/1.1 201 Created"
+        ],
+        "content-length": [
+          "297"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb4nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "24678df362993fcbe6412870000e1012"
+        ],
+        "x-proxied": [
+          "extlb1nuq 0910011e7e",
+          "intlb1nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.061205"
+        ],
+        "etag": [
+          "W/\"a427c143cfba5db72acc97e82d9d412c\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206022117-ecf7ce5035-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 201,
+        "message": "Created"
+      },
+      "uri": "https://api.easypost.com/v2/refunds"
+    },
+    "duration": 172
+  },
+  {
+    "recordedAt": 1654210507,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "X-Client-User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/refunds/rfnd_5a482204b8934441a52426c3f0b011d0"
+    },
+    "response": {
+      "body": "{\n  \"carrier\": \"USPS\",\n  \"updated_at\": \"2022-06-02T22:55:07Z\",\n  \"created_at\": \"2022-06-02T22:55:07Z\",\n  \"id\": \"rfnd_5a482204b8934441a52426c3f0b011d0\",\n  \"shipment_id\": \"shp_e37be17a065348348efaee84aa7642a8\",\n  \"tracking_code\": \"9400100109361122075038\",\n  \"object\": \"Refund\",\n  \"status\": \"submitted\"\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "295"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb4nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "24678df162993fcbe61ea551000e1027"
+        ],
+        "x-proxied": [
+          "extlb1nuq 0910011e7e",
+          "intlb1nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.086168"
+        ],
+        "etag": [
+          "W/\"bc08cc27432cd49e688eb3cd0ecee7d2\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206022117-ecf7ce5035-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/refunds/rfnd_5a482204b8934441a52426c3f0b011d0"
+    },
+    "duration": 187
+  }
+]

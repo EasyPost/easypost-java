@@ -68,6 +68,16 @@ public final class CarrierAccount extends EasyPostResource {
     /**
      * List all carrier accounts.
      *
+     * @return List of CarrierAccount objects.
+     * @throws EasyPostException when the request fails.
+     */
+    public static List<CarrierAccount> all() throws EasyPostException {
+        return all(null, null);
+    }
+
+    /**
+     * List all carrier accounts.
+     *
      * @param params filters to apply to the list.
      * @return List of CarrierAccount objects.
      * @throws EasyPostException when the request fails.

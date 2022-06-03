@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -31,6 +32,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -121,19 +123,19 @@ public abstract class EasyPostResource {
         return headers;
     }
 
-    private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(final String url, final String apiKey)
-            throws IOException {
-        URL easypostURL = null;
+    private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(final String url, final String apiKey,
+                                                                             final String method) throws IOException {
+        HttpsURLConnection conn = null;
         String customURLStreamHandlerClassName = System.getProperty(CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
         if (customURLStreamHandlerClassName != null) {
             // instantiate the custom handler provided
             try {
-                @SuppressWarnings("unchecked")
-                Class<URLStreamHandler> clazz =
+                @SuppressWarnings ("unchecked") Class<URLStreamHandler> clazz =
                         (Class<URLStreamHandler>) Class.forName(customURLStreamHandlerClassName);
                 Constructor<URLStreamHandler> constructor = clazz.getConstructor();
                 URLStreamHandler customHandler = constructor.newInstance();
-                easypostURL = new URL(null, url, customHandler);
+                URL urlObj = new URL(null, url, customHandler);
+                conn = (javax.net.ssl.HttpsURLConnection) urlObj.openConnection();
             } catch (ClassNotFoundException e) {
                 throw new IOException(e);
             } catch (SecurityException e) {
@@ -149,11 +151,18 @@ public abstract class EasyPostResource {
             } catch (InvocationTargetException e) {
                 throw new IOException(e);
             }
+        } else if (EasyPost._vcr != null) {
+            try {
+                conn = EasyPost._vcr.getHttpUrlConnection(url).openConnectionSecure();
+            } catch (Exception vcrException) {
+                throw new IOException(vcrException);
+            }
         } else {
-            easypostURL = new URL(url);
+            URL urlObj = new URL(null, url);
+            conn = (javax.net.ssl.HttpsURLConnection) urlObj.openConnection();
         }
-        javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) easypostURL.openConnection();
         conn.setConnectTimeout(getConnectTimeoutMilliseconds());
+        conn.setRequestMethod(method);
 
         int readTimeout;
         if (EasyPost.readTimeout != 0) {
@@ -192,33 +201,35 @@ public abstract class EasyPostResource {
 
     private static javax.net.ssl.HttpsURLConnection createGetConnection(final String url, final String query,
                                                                         final String apiKey) throws IOException {
-        String getURL = String.format("%s?%s", url, query);
-        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(getURL, apiKey);
-        conn.setRequestMethod("GET");
+        String getURL = url;
+        if (query != null) {
+            getURL = String.format("%s?%s", url, query);
+        }
+        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(getURL, apiKey, "GET");
         return conn;
     }
 
     private static javax.net.ssl.HttpsURLConnection createPostConnection(final String url, final JsonObject body,
                                                                          final String apiKey) throws IOException {
-        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey);
-        conn.setRequestMethod("POST");
+        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey, "POST");
         conn = writeBody(conn, body);
         return conn;
     }
 
     private static javax.net.ssl.HttpsURLConnection createDeleteConnection(final String url, final String query,
                                                                            final String apiKey) throws IOException {
-        String deleteUrl = String.format("%s?%s", url, query);
-        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(deleteUrl, apiKey);
-        conn.setRequestMethod("DELETE");
+        String deleteUrl = url;
+        if (query != null) {
+            deleteUrl = String.format("%s?%s", url, query);
+        }
+        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(deleteUrl, apiKey, "DELETE");
         return conn;
     }
 
     private static javax.net.ssl.HttpsURLConnection createPutConnection(final String url, final JsonObject body,
                                                                         final String apiKey) throws IOException {
-        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey);
-        conn.setRequestMethod("PUT");
-        writeBody(conn, body);
+        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey, "PUT");
+        conn = writeBody(conn, body);
         return conn;
     }
 
@@ -274,8 +285,7 @@ public abstract class EasyPostResource {
     }
 
     private static String getResponseBody(final InputStream responseStream) throws IOException {
-        @SuppressWarnings("resource")
-        String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next();
+        @SuppressWarnings ("resource") String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next();
         responseStream.close();
         return rBody;
     }
@@ -304,6 +314,8 @@ public abstract class EasyPostResource {
                             String.format("Unrecognized HTTP method %s. Please contact EasyPost at %s.", method,
                                     EasyPostResource.EASYPOST_SUPPORT_EMAIL));
             }
+            conn.connect(); // This line is crucial for getting VCR to work
+            // (triggers internal pre-request processing needed for VCR)
             int rCode = conn.getResponseCode(); // sends the request
             String rBody = null;
             if (rCode == HttpURLConnection.HTTP_NO_CONTENT) {
@@ -618,6 +630,54 @@ public abstract class EasyPostResource {
     }
 
     /**
+     * Get all methods for a particular class.
+     *
+     * @param type Class type to get methods for.
+     * @return List of class methods.
+     */
+    private static List<Method> getAllMethods(Class<?> type) {
+        return Arrays.asList(type.getMethods());
+    }
+
+    /**
+     * Get all non-static methods for a particular class.
+     *
+     * @param type Class type to get methods for.
+     * @return List of class methods.
+     */
+    private static List<Method> getAllNonStaticMethods(Class<?> type) {
+        List<Method> allMethods = getAllMethods(type);
+
+        List<Method> nonStaticMethods = new ArrayList<>();
+        for (Method method : allMethods) {
+            if (!Modifier.isStatic(method.getModifiers())) {
+                nonStaticMethods.add(method);
+            }
+        }
+
+        return nonStaticMethods;
+    }
+
+    /**
+     * Get all static methods for a particular class.
+     *
+     * @param type Class type to get methods for.
+     * @return List of class methods.
+     */
+    private static List<Method> getAllStaticMethods(Class<?> type) {
+        List<Method> allMethods = getAllMethods(type);
+
+        List<Method> staticMethods = new ArrayList<>();
+        for (Method method : allMethods) {
+            if (Modifier.isStatic(method.getModifiers())) {
+                staticMethods.add(method);
+            }
+        }
+
+        return staticMethods;
+    }
+
+    /**
      * Merge two EasyPostResource objects.
      *
      * @param obj    the base object
@@ -628,11 +688,11 @@ public abstract class EasyPostResource {
             return;
         }
 
-        Method[] methods = obj.getClass().getMethods();
+        // get all methods from the obj class and its superclasses
+        List<Method> methods = getAllNonStaticMethods(obj.getClass());
 
         for (Method fromMethod : methods) {
-            if ((fromMethod.getDeclaringClass().equals(obj.getClass()) && fromMethod.getName().startsWith("get")) ||
-                    GLOBAL_FIELD_ACCESSORS.contains(fromMethod.getName())) {
+            if (fromMethod.getName().startsWith("get") || GLOBAL_FIELD_ACCESSORS.contains(fromMethod.getName())) {
 
                 String fromName = fromMethod.getName();
                 String toName = fromName.replace("get", "set");
@@ -644,7 +704,21 @@ public abstract class EasyPostResource {
                         toMethod.invoke(obj, value);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    // TODO: Address situation below
+                    /*
+                      The method getSmartrates() on the Shipment object is causing this exception.
+                      Since it found a method with "get" in the name, it expects there to be a "set" equivalent.
+                      There is not, causing this exception to be thrown, although nothing wrong has really happened.
+                      This code block was copy-pasted from StackOverflow: https://stackoverflow.com/a/7526414/13343799
+                      Per the comments, there are some built-in expectations for how this will work,
+                      and should eventually be re-written or removed entirely
+                      (explore returning a brand-new object rather than modifying the existing one).
+                      For now, the easiest fix would be to
+                      a) just ignore this exception, or
+                      b) rename getSmartrates() in the Shipment class to just smartrates()
+                      (similar to how the other methods are named).
+                     */
+                    // e.printStackTrace();
                 }
             }
         }
@@ -761,7 +835,7 @@ public abstract class EasyPostResource {
         PUT
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings ("unused")
     private static class ErrorContainer {
         private EasyPostResource.Error error;
     }
@@ -773,7 +847,7 @@ public abstract class EasyPostResource {
         private String param;
         private String error;
 
-        @SuppressWarnings("unused")
+        @SuppressWarnings ("unused")
         public String getType() {
             return type;
         }
@@ -782,7 +856,7 @@ public abstract class EasyPostResource {
             return message;
         }
 
-        @SuppressWarnings("unused")
+        @SuppressWarnings ("unused")
         public String getCode() {
             return code;
         }

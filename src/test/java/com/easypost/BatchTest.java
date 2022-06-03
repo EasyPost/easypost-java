@@ -1,39 +1,57 @@
 package com.easypost;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Batch;
 import com.easypost.model.BatchCollection;
 import com.easypost.model.Shipment;
-
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BatchTest {
-    private static Batch globalBatch;
-    private static Map<String, Object> params = new HashMap<>();
+
+    private static TestUtils.VCR _vcr;
     
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("batch", TestUtils.ApiKey.TEST);
+    }
+
+    /**
+     * Create a batch.
+     */
+    private static Batch createBasicBatch() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
 
         List<Object> shipments = new ArrayList<>();
+        shipments.add(Fixture.basicShipment());
+        params.put("shipments", shipments);
 
+        return Batch.create(params);
+    }
+
+    private static Batch createOneCallBuyBatch() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+
+        List<Object> shipments = new ArrayList<>();
         shipments.add(Fixture.oneCallBuyShipment());
         params.put("shipments", shipments);
 
-        globalBatch = Batch.create(params);
+        return Batch.create(params);
     }
 
     /**
@@ -43,9 +61,11 @@ public class BatchTest {
      */
     @Test
     public void testCreate() throws EasyPostException{
-        Batch batch = Batch.create(params);
+        _vcr.setUpTest("create");
 
-        assertTrue(batch instanceof Batch);
+        Batch batch = createBasicBatch();
+
+        assertInstanceOf(Batch.class, batch);
         assertTrue(batch.getId().startsWith("batch_"));
         assertNotNull(batch.getShipments());
     }
@@ -57,10 +77,15 @@ public class BatchTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        Batch retrievedBatch = Batch.retrieve(globalBatch.getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(retrievedBatch instanceof Batch);
-        assertEquals(globalBatch.getId(), retrievedBatch.getId());
+        Batch batch = createBasicBatch();
+
+        Batch retrievedBatch = Batch.retrieve(batch.getId());
+
+        assertInstanceOf(Batch.class, batch);
+        // Must compare IDs since elements of batch (i.e. status) may be different
+        assertEquals(batch.getId(), retrievedBatch.getId());
     }
 
     /**
@@ -70,8 +95,9 @@ public class BatchTest {
      */
     @Test
     public void testAll() throws EasyPostException {
+        _vcr.setUpTest("all");
+
         Map<String, Object> params = new HashMap<>();
-        
         params.put("page_size", Fixture.pageSize());
 
         BatchCollection batches = Batch.all(params);
@@ -90,15 +116,18 @@ public class BatchTest {
      */
     @Test
     public void testCreateAndBuy() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
-        List<Object> shipmentData = new ArrayList<>();
+        _vcr.setUpTest("create_and_buy");
 
+        Map<String, Object> params = new HashMap<>();
+
+        List<Object> shipmentData = new ArrayList<>();
         shipmentData.add(Fixture.oneCallBuyShipment());
+
         params.put("shipments", shipmentData);
 
         Batch batch = Batch.createAndBuy(params);
 
-        assertTrue(batch instanceof Batch);
+        assertInstanceOf(Batch.class, batch);
         assertTrue(batch.getId().startsWith("batch_"));
         assertEquals(1, batch.getNumShipments().intValue());
     }
@@ -109,19 +138,14 @@ public class BatchTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled
     public void testBuy() throws EasyPostException {
-        List<Object> shipmentData = new ArrayList<>();
-        Map<String, Object> shipments = new HashMap<>();
+        _vcr.setUpTest("buy");
 
-        shipmentData.add(Fixture.oneCallBuyShipment());
-        shipments.put("shipments", shipmentData);
-
-        Batch batch = Batch.create(shipments);
+        Batch batch = createOneCallBuyBatch();
 
         batch = batch.buy();
 
-        assertTrue(batch instanceof Batch);
+        assertInstanceOf(Batch.class, batch);
         assertEquals(1, batch.getNumShipments().intValue());
     }
 
@@ -130,11 +154,21 @@ public class BatchTest {
      *
      * @throws EasyPostException when the request fails.
      */
-    public void testCreateScanForm() throws EasyPostException {
-        Batch batchWithScanForm = globalBatch.createScanForm();
+    @Test
+    public void testCreateScanForm() throws EasyPostException, InterruptedException {
+        _vcr.setUpTest("create_scanform");
+
+        Batch batch = createOneCallBuyBatch();
+        batch = batch.buy();
+
+        if (_vcr.isRecording()) {
+            Thread.sleep(5000); // Wait enough time for processing
+        }
+
+        Batch batchWithScanForm = batch.createScanForm();
 
         // We can't assert anything meaningful here because the scanform gets queued for generation and may not be immediately available
-        assertTrue(batchWithScanForm instanceof Batch);
+        assertInstanceOf(Batch.class, batchWithScanForm);
     }
 
     /**
@@ -144,8 +178,10 @@ public class BatchTest {
      */
     @Test
     public void testAddRemoveShipment() throws EasyPostException {
+        _vcr.setUpTest("add_remove_shipment");
+
         Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
-        
+
         Batch batch = Batch.create();
 
         List<Shipment> shipmentData = new ArrayList<>();
@@ -169,29 +205,23 @@ public class BatchTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // This test is skipped because we have to wait for the batch status to be `created` and the shipment's status to be `postage_purchased`.
-    public void testLabel() throws EasyPostException {
+    public void testLabel() throws EasyPostException, InterruptedException {
+        _vcr.setUpTest("label");
+
+        Batch batch = createOneCallBuyBatch();
+
+        batch = batch.buy();
+
+        if (_vcr.isRecording()) {
+            Thread.sleep(5000); // Wait enough time for processing
+        }
+
         Map<String, Object> params = new HashMap<>();
         params.put("file_format", "ZPL");
 
-        while (true) {
-            globalBatch = globalBatch.refresh();
-            if("created".equals(globalBatch.getState()) ){
-                globalBatch.buy();
-                break;
-            }
-        }
+        Batch batchWithLabel = batch.label(params);
 
-        while (true) {
-            globalBatch = globalBatch.refresh();
-            if ("postage_purchased".equals(globalBatch.getShipments().get(0).getBatchStatus())) {
-                Batch batchWithLabel = globalBatch.label(params);
-
-                // We can't assert anything meaningful here because the label gets queued for generation and may not be immediately available
-                assertEquals(1, batchWithLabel.getNumShipments().intValue());
-                assertTrue(batchWithLabel instanceof Batch);
-                break;
-            }
-        }
+        // We can't assert anything meaningful here because the label gets queued for generation and may not be immediately available
+        assertInstanceOf(Batch.class, batchWithLabel);
     }
 }

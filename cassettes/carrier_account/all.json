@@ -1,0 +1,93 @@
+[
+  {
+    "recordedAt": 1654210486,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "X-Client-User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts"
+    },
+    "response": {
+      "body": "[\n  {\n    \"readable\": \"USPS\",\n    \"credentials\": {},\n    \"created_at\": \"2022-02-02T20:31:54Z\",\n    \"description\": \"USPS Account\",\n    \"type\": \"UspsAccount\",\n    \"updated_at\": \"2022-02-16T22:22:42Z\",\n    \"clone\": false,\n    \"billing_type\": \"easypost\",\n    \"id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  },\n  {\n    \"readable\": \"DHL Express\",\n    \"credentials\": {},\n    \"created_at\": \"2022-02-02T20:31:54Z\",\n    \"description\": \"DHL Express Account\",\n    \"type\": \"DhlExpressDefaultAccount\",\n    \"updated_at\": \"2022-02-02T20:31:54Z\",\n    \"clone\": false,\n    \"billing_type\": \"easypost\",\n    \"id\": \"ca_fe24b01a1fbf483ab470da57c47b98a8\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  },\n  {\n    \"readable\": \"LSO\",\n    \"credentials\": {},\n    \"created_at\": \"2022-02-02T20:31:54Z\",\n    \"description\": \"LSO Account\",\n    \"type\": \"LsoDefaultAccount\",\n    \"updated_at\": \"2022-02-02T20:31:54Z\",\n    \"clone\": false,\n    \"billing_type\": \"easypost\",\n    \"id\": \"ca_4b2d10b88eb240f4af47ff83587a6b8e\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  },\n  {\n    \"readable\": \"UPS\",\n    \"credentials\": {},\n    \"created_at\": \"2022-05-13T18:53:19Z\",\n    \"description\": \"My custom description\",\n    \"type\": \"UpsAccount\",\n    \"updated_at\": \"2022-05-13T18:53:19Z\",\n    \"clone\": false,\n    \"billing_type\": \"carrier\",\n    \"id\": \"ca_687017c7f80044ab942b697a9607c439\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  },\n  {\n    \"readable\": \"UPS\",\n    \"credentials\": {},\n    \"created_at\": \"2022-05-13T18:53:31Z\",\n    \"description\": \"My custom description\",\n    \"type\": \"UpsAccount\",\n    \"updated_at\": \"2022-05-13T18:53:31Z\",\n    \"clone\": false,\n    \"billing_type\": \"carrier\",\n    \"id\": \"ca_8031f3014d2b49dba089e5c14da57413\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  },\n  {\n    \"readable\": \"UPS\",\n    \"credentials\": {},\n    \"created_at\": \"2022-05-26T19:37:42Z\",\n    \"description\": \"UPS Account\",\n    \"type\": \"UpsAccount\",\n    \"updated_at\": \"2022-05-26T19:37:42Z\",\n    \"clone\": false,\n    \"billing_type\": \"carrier\",\n    \"id\": \"ca_6924408886ad49ac9a8468804f2b52b7\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  },\n  {\n    \"readable\": \"UPS\",\n    \"credentials\": {},\n    \"created_at\": \"2022-05-26T19:37:44Z\",\n    \"description\": \"My custom description\",\n    \"type\": \"UpsAccount\",\n    \"updated_at\": \"2022-05-26T19:37:45Z\",\n    \"clone\": false,\n    \"billing_type\": \"carrier\",\n    \"id\": \"ca_3e92a82adac444a58f032ebcd8eb9028\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  },\n  {\n    \"readable\": \"UPS\",\n    \"credentials\": {},\n    \"created_at\": \"2022-05-26T19:54:50Z\",\n    \"description\": \"UPS Account\",\n    \"type\": \"UpsAccount\",\n    \"updated_at\": \"2022-05-26T19:54:50Z\",\n    \"clone\": false,\n    \"billing_type\": \"carrier\",\n    \"id\": \"ca_e6db2c19d54c4025b852d0ad81ee7f4e\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  },\n  {\n    \"readable\": \"UPS\",\n    \"credentials\": {},\n    \"created_at\": \"2022-05-26T19:54:51Z\",\n    \"description\": \"My custom description\",\n    \"type\": \"UpsAccount\",\n    \"updated_at\": \"2022-05-26T19:54:52Z\",\n    \"clone\": false,\n    \"billing_type\": \"carrier\",\n    \"id\": \"ca_f363eb4e1b194798b015a07598be6ed4\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  },\n  {\n    \"readable\": \"UPS\",\n    \"credentials\": {},\n    \"created_at\": \"2022-06-02T04:49:07Z\",\n    \"description\": \"My custom description\",\n    \"type\": \"UpsAccount\",\n    \"updated_at\": \"2022-06-02T04:49:07Z\",\n    \"clone\": false,\n    \"billing_type\": \"carrier\",\n    \"id\": \"ca_1c4eecb124f841d7a51e7e53cdda6cd8\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  },\n  {\n    \"readable\": \"UPS\",\n    \"credentials\": {},\n    \"created_at\": \"2022-06-02T18:51:25Z\",\n    \"description\": \"UPS Account\",\n    \"type\": \"UpsAccount\",\n    \"updated_at\": \"2022-06-02T18:51:25Z\",\n    \"clone\": false,\n    \"billing_type\": \"carrier\",\n    \"id\": \"ca_2cdc6fb96d99484e8631d7c9620dec24\",\n    \"fields\": {\n      \"credentials\": {}\n    },\n    \"object\": \"CarrierAccount\"\n  }\n]",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "5511"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb5nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "24678df062993fb5fc5032a1000e0a08"
+        ],
+        "x-proxied": [
+          "extlb1nuq 0910011e7e",
+          "intlb1nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.221931"
+        ],
+        "etag": [
+          "W/\"9a7664ede6fee21d32d9a27cfd30144a\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206022117-ecf7ce5035-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts"
+    },
+    "duration": 413
+  }
+]

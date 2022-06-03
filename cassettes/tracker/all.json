@@ -1,0 +1,93 @@
+[
+  {
+    "recordedAt": 1654210541,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "X-Client-User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/trackers?page_size\u003d5"
+    },
+    "response": {
+      "body": "{\n  \"trackers\": [\n    {\n      \"fees\": [],\n      \"carrier_detail\": {\n        \"origin_location\": \"HOUSTON TX, 77001\",\n        \"service\": \"First-Class Package Service\",\n        \"origin_tracking_location\": {\n          \"zip\": \"77063\",\n          \"city\": \"HOUSTON\",\n          \"state\": \"TX\",\n          \"object\": \"TrackingLocation\"\n        },\n        \"destination_location\": \"CHARLESTON SC, 29401\",\n        \"object\": \"CarrierDetail\"\n      },\n      \"created_at\": \"2022-06-02T22:55:29Z\",\n      \"tracking_details\": [\n        {\n          \"tracking_location\": {\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2022-05-02T22:55:29Z\",\n          \"source\": \"USPS\",\n          \"message\": \"Pre-Shipment Info Sent to USPS\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"pre_transit\",\n          \"status_detail\": \"status_update\"\n        },\n        {\n          \"tracking_location\": {\n            \"zip\": \"77063\",\n            \"city\": \"HOUSTON\",\n            \"state\": \"TX\",\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2022-05-03T11:32:29Z\",\n          \"source\": \"USPS\",\n          \"message\": \"Shipping Label Created\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"pre_transit\",\n          \"status_detail\": \"status_update\"\n        }\n      ],\n      \"shipment_id\": \"shp_8a2f939227584eee81a7962b4cda7e0d\",\n      \"tracking_code\": \"9400100109361122075113\",\n      \"status_detail\": \"status_update\",\n      \"mode\": \"test\",\n      \"public_url\": \"https://track.easypost.com/djE6dHJrXzNkYzIxMWUyYjJiYTQ1Y2ZiNTA3OTFiZjVjNjFmNjk4\",\n      \"est_delivery_date\": \"2022-06-02T22:55:29Z\",\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-06-02T22:55:29Z\",\n      \"id\": \"trk_3dc211e2b2ba45cfb50791bf5c61f698\",\n      \"object\": \"Tracker\",\n      \"status\": \"pre_transit\"\n    },\n    {\n      \"fees\": [],\n      \"carrier_detail\": {\n        \"origin_location\": \"HOUSTON TX, 77001\",\n        \"service\": \"First-Class Package Service\",\n        \"origin_tracking_location\": {\n          \"zip\": \"77063\",\n          \"city\": \"HOUSTON\",\n          \"state\": \"TX\",\n          \"object\": \"TrackingLocation\"\n        },\n        \"destination_location\": \"CHARLESTON SC, 29401\",\n        \"object\": \"CarrierDetail\"\n      },\n      \"created_at\": \"2022-06-02T22:55:25Z\",\n      \"tracking_details\": [\n        {\n          \"tracking_location\": {\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2022-05-02T22:55:25Z\",\n          \"source\": \"USPS\",\n          \"message\": \"Pre-Shipment Info Sent to USPS\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"pre_transit\",\n          \"status_detail\": \"status_update\"\n        },\n        {\n          \"tracking_location\": {\n            \"zip\": \"77063\",\n            \"city\": \"HOUSTON\",\n            \"state\": \"TX\",\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2022-05-03T11:32:25Z\",\n          \"source\": \"USPS\",\n          \"message\": \"Shipping Label Created\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"pre_transit\",\n          \"status_detail\": \"status_update\"\n        }\n      ],\n      \"shipment_id\": \"shp_cf4e9faf3b4444a394f7ea613e999e53\",\n      \"tracking_code\": \"9400100109361122075106\",\n      \"status_detail\": \"status_update\",\n      \"mode\": \"test\",\n      \"public_url\": \"https://track.easypost.com/djE6dHJrXzg5MGMzNjE4MmM3YTQ3OTc5MmRjYzQwMWQwMWViMDRh\",\n      \"est_delivery_date\": \"2022-06-02T22:55:25Z\",\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-06-02T22:55:25Z\",\n      \"id\": \"trk_890c36182c7a479792dcc401d01eb04a\",\n      \"object\": \"Tracker\",\n      \"status\": \"pre_transit\"\n    },\n    {\n      \"fees\": [],\n      \"carrier_detail\": {\n        \"origin_location\": \"HOUSTON TX, 77001\",\n        \"service\": \"First-Class Package Service\",\n        \"origin_tracking_location\": {\n          \"zip\": \"77063\",\n          \"city\": \"HOUSTON\",\n          \"state\": \"TX\",\n          \"object\": \"TrackingLocation\"\n        },\n        \"destination_location\": \"CHARLESTON SC, 29401\",\n        \"object\": \"CarrierDetail\"\n      },\n      \"created_at\": \"2022-06-02T22:55:20Z\",\n      \"tracking_details\": [\n        {\n          \"tracking_location\": {\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2022-05-02T22:55:20Z\",\n          \"source\": \"USPS\",\n          \"message\": \"Pre-Shipment Info Sent to USPS\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"pre_transit\",\n          \"status_detail\": \"status_update\"\n        },\n        {\n          \"tracking_location\": {\n            \"zip\": \"77063\",\n            \"city\": \"HOUSTON\",\n            \"state\": \"TX\",\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2022-05-03T11:32:20Z\",\n          \"source\": \"USPS\",\n          \"message\": \"Shipping Label Created\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"pre_transit\",\n          \"status_detail\": \"status_update\"\n        }\n      ],\n      \"shipment_id\": \"shp_8e77e123018b481d8c7cb3a4f40af1f2\",\n      \"tracking_code\": \"9400100109361122075083\",\n      \"status_detail\": \"status_update\",\n      \"mode\": \"test\",\n      \"public_url\": \"https://track.easypost.com/djE6dHJrXzU1YjNkMDI4ZjFiMjQ3ZGQ5Y2EzMzY2MTgyMTM5NDIw\",\n      \"est_delivery_date\": \"2022-06-02T22:55:20Z\",\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-06-02T22:55:20Z\",\n      \"id\": \"trk_55b3d028f1b247dd9ca3366182139420\",\n      \"object\": \"Tracker\",\n      \"status\": \"pre_transit\"\n    },\n    {\n      \"fees\": [],\n      \"carrier_detail\": {\n        \"origin_location\": \"HOUSTON TX, 77001\",\n        \"service\": \"First-Class Package Service\",\n        \"origin_tracking_location\": {\n          \"zip\": \"77063\",\n          \"city\": \"HOUSTON\",\n          \"state\": \"TX\",\n          \"object\": \"TrackingLocation\"\n        },\n        \"destination_location\": \"CHARLESTON SC, 29401\",\n        \"object\": \"CarrierDetail\"\n      },\n      \"created_at\": \"2022-06-02T22:55:18Z\",\n      \"tracking_details\": [\n        {\n          \"tracking_location\": {\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2022-05-02T22:55:18Z\",\n          \"source\": \"USPS\",\n          \"message\": \"Pre-Shipment Info Sent to USPS\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"pre_transit\",\n          \"status_detail\": \"status_update\"\n        },\n        {\n          \"tracking_location\": {\n            \"zip\": \"77063\",\n            \"city\": \"HOUSTON\",\n            \"state\": \"TX\",\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2022-05-03T11:32:18Z\",\n          \"source\": \"USPS\",\n          \"message\": \"Shipping Label Created\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"pre_transit\",\n          \"status_detail\": \"status_update\"\n        }\n      ],\n      \"shipment_id\": \"shp_0131c00c893a4c4fb0c113f1c8c49d79\",\n      \"tracking_code\": \"9400100109361122075076\",\n      \"status_detail\": \"status_update\",\n      \"mode\": \"test\",\n      \"public_url\": \"https://track.easypost.com/djE6dHJrXzFkMGMwYWNhMGZlZjRiM2U4MDgyYjhjNTBhMjU3MjNi\",\n      \"est_delivery_date\": \"2022-06-02T22:55:18Z\",\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-06-02T22:55:18Z\",\n      \"id\": \"trk_1d0c0aca0fef4b3e8082b8c50a25723b\",\n      \"object\": \"Tracker\",\n      \"status\": \"pre_transit\"\n    },\n    {\n      \"fees\": [],\n      \"carrier_detail\": {\n        \"origin_location\": \"HOUSTON TX, 77001\",\n        \"service\": \"First-Class Package Service\",\n        \"origin_tracking_location\": {\n          \"zip\": \"77063\",\n          \"city\": \"HOUSTON\",\n          \"state\": \"TX\",\n          \"object\": \"TrackingLocation\"\n        },\n        \"destination_location\": \"CHARLESTON SC, 29401\",\n        \"object\": \"CarrierDetail\"\n      },\n      \"created_at\": \"2022-06-02T22:55:16Z\",\n      \"tracking_details\": [\n        {\n          \"tracking_location\": {\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2022-05-02T22:55:16Z\",\n          \"source\": \"USPS\",\n          \"message\": \"Pre-Shipment Info Sent to USPS\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"pre_transit\",\n          \"status_detail\": \"status_update\"\n        },\n        {\n          \"tracking_location\": {\n            \"zip\": \"77063\",\n            \"city\": \"HOUSTON\",\n            \"state\": \"TX\",\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2022-05-03T11:32:16Z\",\n          \"source\": \"USPS\",\n          \"message\": \"Shipping Label Created\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"pre_transit\",\n          \"status_detail\": \"status_update\"\n        }\n      ],\n      \"shipment_id\": \"shp_9a4c6ec29fd74bd5825fab95a5246083\",\n      \"tracking_code\": \"9400100109361122075069\",\n      \"status_detail\": \"status_update\",\n      \"mode\": \"test\",\n      \"public_url\": \"https://track.easypost.com/djE6dHJrXzBiMjY4Mzc1NTBhNjRjMDJiNGJlNTA1YmRmYTA2YmNk\",\n      \"est_delivery_date\": \"2022-06-02T22:55:16Z\",\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-06-02T22:55:16Z\",\n      \"id\": \"trk_0b26837550a64c02b4be505bdfa06bcd\",\n      \"object\": \"Tracker\",\n      \"status\": \"pre_transit\"\n    }\n  ],\n  \"has_more\": true\n}",
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "8260"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb8nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "24678df462993fece666e06b000e1a8e"
+        ],
+        "x-proxied": [
+          "extlb1nuq 0910011e7e",
+          "intlb2nuq 570dfcbc0a"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.130411"
+        ],
+        "etag": [
+          "W/\"bcae2ef31337870044211a2379ff3ce7\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202206022117-ecf7ce5035-master"
+        ],
+        "cache-control": [
+          "no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/trackers?page_size\u003d5"
+    },
+    "duration": 261
+  }
+]

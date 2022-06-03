@@ -1,32 +1,36 @@
 package com.easypost;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddressTest {
-    private static Address globalAddress;
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException{
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("address", TestUtils.ApiKey.TEST);
+    }
 
-        globalAddress = Address.create(Fixture.basicAddress());
+    public static Address createBasicAddress() throws EasyPostException {
+        return Address.create(Fixture.basicAddress());
     }
 
     /**
@@ -36,11 +40,13 @@ public class AddressTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        Address address = Address.create(Fixture.basicAddress());
+        _vcr.setUpTest("create");
 
-        assertTrue(address instanceof Address);
-        assertEquals("388 Townsend St", address.getStreet1());
+        Address address = createBasicAddress();
+
+        assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
+        assertEquals("388 Townsend St", address.getStreet1());
     }
 
     /**
@@ -50,15 +56,17 @@ public class AddressTest {
      */
     @Test
     public void testCreateVerifyStrict() throws EasyPostException {
+        _vcr.setUpTest("create_verify_strict");
+
         Map<String, Object> addressData = Fixture.basicAddress();
+
         List<Boolean> verificationList = new ArrayList<>();
-        
         verificationList.add(true);
         addressData.put("verify_strict", verificationList);
 
         Address address = Address.create(addressData);
 
-        assertTrue(address instanceof Address);
+        assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
         assertEquals("388 TOWNSEND ST APT 20", address.getStreet1());
     }
@@ -70,11 +78,14 @@ public class AddressTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException{
-        Address retrievedAddress = Address.retrieve(globalAddress.getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(retrievedAddress instanceof Address);
-        assertTrue(retrievedAddress.getId().startsWith("adr_"));
-        assertThat(globalAddress).usingRecursiveComparison().isEqualTo(retrievedAddress);
+        Address address = createBasicAddress();
+        Address retrievedAddress = Address.retrieve(address.getId());
+
+        assertInstanceOf(Address.class, retrievedAddress);
+        assertEquals(address.getId(), retrievedAddress.getId());
+
     }
 
     /**
@@ -84,8 +95,9 @@ public class AddressTest {
      */
     @Test
     public void testAll() throws EasyPostException{
-        Map<String, Object> params = new HashMap<>();
+        _vcr.setUpTest("all");
 
+        Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
 
         AddressCollection addresses = Address.all(params);
@@ -105,18 +117,15 @@ public class AddressTest {
      */
     @Test
     public void testCreateVerify() throws EasyPostException {
-        List<Boolean> verificationList = new ArrayList<>();
-        verificationList.add(true);
+        _vcr.setUpTest("create_verify");
 
         Map<String, Object> addressData = Fixture.incorrectAddressToVerify();
-        addressData.put("verify", verificationList);
 
         Address address = Address.create(addressData);
 
-        assertTrue(address instanceof Address);
+        assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
         assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
-        assertEquals("Invalid secondary information(Apt/Suite#)", address.getVerifications().getZip4().getErrors().get(0).getMessage());
     }
 
     /**
@@ -127,11 +136,18 @@ public class AddressTest {
      */
     @Test
     public void testCreateAndVerify() throws EasyPostException {
-        Address address = Address.createAndVerify(Fixture.incorrectAddressToVerify());
+        _vcr.setUpTest("create_and_verify");
 
-        assertTrue(address instanceof Address);
+        Map<String, Object> addressData = Fixture.basicAddress();
+        List<Boolean> verifications = new ArrayList<>();
+        verifications.add(true);
+        addressData.put("verify", verifications);
+
+        Address address = Address.createAndVerify(addressData);
+
+        assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
-        assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
+        assertEquals("388 TOWNSEND ST APT 20", address.getStreet1());
     }
 
     /**
@@ -141,10 +157,14 @@ public class AddressTest {
      */
     @Test
     public void testVerify() throws EasyPostException {
-        globalAddress = globalAddress.verify();
+        _vcr.setUpTest("verify");
 
-        assertTrue(globalAddress instanceof Address);
-        assertTrue(globalAddress.getId().startsWith("adr_"));
-        assertEquals("388 TOWNSEND ST APT 20", globalAddress.getStreet1());
+        Address address = createBasicAddress();
+
+        Address verifiedAddress = address.verify();
+
+        assertInstanceOf(Address.class, address);
+        assertTrue(verifiedAddress.getId().startsWith("adr_"));
+        assertEquals("388 TOWNSEND ST APT 20", verifiedAddress.getStreet1());
     }
 }

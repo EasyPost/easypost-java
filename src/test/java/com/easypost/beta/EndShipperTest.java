@@ -1,28 +1,38 @@
 package com.easypost.beta;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
-import com.easypost.EasyPost;
 import com.easypost.Fixture;
+import com.easypost.TestUtils;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.beta.EndShipper;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EndShipperTest {
+    private static TestUtils.VCR _vcr;
     
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException{
-        EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");
+        _vcr = new TestUtils.VCR("end_shipper", TestUtils.ApiKey.PRODUCTION);
+    }
+
+    /**
+     * Create an EndShipper.
+     */
+    private static EndShipper createEndShipper() throws EasyPostException {
+        return EndShipper.create(Fixture.endShipperAddress());
     }
 
     /**
@@ -32,9 +42,11 @@ public class EndShipperTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        EndShipper endShipper = EndShipper.create(Fixture.endShipperAddress());
+        _vcr.setUpTest("create");
 
-        assertTrue(endShipper instanceof EndShipper);
+        EndShipper endShipper = createEndShipper();
+
+        assertInstanceOf(EndShipper.class, endShipper);
         assertTrue(endShipper.getId().startsWith("es_"));
         assertEquals("388 TOWNSEND ST APT 20", endShipper.getStreet1());
     }
@@ -45,11 +57,14 @@ public class EndShipperTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testRetrieve() throws EasyPostException{
-        EndShipper endShipper = EndShipper.create(Fixture.endShipperAddress());
+    public void testRetrieve() throws EasyPostException {
+        _vcr.setUpTest("retrieve");
+
+        EndShipper endShipper = createEndShipper();
+
         EndShipper retrievedEndShipper = EndShipper.retrieve(endShipper.getId());
 
-        assertTrue(retrievedEndShipper instanceof EndShipper);
+        assertInstanceOf(EndShipper.class, retrievedEndShipper);
         assertEquals(endShipper.getStreet1(), retrievedEndShipper.getStreet1());
     }
 
@@ -60,14 +75,15 @@ public class EndShipperTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
+        _vcr.setUpTest("all");
 
+        Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
 
         List<EndShipper> endShippers = EndShipper.all(params);
 
         assertTrue(endShippers.size() <= Fixture.pageSize());
-        assertTrue(endShippers.stream().allMatch(address -> address instanceof EndShipper));
+        assertTrue(endShippers.stream().allMatch(endShipper -> endShipper instanceof EndShipper));
     }
 
     /**
@@ -77,8 +93,13 @@ public class EndShipperTest {
      */
     @Test
     public void testUpdate() throws EasyPostException {
+        _vcr.setUpTest("update");
+
+        EndShipper endShipper = createEndShipper();
+
+        String testName = "NEW NAME"; // all caps since server-side verification will auto-capitalize it in response
         Map<String, Object> updateParams = new HashMap<>();
-        updateParams.put("name", "Jack Sparrow");
+        updateParams.put("name", testName);
         updateParams.put("company", "EasyPost");
         updateParams.put("street1", "388 Townsend St");
         updateParams.put("street2", "Apt 20");
@@ -89,12 +110,10 @@ public class EndShipperTest {
         updateParams.put("phone", "9999999999");
         updateParams.put("email", "test@example.com");
 
-        EndShipper endShipper = EndShipper.create(Fixture.endShipperAddress());
-
         EndShipper updatedEndShipper = endShipper.update(updateParams);
 
-        assertTrue(updatedEndShipper instanceof EndShipper);
+        assertInstanceOf(EndShipper.class, updatedEndShipper);
         assertTrue(updatedEndShipper.getId().startsWith("es_"));
-        assertEquals("9999999999", updatedEndShipper.getPhone());
+        assertEquals(testName, updatedEndShipper.getName());
     }
 }

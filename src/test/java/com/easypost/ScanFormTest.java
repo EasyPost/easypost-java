@@ -1,41 +1,49 @@
 package com.easypost;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.ScanForm;
 import com.easypost.model.ScanFormCollection;
 import com.easypost.model.Shipment;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ScanFormTest {
-    private static ScanForm globalScanForm;
+    private static TestUtils.VCR _vcr;
 
     /**
-     * Setup the testing environment for this file.
+     * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
     public static void setup() throws EasyPostException{
-        EasyPost.apiKey = System.getenv("EASYPOST_TEST_API_KEY");
+        _vcr = new TestUtils.VCR("scan_form", TestUtils.ApiKey.TEST);
+    }
 
+    /**
+     * Create a ScanForm.
+     */
+    private static ScanForm getBasicScanForm() throws EasyPostException {
         Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
 
         List<Shipment> shipments = new ArrayList<>();
-        Map<String, Object> params = new HashMap<>();
-
         shipments.add(shipment);
+
+        Map<String, Object> params = new HashMap<>();
         params.put("shipments", shipments);
 
-        globalScanForm = ScanForm.create(params);
+        ScanForm scanForm = ScanForm.create(params);
+        return scanForm;
     }
 
     /**
@@ -45,19 +53,11 @@ public class ScanFormTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+        _vcr.setUpTest("create");
 
-        List<Shipment> shipments = new ArrayList<>();
+        ScanForm scanForm = getBasicScanForm();
 
-        shipments.add(shipment);
-
-        Map<String, Object> params = new HashMap<>();
-
-        params.put("shipments", shipments);
-
-        ScanForm scanForm = ScanForm.create(params);
-
-        assertTrue(scanForm instanceof ScanForm);
+        assertInstanceOf(ScanForm.class, scanForm);
         assertTrue(scanForm.getId().startsWith("sf_"));
     }
 
@@ -68,10 +68,14 @@ public class ScanFormTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        ScanForm retrievedScanForm = ScanForm.retrieve(globalScanForm.getId());
+        _vcr.setUpTest("retrieve");
 
-        assertTrue(retrievedScanForm instanceof ScanForm);
-        assertThat(globalScanForm).usingRecursiveComparison().isEqualTo(retrievedScanForm);
+        ScanForm scanForm = getBasicScanForm();
+
+        ScanForm retrievedScanForm = ScanForm.retrieve(scanForm.getId());
+
+        assertInstanceOf(ScanForm.class, retrievedScanForm);
+        assertThat(scanForm).usingRecursiveComparison().isEqualTo(retrievedScanForm);
     }
 
     /**
@@ -81,13 +85,14 @@ public class ScanFormTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
+        _vcr.setUpTest("all");
 
+        Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
 
         ScanFormCollection scanForms = ScanForm.all(params);
-
         List<ScanForm> scanFormsList = scanForms.getScanForms();
+
         assertTrue(scanFormsList.size() <= Fixture.pageSize());
         assertNotNull(scanForms.getHasMore());
         assertTrue(scanFormsList.stream().allMatch(scanForm -> scanForm instanceof ScanForm));

@@ -50,7 +50,7 @@ public class BatchManifestExample {
                     break;
                 }
 
-                Thread.sleep(3000);
+                Thread.sleep(5000);
             }
 
             // add shipments to batch
@@ -70,7 +70,7 @@ public class BatchManifestExample {
                     break;
                 }
 
-                Thread.sleep(8000);
+                Thread.sleep(5000);
             }
 
             System.out.println(batch.prettyPrint());
