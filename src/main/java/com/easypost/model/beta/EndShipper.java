@@ -35,13 +35,13 @@ public final class EndShipper extends BaseAddress {
         wrappedParams.put("address", params);
 
         return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "end_shippers"),
-            wrappedParams, EndShipper.class, apiKey);
+                wrappedParams, EndShipper.class, apiKey);
     }
 
     /**
      * Retrieve EndShipper object from API.
      *
-     * @param id     ID of end shipper to retrieve.
+     * @param id ID of end shipper to retrieve.
      * @return EndShipper object.
      * @throws EasyPostException when the request fails.
      */
@@ -59,7 +59,7 @@ public final class EndShipper extends BaseAddress {
      */
     public static EndShipper retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, String.format("%s/%s/%s",
-            EasyPost.BETA_API_BASE, "end_shippers", id), null, EndShipper.class, apiKey);
+                EasyPost.BETA_API_BASE, "end_shippers", id), null, EndShipper.class, apiKey);
     }
 
     /**
@@ -85,7 +85,7 @@ public final class EndShipper extends BaseAddress {
     public static List<EndShipper> all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
         EndShipper[] response = request(RequestMethod.GET, String.format("%s/%s", EasyPost.BETA_API_BASE,
-            "end_shippers"), params, EndShipper[].class, apiKey);
+                "end_shippers"), params, EndShipper[].class, apiKey);
 
         return Arrays.asList(response);
     }
@@ -115,8 +115,9 @@ public final class EndShipper extends BaseAddress {
         wrappedParams.put("address", params);
 
         EndShipper response = request(RequestMethod.PUT, String.format("%s/%s/%s", EasyPost.BETA_API_BASE,
-            "end_shippers", this.getId()), wrappedParams, EndShipper.class, apiKey);
+                "end_shippers", this.getId()), wrappedParams, EndShipper.class, apiKey);
 
-        return response;
+        this.merge(this, response);
+        return this;
     }
 }

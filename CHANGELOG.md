@@ -1,8 +1,9 @@
 # CHANGELOG
 
-## Next Release
+## v5.4.0
 
 - Adds `PaymentMethod.all()`, `CreditCard.fund()`, and `CreditCard.delete()` functions.
+- Fixes a bug that did not merge local and remote objects correctly on update (eg: User, Referral)
 
 ## v5.3.0 (2022-05-19)
 
