@@ -206,14 +206,12 @@ public abstract class EasyPostResource {
             getURL = String.format("%s?%s", url, query);
         }
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(getURL, apiKey, "GET");
-        conn.setRequestMethod("GET");
         return conn;
     }
 
     private static javax.net.ssl.HttpsURLConnection createPostConnection(final String url, final JsonObject body,
                                                                          final String apiKey) throws IOException {
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey, "POST");
-        conn.setRequestMethod("POST");
         conn = writeBody(conn, body);
         return conn;
     }
@@ -225,14 +223,12 @@ public abstract class EasyPostResource {
             deleteUrl = String.format("%s?%s", url, query);
         }
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(deleteUrl, apiKey, "DELETE");
-        conn.setRequestMethod("DELETE");
         return conn;
     }
 
     private static javax.net.ssl.HttpsURLConnection createPutConnection(final String url, final JsonObject body,
                                                                         final String apiKey) throws IOException {
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey, "PUT");
-        conn.setRequestMethod("PUT");
         conn = writeBody(conn, body);
         return conn;
     }
