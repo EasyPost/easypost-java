@@ -15,7 +15,7 @@ Add this to your project's POM:
 <dependency>
   <groupId>com.easypost</groupId>
   <artifactId>easypost-api-client</artifactId>
-  <version>5.3.0</version>
+  <version>5.4.0</version>
 </dependency>
 ```
 
@@ -91,7 +91,7 @@ Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_G
 
 ```bash
 # Build project
-mvn clean install -DskipTests -Dgpg.skip
+mvn clean install -Dgpg.skip
 
 # Run tests
 EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... mvn clean test -B
