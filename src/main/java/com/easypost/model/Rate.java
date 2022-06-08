@@ -336,7 +336,6 @@ public class Rate extends EasyPostResource {
         this.carrierAccountId = carrierAccountId;
     }
 
-
     /**
      * Set billing type of this rate.
      *
