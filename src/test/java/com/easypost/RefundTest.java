@@ -38,8 +38,8 @@ public final class RefundTest {
     private static List<Refund> createBasicRefundList() throws EasyPostException {
         Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
 
-        Shipment retrievedShipment = Shipment.retrieve(shipment.getId());
         // We need to retrieve the shipment so that the tracking_code has time to populate
+        Shipment retrievedShipment = Shipment.retrieve(shipment.getId());
 
         Map<String, Object> params = new HashMap<>();
         params.put("carrier", Fixture.usps());

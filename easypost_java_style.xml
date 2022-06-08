@@ -89,7 +89,7 @@
     <module name="RegexpSingleline">
         <property name="format" value="\s+$"/>
         <property name="minimum" value="0"/>
-        <property name="maximum" value="0"/>
+        <property name="maximum" value="1"/>
         <property name="message" value="Line has trailing spaces."/>
     </module>
 
@@ -161,6 +161,11 @@
         <module name="TypecastParenPad"/>
         <module name="WhitespaceAfter"/>
         <module name="WhitespaceAround"/>
+        <module name="SingleSpaceSeparator"/>
+        <module name="EmptyLineSeparator">
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <property name="allowMultipleEmptyLines" value="false"/>
+        </module>
 
         <!-- Modifier Checks -->
         <!-- See https://checkstyle.org/config_modifier.html -->
