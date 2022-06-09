@@ -20,6 +20,7 @@ public class Rate extends EasyPostResource {
     private Number estDeliveryDays;
     private String shipmentId;
     private String carrierAccountId;
+    private String billingType;
 
     /**
      * Retrieve a Rate from the API.
@@ -333,5 +334,23 @@ public class Rate extends EasyPostResource {
      */
     public void setCarrierAccountId(final String carrierAccountId) {
         this.carrierAccountId = carrierAccountId;
+    }
+
+    /**
+     * Set billing type of this rate.
+     *
+     * @param billingType billing type of this rate.
+     */
+    public void setBillingType(final String billingType) {
+        this.billingType = billingType;
+    }
+
+    /**
+     * Get billing type of this rate.
+     *
+     * @return billing type of this rate.
+     */
+    public String getBillingType() {
+        return billingType;
     }
 }

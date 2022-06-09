@@ -13,7 +13,7 @@ public class CreditCard extends BaseCreditCard {
     }
 
     /**
-     * Fund a credit card.
+     * Fund your EasyPost wallet by charging your primary or secondary card on file.
      *
      * @param amount amount to fund.
      * @param primaryOrSecondary primary or secondary payment method.
@@ -25,7 +25,7 @@ public class CreditCard extends BaseCreditCard {
     }
 
     /**
-     * Fund a credit card.
+     * Fund your EasyPost wallet by charging your primary or secondary card on file.
      *
      * @param amount amount to fund.
      * @param primaryOrSecondary primary or secondary payment method.
@@ -61,7 +61,7 @@ public class CreditCard extends BaseCreditCard {
     }
 
     /**
-     * Delete a credit card.
+     * Delete a credit card by ID.
      *
      * @param creditCardId ID of credit card to delete.
      * @throws EasyPostException when the request fails.
@@ -71,7 +71,7 @@ public class CreditCard extends BaseCreditCard {
     }
 
     /**
-     * Delete a credit card.
+     * Delete a credit card by ID.
      *
      * @param creditCardId ID of credit card to delete.
      * @param apiKey API key to use in request (overrides default API key).

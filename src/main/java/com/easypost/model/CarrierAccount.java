@@ -13,6 +13,7 @@ public final class CarrierAccount extends EasyPostResource {
     private String readable;
     private String description;
     private String reference;
+    private String billingType;
     private Map<String, Object> credentials;
 
     /**
@@ -171,6 +172,24 @@ public final class CarrierAccount extends EasyPostResource {
      */
     public void setReference(final String reference) {
         this.reference = reference;
+    }
+
+    /**
+     * Set billing type of the carrier account.
+     *
+     * @param billingType billing type of the carrier account.
+     */
+    public void setBillingType(final String billingType) {
+        this.billingType = billingType;
+    }
+
+    /**
+     * Get billing type of the carrier account.
+     *
+     * @return billing type of the carrier account.
+     */
+    public String getBillingType() {
+        return billingType;
     }
 
     /**
