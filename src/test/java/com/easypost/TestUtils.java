@@ -44,6 +44,7 @@ public abstract class TestUtils {
 
     /**
      * Get the directory where the program is currently executing.
+     *
      * @return The directory where the program is currently executing
      */
     private static String getSourceFileDirectory() {
@@ -56,6 +57,7 @@ public abstract class TestUtils {
 
     /**
      * Get an API key from the environment.
+     *
      * @param apiKey Type of API key to get
      * @return the API key from the environment
      */
@@ -88,15 +90,6 @@ public abstract class TestUtils {
         private final String apiKey;
 
         private String testCassettesFolder;
-
-        /**
-         * Get whether the VCR is recording.
-         *
-         * @return true if recording, false otherwise.
-         */
-        public boolean isRecording() {
-            return vcr.getMode() == Mode.Record;
-        }
 
         /**
          * Constructor.
@@ -164,6 +157,15 @@ public abstract class TestUtils {
          */
         public VCR() {
             this(null, ApiKey.TEST);
+        }
+
+        /**
+         * Get whether the VCR is recording.
+         *
+         * @return true if recording, false otherwise.
+         */
+        public boolean isRecording() {
+            return vcr.getMode() == Mode.Record;
         }
 
         /**

@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class OrderTest {
-    private static TestUtils.VCR _vcr;
+public final class OrderTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -29,11 +29,13 @@ public class OrderTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("order", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("order", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create an order.
+     *
+     * @return Order object
      */
     private static Order createBasicOrder() throws EasyPostException {
         return Order.create(Fixture.basicOrder());
@@ -46,7 +48,7 @@ public class OrderTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         Order order = createBasicOrder();
 
@@ -62,7 +64,7 @@ public class OrderTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         Order order = createBasicOrder();
 
@@ -80,7 +82,7 @@ public class OrderTest {
      */
     @Test
     public void testGetRates() throws EasyPostException {
-        _vcr.setUpTest("get_rates");
+        vcr.setUpTest("get_rates");
 
         Order order = createBasicOrder();
 
@@ -100,7 +102,7 @@ public class OrderTest {
      */
     @Test
     public void testBuy() throws EasyPostException {
-        _vcr.setUpTest("buy");
+        vcr.setUpTest("buy");
 
         Order order = createBasicOrder();
 
@@ -125,7 +127,7 @@ public class OrderTest {
      */
     @Test
     public void testLowestRate() throws EasyPostException {
-        _vcr.setUpTest("lowest_rate");
+        vcr.setUpTest("lowest_rate");
 
         Order order = createBasicOrder();
 

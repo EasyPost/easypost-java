@@ -17,8 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ReportTest {
-    private static TestUtils.VCR _vcr;
+public final class ReportTest {
+    private static TestUtils.VCR vcr;
+
     /**
      * Set up the testing environment for this file.
      *
@@ -26,11 +27,13 @@ public class ReportTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("report", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("report", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create a report.
+     *
+     * @return Report object
      */
     private static Report createBasicReport() throws EasyPostException {
         Map<String, Object> reportParams = new HashMap<>();
@@ -57,7 +60,7 @@ public class ReportTest {
      */
     @Test
     public void testCreateReport() throws EasyPostException {
-        _vcr.setUpTest("create_report");
+        vcr.setUpTest("create_report");
 
         Report report = createBasicReport();
 
@@ -72,7 +75,7 @@ public class ReportTest {
      */
     @Test
     public void testCreateReportWithAdditionalColumns() throws EasyPostException {
-        _vcr.setUpTest("create_report_with_additional_columns");
+        vcr.setUpTest("create_report_with_additional_columns");
 
         Map<String, Object> reportWithAdditionalColumnsParams = new HashMap<>();
 
@@ -85,7 +88,8 @@ public class ReportTest {
 
         // verify parameters by checking VCR cassette for correct URL
         // Some reports take a long time to generate, so we won't be able to consistently pull the report
-        // There's unfortunately no way to check if the columns were included in the final report without parsing the CSV
+        // There's unfortunately no way to check if the columns
+        // were included in the final report without parsing the CSV
         // so we assume, if we haven't gotten an error by this point, we've made the API calls correctly
         // any failure at this point is a server-side issue
         assertInstanceOf(Report.class, reportWithColumns);
@@ -98,7 +102,7 @@ public class ReportTest {
      */
     @Test
     public void testCreateReportWithColumns() throws EasyPostException {
-        _vcr.setUpTest("create_report_with_columns");
+        vcr.setUpTest("create_report_with_columns");
 
         Map<String, Object> reportWithAdditionalColumnsParams = new HashMap<>();
 
@@ -110,7 +114,8 @@ public class ReportTest {
 
         // verify parameters by checking VCR cassette for correct URL
         // Some reports take a long time to generate, so we won't be able to consistently pull the report
-        // There's unfortunately no way to check if the columns were included in the final report without parsing the CSV
+        // There's unfortunately no way to check if the columns
+        // were included in the final report without parsing the CSV
         // so we assume, if we haven't gotten an error by this point, we've made the API calls correctly
         // any failure at this point is a server-side issue
         assertInstanceOf(Report.class, reportWithColumns);
@@ -123,7 +128,7 @@ public class ReportTest {
      */
     @Test
     public void testRetrieveReport() throws EasyPostException {
-        _vcr.setUpTest("retrieve_report");
+        vcr.setUpTest("retrieve_report");
 
         Report report = createBasicReport();
 
@@ -141,7 +146,7 @@ public class ReportTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all_reports");
+        vcr.setUpTest("all_reports");
 
         Map<String, Object> params = new HashMap<>();
 
@@ -164,12 +169,13 @@ public class ReportTest {
      */
     @Test
     public void testCreateNoType() throws EasyPostException {
-        _vcr.setUpTest("create_report_no_type");
+        vcr.setUpTest("create_report_no_type");
 
         Map<String, Object> params = new HashMap<>();
         params.put("type", "test");
 
-        // should throw EasyPostException, but might throw NullPointerException due to a bug in the VCR grabbing response content,
+        // should throw EasyPostException,
+        // but might throw NullPointerException due to a bug in the VCR grabbing response content,
         // so we'll just check fo a generic exception
         assertThrows(Exception.class, () -> Report.create(params));
     }
@@ -181,12 +187,13 @@ public class ReportTest {
      */
     @Test
     public void testAllNoType() throws EasyPostException {
-        _vcr.setUpTest("all_reports_no_type");
+        vcr.setUpTest("all_reports_no_type");
 
         Map<String, Object> params = new HashMap<>();
         params.put("type", "test");
 
-        // should throw EasyPostException, but might throw NullPointerException due to a bug in the VCR grabbing response content,
+        // should throw EasyPostException,
+        // but might throw NullPointerException due to a bug in the VCR grabbing response content,
         // so we'll just check fo a generic exception
         assertThrows(Exception.class, () -> Report.all(params));
     }

@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
-public class RateTest {
-    private static TestUtils.VCR _vcr;
+public final class RateTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -19,7 +19,7 @@ public class RateTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("rate", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("rate", TestUtils.ApiKey.TEST);
     }
 
     /**
@@ -29,7 +29,7 @@ public class RateTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         Shipment shipment = Shipment.create(Fixture.basicShipment());
         Rate rate = shipment.getRates().get(0);

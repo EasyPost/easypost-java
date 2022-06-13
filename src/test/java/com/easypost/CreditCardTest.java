@@ -3,20 +3,20 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.CreditCard;
 import com.easypost.model.CreditCardFund;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-public class CreditCardTest {
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public final class CreditCardTest {
     /**
      * Setup the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() throws EasyPostException{
+    public static void setup() throws EasyPostException {
         EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");
     }
 

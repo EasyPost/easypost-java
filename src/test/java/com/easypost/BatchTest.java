@@ -17,10 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BatchTest {
+public final class BatchTest {
+    private static TestUtils.VCR vcr;
 
-    private static TestUtils.VCR _vcr;
-    
     /**
      * Set up the testing environment for this file.
      *
@@ -28,11 +27,13 @@ public class BatchTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("batch", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("batch", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create a batch.
+     *
+     * @return Batch object.
      */
     private static Batch createBasicBatch() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
@@ -60,8 +61,8 @@ public class BatchTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testCreate() throws EasyPostException{
-        _vcr.setUpTest("create");
+    public void testCreate() throws EasyPostException {
+        vcr.setUpTest("create");
 
         Batch batch = createBasicBatch();
 
@@ -77,7 +78,7 @@ public class BatchTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         Batch batch = createBasicBatch();
 
@@ -95,7 +96,7 @@ public class BatchTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
@@ -116,7 +117,7 @@ public class BatchTest {
      */
     @Test
     public void testCreateAndBuy() throws EasyPostException {
-        _vcr.setUpTest("create_and_buy");
+        vcr.setUpTest("create_and_buy");
 
         Map<String, Object> params = new HashMap<>();
 
@@ -139,7 +140,7 @@ public class BatchTest {
      */
     @Test
     public void testBuy() throws EasyPostException {
-        _vcr.setUpTest("buy");
+        vcr.setUpTest("buy");
 
         Batch batch = createOneCallBuyBatch();
 
@@ -156,18 +157,19 @@ public class BatchTest {
      */
     @Test
     public void testCreateScanForm() throws EasyPostException, InterruptedException {
-        _vcr.setUpTest("create_scanform");
+        vcr.setUpTest("create_scanform");
 
         Batch batch = createOneCallBuyBatch();
         batch = batch.buy();
 
-        if (_vcr.isRecording()) {
-            Thread.sleep(5000); // Wait enough time for processing
+        if (vcr.isRecording()) {
+            Thread.sleep(10000); // Wait enough time for processing
         }
 
         Batch batchWithScanForm = batch.createScanForm();
 
-        // We can't assert anything meaningful here because the scanform gets queued for generation and may not be immediately available
+        // We can't assert anything meaningful here
+        // because the scanform gets queued for generation and may not be immediately available
         assertInstanceOf(Batch.class, batchWithScanForm);
     }
 
@@ -178,7 +180,7 @@ public class BatchTest {
      */
     @Test
     public void testAddRemoveShipment() throws EasyPostException {
-        _vcr.setUpTest("add_remove_shipment");
+        vcr.setUpTest("add_remove_shipment");
 
         Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
 
@@ -206,14 +208,14 @@ public class BatchTest {
      */
     @Test
     public void testLabel() throws EasyPostException, InterruptedException {
-        _vcr.setUpTest("label");
+        vcr.setUpTest("label");
 
         Batch batch = createOneCallBuyBatch();
 
         batch = batch.buy();
 
-        if (_vcr.isRecording()) {
-            Thread.sleep(5000); // Wait enough time for processing
+        if (vcr.isRecording()) {
+            Thread.sleep(10000); // Wait enough time for processing
         }
 
         Map<String, Object> params = new HashMap<>();
@@ -221,7 +223,8 @@ public class BatchTest {
 
         Batch batchWithLabel = batch.label(params);
 
-        // We can't assert anything meaningful here because the label gets queued for generation and may not be immediately available
+        // We can't assert anything meaningful here
+        // because the label gets queued for generation and may not be immediately available
         assertInstanceOf(Batch.class, batchWithLabel);
     }
 }

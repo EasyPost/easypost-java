@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class WebhookTest {
+@TestMethodOrder (MethodOrderer.OrderAnnotation.class)
+public final class WebhookTest {
     private static String testWebhookId = null;
-    private static TestUtils.VCR _vcr;
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -30,9 +30,26 @@ public class WebhookTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("webhook", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("webhook", TestUtils.ApiKey.TEST);
     }
 
+    /**
+     * Create a webhook.
+     *
+     * @return Webhook object
+     */
+    private static Webhook createBasicWebhook() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("url", Fixture.webhookUrl());
+
+        Webhook webhook = Webhook.create(params);
+        testWebhookId = webhook.getId(); // trigger deletion after test
+        return webhook;
+    }
+
+    /**
+     * Clean up test attributes after each unit test.
+     */
     @AfterEach
     public void cleanup() {
         if (testWebhookId != null) {
@@ -45,17 +62,6 @@ public class WebhookTest {
             }
         }
     }
-    /**
-     * Create a webhook.
-     */
-    private static Webhook createBasicWebhook() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
-        params.put("url", Fixture.webhookUrl());
-
-        Webhook webhook = Webhook.create(params);
-        testWebhookId = webhook.getId(); // trigger deletion after test
-        return webhook;
-    }
 
     /**
      * Test creating a webhook.
@@ -64,7 +70,7 @@ public class WebhookTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         Webhook webhook = createBasicWebhook();
 
@@ -80,7 +86,7 @@ public class WebhookTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         Webhook webhook = createBasicWebhook();
 
@@ -97,7 +103,7 @@ public class WebhookTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         WebhookCollection webhooks = Webhook.all();
 
@@ -113,7 +119,7 @@ public class WebhookTest {
      */
     @Test
     public void testUpdate() throws EasyPostException {
-        _vcr.setUpTest("update");
+        vcr.setUpTest("update");
 
         Webhook webhook = createBasicWebhook();
 
@@ -129,7 +135,7 @@ public class WebhookTest {
      */
     @Test
     public void testDelete() throws EasyPostException {
-        _vcr.setUpTest("delete");
+        vcr.setUpTest("delete");
 
         Webhook webhook = createBasicWebhook();
         Webhook retrievedWebhook = Webhook.retrieve(webhook.getId());

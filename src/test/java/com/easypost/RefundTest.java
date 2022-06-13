@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class RefundTest {
-    private static TestUtils.VCR _vcr;
+public final class RefundTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -27,16 +27,19 @@ public class RefundTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("refund", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("refund", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create a list of refunds.
+     *
+     * @return List of Refund objects
      */
     private static List<Refund> createBasicRefundList() throws EasyPostException {
         Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
 
-        Shipment retrievedShipment = Shipment.retrieve(shipment.getId()); // We need to retrieve the shipment so that the tracking_code has time to populate
+        // We need to retrieve the shipment so that the tracking_code has time to populate
+        Shipment retrievedShipment = Shipment.retrieve(shipment.getId());
 
         Map<String, Object> params = new HashMap<>();
         params.put("carrier", Fixture.usps());
@@ -52,7 +55,7 @@ public class RefundTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         List<Refund> refunds = createBasicRefundList();
 
@@ -71,7 +74,7 @@ public class RefundTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
@@ -92,7 +95,7 @@ public class RefundTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         List<Refund> refunds = createBasicRefundList();
         Refund refund = refunds.get(0);

@@ -20,9 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PickupTest {
+public final class PickupTest {
     // Remember to bump the pickup date if you need to re-record the cassette
-    private static TestUtils.VCR _vcr;
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -31,11 +31,13 @@ public class PickupTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("pickup", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("pickup", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create a pickup.
+     *
+     * @return Pickup object
      */
     private static Pickup createBasicPickup() throws EasyPostException {
         Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
@@ -54,7 +56,7 @@ public class PickupTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         Pickup pickup = createBasicPickup();
 
@@ -70,7 +72,7 @@ public class PickupTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         Pickup pickup = createBasicPickup();
 
@@ -87,7 +89,7 @@ public class PickupTest {
      */
     @Test
     public void testBuy() throws EasyPostException, InterruptedException {
-        _vcr.setUpTest("buy");
+        vcr.setUpTest("buy");
 
         Pickup pickup = createBasicPickup();
 
@@ -110,7 +112,7 @@ public class PickupTest {
      */
     @Test
     public void testCancel() throws EasyPostException, InterruptedException {
-        _vcr.setUpTest("cancel");
+        vcr.setUpTest("cancel");
 
         Pickup pickup = createBasicPickup();
 
@@ -133,7 +135,7 @@ public class PickupTest {
      */
     @Test
     public void testLowestRate() throws EasyPostException {
-        _vcr.setUpTest("lowest_rate");
+        vcr.setUpTest("lowest_rate");
 
         Pickup pickup = createBasicPickup();
 

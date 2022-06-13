@@ -5,9 +5,7 @@ import com.easypost.model.CarrierAccount;
 import com.easypost.model.CarrierType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CarrierAccountTest {
+public final class CarrierAccountTest {
     private static String testCarrierAccountId = null;
 
-    private static TestUtils.VCR _vcr;
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -31,9 +28,18 @@ public class CarrierAccountTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("carrier_account", TestUtils.ApiKey.PRODUCTION);
+        vcr = new TestUtils.VCR("carrier_account", TestUtils.ApiKey.PRODUCTION);
     }
 
+    private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
+        CarrierAccount carrierAccount = CarrierAccount.create(Fixture.basicCarrierAccount());
+        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
+        return carrierAccount;
+    }
+
+    /**
+     * Clean up test attributes after each unit test.
+     */
     @AfterEach
     public void cleanup() {
         if (testCarrierAccountId != null) {
@@ -47,12 +53,6 @@ public class CarrierAccountTest {
         }
     }
 
-    private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
-        CarrierAccount carrierAccount = CarrierAccount.create(Fixture.basicCarrierAccount());
-        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
-        return carrierAccount;
-    }
-
     /**
      * Test creating a carrier account.
      *
@@ -60,7 +60,7 @@ public class CarrierAccountTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         CarrierAccount carrierAccount = createBasicCarrierAccount();
 
@@ -75,7 +75,7 @@ public class CarrierAccountTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         CarrierAccount carrierAccount = createBasicCarrierAccount();
 
@@ -93,7 +93,7 @@ public class CarrierAccountTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         List<CarrierAccount> carrierAccounts = CarrierAccount.all();
 
@@ -107,7 +107,7 @@ public class CarrierAccountTest {
      */
     @Test
     public void testUpdate() throws EasyPostException {
-        _vcr.setUpTest("update");
+        vcr.setUpTest("update");
 
         CarrierAccount carrierAccount = createBasicCarrierAccount();
 
@@ -130,7 +130,7 @@ public class CarrierAccountTest {
      */
     @Test
     public void testDelete() throws EasyPostException {
-        _vcr.setUpTest("delete");
+        vcr.setUpTest("delete");
 
         CarrierAccount carrierAccount = createBasicCarrierAccount();
 
@@ -144,7 +144,7 @@ public class CarrierAccountTest {
      */
     @Test
     public void testTypes() throws EasyPostException {
-        _vcr.setUpTest("types");
+        vcr.setUpTest("types");
 
         List<CarrierType> types = CarrierType.all();
 

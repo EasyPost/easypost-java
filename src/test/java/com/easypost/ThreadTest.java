@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ThreadTest {
-    private static TestUtils.VCR _vcr;
-    static Map<String, Object> defaultFromAddress = new HashMap<String, Object>();
-    static Map<String, Object> defaultToAddress = new HashMap<String, Object>();
-    static Map<String, Object> defaultParcel = new HashMap<String, Object>();
+public final class ThreadTest {
+    private static Map<String, Object> defaultFromAddress = new HashMap<String, Object>();
+    private static Map<String, Object> defaultToAddress = new HashMap<String, Object>();
+    private static Map<String, Object> defaultParcel = new HashMap<String, Object>();
+    private static TestUtils.VCR vcr;
 
     static Map<String, Object> orderShipment() throws EasyPostException {
         Map<String, Object> shipmentMap = new HashMap<String, Object>();
@@ -29,7 +29,7 @@ public class ThreadTest {
      */
     @BeforeAll
     public static void setUp() {
-        _vcr = new TestUtils.VCR("thread", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("thread", TestUtils.ApiKey.TEST);
 
         defaultFromAddress.put("name", "EasyPost");
         defaultFromAddress.put("street1", "164 Townsend St");
@@ -59,12 +59,12 @@ public class ThreadTest {
      */
     @Test
     public void testThreadOrderCreation() throws EasyPostException, InterruptedException {
-        _vcr.setUpTest("thread_order_creation");
+        vcr.setUpTest("thread_order_creation");
 
         // create a default set of shipment and order params to feed to the threads
-        Map<String, Object> shipment_1 = orderShipment();
+        Map<String, Object> shipment1 = orderShipment();
         List<Map<String, Object>> shipments = new ArrayList<Map<String, Object>>();
-        shipments.add(shipment_1);
+        shipments.add(shipment1);
         Map<String, Object> orderParams = new HashMap<String, Object>();
         orderParams.put("shipments", shipments);
         orderParams.put("from_address", defaultFromAddress);
@@ -101,9 +101,9 @@ public class ThreadTest {
      * @throws EasyPostException when the request fails.
      */
     private static class CreateOrders implements Runnable {
-        List<Map<String, Object>> orders;
+        private List<Map<String, Object>> orders;
 
-        public CreateOrders(List<Map<String, Object>> orders) {
+        CreateOrders(List<Map<String, Object>> orders) {
             this.orders = orders;
         }
 

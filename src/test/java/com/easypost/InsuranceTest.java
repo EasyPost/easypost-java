@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class InsuranceTest {
-    private static TestUtils.VCR _vcr;
+public final class InsuranceTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -25,11 +25,13 @@ public class InsuranceTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("insurance", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("insurance", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Create insurance object.
+     *
+     * @return Insurance object
      */
     private static Insurance createBasicInsurance() throws EasyPostException {
         return Insurance.create(Fixture.basicInsurance());
@@ -42,7 +44,7 @@ public class InsuranceTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         Insurance insurance = createBasicInsurance();
 
@@ -58,7 +60,7 @@ public class InsuranceTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         Insurance insurance = createBasicInsurance();
 
@@ -76,7 +78,7 @@ public class InsuranceTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());

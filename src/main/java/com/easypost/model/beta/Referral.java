@@ -1,7 +1,7 @@
 package com.easypost.model.beta;
 
-import com.easypost.exception.EasyPostException;
 import com.easypost.EasyPost;
+import com.easypost.exception.EasyPostException;
 import com.easypost.model.ApiKey;
 import com.easypost.model.BaseUser;
 import com.easypost.model.Utilities;
@@ -12,10 +12,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Referral extends BaseUser {
     private List<ApiKey> apiKeys;
@@ -163,7 +163,7 @@ public class Referral extends BaseUser {
      */
     private static String retrieveEasypostStripeApiKey() throws EasyPostException {
         @SuppressWarnings("unchecked")
-        Map<String, String> response =  request(RequestMethod.GET, String.format("%s/%s",
+        Map<String, String> response = request(RequestMethod.GET, String.format("%s/%s",
             EasyPost.BETA_API_BASE, "partners/stripe_public_key"), null, Map.class, null);
 
         return response.getOrDefault("public_key", "");

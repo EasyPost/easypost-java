@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ErrorTest {
-    private static TestUtils.VCR _vcr;
+public final class ErrorTest {
+    private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
@@ -17,7 +17,7 @@ public class ErrorTest {
      */
     @BeforeAll
     public static void setup() {
-        _vcr = new TestUtils.VCR("error", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("error", TestUtils.ApiKey.TEST);
     }
 
     /**
@@ -27,9 +27,10 @@ public class ErrorTest {
      */
     @Test
     public void testError() throws EasyPostException {
-        _vcr.setUpTest("error");
+        vcr.setUpTest("error");
 
-        // should throw EasyPostException, but might throw NullPointerException due to a bug in the VCR grabbing response content,
+        // should throw EasyPostException,
+        // but might throw NullPointerException due to a bug in the VCR grabbing response content,
         // so we'll just check fo a generic exception
         assertThrows(Exception.class, () -> Shipment.create(null));
     }

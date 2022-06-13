@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
-public class PaymentMethodTest {
+public final class PaymentMethodTest {
 
-    private static TestUtils.VCR _vcr;
+    private static TestUtils.VCR vcr;
 
     /**
      * Setup the testing environment for this file.
@@ -17,8 +17,8 @@ public class PaymentMethodTest {
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() throws EasyPostException{
-        _vcr = new TestUtils.VCR("payment_method", TestUtils.ApiKey.PRODUCTION);
+    public static void setup() throws EasyPostException {
+        vcr = new TestUtils.VCR("payment_method", TestUtils.ApiKey.PRODUCTION);
     }
 
     /**
@@ -28,7 +28,7 @@ public class PaymentMethodTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         PaymentMethod paymentMethods = PaymentMethod.all();
 

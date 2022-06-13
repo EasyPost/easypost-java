@@ -15,21 +15,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class EndShipperTest {
-    private static TestUtils.VCR _vcr;
-    
+public final class EndShipperTest {
+    private static TestUtils.VCR vcr;
+
     /**
      * Set up the testing environment for this file.
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() throws EasyPostException{
-        _vcr = new TestUtils.VCR("end_shipper", TestUtils.ApiKey.PRODUCTION);
+    public static void setup() throws EasyPostException {
+        vcr = new TestUtils.VCR("end_shipper", TestUtils.ApiKey.PRODUCTION);
     }
 
     /**
      * Create an EndShipper.
+     *
+     * @return EndShipper object.
      */
     private static EndShipper createEndShipper() throws EasyPostException {
         return EndShipper.create(Fixture.endShipperAddress());
@@ -42,7 +44,7 @@ public class EndShipperTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         EndShipper endShipper = createEndShipper();
 
@@ -58,7 +60,7 @@ public class EndShipperTest {
      */
     @Test
     public void testRetrieve() throws EasyPostException {
-        _vcr.setUpTest("retrieve");
+        vcr.setUpTest("retrieve");
 
         EndShipper endShipper = createEndShipper();
 
@@ -75,7 +77,7 @@ public class EndShipperTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
@@ -93,7 +95,7 @@ public class EndShipperTest {
      */
     @Test
     public void testUpdate() throws EasyPostException {
-        _vcr.setUpTest("update");
+        vcr.setUpTest("update");
 
         EndShipper endShipper = createEndShipper();
 

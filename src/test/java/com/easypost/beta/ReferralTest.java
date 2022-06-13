@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ReferralTest {
-    private static TestUtils.VCR _vcr;
-    private static final String REFERRAL_USER_PROD_API_KEY = System.getenv("REFERRAL_USER_PROD_API_KEY")
-        == null ? "123": System.getenv("REFERRAL_USER_PROD_API_KEY");
-    
+public final class ReferralTest {
+    private static final String REFERRAL_USER_PROD_API_KEY =
+            System.getenv("REFERRAL_USER_PROD_API_KEY") == null ? "123" : System.getenv("REFERRAL_USER_PROD_API_KEY");
+    private static TestUtils.VCR vcr;
+
     /**
      * Set up the testing environment for this file.
      *
@@ -28,11 +28,13 @@ public class ReferralTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        _vcr = new TestUtils.VCR("referral", REFERRAL_USER_PROD_API_KEY);
+        vcr = new TestUtils.VCR("referral", REFERRAL_USER_PROD_API_KEY);
     }
 
     /**
      * Create a referral.
+     *
+     * @return Referral object
      */
     private static Referral createReferral() throws EasyPostException {
         return Referral.create(Fixture.referralUser());
@@ -45,7 +47,7 @@ public class ReferralTest {
      */
     @Test
     public void testCreate() throws EasyPostException {
-        _vcr.setUpTest("create");
+        vcr.setUpTest("create");
 
         Referral referralUser = createReferral();
 
@@ -61,7 +63,7 @@ public class ReferralTest {
      */
     @Test
     public void testUpdate() throws EasyPostException {
-        _vcr.setUpTest("update");
+        vcr.setUpTest("update");
 
         Referral referralUser = createReferral();
         boolean response = Referral.updateEmail("email@example.com", referralUser.getId());
@@ -76,7 +78,7 @@ public class ReferralTest {
      */
     @Test
     public void testAll() throws EasyPostException {
-        _vcr.setUpTest("all");
+        vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
@@ -94,12 +96,13 @@ public class ReferralTest {
      */
     @Test
     public void testReferralAddCreditCard() throws Exception {
-        _vcr.setUpTest("referral_add_credit_card");
+        vcr.setUpTest("referral_add_credit_card");
 
         Map<String, String> creditCardDetails = Fixture.creditCardDetails();
         CreditCard creditCard = Referral.addCreditCard(REFERRAL_USER_PROD_API_KEY, creditCardDetails.get("number"),
-            Integer.parseInt(creditCardDetails.get("expiration_month")),
-            Integer.parseInt(creditCardDetails.get("expiration_year")), creditCardDetails.get("cvc"), Referral.Priority.PRIMARY);
+                Integer.parseInt(creditCardDetails.get("expiration_month")),
+                Integer.parseInt(creditCardDetails.get("expiration_year")), creditCardDetails.get("cvc"),
+                Referral.Priority.PRIMARY);
 
         assertInstanceOf(CreditCard.class, creditCard);
         assertTrue(creditCard.getId().startsWith("card_"));
