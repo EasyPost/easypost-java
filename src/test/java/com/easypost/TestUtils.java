@@ -2,6 +2,7 @@ package com.easypost;
 
 import com.easypost.easyvcr.AdvancedSettings;
 import com.easypost.easyvcr.Cassette;
+import com.easypost.easyvcr.CensorElement;
 import com.easypost.easyvcr.Censors;
 import com.easypost.easyvcr.MatchRules;
 import com.easypost.easyvcr.Mode;
@@ -36,10 +37,12 @@ public abstract class TestUtils {
         add("phone_number");
         add("phone");
         add("test_credentials");
-        // add("created_at");
-        // add("updated_at");
-        // TODO: ^ Add as something to ignore when comparing bodies in a future version of EasyVCR
-        // Timezone difference between local machine and GitHub Actions causing failure on replay
+    }};
+
+    private static final List<CensorElement> BODY_ELEMENTS_TO_IGNORE_ON_MATCH = new ArrayList<CensorElement>() {{
+        // Timezone difference between machines causing failure on replay
+        add(new CensorElement("createdAt", false));
+        add(new CensorElement("updatedAt", false));
     }};
 
     /**
@@ -99,11 +102,14 @@ public abstract class TestUtils {
          */
         public VCR(String testCassettesFolder, String apiKey) {
             AdvancedSettings advancedSettings = new AdvancedSettings();
-            advancedSettings.matchRules = MatchRules.regular(); // match by method, url
-            // TODO: Change to strict when VCR updated with ignore aspect
-            advancedSettings.censors =
-                    new Censors("REDACTED").hideHeaders(HEADER_CENSORS).hideQueryParameters(QUERY_CENSORS)
-                            .hideBodyParameters(BODY_CENSORS);
+            advancedSettings.matchRules = new MatchRules()
+                    .byMethod()
+                    .byFullUrl()
+                    .byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
+            advancedSettings.censors = new Censors("REDACTED")
+                    .censorHeadersByKeys(HEADER_CENSORS)
+                    .censorQueryParametersByKeys(QUERY_CENSORS)
+                    .censorBodyElementsByKeys(BODY_CENSORS);
 
             vcr = new com.easypost.easyvcr.VCR(advancedSettings);
 
