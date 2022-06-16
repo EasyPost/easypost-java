@@ -40,33 +40,6 @@ public final class ShipmentTest {
     }
 
     /**
-     * Create a basic shipment.
-     *
-     * @return Shipment object
-     */
-    private static Shipment createBasicShipment() throws EasyPostException {
-        return Shipment.create(Fixture.basicShipment());
-    }
-
-    /**
-     * Create a full shipment.
-     *
-     * @return Shipment object
-     */
-    private static Shipment createFullShipment() throws EasyPostException {
-        return Shipment.create(Fixture.fullShipment());
-    }
-
-    /**
-     * Create a one-call-buy shipment.
-     *
-     * @return Shipment object
-     */
-    private static Shipment createOneCallBuyShipment() throws EasyPostException {
-        return Shipment.create(Fixture.oneCallBuyShipment());
-    }
-
-    /**
      * Test creating a shipment.
      *
      * @throws EasyPostException when the request fails.
@@ -83,6 +56,15 @@ public final class ShipmentTest {
         assertEquals("PNG", shipment.getOptions().get("label_format"));
         assertEquals("123", shipment.getOptions().get("invoice_number"));
         assertEquals("123", shipment.getReference());
+    }
+
+    /**
+     * Create a full shipment.
+     *
+     * @return Shipment object
+     */
+    private static Shipment createFullShipment() throws EasyPostException {
+        return Shipment.create(Fixture.fullShipment());
     }
 
     /**
@@ -140,6 +122,15 @@ public final class ShipmentTest {
     }
 
     /**
+     * Create a basic shipment.
+     *
+     * @return Shipment object
+     */
+    private static Shipment createBasicShipment() throws EasyPostException {
+        return Shipment.create(Fixture.basicShipment());
+    }
+
+    /**
      * Test generating a new rate for a shipment.
      *
      * @throws EasyPostException when the request fails.
@@ -181,8 +172,17 @@ public final class ShipmentTest {
     }
 
     /**
-     * Test insuring a Shipment.
+     * Create a one-call-buy shipment.
      *
+     * @return Shipment object
+     */
+    private static Shipment createOneCallBuyShipment() throws EasyPostException {
+        return Shipment.create(Fixture.oneCallBuyShipment());
+    }
+
+    /**
+     * Test insuring a Shipment.
+     * <p>
      * If the shipment was purchased with a USPS rate, it must have had its
      * insurance set to `0` when bought
      * so that USPS doesn't automatically insure it so we could manually insure it
@@ -212,7 +212,7 @@ public final class ShipmentTest {
 
     /**
      * Test refunding a Shipment.
-     *
+     * <p>
      * Refunding a test shipment must happen within seconds of the shipment being
      * created as test shipments naturally
      * follow a flow of created -> delivered to cycle through tracking events in

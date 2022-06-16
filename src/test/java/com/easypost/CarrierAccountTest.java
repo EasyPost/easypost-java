@@ -31,12 +31,6 @@ public final class CarrierAccountTest {
         vcr = new TestUtils.VCR("carrier_account", TestUtils.ApiKey.PRODUCTION);
     }
 
-    private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
-        CarrierAccount carrierAccount = CarrierAccount.create(Fixture.basicCarrierAccount());
-        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
-        return carrierAccount;
-    }
-
     /**
      * Clean up test attributes after each unit test.
      */
@@ -66,6 +60,12 @@ public final class CarrierAccountTest {
 
         assertInstanceOf(CarrierAccount.class, carrierAccount);
         assertTrue(carrierAccount.getId().startsWith("ca_"));
+    }
+
+    private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
+        CarrierAccount carrierAccount = CarrierAccount.create(Fixture.basicCarrierAccount());
+        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
+        return carrierAccount;
     }
 
     /**

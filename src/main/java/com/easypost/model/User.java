@@ -67,17 +67,6 @@ public class User extends BaseUser {
      * Create a User object with a map of parameters.
      *
      * @param params map of User parameters.
-     * @return User object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static User create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a User object with a map of parameters.
-     *
-     * @param params map of User parameters.
      * @param apiKey API key to use in request (overrides default API key).
      * @return User object.
      * @throws EasyPostException when the request fails.
@@ -87,6 +76,17 @@ public class User extends BaseUser {
         wrappedParams.put("user", params);
 
         return request(RequestMethod.POST, classURL(User.class), wrappedParams, User.class, apiKey);
+    }
+
+    /**
+     * Create a User object with a map of parameters.
+     *
+     * @param params map of User parameters.
+     * @return User object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static User create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
     }
 
     /**
@@ -112,8 +112,8 @@ public class User extends BaseUser {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
-        User response = request(RequestMethod.PUT, instanceURL(User.class, this.getId()), wrappedParams, User.class,
-                apiKey);
+        User response =
+                request(RequestMethod.PUT, instanceURL(User.class, this.getId()), wrappedParams, User.class, apiKey);
 
         this.merge(this, response);
         return this;

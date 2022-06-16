@@ -42,153 +42,6 @@ public final class Shipment extends EasyPostResource {
     private String service;
 
     /**
-     * Create a new Shipment object from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Shipment create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a new Shipment object from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Shipment create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("shipment", params);
-
-        return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
-    }
-
-    /**
-     * Retrieve a Shipment from the API.
-     *
-     * @param id the id of the Shipment to retrieve.
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Shipment retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Shipment from the API.
-     *
-     * @param id     the id of the Shipment to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Shipment retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Shipment.class, id), null, Shipment.class, apiKey);
-    }
-
-    /**
-     * Get a list of all Shipment objects.
-     *
-     * @param params the options for the query.
-     * @return ShipmentCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static ShipmentCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * Get a list of all Shipment objects.
-     *
-     * @param params the options for the query.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return ShipmentCollection object
-     * @throws EasyPostException when the request fails.
-     */
-    public static ShipmentCollection all(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Shipment.class), params, ShipmentCollection.class, apiKey);
-    }
-
-    /**
-     * Get the lowest smartrate from a list of smartrates.
-     *
-     * @param smartrates       List of smartrates to filter from.
-     * @param deliveryDay      Delivery days restriction to use when filtering.
-     * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
-     * @return lowest Smartrate object
-     * @throws EasyPostException when the request fails.
-     */
-    public static Smartrate getLowestSmartRate(final List<Smartrate> smartrates, int deliveryDay,
-                                               String deliveryAccuracy) throws EasyPostException {
-        Smartrate lowestSmartrate = null;
-
-        HashSet<String> validDeliveryAccuracies = new HashSet<String>(
-                Arrays.asList("percentile_50", "percentile_75", "percentile_85", "percentile_90", "percentile_95",
-                        "percentile_97", "percentile_99"));
-
-        if (!validDeliveryAccuracies.contains(deliveryAccuracy.toLowerCase())) {
-            throw new EasyPostException("Invalid delivery_accuracy value, must be one of: " + validDeliveryAccuracies);
-        }
-
-        for (Smartrate rate : smartrates) {
-            int smartrateDeliveryDay = rate.getTimeInTransit().getSmartRateAccuracy(deliveryAccuracy);
-
-            if (smartrateDeliveryDay > deliveryDay) {
-                continue;
-            } else if (lowestSmartrate == null || rate.getRate() < lowestSmartrate.getRate()) {
-                lowestSmartrate = rate;
-            }
-        }
-
-        if (lowestSmartrate == null) {
-            throw new EasyPostException("No rates found.");
-        }
-
-        return lowestSmartrate;
-    }
-
-    /**
-     * Get the ID of this Shipment.
-     *
-     * @return the ID of this Shipment.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Shipment.
-     *
-     * @param id the ID of this Shipment.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of this Shipment.
-     *
-     * @return the mode of this Shipment.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of this Shipment.
-     *
-     * @param mode the mode of this Shipment.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
-    }
-
-    /**
      * Get the reference of this Shipment.
      *
      * @return the reference of this Shipment.
@@ -459,42 +312,6 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get the tracking code of this Shipment.
-     *
-     * @return the tracking code of this Shipment.
-     */
-    public String getTrackingCode() {
-        return trackingCode;
-    }
-
-    /**
-     * Set the tracking code of this Shipment.
-     *
-     * @param trackingCode the tracking code of this Shipment.
-     */
-    public void setTrackingCode(final String trackingCode) {
-        this.trackingCode = trackingCode;
-    }
-
-    /**
-     * Get the status of this Shipment.
-     *
-     * @return the status of this Shipment.
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * Set the status of this Shipment.
-     *
-     * @param status the status of this Shipment.
-     */
-    public void setStatus(final String status) {
-        this.status = status;
-    }
-
-    /**
      * Get the refund status of this Shipment.
      *
      * @return the refund status of this Shipment.
@@ -693,6 +510,79 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
+     * Create a new Shipment object from a map of parameters.
+     *
+     * @param params the map of parameters.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Shipment create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a new Shipment object from a map of parameters.
+     *
+     * @param params the map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Shipment create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("shipment", params);
+
+        return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
+    }
+
+    /**
+     * Retrieve a Shipment from the API.
+     *
+     * @param id the id of the Shipment to retrieve.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Shipment retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a Shipment from the API.
+     *
+     * @param id     the id of the Shipment to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Shipment retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Shipment.class, id), null, Shipment.class, apiKey);
+    }
+
+    /**
+     * Get a list of all Shipment objects.
+     *
+     * @param params the options for the query.
+     * @return ShipmentCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static ShipmentCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * Get a list of all Shipment objects.
+     *
+     * @param params the options for the query.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return ShipmentCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static ShipmentCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Shipment.class), params, ShipmentCollection.class, apiKey);
+    }
+
+    /**
      * Refresh this Shipment.
      *
      * @return Shipment object
@@ -700,6 +590,91 @@ public final class Shipment extends EasyPostResource {
      */
     public Shipment refresh() throws EasyPostException {
         return this.refresh(null, null);
+    }
+
+    /**
+     * Refresh this Shipment.
+     *
+     * @param params the options for the query.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, String.format("%s", instanceURL(Shipment.class, this.getId())), params,
+                Shipment.class, apiKey);
+    }
+
+    /**
+     * Get the ID of this Shipment.
+     *
+     * @return the ID of this Shipment.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set the ID of this Shipment.
+     *
+     * @param id the ID of this Shipment.
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the mode of this Shipment.
+     *
+     * @return the mode of this Shipment.
+     */
+    public String getMode() {
+        return mode;
+    }
+
+    /**
+     * Set the mode of this Shipment.
+     *
+     * @param mode the mode of this Shipment.
+     */
+    public void setMode(final String mode) {
+        this.mode = mode;
+    }
+
+    /**
+     * Get the tracking code of this Shipment.
+     *
+     * @return the tracking code of this Shipment.
+     */
+    public String getTrackingCode() {
+        return trackingCode;
+    }
+
+    /**
+     * Set the tracking code of this Shipment.
+     *
+     * @param trackingCode the tracking code of this Shipment.
+     */
+    public void setTrackingCode(final String trackingCode) {
+        this.trackingCode = trackingCode;
+    }
+
+    /**
+     * Get the status of this Shipment.
+     *
+     * @return the status of this Shipment.
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * Set the status of this Shipment.
+     *
+     * @param status the status of this Shipment.
+     */
+    public void setStatus(final String status) {
+        this.status = status;
     }
 
     /**
@@ -725,19 +700,6 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Refresh this Shipment.
-     *
-     * @param params the options for the query.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s", instanceURL(Shipment.class, this.getId())), params,
-                Shipment.class, apiKey);
-    }
-
-    /**
      * Get new rates for this Shipment.
      *
      * @return Shipment object
@@ -745,6 +707,23 @@ public final class Shipment extends EasyPostResource {
      */
     public Shipment newRates() throws EasyPostException {
         return this.newRates(null, null);
+    }
+
+    /**
+     * Get new rates for this Shipment.
+     *
+     * @param params the options for the query.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment newRates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Shipment response =
+                request(RequestMethod.POST, String.format("%s/rerate", instanceURL(Shipment.class, this.getId())),
+                        params, Shipment.class, apiKey);
+
+        this.merge(this, response);
+        return this;
     }
 
     /**
@@ -770,33 +749,6 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Get new rates for this Shipment.
-     *
-     * @param params the options for the query.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment newRates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Shipment response =
-                request(RequestMethod.POST, String.format("%s/rerate", instanceURL(Shipment.class, this.getId())),
-                        params, Shipment.class, apiKey);
-
-        this.merge(this, response);
-        return this;
-    }
-
-    /**
-     * Get Smartrates for this Shipment.
-     *
-     * @return List of Smartrate objects
-     * @throws EasyPostException when the request fails.
-     */
-    public List<Smartrate> getSmartrates() throws EasyPostException {
-        return this.getSmartrates(null, null);
-    }
-
-    /**
      * Get Smartrates for this Shipment.
      *
      * @param params the options for the query.
@@ -805,17 +757,6 @@ public final class Shipment extends EasyPostResource {
      */
     public List<Smartrate> getSmartrates(final Map<String, Object> params) throws EasyPostException {
         return this.getSmartrates(params, null);
-    }
-
-    /**
-     * Get Smartrates for this Shipment.
-     *
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return List of Smartrate objects
-     * @throws EasyPostException when the request fails.
-     */
-    public List<Smartrate> getSmartrates(final String apiKey) throws EasyPostException {
-        return this.getSmartrates(null, apiKey);
     }
 
     /**
@@ -835,6 +776,17 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
+     * Get Smartrates for this Shipment.
+     *
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return List of Smartrate objects
+     * @throws EasyPostException when the request fails.
+     */
+    public List<Smartrate> getSmartrates(final String apiKey) throws EasyPostException {
+        return this.getSmartrates(null, apiKey);
+    }
+
+    /**
      * Buy this Shipment.
      *
      * @return Shipment object
@@ -842,6 +794,23 @@ public final class Shipment extends EasyPostResource {
      */
     public Shipment buy() throws EasyPostException {
         return this.buy(null, null);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
+     * @param params the options for the query.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Shipment response =
+                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Shipment.class, this.getId())), params,
+                        Shipment.class, apiKey);
+
+        this.merge(this, response);
+        return this;
     }
 
     /**
@@ -881,23 +850,6 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Buy this Shipment.
-     *
-     * @param params the options for the query.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Shipment response =
-                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Shipment.class, this.getId())), params,
-                        Shipment.class, apiKey);
-
-        this.merge(this, response);
-        return this;
-    }
-
-    /**
      * Refund this Shipment.
      *
      * @return Shipment object
@@ -905,6 +857,19 @@ public final class Shipment extends EasyPostResource {
      */
     public Shipment refund() throws EasyPostException {
         return this.refund(null, null);
+    }
+
+    /**
+     * Refund this Shipment.
+     *
+     * @param params the options for the query.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment refund(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, String.format("%s/refund", instanceURL(Shipment.class, this.getId())), params,
+                Shipment.class, apiKey);
     }
 
     /**
@@ -930,19 +895,6 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Refund this Shipment.
-     *
-     * @param params the options for the query.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment refund(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s/refund", instanceURL(Shipment.class, this.getId())), params,
-                Shipment.class, apiKey);
-    }
-
-    /**
      * Label this Shipment.
      *
      * @return Shipment object
@@ -950,6 +902,23 @@ public final class Shipment extends EasyPostResource {
      */
     public Shipment label() throws EasyPostException {
         return this.label(null, null);
+    }
+
+    /**
+     * Label this Shipment.
+     *
+     * @param params the options for the query.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment label(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Shipment response =
+                request(RequestMethod.GET, String.format("%s/label", instanceURL(Shipment.class, this.getId())), params,
+                        Shipment.class, apiKey);
+
+        this.merge(this, response);
+        return this;
     }
 
     /**
@@ -975,23 +944,6 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Label this Shipment.
-     *
-     * @param params the options for the query.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment label(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Shipment response =
-                request(RequestMethod.GET, String.format("%s/label", instanceURL(Shipment.class, this.getId())), params,
-                        Shipment.class, apiKey);
-
-        this.merge(this, response);
-        return this;
-    }
-
-    /**
      * Insure this Shipment.
      *
      * @return Shipment object
@@ -999,6 +951,19 @@ public final class Shipment extends EasyPostResource {
      */
     public Shipment insure() throws EasyPostException {
         return this.insure(null, null);
+    }
+
+    /**
+     * Insure this Shipment.
+     *
+     * @param params the options for the query.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment insure(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.POST, String.format("%s/insure", instanceURL(Shipment.class, this.getId())),
+                params, Shipment.class, apiKey);
     }
 
     /**
@@ -1024,19 +989,6 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
-     * Insure this Shipment.
-     *
-     * @param params the options for the query.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment insure(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, String.format("%s/insure", instanceURL(Shipment.class, this.getId())),
-                params, Shipment.class, apiKey);
-    }
-
-    /**
      * Get the lowest smartrate for this Shipment.
      *
      * @param deliveryDay      Delivery days restriction to use when filtering.
@@ -1053,6 +1005,54 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
+     * Get Smartrates for this Shipment.
+     *
+     * @return List of Smartrate objects
+     * @throws EasyPostException when the request fails.
+     */
+    public List<Smartrate> getSmartrates() throws EasyPostException {
+        return this.getSmartrates(null, null);
+    }
+
+    /**
+     * Get the lowest smartrate from a list of smartrates.
+     *
+     * @param smartrates       List of smartrates to filter from.
+     * @param deliveryDay      Delivery days restriction to use when filtering.
+     * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
+     * @return lowest Smartrate object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Smartrate getLowestSmartRate(final List<Smartrate> smartrates, int deliveryDay,
+                                               String deliveryAccuracy) throws EasyPostException {
+        Smartrate lowestSmartrate = null;
+
+        HashSet<String> validDeliveryAccuracies = new HashSet<String>(
+                Arrays.asList("percentile_50", "percentile_75", "percentile_85", "percentile_90", "percentile_95",
+                        "percentile_97", "percentile_99"));
+
+        if (!validDeliveryAccuracies.contains(deliveryAccuracy.toLowerCase())) {
+            throw new EasyPostException("Invalid delivery_accuracy value, must be one of: " + validDeliveryAccuracies);
+        }
+
+        for (Smartrate rate : smartrates) {
+            int smartrateDeliveryDay = rate.getTimeInTransit().getSmartRateAccuracy(deliveryAccuracy);
+
+            if (smartrateDeliveryDay > deliveryDay) {
+                continue;
+            } else if (lowestSmartrate == null || rate.getRate() < lowestSmartrate.getRate()) {
+                lowestSmartrate = rate;
+            }
+        }
+
+        if (lowestSmartrate == null) {
+            throw new EasyPostException("No rates found.");
+        }
+
+        return lowestSmartrate;
+    }
+
+    /**
      * Get the lowest rate for this Shipment.
      *
      * @return lowest Rate object
@@ -1060,17 +1060,6 @@ public final class Shipment extends EasyPostResource {
      */
     public Rate lowestRate() throws EasyPostException {
         return this.lowestRate(null, null);
-    }
-
-    /**
-     * Get the lowest rate for this shipment.
-     *
-     * @param carriers the carriers to use in the query.
-     * @return Rate object
-     * @throws EasyPostException when the request fails.
-     */
-    public Rate lowestRate(final List<String> carriers) throws EasyPostException {
-        return this.lowestRate(carriers, null);
     }
 
     /**
@@ -1083,5 +1072,16 @@ public final class Shipment extends EasyPostResource {
      */
     public Rate lowestRate(final List<String> carriers, final List<String> services) throws EasyPostException {
         return Utilities.getLowestObjectRate(this.rates, carriers, services);
+    }
+
+    /**
+     * Get the lowest rate for this shipment.
+     *
+     * @param carriers the carriers to use in the query.
+     * @return Rate object
+     * @throws EasyPostException when the request fails.
+     */
+    public Rate lowestRate(final List<String> carriers) throws EasyPostException {
+        return this.lowestRate(carriers, null);
     }
 }

@@ -11,27 +11,6 @@ public final class ApiKeys extends EasyPostResource {
     private List<ApiKeys> children;
 
     /**
-     * Get all API keys.
-     *
-     * @return ApiKeys object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static ApiKeys all() throws EasyPostException {
-        return all(null);
-    }
-
-    /**
-     * Get all API keys.
-     *
-     * @param apiKey API key to use for this request.
-     * @return ApiKeys object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static ApiKeys all(final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
-    }
-
-    /**
      * Get API key ID.
      *
      * @return API key ID.
@@ -83,6 +62,27 @@ public final class ApiKeys extends EasyPostResource {
      */
     public void setChildren(final List<ApiKeys> children) {
         this.children = children;
+    }
+
+    /**
+     * Get all API keys.
+     *
+     * @return ApiKeys object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static ApiKeys all() throws EasyPostException {
+        return all(null);
+    }
+
+    /**
+     * Get all API keys.
+     *
+     * @param apiKey API key to use for this request.
+     * @return ApiKeys object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static ApiKeys all(final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
     }
 
 }

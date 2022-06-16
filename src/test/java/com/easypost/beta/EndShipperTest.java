@@ -29,15 +29,6 @@ public final class EndShipperTest {
     }
 
     /**
-     * Create an EndShipper.
-     *
-     * @return EndShipper object.
-     */
-    private static EndShipper createEndShipper() throws EasyPostException {
-        return EndShipper.create(Fixture.endShipperAddress());
-    }
-
-    /**
      * Test creating an EndShipper object.
      *
      * @throws EasyPostException when the request fails.
@@ -51,6 +42,15 @@ public final class EndShipperTest {
         assertInstanceOf(EndShipper.class, endShipper);
         assertTrue(endShipper.getId().startsWith("es_"));
         assertEquals("388 TOWNSEND ST APT 20", endShipper.getStreet1());
+    }
+
+    /**
+     * Create an EndShipper.
+     *
+     * @return EndShipper object.
+     */
+    private static EndShipper createEndShipper() throws EasyPostException {
+        return EndShipper.create(Fixture.endShipperAddress());
     }
 
     /**

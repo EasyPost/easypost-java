@@ -31,6 +31,21 @@ public final class ScanFormTest {
     }
 
     /**
+     * Test creating a scan form.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreate() throws EasyPostException {
+        vcr.setUpTest("create");
+
+        ScanForm scanForm = getBasicScanForm();
+
+        assertInstanceOf(ScanForm.class, scanForm);
+        assertTrue(scanForm.getId().startsWith("sf_"));
+    }
+
+    /**
      * Create a ScanForm.
      *
      * @return ScanForm object
@@ -46,21 +61,6 @@ public final class ScanFormTest {
 
         ScanForm scanForm = ScanForm.create(params);
         return scanForm;
-    }
-
-    /**
-     * Test creating a scan form.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testCreate() throws EasyPostException {
-        vcr.setUpTest("create");
-
-        ScanForm scanForm = getBasicScanForm();
-
-        assertInstanceOf(ScanForm.class, scanForm);
-        assertTrue(scanForm.getId().startsWith("sf_"));
     }
 
     /**

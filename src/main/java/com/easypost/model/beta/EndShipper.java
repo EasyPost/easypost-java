@@ -58,8 +58,8 @@ public final class EndShipper extends BaseAddress {
      * @throws EasyPostException when the request fails.
      */
     public static EndShipper retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s/%s/%s",
-                EasyPost.BETA_API_BASE, "end_shippers", id), null, EndShipper.class, apiKey);
+        return request(RequestMethod.GET, String.format("%s/%s/%s", EasyPost.BETA_API_BASE, "end_shippers", id), null,
+                EndShipper.class, apiKey);
     }
 
     /**
@@ -69,8 +69,7 @@ public final class EndShipper extends BaseAddress {
      * @return List<EndShipper>.
      * @throws EasyPostException when the request fails.
      */
-    public static List<EndShipper> all(final Map<String, Object> params)
-            throws EasyPostException {
+    public static List<EndShipper> all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
     }
 
@@ -82,10 +81,10 @@ public final class EndShipper extends BaseAddress {
      * @return List<EndShipper>.
      * @throws EasyPostException when the request fails.
      */
-    public static List<EndShipper> all(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        EndShipper[] response = request(RequestMethod.GET, String.format("%s/%s", EasyPost.BETA_API_BASE,
-                "end_shippers"), params, EndShipper[].class, apiKey);
+    public static List<EndShipper> all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        EndShipper[] response =
+                request(RequestMethod.GET, String.format("%s/%s", EasyPost.BETA_API_BASE, "end_shippers"), params,
+                        EndShipper[].class, apiKey);
 
         return Arrays.asList(response);
     }
@@ -114,8 +113,9 @@ public final class EndShipper extends BaseAddress {
 
         wrappedParams.put("address", params);
 
-        EndShipper response = request(RequestMethod.PUT, String.format("%s/%s/%s", EasyPost.BETA_API_BASE,
-                "end_shippers", this.getId()), wrappedParams, EndShipper.class, apiKey);
+        EndShipper response = request(RequestMethod.PUT,
+                String.format("%s/%s/%s", EasyPost.BETA_API_BASE, "end_shippers", this.getId()), wrappedParams,
+                EndShipper.class, apiKey);
 
         this.merge(this, response);
         return this;

@@ -33,15 +33,6 @@ public final class OrderTest {
     }
 
     /**
-     * Create an order.
-     *
-     * @return Order object
-     */
-    private static Order createBasicOrder() throws EasyPostException {
-        return Order.create(Fixture.basicOrder());
-    }
-
-    /**
      * Test creating an Order.
      *
      * @throws EasyPostException when the request fails.
@@ -55,6 +46,15 @@ public final class OrderTest {
         assertInstanceOf(Order.class, order);
         assertTrue(order.getId().startsWith("order_"));
         assertNotNull(order.getRates());
+    }
+
+    /**
+     * Create an order.
+     *
+     * @return Order object
+     */
+    private static Order createBasicOrder() throws EasyPostException {
+        return Order.create(Fixture.basicOrder());
     }
 
     /**

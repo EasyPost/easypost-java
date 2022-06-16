@@ -23,32 +23,6 @@ public class Rate extends EasyPostResource {
     private String billingType;
 
     /**
-     * Retrieve a Rate from the API.
-     *
-     * @param id ID of the Rate to retrieve.
-     * @return Rate object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Rate retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Rate from the API.
-     *
-     * @param id     ID of the Rate to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Rate object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Rate retrieve(final String id, final String apiKey) throws EasyPostException {
-        Rate response;
-        response = request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
-
-        return response;
-    }
-
-    /**
      * Get the ID of this Rate.
      *
      * @return ID of this Rate.
@@ -64,6 +38,24 @@ public class Rate extends EasyPostResource {
      */
     public void setId(final String id) {
         this.id = id;
+    }
+
+    /**
+     * Get the ID of the shipment of this Rate.
+     *
+     * @return ID of the shipment of this Rate.
+     */
+    public String getShipmentId() {
+        return shipmentId;
+    }
+
+    /**
+     * Set the ID of the shipment of this Rate.
+     *
+     * @param shipmentId ID of the shipment of this Rate.
+     */
+    public void setShipmentId(final String shipmentId) {
+        this.shipmentId = shipmentId;
     }
 
     /**
@@ -301,24 +293,6 @@ public class Rate extends EasyPostResource {
     }
 
     /**
-     * Get the ID of the shipment of this Rate.
-     *
-     * @return ID of the shipment of this Rate.
-     */
-    public String getShipmentId() {
-        return shipmentId;
-    }
-
-    /**
-     * Set the ID of the shipment of this Rate.
-     *
-     * @param shipmentId ID of the shipment of this Rate.
-     */
-    public void setShipmentId(final String shipmentId) {
-        this.shipmentId = shipmentId;
-    }
-
-    /**
      * Get the ID of the carrier account of this Rate.
      *
      * @return ID of the carrier account of this Rate.
@@ -337,6 +311,15 @@ public class Rate extends EasyPostResource {
     }
 
     /**
+     * Get billing type of this rate.
+     *
+     * @return billing type of this rate.
+     */
+    public String getBillingType() {
+        return billingType;
+    }
+
+    /**
      * Set billing type of this rate.
      *
      * @param billingType billing type of this rate.
@@ -346,11 +329,28 @@ public class Rate extends EasyPostResource {
     }
 
     /**
-     * Get billing type of this rate.
+     * Retrieve a Rate from the API.
      *
-     * @return billing type of this rate.
+     * @param id ID of the Rate to retrieve.
+     * @return Rate object.
+     * @throws EasyPostException when the request fails.
      */
-    public String getBillingType() {
-        return billingType;
+    public static Rate retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a Rate from the API.
+     *
+     * @param id     ID of the Rate to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Rate object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Rate retrieve(final String id, final String apiKey) throws EasyPostException {
+        Rate response;
+        response = request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
+
+        return response;
     }
 }

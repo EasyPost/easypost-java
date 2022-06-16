@@ -24,15 +24,6 @@ public final class ParcelTest {
     }
 
     /**
-     * Create a parcel.
-     *
-     * @return Parcel object
-     */
-    private static Parcel createBasicParcel() throws EasyPostException {
-        return Parcel.create(Fixture.basicParcel());
-    }
-
-    /**
      * Test creating a Parcel.
      *
      * @throws EasyPostException when the request fails.
@@ -46,6 +37,15 @@ public final class ParcelTest {
         assertInstanceOf(Parcel.class, parcel);
         assertTrue(parcel.getId().startsWith("prcl_"));
         assertEquals(15.4, parcel.getWeight(), 0.01);
+    }
+
+    /**
+     * Create a parcel.
+     *
+     * @return Parcel object
+     */
+    private static Parcel createBasicParcel() throws EasyPostException {
+        return Parcel.create(Fixture.basicParcel());
     }
 
     /**

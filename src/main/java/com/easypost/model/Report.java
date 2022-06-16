@@ -20,99 +20,6 @@ public final class Report extends EasyPostResource {
     private Date urlExpiresAt;
 
     /**
-     * Create a Report from a map of parameters.
-     *
-     * @param params a map of parameters.
-     * @return Report object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Report create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a Report from a map of parameters.
-     *
-     * @param params a map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Report object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Report create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        if (params.containsKey("type")) {
-            HashMap<String, Object> paramsWithoutType = new HashMap<>(params);
-            paramsWithoutType.remove("type");
-            return request(RequestMethod.POST, reportURL((String) params.get("type")),
-                    paramsWithoutType, Report.class, apiKey);
-        } else {
-            throw new EasyPostException("Report type is required.");
-        }
-    }
-
-    /**
-     * Retrieve a Report from the API.
-     *
-     * @param id the ID of the Report to retrieve.
-     * @return Report object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Report retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Report from the API.
-     *
-     * @param id     the ID of the Report to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Report object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Report retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Report.class, id), null, Report.class, apiKey);
-    }
-
-    /**
-     * Get a list of Reports from the API.
-     *
-     * @param params a map of parameters.
-     * @return ReportCollection object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static ReportCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * Get a list of Reports from the API.
-     *
-     * @param params a map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return ReportCollection object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static ReportCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        String type = (String) params.get("type");
-        return request(RequestMethod.GET, reportURL(type), params, ReportCollection.class, apiKey);
-    }
-
-    /**
-     * Generate a report URL.
-     *
-     * @param type the type of report to generate.
-     * @return the URL to generate the report.
-     * @throws EasyPostException when the request fails.
-     */
-    protected static String reportURL(final String type) throws EasyPostException {
-        try {
-            String urlType = URLEncoder.encode(type, "UTF-8").toLowerCase();
-            return String.format("%s/reports/%s/", EasyPost.API_BASE, urlType);
-        } catch (java.io.UnsupportedEncodingException e) {
-            throw new EasyPostException("Undetermined Report Type");
-        }
-    }
-
-    /**
      * Get the ID of this Report.
      *
      * @return the ID of this Report.
@@ -128,42 +35,6 @@ public final class Report extends EasyPostResource {
      */
     public void setId(final String id) {
         this.id = id;
-    }
-
-    /**
-     * Get the start date of this Report.
-     *
-     * @return the start date of this Report.
-     */
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    /**
-     * Set the start date of this Report.
-     *
-     * @param startDate the start date of this Report.
-     */
-    public void setStartDate(final Date startDate) {
-        this.startDate = startDate;
-    }
-
-    /**
-     * Get the end date of this Report.
-     *
-     * @return the end date of this Report.
-     */
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    /**
-     * Set the end date of this Report.
-     *
-     * @param endDate the end date of this Report.
-     */
-    public void setEndDate(final Date endDate) {
-        this.endDate = endDate;
     }
 
     /**
@@ -200,6 +71,42 @@ public final class Report extends EasyPostResource {
      */
     public void setStatus(final String status) {
         this.status = status;
+    }
+
+    /**
+     * Get the start date of this Report.
+     *
+     * @return the start date of this Report.
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * Set the start date of this Report.
+     *
+     * @param startDate the start date of this Report.
+     */
+    public void setStartDate(final Date startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * Get the end date of this Report.
+     *
+     * @return the end date of this Report.
+     */
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * Set the end date of this Report.
+     *
+     * @param endDate the end date of this Report.
+     */
+    public void setEndDate(final Date endDate) {
+        this.endDate = endDate;
     }
 
     /**
@@ -254,5 +161,98 @@ public final class Report extends EasyPostResource {
      */
     public void setUrlExpiresAt(final Date urlExpiresAt) {
         this.urlExpiresAt = urlExpiresAt;
+    }
+
+    /**
+     * Create a Report from a map of parameters.
+     *
+     * @param params a map of parameters.
+     * @return Report object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Report create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a Report from a map of parameters.
+     *
+     * @param params a map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Report object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Report create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        if (params.containsKey("type")) {
+            HashMap<String, Object> paramsWithoutType = new HashMap<>(params);
+            paramsWithoutType.remove("type");
+            return request(RequestMethod.POST, reportURL((String) params.get("type")), paramsWithoutType, Report.class,
+                    apiKey);
+        } else {
+            throw new EasyPostException("Report type is required.");
+        }
+    }
+
+    /**
+     * Generate a report URL.
+     *
+     * @param type the type of report to generate.
+     * @return the URL to generate the report.
+     * @throws EasyPostException when the request fails.
+     */
+    protected static String reportURL(final String type) throws EasyPostException {
+        try {
+            String urlType = URLEncoder.encode(type, "UTF-8").toLowerCase();
+            return String.format("%s/reports/%s/", EasyPost.API_BASE, urlType);
+        } catch (java.io.UnsupportedEncodingException e) {
+            throw new EasyPostException("Undetermined Report Type");
+        }
+    }
+
+    /**
+     * Retrieve a Report from the API.
+     *
+     * @param id the ID of the Report to retrieve.
+     * @return Report object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Report retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a Report from the API.
+     *
+     * @param id     the ID of the Report to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Report object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Report retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Report.class, id), null, Report.class, apiKey);
+    }
+
+    /**
+     * Get a list of Reports from the API.
+     *
+     * @param params a map of parameters.
+     * @return ReportCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static ReportCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * Get a list of Reports from the API.
+     *
+     * @param params a map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return ReportCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static ReportCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        String type = (String) params.get("type");
+        return request(RequestMethod.GET, reportURL(type), params, ReportCollection.class, apiKey);
     }
 }

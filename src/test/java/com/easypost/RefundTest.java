@@ -31,24 +31,6 @@ public final class RefundTest {
     }
 
     /**
-     * Create a list of refunds.
-     *
-     * @return List of Refund objects
-     */
-    private static List<Refund> createBasicRefundList() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
-
-        // We need to retrieve the shipment so that the tracking_code has time to populate
-        Shipment retrievedShipment = Shipment.retrieve(shipment.getId());
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("carrier", Fixture.usps());
-        params.put("tracking_codes", retrievedShipment.getTrackingCode());
-
-        return Refund.create(params);
-    }
-
-    /**
      * Test creating a refund.
      *
      * @throws EasyPostException when the request fails.
@@ -65,6 +47,24 @@ public final class RefundTest {
         Refund refund = refunds.get(0);
         assertTrue(refund.getId().startsWith("rfnd_"));
         assertEquals("submitted", refund.getStatus());
+    }
+
+    /**
+     * Create a list of refunds.
+     *
+     * @return List of Refund objects
+     */
+    private static List<Refund> createBasicRefundList() throws EasyPostException {
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+
+        // We need to retrieve the shipment so that the tracking_code has time to populate
+        Shipment retrievedShipment = Shipment.retrieve(shipment.getId());
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("carrier", Fixture.usps());
+        params.put("tracking_codes", retrievedShipment.getTrackingCode());
+
+        return Refund.create(params);
     }
 
     /**

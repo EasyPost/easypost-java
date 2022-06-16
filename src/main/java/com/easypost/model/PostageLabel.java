@@ -44,6 +44,24 @@ public final class PostageLabel extends EasyPostResource {
     }
 
     /**
+     * Get the URL of this PostageLabel.
+     *
+     * @return URL of this PostageLabel.
+     */
+    public String getLabelUrl() {
+        return labelUrl;
+    }
+
+    /**
+     * Set the URL of this PostageLabel.
+     *
+     * @param labelUrl URL of this PostageLabel.
+     */
+    public void setLabelUrl(final String labelUrl) {
+        this.labelUrl = labelUrl;
+    }
+
+    /**
      * Get the date advance of this PostageLabel.
      *
      * @return Date advance of this PostageLabel.
@@ -134,24 +152,6 @@ public final class PostageLabel extends EasyPostResource {
     }
 
     /**
-     * Get the URL of this PostageLabel.
-     *
-     * @return URL of this PostageLabel.
-     */
-    public String getLabelUrl() {
-        return labelUrl;
-    }
-
-    /**
-     * Set the URL of this PostageLabel.
-     *
-     * @param labelUrl URL of this PostageLabel.
-     */
-    public void setLabelUrl(final String labelUrl) {
-        this.labelUrl = labelUrl;
-    }
-
-    /**
      * Get the file of this PostageLabel.
      *
      * @return File of this PostageLabel.
@@ -212,15 +212,6 @@ public final class PostageLabel extends EasyPostResource {
      */
     public String getPdfLabelType() {
         return labelPdfType;
-    }
-
-    /**
-     * Set the PDF type of this PostageLabel.
-     *
-     * @param labelPdfType PDF type of this PostageLabel.
-     */
-    public void setLabelPdfType(final String labelPdfType) {
-        this.labelPdfType = labelPdfType;
     }
 
     /**
@@ -287,15 +278,6 @@ public final class PostageLabel extends EasyPostResource {
     }
 
     /**
-     * Set the EPL2 type of this PostageLabel.
-     *
-     * @param labelEpl2Type EPL2 type of this PostageLabel.
-     */
-    public void setLabelEpl2Type(final String labelEpl2Type) {
-        this.labelEpl2Type = labelEpl2Type;
-    }
-
-    /**
      * Get the EPL2 URL of this PostageLabel.
      *
      * @return EPL2 URL of this PostageLabel.
@@ -359,15 +341,6 @@ public final class PostageLabel extends EasyPostResource {
     }
 
     /**
-     * Set the ZPL type of this PostageLabel.
-     *
-     * @param labelZplType ZPL type of this PostageLabel.
-     */
-    public void setLabelZplType(final String labelZplType) {
-        this.labelZplType = labelZplType;
-    }
-
-    /**
      * Get the ZPL URL of this PostageLabel.
      *
      * @return ZPL URL of this PostageLabel.
@@ -401,5 +374,32 @@ public final class PostageLabel extends EasyPostResource {
      */
     public void setLabelZplFileType(final String labelZplFileType) {
         this.labelZplFileType = labelZplFileType;
+    }
+
+    /**
+     * Set the PDF type of this PostageLabel.
+     *
+     * @param labelPdfType PDF type of this PostageLabel.
+     */
+    public void setLabelPdfType(final String labelPdfType) {
+        this.labelPdfType = labelPdfType;
+    }
+
+    /**
+     * Set the EPL2 type of this PostageLabel.
+     *
+     * @param labelEpl2Type EPL2 type of this PostageLabel.
+     */
+    public void setLabelEpl2Type(final String labelEpl2Type) {
+        this.labelEpl2Type = labelEpl2Type;
+    }
+
+    /**
+     * Set the ZPL type of this PostageLabel.
+     *
+     * @param labelZplType ZPL type of this PostageLabel.
+     */
+    public void setLabelZplType(final String labelZplType) {
+        this.labelZplType = labelZplType;
     }
 }

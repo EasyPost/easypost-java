@@ -38,9 +38,6 @@ ij_css_value_alignment = do_not_align
 indent_size = 2
 ij_gherkin_keep_indents_on_empty_lines = false
 
-[*.gsp]
-ij_gsp_keep_indents_on_empty_lines = false
-
 [*.haml]
 indent_size = 2
 ij_haml_keep_indents_on_empty_lines = false
@@ -50,7 +47,7 @@ ij_java_align_consecutive_assignments = false
 ij_java_align_consecutive_variable_declarations = false
 ij_java_align_group_field_declarations = false
 ij_java_align_multiline_annotation_parameters = false
-ij_java_align_multiline_array_initializer_expression = false
+ij_java_align_multiline_array_initializer_expression = true
 ij_java_align_multiline_assignment = false
 ij_java_align_multiline_binary_operation = false
 ij_java_align_multiline_chained_methods = false
@@ -67,10 +64,11 @@ ij_java_align_multiline_text_blocks = false
 ij_java_align_multiline_throws_list = false
 ij_java_align_subsequent_simple_methods = false
 ij_java_align_throws_keyword = false
+ij_java_align_types_in_multi_catch = true
 ij_java_annotation_parameter_wrap = off
-ij_java_array_initializer_new_line_after_left_brace = false
-ij_java_array_initializer_right_brace_on_new_line = false
-ij_java_array_initializer_wrap = normal
+ij_java_array_initializer_new_line_after_left_brace = true
+ij_java_array_initializer_right_brace_on_new_line = true
+ij_java_array_initializer_wrap = split_into_lines
 ij_java_assert_statement_colon_on_next_line = false
 ij_java_assert_statement_wrap = normal
 ij_java_assignment_wrap = normal
@@ -105,6 +103,7 @@ ij_java_class_count_to_use_import_on_demand = 999
 ij_java_class_names_in_javadoc = 1
 ij_java_do_not_indent_top_level_class_members = false
 ij_java_do_not_wrap_after_single_annotation = false
+ij_java_do_not_wrap_after_single_annotation_in_parameter = false
 ij_java_do_while_brace_force = always
 ij_java_doc_add_blank_line_after_description = true
 ij_java_doc_add_blank_line_after_param_comments = false
@@ -168,6 +167,7 @@ ij_java_label_indent_size = 0
 ij_java_lambda_brace_style = end_of_line
 ij_java_layout_static_imports_separately = true
 ij_java_line_comment_add_space = false
+ij_java_line_comment_add_space_on_reformat = false
 ij_java_line_comment_at_first_column = true
 ij_java_message_dd_suffix = EJB
 ij_java_message_eb_suffix = Bean
@@ -178,7 +178,9 @@ ij_java_method_parameters_new_line_after_left_paren = false
 ij_java_method_parameters_right_paren_on_new_line = false
 ij_java_method_parameters_wrap = normal
 ij_java_modifier_list_wrap = false
+ij_java_multi_catch_types_wrap = normal
 ij_java_names_count_to_use_import_on_demand = 999
+ij_java_new_line_after_lparen_in_annotation = false
 ij_java_new_line_after_lparen_in_record_header = false
 ij_java_parameter_annotation_wrap = normal
 ij_java_parentheses_expression_new_line_after_left_paren = false
@@ -194,6 +196,7 @@ ij_java_replace_sum_lambda_with_method_ref = true
 ij_java_resource_list_new_line_after_left_paren = false
 ij_java_resource_list_right_paren_on_new_line = false
 ij_java_resource_list_wrap = normal
+ij_java_rparen_on_new_line_in_annotation = false
 ij_java_rparen_on_new_line_in_record_header = false
 ij_java_session_dd_suffix = EJB
 ij_java_session_eb_suffix = Bean
@@ -249,6 +252,7 @@ ij_java_space_within_empty_array_initializer_braces = true
 ij_java_space_within_empty_method_call_parentheses = false
 ij_java_space_within_empty_method_parentheses = false
 ij_java_spaces_around_additive_operators = true
+ij_java_spaces_around_annotation_eq = true
 ij_java_spaces_around_assignment_operators = true
 ij_java_spaces_around_bitwise_operators = true
 ij_java_spaces_around_equality_operators = true
@@ -405,7 +409,7 @@ ij_editorconfig_space_before_colon = false
 ij_editorconfig_space_before_comma = false
 ij_editorconfig_spaces_around_assignment_operators = true
 
-[{*.ant,*.fxml,*.jhm,*.jnlp,*.jrxml,*.pom,*.rng,*.tld,*.wadl,*.wsdd,*.wsdl,*.xjb,*.xml,*.xsd,*.xsl,*.xslt,*.xul}]
+[{*.ant,*.fxml,*.jhm,*.jnlp,*.jrxml,*.pom,*.rng,*.tld,*.wadl,*.wsdl,*.xml,*.xsd,*.xsl,*.xslt,*.xul}]
 ij_xml_align_attributes = true
 ij_xml_align_text = false
 ij_xml_attribute_wrap = normal
@@ -776,7 +780,7 @@ ij_javascript_wrap_comments = false
 [{*.ft,*.vm,*.vsl}]
 ij_vtl_keep_indents_on_empty_lines = false
 
-[{*.gant,*.groovy,*.gson,*.gy}]
+[{*.gant,*.groovy,*.gy}]
 ij_groovy_align_group_field_declarations = false
 ij_groovy_align_multiline_array_initializer_expression = false
 ij_groovy_align_multiline_assignment = false
@@ -822,6 +826,7 @@ ij_groovy_class_brace_style = end_of_line
 ij_groovy_class_count_to_use_import_on_demand = 5
 ij_groovy_do_while_brace_force = never
 ij_groovy_else_on_new_line = false
+ij_groovy_enable_groovydoc_formatting = true
 ij_groovy_enum_constants_wrap = off
 ij_groovy_extends_keyword_wrap = off
 ij_groovy_extends_list_wrap = off
@@ -854,6 +859,7 @@ ij_groovy_label_indent_size = 0
 ij_groovy_lambda_brace_style = end_of_line
 ij_groovy_layout_static_imports_separately = true
 ij_groovy_line_comment_add_space = false
+ij_groovy_line_comment_add_space_on_reformat = false
 ij_groovy_line_comment_at_first_column = true
 ij_groovy_method_annotation_wrap = split_into_lines
 ij_groovy_method_brace_style = end_of_line
@@ -1051,6 +1057,7 @@ ij_kotlin_keep_indents_on_empty_lines = false
 ij_kotlin_keep_line_breaks = true
 ij_kotlin_lbrace_on_next_line = false
 ij_kotlin_line_comment_add_space = false
+ij_kotlin_line_comment_add_space_on_reformat = false
 ij_kotlin_line_comment_at_first_column = true
 ij_kotlin_method_annotation_wrap = split_into_lines
 ij_kotlin_method_call_chain_wrap = off
@@ -1094,13 +1101,17 @@ ij_markdown_force_one_space_after_blockquote_symbol = true
 ij_markdown_force_one_space_after_header_symbol = true
 ij_markdown_force_one_space_after_list_bullet = true
 ij_markdown_force_one_space_between_words = true
+ij_markdown_insert_quote_arrows_on_wrap = true
 ij_markdown_keep_indents_on_empty_lines = false
+ij_markdown_keep_line_breaks_inside_text_blocks = true
 ij_markdown_max_lines_around_block_elements = 1
 ij_markdown_max_lines_around_header = 1
 ij_markdown_max_lines_between_paragraphs = 1
 ij_markdown_min_lines_around_block_elements = 1
 ij_markdown_min_lines_around_header = 1
 ij_markdown_min_lines_between_paragraphs = 1
+ij_markdown_wrap_text_if_long = true
+ij_markdown_wrap_text_inside_blockquotes = true
 
 [{*.pb,*.textproto}]
 indent_size = 2
@@ -1124,6 +1135,9 @@ ij_properties_spaces_around_key_value_delimiter = false
 
 [{*.qute.html,*.qute.json,*.qute.txt,*.qute.yaml,*.qute.yml}]
 ij_qute_keep_indents_on_empty_lines = false
+
+[{*.toml,Cargo.lock,Cargo.toml.orig,Gopkg.lock,Pipfile,poetry.lock}]
+ij_toml_keep_indents_on_empty_lines = false
 
 [{*.yaml,*.yml}]
 indent_size = 2

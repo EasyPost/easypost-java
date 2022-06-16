@@ -33,28 +33,6 @@ public final class UserTest {
     }
 
     /**
-     * Retrieve current user.
-     *
-     * @return User object
-     */
-    private static User retrieveMe() throws EasyPostException {
-        return User.retrieveMe();
-    }
-
-    /**
-     * Create a user.
-     *
-     * @return User object
-     */
-    private static User createUser() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
-        params.put("name", "Test User");
-        User user = User.create(params);
-        testUserId = user.getId(); // trigger deletion after test
-        return user;
-    }
-
-    /**
      * Clean up test attributes after each unit test.
      */
     @AfterEach
@@ -87,6 +65,19 @@ public final class UserTest {
     }
 
     /**
+     * Create a user.
+     *
+     * @return User object
+     */
+    private static User createUser() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "Test User");
+        User user = User.create(params);
+        testUserId = user.getId(); // trigger deletion after test
+        return user;
+    }
+
+    /**
      * Test retrieving a user.
      *
      * @throws EasyPostException when the request fails.
@@ -104,6 +95,15 @@ public final class UserTest {
         assertInstanceOf(User.class, user);
         assertTrue(user.getId().startsWith("user_"));
         assertEquals(userId, user.getId());
+    }
+
+    /**
+     * Retrieve current user.
+     *
+     * @return User object
+     */
+    private static User retrieveMe() throws EasyPostException {
+        return User.retrieveMe();
     }
 
     /**

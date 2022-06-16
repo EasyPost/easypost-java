@@ -15,158 +15,6 @@ public final class Address extends BaseAddress {
     private AddressVerifications verifications;
 
     /**
-     * Create Address object from parameter map.
-     *
-     * @param params Map of address parameters.
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create Address object from parameter map.
-     *
-     * @param params Map of address parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-
-        if (params.containsKey("verify")) {
-            wrappedParams.put("verify", params.remove("verify"));
-        }
-
-        if (params.containsKey("verify_strict")) {
-            wrappedParams.put("verify_strict", params.remove("verify_strict"));
-        }
-
-        wrappedParams.put("address", params);
-
-        return request(RequestMethod.POST, classURL(Address.class), wrappedParams, Address.class, apiKey);
-    }
-
-    /**
-     * Retrieve Address object from API.
-     *
-     * @param id ID of address to retrieve.
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve Address object from API.
-     *
-     * @param id     ID of address to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Address.class, id), null, Address.class, apiKey);
-    }
-
-    /**
-     * List all Address objects.
-     *
-     * @param params Map of parameters.
-     * @return AddressCollection object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static AddressCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * List all Address objects.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return AddressCollection object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static AddressCollection all(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Address.class), params, AddressCollection.class, apiKey);
-    }
-
-    /**
-     * Create Address object from parameter map and immediately verify it.
-     *
-     * @param params Map of address parameters.
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address createAndVerify(final Map<String, Object> params) throws EasyPostException {
-        return createAndVerify(params, null);
-    }
-
-    /**
-     * Create Address object from parameter map and immediately verify it.
-     *
-     * @param params Map of address parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address createAndVerify(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("address", params);
-
-        AddressVerifyResponse response = request(RequestMethod.POST, String.format("%s/create_and_verify",
-                        classURL(Address.class)), wrappedParams, AddressVerifyResponse.class, apiKey);
-
-        return response.getAddress();
-    }
-
-    /**
-     * Create Address object from parameter map
-     * and immediately verify it with a specific carrier.
-     *
-     * @param params  Map of address parameters.
-     * @param carrier Carrier to verify address with.
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier)
-            throws EasyPostException {
-        return createAndVerifyWithCarrier(params, carrier, null);
-    }
-
-    /**
-     * Create Address object from parameter map
-     * and immediately verify it with a specific carrier.
-     *
-     * @param params  Map of address parameters.
-     * @param carrier Carrier to verify address with.
-     * @param apiKey  API key to use in request (overrides default API key).
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier,
-                                                     final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("address", params);
-        wrappedParams.put("carrier", carrier);
-
-        AddressVerifyResponse response;
-        response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
-                wrappedParams, AddressVerifyResponse.class, apiKey);
-
-        if (response.getMessage() != null) {
-            response.getAddress().setMessage(response.getMessage());
-        }
-        return response.getAddress();
-    }
-
-    /**
      * Get address mode.
      *
      * @return address mode
@@ -272,6 +120,159 @@ public final class Address extends BaseAddress {
      */
     public void setVerifications(final AddressVerifications verifications) {
         this.verifications = verifications;
+    }
+
+    /**
+     * Create Address object from parameter map.
+     *
+     * @param params Map of address parameters.
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create Address object from parameter map.
+     *
+     * @param params Map of address parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+
+        if (params.containsKey("verify")) {
+            wrappedParams.put("verify", params.remove("verify"));
+        }
+
+        if (params.containsKey("verify_strict")) {
+            wrappedParams.put("verify_strict", params.remove("verify_strict"));
+        }
+
+        wrappedParams.put("address", params);
+
+        return request(RequestMethod.POST, classURL(Address.class), wrappedParams, Address.class, apiKey);
+    }
+
+    /**
+     * Retrieve Address object from API.
+     *
+     * @param id ID of address to retrieve.
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve Address object from API.
+     *
+     * @param id     ID of address to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Address.class, id), null, Address.class, apiKey);
+    }
+
+    /**
+     * List all Address objects.
+     *
+     * @param params Map of parameters.
+     * @return AddressCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static AddressCollection all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
+    }
+
+    /**
+     * List all Address objects.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return AddressCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static AddressCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Address.class), params, AddressCollection.class, apiKey);
+    }
+
+    /**
+     * Create Address object from parameter map and immediately verify it.
+     *
+     * @param params Map of address parameters.
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address createAndVerify(final Map<String, Object> params) throws EasyPostException {
+        return createAndVerify(params, null);
+    }
+
+    /**
+     * Create Address object from parameter map and immediately verify it.
+     *
+     * @param params Map of address parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address createAndVerify(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("address", params);
+
+        AddressVerifyResponse response =
+                request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
+                        wrappedParams, AddressVerifyResponse.class, apiKey);
+
+        return response.getAddress();
+    }
+
+    /**
+     * Create Address object from parameter map
+     * and immediately verify it with a specific carrier.
+     *
+     * @param params  Map of address parameters.
+     * @param carrier Carrier to verify address with.
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier)
+            throws EasyPostException {
+        return createAndVerifyWithCarrier(params, carrier, null);
+    }
+
+    /**
+     * Create Address object from parameter map
+     * and immediately verify it with a specific carrier.
+     *
+     * @param params  Map of address parameters.
+     * @param carrier Carrier to verify address with.
+     * @param apiKey  API key to use in request (overrides default API key).
+     * @return Address object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier,
+                                                     final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("address", params);
+        wrappedParams.put("carrier", carrier);
+
+        AddressVerifyResponse response;
+        response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
+                wrappedParams, AddressVerifyResponse.class, apiKey);
+
+        if (response.getMessage() != null) {
+            response.getAddress().setMessage(response.getMessage());
+        }
+        return response.getAddress();
     }
 
     /**

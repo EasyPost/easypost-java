@@ -30,16 +30,6 @@ public final class AddressTest {
     }
 
     /**
-     * Create a basic address.
-     *
-     * @return basic Address object
-     * @throws EasyPostException
-     */
-    public static Address createBasicAddress() throws EasyPostException {
-        return Address.create(Fixture.basicAddress());
-    }
-
-    /**
      * Test creating an address.
      *
      * @throws EasyPostException when the request fails.
@@ -53,6 +43,16 @@ public final class AddressTest {
         assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
         assertEquals("388 Townsend St", address.getStreet1());
+    }
+
+    /**
+     * Create a basic address.
+     *
+     * @return basic Address object
+     * @throws EasyPostException
+     */
+    public static Address createBasicAddress() throws EasyPostException {
+        return Address.create(Fixture.basicAddress());
     }
 
     /**

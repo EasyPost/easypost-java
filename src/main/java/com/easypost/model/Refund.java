@@ -17,6 +17,114 @@ public final class Refund extends EasyPostResource {
     private String shipmentId;
 
     /**
+     * Get refund ID.
+     *
+     * @return refund ID
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set refund ID.
+     *
+     * @param id refund ID
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get refund shipment ID.
+     *
+     * @return refund shipment ID
+     */
+    public String getShipmentId() {
+        return shipmentId;
+    }
+
+    /**
+     * Get refund tracking code.
+     *
+     * @return refund tracking code
+     */
+    public String getTrackingCode() {
+        return trackingCode;
+    }
+
+    /**
+     * Set refund tracking code.
+     *
+     * @param trackingCode refund tracking code
+     */
+    public void setTrackingCode(final String trackingCode) {
+        this.trackingCode = trackingCode;
+    }
+
+    /**
+     * Get refund status.
+     *
+     * @return refund status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * Set refund status.
+     *
+     * @param status refund status
+     */
+    public void setStatus(final String status) {
+        this.status = status;
+    }
+
+    /**
+     * Set refund shipment ID.
+     *
+     * @param shipmentId refund shipment ID
+     */
+    public void setShipmentId(final String shipmentId) {
+        this.shipmentId = shipmentId;
+    }
+
+    /**
+     * Get refund confirmation number.
+     *
+     * @return refund confirmation number
+     */
+    public String getConfirmationNumber() {
+        return confirmationNumber;
+    }
+
+    /**
+     * Set refund confirmation number.
+     *
+     * @param confirmationNumber refund confirmation number
+     */
+    public void setConfirmationNumber(final String confirmationNumber) {
+        this.confirmationNumber = confirmationNumber;
+    }
+
+    /**
+     * Get refund carrier.
+     *
+     * @return refund carrier
+     */
+    public String getCarrier() {
+        return carrier;
+    }
+
+    /**
+     * Set refund carrier.
+     *
+     * @param carrier refund carrier
+     */
+    public void setCarrier(final String carrier) {
+        this.carrier = carrier;
+    }
+
+    /**
      * Create a Refund object from a map of parameters.
      *
      * @param params Map of parameters
@@ -87,113 +195,5 @@ public final class Refund extends EasyPostResource {
      */
     public static RefundCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, classURL(Refund.class), params, RefundCollection.class, apiKey);
-    }
-
-    /**
-     * Get refund ID.
-     *
-     * @return refund ID
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set refund ID.
-     *
-     * @param id refund ID
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get refund tracking code.
-     *
-     * @return refund tracking code
-     */
-    public String getTrackingCode() {
-        return trackingCode;
-    }
-
-    /**
-     * Set refund tracking code.
-     *
-     * @param trackingCode refund tracking code
-     */
-    public void setTrackingCode(final String trackingCode) {
-        this.trackingCode = trackingCode;
-    }
-
-    /**
-     * Get refund confirmation number.
-     *
-     * @return refund confirmation number
-     */
-    public String getConfirmationNumber() {
-        return confirmationNumber;
-    }
-
-    /**
-     * Set refund confirmation number.
-     *
-     * @param confirmationNumber refund confirmation number
-     */
-    public void setConfirmationNumber(final String confirmationNumber) {
-        this.confirmationNumber = confirmationNumber;
-    }
-
-    /**
-     * Get refund status.
-     *
-     * @return refund status
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * Set refund status.
-     *
-     * @param status refund status
-     */
-    public void setStatus(final String status) {
-        this.status = status;
-    }
-
-    /**
-     * Get refund carrier.
-     *
-     * @return refund carrier
-     */
-    public String getCarrier() {
-        return carrier;
-    }
-
-    /**
-     * Set refund carrier.
-     *
-     * @param carrier refund carrier
-     */
-    public void setCarrier(final String carrier) {
-        this.carrier = carrier;
-    }
-
-    /**
-     * Get refund shipment ID.
-     *
-     * @return refund shipment ID
-     */
-    public String getShipmentId() {
-        return shipmentId;
-    }
-
-    /**
-     * Set refund shipment ID.
-     *
-     * @param shipmentId refund shipment ID
-     */
-    public void setShipmentId(final String shipmentId) {
-        this.shipmentId = shipmentId;
     }
 }

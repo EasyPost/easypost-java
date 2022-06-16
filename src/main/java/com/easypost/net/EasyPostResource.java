@@ -72,13 +72,166 @@ public abstract class EasyPostResource {
     private Date updatedAt;
     private ArrayList<Fee> fees;
 
-    private static String className(final Class<?> clazz) {
-        return clazz.getSimpleName().replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase().replace("$", "");
-
+    /**
+     * Get the timeout in milliseconds for connecting to the API.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static int getConnectTimeoutMilliseconds() {
+        return connectTimeoutMilliseconds;
     }
 
-    protected static String singleClassURL(final Class<?> clazz) {
-        return String.format("%s/%s", EasyPost.API_BASE, className(clazz));
+    /**
+     * Set the timeout in milliseconds for connecting to the API.
+     *
+     * @param milliseconds the timeout in milliseconds
+     */
+    public static void setConnectTimeoutMilliseconds(int milliseconds) {
+        connectTimeoutMilliseconds = milliseconds;
+    }
+
+    /**
+     * Get the timeout in milliseconds for reading API responses.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static int getReadTimeoutMilliseconds() {
+        return readTimeoutMilliseconds;
+    }
+
+    /**
+     * Set the timeout in milliseconds for reading API responses.
+     *
+     * @param milliseconds the timeout in milliseconds
+     */
+    public static void setReadTimeoutMilliseconds(int milliseconds) {
+        readTimeoutMilliseconds = milliseconds;
+    }
+
+    /**
+     * Get the timeout in milliseconds for App Engine API requests.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static double getAppEngineTimeoutSeconds() {
+        return appEngineTimeoutSeconds;
+    }
+
+    /**
+     * Set the timeout in seconds for App Engine API requests.
+     *
+     * @param seconds the timeout in seconds
+     */
+    public static void setAppEngineTimeoutSeconds(double seconds) {
+        appEngineTimeoutSeconds = seconds;
+    }
+
+    /**
+     * @return the Date this object was created
+     */
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Set the Date this object was created.
+     *
+     * @param createdAt the Date this object was created
+     */
+    public void setCreatedAt(final Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    /**
+     * @return the Date this object was last updated
+     */
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    /**
+     * Set the Date this object was last updated.
+     *
+     * @param updatedAt the Date this object was last updated
+     */
+    public void setUpdatedAt(final Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    /**
+     * @return the Fees associated with this object
+     */
+    public ArrayList<Fee> getFees() {
+        return fees;
+    }
+
+    /**
+     * Set the Fees associated with this object.
+     *
+     * @param fees the Fees associated with this object
+     */
+    public void setFees(final ArrayList<Fee> fees) {
+        this.fees = fees;
+    }
+
+    /**
+     * @return the ID of this object
+     */
+    public String getId() {
+        return "";
+    }
+
+    /**
+     * @return the API mode used to create this object
+     */
+    public String getMode() {
+        return "";
+    }
+
+    /**
+     * @return the list of shipments in this batch
+     */
+    public List<Shipment> getShipments() {
+        return new ArrayList<Shipment>();
+    }
+
+    /**
+     * @return the URL of the label for this object
+     */
+    public String getLabelUrl() {
+        return "";
+    }
+
+    /**
+     * @return the ID of this shipment
+     */
+    public String getShipmentId() {
+        return "";
+    }
+
+    /**
+     * @return the tracking code of this shipment
+     */
+    public String getTrackingCode() {
+        return "";
+    }
+
+    /**
+     * @return the status of this object
+     */
+    public String getStatus() {
+        return "";
+    }
+
+    /**
+     * @return the tracking details of this shipment
+     */
+    public List<TrackingDetail> getTrackingDetails() {
+        return new ArrayList<TrackingDetail>();
+    }
+
+    protected static String instanceURL(final Class<?> clazz, final String id) {
+        return String.format("%s/%s", classURL(clazz), id);
     }
 
     protected static String classURL(final Class<?> clazz) {
@@ -90,8 +243,13 @@ public abstract class EasyPostResource {
         }
     }
 
-    protected static String instanceURL(final Class<?> clazz, final String id) {
-        return String.format("%s/%s", classURL(clazz), id);
+    protected static String singleClassURL(final Class<?> clazz) {
+        return String.format("%s/%s", EasyPost.API_BASE, className(clazz));
+    }
+
+    private static String className(final Class<?> clazz) {
+        return clazz.getSimpleName().replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase().replace("$", "");
+
     }
 
     private static String urlEncodePair(final String key, final String value) throws UnsupportedEncodingException {
@@ -111,8 +269,15 @@ public abstract class EasyPostResource {
         headers.put("Authorization", String.format("Bearer %s", apiKey));
 
         // debug headers
-        String[] propertyNames = { "os.name", "os.version", "os.arch", "java.version", "java.vendor", "java.vm.version",
-                "java.vm.vendor" };
+        String[] propertyNames = {
+                "os.name",
+                "os.version",
+                "os.arch",
+                "java.version",
+                "java.vendor",
+                "java.vm.version",
+                "java.vm.vendor"
+        };
         Map<String, String> propertyMap = new HashMap<String, String>();
         for (String propertyName : propertyNames) {
             propertyMap.put(propertyName, System.getProperty(propertyName));
@@ -543,57 +708,32 @@ public abstract class EasyPostResource {
     }
 
     /**
-     * Get the timeout in milliseconds for connecting to the API.
+     * Get all static methods for a particular class.
      *
-     * @return the timeout in milliseconds
+     * @param type Class type to get methods for.
+     * @return List of class methods.
      */
-    public static int getConnectTimeoutMilliseconds() {
-        return connectTimeoutMilliseconds;
+    private static List<Method> getAllStaticMethods(Class<?> type) {
+        List<Method> allMethods = getAllMethods(type);
+
+        List<Method> staticMethods = new ArrayList<>();
+        for (Method method : allMethods) {
+            if (Modifier.isStatic(method.getModifiers())) {
+                staticMethods.add(method);
+            }
+        }
+
+        return staticMethods;
     }
 
     /**
-     * Set the timeout in milliseconds for connecting to the API.
+     * Get all methods for a particular class.
      *
-     * @param milliseconds the timeout in milliseconds
+     * @param type Class type to get methods for.
+     * @return List of class methods.
      */
-    public static void setConnectTimeoutMilliseconds(int milliseconds) {
-        connectTimeoutMilliseconds = milliseconds;
-    }
-
-    /**
-     * Get the timeout in milliseconds for reading API responses.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static int getReadTimeoutMilliseconds() {
-        return readTimeoutMilliseconds;
-    }
-
-    /**
-     * Set the timeout in milliseconds for reading API responses.
-     *
-     * @param milliseconds the timeout in milliseconds
-     */
-    public static void setReadTimeoutMilliseconds(int milliseconds) {
-        readTimeoutMilliseconds = milliseconds;
-    }
-
-    /**
-     * Get the timeout in milliseconds for App Engine API requests.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static double getAppEngineTimeoutSeconds() {
-        return appEngineTimeoutSeconds;
-    }
-
-    /**
-     * Set the timeout in seconds for App Engine API requests.
-     *
-     * @param seconds the timeout in seconds
-     */
-    public static void setAppEngineTimeoutSeconds(double seconds) {
-        appEngineTimeoutSeconds = seconds;
+    private static List<Method> getAllMethods(Class<?> type) {
+        return Arrays.asList(type.getMethods());
     }
 
     /**
@@ -603,16 +743,6 @@ public abstract class EasyPostResource {
     public String toString() {
 
         return (String) this.getIdString();
-    }
-
-    /**
-     * Pretty print the JSON representation of the object.
-     *
-     * @return the JSON representation of the object.
-     */
-    public String prettyPrint() {
-        return String.format("<%s@%s id=%s> JSON: %s", this.getClass().getName(), System.identityHashCode(this),
-                this.getIdString(), PRETTY_PRINT_GSON.toJson(this));
     }
 
     private Object getIdString() {
@@ -631,51 +761,13 @@ public abstract class EasyPostResource {
     }
 
     /**
-     * Get all methods for a particular class.
+     * Pretty print the JSON representation of the object.
      *
-     * @param type Class type to get methods for.
-     * @return List of class methods.
+     * @return the JSON representation of the object.
      */
-    private static List<Method> getAllMethods(Class<?> type) {
-        return Arrays.asList(type.getMethods());
-    }
-
-    /**
-     * Get all non-static methods for a particular class.
-     *
-     * @param type Class type to get methods for.
-     * @return List of class methods.
-     */
-    private static List<Method> getAllNonStaticMethods(Class<?> type) {
-        List<Method> allMethods = getAllMethods(type);
-
-        List<Method> nonStaticMethods = new ArrayList<>();
-        for (Method method : allMethods) {
-            if (!Modifier.isStatic(method.getModifiers())) {
-                nonStaticMethods.add(method);
-            }
-        }
-
-        return nonStaticMethods;
-    }
-
-    /**
-     * Get all static methods for a particular class.
-     *
-     * @param type Class type to get methods for.
-     * @return List of class methods.
-     */
-    private static List<Method> getAllStaticMethods(Class<?> type) {
-        List<Method> allMethods = getAllMethods(type);
-
-        List<Method> staticMethods = new ArrayList<>();
-        for (Method method : allMethods) {
-            if (Modifier.isStatic(method.getModifiers())) {
-                staticMethods.add(method);
-            }
-        }
-
-        return staticMethods;
+    public String prettyPrint() {
+        return String.format("<%s@%s id=%s> JSON: %s", this.getClass().getName(), System.identityHashCode(this),
+                this.getIdString(), PRETTY_PRINT_GSON.toJson(this));
     }
 
     /**
@@ -726,107 +818,22 @@ public abstract class EasyPostResource {
     }
 
     /**
-     * @return the Date this object was created
-     */
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * Set the Date this object was created.
+     * Get all non-static methods for a particular class.
      *
-     * @param createdAt the Date this object was created
+     * @param type Class type to get methods for.
+     * @return List of class methods.
      */
-    public void setCreatedAt(final Date createdAt) {
-        this.createdAt = createdAt;
-    }
+    private static List<Method> getAllNonStaticMethods(Class<?> type) {
+        List<Method> allMethods = getAllMethods(type);
 
-    /**
-     * @return the Date this object was last updated
-     */
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+        List<Method> nonStaticMethods = new ArrayList<>();
+        for (Method method : allMethods) {
+            if (!Modifier.isStatic(method.getModifiers())) {
+                nonStaticMethods.add(method);
+            }
+        }
 
-    /**
-     * Set the Date this object was last updated.
-     *
-     * @param updatedAt the Date this object was last updated
-     */
-    public void setUpdatedAt(final Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    /**
-     * @return the Fees associated with this object
-     */
-    public ArrayList<Fee> getFees() {
-        return fees;
-    }
-
-    /**
-     * Set the Fees associated with this object.
-     *
-     * @param fees the Fees associated with this object
-     */
-    public void setFees(final ArrayList<Fee> fees) {
-        this.fees = fees;
-    }
-
-    /**
-     * @return the ID of this object
-     */
-    public String getId() {
-        return "";
-    }
-
-    /**
-     * @return the API mode used to create this object
-     */
-    public String getMode() {
-        return "";
-    }
-
-    /**
-     * @return the list of shipments in this batch
-     */
-    public List<Shipment> getShipments() {
-        return new ArrayList<Shipment>();
-    }
-
-    /**
-     * @return the URL of the label for this object
-     */
-    public String getLabelUrl() {
-        return "";
-    }
-
-    /**
-     * @return the ID of this shipment
-     */
-    public String getShipmentId() {
-        return "";
-    }
-
-    /**
-     * @return the tracking code of this shipment
-     */
-    public String getTrackingCode() {
-        return "";
-    }
-
-    /**
-     * @return the status of this object
-     */
-    public String getStatus() {
-        return "";
-    }
-
-    /**
-     * @return the tracking details of this shipment
-     */
-    public List<TrackingDetail> getTrackingDetails() {
-        return new ArrayList<TrackingDetail>();
+        return nonStaticMethods;
     }
 
     protected enum RequestMethod {

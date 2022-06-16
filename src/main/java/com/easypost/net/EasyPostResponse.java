@@ -14,17 +14,6 @@ public class EasyPostResponse {
     private String responseBody;
 
     /**
-     * Constructor.
-     *
-     * @param responseCode HTTP response code
-     * @param responseBody HTTP response body
-     */
-    public EasyPostResponse(final int responseCode, final String responseBody) {
-        this.responseCode = responseCode;
-        this.responseBody = responseBody;
-    }
-
-    /**
      * Get HTTP response code.
      *
      * @return HTTP response code
@@ -57,6 +46,17 @@ public class EasyPostResponse {
      * @param responseBody HTTP response body
      */
     public void setResponseBody(final String responseBody) {
+        this.responseBody = responseBody;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param responseCode HTTP response code
+     * @param responseBody HTTP response body
+     */
+    public EasyPostResponse(final int responseCode, final String responseBody) {
+        this.responseCode = responseCode;
         this.responseBody = responseBody;
     }
 }

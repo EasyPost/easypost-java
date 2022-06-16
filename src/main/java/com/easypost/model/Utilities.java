@@ -58,13 +58,12 @@ public final class Utilities {
     /**
      * Create Encoded URL from a Map.
      *
-     * @param params Map of parameters to be encoded.
+     * @param params    Map of parameters to be encoded.
      * @param parentKey Parent key in the encoded URL.
      * @return Encoded URL for Stripe API call.
      * @throws Exception
      */
-    public static String getEncodedURL(Map<String, String> params, String parentKey)
-        throws Exception {
+    public static String getEncodedURL(Map<String, String> params, String parentKey) throws Exception {
         StringBuilder result = new StringBuilder();
         boolean first = true;
 

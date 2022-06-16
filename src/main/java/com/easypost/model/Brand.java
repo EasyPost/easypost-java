@@ -50,7 +50,7 @@ public class Brand extends EasyPostResource {
         this.color = color;
     }
 
-     /**
+    /**
      * Get the logo of the Brand.
      *
      * @return the logo of the Brand.

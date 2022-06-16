@@ -33,15 +33,6 @@ public final class ReferralTest {
     }
 
     /**
-     * Create a referral.
-     *
-     * @return Referral object
-     */
-    private static Referral createReferral() throws EasyPostException {
-        return Referral.create(Fixture.referralUser());
-    }
-
-    /**
      * Test creating a Referral object.
      *
      * @throws EasyPostException when the request fails.
@@ -55,6 +46,15 @@ public final class ReferralTest {
         assertInstanceOf(Referral.class, referralUser);
         assertTrue(referralUser.getId().startsWith("user_"));
         assertEquals(Fixture.referralUser().get("name"), referralUser.getName());
+    }
+
+    /**
+     * Create a referral.
+     *
+     * @return Referral object
+     */
+    private static Referral createReferral() throws EasyPostException {
+        return Referral.create(Fixture.referralUser());
     }
 
     /**

@@ -95,6 +95,34 @@ public abstract class TestUtils {
         private String testCassettesFolder;
 
         /**
+         * Get whether the VCR is recording.
+         *
+         * @return true if recording, false otherwise.
+         */
+        public boolean isRecording() {
+            return vcr.getMode() == Mode.Record;
+        }
+
+        /**
+         * Constructor.
+         *
+         * @param testCassettesFolder The folder where the cassettes will be stored.
+         */
+        public VCR(String testCassettesFolder) {
+            this(testCassettesFolder, ApiKey.TEST);
+        }
+
+        /**
+         * Constructor.
+         *
+         * @param testCassettesFolder The folder where the cassettes will be stored.
+         * @param apiKey              The API key to use.
+         */
+        public VCR(String testCassettesFolder, ApiKey apiKey) {
+            this(testCassettesFolder, getApiKey(apiKey));
+        }
+
+        /**
          * Constructor.
          *
          * @param testCassettesFolder The folder where the cassettes will be stored.
@@ -102,14 +130,10 @@ public abstract class TestUtils {
          */
         public VCR(String testCassettesFolder, String apiKey) {
             AdvancedSettings advancedSettings = new AdvancedSettings();
-            advancedSettings.matchRules = new MatchRules()
-                    .byMethod()
-                    .byFullUrl()
-                    .byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
-            advancedSettings.censors = new Censors("REDACTED")
-                    .censorHeadersByKeys(HEADER_CENSORS)
-                    .censorQueryParametersByKeys(QUERY_CENSORS)
-                    .censorBodyElementsByKeys(BODY_CENSORS);
+            advancedSettings.matchRules =
+                    new MatchRules().byMethod().byFullUrl().byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
+            advancedSettings.censors = new Censors("REDACTED").censorHeadersByKeys(HEADER_CENSORS)
+                    .censorQueryParametersByKeys(QUERY_CENSORS).censorBodyElementsByKeys(BODY_CENSORS);
 
             vcr = new com.easypost.easyvcr.VCR(advancedSettings);
 
@@ -133,25 +157,6 @@ public abstract class TestUtils {
         /**
          * Constructor.
          *
-         * @param testCassettesFolder The folder where the cassettes will be stored.
-         * @param apiKey              The API key to use.
-         */
-        public VCR(String testCassettesFolder, ApiKey apiKey) {
-            this(testCassettesFolder, getApiKey(apiKey));
-        }
-
-        /**
-         * Constructor.
-         *
-         * @param testCassettesFolder The folder where the cassettes will be stored.
-         */
-        public VCR(String testCassettesFolder) {
-            this(testCassettesFolder, ApiKey.TEST);
-        }
-
-        /**
-         * Constructor.
-         *
          * @param apiKey The API key to use.
          */
         public VCR(ApiKey apiKey) {
@@ -166,12 +171,12 @@ public abstract class TestUtils {
         }
 
         /**
-         * Get whether the VCR is recording.
+         * Set up the VCR for a unit test.
          *
-         * @return true if recording, false otherwise.
+         * @param cassetteName The name of the cassette to use.
          */
-        public boolean isRecording() {
-            return vcr.getMode() == Mode.Record;
+        public void setUpTest(String cassetteName) {
+            setUpTest(cassetteName, null);
         }
 
         /**
@@ -203,15 +208,6 @@ public abstract class TestUtils {
 
             // set VCR to be used during requests
             EasyPost._vcr = vcr;
-        }
-
-        /**
-         * Set up the VCR for a unit test.
-         *
-         * @param cassetteName The name of the cassette to use.
-         */
-        public void setUpTest(String cassetteName) {
-            setUpTest(cassetteName, null);
         }
     }
 }

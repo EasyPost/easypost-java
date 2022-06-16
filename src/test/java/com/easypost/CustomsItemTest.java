@@ -24,15 +24,6 @@ public final class CustomsItemTest {
     }
 
     /**
-     * Create a customs item.
-     *
-     * @return CustomsItem object.
-     */
-    private static CustomsItem createBasicCustomsItem() throws EasyPostException {
-        return CustomsItem.create(Fixture.basicCustomsItem());
-    }
-
-    /**
      * Test creating a CustomsItem.
      *
      * @throws EasyPostException when the request fails.
@@ -46,6 +37,15 @@ public final class CustomsItemTest {
         assertInstanceOf(CustomsItem.class, customsItem);
         assertTrue(customsItem.getId().startsWith("cstitem_"));
         assertEquals(23.0, customsItem.getValue(), 0.01);
+    }
+
+    /**
+     * Create a customs item.
+     *
+     * @return CustomsItem object.
+     */
+    private static CustomsItem createBasicCustomsItem() throws EasyPostException {
+        return CustomsItem.create(Fixture.basicCustomsItem());
     }
 
     /**

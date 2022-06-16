@@ -12,7 +12,7 @@ public abstract class EasyPost {
 
     /**
      * Set a VCR to be used for all HTTP requests.
-     *
+     * <p>
      * NOTE: This is meant for unit testing purposes only. Do not use in production.
      */
     public static VCR _vcr = null;

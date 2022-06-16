@@ -25,109 +25,6 @@ public final class Pickup extends EasyPostResource {
     private List<PickupRate> pickupRates;
 
     /**
-     * Create a new Pickup object from a map of parameters.
-     *
-     * @param params Map of parameters.
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Pickup create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a new Pickup object from a map of parameters.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Pickup create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("pickup", params);
-
-        return request(RequestMethod.POST, classURL(Pickup.class), wrappedParams, Pickup.class, apiKey);
-    }
-
-    /**
-     * Retrieve a Pickup from the API.
-     *
-     * @param id ID of Pickup to retrieve.
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Pickup retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Pickup from the API.
-     *
-     * @param id     ID of Pickup to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Pickup retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Pickup.class, id), null, Pickup.class, apiKey);
-    }
-
-    /**
-     * Get the ID of this Pickup.
-     *
-     * @return the ID of this Pickup.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Pickup.
-     *
-     * @param id the ID of this Pickup.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of this Pickup.
-     *
-     * @return the mode of this Pickup.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of this Pickup.
-     *
-     * @param mode the mode of this Pickup.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
-    }
-
-    /**
-     * Get the status of this Pickup.
-     *
-     * @return the status of this Pickup.
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * Set the status of this Pickup.
-     *
-     * @param status the status of this Pickup.
-     */
-    public void setStatus(final String status) {
-        this.status = status;
-    }
-
-    /**
      * Get the reference of this Pickup.
      *
      * @return the reference of this Pickup.
@@ -290,21 +187,52 @@ public final class Pickup extends EasyPostResource {
     }
 
     /**
-     * Get the pickup rates of this Pickup.
+     * Create a new Pickup object from a map of parameters.
      *
-     * @return List of PickupRate objects.
+     * @param params Map of parameters.
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
      */
-    public List<PickupRate> getPickupRates() {
-        return pickupRates;
+    public static Pickup create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
     }
 
     /**
-     * Set the pickup rates of this Pickup.
+     * Create a new Pickup object from a map of parameters.
      *
-     * @param pickupRates List of PickupRate objects.
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
      */
-    public void setPickupRates(final List<PickupRate> pickupRates) {
-        this.pickupRates = pickupRates;
+    public static Pickup create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("pickup", params);
+
+        return request(RequestMethod.POST, classURL(Pickup.class), wrappedParams, Pickup.class, apiKey);
+    }
+
+    /**
+     * Retrieve a Pickup from the API.
+     *
+     * @param id ID of Pickup to retrieve.
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Pickup retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a Pickup from the API.
+     *
+     * @param id     ID of Pickup to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Pickup retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(Pickup.class, id), null, Pickup.class, apiKey);
     }
 
     /**
@@ -315,6 +243,73 @@ public final class Pickup extends EasyPostResource {
      */
     public Pickup refresh() throws EasyPostException {
         return this.refresh(null, null);
+    }
+
+    /**
+     * Refresh this Pickup.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Pickup refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, String.format("%s", instanceURL(Pickup.class, this.getId())), params,
+                Pickup.class, apiKey);
+    }
+
+    /**
+     * Get the ID of this Pickup.
+     *
+     * @return the ID of this Pickup.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set the ID of this Pickup.
+     *
+     * @param id the ID of this Pickup.
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the mode of this Pickup.
+     *
+     * @return the mode of this Pickup.
+     */
+    public String getMode() {
+        return mode;
+    }
+
+    /**
+     * Set the mode of this Pickup.
+     *
+     * @param mode the mode of this Pickup.
+     */
+    public void setMode(final String mode) {
+        this.mode = mode;
+    }
+
+    /**
+     * Get the status of this Pickup.
+     *
+     * @return the status of this Pickup.
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * Set the status of this Pickup.
+     *
+     * @param status the status of this Pickup.
+     */
+    public void setStatus(final String status) {
+        this.status = status;
     }
 
     /**
@@ -340,19 +335,6 @@ public final class Pickup extends EasyPostResource {
     }
 
     /**
-     * Refresh this Pickup.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Pickup refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s", instanceURL(Pickup.class, this.getId())), params,
-                Pickup.class, apiKey);
-    }
-
-    /**
      * Buy this Pickup.
      *
      * @return Pickup object.
@@ -360,6 +342,23 @@ public final class Pickup extends EasyPostResource {
      */
     public Pickup buy() throws EasyPostException {
         return this.buy(null, null);
+    }
+
+    /**
+     * Buy this Pickup.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Pickup buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Pickup response =
+                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Pickup.class, this.getId())), params,
+                        Pickup.class, apiKey);
+
+        this.merge(this, response);
+        return this;
     }
 
     /**
@@ -399,23 +398,6 @@ public final class Pickup extends EasyPostResource {
     }
 
     /**
-     * Buy this Pickup.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Pickup buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Pickup response =
-                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Pickup.class, this.getId())), params,
-                        Pickup.class, apiKey);
-
-        this.merge(this, response);
-        return this;
-    }
-
-    /**
      * Cancel this Pickup.
      *
      * @return Pickup object.
@@ -423,6 +405,19 @@ public final class Pickup extends EasyPostResource {
      */
     public Pickup cancel() throws EasyPostException {
         return this.cancel(null, null);
+    }
+
+    /**
+     * Cancel this Pickup.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Pickup cancel(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.POST, String.format("%s/cancel", instanceURL(Pickup.class, this.getId())), params,
+                Pickup.class, apiKey);
     }
 
     /**
@@ -448,19 +443,6 @@ public final class Pickup extends EasyPostResource {
     }
 
     /**
-     * Cancel this Pickup.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Pickup cancel(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, String.format("%s/cancel", instanceURL(Pickup.class, this.getId())), params,
-                Pickup.class, apiKey);
-    }
-
-    /**
      * Get the lowest rate for this Pickup.
      *
      * @return lowest PickupRate object
@@ -468,17 +450,6 @@ public final class Pickup extends EasyPostResource {
      */
     public PickupRate lowestRate() throws EasyPostException {
         return this.lowestRate(null, null);
-    }
-
-    /**
-     * Get the lowest rate for this pickup.
-     *
-     * @param carriers the carriers to use in the query.
-     * @return PickupRate object
-     * @throws EasyPostException when the request fails.
-     */
-    public PickupRate lowestRate(final List<String> carriers) throws EasyPostException {
-        return this.lowestRate(carriers, null);
     }
 
     /**
@@ -497,5 +468,34 @@ public final class Pickup extends EasyPostResource {
         }
 
         return (PickupRate) Utilities.getLowestObjectRate(rates, carriers, services);
+    }
+
+    /**
+     * Get the pickup rates of this Pickup.
+     *
+     * @return List of PickupRate objects.
+     */
+    public List<PickupRate> getPickupRates() {
+        return pickupRates;
+    }
+
+    /**
+     * Set the pickup rates of this Pickup.
+     *
+     * @param pickupRates List of PickupRate objects.
+     */
+    public void setPickupRates(final List<PickupRate> pickupRates) {
+        this.pickupRates = pickupRates;
+    }
+
+    /**
+     * Get the lowest rate for this pickup.
+     *
+     * @param carriers the carriers to use in the query.
+     * @return PickupRate object
+     * @throws EasyPostException when the request fails.
+     */
+    public PickupRate lowestRate(final List<String> carriers) throws EasyPostException {
+        return this.lowestRate(carriers, null);
     }
 }

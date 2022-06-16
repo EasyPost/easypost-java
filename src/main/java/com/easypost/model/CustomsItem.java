@@ -18,55 +18,6 @@ public final class CustomsItem extends EasyPostResource {
     private String currency;
 
     /**
-     * Create a CustomsItem from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @return CustomsItem object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsItem create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a CustomsItem from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return CustomsItem object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsItem create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("customs_item", params);
-
-        return request(RequestMethod.POST, classURL(CustomsItem.class), wrappedParams, CustomsItem.class, apiKey);
-    }
-
-    /**
-     * Retrieve a CustomsItem from the API.
-     *
-     * @param id the ID of the CustomsItem to retrieve.
-     * @return CustomsItem object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsItem retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a CustomsItem from the API.
-     *
-     * @param id     the ID of the CustomsItem to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return CustomsItem object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsItem retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(CustomsItem.class, id), null, CustomsItem.class, apiKey);
-    }
-
-    /**
      * Get this CustomsItem's ID.
      *
      * @return the ID of this CustomsItem.
@@ -226,5 +177,54 @@ public final class CustomsItem extends EasyPostResource {
      */
     public void setCurrency(final String currency) {
         this.currency = currency;
+    }
+
+    /**
+     * Create a CustomsItem from a map of parameters.
+     *
+     * @param params the map of parameters.
+     * @return CustomsItem object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static CustomsItem create(final Map<String, Object> params) throws EasyPostException {
+        return create(params, null);
+    }
+
+    /**
+     * Create a CustomsItem from a map of parameters.
+     *
+     * @param params the map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return CustomsItem object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static CustomsItem create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put("customs_item", params);
+
+        return request(RequestMethod.POST, classURL(CustomsItem.class), wrappedParams, CustomsItem.class, apiKey);
+    }
+
+    /**
+     * Retrieve a CustomsItem from the API.
+     *
+     * @param id the ID of the CustomsItem to retrieve.
+     * @return CustomsItem object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static CustomsItem retrieve(final String id) throws EasyPostException {
+        return retrieve(id, null);
+    }
+
+    /**
+     * Retrieve a CustomsItem from the API.
+     *
+     * @param id     the ID of the CustomsItem to retrieve.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return CustomsItem object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static CustomsItem retrieve(final String id, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, instanceURL(CustomsItem.class, id), null, CustomsItem.class, apiKey);
     }
 }

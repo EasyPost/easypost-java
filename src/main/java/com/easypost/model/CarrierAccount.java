@@ -17,6 +17,96 @@ public final class CarrierAccount extends EasyPostResource {
     private Map<String, Object> credentials;
 
     /**
+     * Get readable name of the carrier account.
+     *
+     * @return readable name of the carrier account.
+     */
+    public String getReadable() {
+        return readable;
+    }
+
+    /**
+     * Set readable name of the carrier account.
+     *
+     * @param readable readable name of the carrier account.
+     */
+    public void setReadable(final String readable) {
+        this.readable = readable;
+    }
+
+    /**
+     * Get description of the carrier account.
+     *
+     * @return description of the carrier account.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Set description of the carrier account.
+     *
+     * @param description description of the carrier account.
+     */
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    /**
+     * Get reference of the carrier account.
+     *
+     * @return reference of the carrier account.
+     */
+    public String getReference() {
+        return reference;
+    }
+
+    /**
+     * Set reference of the carrier account.
+     *
+     * @param reference reference of the carrier account.
+     */
+    public void setReference(final String reference) {
+        this.reference = reference;
+    }
+
+    /**
+     * Get billing type of the carrier account.
+     *
+     * @return billing type of the carrier account.
+     */
+    public String getBillingType() {
+        return billingType;
+    }
+
+    /**
+     * Set billing type of the carrier account.
+     *
+     * @param billingType billing type of the carrier account.
+     */
+    public void setBillingType(final String billingType) {
+        this.billingType = billingType;
+    }
+
+    /**
+     * Get credentials of the carrier account.
+     *
+     * @return credentials of the carrier account.
+     */
+    public Map<String, Object> getCredentials() {
+        return credentials;
+    }
+
+    /**
+     * Set credentials of the carrier account.
+     *
+     * @param credentials credentials of the carrier account.
+     */
+    public void setCredentials(final Map<String, Object> credentials) {
+        this.credentials = credentials;
+    }
+
+    /**
      * Create a carrier account.
      *
      * @param params parameters to create.
@@ -80,17 +170,6 @@ public final class CarrierAccount extends EasyPostResource {
      * List all carrier accounts.
      *
      * @param params filters to apply to the list.
-     * @return List of CarrierAccount objects.
-     * @throws EasyPostException when the request fails.
-     */
-    public static List<CarrierAccount> all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * List all carrier accounts.
-     *
-     * @param params filters to apply to the list.
      * @param apiKey API key to use in request (overrides default API key).
      * @return List of CarrierAccount objects.
      * @throws EasyPostException when the request fails.
@@ -103,111 +182,14 @@ public final class CarrierAccount extends EasyPostResource {
     }
 
     /**
-     * Get ID of the carrier account.
+     * List all carrier accounts.
      *
-     * @return ID of the carrier account.
+     * @param params filters to apply to the list.
+     * @return List of CarrierAccount objects.
+     * @throws EasyPostException when the request fails.
      */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set ID of the carrier account.
-     *
-     * @param id ID of the carrier account.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get readable name of the carrier account.
-     *
-     * @return readable name of the carrier account.
-     */
-    public String getReadable() {
-        return readable;
-    }
-
-    /**
-     * Set readable name of the carrier account.
-     *
-     * @param readable readable name of the carrier account.
-     */
-    public void setReadable(final String readable) {
-        this.readable = readable;
-    }
-
-    /**
-     * Get description of the carrier account.
-     *
-     * @return description of the carrier account.
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Set description of the carrier account.
-     *
-     * @param description description of the carrier account.
-     */
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    /**
-     * Get reference of the carrier account.
-     *
-     * @return reference of the carrier account.
-     */
-    public String getReference() {
-        return reference;
-    }
-
-    /**
-     * Set reference of the carrier account.
-     *
-     * @param reference reference of the carrier account.
-     */
-    public void setReference(final String reference) {
-        this.reference = reference;
-    }
-
-    /**
-     * Set billing type of the carrier account.
-     *
-     * @param billingType billing type of the carrier account.
-     */
-    public void setBillingType(final String billingType) {
-        this.billingType = billingType;
-    }
-
-    /**
-     * Get billing type of the carrier account.
-     *
-     * @return billing type of the carrier account.
-     */
-    public String getBillingType() {
-        return billingType;
-    }
-
-    /**
-     * Get credentials of the carrier account.
-     *
-     * @return credentials of the carrier account.
-     */
-    public Map<String, Object> getCredentials() {
-        return credentials;
-    }
-
-    /**
-     * Set credentials of the carrier account.
-     *
-     * @param credentials credentials of the carrier account.
-     */
-    public void setCredentials(final Map<String, Object> credentials) {
-        this.credentials = credentials;
+    public static List<CarrierAccount> all(final Map<String, Object> params) throws EasyPostException {
+        return all(params, null);
     }
 
     /**
@@ -239,6 +221,24 @@ public final class CarrierAccount extends EasyPostResource {
 
         this.merge(this, response);
         return this;
+    }
+
+    /**
+     * Get ID of the carrier account.
+     *
+     * @return ID of the carrier account.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set ID of the carrier account.
+     *
+     * @param id ID of the carrier account.
+     */
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**

@@ -14,6 +14,15 @@ public class EasyPostException extends Exception {
     private final String param;
 
     /**
+     * Get the parameter name.
+     *
+     * @return the parameter name
+     */
+    public String getParam() {
+        return param;
+    }
+
+    /**
      * Constructor.
      *
      * @param message the exception message
@@ -44,14 +53,5 @@ public class EasyPostException extends Exception {
     public EasyPostException(final String message, final String param, final Throwable ex) {
         super(message, ex);
         this.param = param;
-    }
-
-    /**
-     * Get the parameter name.
-     *
-     * @return the parameter name
-     */
-    public String getParam() {
-        return param;
     }
 }

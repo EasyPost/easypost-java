@@ -7,22 +7,6 @@ public final class SmartrateCollection {
     private List<Smartrate> smartrates;
 
     /**
-     * Constructor.
-     */
-    public SmartrateCollection() {
-        this.smartrates = new ArrayList<Smartrate>();
-    }
-
-    /**
-     * Create a SmartrateCollection from a list of rates.
-     *
-     * @param smartrates List of Smartrate objects
-     */
-    public SmartrateCollection(final List<Smartrate> smartrates) {
-        setSmartrates(smartrates);
-    }
-
-    /**
      * Get this SmartrateCollection's Smartrate objects.
      *
      * @return List of Smartrate objects.
@@ -38,6 +22,22 @@ public final class SmartrateCollection {
      */
     public void setSmartrates(final List<Smartrate> smartrates) {
         this.smartrates = smartrates;
+    }
+
+    /**
+     * Constructor.
+     */
+    public SmartrateCollection() {
+        this.smartrates = new ArrayList<Smartrate>();
+    }
+
+    /**
+     * Create a SmartrateCollection from a list of rates.
+     *
+     * @param smartrates List of Smartrate objects
+     */
+    public SmartrateCollection(final List<Smartrate> smartrates) {
+        setSmartrates(smartrates);
     }
 
     /**
