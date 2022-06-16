@@ -25,39 +25,75 @@ public class BaseUser extends EasyPostResource {
     private List<User> children;
 
     /**
-     * Get the ID of the User.
+     * Get the balance of the User.
      *
-     * @return the ID of the User.
+     * @return the balance of the User.
      */
-    public String getId() {
-        return id;
+    public String getBalance() {
+        return balance;
     }
 
     /**
-     * Set the ID of the User.
+     * Set the balance of the User.
      *
-     * @param id the ID of the User.
+     * @param balance the balance of the User.
      */
-    public void setId(final String id) {
-        this.id = id;
+    public void setBalance(final String balance) {
+        this.balance = balance;
     }
 
     /**
-     * Get the name of the User.
+     * Get the cc fee rate of the User.
      *
-     * @return the name of the User.
+     * @return the cc fee rate of the User.
      */
-    public String getName() {
-        return name;
+    public String getCcFeeRate() {
+        return ccFeeRate;
     }
 
     /**
-     * Set the name of the User.
+     * Set the cc fee rate of the User.
      *
-     * @param name the name of the User.
+     * @param ccFeeRate the cc fee rate of the User.
      */
-    public void setName(final String name) {
-        this.name = name;
+    public void setCcFeeRate(String ccFeeRate) {
+        this.ccFeeRate = ccFeeRate;
+    }
+
+    /**
+     * Get the children of the User.
+     *
+     * @return List of User objects.
+     */
+    public List<User> getChildren() {
+        return children;
+    }
+
+    /**
+     * Set the children of the User.
+     *
+     * @param children List of User objects.
+     */
+    public void setChildren(final List<User> children) {
+        this.children = children;
+    }
+
+    /**
+     * Get the default insurance amount of the User.
+     *
+     * @return the default insurance amount of the User.
+     */
+    public String getDefaultInsuranceAmount() {
+        return defaultInsuranceAmount;
+    }
+
+    /**
+     * Set the default insurance amount of the User.
+     *
+     * @param defaultInsuranceAmount the default insurance amount of the User.
+     */
+    public void setDefaultInsuranceAmount(String defaultInsuranceAmount) {
+        this.defaultInsuranceAmount = defaultInsuranceAmount;
     }
 
     /**
@@ -79,111 +115,93 @@ public class BaseUser extends EasyPostResource {
     }
 
     /**
-     * Get the phone number of the User.
+     * Get the has billing method of the User.
      *
-     * @return the phone number of the User.
+     * @return the has billing method of the User.
      */
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public boolean getHasBillingMethod() {
+        return hasBillingMethod;
     }
 
     /**
-     * Set the phone number of the User.
+     * Set the has billing method of the User.
      *
-     * @param phoneNumber the phone number of the User.
+     * @param hasBillingMethod the has billing method of the User.
      */
-    public void setPhoneNumber(final String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setHasBillingMethod(boolean hasBillingMethod) {
+        this.hasBillingMethod = hasBillingMethod;
     }
 
     /**
-     * Get the balance of the User.
+     * Get the ID of the User.
      *
-     * @return the balance of the User.
+     * @return the ID of the User.
      */
-    public String getBalance() {
-        return balance;
+    public String getId() {
+        return id;
     }
 
     /**
-     * Set the balance of the User.
+     * Set the ID of the User.
      *
-     * @param balance the balance of the User.
+     * @param id the ID of the User.
      */
-    public void setBalance(final String balance) {
-        this.balance = balance;
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**
-     * Get the recharge amount of the User.
+     * Get the insurance fee minimum of the User.
      *
-     * @return the recharge amount of the User.
+     * @return the insurance fee minimum of the User.
      */
-    public String getRechargeAmount() {
-        return rechargeAmount;
+    public String getInsuranceFeeMinimum() {
+        return insuranceFeeMinimum;
     }
 
     /**
-     * Set the recharge amount of the User.
+     * Set the insurance fee minimum of the User.
      *
-     * @param rechargeAmount the recharge amount of the User.
+     * @param insuranceFeeMinimum the insurance fee minimum of the User.
      */
-    public void setRechargeAmount(final String rechargeAmount) {
-        this.rechargeAmount = rechargeAmount;
+    public void setInsuranceFeeMinimum(String insuranceFeeMinimum) {
+        this.insuranceFeeMinimum = insuranceFeeMinimum;
     }
 
     /**
-     * Get the secondary recharge amount of the User.
+     * Get the insurance fee rate of the User.
      *
-     * @return the secondary recharge amount of the User.
+     * @return the insurance fee rate of the User.
      */
-    public String getSecondaryRechargeAmount() {
-        return secondaryRechargeAmount;
+    public String getInsuranceFeeRate() {
+        return insuranceFeeRate;
     }
 
     /**
-     * Set the secondary recharge amount of the User.
+     * Set the insurance fee rate of the User.
      *
-     * @param secondaryRechargeAmount the secondary recharge amount of the User.
+     * @param insuranceFeeRate the insurance fee rate of the User.
      */
-    public void setSecondaryRechargeAmount(final String secondaryRechargeAmount) {
-        this.secondaryRechargeAmount = secondaryRechargeAmount;
+    public void setInsuranceFeeRate(String insuranceFeeRate) {
+        this.insuranceFeeRate = insuranceFeeRate;
     }
 
     /**
-     * Get the recharge threshold of the User.
+     * Get the name of the User.
      *
-     * @return the recharge threshold of the User.
+     * @return the name of the User.
      */
-    public String getRechargeThreshold() {
-        return rechargeThreshold;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Set the recharge threshold of the User.
+     * Set the name of the User.
      *
-     * @param rechargeThreshold the recharge threshold of the User.
+     * @param name the name of the User.
      */
-    public void setRechargeThreshold(final String rechargeThreshold) {
-        this.rechargeThreshold = rechargeThreshold;
-    }
-
-    /**
-     * Get the children of the User.
-     *
-     * @return List of User objects.
-     */
-    public List<User> getChildren() {
-        return children;
-    }
-
-    /**
-     * Set the children of the User.
-     *
-     * @param children List of User objects.
-     */
-    public void setChildren(final List<User> children) {
-        this.children = children;
+    public void setName(final String name) {
+        this.name = name;
     }
 
     /**
@@ -223,21 +241,21 @@ public class BaseUser extends EasyPostResource {
     }
 
     /**
-     * Get the verified of the User.
+     * Get the phone number of the User.
      *
-     * @return the verified of the User.
+     * @return the phone number of the User.
      */
-    public boolean getVerified() {
-        return verified;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     /**
-     * Set the verified of the User.
+     * Set the phone number of the User.
      *
-     * @param verified the verified of the User.
+     * @param phoneNumber the phone number of the User.
      */
-    public void setVerified(boolean verified) {
-        this.verified = verified;
+    public void setPhoneNumber(final String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     /**
@@ -259,92 +277,74 @@ public class BaseUser extends EasyPostResource {
     }
 
     /**
-     * Get the has billing method of the User.
+     * Get the recharge amount of the User.
      *
-     * @return the has billing method of the User.
+     * @return the recharge amount of the User.
      */
-    public boolean getHasBillingMethod() {
-        return hasBillingMethod;
+    public String getRechargeAmount() {
+        return rechargeAmount;
     }
 
     /**
-     * Set the has billing method of the User.
+     * Set the recharge amount of the User.
      *
-     * @param hasBillingMethod the has billing method of the User.
+     * @param rechargeAmount the recharge amount of the User.
      */
-    public void setHasBillingMethod(boolean hasBillingMethod) {
-        this.hasBillingMethod = hasBillingMethod;
+    public void setRechargeAmount(final String rechargeAmount) {
+        this.rechargeAmount = rechargeAmount;
     }
 
     /**
-     * Get the cc fee rate of the User.
+     * Get the recharge threshold of the User.
      *
-     * @return the cc fee rate of the User.
+     * @return the recharge threshold of the User.
      */
-    public String getCcFeeRate() {
-        return ccFeeRate;
+    public String getRechargeThreshold() {
+        return rechargeThreshold;
     }
 
     /**
-     * Set the cc fee rate of the User.
+     * Set the recharge threshold of the User.
      *
-     * @param ccFeeRate the cc fee rate of the User.
+     * @param rechargeThreshold the recharge threshold of the User.
      */
-    public void setCcFeeRate(String ccFeeRate) {
-        this.ccFeeRate = ccFeeRate;
+    public void setRechargeThreshold(final String rechargeThreshold) {
+        this.rechargeThreshold = rechargeThreshold;
     }
 
     /**
-     * Get the default insurance amount of the User.
+     * Get the secondary recharge amount of the User.
      *
-     * @return the default insurance amount of the User.
+     * @return the secondary recharge amount of the User.
      */
-    public String getDefaultInsuranceAmount() {
-        return defaultInsuranceAmount;
+    public String getSecondaryRechargeAmount() {
+        return secondaryRechargeAmount;
     }
 
     /**
-     * Set the default insurance amount of the User.
+     * Set the secondary recharge amount of the User.
      *
-     * @param defaultInsuranceAmount the default insurance amount of the User.
+     * @param secondaryRechargeAmount the secondary recharge amount of the User.
      */
-    public void setDefaultInsuranceAmount(String defaultInsuranceAmount) {
-        this.defaultInsuranceAmount = defaultInsuranceAmount;
+    public void setSecondaryRechargeAmount(final String secondaryRechargeAmount) {
+        this.secondaryRechargeAmount = secondaryRechargeAmount;
     }
 
     /**
-     * Get the insurance fee rate of the User.
+     * Get the verified of the User.
      *
-     * @return the insurance fee rate of the User.
+     * @return the verified of the User.
      */
-    public String getInsuranceFeeRate() {
-        return insuranceFeeRate;
+    public boolean getVerified() {
+        return verified;
     }
 
     /**
-     * Set the insurance fee rate of the User.
+     * Set the verified of the User.
      *
-     * @param insuranceFeeRate the insurance fee rate of the User.
+     * @param verified the verified of the User.
      */
-    public void setInsuranceFeeRate(String insuranceFeeRate) {
-        this.insuranceFeeRate = insuranceFeeRate;
-    }
-
-    /**
-     * Get the insurance fee minimum of the User.
-     *
-     * @return the insurance fee minimum of the User.
-     */
-    public String getInsuranceFeeMinimum() {
-        return insuranceFeeMinimum;
-    }
-
-    /**
-     * Set the insurance fee minimum of the User.
-     *
-     * @param insuranceFeeMinimum the insurance fee minimum of the User.
-     */
-    public void setInsuranceFeeMinimum(String insuranceFeeMinimum) {
-        this.insuranceFeeMinimum = insuranceFeeMinimum;
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 }

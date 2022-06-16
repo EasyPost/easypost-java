@@ -9,24 +9,6 @@ public final class EventData extends EasyPostResource {
     private EasyPostResource object;
 
     /**
-     * Get the previous attributes of this EventData.
-     *
-     * @return Map of previous attributes
-     */
-    public Map<String, Object> getPreviousAttributes() {
-        return previousAttributes;
-    }
-
-    /**
-     * Set the previous attributes of this EventData.
-     *
-     * @param previousAttributes Map of previous attributes
-     */
-    public void setPreviousAttributes(final Map<String, Object> previousAttributes) {
-        this.previousAttributes = previousAttributes;
-    }
-
-    /**
      * Get the object of this EventData.
      *
      * @return EasyPostResource object
@@ -42,5 +24,23 @@ public final class EventData extends EasyPostResource {
      */
     public void setObject(final EasyPostResource object) {
         this.object = object;
+    }
+
+    /**
+     * Get the previous attributes of this EventData.
+     *
+     * @return Map of previous attributes
+     */
+    public Map<String, Object> getPreviousAttributes() {
+        return previousAttributes;
+    }
+
+    /**
+     * Set the previous attributes of this EventData.
+     *
+     * @param previousAttributes Map of previous attributes
+     */
+    public void setPreviousAttributes(final Map<String, Object> previousAttributes) {
+        this.previousAttributes = previousAttributes;
     }
 }

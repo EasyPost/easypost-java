@@ -7,24 +7,6 @@ public final class Fee {
     private Boolean refunded;
 
     /**
-     * Get Fee type.
-     *
-     * @return type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Set Fee type.
-     *
-     * @param type type
-     */
-    public void setType(final String type) {
-        this.type = type;
-    }
-
-    /**
      * Get Fee amount.
      *
      * @return amount
@@ -76,5 +58,23 @@ public final class Fee {
      */
     public void setRefunded(final Boolean refunded) {
         this.refunded = refunded;
+    }
+
+    /**
+     * Get Fee type.
+     *
+     * @return type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Set Fee type.
+     *
+     * @param type type
+     */
+    public void setType(final String type) {
+        this.type = type;
     }
 }

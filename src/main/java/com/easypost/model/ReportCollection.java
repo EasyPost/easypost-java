@@ -9,24 +9,6 @@ public final class ReportCollection extends EasyPostResource {
     private Boolean hasMore;
 
     /**
-     * Get this ReportCollection's Report objects.
-     *
-     * @return List of Report objects.
-     */
-    public List<Report> getReports() {
-        return reports;
-    }
-
-    /**
-     * Set this ReportCollection's Report objects.
-     *
-     * @param reports List of Report objects.
-     */
-    public void setReports(final List<Report> reports) {
-        this.reports = reports;
-    }
-
-    /**
      * Get whether there are more reports to retrieve.
      *
      * @return true if there are more reports to retrieve, false otherwise.
@@ -42,5 +24,23 @@ public final class ReportCollection extends EasyPostResource {
      */
     public void setHasMore(final Boolean hasMore) {
         this.hasMore = hasMore;
+    }
+
+    /**
+     * Get this ReportCollection's Report objects.
+     *
+     * @return List of Report objects.
+     */
+    public List<Report> getReports() {
+        return reports;
+    }
+
+    /**
+     * Set this ReportCollection's Report objects.
+     *
+     * @param reports List of Report objects.
+     */
+    public void setReports(final List<Report> reports) {
+        this.reports = reports;
     }
 }

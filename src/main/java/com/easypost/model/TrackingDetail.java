@@ -10,21 +10,21 @@ public final class TrackingDetail {
     private String statusDetail;
 
     /**
-     * Get the status of the tracking detail.
+     * Get the datetime of the tracking detail.
      *
-     * @return the status of the tracking detail.
+     * @return the datetime of the tracking detail.
      */
-    public String getStatus() {
-        return status;
+    public Date getDatetime() {
+        return datetime;
     }
 
     /**
-     * Set the status of the tracking detail.
+     * Set the datetime of the tracking detail.
      *
-     * @param status the status of the tracking detail.
+     * @param datetime the datetime of the tracking detail.
      */
-    public void setStatus(final String status) {
-        this.status = status;
+    public void setDatetime(final Date datetime) {
+        this.datetime = datetime;
     }
 
     /**
@@ -46,39 +46,21 @@ public final class TrackingDetail {
     }
 
     /**
-     * Get the datetime of the tracking detail.
+     * Get the status of the tracking detail.
      *
-     * @return the datetime of the tracking detail.
+     * @return the status of the tracking detail.
      */
-    public Date getDatetime() {
-        return datetime;
+    public String getStatus() {
+        return status;
     }
 
     /**
-     * Set the datetime of the tracking detail.
+     * Set the status of the tracking detail.
      *
-     * @param datetime the datetime of the tracking detail.
+     * @param status the status of the tracking detail.
      */
-    public void setDatetime(final Date datetime) {
-        this.datetime = datetime;
-    }
-
-    /**
-     * Get the tracking location of the tracking detail.
-     *
-     * @return TrackingLocation object.
-     */
-    public TrackingLocation getTrackingLocation() {
-        return trackingLocation;
-    }
-
-    /**
-     * Set the tracking location of the tracking detail.
-     *
-     * @param location TrackingLocation object.
-     */
-    public void setTrackingLocation(final TrackingLocation location) {
-        this.trackingLocation = location;
+    public void setStatus(final String status) {
+        this.status = status;
     }
 
     /**
@@ -97,6 +79,24 @@ public final class TrackingDetail {
      */
     public void setStatusDetail(final String statusDetail) {
         this.statusDetail = statusDetail;
+    }
+
+    /**
+     * Get the tracking location of the tracking detail.
+     *
+     * @return TrackingLocation object.
+     */
+    public TrackingLocation getTrackingLocation() {
+        return trackingLocation;
+    }
+
+    /**
+     * Set the tracking location of the tracking detail.
+     *
+     * @param location TrackingLocation object.
+     */
+    public void setTrackingLocation(final TrackingLocation location) {
+        this.trackingLocation = location;
     }
 
 }

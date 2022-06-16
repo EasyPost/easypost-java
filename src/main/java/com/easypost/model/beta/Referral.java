@@ -4,6 +4,7 @@ import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.ApiKey;
 import com.easypost.model.BaseUser;
+import com.easypost.model.CreditCardPriority;
 import com.easypost.model.Utilities;
 
 import java.io.BufferedReader;
@@ -138,7 +139,7 @@ public class Referral extends BaseUser {
      */
     public static CreditCard addCreditCard(String referralApiKey, String number, int expirationMonth,
                                            int expirationYear, String cvc) throws Exception {
-        return addCreditCard(referralApiKey, number, expirationMonth, expirationYear, cvc, Priority.PRIMARY);
+        return addCreditCard(referralApiKey, number, expirationMonth, expirationYear, cvc, CreditCardPriority.PRIMARY);
     }
 
     /**
@@ -154,7 +155,8 @@ public class Referral extends BaseUser {
      * @throws Exception when the request fails.
      */
     public static CreditCard addCreditCard(String referralApiKey, String number, int expirationMonth,
-                                           int expirationYear, String cvc, Priority priority) throws Exception {
+                                           int expirationYear, String cvc, CreditCardPriority priority)
+            throws Exception {
         String easypostStripeApiKey = retrieveEasypostStripeApiKey();
         String stripeToken;
 
@@ -257,10 +259,5 @@ public class Referral extends BaseUser {
 
         return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "credit_cards"),
                 wrappedParams, CreditCard.class, referralApiKey);
-    }
-
-    public enum Priority {
-        PRIMARY,
-        SECONDARY
     }
 }

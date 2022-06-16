@@ -25,78 +25,6 @@ public final class Order extends EasyPostResource {
     private List<CarrierAccount> carrierAccounts;
 
     /**
-     * Get the service of the Order.
-     *
-     * @return the service of the Order.
-     */
-    public String getService() {
-        return service;
-    }
-
-    /**
-     * Set the service of the Order.
-     *
-     * @param service the service of the Order.
-     */
-    public void setService(final String service) {
-        this.service = service;
-    }
-
-    /**
-     * Get the reference of the Order.
-     *
-     * @return the reference of the Order.
-     */
-    public String getReference() {
-        return reference;
-    }
-
-    /**
-     * Set the reference of the Order.
-     *
-     * @param reference the reference of the Order.
-     */
-    public void setReference(final String reference) {
-        this.reference = reference;
-    }
-
-    /**
-     * Get whether the order is a return.
-     *
-     * @return true if the order is a return.
-     */
-    public Boolean getIsReturn() {
-        return isReturn;
-    }
-
-    /**
-     * Set whether the order is a return.
-     *
-     * @param isReturn true if the order is a return.
-     */
-    public void setIsReturn(final Boolean isReturn) {
-        this.isReturn = isReturn;
-    }
-
-    /**
-     * Get the to address of the Order.
-     *
-     * @return the to address of the Order.
-     */
-    public Address getToAddress() {
-        return toAddress;
-    }
-
-    /**
-     * Set the to address of the Order.
-     *
-     * @param toAddress the to address of the Order.
-     */
-    public void setToAddress(final Address toAddress) {
-        this.toAddress = toAddress;
-    }
-
-    /**
      * Get the buyer address of the Order.
      *
      * @return the buyer address of the Order.
@@ -115,39 +43,21 @@ public final class Order extends EasyPostResource {
     }
 
     /**
-     * Get the from address of the Order.
+     * Get the list of carrier accounts of the Order.
      *
-     * @return the from address of the Order.
+     * @return List of CarrierAccount object.
      */
-    public Address getFromAddress() {
-        return fromAddress;
+    public List<CarrierAccount> getCarrierAccounts() {
+        return carrierAccounts;
     }
 
     /**
-     * Set the from address of the Order.
+     * Set the carrier accounts of the Order.
      *
-     * @param fromAddress the from address of the Order.
+     * @param carrierAccounts List of CarrierAccount objects
      */
-    public void setFromAddress(final Address fromAddress) {
-        this.fromAddress = fromAddress;
-    }
-
-    /**
-     * Get the return address of the Order.
-     *
-     * @return the return address of the Order.
-     */
-    public Address getReturnAddress() {
-        return returnAddress;
-    }
-
-    /**
-     * Set the return address of the Order.
-     *
-     * @param returnAddress the return address of the Order.
-     */
-    public void setReturnAddress(final Address returnAddress) {
-        this.returnAddress = returnAddress;
+    public void setCarrierAccounts(List<CarrierAccount> carrierAccounts) {
+        this.carrierAccounts = carrierAccounts;
     }
 
     /**
@@ -169,39 +79,39 @@ public final class Order extends EasyPostResource {
     }
 
     /**
-     * Get the rates of the Order.
+     * Get the from address of the Order.
      *
-     * @return List of Rate objects.
+     * @return the from address of the Order.
      */
-    public List<Rate> getRates() {
-        return rates;
+    public Address getFromAddress() {
+        return fromAddress;
     }
 
     /**
-     * Set the rates of the Order.
+     * Set the from address of the Order.
      *
-     * @param rates List of Rate objects.
+     * @param fromAddress the from address of the Order.
      */
-    public void setRates(final List<Rate> rates) {
-        this.rates = rates;
+    public void setFromAddress(final Address fromAddress) {
+        this.fromAddress = fromAddress;
     }
 
     /**
-     * Get the options of the Order.
+     * Get whether the order is a return.
      *
-     * @return map of options.
+     * @return true if the order is a return.
      */
-    public Map<String, Object> getOptions() {
-        return options;
+    public Boolean getIsReturn() {
+        return isReturn;
     }
 
     /**
-     * Set the options of the Order.
+     * Set whether the order is a return.
      *
-     * @param options map of options.
+     * @param isReturn true if the order is a return.
      */
-    public void setOptions(final Map<String, Object> options) {
-        this.options = options;
+    public void setIsReturn(final Boolean isReturn) {
+        this.isReturn = isReturn;
     }
 
     /**
@@ -223,21 +133,111 @@ public final class Order extends EasyPostResource {
     }
 
     /**
-     * Get the list of carrier accounts of the Order.
+     * Get the options of the Order.
      *
-     * @return List of CarrierAccount object.
+     * @return map of options.
      */
-    public List<CarrierAccount> getCarrierAccounts() {
-        return carrierAccounts;
+    public Map<String, Object> getOptions() {
+        return options;
     }
 
     /**
-     * Set the carrier accounts of the Order.
+     * Set the options of the Order.
      *
-     * @param carrierAccounts List of CarrierAccount objects
+     * @param options map of options.
      */
-    public void setCarrierAccounts(List<CarrierAccount> carrierAccounts) {
-        this.carrierAccounts = carrierAccounts;
+    public void setOptions(final Map<String, Object> options) {
+        this.options = options;
+    }
+
+    /**
+     * Get the rates of the Order.
+     *
+     * @return List of Rate objects.
+     */
+    public List<Rate> getRates() {
+        return rates;
+    }
+
+    /**
+     * Set the rates of the Order.
+     *
+     * @param rates List of Rate objects.
+     */
+    public void setRates(final List<Rate> rates) {
+        this.rates = rates;
+    }
+
+    /**
+     * Get the reference of the Order.
+     *
+     * @return the reference of the Order.
+     */
+    public String getReference() {
+        return reference;
+    }
+
+    /**
+     * Set the reference of the Order.
+     *
+     * @param reference the reference of the Order.
+     */
+    public void setReference(final String reference) {
+        this.reference = reference;
+    }
+
+    /**
+     * Get the return address of the Order.
+     *
+     * @return the return address of the Order.
+     */
+    public Address getReturnAddress() {
+        return returnAddress;
+    }
+
+    /**
+     * Set the return address of the Order.
+     *
+     * @param returnAddress the return address of the Order.
+     */
+    public void setReturnAddress(final Address returnAddress) {
+        this.returnAddress = returnAddress;
+    }
+
+    /**
+     * Get the service of the Order.
+     *
+     * @return the service of the Order.
+     */
+    public String getService() {
+        return service;
+    }
+
+    /**
+     * Set the service of the Order.
+     *
+     * @param service the service of the Order.
+     */
+    public void setService(final String service) {
+        this.service = service;
+    }
+
+    /**
+     * Get the to address of the Order.
+     *
+     * @return the to address of the Order.
+     */
+    public Address getToAddress() {
+        return toAddress;
+    }
+
+    /**
+     * Set the to address of the Order.
+     *
+     * @param toAddress the to address of the Order.
+     */
+    public void setToAddress(final Address toAddress) {
+        this.toAddress = toAddress;
     }
 
     /**

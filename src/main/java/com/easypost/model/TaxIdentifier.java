@@ -28,6 +28,24 @@ public final class TaxIdentifier extends EasyPostResource {
     }
 
     /**
+     * Get the issuing country associated with this TaxIdentifier.
+     *
+     * @return the issuing country associated with this TaxIdentifier.
+     */
+    public String getIssuingCountry() {
+        return issuingCountry;
+    }
+
+    /**
+     * Set the issuing country associated with this TaxIdentifier.
+     *
+     * @param issuingCountry the issuing country associated with this TaxIdentifier.
+     */
+    public void setIssuingCountry(final String issuingCountry) {
+        this.issuingCountry = issuingCountry;
+    }
+
+    /**
      * Get the tax ID associated with this TaxIdentifier.
      *
      * @return the tax ID associated with this TaxIdentifier.
@@ -61,23 +79,5 @@ public final class TaxIdentifier extends EasyPostResource {
      */
     public void setTaxIdType(final String taxIdType) {
         this.taxIdType = taxIdType;
-    }
-
-    /**
-     * Get the issuing country associated with this TaxIdentifier.
-     *
-     * @return the issuing country associated with this TaxIdentifier.
-     */
-    public String getIssuingCountry() {
-        return issuingCountry;
-    }
-
-    /**
-     * Set the issuing country associated with this TaxIdentifier.
-     *
-     * @param issuingCountry the issuing country associated with this TaxIdentifier.
-     */
-    public void setIssuingCountry(final String issuingCountry) {
-        this.issuingCountry = issuingCountry;
     }
 }

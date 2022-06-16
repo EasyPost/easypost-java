@@ -15,7 +15,7 @@ public class CreditCard extends BaseCreditCard {
      * @return CreditCardFund object.
      * @throws EasyPostException when the request fails.
      */
-    public static CreditCardFund fund(String amount, Priority primaryOrSecondary) throws EasyPostException {
+    public static CreditCardFund fund(String amount, CreditCardPriority primaryOrSecondary) throws EasyPostException {
         return fund(amount, primaryOrSecondary, null);
     }
 
@@ -28,7 +28,7 @@ public class CreditCard extends BaseCreditCard {
      * @return CreditCardFund object.
      * @throws EasyPostException when the request fails.
      */
-    public static CreditCardFund fund(String amount, Priority primaryOrSecondary, String apiKey)
+    public static CreditCardFund fund(String amount, CreditCardPriority primaryOrSecondary, String apiKey)
             throws EasyPostException {
         PaymentMethod paymentMethods = PaymentMethod.all();
         String cardID = null;
@@ -76,10 +76,5 @@ public class CreditCard extends BaseCreditCard {
     public static void delete(String creditCardId, String apiKey) throws EasyPostException {
         request(RequestMethod.DELETE, String.format("%s/%s/%s", EasyPost.API_BASE, "credit_cards", creditCardId), null,
                 CreditCard.class, apiKey);
-    }
-
-    public enum Priority {
-        PRIMARY,
-        SECONDARY
     }
 }

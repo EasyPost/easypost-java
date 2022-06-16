@@ -21,21 +21,21 @@ public final class CustomsInfo extends EasyPostResource {
     private String declaration;
 
     /**
-     * Get this CustomsInfo's ID.
+     * Get an explanation of this CustomsInfo's contents.
      *
-     * @return the ID of this CustomsInfo.
+     * @return the explanation of this CustomsInfo's contents.
      */
-    public String getId() {
-        return id;
+    public String getContentsExplanation() {
+        return contentsExplanation;
     }
 
     /**
-     * Set this CustomsInfo's ID.
+     * Set an explanation of this CustomsInfo's contents.
      *
-     * @param id the ID of this CustomsInfo.
+     * @param contentsExplanation the explanation of this CustomsInfo's contents.
      */
-    public void setId(final String id) {
-        this.id = id;
+    public void setContentsExplanation(final String contentsExplanation) {
+        this.contentsExplanation = contentsExplanation;
     }
 
     /**
@@ -57,24 +57,6 @@ public final class CustomsInfo extends EasyPostResource {
     }
 
     /**
-     * Get an explanation of this CustomsInfo's contents.
-     *
-     * @return the explanation of this CustomsInfo's contents.
-     */
-    public String getContentsExplanation() {
-        return contentsExplanation;
-    }
-
-    /**
-     * Set an explanation of this CustomsInfo's contents.
-     *
-     * @param contentsExplanation the explanation of this CustomsInfo's contents.
-     */
-    public void setContentsExplanation(final String contentsExplanation) {
-        this.contentsExplanation = contentsExplanation;
-    }
-
-    /**
      * Get whether this CustomsInfo is certified by customs.
      *
      * @return true if this CustomsInfo is certified by customs.
@@ -90,78 +72,6 @@ public final class CustomsInfo extends EasyPostResource {
      */
     public void setCustomsCertify(final boolean customsCertify) {
         this.customsCertify = customsCertify;
-    }
-
-    /**
-     * Get this CustomsInfo's signer.
-     *
-     * @return the signer of this CustomsInfo.
-     */
-    public String getCustomsSigner() {
-        return customsSigner;
-    }
-
-    /**
-     * Set this CustomsInfo's signer.
-     *
-     * @param customsSigner the signer of this CustomsInfo.
-     */
-    public void setCustomsSigner(final String customsSigner) {
-        this.customsSigner = customsSigner;
-    }
-
-    /**
-     * Get the non-delivery option of this CustomsInfo.
-     *
-     * @return the non-delivery option of this CustomsInfo.
-     */
-    public String getNonDeliveryOption() {
-        return nonDeliveryOption;
-    }
-
-    /**
-     * Set this CustomsInfo's non-delivery option.
-     *
-     * @param nonDeliveryOption the non-delivery option of this CustomsInfo.
-     */
-    public void setNonDeliveryOption(final String nonDeliveryOption) {
-        this.nonDeliveryOption = nonDeliveryOption;
-    }
-
-    /**
-     * Get this CustomsInfo's restriction type.
-     *
-     * @return the restriction type of this CustomsInfo.
-     */
-    public String getRestrictionType() {
-        return restrictionType;
-    }
-
-    /**
-     * Set this CustomsInfo's restriction type.
-     *
-     * @param restrictionType the restriction type of this CustomsInfo.
-     */
-    public void setRestrictionType(final String restrictionType) {
-        this.restrictionType = restrictionType;
-    }
-
-    /**
-     * Get this CustomsInfo's restriction comments.
-     *
-     * @return the restriction comments of this CustomsInfo.
-     */
-    public String getRestrictionComments() {
-        return restrictionComments;
-    }
-
-    /**
-     * Set this CustomsInfo's restriction comments.
-     *
-     * @param restrictionComments the restriction comments of this CustomsInfo.
-     */
-    public void setRestrictionComments(final String restrictionComments) {
-        this.restrictionComments = restrictionComments;
     }
 
     /**
@@ -183,21 +93,21 @@ public final class CustomsInfo extends EasyPostResource {
     }
 
     /**
-     * Get this CustomsInfo's EEL or PFC.
+     * Get this CustomsInfo's signer.
      *
-     * @return the EEL or PFC of this CustomsInfo.
+     * @return the signer of this CustomsInfo.
      */
-    public String getEelPfc() {
-        return eelPfc;
+    public String getCustomsSigner() {
+        return customsSigner;
     }
 
     /**
-     * Set this CustomsInfo's EEL or PFC.
+     * Set this CustomsInfo's signer.
      *
-     * @param eelPfc the EEL or PFC of this CustomsInfo.
+     * @param customsSigner the signer of this CustomsInfo.
      */
-    public void setEelPfc(String eelPfc) {
-        this.eelPfc = eelPfc;
+    public void setCustomsSigner(final String customsSigner) {
+        this.customsSigner = customsSigner;
     }
 
     /**
@@ -216,6 +126,96 @@ public final class CustomsInfo extends EasyPostResource {
      */
     public void setDeclaration(String declaration) {
         this.declaration = declaration;
+    }
+
+    /**
+     * Get this CustomsInfo's EEL or PFC.
+     *
+     * @return the EEL or PFC of this CustomsInfo.
+     */
+    public String getEelPfc() {
+        return eelPfc;
+    }
+
+    /**
+     * Set this CustomsInfo's EEL or PFC.
+     *
+     * @param eelPfc the EEL or PFC of this CustomsInfo.
+     */
+    public void setEelPfc(String eelPfc) {
+        this.eelPfc = eelPfc;
+    }
+
+    /**
+     * Get this CustomsInfo's ID.
+     *
+     * @return the ID of this CustomsInfo.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set this CustomsInfo's ID.
+     *
+     * @param id the ID of this CustomsInfo.
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the non-delivery option of this CustomsInfo.
+     *
+     * @return the non-delivery option of this CustomsInfo.
+     */
+    public String getNonDeliveryOption() {
+        return nonDeliveryOption;
+    }
+
+    /**
+     * Set this CustomsInfo's non-delivery option.
+     *
+     * @param nonDeliveryOption the non-delivery option of this CustomsInfo.
+     */
+    public void setNonDeliveryOption(final String nonDeliveryOption) {
+        this.nonDeliveryOption = nonDeliveryOption;
+    }
+
+    /**
+     * Get this CustomsInfo's restriction comments.
+     *
+     * @return the restriction comments of this CustomsInfo.
+     */
+    public String getRestrictionComments() {
+        return restrictionComments;
+    }
+
+    /**
+     * Set this CustomsInfo's restriction comments.
+     *
+     * @param restrictionComments the restriction comments of this CustomsInfo.
+     */
+    public void setRestrictionComments(final String restrictionComments) {
+        this.restrictionComments = restrictionComments;
+    }
+
+    /**
+     * Get this CustomsInfo's restriction type.
+     *
+     * @return the restriction type of this CustomsInfo.
+     */
+    public String getRestrictionType() {
+        return restrictionType;
+    }
+
+    /**
+     * Set this CustomsInfo's restriction type.
+     *
+     * @param restrictionType the restriction type of this CustomsInfo.
+     */
+    public void setRestrictionType(final String restrictionType) {
+        this.restrictionType = restrictionType;
     }
 
     /**

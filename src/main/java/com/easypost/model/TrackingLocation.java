@@ -25,24 +25,6 @@ public final class TrackingLocation {
     }
 
     /**
-     * Get the state of the tracking location.
-     *
-     * @return the state of the tracking location.
-     */
-    public String getState() {
-        return state;
-    }
-
-    /**
-     * Set the state of the tracking location.
-     *
-     * @param state the state of the tracking location.
-     */
-    public void setState(final String state) {
-        this.state = state;
-    }
-
-    /**
      * Get the country of the tracking location.
      *
      * @return the country of the tracking location.
@@ -58,6 +40,24 @@ public final class TrackingLocation {
      */
     public void setCountry(final String country) {
         this.country = country;
+    }
+
+    /**
+     * Get the state of the tracking location.
+     *
+     * @return the state of the tracking location.
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * Set the state of the tracking location.
+     *
+     * @param state the state of the tracking location.
+     */
+    public void setState(final String state) {
+        this.state = state;
     }
 
     /**

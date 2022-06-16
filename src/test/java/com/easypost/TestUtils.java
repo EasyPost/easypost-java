@@ -13,21 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class TestUtils {
+    public enum ApiKey {
+        TEST,
+        PRODUCTION
+    }
+
     private static final String API_KEY_FAILED_TO_PULL = "couldnotpullapikey";
-
     private static final String CASSETTES_FOLDER = "cassettes";
-
     private static final java.util.List<String> HEADER_CENSORS = new ArrayList<String>() {{
         add("Authorization");
         add("User-Agent");
         add("X-Client-User-Agent");
     }};
-
     private static final List<String> QUERY_CENSORS = new ArrayList<String>() {{
         add("card[cvc]");
         add("card[number]");
     }};
-
     private static final List<String> BODY_CENSORS = new ArrayList<String>() {{
         add("api_keys");
         add("client_ip");
@@ -38,7 +39,6 @@ public abstract class TestUtils {
         add("phone");
         add("test_credentials");
     }};
-
     private static final List<CensorElement> BODY_ELEMENTS_TO_IGNORE_ON_MATCH = new ArrayList<CensorElement>() {{
         // Timezone difference between machines causing failure on replay
         add(new CensorElement("createdAt", false));
@@ -80,11 +80,6 @@ public abstract class TestUtils {
         String value = System.getenv(keyName);
         return value != null ? value :
                 API_KEY_FAILED_TO_PULL; // if can't pull from environment, will use a fake key. Won't matter on replay.
-    }
-
-    public enum ApiKey {
-        TEST,
-        PRODUCTION
     }
 
     public static final class VCR {

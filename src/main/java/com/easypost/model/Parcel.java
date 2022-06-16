@@ -15,6 +15,24 @@ public final class Parcel extends EasyPostResource {
     private Float height;
 
     /**
+     * Get the height of this Parcel.
+     *
+     * @return the height of this Parcel.
+     */
+    public Float getHeight() {
+        return height;
+    }
+
+    /**
+     * Set the height of this Parcel.
+     *
+     * @param height the height of this Parcel.
+     */
+    public void setHeight(final Float height) {
+        this.height = height;
+    }
+
+    /**
      * Get the ID of this Parcel.
      *
      * @return the ID of this Parcel.
@@ -30,6 +48,24 @@ public final class Parcel extends EasyPostResource {
      */
     public void setId(final String id) {
         this.id = id;
+    }
+
+    /**
+     * Get the length of this Parcel.
+     *
+     * @return the length of this Parcel.
+     */
+    public Float getLength() {
+        return length;
+    }
+
+    /**
+     * Set the length of this Parcel.
+     *
+     * @param length the length of this Parcel.
+     */
+    public void setLength(final Float length) {
+        this.length = length;
     }
 
     /**
@@ -69,24 +105,6 @@ public final class Parcel extends EasyPostResource {
     }
 
     /**
-     * Get the length of this Parcel.
-     *
-     * @return the length of this Parcel.
-     */
-    public Float getLength() {
-        return length;
-    }
-
-    /**
-     * Set the length of this Parcel.
-     *
-     * @param length the length of this Parcel.
-     */
-    public void setLength(final Float length) {
-        this.length = length;
-    }
-
-    /**
      * Get the width of this Parcel.
      *
      * @return the width of this Parcel.
@@ -102,24 +120,6 @@ public final class Parcel extends EasyPostResource {
      */
     public void setWidth(final Float width) {
         this.width = width;
-    }
-
-    /**
-     * Get the height of this Parcel.
-     *
-     * @return the height of this Parcel.
-     */
-    public Float getHeight() {
-        return height;
-    }
-
-    /**
-     * Set the height of this Parcel.
-     *
-     * @param height the height of this Parcel.
-     */
-    public void setHeight(final Float height) {
-        this.height = height;
     }
 
     /**

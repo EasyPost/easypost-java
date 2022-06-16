@@ -14,24 +14,6 @@ public final class Webhook extends EasyPostResource {
     private Date disabledAt;
 
     /**
-     * Get the URL of the webhook.
-     *
-     * @return the URL of the webhook
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * Set the URL of the webhook.
-     *
-     * @param url the URL of the webhook
-     */
-    public void setUrl(final String url) {
-        this.url = url;
-    }
-
-    /**
      * Get the date and time when the webhook was disabled.
      *
      * @return the date and time when the webhook was disabled
@@ -47,6 +29,24 @@ public final class Webhook extends EasyPostResource {
      */
     public void setDisabledAt(final Date disabledAt) {
         this.disabledAt = disabledAt;
+    }
+
+    /**
+     * Get the URL of the webhook.
+     *
+     * @return the URL of the webhook
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Set the URL of the webhook.
+     *
+     * @param url the URL of the webhook
+     */
+    public void setUrl(final String url) {
+        this.url = url;
     }
 
     /**

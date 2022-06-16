@@ -17,60 +17,6 @@ public final class CarrierAccount extends EasyPostResource {
     private Map<String, Object> credentials;
 
     /**
-     * Get readable name of the carrier account.
-     *
-     * @return readable name of the carrier account.
-     */
-    public String getReadable() {
-        return readable;
-    }
-
-    /**
-     * Set readable name of the carrier account.
-     *
-     * @param readable readable name of the carrier account.
-     */
-    public void setReadable(final String readable) {
-        this.readable = readable;
-    }
-
-    /**
-     * Get description of the carrier account.
-     *
-     * @return description of the carrier account.
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Set description of the carrier account.
-     *
-     * @param description description of the carrier account.
-     */
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    /**
-     * Get reference of the carrier account.
-     *
-     * @return reference of the carrier account.
-     */
-    public String getReference() {
-        return reference;
-    }
-
-    /**
-     * Set reference of the carrier account.
-     *
-     * @param reference reference of the carrier account.
-     */
-    public void setReference(final String reference) {
-        this.reference = reference;
-    }
-
-    /**
      * Get billing type of the carrier account.
      *
      * @return billing type of the carrier account.
@@ -104,6 +50,60 @@ public final class CarrierAccount extends EasyPostResource {
      */
     public void setCredentials(final Map<String, Object> credentials) {
         this.credentials = credentials;
+    }
+
+    /**
+     * Get description of the carrier account.
+     *
+     * @return description of the carrier account.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Set description of the carrier account.
+     *
+     * @param description description of the carrier account.
+     */
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    /**
+     * Get readable name of the carrier account.
+     *
+     * @return readable name of the carrier account.
+     */
+    public String getReadable() {
+        return readable;
+    }
+
+    /**
+     * Set readable name of the carrier account.
+     *
+     * @param readable readable name of the carrier account.
+     */
+    public void setReadable(final String readable) {
+        this.readable = readable;
+    }
+
+    /**
+     * Get reference of the carrier account.
+     *
+     * @return reference of the carrier account.
+     */
+    public String getReference() {
+        return reference;
+    }
+
+    /**
+     * Set reference of the carrier account.
+     *
+     * @param reference reference of the carrier account.
+     */
+    public void setReference(final String reference) {
+        this.reference = reference;
     }
 
     /**

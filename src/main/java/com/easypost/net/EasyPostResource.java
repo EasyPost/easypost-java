@@ -48,6 +48,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 public abstract class EasyPostResource {
+    protected enum RequestMethod {
+        GET,
+        POST,
+        DELETE,
+        PUT
+    }
+
     public static final String EASYPOST_SUPPORT_EMAIL = "support@easypost.com";
     public static final Gson GSON =
             new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -73,42 +80,6 @@ public abstract class EasyPostResource {
     private ArrayList<Fee> fees;
 
     /**
-     * Get the timeout in milliseconds for connecting to the API.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static int getConnectTimeoutMilliseconds() {
-        return connectTimeoutMilliseconds;
-    }
-
-    /**
-     * Set the timeout in milliseconds for connecting to the API.
-     *
-     * @param milliseconds the timeout in milliseconds
-     */
-    public static void setConnectTimeoutMilliseconds(int milliseconds) {
-        connectTimeoutMilliseconds = milliseconds;
-    }
-
-    /**
-     * Get the timeout in milliseconds for reading API responses.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static int getReadTimeoutMilliseconds() {
-        return readTimeoutMilliseconds;
-    }
-
-    /**
-     * Set the timeout in milliseconds for reading API responses.
-     *
-     * @param milliseconds the timeout in milliseconds
-     */
-    public static void setReadTimeoutMilliseconds(int milliseconds) {
-        readTimeoutMilliseconds = milliseconds;
-    }
-
-    /**
      * Get the timeout in milliseconds for App Engine API requests.
      *
      * @return the timeout in milliseconds
@@ -127,6 +98,24 @@ public abstract class EasyPostResource {
     }
 
     /**
+     * Get the timeout in milliseconds for connecting to the API.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static int getConnectTimeoutMilliseconds() {
+        return connectTimeoutMilliseconds;
+    }
+
+    /**
+     * Set the timeout in milliseconds for connecting to the API.
+     *
+     * @param milliseconds the timeout in milliseconds
+     */
+    public static void setConnectTimeoutMilliseconds(int milliseconds) {
+        connectTimeoutMilliseconds = milliseconds;
+    }
+
+    /**
      * @return the Date this object was created
      */
     public Date getCreatedAt() {
@@ -140,22 +129,6 @@ public abstract class EasyPostResource {
      */
     public void setCreatedAt(final Date createdAt) {
         this.createdAt = createdAt;
-    }
-
-    /**
-     * @return the Date this object was last updated
-     */
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    /**
-     * Set the Date this object was last updated.
-     *
-     * @param updatedAt the Date this object was last updated
-     */
-    public void setUpdatedAt(final Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     /**
@@ -182,9 +155,41 @@ public abstract class EasyPostResource {
     }
 
     /**
+     * @return the URL of the label for this object
+     */
+    public String getLabelUrl() {
+        return "";
+    }
+
+    /**
      * @return the API mode used to create this object
      */
     public String getMode() {
+        return "";
+    }
+
+    /**
+     * Get the timeout in milliseconds for reading API responses.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static int getReadTimeoutMilliseconds() {
+        return readTimeoutMilliseconds;
+    }
+
+    /**
+     * Set the timeout in milliseconds for reading API responses.
+     *
+     * @param milliseconds the timeout in milliseconds
+     */
+    public static void setReadTimeoutMilliseconds(int milliseconds) {
+        readTimeoutMilliseconds = milliseconds;
+    }
+
+    /**
+     * @return the ID of this shipment
+     */
+    public String getShipmentId() {
         return "";
     }
 
@@ -196,16 +201,9 @@ public abstract class EasyPostResource {
     }
 
     /**
-     * @return the URL of the label for this object
+     * @return the status of this object
      */
-    public String getLabelUrl() {
-        return "";
-    }
-
-    /**
-     * @return the ID of this shipment
-     */
-    public String getShipmentId() {
+    public String getStatus() {
         return "";
     }
 
@@ -217,17 +215,26 @@ public abstract class EasyPostResource {
     }
 
     /**
-     * @return the status of this object
-     */
-    public String getStatus() {
-        return "";
-    }
-
-    /**
      * @return the tracking details of this shipment
      */
     public List<TrackingDetail> getTrackingDetails() {
         return new ArrayList<TrackingDetail>();
+    }
+
+    /**
+     * @return the Date this object was last updated
+     */
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    /**
+     * Set the Date this object was last updated.
+     *
+     * @param updatedAt the Date this object was last updated
+     */
+    public void setUpdatedAt(final Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     protected static String instanceURL(final Class<?> clazz, final String id) {
@@ -836,13 +843,6 @@ public abstract class EasyPostResource {
         return nonStaticMethods;
     }
 
-    protected enum RequestMethod {
-        GET,
-        POST,
-        DELETE,
-        PUT
-    }
-
     @SuppressWarnings ("unused")
     private static class ErrorContainer {
         private EasyPostResource.Error error;
@@ -856,25 +856,25 @@ public abstract class EasyPostResource {
         private String error;
 
         @SuppressWarnings ("unused")
-        public String getType() {
-            return type;
+        public String getCode() {
+            return code;
+        }
+
+        public String getError() {
+            return error;
         }
 
         public String getMessage() {
             return message;
         }
 
-        @SuppressWarnings ("unused")
-        public String getCode() {
-            return code;
-        }
-
         public String getParam() {
             return param;
         }
 
-        public String getError() {
-            return error;
+        @SuppressWarnings ("unused")
+        public String getType() {
+            return type;
         }
     }
 

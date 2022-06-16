@@ -12,75 +12,21 @@ public class BaseCreditCard extends EasyPostResource {
     private String brand;
 
     /**
-     * Get ID of this CreditCard object.
+     * Get the brand of this CreditCard object.
      *
-     * @return ID of this CreditCard.
+     * @return the brand of this CreditCard.
      */
-    public String getId() {
-        return id;
+    public String getBrand() {
+        return brand;
     }
 
     /**
-     * Set ID of this CreditCard object.
+     * Set the brand of this CreditCard object.
      *
-     * @param id ID of this CreditCard.
+     * @param brand the brand of this CreditCard.
      */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the object of this CreditCard object.
-     *
-     * @return the object of this CreditCard.
-     */
-    public String getObject() {
-        return object;
-    }
-
-    /**
-     * Set the object of this CreditCard object.
-     *
-     * @param object the object of this CreditCard.
-     */
-    public void setObject(String object) {
-        this.object = object;
-    }
-
-    /**
-     * Get the name of this CreditCard object.
-     *
-     * @return the name of this CreditCard.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Set the name of this CreditCard object.
-     *
-     * @param name the name of this CreditCard.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Get the last 4 digits of this CreditCard object.
-     *
-     * @return the last 4 digits of this CreditCard.
-     */
-    public String getLast4() {
-        return last4;
-    }
-
-    /**
-     * Set the last 4 digits of this CreditCard object.
-     *
-     * @param last4 the last 4 digits of this CreditCard.
-     */
-    public void setLast4(String last4) {
-        this.last4 = last4;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     /**
@@ -120,20 +66,74 @@ public class BaseCreditCard extends EasyPostResource {
     }
 
     /**
-     * Get the brand of this CreditCard object.
+     * Get ID of this CreditCard object.
      *
-     * @return the brand of this CreditCard.
+     * @return ID of this CreditCard.
      */
-    public String getBrand() {
-        return brand;
+    public String getId() {
+        return id;
     }
 
     /**
-     * Set the brand of this CreditCard object.
+     * Set ID of this CreditCard object.
      *
-     * @param brand the brand of this CreditCard.
+     * @param id ID of this CreditCard.
      */
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the last 4 digits of this CreditCard object.
+     *
+     * @return the last 4 digits of this CreditCard.
+     */
+    public String getLast4() {
+        return last4;
+    }
+
+    /**
+     * Set the last 4 digits of this CreditCard object.
+     *
+     * @param last4 the last 4 digits of this CreditCard.
+     */
+    public void setLast4(String last4) {
+        this.last4 = last4;
+    }
+
+    /**
+     * Get the name of this CreditCard object.
+     *
+     * @return the name of this CreditCard.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Set the name of this CreditCard object.
+     *
+     * @param name the name of this CreditCard.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Get the object of this CreditCard object.
+     *
+     * @return the object of this CreditCard.
+     */
+    public String getObject() {
+        return object;
+    }
+
+    /**
+     * Set the object of this CreditCard object.
+     *
+     * @param object the object of this CreditCard.
+     */
+    public void setObject(String object) {
+        this.object = object;
     }
 }

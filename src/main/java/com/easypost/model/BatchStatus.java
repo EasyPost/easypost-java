@@ -43,24 +43,6 @@ public final class BatchStatus {
     }
 
     /**
-     * Get the number of postage purchases.
-     *
-     * @return the number of postage purchases.
-     */
-    public int getPostagePurchased() {
-        return postagePurchased;
-    }
-
-    /**
-     * Set the number of postage purchases.
-     *
-     * @param postagePurchased the number of postage purchases.
-     */
-    public void setPostagePurchased(final int postagePurchased) {
-        this.postagePurchased = postagePurchased;
-    }
-
-    /**
      * Get the number of postage purchases that failed.
      *
      * @return the number of postage purchases that failed.
@@ -76,5 +58,23 @@ public final class BatchStatus {
      */
     public void setPostagePurchaseFailed(final int postagePurchaseFailed) {
         this.postagePurchaseFailed = postagePurchaseFailed;
+    }
+
+    /**
+     * Get the number of postage purchases.
+     *
+     * @return the number of postage purchases.
+     */
+    public int getPostagePurchased() {
+        return postagePurchased;
+    }
+
+    /**
+     * Set the number of postage purchases.
+     *
+     * @param postagePurchased the number of postage purchases.
+     */
+    public void setPostagePurchased(final int postagePurchased) {
+        this.postagePurchased = postagePurchased;
     }
 }

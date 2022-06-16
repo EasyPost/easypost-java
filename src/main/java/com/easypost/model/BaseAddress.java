@@ -16,6 +16,78 @@ public class BaseAddress extends EasyPostResource {
     private String email;
 
     /**
+     * Get city of address.
+     *
+     * @return address city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Set city of address.
+     *
+     * @param city address city
+     */
+    public void setCity(final String city) {
+        this.city = city;
+    }
+
+    /**
+     * Get company of Address.
+     *
+     * @return Address company
+     */
+    public String getCompany() {
+        return company;
+    }
+
+    /**
+     * Set company of Address.
+     *
+     * @param company Address company
+     */
+    public void setCompany(final String company) {
+        this.company = company;
+    }
+
+    /**
+     * Get country of Address.
+     *
+     * @return Address country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * Set country of Address.
+     *
+     * @param country Address country
+     */
+    public void setCountry(final String country) {
+        this.country = country;
+    }
+
+    /**
+     * Get email of Address.
+     *
+     * @return Address email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Set email of Address.
+     *
+     * @param email Address email
+     */
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+
+    /**
      * Get Address ID.
      *
      * @return Address ID
@@ -52,21 +124,39 @@ public class BaseAddress extends EasyPostResource {
     }
 
     /**
-     * Get company of Address.
+     * Get phone number of Address.
      *
-     * @return Address company
+     * @return Address phone number
      */
-    public String getCompany() {
-        return company;
+    public String getPhone() {
+        return phone;
     }
 
     /**
-     * Set company of Address.
+     * Set phone number of Address.
      *
-     * @param company Address company
+     * @param phone Address phone number
      */
-    public void setCompany(final String company) {
-        this.company = company;
+    public void setPhone(final String phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * Get state of Address.
+     *
+     * @return Address state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * Set state of Address.
+     *
+     * @param state Address state
+     */
+    public void setState(final String state) {
+        this.state = state;
     }
 
     /**
@@ -106,42 +196,6 @@ public class BaseAddress extends EasyPostResource {
     }
 
     /**
-     * Get city of address.
-     *
-     * @return address city
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     * Set city of address.
-     *
-     * @param city address city
-     */
-    public void setCity(final String city) {
-        this.city = city;
-    }
-
-    /**
-     * Get state of Address.
-     *
-     * @return Address state
-     */
-    public String getState() {
-        return state;
-    }
-
-    /**
-     * Set state of Address.
-     *
-     * @param state Address state
-     */
-    public void setState(final String state) {
-        this.state = state;
-    }
-
-    /**
      * Get zip code of Address.
      *
      * @return Address zip code
@@ -157,59 +211,5 @@ public class BaseAddress extends EasyPostResource {
      */
     public void setZip(final String zip) {
         this.zip = zip;
-    }
-
-    /**
-     * Get country of Address.
-     *
-     * @return Address country
-     */
-    public String getCountry() {
-        return country;
-    }
-
-    /**
-     * Set country of Address.
-     *
-     * @param country Address country
-     */
-    public void setCountry(final String country) {
-        this.country = country;
-    }
-
-    /**
-     * Get phone number of Address.
-     *
-     * @return Address phone number
-     */
-    public String getPhone() {
-        return phone;
-    }
-
-    /**
-     * Set phone number of Address.
-     *
-     * @param phone Address phone number
-     */
-    public void setPhone(final String phone) {
-        this.phone = phone;
-    }
-
-    /**
-     * Get email of Address.
-     *
-     * @return Address email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Set email of Address.
-     *
-     * @param email Address email
-     */
-    public void setEmail(final String email) {
-        this.email = email;
     }
 }

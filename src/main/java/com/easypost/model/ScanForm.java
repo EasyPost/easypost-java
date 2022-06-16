@@ -18,6 +18,60 @@ public class ScanForm extends EasyPostResource {
     private String batchId;
 
     /**
+     * Get the batch ID of the ScanForm.
+     *
+     * @return the batch ID of the ScanForm.
+     */
+    public String getBatchId() {
+        return batchId;
+    }
+
+    /**
+     * Set the batch ID of the ScanForm.
+     *
+     * @param batchId the batch ID of the ScanForm.
+     */
+    public void setBatchId(final String batchId) {
+        this.batchId = batchId;
+    }
+
+    /**
+     * Get the confirmation of the ScanForm.
+     *
+     * @return the confirmation of the ScanForm.
+     */
+    public String getConfirmation() {
+        return confirmation;
+    }
+
+    /**
+     * Set the confirmation of the ScanForm.
+     *
+     * @param confirmation the confirmation of the ScanForm.
+     */
+    public void setConfirmation(final String confirmation) {
+        this.confirmation = confirmation;
+    }
+
+    /**
+     * Get the from address of the ScanForm.
+     *
+     * @return the from address of the ScanForm.
+     */
+    public Address getFromAddress() {
+        return fromAddress;
+    }
+
+    /**
+     * Set the from address of the ScanForm.
+     *
+     * @param fromAddress the from address of the ScanForm.
+     */
+    public void setFromAddress(final Address fromAddress) {
+        this.fromAddress = fromAddress;
+    }
+
+    /**
      * Get the ID of the ScanForm.
      *
      * @return the ID of the ScanForm.
@@ -81,60 +135,6 @@ public class ScanForm extends EasyPostResource {
     }
 
     /**
-     * Get the message of the ScanForm.
-     *
-     * @return the message of the ScanForm.
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * Set the message of the ScanForm.
-     *
-     * @param message the message of the ScanForm.
-     */
-    public void setMessage(final String message) {
-        this.message = message;
-    }
-
-    /**
-     * Get the from address of the ScanForm.
-     *
-     * @return the from address of the ScanForm.
-     */
-    public Address getFromAddress() {
-        return fromAddress;
-    }
-
-    /**
-     * Set the from address of the ScanForm.
-     *
-     * @param fromAddress the from address of the ScanForm.
-     */
-    public void setFromAddress(final Address fromAddress) {
-        this.fromAddress = fromAddress;
-    }
-
-    /**
-     * Get the tracking codes of the ScanForm.
-     *
-     * @return the tracking codes of the ScanForm.
-     */
-    public List<String> getTrackingCodes() {
-        return trackingCodes;
-    }
-
-    /**
-     * Set the tracking codes of the ScanForm.
-     *
-     * @param trackingCodes the tracking codes of the ScanForm.
-     */
-    public void setTrackingCodes(final List<String> trackingCodes) {
-        this.trackingCodes = trackingCodes;
-    }
-
-    /**
      * Get the label file type of the ScanForm.
      *
      * @return the label file type of the ScanForm.
@@ -162,39 +162,39 @@ public class ScanForm extends EasyPostResource {
     }
 
     /**
-     * Get the confirmation of the ScanForm.
+     * Get the message of the ScanForm.
      *
-     * @return the confirmation of the ScanForm.
+     * @return the message of the ScanForm.
      */
-    public String getConfirmation() {
-        return confirmation;
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * Set the confirmation of the ScanForm.
+     * Set the message of the ScanForm.
      *
-     * @param confirmation the confirmation of the ScanForm.
+     * @param message the message of the ScanForm.
      */
-    public void setConfirmation(final String confirmation) {
-        this.confirmation = confirmation;
+    public void setMessage(final String message) {
+        this.message = message;
     }
 
     /**
-     * Get the batch ID of the ScanForm.
+     * Get the tracking codes of the ScanForm.
      *
-     * @return the batch ID of the ScanForm.
+     * @return the tracking codes of the ScanForm.
      */
-    public String getBatchId() {
-        return batchId;
+    public List<String> getTrackingCodes() {
+        return trackingCodes;
     }
 
     /**
-     * Set the batch ID of the ScanForm.
+     * Set the tracking codes of the ScanForm.
      *
-     * @param batchId the batch ID of the ScanForm.
+     * @param trackingCodes the tracking codes of the ScanForm.
      */
-    public void setBatchId(final String batchId) {
-        this.batchId = batchId;
+    public void setTrackingCodes(final List<String> trackingCodes) {
+        this.trackingCodes = trackingCodes;
     }
 
     /**

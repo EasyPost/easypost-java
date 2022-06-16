@@ -19,24 +19,6 @@ public final class Batch extends EasyPostResource {
     private String reference;
 
     /**
-     * Get state of this batch.
-     *
-     * @return state of this batch.
-     */
-    public String getState() {
-        return state;
-    }
-
-    /**
-     * Set state of this batch.
-     *
-     * @param state state of this batch.
-     */
-    public void setState(final String state) {
-        this.state = state;
-    }
-
-    /**
      * Get status of this batch.
      *
      * @return status of this batch.
@@ -73,6 +55,24 @@ public final class Batch extends EasyPostResource {
     }
 
     /**
+     * Get reference of this batch.
+     *
+     * @return reference of this batch.
+     */
+    public String getReference() {
+        return reference;
+    }
+
+    /**
+     * Set reference of this batch.
+     *
+     * @param reference reference of this batch.
+     */
+    public void setReference(final String reference) {
+        this.reference = reference;
+    }
+
+    /**
      * Get scan form of this batch.
      *
      * @return ScanForm object.
@@ -91,21 +91,21 @@ public final class Batch extends EasyPostResource {
     }
 
     /**
-     * Get reference of this batch.
+     * Get state of this batch.
      *
-     * @return reference of this batch.
+     * @return state of this batch.
      */
-    public String getReference() {
-        return reference;
+    public String getState() {
+        return state;
     }
 
     /**
-     * Set reference of this batch.
+     * Set state of this batch.
      *
-     * @param reference reference of this batch.
+     * @param state state of this batch.
      */
-    public void setReference(final String reference) {
-        this.reference = reference;
+    public void setState(final String state) {
+        this.state = state;
     }
 
     /**
@@ -258,6 +258,15 @@ public final class Batch extends EasyPostResource {
     }
 
     /**
+     * Get label URL of this batch.
+     *
+     * @return Label URL of this batch.x
+     */
+    public String getLabelUrl() {
+        return labelUrl;
+    }
+
+    /**
      * Get mode of this batch.
      *
      * @return mode of this batch.
@@ -291,15 +300,6 @@ public final class Batch extends EasyPostResource {
      */
     public void setShipments(final List<Shipment> shipments) {
         this.shipments = shipments;
-    }
-
-    /**
-     * Get label URL of this batch.
-     *
-     * @return Label URL of this batch.x
-     */
-    public String getLabelUrl() {
-        return labelUrl;
     }
 
     /**

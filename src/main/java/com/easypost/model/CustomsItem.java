@@ -18,21 +18,39 @@ public final class CustomsItem extends EasyPostResource {
     private String currency;
 
     /**
-     * Get this CustomsItem's ID.
+     * Get this CustomsItem's code.
      *
-     * @return the ID of this CustomsItem.
+     * @return the code of this CustomsItem.
      */
-    public String getId() {
-        return id;
+    public String getCode() {
+        return code;
     }
 
     /**
-     * Set this CustomsItem's ID.
+     * Set this CustomsItem's code.
      *
-     * @param id the ID of this CustomsItem.
+     * @param code the code of this CustomsItem.
      */
-    public void setId(final String id) {
-        this.id = id;
+    public void setCode(final String code) {
+        this.code = code;
+    }
+
+    /**
+     * Get this CustomsItem's currency.
+     *
+     * @return the currency of this CustomsItem.
+     */
+    public String getCurrency() {
+        return currency;
+    }
+
+    /**
+     * Set this CustomsItem's currency.
+     *
+     * @param currency the currency of this CustomsItem.
+     */
+    public void setCurrency(final String currency) {
+        this.currency = currency;
     }
 
     /**
@@ -69,6 +87,24 @@ public final class CustomsItem extends EasyPostResource {
      */
     public void setHsTariffNumber(final String hsTariffNumber) {
         this.hsTariffNumber = hsTariffNumber;
+    }
+
+    /**
+     * Get this CustomsItem's ID.
+     *
+     * @return the ID of this CustomsItem.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set this CustomsItem's ID.
+     *
+     * @param id the ID of this CustomsItem.
+     */
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**
@@ -141,42 +177,6 @@ public final class CustomsItem extends EasyPostResource {
      */
     public void setWeight(final Float weight) {
         this.weight = weight;
-    }
-
-    /**
-     * Get this CustomsItem's code.
-     *
-     * @return the code of this CustomsItem.
-     */
-    public String getCode() {
-        return code;
-    }
-
-    /**
-     * Set this CustomsItem's code.
-     *
-     * @param code the code of this CustomsItem.
-     */
-    public void setCode(final String code) {
-        this.code = code;
-    }
-
-    /**
-     * Get this CustomsItem's currency.
-     *
-     * @return the currency of this CustomsItem.
-     */
-    public String getCurrency() {
-        return currency;
-    }
-
-    /**
-     * Set this CustomsItem's currency.
-     *
-     * @param currency the currency of this CustomsItem.
-     */
-    public void setCurrency(final String currency) {
-        this.currency = currency;
     }
 
     /**

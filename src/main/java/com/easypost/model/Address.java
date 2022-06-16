@@ -15,42 +15,6 @@ public final class Address extends BaseAddress {
     private AddressVerifications verifications;
 
     /**
-     * Get address mode.
-     *
-     * @return address mode
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set address mode.
-     *
-     * @param mode address mode
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
-    }
-
-    /**
-     * Get address message.
-     *
-     * @return address message
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * Set address message.
-     *
-     * @param message address message
-     */
-    public void setMessage(final String message) {
-        this.message = message;
-    }
-
-    /**
      * Get carrier facility for address.
      *
      * @return address carrier facility
@@ -84,6 +48,42 @@ public final class Address extends BaseAddress {
      */
     public void setFederalTaxId(final String federalTaxId) {
         this.federalTaxId = federalTaxId;
+    }
+
+    /**
+     * Get address message.
+     *
+     * @return address message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * Set address message.
+     *
+     * @param message address message
+     */
+    public void setMessage(final String message) {
+        this.message = message;
+    }
+
+    /**
+     * Get address mode.
+     *
+     * @return address mode
+     */
+    public String getMode() {
+        return mode;
+    }
+
+    /**
+     * Set address mode.
+     *
+     * @param mode address mode
+     */
+    public void setMode(final String mode) {
+        this.mode = mode;
     }
 
     /**

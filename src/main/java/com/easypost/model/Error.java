@@ -7,6 +7,24 @@ public final class Error {
     private String code;
 
     /**
+     * Get the error code.
+     *
+     * @return code
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * Set the error code.
+     *
+     * @param code code
+     */
+    public void setCode(final String code) {
+        this.code = code;
+    }
+
+    /**
      * Get the field that caused the error.
      *
      * @return field
@@ -58,23 +76,5 @@ public final class Error {
      */
     public void setSuggestion(final String suggestion) {
         this.suggestion = suggestion;
-    }
-
-    /**
-     * Get the error code.
-     *
-     * @return code
-     */
-    public String getCode() {
-        return code;
-    }
-
-    /**
-     * Set the error code.
-     *
-     * @param code code
-     */
-    public void setCode(final String code) {
-        this.code = code;
     }
 }

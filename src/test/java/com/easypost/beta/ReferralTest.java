@@ -3,6 +3,7 @@ package com.easypost.beta;
 import com.easypost.Fixture;
 import com.easypost.TestUtils;
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.CreditCardPriority;
 import com.easypost.model.beta.CreditCard;
 import com.easypost.model.beta.Referral;
 import org.junit.jupiter.api.BeforeAll;
@@ -104,7 +105,7 @@ public final class ReferralTest {
         CreditCard creditCard = Referral.addCreditCard(REFERRAL_USER_PROD_API_KEY, creditCardDetails.get("number"),
                 Integer.parseInt(creditCardDetails.get("expiration_month")),
                 Integer.parseInt(creditCardDetails.get("expiration_year")), creditCardDetails.get("cvc"),
-                Referral.Priority.PRIMARY);
+                CreditCardPriority.PRIMARY);
 
         assertInstanceOf(CreditCard.class, creditCard);
         assertTrue(creditCard.getId().startsWith("card_"));

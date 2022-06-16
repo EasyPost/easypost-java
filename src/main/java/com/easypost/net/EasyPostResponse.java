@@ -14,24 +14,6 @@ public class EasyPostResponse {
     private String responseBody;
 
     /**
-     * Get HTTP response code.
-     *
-     * @return HTTP response code
-     */
-    public int getResponseCode() {
-        return responseCode;
-    }
-
-    /**
-     * Set HTTP response code.
-     *
-     * @param responseCode HTTP response code
-     */
-    public void setResponseCode(final int responseCode) {
-        this.responseCode = responseCode;
-    }
-
-    /**
      * Get HTTP response body.
      *
      * @return HTTP response body
@@ -47,6 +29,24 @@ public class EasyPostResponse {
      */
     public void setResponseBody(final String responseBody) {
         this.responseBody = responseBody;
+    }
+
+    /**
+     * Get HTTP response code.
+     *
+     * @return HTTP response code
+     */
+    public int getResponseCode() {
+        return responseCode;
+    }
+
+    /**
+     * Set HTTP response code.
+     *
+     * @param responseCode HTTP response code
+     */
+    public void setResponseCode(final int responseCode) {
+        this.responseCode = responseCode;
     }
 
     /**

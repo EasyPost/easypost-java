@@ -14,39 +14,21 @@ public final class CarrierType extends EasyPostResource {
     private Map<String, Object> fields;
 
     /**
-     * Get the type of the carrier.
+     * Get the fields of the carrier.
      *
-     * @return type of a carrier.
+     * @return fields from a carrier.
      */
-    public String getType() {
-        return type;
+    public Map<String, Object> getFields() {
+        return fields;
     }
 
     /**
-     * Set the type of carrier.
+     * Set the fields of carrier.
      *
-     * @param type type of a carrier.
+     * @param fields fields for a carrier.
      */
-    public void setType(final String type) {
-        this.type = type;
-    }
-
-    /**
-     * Get the readable name of the carrier.
-     *
-     * @return return readable name of the carrier.
-     */
-    public String getReadable() {
-        return readable;
-    }
-
-    /**
-     * Set the readable name of the carrier.
-     *
-     * @param readable readable name of the carrier.
-     */
-    public void setReadable(final String readable) {
-        this.readable = readable;
+    public void setFields(final Map<String, Object> fields) {
+        this.fields = fields;
     }
 
     /**
@@ -68,21 +50,39 @@ public final class CarrierType extends EasyPostResource {
     }
 
     /**
-     * Get the fields of the carrier.
+     * Get the readable name of the carrier.
      *
-     * @return fields from a carrier.
+     * @return return readable name of the carrier.
      */
-    public Map<String, Object> getFields() {
-        return fields;
+    public String getReadable() {
+        return readable;
     }
 
     /**
-     * Set the fields of carrier.
+     * Set the readable name of the carrier.
      *
-     * @param fields fields for a carrier.
+     * @param readable readable name of the carrier.
      */
-    public void setFields(final Map<String, Object> fields) {
-        this.fields = fields;
+    public void setReadable(final String readable) {
+        this.readable = readable;
+    }
+
+    /**
+     * Get the type of the carrier.
+     *
+     * @return type of a carrier.
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Set the type of carrier.
+     *
+     * @param type type of a carrier.
+     */
+    public void setType(final String type) {
+        this.type = type;
     }
 
     /**

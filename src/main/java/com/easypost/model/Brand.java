@@ -15,6 +15,42 @@ public class Brand extends EasyPostResource {
     private String id;
 
     /**
+     * Get the ad of the Brand.
+     *
+     * @return the ad of the Brand.
+     */
+    public String getAd() {
+        return this.ad;
+    }
+
+    /**
+     * Set the ad of the Brand.
+     *
+     * @param ad the ad of the Brand.
+     */
+    public void setAd(String ad) {
+        this.ad = ad;
+    }
+
+    /**
+     * Get the ad href of the Brand.
+     *
+     * @return the ad href of the Brand.
+     */
+    public String getAdHref() {
+        return this.adHref;
+    }
+
+    /**
+     * Set the ad href of the Brand.
+     *
+     * @param adHref the ad href of the Brand.
+     */
+    public void setAdHref(String adHref) {
+        this.adHref = adHref;
+    }
+
+    /**
      * Get the background of the Brand.
      *
      * @return the background of the Brand.
@@ -48,6 +84,24 @@ public class Brand extends EasyPostResource {
      */
     public void setColor(String color) {
         this.color = color;
+    }
+
+    /**
+     * Get the ID of the Brand.
+     *
+     * @return the ID of the Brand.
+     */
+    public String getId() {
+        return this.id;
+    }
+
+    /**
+     * Set the ID of the Brand.
+     *
+     * @param id the id of the Brand.
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -87,42 +141,6 @@ public class Brand extends EasyPostResource {
     }
 
     /**
-     * Get the ad of the Brand.
-     *
-     * @return the ad of the Brand.
-     */
-    public String getAd() {
-        return this.ad;
-    }
-
-    /**
-     * Set the ad of the Brand.
-     *
-     * @param ad the ad of the Brand.
-     */
-    public void setAd(String ad) {
-        this.ad = ad;
-    }
-
-    /**
-     * Get the ad href of the Brand.
-     *
-     * @return the ad href of the Brand.
-     */
-    public String getAdHref() {
-        return this.adHref;
-    }
-
-    /**
-     * Set the ad href of the Brand.
-     *
-     * @param adHref the ad href of the Brand.
-     */
-    public void setAdHref(String adHref) {
-        this.adHref = adHref;
-    }
-
-    /**
      * Get the name of the User.
      *
      * @return the name of the User.
@@ -138,24 +156,6 @@ public class Brand extends EasyPostResource {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * Get the user ID of the Brand.
-     *
-     * @return the user ID of the Brand.
-     */
-    public String getUserID() {
-        return this.userID;
-    }
-
-    /**
-     * Set the user ID of the Brand.
-     *
-     * @param userID the user ID of the Brand.
-     */
-    public void setUserID(String userID) {
-        this.userID = userID;
     }
 
     /**
@@ -177,20 +177,20 @@ public class Brand extends EasyPostResource {
     }
 
     /**
-     * Get the ID of the Brand.
+     * Get the user ID of the Brand.
      *
-     * @return the ID of the Brand.
+     * @return the user ID of the Brand.
      */
-    public String getId() {
-        return this.id;
+    public String getUserID() {
+        return this.userID;
     }
 
     /**
-     * Set the ID of the Brand.
+     * Set the user ID of the Brand.
      *
-     * @param id the id of the Brand.
+     * @param userID the user ID of the Brand.
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

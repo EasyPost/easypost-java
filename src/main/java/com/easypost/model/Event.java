@@ -13,6 +13,24 @@ public final class Event extends EasyPostResource {
     private Map<String, Object> previousAttributes;
 
     /**
+     * Get the description of this Event.
+     *
+     * @return Event's description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Set the description of this Event.
+     *
+     * @param description Event's description
+     */
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    /**
      * Get this Event's ID.
      *
      * @return Event's ID
@@ -49,21 +67,21 @@ public final class Event extends EasyPostResource {
     }
 
     /**
-     * Get the description of this Event.
+     * Get the previous attributes of this Event.
      *
-     * @return Event's description
+     * @return Event's previous attributes
      */
-    public String getDescription() {
-        return description;
+    public Map<String, Object> getPreviousAttributes() {
+        return previousAttributes;
     }
 
     /**
-     * Set the description of this Event.
+     * Set the previous attributes of this Event.
      *
-     * @param description Event's description
+     * @param previousAttributes Event's previous attributes
      */
-    public void setDescription(final String description) {
-        this.description = description;
+    public void setPreviousAttributes(final Map<String, Object> previousAttributes) {
+        this.previousAttributes = previousAttributes;
     }
 
     /**
@@ -82,24 +100,6 @@ public final class Event extends EasyPostResource {
      */
     public void setResult(final EasyPostResource result) {
         this.result = result;
-    }
-
-    /**
-     * Get the previous attributes of this Event.
-     *
-     * @return Event's previous attributes
-     */
-    public Map<String, Object> getPreviousAttributes() {
-        return previousAttributes;
-    }
-
-    /**
-     * Set the previous attributes of this Event.
-     *
-     * @param previousAttributes Event's previous attributes
-     */
-    public void setPreviousAttributes(final Map<String, Object> previousAttributes) {
-        this.previousAttributes = previousAttributes;
     }
 
     /**

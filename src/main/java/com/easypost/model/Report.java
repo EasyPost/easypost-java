@@ -20,6 +20,24 @@ public final class Report extends EasyPostResource {
     private Date urlExpiresAt;
 
     /**
+     * Get the end date of this Report.
+     *
+     * @return the end date of this Report.
+     */
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * Set the end date of this Report.
+     *
+     * @param endDate the end date of this Report.
+     */
+    public void setEndDate(final Date endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
      * Get the ID of this Report.
      *
      * @return the ID of this Report.
@@ -74,42 +92,6 @@ public final class Report extends EasyPostResource {
     }
 
     /**
-     * Get the start date of this Report.
-     *
-     * @return the start date of this Report.
-     */
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    /**
-     * Set the start date of this Report.
-     *
-     * @param startDate the start date of this Report.
-     */
-    public void setStartDate(final Date startDate) {
-        this.startDate = startDate;
-    }
-
-    /**
-     * Get the end date of this Report.
-     *
-     * @return the end date of this Report.
-     */
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    /**
-     * Set the end date of this Report.
-     *
-     * @param endDate the end date of this Report.
-     */
-    public void setEndDate(final Date endDate) {
-        this.endDate = endDate;
-    }
-
-    /**
      * Get whether this Report includes children.
      *
      * @return whether this Report includes children.
@@ -125,6 +107,24 @@ public final class Report extends EasyPostResource {
      */
     public void setIncludeChildren(final Boolean includeChildren) {
         this.includeChildren = includeChildren;
+    }
+
+    /**
+     * Get the start date of this Report.
+     *
+     * @return the start date of this Report.
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * Set the start date of this Report.
+     *
+     * @param startDate the start date of this Report.
+     */
+    public void setStartDate(final Date startDate) {
+        this.startDate = startDate;
     }
 
     /**

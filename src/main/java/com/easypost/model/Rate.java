@@ -23,39 +23,21 @@ public class Rate extends EasyPostResource {
     private String billingType;
 
     /**
-     * Get the ID of this Rate.
+     * Get billing type of this rate.
      *
-     * @return ID of this Rate.
+     * @return billing type of this rate.
      */
-    public String getId() {
-        return id;
+    public String getBillingType() {
+        return billingType;
     }
 
     /**
-     * Set the ID of this Rate.
+     * Set billing type of this rate.
      *
-     * @param id ID of this Rate.
+     * @param billingType billing type of this rate.
      */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the ID of the shipment of this Rate.
-     *
-     * @return ID of the shipment of this Rate.
-     */
-    public String getShipmentId() {
-        return shipmentId;
-    }
-
-    /**
-     * Set the ID of the shipment of this Rate.
-     *
-     * @param shipmentId ID of the shipment of this Rate.
-     */
-    public void setShipmentId(final String shipmentId) {
-        this.shipmentId = shipmentId;
+    public void setBillingType(final String billingType) {
+        this.billingType = billingType;
     }
 
     /**
@@ -77,93 +59,21 @@ public class Rate extends EasyPostResource {
     }
 
     /**
-     * Get the service of this Rate.
+     * Get the ID of the carrier account of this Rate.
      *
-     * @return Service of this Rate.
+     * @return ID of the carrier account of this Rate.
      */
-    public String getService() {
-        return service;
+    public String getCarrierAccountId() {
+        return carrierAccountId;
     }
 
     /**
-     * Set the service of this Rate.
+     * Set the ID of the carrier account of this Rate.
      *
-     * @param service Service of this Rate.
+     * @param carrierAccountId ID of the carrier account of this Rate.
      */
-    public void setService(final String service) {
-        this.service = service;
-    }
-
-    /**
-     * Get the service code of this Rate.
-     *
-     * @return Service code of this Rate.
-     */
-    public String getServiceCode() {
-        return serviceCode;
-    }
-
-    /**
-     * Set the service code of this Rate.
-     *
-     * @param serviceCode Service code of this Rate.
-     */
-    public void setServiceCode(final String serviceCode) {
-        this.serviceCode = serviceCode;
-    }
-
-    /**
-     * Get the rate of this Rate.
-     *
-     * @return Rate of this Rate.
-     */
-    public Float getRate() {
-        return rate;
-    }
-
-    /**
-     * Set the rate of this Rate.
-     *
-     * @param rate Rate of this Rate.
-     */
-    public void setRate(final Float rate) {
-        this.rate = rate;
-    }
-
-    /**
-     * Get the list rate of this Rate.
-     *
-     * @return List rate of this Rate.
-     */
-    public Float getListRate() {
-        return listRate;
-    }
-
-    /**
-     * Set the list rate of this Rate.
-     *
-     * @param listRate List rate of this Rate.
-     */
-    public void setListRate(final Float listRate) {
-        this.listRate = listRate;
-    }
-
-    /**
-     * Get the retail rate of this Rate.
-     *
-     * @return Retail rate of this Rate.
-     */
-    public Float getRetailRate() {
-        return retailRate;
-    }
-
-    /**
-     * Set the retail rate of this Rate.
-     *
-     * @param retailRate Retail rate of this Rate.
-     */
-    public void setRetailRate(final Float retailRate) {
-        this.retailRate = retailRate;
+    public void setCarrierAccountId(final String carrierAccountId) {
+        this.carrierAccountId = carrierAccountId;
     }
 
     /**
@@ -182,60 +92,6 @@ public class Rate extends EasyPostResource {
      */
     public void setCurrency(final String currency) {
         this.currency = currency;
-    }
-
-    /**
-     * Get the list currency of this Rate.
-     *
-     * @return List currency of this Rate.
-     */
-    public String getListCurrency() {
-        return listCurrency;
-    }
-
-    /**
-     * Set the list currency of this Rate.
-     *
-     * @param listCurrency List currency of this Rate.
-     */
-    public void setListCurrency(final String listCurrency) {
-        this.listCurrency = listCurrency;
-    }
-
-    /**
-     * Get the retail currency of this Rate.
-     *
-     * @return Retail currency of this Rate.
-     */
-    public String getRetailCurrency() {
-        return retailCurrency;
-    }
-
-    /**
-     * Set the retail currency of this Rate.
-     *
-     * @param retailCurrency Retail currency of this Rate.
-     */
-    public void setRetailCurrency(final String retailCurrency) {
-        this.retailCurrency = retailCurrency;
-    }
-
-    /**
-     * Get the delivery days of this Rate.
-     *
-     * @return Delivery days of this Rate.
-     */
-    public Number getDeliveryDays() {
-        return deliveryDays;
-    }
-
-    /**
-     * Set the delivery days of this Rate.
-     *
-     * @param deliveryDays Delivery days of this Rate.
-     */
-    public void setDeliveryDays(final Number deliveryDays) {
-        this.deliveryDays = deliveryDays;
     }
 
     /**
@@ -275,6 +131,24 @@ public class Rate extends EasyPostResource {
     }
 
     /**
+     * Get the delivery days of this Rate.
+     *
+     * @return Delivery days of this Rate.
+     */
+    public Number getDeliveryDays() {
+        return deliveryDays;
+    }
+
+    /**
+     * Set the delivery days of this Rate.
+     *
+     * @param deliveryDays Delivery days of this Rate.
+     */
+    public void setDeliveryDays(final Number deliveryDays) {
+        this.deliveryDays = deliveryDays;
+    }
+
+    /**
      * Get the estimated delivery days for this Rate.
      *
      * @return Estimated delivery days for this Rate.
@@ -293,39 +167,165 @@ public class Rate extends EasyPostResource {
     }
 
     /**
-     * Get the ID of the carrier account of this Rate.
+     * Get the ID of this Rate.
      *
-     * @return ID of the carrier account of this Rate.
+     * @return ID of this Rate.
      */
-    public String getCarrierAccountId() {
-        return carrierAccountId;
+    public String getId() {
+        return id;
     }
 
     /**
-     * Set the ID of the carrier account of this Rate.
+     * Set the ID of this Rate.
      *
-     * @param carrierAccountId ID of the carrier account of this Rate.
+     * @param id ID of this Rate.
      */
-    public void setCarrierAccountId(final String carrierAccountId) {
-        this.carrierAccountId = carrierAccountId;
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**
-     * Get billing type of this rate.
+     * Get the ID of the shipment of this Rate.
      *
-     * @return billing type of this rate.
+     * @return ID of the shipment of this Rate.
      */
-    public String getBillingType() {
-        return billingType;
+    public String getShipmentId() {
+        return shipmentId;
     }
 
     /**
-     * Set billing type of this rate.
+     * Set the ID of the shipment of this Rate.
      *
-     * @param billingType billing type of this rate.
+     * @param shipmentId ID of the shipment of this Rate.
      */
-    public void setBillingType(final String billingType) {
-        this.billingType = billingType;
+    public void setShipmentId(final String shipmentId) {
+        this.shipmentId = shipmentId;
+    }
+
+    /**
+     * Get the list currency of this Rate.
+     *
+     * @return List currency of this Rate.
+     */
+    public String getListCurrency() {
+        return listCurrency;
+    }
+
+    /**
+     * Set the list currency of this Rate.
+     *
+     * @param listCurrency List currency of this Rate.
+     */
+    public void setListCurrency(final String listCurrency) {
+        this.listCurrency = listCurrency;
+    }
+
+    /**
+     * Get the list rate of this Rate.
+     *
+     * @return List rate of this Rate.
+     */
+    public Float getListRate() {
+        return listRate;
+    }
+
+    /**
+     * Set the list rate of this Rate.
+     *
+     * @param listRate List rate of this Rate.
+     */
+    public void setListRate(final Float listRate) {
+        this.listRate = listRate;
+    }
+
+    /**
+     * Get the rate of this Rate.
+     *
+     * @return Rate of this Rate.
+     */
+    public Float getRate() {
+        return rate;
+    }
+
+    /**
+     * Set the rate of this Rate.
+     *
+     * @param rate Rate of this Rate.
+     */
+    public void setRate(final Float rate) {
+        this.rate = rate;
+    }
+
+    /**
+     * Get the retail currency of this Rate.
+     *
+     * @return Retail currency of this Rate.
+     */
+    public String getRetailCurrency() {
+        return retailCurrency;
+    }
+
+    /**
+     * Set the retail currency of this Rate.
+     *
+     * @param retailCurrency Retail currency of this Rate.
+     */
+    public void setRetailCurrency(final String retailCurrency) {
+        this.retailCurrency = retailCurrency;
+    }
+
+    /**
+     * Get the retail rate of this Rate.
+     *
+     * @return Retail rate of this Rate.
+     */
+    public Float getRetailRate() {
+        return retailRate;
+    }
+
+    /**
+     * Set the retail rate of this Rate.
+     *
+     * @param retailRate Retail rate of this Rate.
+     */
+    public void setRetailRate(final Float retailRate) {
+        this.retailRate = retailRate;
+    }
+
+    /**
+     * Get the service of this Rate.
+     *
+     * @return Service of this Rate.
+     */
+    public String getService() {
+        return service;
+    }
+
+    /**
+     * Set the service of this Rate.
+     *
+     * @param service Service of this Rate.
+     */
+    public void setService(final String service) {
+        this.service = service;
+    }
+
+    /**
+     * Get the service code of this Rate.
+     *
+     * @return Service code of this Rate.
+     */
+    public String getServiceCode() {
+        return serviceCode;
+    }
+
+    /**
+     * Set the service code of this Rate.
+     *
+     * @param serviceCode Service code of this Rate.
+     */
+    public void setServiceCode(final String serviceCode) {
+        this.serviceCode = serviceCode;
     }
 
     /**

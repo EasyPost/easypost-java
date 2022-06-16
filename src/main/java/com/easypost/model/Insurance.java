@@ -23,39 +23,21 @@ public final class Insurance extends EasyPostResource {
     private List<String> messages;
 
     /**
-     * Get the reference of this Insurance.
+     * Get the amount of this Insurance.
      *
-     * @return the reference of the Insurance
+     * @return the amount of the Insurance
      */
-    public String getReference() {
-        return reference;
+    public Float getAmount() {
+        return amount;
     }
 
     /**
-     * Set the reference of this Insurance.
+     * Set the amount of this Insurance.
      *
-     * @param reference the reference of the Insurance
+     * @param amount the amount of the Insurance
      */
-    public void setReference(final String reference) {
-        this.reference = reference;
-    }
-
-    /**
-     * Get the to address of this Insurance.
-     *
-     * @return the to address of the Insurance
-     */
-    public Address getToAddress() {
-        return toAddress;
-    }
-
-    /**
-     * Set the to address of this Insurance.
-     *
-     * @param toAddress the to address of the Insurance
-     */
-    public void setToAddress(final Address toAddress) {
-        this.toAddress = toAddress;
+    public void setAmount(final Float amount) {
+        this.amount = amount;
     }
 
     /**
@@ -77,21 +59,21 @@ public final class Insurance extends EasyPostResource {
     }
 
     /**
-     * Get the tracker of this Insurance.
+     * Get the messages of this Insurance.
      *
-     * @return Tracker object
+     * @return list of messages of the Insurance
      */
-    public Tracker getTracker() {
-        return tracker;
+    public List<String> getMessages() {
+        return messages;
     }
 
     /**
-     * Set the tracker of this Insurance.
+     * Set the messages of this Insurance.
      *
-     * @param tracker Tracker object
+     * @param messages list of messages of the Insurance
      */
-    public void setTracker(final Tracker tracker) {
-        this.tracker = tracker;
+    public void setMessages(final List<String> messages) {
+        this.messages = messages;
     }
 
     /**
@@ -131,39 +113,57 @@ public final class Insurance extends EasyPostResource {
     }
 
     /**
-     * Get the amount of this Insurance.
+     * Get the reference of this Insurance.
      *
-     * @return the amount of the Insurance
+     * @return the reference of the Insurance
      */
-    public Float getAmount() {
-        return amount;
+    public String getReference() {
+        return reference;
     }
 
     /**
-     * Set the amount of this Insurance.
+     * Set the reference of this Insurance.
      *
-     * @param amount the amount of the Insurance
+     * @param reference the reference of the Insurance
      */
-    public void setAmount(final Float amount) {
-        this.amount = amount;
+    public void setReference(final String reference) {
+        this.reference = reference;
     }
 
     /**
-     * Get the messages of this Insurance.
+     * Get the to address of this Insurance.
      *
-     * @return list of messages of the Insurance
+     * @return the to address of the Insurance
      */
-    public List<String> getMessages() {
-        return messages;
+    public Address getToAddress() {
+        return toAddress;
     }
 
     /**
-     * Set the messages of this Insurance.
+     * Set the to address of this Insurance.
      *
-     * @param messages list of messages of the Insurance
+     * @param toAddress the to address of the Insurance
      */
-    public void setMessages(final List<String> messages) {
-        this.messages = messages;
+    public void setToAddress(final Address toAddress) {
+        this.toAddress = toAddress;
+    }
+
+    /**
+     * Get the tracker of this Insurance.
+     *
+     * @return Tracker object
+     */
+    public Tracker getTracker() {
+        return tracker;
+    }
+
+    /**
+     * Set the tracker of this Insurance.
+     *
+     * @param tracker Tracker object
+     */
+    public void setTracker(final Tracker tracker) {
+        this.tracker = tracker;
     }
 
     /**
@@ -308,6 +308,15 @@ public final class Insurance extends EasyPostResource {
     }
 
     /**
+     * Get the status of this Insurance.
+     *
+     * @return the status of the Insurance
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
      * Get the tracking code of this Insurance.
      *
      * @return the tracking code of the Insurance
@@ -323,15 +332,6 @@ public final class Insurance extends EasyPostResource {
      */
     public void setTrackingCode(final String trackingCode) {
         this.trackingCode = trackingCode;
-    }
-
-    /**
-     * Get the status of this Insurance.
-     *
-     * @return the status of the Insurance
-     */
-    public String getStatus() {
-        return status;
     }
 
     /**

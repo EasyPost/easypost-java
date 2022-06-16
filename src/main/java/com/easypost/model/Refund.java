@@ -17,6 +17,42 @@ public final class Refund extends EasyPostResource {
     private String shipmentId;
 
     /**
+     * Get refund carrier.
+     *
+     * @return refund carrier
+     */
+    public String getCarrier() {
+        return carrier;
+    }
+
+    /**
+     * Set refund carrier.
+     *
+     * @param carrier refund carrier
+     */
+    public void setCarrier(final String carrier) {
+        this.carrier = carrier;
+    }
+
+    /**
+     * Get refund confirmation number.
+     *
+     * @return refund confirmation number
+     */
+    public String getConfirmationNumber() {
+        return confirmationNumber;
+    }
+
+    /**
+     * Set refund confirmation number.
+     *
+     * @param confirmationNumber refund confirmation number
+     */
+    public void setConfirmationNumber(final String confirmationNumber) {
+        this.confirmationNumber = confirmationNumber;
+    }
+
+    /**
      * Get refund ID.
      *
      * @return refund ID
@@ -44,6 +80,15 @@ public final class Refund extends EasyPostResource {
     }
 
     /**
+     * Get refund status.
+     *
+     * @return refund status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
      * Get refund tracking code.
      *
      * @return refund tracking code
@@ -62,15 +107,6 @@ public final class Refund extends EasyPostResource {
     }
 
     /**
-     * Get refund status.
-     *
-     * @return refund status
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
      * Set refund status.
      *
      * @param status refund status
@@ -86,42 +122,6 @@ public final class Refund extends EasyPostResource {
      */
     public void setShipmentId(final String shipmentId) {
         this.shipmentId = shipmentId;
-    }
-
-    /**
-     * Get refund confirmation number.
-     *
-     * @return refund confirmation number
-     */
-    public String getConfirmationNumber() {
-        return confirmationNumber;
-    }
-
-    /**
-     * Set refund confirmation number.
-     *
-     * @param confirmationNumber refund confirmation number
-     */
-    public void setConfirmationNumber(final String confirmationNumber) {
-        this.confirmationNumber = confirmationNumber;
-    }
-
-    /**
-     * Get refund carrier.
-     *
-     * @return refund carrier
-     */
-    public String getCarrier() {
-        return carrier;
-    }
-
-    /**
-     * Set refund carrier.
-     *
-     * @param carrier refund carrier
-     */
-    public void setCarrier(final String carrier) {
-        this.carrier = carrier;
     }
 
     /**

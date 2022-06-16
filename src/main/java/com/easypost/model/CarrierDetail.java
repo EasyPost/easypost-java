@@ -12,21 +12,21 @@ public final class CarrierDetail {
     private String initialDeliveryAttempt;
 
     /**
-     * Get carrier service.
+     * Get alternate identifier.
      *
-     * @return carrier service
+     * @return alternate identifier
      */
-    public String getService() {
-        return service;
+    public String getAlternateIdentifier() {
+        return alternateIdentifier;
     }
 
     /**
-     * Set carrier service.
+     * Set alternate identifier.
      *
-     * @param service carrier service
+     * @param alternateIdentifier alternate identifier
      */
-    public void setService(final String service) {
-        this.service = service;
+    public void setAlternateIdentifier(final String alternateIdentifier) {
+        this.alternateIdentifier = alternateIdentifier;
     }
 
     /**
@@ -45,6 +45,24 @@ public final class CarrierDetail {
      */
     public void setContainerType(final String containerType) {
         this.containerType = containerType;
+    }
+
+    /**
+     * Get destination location.
+     *
+     * @return destination location
+     */
+    public String getDestinationLocation() {
+        return destinationLocation;
+    }
+
+    /**
+     * Set destination location.
+     *
+     * @param destinationLocation destination location
+     */
+    public void setDestinationLocation(final String destinationLocation) {
+        this.destinationLocation = destinationLocation;
     }
 
     /**
@@ -84,42 +102,6 @@ public final class CarrierDetail {
     }
 
     /**
-     * Get origin location.
-     *
-     * @return origin location
-     */
-    public String getOriginLocation() {
-        return originLocation;
-    }
-
-    /**
-     * Set origin location.
-     *
-     * @param originLocation origin location
-     */
-    public void setOriginLocation(final String originLocation) {
-        this.originLocation = originLocation;
-    }
-
-    /**
-     * Get destination location.
-     *
-     * @return destination location
-     */
-    public String getDestinationLocation() {
-        return destinationLocation;
-    }
-
-    /**
-     * Set destination location.
-     *
-     * @param destinationLocation destination location
-     */
-    public void setDestinationLocation(final String destinationLocation) {
-        this.destinationLocation = destinationLocation;
-    }
-
-    /**
      * Get the guaranteed delivery date.
      *
      * @return guaranteed delivery date
@@ -138,24 +120,6 @@ public final class CarrierDetail {
     }
 
     /**
-     * Get alternate identifier.
-     *
-     * @return alternate identifier
-     */
-    public String getAlternateIdentifier() {
-        return alternateIdentifier;
-    }
-
-    /**
-     * Set alternate identifier.
-     *
-     * @param alternateIdentifier alternate identifier
-     */
-    public void setAlternateIdentifier(final String alternateIdentifier) {
-        this.alternateIdentifier = alternateIdentifier;
-    }
-
-    /**
      * Get initial delivery attempt.
      *
      * @return initial delivery attempt
@@ -171,5 +135,41 @@ public final class CarrierDetail {
      */
     public void setInitialDeliveryAttempt(final String initialDeliveryAttempt) {
         this.initialDeliveryAttempt = initialDeliveryAttempt;
+    }
+
+    /**
+     * Get origin location.
+     *
+     * @return origin location
+     */
+    public String getOriginLocation() {
+        return originLocation;
+    }
+
+    /**
+     * Set origin location.
+     *
+     * @param originLocation origin location
+     */
+    public void setOriginLocation(final String originLocation) {
+        this.originLocation = originLocation;
+    }
+
+    /**
+     * Get carrier service.
+     *
+     * @return carrier service
+     */
+    public String getService() {
+        return service;
+    }
+
+    /**
+     * Set carrier service.
+     *
+     * @param service carrier service
+     */
+    public void setService(final String service) {
+        this.service = service;
     }
 }
