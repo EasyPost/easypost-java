@@ -217,7 +217,7 @@ public final class CarrierAccount extends EasyPostResource {
     }
 
     /**
-     * Get object type of the carrier account
+     * Get object type of the carrier account.
      * @return object type of the carrier account.
      */
     public String getObject() {

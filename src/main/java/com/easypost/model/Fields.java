@@ -65,7 +65,7 @@ public class Fields extends EasyPostResource {
     }
 
     /**
-     * Set whether this Fields object is a custom workflow
+     * Set whether this Fields object is a custom workflow.
      * @param customWorkflow true if this Fields object is a custom workflow, false otherwise.
      */
     public void setCustomWorkflow(boolean customWorkflow) {
