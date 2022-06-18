@@ -10,7 +10,6 @@ import java.util.Map;
 
 public final class CarrierAccount extends EasyPostResource {
     private String id;
-
     private String object;
     private String type;
     private Fields fields;
@@ -218,6 +217,7 @@ public final class CarrierAccount extends EasyPostResource {
 
     /**
      * Get object type of the carrier account.
+     *
      * @return object type of the carrier account.
      */
     public String getObject() {
@@ -226,6 +226,7 @@ public final class CarrierAccount extends EasyPostResource {
 
     /**
      * Set object type of the carrier account.
+     *
      * @param object object type of the carrier account.
      */
     public void setObject(String object) {
@@ -234,6 +235,7 @@ public final class CarrierAccount extends EasyPostResource {
 
     /**
      * Get type of the carrier account.
+     *
      * @return type of the carrier account.
      */
     public String getType() {
@@ -242,6 +244,7 @@ public final class CarrierAccount extends EasyPostResource {
 
     /**
      * Set type of the carrier account.
+     *
      * @param type type of the carrier account.
      */
     public void setType(String type) {
@@ -250,6 +253,7 @@ public final class CarrierAccount extends EasyPostResource {
 
     /**
      * Get fields of the carrier account.
+     *
      * @return fields of the carrier account.
      */
     public Fields getFields() {
@@ -258,6 +262,7 @@ public final class CarrierAccount extends EasyPostResource {
 
     /**
      * Set fields of the carrier account.
+     *
      * @param fields fields of the carrier account.
      */
     public void setFields(Fields fields) {
@@ -266,6 +271,7 @@ public final class CarrierAccount extends EasyPostResource {
 
     /**
      * Get whether the carrier account is a clone.
+     *
      * @return True if carrier account is a clone, false otherwise.
      */
     public boolean isClone() {
@@ -274,6 +280,7 @@ public final class CarrierAccount extends EasyPostResource {
 
     /**
      * Set whether the carrier account is a clone.
+     *
      * @param clone True if carrier account is a clone, false otherwise.
      */
     public void setClone(boolean clone) {
@@ -282,6 +289,7 @@ public final class CarrierAccount extends EasyPostResource {
 
     /**
      * Get test credentials of the carrier account.
+     *
      * @return test credentials of the carrier account.
      */
     public Map<String, Object> getTestCredentials() {
@@ -290,6 +298,7 @@ public final class CarrierAccount extends EasyPostResource {
 
     /**
      * Set test credentials of the carrier account.
+     *
      * @param testCredentials test credentials of the carrier account.
      */
     public void setTestCredentials(Map<String, Object> testCredentials) {
