@@ -10,11 +10,16 @@ import java.util.Map;
 
 public final class CarrierAccount extends EasyPostResource {
     private String id;
+    private String object;
+    private String type;
+    private Fields fields;
+    private boolean clone;
     private String readable;
     private String description;
     private String reference;
     private String billingType;
     private Map<String, Object> credentials;
+    private Map<String, Object> testCredentials;
 
     /**
      * Create a carrier account.
@@ -208,6 +213,96 @@ public final class CarrierAccount extends EasyPostResource {
      */
     public void setCredentials(final Map<String, Object> credentials) {
         this.credentials = credentials;
+    }
+
+    /**
+     * Get object type of the carrier account.
+     *
+     * @return object type of the carrier account.
+     */
+    public String getObject() {
+        return object;
+    }
+
+    /**
+     * Set object type of the carrier account.
+     *
+     * @param object object type of the carrier account.
+     */
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    /**
+     * Get type of the carrier account.
+     *
+     * @return type of the carrier account.
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Set type of the carrier account.
+     *
+     * @param type type of the carrier account.
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * Get fields of the carrier account.
+     *
+     * @return fields of the carrier account.
+     */
+    public Fields getFields() {
+        return fields;
+    }
+
+    /**
+     * Set fields of the carrier account.
+     *
+     * @param fields fields of the carrier account.
+     */
+    public void setFields(Fields fields) {
+        this.fields = fields;
+    }
+
+    /**
+     * Get whether the carrier account is a clone.
+     *
+     * @return True if carrier account is a clone, false otherwise.
+     */
+    public boolean isClone() {
+        return clone;
+    }
+
+    /**
+     * Set whether the carrier account is a clone.
+     *
+     * @param clone True if carrier account is a clone, false otherwise.
+     */
+    public void setClone(boolean clone) {
+        this.clone = clone;
+    }
+
+    /**
+     * Get test credentials of the carrier account.
+     *
+     * @return test credentials of the carrier account.
+     */
+    public Map<String, Object> getTestCredentials() {
+        return testCredentials;
+    }
+
+    /**
+     * Set test credentials of the carrier account.
+     *
+     * @param testCredentials test credentials of the carrier account.
+     */
+    public void setTestCredentials(Map<String, Object> testCredentials) {
+        this.testCredentials = testCredentials;
     }
 
     /**
