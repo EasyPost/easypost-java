@@ -754,9 +754,37 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link #smartrates(Map)} instead.
      */
+    @Deprecated
     public List<Smartrate> getSmartrates(final Map<String, Object> params) throws EasyPostException {
-        return this.getSmartrates(params, null);
+        return this.smartrates(params);
+    }
+
+    /**
+     * Get Smartrates for this Shipment.
+     *
+     * @param params the options for the query.
+     * @return List of Smartrate objects
+     * @throws EasyPostException when the request fails.
+     */
+    public List<Smartrate> smartrates(final Map<String, Object> params) throws EasyPostException {
+        return this.smartrates(params, null);
+    }
+
+    /**
+     * Get Smartrates for this Shipment.
+     *
+     * @param params the options for the query.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return List of Smartrate objects
+     * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link #smartrates(Map, String)} instead.
+     */
+    @Deprecated
+    public List<Smartrate> getSmartrates(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return this.smartrates(params, apiKey);
     }
 
     /**
@@ -767,8 +795,7 @@ public final class Shipment extends EasyPostResource {
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<Smartrate> getSmartrates(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
+    public List<Smartrate> smartrates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         SmartrateCollection smartrateCollection =
                 request(RequestMethod.GET, String.format("%s/smartrate", instanceURL(Shipment.class, this.getId())),
                         params, SmartrateCollection.class, apiKey);
@@ -781,9 +808,22 @@ public final class Shipment extends EasyPostResource {
      * @param apiKey API key to use in request (overrides default API key).
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link #smartrates(String)} instead.
      */
+    @Deprecated
     public List<Smartrate> getSmartrates(final String apiKey) throws EasyPostException {
-        return this.getSmartrates(null, apiKey);
+        return this.smartrates(apiKey);
+    }
+
+    /**
+     * Get Smartrates for this Shipment.
+     *
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return List of Smartrate objects
+     * @throws EasyPostException when the request fails.
+     */
+    public List<Smartrate> smartrates(final String apiKey) throws EasyPostException {
+        return this.smartrates(null, apiKey);
     }
 
     /**
@@ -1009,22 +1049,50 @@ public final class Shipment extends EasyPostResource {
      *
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link #smartrates()} instead.
      */
+    @Deprecated
     public List<Smartrate> getSmartrates() throws EasyPostException {
-        return this.getSmartrates(null, null);
+        return this.smartrates();
     }
 
     /**
-     * Get the lowest smartrate from a list of smartrates.
+     * Get Smartrates for this Shipment.
      *
-     * @param smartrates       List of smartrates to filter from.
+     * @return List of Smartrate objects
+     * @throws EasyPostException when the request fails.
+     */
+    public List<Smartrate> smartrates() throws EasyPostException {
+        return this.smartrates(null, null);
+    }
+
+    /**
+     * Get the lowest Smartrate from a list of Smartrates.
+     *
+     * @param smartrates       List of Smartrates to filter from.
+     * @param deliveryDay      Delivery days restriction to use when filtering.
+     * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
+     * @return lowest Smartrate object
+     * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link #findLowestSmartrate(List, int, String)} instead.
+     */
+    @Deprecated
+    public static Smartrate getLowestSmartRate(final List<Smartrate> smartrates, int deliveryDay,
+                                               String deliveryAccuracy) throws EasyPostException {
+        return findLowestSmartrate(smartrates, deliveryDay, deliveryAccuracy);
+    }
+
+    /**
+     * Find the lowest Smartrate from a list of Smartrates.
+     *
+     * @param smartrates       List of Smartrates to filter from.
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      */
-    public static Smartrate getLowestSmartRate(final List<Smartrate> smartrates, int deliveryDay,
-                                               String deliveryAccuracy) throws EasyPostException {
+    public static Smartrate findLowestSmartrate(final List<Smartrate> smartrates, int deliveryDay,
+                                                String deliveryAccuracy) throws EasyPostException {
         Smartrate lowestSmartrate = null;
 
         HashSet<String> validDeliveryAccuracies = new HashSet<String>(
