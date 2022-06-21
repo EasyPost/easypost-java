@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1654210509,
+    "recordedAt": 1655410339,
     "request": {
       "body": "",
       "method": "GET",
@@ -18,7 +18,8 @@
       "uri": "https://api.easypost.com/v2/payment_methods"
     },
     "response": {
-      "body": "{\n  \"id\": \"cust_815cb5adf39548fc8ec9ee928cd51a96\",\n  \"object\": \"PaymentMethods\"\n}",
+      "body": "{\n  \"secondary_payment_method\": null,\n  \"id\": \"cust_815cb5adf39548fc8ec9ee928cd51a96\",\n  \"primary_payment_method\": null,\n  \"object\": \"PaymentMethods\"\n}",
+      "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
@@ -30,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb3nuq"
+          "bigweb4nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -57,17 +58,18 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "24678df362993fcde6411b4b000e10ee"
+          "f462041962ab8ea3e7797e6400090136"
         ],
         "x-proxied": [
-          "extlb1nuq 0910011e7e",
-          "intlb1nuq 570dfcbc0a"
+          "extlb3wdc 0910011e7e",
+          "intlb2wdc 0910011e7e",
+          "intlb2nuq 0910011e7e"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.018920"
+          "0.022183"
         ],
         "etag": [
           "W/\"a9da3fd4f7563256345830987de33ece\""
@@ -76,7 +78,7 @@
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206022117-ecf7ce5035-master"
+          "easypost-202206152126-24f54ae67a-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -86,8 +88,9 @@
         "code": 200,
         "message": "OK"
       },
+      "errors": null,
       "uri": "https://api.easypost.com/v2/payment_methods"
     },
-    "duration": 137
+    "duration": 522
   }
 ]

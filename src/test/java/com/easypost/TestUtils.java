@@ -13,21 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class TestUtils {
+    public enum ApiKey {
+        TEST,
+        PRODUCTION
+    }
+
     private static final String API_KEY_FAILED_TO_PULL = "couldnotpullapikey";
-
     private static final String CASSETTES_FOLDER = "cassettes";
-
     private static final java.util.List<String> HEADER_CENSORS = new ArrayList<String>() {{
         add("Authorization");
         add("User-Agent");
         add("X-Client-User-Agent");
     }};
-
     private static final List<String> QUERY_CENSORS = new ArrayList<String>() {{
         add("card[cvc]");
         add("card[number]");
     }};
-
     private static final List<String> BODY_CENSORS = new ArrayList<String>() {{
         add("api_keys");
         add("client_ip");
@@ -38,7 +39,6 @@ public abstract class TestUtils {
         add("phone");
         add("test_credentials");
     }};
-
     private static final List<CensorElement> BODY_ELEMENTS_TO_IGNORE_ON_MATCH = new ArrayList<CensorElement>() {{
         // Timezone difference between machines causing failure on replay
         add(new CensorElement("createdAt", false));
@@ -82,17 +82,40 @@ public abstract class TestUtils {
                 API_KEY_FAILED_TO_PULL; // if can't pull from environment, will use a fake key. Won't matter on replay.
     }
 
-    public enum ApiKey {
-        TEST,
-        PRODUCTION
-    }
-
     public static final class VCR {
         private final com.easypost.easyvcr.VCR vcr;
 
         private final String apiKey;
 
         private String testCassettesFolder;
+
+        /**
+         * Get whether the VCR is recording.
+         *
+         * @return true if recording, false otherwise.
+         */
+        public boolean isRecording() {
+            return vcr.getMode() == Mode.Record;
+        }
+
+        /**
+         * Constructor.
+         *
+         * @param testCassettesFolder The folder where the cassettes will be stored.
+         */
+        public VCR(String testCassettesFolder) {
+            this(testCassettesFolder, ApiKey.TEST);
+        }
+
+        /**
+         * Constructor.
+         *
+         * @param testCassettesFolder The folder where the cassettes will be stored.
+         * @param apiKey              The API key to use.
+         */
+        public VCR(String testCassettesFolder, ApiKey apiKey) {
+            this(testCassettesFolder, getApiKey(apiKey));
+        }
 
         /**
          * Constructor.
@@ -102,14 +125,10 @@ public abstract class TestUtils {
          */
         public VCR(String testCassettesFolder, String apiKey) {
             AdvancedSettings advancedSettings = new AdvancedSettings();
-            advancedSettings.matchRules = new MatchRules()
-                    .byMethod()
-                    .byFullUrl()
-                    .byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
-            advancedSettings.censors = new Censors("REDACTED")
-                    .censorHeadersByKeys(HEADER_CENSORS)
-                    .censorQueryParametersByKeys(QUERY_CENSORS)
-                    .censorBodyElementsByKeys(BODY_CENSORS);
+            advancedSettings.matchRules =
+                    new MatchRules().byMethod().byFullUrl().byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
+            advancedSettings.censors = new Censors("REDACTED").censorHeadersByKeys(HEADER_CENSORS)
+                    .censorQueryParametersByKeys(QUERY_CENSORS).censorBodyElementsByKeys(BODY_CENSORS);
 
             vcr = new com.easypost.easyvcr.VCR(advancedSettings);
 
@@ -133,25 +152,6 @@ public abstract class TestUtils {
         /**
          * Constructor.
          *
-         * @param testCassettesFolder The folder where the cassettes will be stored.
-         * @param apiKey              The API key to use.
-         */
-        public VCR(String testCassettesFolder, ApiKey apiKey) {
-            this(testCassettesFolder, getApiKey(apiKey));
-        }
-
-        /**
-         * Constructor.
-         *
-         * @param testCassettesFolder The folder where the cassettes will be stored.
-         */
-        public VCR(String testCassettesFolder) {
-            this(testCassettesFolder, ApiKey.TEST);
-        }
-
-        /**
-         * Constructor.
-         *
          * @param apiKey The API key to use.
          */
         public VCR(ApiKey apiKey) {
@@ -166,12 +166,12 @@ public abstract class TestUtils {
         }
 
         /**
-         * Get whether the VCR is recording.
+         * Set up the VCR for a unit test.
          *
-         * @return true if recording, false otherwise.
+         * @param cassetteName The name of the cassette to use.
          */
-        public boolean isRecording() {
-            return vcr.getMode() == Mode.Record;
+        public void setUpTest(String cassetteName) {
+            setUpTest(cassetteName, null);
         }
 
         /**
@@ -203,15 +203,6 @@ public abstract class TestUtils {
 
             // set VCR to be used during requests
             EasyPost._vcr = vcr;
-        }
-
-        /**
-         * Set up the VCR for a unit test.
-         *
-         * @param cassetteName The name of the cassette to use.
-         */
-        public void setUpTest(String cassetteName) {
-            setUpTest(cassetteName, null);
         }
     }
 }

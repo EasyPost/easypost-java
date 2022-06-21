@@ -24,15 +24,6 @@ public final class CustomsInfoTest {
     }
 
     /**
-     * Create a customs info object.
-     *
-     * @return CustomsInfo object.
-     */
-    private static CustomsInfo createBasicCustomsInfo() throws EasyPostException {
-        return CustomsInfo.create(Fixture.basicCustomsInfo());
-    }
-
-    /**
      * Test creating a CustomsInfo.
      *
      * @throws EasyPostException when the request fails.
@@ -46,6 +37,15 @@ public final class CustomsInfoTest {
         assertInstanceOf(CustomsInfo.class, customsInfo);
         assertTrue(customsInfo.getId().startsWith("cstinfo_"));
         assertEquals("NOEEI 30.37(a)", customsInfo.getEelPfc());
+    }
+
+    /**
+     * Create a customs info object.
+     *
+     * @return CustomsInfo object.
+     */
+    private static CustomsInfo createBasicCustomsInfo() throws EasyPostException {
+        return CustomsInfo.create(Fixture.basicCustomsInfo());
     }
 
     /**

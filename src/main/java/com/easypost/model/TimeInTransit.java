@@ -171,6 +171,6 @@ public final class TimeInTransit {
                 return this.percentile99;
             default:
                 throw new EasyPostException("Invalid percentile value");
-          }
+        }
     }
 }

@@ -35,21 +35,6 @@ public final class PickupTest {
     }
 
     /**
-     * Create a pickup.
-     *
-     * @return Pickup object
-     */
-    private static Pickup createBasicPickup() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
-
-        Map<String, Object> pickupData = Fixture.basicPickup();
-        pickupData.put("shipment", shipment);
-
-        Pickup pickup = Pickup.create(pickupData);
-        return pickup;
-    }
-
-    /**
      * Test creating a pickup.
      *
      * @throws EasyPostException when the request fails.
@@ -63,6 +48,21 @@ public final class PickupTest {
         assertInstanceOf(Pickup.class, pickup);
         assertTrue(pickup.getId().startsWith("pickup_"));
         assertNotNull(pickup.getPickupRates());
+    }
+
+    /**
+     * Create a pickup.
+     *
+     * @return Pickup object
+     */
+    private static Pickup createBasicPickup() throws EasyPostException {
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+
+        Map<String, Object> pickupData = Fixture.basicPickup();
+        pickupData.put("shipment", shipment);
+
+        Pickup pickup = Pickup.create(pickupData);
+        return pickup;
     }
 
     /**

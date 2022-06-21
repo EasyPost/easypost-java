@@ -9,24 +9,6 @@ public final class RefundCollection extends EasyPostResource {
     private Boolean hasMore;
 
     /**
-     * Get this RefundCollection's Refund objects.
-     *
-     * @return a List of Refund objects.
-     */
-    public List<Refund> getRefunds() {
-        return refunds;
-    }
-
-    /**
-     * Set this RefundCollection's Refund objects.
-     *
-     * @param refunds a List of Refund objects.
-     */
-    public void setRefunds(final List<Refund> refunds) {
-        this.refunds = refunds;
-    }
-
-    /**
      * Get whether there are more Refund objects to retrieve.
      *
      * @return true if there are more Refund objects to retrieve.
@@ -42,5 +24,23 @@ public final class RefundCollection extends EasyPostResource {
      */
     public void setHasMore(final Boolean hasMore) {
         this.hasMore = hasMore;
+    }
+
+    /**
+     * Get this RefundCollection's Refund objects.
+     *
+     * @return a List of Refund objects.
+     */
+    public List<Refund> getRefunds() {
+        return refunds;
+    }
+
+    /**
+     * Set this RefundCollection's Refund objects.
+     *
+     * @param refunds a List of Refund objects.
+     */
+    public void setRefunds(final List<Refund> refunds) {
+        this.refunds = refunds;
     }
 }

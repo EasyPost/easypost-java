@@ -9,24 +9,6 @@ public final class ShipmentCollection extends EasyPostResource {
     private Boolean hasMore;
 
     /**
-     * Get this ShipmentCollection's Shipment objects.
-     *
-     * @return List of Shipment objects.
-     */
-    public List<Shipment> getShipments() {
-        return shipments;
-    }
-
-    /**
-     * Set this ShipmentCollection's Shipment objects.
-     *
-     * @param shipments List of Shipment objects.
-     */
-    public void setShipments(final List<Shipment> shipments) {
-        this.shipments = shipments;
-    }
-
-    /**
      * Get whether there are more Shipment objects to retrieve.
      *
      * @return true if there are more Shipment objects to retrieve, false otherwise.
@@ -42,5 +24,23 @@ public final class ShipmentCollection extends EasyPostResource {
      */
     public void setHasMore(final Boolean hasMore) {
         this.hasMore = hasMore;
+    }
+
+    /**
+     * Get this ShipmentCollection's Shipment objects.
+     *
+     * @return List of Shipment objects.
+     */
+    public List<Shipment> getShipments() {
+        return shipments;
+    }
+
+    /**
+     * Set this ShipmentCollection's Shipment objects.
+     *
+     * @param shipments List of Shipment objects.
+     */
+    public void setShipments(final List<Shipment> shipments) {
+        this.shipments = shipments;
     }
 }

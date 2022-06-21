@@ -1,4 +1,3 @@
 package com.easypost.model;
 
-public class PrimaryPaymentMethod extends BaseCreditCard {
-}
+public class PrimaryPaymentMethod extends BaseCreditCard {}

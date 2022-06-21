@@ -8,21 +8,21 @@ public final class AddressVerification {
     private AddressDetail details;
 
     /**
-     * Get whether the address verification was successful.
+     * Get the address detail object.
      *
-     * @return true if the address was successfully verified
+     * @return AddressDetail object
      */
-    public Boolean getSuccess() {
-        return success;
+    public AddressDetail getAddressDetail() {
+        return details;
     }
 
     /**
-     * Set whether the address verification was successful.
+     * Set the address detail object.
      *
-     * @param success true if the address was successfully verified
+     * @param details AddressDetail object
      */
-    public void setSuccess(final Boolean success) {
-        this.success = success;
+    public void setAddressDetail(final AddressDetail details) {
+        this.details = details;
     }
 
     /**
@@ -44,20 +44,20 @@ public final class AddressVerification {
     }
 
     /**
-     * Get the address detail object.
+     * Get whether the address verification was successful.
      *
-     * @return AddressDetail object
+     * @return true if the address was successfully verified
      */
-    public AddressDetail getAddressDetail() {
-        return details;
+    public Boolean getSuccess() {
+        return success;
     }
 
     /**
-     * Set the address detail object.
+     * Set whether the address verification was successful.
      *
-     * @param details AddressDetail object
+     * @param success true if the address was successfully verified
      */
-    public void setAddressDetail(final AddressDetail details) {
-        this.details = details;
+    public void setSuccess(final Boolean success) {
+        this.success = success;
     }
 }

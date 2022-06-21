@@ -25,6 +25,168 @@ public final class Pickup extends EasyPostResource {
     private List<PickupRate> pickupRates;
 
     /**
+     * Get the address of this Pickup.
+     *
+     * @return Address object.
+     */
+    public Address getAddress() {
+        return address;
+    }
+
+    /**
+     * Set the address of this Pickup.
+     *
+     * @param address Address object.
+     */
+    public void setAddress(final Address address) {
+        this.address = address;
+    }
+
+    /**
+     * Get the carrier accounts of this Pickup.
+     *
+     * @return List of CarrierAccount objects.
+     */
+    public List<CarrierAccount> getCarrierAccounts() {
+        return carrierAccounts;
+    }
+
+    /**
+     * Set the carrier accounts of this Pickup.
+     *
+     * @param carrierAccounts List of CarrierAccount objects.
+     */
+    public void setCarrierAccounts(final List<CarrierAccount> carrierAccounts) {
+        this.carrierAccounts = carrierAccounts;
+    }
+
+    /**
+     * Get the confirmation of this Pickup.
+     *
+     * @return the confirmation of this Pickup.
+     */
+    public String getConfirmation() {
+        return confirmation;
+    }
+
+    /**
+     * Set the confirmation of this Pickup.
+     *
+     * @param confirmation the confirmation of this Pickup.
+     */
+    public void setConfirmation(final String confirmation) {
+        this.confirmation = confirmation;
+    }
+
+    /**
+     * Get instructions for the pickup.
+     *
+     * @return instructions for the pickup.
+     */
+    public String getInstructions() {
+        return instructions;
+    }
+
+    /**
+     * Set instructions for the pickup.
+     *
+     * @param instructions instructions for the pickup.
+     */
+    public void setInstructions(final String instructions) {
+        this.instructions = instructions;
+    }
+
+    /**
+     * Get whether the address is an account address.
+     *
+     * @return whether the address is an account address.
+     */
+    public Boolean getIsAccountAddress() {
+        return isAccountAddress;
+    }
+
+    /**
+     * Set whether the address is an account address.
+     *
+     * @param isAccountAddress if the address is an account address.
+     */
+    public void setIsAccountAddress(final Boolean isAccountAddress) {
+        this.isAccountAddress = isAccountAddress;
+    }
+
+    /**
+     * Get the latest date of this Pickup.
+     *
+     * @return the latest date of this Pickup.
+     */
+    public Date getMaxDatetime() {
+        return maxDatetime;
+    }
+
+    /**
+     * Set the latest date of this Pickup.
+     *
+     * @param maxDatetime the latest date of this Pickup.
+     */
+    public void setMaxDatetime(final Date maxDatetime) {
+        this.maxDatetime = maxDatetime;
+    }
+
+    /**
+     * Get the messages of this Pickup.
+     *
+     * @return List of ShipmentMessages objects.
+     */
+    public List<ShipmentMessage> getMessages() {
+        return messages;
+    }
+
+    /**
+     * Set the messages of this Pickup.
+     *
+     * @param messages List of ShipmentMessages objects.
+     */
+    public void setMessages(final List<ShipmentMessage> messages) {
+        this.messages = messages;
+    }
+
+    /**
+     * Get the earliest date of this Pickup.
+     *
+     * @return the earliest date of this Pickup.
+     */
+    public Date getMinDatetime() {
+        return minDatetime;
+    }
+
+    /**
+     * Set the earliest date of this Pickup.
+     *
+     * @param minDatetime the earliest date of this Pickup.
+     */
+    public void setMinDatetime(final Date minDatetime) {
+        this.minDatetime = minDatetime;
+    }
+
+    /**
+     * Get the reference of this Pickup.
+     *
+     * @return the reference of this Pickup.
+     */
+    public String getReference() {
+        return reference;
+    }
+
+    /**
+     * Set the reference of this Pickup.
+     *
+     * @param reference the reference of this Pickup.
+     */
+    public void setReference(final String reference) {
+        this.reference = reference;
+    }
+
+    /**
      * Create a new Pickup object from a map of parameters.
      *
      * @param params Map of parameters.
@@ -71,6 +233,29 @@ public final class Pickup extends EasyPostResource {
      */
     public static Pickup retrieve(final String id, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, instanceURL(Pickup.class, id), null, Pickup.class, apiKey);
+    }
+
+    /**
+     * Refresh this Pickup.
+     *
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Pickup refresh() throws EasyPostException {
+        return this.refresh(null, null);
+    }
+
+    /**
+     * Refresh this Pickup.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Pickup refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, String.format("%s", instanceURL(Pickup.class, this.getId())), params,
+                Pickup.class, apiKey);
     }
 
     /**
@@ -128,196 +313,6 @@ public final class Pickup extends EasyPostResource {
     }
 
     /**
-     * Get the reference of this Pickup.
-     *
-     * @return the reference of this Pickup.
-     */
-    public String getReference() {
-        return reference;
-    }
-
-    /**
-     * Set the reference of this Pickup.
-     *
-     * @param reference the reference of this Pickup.
-     */
-    public void setReference(final String reference) {
-        this.reference = reference;
-    }
-
-    /**
-     * Get the earliest date of this Pickup.
-     *
-     * @return the earliest date of this Pickup.
-     */
-    public Date getMinDatetime() {
-        return minDatetime;
-    }
-
-    /**
-     * Set the earliest date of this Pickup.
-     *
-     * @param minDatetime the earliest date of this Pickup.
-     */
-    public void setMinDatetime(final Date minDatetime) {
-        this.minDatetime = minDatetime;
-    }
-
-    /**
-     * Get the latest date of this Pickup.
-     *
-     * @return the latest date of this Pickup.
-     */
-    public Date getMaxDatetime() {
-        return maxDatetime;
-    }
-
-    /**
-     * Set the latest date of this Pickup.
-     *
-     * @param maxDatetime the latest date of this Pickup.
-     */
-    public void setMaxDatetime(final Date maxDatetime) {
-        this.maxDatetime = maxDatetime;
-    }
-
-    /**
-     * Get whether the address is an account address.
-     *
-     * @return whether the address is an account address.
-     */
-    public Boolean getIsAccountAddress() {
-        return isAccountAddress;
-    }
-
-    /**
-     * Set whether the address is an account address.
-     *
-     * @param isAccountAddress if the address is an account address.
-     */
-    public void setIsAccountAddress(final Boolean isAccountAddress) {
-        this.isAccountAddress = isAccountAddress;
-    }
-
-    /**
-     * Get instructions for the pickup.
-     *
-     * @return instructions for the pickup.
-     */
-    public String getInstructions() {
-        return instructions;
-    }
-
-    /**
-     * Set instructions for the pickup.
-     *
-     * @param instructions instructions for the pickup.
-     */
-    public void setInstructions(final String instructions) {
-        this.instructions = instructions;
-    }
-
-    /**
-     * Get the messages of this Pickup.
-     *
-     * @return List of ShipmentMessages objects.
-     */
-    public List<ShipmentMessage> getMessages() {
-        return messages;
-    }
-
-    /**
-     * Set the messages of this Pickup.
-     *
-     * @param messages List of ShipmentMessages objects.
-     */
-    public void setMessages(final List<ShipmentMessage> messages) {
-        this.messages = messages;
-    }
-
-    /**
-     * Get the confirmation of this Pickup.
-     *
-     * @return the confirmation of this Pickup.
-     */
-    public String getConfirmation() {
-        return confirmation;
-    }
-
-    /**
-     * Set the confirmation of this Pickup.
-     *
-     * @param confirmation the confirmation of this Pickup.
-     */
-    public void setConfirmation(final String confirmation) {
-        this.confirmation = confirmation;
-    }
-
-    /**
-     * Get the address of this Pickup.
-     *
-     * @return Address object.
-     */
-    public Address getAddress() {
-        return address;
-    }
-
-    /**
-     * Set the address of this Pickup.
-     *
-     * @param address Address object.
-     */
-    public void setAddress(final Address address) {
-        this.address = address;
-    }
-
-    /**
-     * Get the carrier accounts of this Pickup.
-     *
-     * @return List of CarrierAccount objects.
-     */
-    public List<CarrierAccount> getCarrierAccounts() {
-        return carrierAccounts;
-    }
-
-    /**
-     * Set the carrier accounts of this Pickup.
-     *
-     * @param carrierAccounts List of CarrierAccount objects.
-     */
-    public void setCarrierAccounts(final List<CarrierAccount> carrierAccounts) {
-        this.carrierAccounts = carrierAccounts;
-    }
-
-    /**
-     * Get the pickup rates of this Pickup.
-     *
-     * @return List of PickupRate objects.
-     */
-    public List<PickupRate> getPickupRates() {
-        return pickupRates;
-    }
-
-    /**
-     * Set the pickup rates of this Pickup.
-     *
-     * @param pickupRates List of PickupRate objects.
-     */
-    public void setPickupRates(final List<PickupRate> pickupRates) {
-        this.pickupRates = pickupRates;
-    }
-
-    /**
-     * Refresh this Pickup.
-     *
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Pickup refresh() throws EasyPostException {
-        return this.refresh(null, null);
-    }
-
-    /**
      * Refresh this Pickup.
      *
      * @param params Map of parameters.
@@ -340,19 +335,6 @@ public final class Pickup extends EasyPostResource {
     }
 
     /**
-     * Refresh this Pickup.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Pickup refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s", instanceURL(Pickup.class, this.getId())), params,
-                Pickup.class, apiKey);
-    }
-
-    /**
      * Buy this Pickup.
      *
      * @return Pickup object.
@@ -360,6 +342,23 @@ public final class Pickup extends EasyPostResource {
      */
     public Pickup buy() throws EasyPostException {
         return this.buy(null, null);
+    }
+
+    /**
+     * Buy this Pickup.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Pickup buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        Pickup response =
+                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Pickup.class, this.getId())), params,
+                        Pickup.class, apiKey);
+
+        this.merge(this, response);
+        return this;
     }
 
     /**
@@ -399,23 +398,6 @@ public final class Pickup extends EasyPostResource {
     }
 
     /**
-     * Buy this Pickup.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Pickup buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Pickup response =
-                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Pickup.class, this.getId())), params,
-                        Pickup.class, apiKey);
-
-        this.merge(this, response);
-        return this;
-    }
-
-    /**
      * Cancel this Pickup.
      *
      * @return Pickup object.
@@ -423,6 +405,19 @@ public final class Pickup extends EasyPostResource {
      */
     public Pickup cancel() throws EasyPostException {
         return this.cancel(null, null);
+    }
+
+    /**
+     * Cancel this Pickup.
+     *
+     * @param params Map of parameters.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Pickup object.
+     * @throws EasyPostException when the request fails.
+     */
+    public Pickup cancel(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.POST, String.format("%s/cancel", instanceURL(Pickup.class, this.getId())), params,
+                Pickup.class, apiKey);
     }
 
     /**
@@ -448,19 +443,6 @@ public final class Pickup extends EasyPostResource {
     }
 
     /**
-     * Cancel this Pickup.
-     *
-     * @param params Map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Pickup cancel(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, String.format("%s/cancel", instanceURL(Pickup.class, this.getId())), params,
-                Pickup.class, apiKey);
-    }
-
-    /**
      * Get the lowest rate for this Pickup.
      *
      * @return lowest PickupRate object
@@ -468,17 +450,6 @@ public final class Pickup extends EasyPostResource {
      */
     public PickupRate lowestRate() throws EasyPostException {
         return this.lowestRate(null, null);
-    }
-
-    /**
-     * Get the lowest rate for this pickup.
-     *
-     * @param carriers the carriers to use in the query.
-     * @return PickupRate object
-     * @throws EasyPostException when the request fails.
-     */
-    public PickupRate lowestRate(final List<String> carriers) throws EasyPostException {
-        return this.lowestRate(carriers, null);
     }
 
     /**
@@ -497,5 +468,34 @@ public final class Pickup extends EasyPostResource {
         }
 
         return (PickupRate) Utilities.getLowestObjectRate(rates, carriers, services);
+    }
+
+    /**
+     * Get the pickup rates of this Pickup.
+     *
+     * @return List of PickupRate objects.
+     */
+    public List<PickupRate> getPickupRates() {
+        return pickupRates;
+    }
+
+    /**
+     * Set the pickup rates of this Pickup.
+     *
+     * @param pickupRates List of PickupRate objects.
+     */
+    public void setPickupRates(final List<PickupRate> pickupRates) {
+        this.pickupRates = pickupRates;
+    }
+
+    /**
+     * Get the lowest rate for this pickup.
+     *
+     * @param carriers the carriers to use in the query.
+     * @return PickupRate object
+     * @throws EasyPostException when the request fails.
+     */
+    public PickupRate lowestRate(final List<String> carriers) throws EasyPostException {
+        return this.lowestRate(carriers, null);
     }
 }

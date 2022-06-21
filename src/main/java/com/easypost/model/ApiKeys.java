@@ -11,24 +11,21 @@ public final class ApiKeys extends EasyPostResource {
     private List<ApiKeys> children;
 
     /**
-     * Get all API keys.
+     * Get a list of API keys for a given parent key.
      *
-     * @return ApiKeys object.
-     * @throws EasyPostException when the request fails.
+     * @return List of ApiKeys objects.
      */
-    public static ApiKeys all() throws EasyPostException {
-        return all(null);
+    public List<ApiKeys> getChildren() {
+        return children;
     }
 
     /**
-     * Get all API keys.
+     * Set a list of API keys for a given parent key.
      *
-     * @param apiKey API key to use for this request.
-     * @return ApiKeys object.
-     * @throws EasyPostException when the request fails.
+     * @param children List of ApiKeys objects.
      */
-    public static ApiKeys all(final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
+    public void setChildren(final List<ApiKeys> children) {
+        this.children = children;
     }
 
     /**
@@ -68,21 +65,24 @@ public final class ApiKeys extends EasyPostResource {
     }
 
     /**
-     * Get a list of API keys for a given parent key.
+     * Get all API keys.
      *
-     * @return List of ApiKeys objects.
+     * @return ApiKeys object.
+     * @throws EasyPostException when the request fails.
      */
-    public List<ApiKeys> getChildren() {
-        return children;
+    public static ApiKeys all() throws EasyPostException {
+        return all(null);
     }
 
     /**
-     * Set a list of API keys for a given parent key.
+     * Get all API keys.
      *
-     * @param children List of ApiKeys objects.
+     * @param apiKey API key to use for this request.
+     * @return ApiKeys object.
+     * @throws EasyPostException when the request fails.
      */
-    public void setChildren(final List<ApiKeys> children) {
-        this.children = children;
+    public static ApiKeys all(final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
     }
 
 }

@@ -31,31 +31,6 @@ public final class BatchTest {
     }
 
     /**
-     * Create a batch.
-     *
-     * @return Batch object.
-     */
-    private static Batch createBasicBatch() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
-
-        List<Object> shipments = new ArrayList<>();
-        shipments.add(Fixture.basicShipment());
-        params.put("shipments", shipments);
-
-        return Batch.create(params);
-    }
-
-    private static Batch createOneCallBuyBatch() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
-
-        List<Object> shipments = new ArrayList<>();
-        shipments.add(Fixture.oneCallBuyShipment());
-        params.put("shipments", shipments);
-
-        return Batch.create(params);
-    }
-
-    /**
      * Test creating a Batch.
      *
      * @throws EasyPostException when the request fails.
@@ -69,6 +44,21 @@ public final class BatchTest {
         assertInstanceOf(Batch.class, batch);
         assertTrue(batch.getId().startsWith("batch_"));
         assertNotNull(batch.getShipments());
+    }
+
+    /**
+     * Create a batch.
+     *
+     * @return Batch object.
+     */
+    private static Batch createBasicBatch() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+
+        List<Object> shipments = new ArrayList<>();
+        shipments.add(Fixture.basicShipment());
+        params.put("shipments", shipments);
+
+        return Batch.create(params);
     }
 
     /**
@@ -148,6 +138,16 @@ public final class BatchTest {
 
         assertInstanceOf(Batch.class, batch);
         assertEquals(1, batch.getNumShipments().intValue());
+    }
+
+    private static Batch createOneCallBuyBatch() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+
+        List<Object> shipments = new ArrayList<>();
+        shipments.add(Fixture.oneCallBuyShipment());
+        params.put("shipments", shipments);
+
+        return Batch.create(params);
     }
 
     /**

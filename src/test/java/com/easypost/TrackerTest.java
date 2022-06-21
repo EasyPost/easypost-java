@@ -29,19 +29,6 @@ public final class TrackerTest {
     }
 
     /**
-     * Create a tracker.
-     *
-     * @return Tracker object
-     */
-    private static Tracker createBasicTracker() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
-        params.put("carrier", Fixture.usps());
-        params.put("tracking_code", "EZ1000000001");
-
-        return Tracker.create(params);
-    }
-
-    /**
      * Test creating a tracker.
      *
      * @throws EasyPostException when the request fails.
@@ -55,6 +42,19 @@ public final class TrackerTest {
         assertInstanceOf(Tracker.class, tracker);
         assertTrue(tracker.getId().startsWith("trk_"));
         assertEquals("pre_transit", tracker.getStatus());
+    }
+
+    /**
+     * Create a tracker.
+     *
+     * @return Tracker object
+     */
+    private static Tracker createBasicTracker() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("carrier", Fixture.usps());
+        params.put("tracking_code", "EZ1000000001");
+
+        return Tracker.create(params);
     }
 
     /**
@@ -106,7 +106,11 @@ public final class TrackerTest {
         vcr.setUpTest("create_list");
 
         Map<String, Object> params = new HashMap<>();
-        String[] trackingCodes = new String[] { "EZ1000000001", "EZ1000000002", "EZ1000000003" };
+        String[] trackingCodes = new String[] {
+                "EZ1000000001",
+                "EZ1000000002",
+                "EZ1000000003"
+        };
 
         for (int i = 0; i < trackingCodes.length; i++) {
             Map<String, Object> tracker = new HashMap<>();

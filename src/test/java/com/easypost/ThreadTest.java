@@ -16,12 +16,6 @@ public final class ThreadTest {
     private static Map<String, Object> defaultParcel = new HashMap<String, Object>();
     private static TestUtils.VCR vcr;
 
-    static Map<String, Object> orderShipment() throws EasyPostException {
-        Map<String, Object> shipmentMap = new HashMap<String, Object>();
-        shipmentMap.put("parcel", defaultParcel);
-        return shipmentMap;
-    }
-
     /**
      * Set up the testing environment for this file.
      *
@@ -93,6 +87,12 @@ public final class ThreadTest {
 
         // for more information on threads including adding timeouts and interrupts see:
         // http://docs.oracle.com/javase/tutorial/essential/concurrency/index.html
+    }
+
+    static Map<String, Object> orderShipment() throws EasyPostException {
+        Map<String, Object> shipmentMap = new HashMap<String, Object>();
+        shipmentMap.put("parcel", defaultParcel);
+        return shipmentMap;
     }
 
     /**

@@ -9,24 +9,6 @@ public final class PickupCollection extends EasyPostResource {
     private Boolean hasMore;
 
     /**
-     * Get this PickupCollection's Pickup objects.
-     *
-     * @return List of Pickup objects.
-     */
-    public List<Pickup> getPickups() {
-        return pickups;
-    }
-
-    /**
-     * Set this PickupCollection's Pickup objects.
-     *
-     * @param pickups List of Pickup objects.
-     */
-    public void setPickups(final List<Pickup> pickups) {
-        this.pickups = pickups;
-    }
-
-    /**
      * Get whether there are more Pickup objects to retrieve.
      *
      * @return whether there are more Pickup objects to retrieve.
@@ -42,5 +24,23 @@ public final class PickupCollection extends EasyPostResource {
      */
     public void setHasMore(final Boolean hasMore) {
         this.hasMore = hasMore;
+    }
+
+    /**
+     * Get this PickupCollection's Pickup objects.
+     *
+     * @return List of Pickup objects.
+     */
+    public List<Pickup> getPickups() {
+        return pickups;
+    }
+
+    /**
+     * Set this PickupCollection's Pickup objects.
+     *
+     * @param pickups List of Pickup objects.
+     */
+    public void setPickups(final List<Pickup> pickups) {
+        this.pickups = pickups;
     }
 }

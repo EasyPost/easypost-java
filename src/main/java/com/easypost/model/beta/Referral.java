@@ -4,6 +4,7 @@ import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.ApiKey;
 import com.easypost.model.BaseUser;
+import com.easypost.model.CreditCardPriority;
 import com.easypost.model.Utilities;
 
 import java.io.BufferedReader;
@@ -20,9 +21,22 @@ import java.util.Map;
 public class Referral extends BaseUser {
     private List<ApiKey> apiKeys;
 
-    public enum Priority {
-        PRIMARY,
-        SECONDARY
+    /**
+     * Get the api keys of the Referral user.
+     *
+     * @return the api keys of the Referral user.
+     */
+    public List<ApiKey> getApiKeys() {
+        return apiKeys;
+    }
+
+    /**
+     * Set the api keys of the Referral user.
+     *
+     * @param apiKeys the api keys of the Referral user.
+     */
+    public void setApiKeys(List<ApiKey> apiKeys) {
+        this.apiKeys = apiKeys;
     }
 
     /**
@@ -49,13 +63,13 @@ public class Referral extends BaseUser {
         wrappedParams.put("user", params);
 
         return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "referral_customers"),
-        wrappedParams, Referral.class, apiKey);
+                wrappedParams, Referral.class, apiKey);
     }
 
     /**
      * Update a Referral object email. This function requires the Partner User's API key.
      *
-     * @param email Email of the referral user to update.
+     * @param email  Email of the referral user to update.
      * @param userId ID of the referral user to update.
      * @return true if success.
      * @throws EasyPostException when the request fails.
@@ -67,7 +81,7 @@ public class Referral extends BaseUser {
     /**
      * Update a Referral object email. This function requires the Partner User's API key.
      *
-     * @param email Email of the referral user to update.
+     * @param email  Email of the referral user to update.
      * @param userId ID of the referral user to update.
      * @param apiKey API key to use in request (overrides default API key).
      * @return true if success.
@@ -80,7 +94,7 @@ public class Referral extends BaseUser {
         wrappedParams.put("user", params);
 
         request(RequestMethod.PUT, String.format("%s/%s/%s", EasyPost.BETA_API_BASE, "referral_customers", userId),
-            wrappedParams, Referral.class, apiKey);
+                wrappedParams, Referral.class, apiKey);
 
         return true;
     }
@@ -105,8 +119,9 @@ public class Referral extends BaseUser {
      * @throws EasyPostException when the request fails.
      */
     public static List<Referral> all(final Map<String, Object> params, String apiKey) throws EasyPostException {
-        Referral[] response = request(RequestMethod.GET, String.format("%s/%s", EasyPost.BETA_API_BASE,
-            "referral_customers"), params, Referral[].class, apiKey);
+        Referral[] response =
+                request(RequestMethod.GET, String.format("%s/%s", EasyPost.BETA_API_BASE, "referral_customers"), params,
+                        Referral[].class, apiKey);
 
         return Arrays.asList(response);
     }
@@ -114,35 +129,34 @@ public class Referral extends BaseUser {
     /**
      * Add credit card to a referral user. This function requires the Referral User's API key.
      *
-     * @param referralApiKey API key of the referral user.
-     * @param number Credit card number.
+     * @param referralApiKey  API key of the referral user.
+     * @param number          Credit card number.
      * @param expirationMonth Expiration month of the credit card.
-     * @param expirationYear Expiration year of the credit card.
-     * @param cvc CVC of the credit card.
-     *
+     * @param expirationYear  Expiration year of the credit card.
+     * @param cvc             CVC of the credit card.
      * @return CreditCard object.
      * @throws Exception when the request fails.
      */
-    public static CreditCard addCreditCard(String referralApiKey, String number,
-        int expirationMonth, int expirationYear, String cvc) throws Exception {
-        return addCreditCard(referralApiKey, number, expirationMonth, expirationYear, cvc, Priority.PRIMARY);
+    public static CreditCard addCreditCard(String referralApiKey, String number, int expirationMonth,
+                                           int expirationYear, String cvc) throws Exception {
+        return addCreditCard(referralApiKey, number, expirationMonth, expirationYear, cvc, CreditCardPriority.PRIMARY);
     }
 
     /**
      * Add credit card to a referral user. This function requires the Referral User's API key.
      *
-     * @param referralApiKey API key of the referral user.
-     * @param number Credit card number.
+     * @param referralApiKey  API key of the referral user.
+     * @param number          Credit card number.
      * @param expirationMonth Expiration month of the credit card.
-     * @param expirationYear Expiration year of the credit card.
-     * @param cvc CVC of the credit card.
-     * @param priority Priority of this credit card.
-     *
+     * @param expirationYear  Expiration year of the credit card.
+     * @param cvc             CVC of the credit card.
+     * @param priority        Priority of this credit card.
      * @return CreditCard object.
      * @throws Exception when the request fails.
      */
-    public static CreditCard addCreditCard(String referralApiKey, String number,
-        int expirationMonth, int expirationYear, String cvc, Priority priority) throws Exception {
+    public static CreditCard addCreditCard(String referralApiKey, String number, int expirationMonth,
+                                           int expirationYear, String cvc, CreditCardPriority priority)
+            throws Exception {
         String easypostStripeApiKey = retrieveEasypostStripeApiKey();
         String stripeToken;
 
@@ -162,9 +176,9 @@ public class Referral extends BaseUser {
      * @throws EasyPostException when the request fails.
      */
     private static String retrieveEasypostStripeApiKey() throws EasyPostException {
-        @SuppressWarnings("unchecked")
-        Map<String, String> response = request(RequestMethod.GET, String.format("%s/%s",
-            EasyPost.BETA_API_BASE, "partners/stripe_public_key"), null, Map.class, null);
+        @SuppressWarnings ("unchecked") Map<String, String> response =
+                request(RequestMethod.GET, String.format("%s/%s", EasyPost.BETA_API_BASE, "partners/stripe_public_key"),
+                        null, Map.class, null);
 
         return response.getOrDefault("public_key", "");
     }
@@ -172,17 +186,16 @@ public class Referral extends BaseUser {
     /**
      * Get credit card token from Stripe.
      *
-     * @param number Credit card number.
-     * @param expirationMonth Expiration month of the credit card.
-     * @param expirationYear Expiration year of the credit card.
-     * @param cvc CVC of the credit card.
+     * @param number               Credit card number.
+     * @param expirationMonth      Expiration month of the credit card.
+     * @param expirationYear       Expiration year of the credit card.
+     * @param cvc                  CVC of the credit card.
      * @param easypostStripeApiKey EasyPost Stripe API key.
-     *
      * @return Stripe token.
      * @throws Exception when the request fails.
      */
-    private static String createStripeToken(String number, int expirationMonth, int expirationYear,
-        String cvc, String easypostStripeApiKey) throws Exception {
+    private static String createStripeToken(String number, int expirationMonth, int expirationYear, String cvc,
+                                            String easypostStripeApiKey) throws Exception {
         Map<String, String> params = new HashMap<>();
         params.put("number", number);
         params.put("exp_month", String.valueOf(expirationMonth));
@@ -205,8 +218,7 @@ public class Referral extends BaseUser {
 
         StringBuilder response;
 
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(conn.getInputStream()))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
 
             String line;
             response = new StringBuilder();
@@ -222,8 +234,7 @@ public class Referral extends BaseUser {
 
         String responseBody = response.toString();
 
-        @SuppressWarnings("unchecked")
-        Map<String, Object> responseMap = GSON.fromJson(responseBody, Map.class);
+        @SuppressWarnings ("unchecked") Map<String, Object> responseMap = GSON.fromJson(responseBody, Map.class);
 
         return responseMap.get("id").toString();
     }
@@ -233,13 +244,12 @@ public class Referral extends BaseUser {
      *
      * @param referralApiKey API key of the referral user.
      * @param stripeObjectId Stripe token.
-     * @param priority Credit card priority.
-     *
+     * @param priority       Credit card priority.
      * @return CreditCard object.
      * @throws EasyPostException when the request fails.
      */
-    private static CreditCard createEasypostCreditCard(String referralApiKey,
-        String stripeObjectId, String priority) throws EasyPostException {
+    private static CreditCard createEasypostCreditCard(String referralApiKey, String stripeObjectId, String priority)
+            throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
         params.put("stripe_object_id", stripeObjectId);
         params.put("priority", priority);
@@ -248,24 +258,6 @@ public class Referral extends BaseUser {
         wrappedParams.put("credit_card", params);
 
         return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "credit_cards"),
-        wrappedParams, CreditCard.class, referralApiKey);
-    }
-
-    /**
-     * Get the api keys of the Referral user.
-     *
-     * @return the api keys of the Referral user.
-     */
-    public List<ApiKey> getApiKeys() {
-        return apiKeys;
-    }
-
-    /**
-     * Set the api keys of the Referral user.
-     *
-     * @param apiKeys the api keys of the Referral user.
-     */
-    public void setApiKeys(List<ApiKey> apiKeys) {
-        this.apiKeys = apiKeys;
+                wrappedParams, CreditCard.class, referralApiKey);
     }
 }

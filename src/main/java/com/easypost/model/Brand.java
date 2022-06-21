@@ -15,78 +15,6 @@ public class Brand extends EasyPostResource {
     private String id;
 
     /**
-     * Get the background of the Brand.
-     *
-     * @return the background of the Brand.
-     */
-    public String getBackgroundColor() {
-        return backgroundColor;
-    }
-
-    /**
-     * Set the background of the Brand.
-     *
-     * @param backgroundColor the background of the Brand.
-     */
-    public void setBackgroundColor(String backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
-    /**
-     * Get the color of the Brand.
-     *
-     * @return the color of the Brand.
-     */
-    public String getColor() {
-        return this.color;
-    }
-
-    /**
-     * Set the color of the Brand.
-     *
-     * @param color the color of the Brand.
-     */
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-     /**
-     * Get the logo of the Brand.
-     *
-     * @return the logo of the Brand.
-     */
-    public String getLogo() {
-        return this.logo;
-    }
-
-    /**
-     * Set the logo of the Brand.
-     *
-     * @param logo the logo of the Brand.
-     */
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
-
-    /**
-     * Get the logo href of the Brand.
-     *
-     * @return the logo href of the Brand.
-     */
-    public String getLogoHref() {
-        return this.logoHref;
-    }
-
-    /**
-     * Set the logo href of the Brand.
-     *
-     * @param logoHref the logo href of the Brand.
-     */
-    public void setLogoHref(String logoHref) {
-        this.logoHref = logoHref;
-    }
-
-    /**
      * Get the ad of the Brand.
      *
      * @return the ad of the Brand.
@@ -123,6 +51,96 @@ public class Brand extends EasyPostResource {
     }
 
     /**
+     * Get the background of the Brand.
+     *
+     * @return the background of the Brand.
+     */
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    /**
+     * Set the background of the Brand.
+     *
+     * @param backgroundColor the background of the Brand.
+     */
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    /**
+     * Get the color of the Brand.
+     *
+     * @return the color of the Brand.
+     */
+    public String getColor() {
+        return this.color;
+    }
+
+    /**
+     * Set the color of the Brand.
+     *
+     * @param color the color of the Brand.
+     */
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    /**
+     * Get the ID of the Brand.
+     *
+     * @return the ID of the Brand.
+     */
+    public String getId() {
+        return this.id;
+    }
+
+    /**
+     * Set the ID of the Brand.
+     *
+     * @param id the id of the Brand.
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the logo of the Brand.
+     *
+     * @return the logo of the Brand.
+     */
+    public String getLogo() {
+        return this.logo;
+    }
+
+    /**
+     * Set the logo of the Brand.
+     *
+     * @param logo the logo of the Brand.
+     */
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    /**
+     * Get the logo href of the Brand.
+     *
+     * @return the logo href of the Brand.
+     */
+    public String getLogoHref() {
+        return this.logoHref;
+    }
+
+    /**
+     * Set the logo href of the Brand.
+     *
+     * @param logoHref the logo href of the Brand.
+     */
+    public void setLogoHref(String logoHref) {
+        this.logoHref = logoHref;
+    }
+
+    /**
      * Get the name of the User.
      *
      * @return the name of the User.
@@ -138,24 +156,6 @@ public class Brand extends EasyPostResource {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * Get the user ID of the Brand.
-     *
-     * @return the user ID of the Brand.
-     */
-    public String getUserID() {
-        return this.userID;
-    }
-
-    /**
-     * Set the user ID of the Brand.
-     *
-     * @param userID the user ID of the Brand.
-     */
-    public void setUserID(String userID) {
-        this.userID = userID;
     }
 
     /**
@@ -177,20 +177,20 @@ public class Brand extends EasyPostResource {
     }
 
     /**
-     * Get the ID of the Brand.
+     * Get the user ID of the Brand.
      *
-     * @return the ID of the Brand.
+     * @return the user ID of the Brand.
      */
-    public String getId() {
-        return this.id;
+    public String getUserID() {
+        return this.userID;
     }
 
     /**
-     * Set the ID of the Brand.
+     * Set the user ID of the Brand.
      *
-     * @param id the id of the Brand.
+     * @param userID the user ID of the Brand.
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

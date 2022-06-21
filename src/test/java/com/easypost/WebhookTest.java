@@ -34,20 +34,6 @@ public final class WebhookTest {
     }
 
     /**
-     * Create a webhook.
-     *
-     * @return Webhook object
-     */
-    private static Webhook createBasicWebhook() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
-        params.put("url", Fixture.webhookUrl());
-
-        Webhook webhook = Webhook.create(params);
-        testWebhookId = webhook.getId(); // trigger deletion after test
-        return webhook;
-    }
-
-    /**
      * Clean up test attributes after each unit test.
      */
     @AfterEach
@@ -77,6 +63,20 @@ public final class WebhookTest {
         assertInstanceOf(Webhook.class, webhook);
         assertTrue(webhook.getId().startsWith("hook_"));
         assertEquals(Fixture.webhookUrl(), webhook.getUrl());
+    }
+
+    /**
+     * Create a webhook.
+     *
+     * @return Webhook object
+     */
+    private static Webhook createBasicWebhook() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("url", Fixture.webhookUrl());
+
+        Webhook webhook = Webhook.create(params);
+        testWebhookId = webhook.getId(); // trigger deletion after test
+        return webhook;
     }
 
     /**

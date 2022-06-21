@@ -15,6 +15,114 @@ public final class Address extends BaseAddress {
     private AddressVerifications verifications;
 
     /**
+     * Get carrier facility for address.
+     *
+     * @return address carrier facility
+     */
+    public String getCarrierFacility() {
+        return carrierFacility;
+    }
+
+    /**
+     * Set carrier facility for address.
+     *
+     * @param carrierFacility address carrier facility
+     */
+    public void setCarrierFacility(final String carrierFacility) {
+        this.carrierFacility = carrierFacility;
+    }
+
+    /**
+     * Get federal tax id of address.
+     *
+     * @return address federal tax id
+     */
+    public String getFederalTaxId() {
+        return federalTaxId;
+    }
+
+    /**
+     * Set federal tax id of address.
+     *
+     * @param federalTaxId address federal tax id
+     */
+    public void setFederalTaxId(final String federalTaxId) {
+        this.federalTaxId = federalTaxId;
+    }
+
+    /**
+     * Get address message.
+     *
+     * @return address message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * Set address message.
+     *
+     * @param message address message
+     */
+    public void setMessage(final String message) {
+        this.message = message;
+    }
+
+    /**
+     * Get address mode.
+     *
+     * @return address mode
+     */
+    public String getMode() {
+        return mode;
+    }
+
+    /**
+     * Set address mode.
+     *
+     * @param mode address mode
+     */
+    public void setMode(final String mode) {
+        this.mode = mode;
+    }
+
+    /**
+     * Get whether address is residential.
+     *
+     * @return whether address is residential
+     */
+    public Boolean getResidential() {
+        return residential;
+    }
+
+    /**
+     * Set whether address is residential.
+     *
+     * @param residential whether address is residential
+     */
+    public void setResidential(final Boolean residential) {
+        this.residential = residential;
+    }
+
+    /**
+     * Get verifications for address.
+     *
+     * @return address verifications
+     */
+    public AddressVerifications getVerifications() {
+        return verifications;
+    }
+
+    /**
+     * Set verifications for address.
+     *
+     * @param verifications address verifications
+     */
+    public void setVerifications(final AddressVerifications verifications) {
+        this.verifications = verifications;
+    }
+
+    /**
      * Create Address object from parameter map.
      *
      * @param params Map of address parameters.
@@ -120,8 +228,9 @@ public final class Address extends BaseAddress {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("address", params);
 
-        AddressVerifyResponse response = request(RequestMethod.POST, String.format("%s/create_and_verify",
-                        classURL(Address.class)), wrappedParams, AddressVerifyResponse.class, apiKey);
+        AddressVerifyResponse response =
+                request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
+                        wrappedParams, AddressVerifyResponse.class, apiKey);
 
         return response.getAddress();
     }
@@ -164,114 +273,6 @@ public final class Address extends BaseAddress {
             response.getAddress().setMessage(response.getMessage());
         }
         return response.getAddress();
-    }
-
-    /**
-     * Get address mode.
-     *
-     * @return address mode
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set address mode.
-     *
-     * @param mode address mode
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
-    }
-
-    /**
-     * Get address message.
-     *
-     * @return address message
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * Set address message.
-     *
-     * @param message address message
-     */
-    public void setMessage(final String message) {
-        this.message = message;
-    }
-
-    /**
-     * Get carrier facility for address.
-     *
-     * @return address carrier facility
-     */
-    public String getCarrierFacility() {
-        return carrierFacility;
-    }
-
-    /**
-     * Set carrier facility for address.
-     *
-     * @param carrierFacility address carrier facility
-     */
-    public void setCarrierFacility(final String carrierFacility) {
-        this.carrierFacility = carrierFacility;
-    }
-
-    /**
-     * Get federal tax id of address.
-     *
-     * @return address federal tax id
-     */
-    public String getFederalTaxId() {
-        return federalTaxId;
-    }
-
-    /**
-     * Set federal tax id of address.
-     *
-     * @param federalTaxId address federal tax id
-     */
-    public void setFederalTaxId(final String federalTaxId) {
-        this.federalTaxId = federalTaxId;
-    }
-
-    /**
-     * Get whether address is residential.
-     *
-     * @return whether address is residential
-     */
-    public Boolean getResidential() {
-        return residential;
-    }
-
-    /**
-     * Set whether address is residential.
-     *
-     * @param residential whether address is residential
-     */
-    public void setResidential(final Boolean residential) {
-        this.residential = residential;
-    }
-
-    /**
-     * Get verifications for address.
-     *
-     * @return address verifications
-     */
-    public AddressVerifications getVerifications() {
-        return verifications;
-    }
-
-    /**
-     * Set verifications for address.
-     *
-     * @param verifications address verifications
-     */
-    public void setVerifications(final AddressVerifications verifications) {
-        this.verifications = verifications;
     }
 
     /**

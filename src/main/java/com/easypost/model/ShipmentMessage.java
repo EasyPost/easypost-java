@@ -44,24 +44,6 @@ public final class ShipmentMessage {
     }
 
     /**
-     * Get the type of this message.
-     *
-     * @return the type of this message.
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Set the type of this message.
-     *
-     * @param type the type of this message.
-     */
-    public void setType(final String type) {
-        this.type = type;
-    }
-
-    /**
      * Get the contents of this message.
      *
      * @return the contents of this message.
@@ -77,5 +59,23 @@ public final class ShipmentMessage {
      */
     public void setMessage(final Object message) {
         this.message = message;
+    }
+
+    /**
+     * Get the type of this message.
+     *
+     * @return the type of this message.
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Set the type of this message.
+     *
+     * @param type the type of this message.
+     */
+    public void setType(final String type) {
+        this.type = type;
     }
 }

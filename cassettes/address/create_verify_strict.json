@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1654210544,
+    "recordedAt": 1655410402,
     "request": {
       "body": "{\n  \"address\": {\n    \"zip\": \"94107\",\n    \"city\": \"San Francisco\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Jack Sparrow\",\n    \"company\": \"EasyPost\",\n    \"street1\": \"388 Townsend St\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\"\n  },\n  \"verify_strict\": [\n    true\n  ]\n}",
       "method": "POST",
@@ -21,7 +21,8 @@
       "uri": "https://api.easypost.com/v2/addresses"
     },
     "response": {
-      "body": "{\n  \"zip\": \"94107-1670\",\n  \"country\": \"US\",\n  \"city\": \"SAN FRANCISCO\",\n  \"created_at\": \"2022-06-02T22:55:44+00:00\",\n  \"verifications\": {\n    \"delivery\": {\n      \"success\": true,\n      \"details\": {\n        \"latitude\": 37.77551,\n        \"time_zone\": \"America/Los_Angeles\",\n        \"longitude\": -122.39697\n      },\n      \"errors\": []\n    },\n    \"zip4\": {\n      \"success\": true,\n      \"errors\": []\n    }\n  },\n  \"mode\": \"test\",\n  \"residential\": true,\n  \"updated_at\": \"2022-06-02T22:55:44+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"JACK SPARROW\",\n  \"company\": \"EASYPOST\",\n  \"street1\": \"388 TOWNSEND ST APT 20\",\n  \"id\": \"adr_22594321e2c711ec9883ac1f6bc7b362\",\n  \"street2\": \"\",\n  \"state\": \"CA\",\n  \"object\": \"Address\"\n}",
+      "body": "{\n  \"zip\": \"94107-1670\",\n  \"country\": \"US\",\n  \"city\": \"SAN FRANCISCO\",\n  \"created_at\": \"2022-06-16T20:13:22+00:00\",\n  \"verifications\": {\n    \"delivery\": {\n      \"success\": true,\n      \"details\": {\n        \"latitude\": 37.77551,\n        \"time_zone\": \"America/Los_Angeles\",\n        \"longitude\": -122.39697\n      },\n      \"errors\": []\n    },\n    \"zip4\": {\n      \"success\": true,\n      \"details\": null,\n      \"errors\": []\n    }\n  },\n  \"mode\": \"test\",\n  \"federal_tax_id\": null,\n  \"state_tax_id\": null,\n  \"carrier_facility\": null,\n  \"residential\": true,\n  \"updated_at\": \"2022-06-16T20:13:22+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"JACK SPARROW\",\n  \"company\": \"EASYPOST\",\n  \"street1\": \"388 TOWNSEND ST APT 20\",\n  \"id\": \"adr_c554c548edb011ec9774ac1f6bc7b362\",\n  \"street2\": \"\",\n  \"state\": \"CA\",\n  \"email\": null,\n  \"object\": \"Address\"\n}",
+      "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 201 Created"
@@ -33,7 +34,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb3nuq"
+          "bigweb7nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -53,6 +54,9 @@
         "pragma": [
           "no-cache"
         ],
+        "x-canary": [
+          "direct"
+        ],
         "x-content-type-options": [
           "nosniff"
         ],
@@ -60,29 +64,30 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "24678df662993ff0e631ca12000e1b82"
+          "f462041462ab8ee2e779826700091262"
         ],
         "x-proxied": [
-          "extlb1nuq 0910011e7e",
-          "intlb1nuq 570dfcbc0a"
+          "extlb3wdc 0910011e7e",
+          "intlb2wdc 0910011e7e",
+          "intlb1nuq 0910011e7e"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.052686"
+          "0.044569"
         ],
         "etag": [
-          "W/\"fd07eacd63c06790c7b67d2caf8ba030\""
+          "W/\"a2e5e651541e046940622881c0fedc5e\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "location": [
-          "/api/v2/addresses/adr_22594321e2c711ec9883ac1f6bc7b362"
+          "/api/v2/addresses/adr_c554c548edb011ec9774ac1f6bc7b362"
         ],
         "x-version-label": [
-          "easypost-202206022117-ecf7ce5035-master"
+          "easypost-202206152126-24f54ae67a-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -92,8 +97,9 @@
         "code": 201,
         "message": "Created"
       },
+      "errors": null,
       "uri": "https://api.easypost.com/v2/addresses"
     },
-    "duration": 156
+    "duration": 541
   }
 ]

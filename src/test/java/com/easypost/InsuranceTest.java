@@ -29,15 +29,6 @@ public final class InsuranceTest {
     }
 
     /**
-     * Create insurance object.
-     *
-     * @return Insurance object
-     */
-    private static Insurance createBasicInsurance() throws EasyPostException {
-        return Insurance.create(Fixture.basicInsurance());
-    }
-
-    /**
      * Test creating an insurance object.
      *
      * @throws EasyPostException when the request fails.
@@ -51,6 +42,15 @@ public final class InsuranceTest {
         assertInstanceOf(Insurance.class, insurance);
         assertTrue(insurance.getId().startsWith("ins_"));
         assertEquals(100.0, insurance.getAmount(), 0.01);
+    }
+
+    /**
+     * Create insurance object.
+     *
+     * @return Insurance object
+     */
+    private static Insurance createBasicInsurance() throws EasyPostException {
+        return Insurance.create(Fixture.basicInsurance());
     }
 
     /**

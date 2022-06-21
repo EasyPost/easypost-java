@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1654210541,
+    "recordedAt": 1655410394,
     "request": {
       "body": "{\n  \"trackers\": {\n    \"0\": {\n      \"tracking_code\": \"EZ1000000001\"\n    },\n    \"1\": {\n      \"tracking_code\": \"EZ1000000002\"\n    },\n    \"2\": {\n      \"tracking_code\": \"EZ1000000003\"\n    }\n  }\n}",
       "method": "POST",
@@ -22,6 +22,7 @@
     },
     "response": {
       "body": "{}",
+      "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
@@ -33,7 +34,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb8nuq"
+          "bigweb1nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -60,17 +61,18 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "24678df762993fede62024b0000e1ad5"
+          "f462041962ab8edae77982440009104d"
         ],
         "x-proxied": [
-          "extlb1nuq 0910011e7e",
-          "intlb1nuq 570dfcbc0a"
+          "extlb3wdc 0910011e7e",
+          "intlb2wdc 0910011e7e",
+          "intlb2nuq 0910011e7e"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.035338"
+          "0.040487"
         ],
         "etag": [
           "W/\"44136fa355b3678a1146ad16f7e8649e\""
@@ -79,7 +81,7 @@
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206022117-ecf7ce5035-master"
+          "easypost-202206152126-24f54ae67a-master"
         ],
         "cache-control": [
           "no-cache, no-store"
@@ -89,8 +91,9 @@
         "code": 200,
         "message": "OK"
       },
+      "errors": null,
       "uri": "https://api.easypost.com/v2/trackers/create_list"
     },
-    "duration": 141
+    "duration": 560
   }
 ]

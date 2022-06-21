@@ -9,24 +9,6 @@ public final class TrackerCollection extends EasyPostResource {
     private Boolean hasMore;
 
     /**
-     * Get this TrackerCollection's Tracker objects.
-     *
-     * @return List of Tracker objects.
-     */
-    public List<Tracker> getTrackers() {
-        return trackers;
-    }
-
-    /**
-     * Set this TrackerCollection's Tracker objects.
-     *
-     * @param trackers List of Tracker objects.
-     */
-    public void setTrackers(final List<Tracker> trackers) {
-        this.trackers = trackers;
-    }
-
-    /**
      * Get whether there are more Trackers to retrieve.
      *
      * @return true if there are more Trackers to retrieve, false otherwise.
@@ -42,5 +24,23 @@ public final class TrackerCollection extends EasyPostResource {
      */
     public void setHasMore(final Boolean hasMore) {
         this.hasMore = hasMore;
+    }
+
+    /**
+     * Get this TrackerCollection's Tracker objects.
+     *
+     * @return List of Tracker objects.
+     */
+    public List<Tracker> getTrackers() {
+        return trackers;
+    }
+
+    /**
+     * Set this TrackerCollection's Tracker objects.
+     *
+     * @param trackers List of Tracker objects.
+     */
+    public void setTrackers(final List<Tracker> trackers) {
+        this.trackers = trackers;
     }
 }

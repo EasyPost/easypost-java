@@ -29,17 +29,6 @@ public final class EventTest {
     }
 
     /**
-     * Get an event collection.
-     *
-     * @return EventCollection object.
-     */
-    private static EventCollection getBasicEventCollection() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
-        params.put("page_size", Fixture.pageSize());
-        return Event.all(params);
-    }
-
-    /**
      * Test retrieving all events.
      *
      * @throws EasyPostException when the request fails.
@@ -55,6 +44,17 @@ public final class EventTest {
         assertTrue(eventsList.size() <= Fixture.pageSize());
         assertNotNull(events.getHasMore());
         assertTrue(eventsList.stream().allMatch(event -> event instanceof Event));
+    }
+
+    /**
+     * Get an event collection.
+     *
+     * @return EventCollection object.
+     */
+    private static EventCollection getBasicEventCollection() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixture.pageSize());
+        return Event.all(params);
     }
 
     /**

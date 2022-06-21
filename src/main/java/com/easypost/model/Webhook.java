@@ -14,6 +14,42 @@ public final class Webhook extends EasyPostResource {
     private Date disabledAt;
 
     /**
+     * Get the date and time when the webhook was disabled.
+     *
+     * @return the date and time when the webhook was disabled
+     */
+    public Date getDisabledAt() {
+        return disabledAt;
+    }
+
+    /**
+     * Set the date and time when the webhook was disabled.
+     *
+     * @param disabledAt the date and time when the webhook was disabled
+     */
+    public void setDisabledAt(final Date disabledAt) {
+        this.disabledAt = disabledAt;
+    }
+
+    /**
+     * Get the URL of the webhook.
+     *
+     * @return the URL of the webhook
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Set the URL of the webhook.
+     *
+     * @param url the URL of the webhook
+     */
+    public void setUrl(final String url) {
+        this.url = url;
+    }
+
+    /**
      * Create a Webhook object from a map of parameters.
      *
      * @param params the map of parameters
@@ -77,6 +113,19 @@ public final class Webhook extends EasyPostResource {
      * Get a list of all Webhook objects.
      *
      * @param params params for request
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return WebhookCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public static WebhookCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
+    }
+
+    /**
+     * Get a list of all Webhook objects.
+     *
+     * @param params params for request
      * @return WebhookCollection object
      * @throws EasyPostException when the request fails.
      */
@@ -85,16 +134,22 @@ public final class Webhook extends EasyPostResource {
     }
 
     /**
-     * Get a list of all Webhook objects.
+     * Delete this Webhook.
      *
-     * @param params params for request
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return WebhookCollection object
      * @throws EasyPostException when the request fails.
      */
-    public static WebhookCollection all(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
+    public void delete() throws EasyPostException {
+        this.delete(null);
+    }
+
+    /**
+     * Delete this Webhook.
+     *
+     * @param apiKey API key to use in request (overrides default API key).
+     * @throws EasyPostException when the request fails.
+     */
+    public void delete(final String apiKey) throws EasyPostException {
+        request(RequestMethod.DELETE, instanceURL(Webhook.class, this.getId()), null, Webhook.class, apiKey);
     }
 
     /**
@@ -134,61 +189,6 @@ public final class Webhook extends EasyPostResource {
     }
 
     /**
-     * Get the URL of the webhook.
-     *
-     * @return the URL of the webhook
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * Set the URL of the webhook.
-     *
-     * @param url the URL of the webhook
-     */
-    public void setUrl(final String url) {
-        this.url = url;
-    }
-
-    /**
-     * Get the date and time when the webhook was disabled.
-     *
-     * @return the date and time when the webhook was disabled
-     */
-    public Date getDisabledAt() {
-        return disabledAt;
-    }
-
-    /**
-     * Set the date and time when the webhook was disabled.
-     *
-     * @param disabledAt the date and time when the webhook was disabled
-     */
-    public void setDisabledAt(final Date disabledAt) {
-        this.disabledAt = disabledAt;
-    }
-
-    /**
-     * Delete this Webhook.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    public void delete() throws EasyPostException {
-        this.delete(null);
-    }
-
-    /**
-     * Delete this Webhook.
-     *
-     * @param apiKey API key to use in request (overrides default API key).
-     * @throws EasyPostException when the request fails.
-     */
-    public void delete(final String apiKey) throws EasyPostException {
-        request(RequestMethod.DELETE, instanceURL(Webhook.class, this.getId()), null, Webhook.class, apiKey);
-    }
-
-    /**
      * Update this webhook.
      *
      * @return Webhook object
@@ -196,17 +196,6 @@ public final class Webhook extends EasyPostResource {
      */
     public Webhook update() throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
-        return this.update(params, null);
-    }
-
-    /**
-     * Update this webhook.
-     *
-     * @param params the map of parameters
-     * @return Webhook object
-     * @throws EasyPostException when the request fails.
-     */
-    public Webhook update(final Map<String, Object> params) throws EasyPostException {
         return this.update(params, null);
     }
 
@@ -228,5 +217,16 @@ public final class Webhook extends EasyPostResource {
 
         this.merge(this, response);
         return this;
+    }
+
+    /**
+     * Update this webhook.
+     *
+     * @param params the map of parameters
+     * @return Webhook object
+     * @throws EasyPostException when the request fails.
+     */
+    public Webhook update(final Map<String, Object> params) throws EasyPostException {
+        return this.update(params, null);
     }
 }

@@ -23,6 +23,150 @@ public final class Insurance extends EasyPostResource {
     private List<String> messages;
 
     /**
+     * Get the amount of this Insurance.
+     *
+     * @return the amount of the Insurance
+     */
+    public Float getAmount() {
+        return amount;
+    }
+
+    /**
+     * Set the amount of this Insurance.
+     *
+     * @param amount the amount of the Insurance
+     */
+    public void setAmount(final Float amount) {
+        this.amount = amount;
+    }
+
+    /**
+     * Get the from address of this Insurance.
+     *
+     * @return the from address of the Insurance
+     */
+    public Address getFromAddress() {
+        return fromAddress;
+    }
+
+    /**
+     * Set the from address of this Insurance.
+     *
+     * @param fromAddress the from address of the Insurance
+     */
+    public void setFromAddress(final Address fromAddress) {
+        this.fromAddress = fromAddress;
+    }
+
+    /**
+     * Get the messages of this Insurance.
+     *
+     * @return list of messages of the Insurance
+     */
+    public List<String> getMessages() {
+        return messages;
+    }
+
+    /**
+     * Set the messages of this Insurance.
+     *
+     * @param messages list of messages of the Insurance
+     */
+    public void setMessages(final List<String> messages) {
+        this.messages = messages;
+    }
+
+    /**
+     * Get the provider of this Insurance.
+     *
+     * @return the provider of the Insurance
+     */
+    public String getProvider() {
+        return provider;
+    }
+
+    /**
+     * Set the provider of this Insurance.
+     *
+     * @param provider the provider of the Insurance
+     */
+    public void setProvider(final String provider) {
+        this.provider = provider;
+    }
+
+    /**
+     * Get the provider ID of this Insurance.
+     *
+     * @return the provider ID of the Insurance
+     */
+    public String getProviderId() {
+        return providerId;
+    }
+
+    /**
+     * Set the provider ID of this Insurance.
+     *
+     * @param providerId the provider ID of the Insurance
+     */
+    public void setProviderId(final String providerId) {
+        this.providerId = providerId;
+    }
+
+    /**
+     * Get the reference of this Insurance.
+     *
+     * @return the reference of the Insurance
+     */
+    public String getReference() {
+        return reference;
+    }
+
+    /**
+     * Set the reference of this Insurance.
+     *
+     * @param reference the reference of the Insurance
+     */
+    public void setReference(final String reference) {
+        this.reference = reference;
+    }
+
+    /**
+     * Get the to address of this Insurance.
+     *
+     * @return the to address of the Insurance
+     */
+    public Address getToAddress() {
+        return toAddress;
+    }
+
+    /**
+     * Set the to address of this Insurance.
+     *
+     * @param toAddress the to address of the Insurance
+     */
+    public void setToAddress(final Address toAddress) {
+        this.toAddress = toAddress;
+    }
+
+    /**
+     * Get the tracker of this Insurance.
+     *
+     * @return Tracker object
+     */
+    public Tracker getTracker() {
+        return tracker;
+    }
+
+    /**
+     * Set the tracker of this Insurance.
+     *
+     * @param tracker Tracker object
+     */
+    public void setTracker(final Tracker tracker) {
+        this.tracker = tracker;
+    }
+
+    /**
      * Create a new Insurance object from a map of parameters.
      *
      * @param params map of parameters
@@ -96,6 +240,29 @@ public final class Insurance extends EasyPostResource {
     }
 
     /**
+     * Refresh this Insurance.
+     *
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public Insurance refresh() throws EasyPostException {
+        return this.refresh(null, null);
+    }
+
+    /**
+     * Refresh this Insurance.
+     *
+     * @param params a map of parameters
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public Insurance refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return request(RequestMethod.GET, String.format("%s", instanceURL(Insurance.class, this.getId())), params,
+                Insurance.class, apiKey);
+    }
+
+    /**
      * Get the ID of this Insurance.
      *
      * @return the ID of the Insurance
@@ -132,111 +299,21 @@ public final class Insurance extends EasyPostResource {
     }
 
     /**
-     * Get the reference of this Insurance.
+     * Get the shipment ID of this Insurance.
      *
-     * @return the reference of the Insurance
+     * @return the shipment ID of the Insurance
      */
-    public String getReference() {
-        return reference;
+    public String getShipmentId() {
+        return shipmentId;
     }
 
     /**
-     * Set the reference of this Insurance.
+     * Get the status of this Insurance.
      *
-     * @param reference the reference of the Insurance
+     * @return the status of the Insurance
      */
-    public void setReference(final String reference) {
-        this.reference = reference;
-    }
-
-    /**
-     * Get the to address of this Insurance.
-     *
-     * @return the to address of the Insurance
-     */
-    public Address getToAddress() {
-        return toAddress;
-    }
-
-    /**
-     * Set the to address of this Insurance.
-     *
-     * @param toAddress the to address of the Insurance
-     */
-    public void setToAddress(final Address toAddress) {
-        this.toAddress = toAddress;
-    }
-
-    /**
-     * Get the from address of this Insurance.
-     *
-     * @return the from address of the Insurance
-     */
-    public Address getFromAddress() {
-        return fromAddress;
-    }
-
-    /**
-     * Set the from address of this Insurance.
-     *
-     * @param fromAddress the from address of the Insurance
-     */
-    public void setFromAddress(final Address fromAddress) {
-        this.fromAddress = fromAddress;
-    }
-
-    /**
-     * Get the tracker of this Insurance.
-     *
-     * @return Tracker object
-     */
-    public Tracker getTracker() {
-        return tracker;
-    }
-
-    /**
-     * Set the tracker of this Insurance.
-     *
-     * @param tracker Tracker object
-     */
-    public void setTracker(final Tracker tracker) {
-        this.tracker = tracker;
-    }
-
-    /**
-     * Get the provider of this Insurance.
-     *
-     * @return the provider of the Insurance
-     */
-    public String getProvider() {
-        return provider;
-    }
-
-    /**
-     * Set the provider of this Insurance.
-     *
-     * @param provider the provider of the Insurance
-     */
-    public void setProvider(final String provider) {
-        this.provider = provider;
-    }
-
-    /**
-     * Get the provider ID of this Insurance.
-     *
-     * @return the provider ID of the Insurance
-     */
-    public String getProviderId() {
-        return providerId;
-    }
-
-    /**
-     * Set the provider ID of this Insurance.
-     *
-     * @param providerId the provider ID of the Insurance
-     */
-    public void setProviderId(final String providerId) {
-        this.providerId = providerId;
+    public String getStatus() {
+        return status;
     }
 
     /**
@@ -258,15 +335,6 @@ public final class Insurance extends EasyPostResource {
     }
 
     /**
-     * Get the status of this Insurance.
-     *
-     * @return the status of the Insurance
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
      * Set the status of this Insurance.
      *
      * @param status the status of the Insurance
@@ -276,67 +344,12 @@ public final class Insurance extends EasyPostResource {
     }
 
     /**
-     * Get the shipment ID of this Insurance.
-     *
-     * @return the shipment ID of the Insurance
-     */
-    public String getShipmentId() {
-        return shipmentId;
-    }
-
-    /**
      * Set the shipment ID of this Insurance.
      *
      * @param shipmentId the shipment ID of the Insurance
      */
     public void setShipmentId(final String shipmentId) {
         this.shipmentId = shipmentId;
-    }
-
-    /**
-     * Get the amount of this Insurance.
-     *
-     * @return the amount of the Insurance
-     */
-    public Float getAmount() {
-        return amount;
-    }
-
-    /**
-     * Set the amount of this Insurance.
-     *
-     * @param amount the amount of the Insurance
-     */
-    public void setAmount(final Float amount) {
-        this.amount = amount;
-    }
-
-    /**
-     * Get the messages of this Insurance.
-     *
-     * @return list of messages of the Insurance
-     */
-    public List<String> getMessages() {
-        return messages;
-    }
-
-    /**
-     * Set the messages of this Insurance.
-     *
-     * @param messages list of messages of the Insurance
-     */
-    public void setMessages(final List<String> messages) {
-        this.messages = messages;
-    }
-
-    /**
-     * Refresh this Insurance.
-     *
-     * @return Insurance object
-     * @throws EasyPostException when the request fails.
-     */
-    public Insurance refresh() throws EasyPostException {
-        return this.refresh(null, null);
     }
 
     /**
@@ -359,18 +372,5 @@ public final class Insurance extends EasyPostResource {
      */
     public Insurance refresh(final String apiKey) throws EasyPostException {
         return this.refresh(null, apiKey);
-    }
-
-    /**
-     * Refresh this Insurance.
-     *
-     * @param params a map of parameters
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Insurance object
-     * @throws EasyPostException when the request fails.
-     */
-    public Insurance refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s", instanceURL(Insurance.class, this.getId())), params,
-                Insurance.class, apiKey);
     }
 }

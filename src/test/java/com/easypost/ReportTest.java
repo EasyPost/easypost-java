@@ -31,29 +31,6 @@ public final class ReportTest {
     }
 
     /**
-     * Create a report.
-     *
-     * @return Report object
-     */
-    private static Report createBasicReport() throws EasyPostException {
-        Map<String, Object> reportParams = new HashMap<>();
-
-        reportParams.put("start_date", Fixture.reportDate());
-        reportParams.put("end_date", Fixture.reportDate());
-        reportParams.put("type", Fixture.reportType());
-
-        return Report.create(reportParams);
-    }
-
-    private static Report createAdvancedReport(Map<String, Object> parameters) throws EasyPostException {
-        parameters.put("start_date", Fixture.reportDate());
-        parameters.put("end_date", Fixture.reportDate());
-        parameters.put("type", Fixture.reportType());
-
-        return Report.create(parameters);
-    }
-
-    /**
      * Test creating a report.
      *
      * @throws EasyPostException when the request fails.
@@ -66,6 +43,21 @@ public final class ReportTest {
 
         assertInstanceOf(Report.class, report);
         assertTrue(report.getId().startsWith("shprep_"));
+    }
+
+    /**
+     * Create a report.
+     *
+     * @return Report object
+     */
+    private static Report createBasicReport() throws EasyPostException {
+        Map<String, Object> reportParams = new HashMap<>();
+
+        reportParams.put("start_date", Fixture.reportDate());
+        reportParams.put("end_date", Fixture.reportDate());
+        reportParams.put("type", Fixture.reportType());
+
+        return Report.create(reportParams);
     }
 
     /**
@@ -93,6 +85,14 @@ public final class ReportTest {
         // so we assume, if we haven't gotten an error by this point, we've made the API calls correctly
         // any failure at this point is a server-side issue
         assertInstanceOf(Report.class, reportWithColumns);
+    }
+
+    private static Report createAdvancedReport(Map<String, Object> parameters) throws EasyPostException {
+        parameters.put("start_date", Fixture.reportDate());
+        parameters.put("end_date", Fixture.reportDate());
+        parameters.put("type", Fixture.reportType());
+
+        return Report.create(parameters);
     }
 
     /**

@@ -104,8 +104,7 @@ public final class RateDeserializer implements JsonDeserializer<Rate> {
             shipmentID = jo.get("shipment_id").getAsString();
         }
 
-        @SuppressWarnings("unused")
-        TimeInTransit timeInTransit;
+        @SuppressWarnings ("unused") TimeInTransit timeInTransit;
         JsonElement timeInTransitJsonElement = jo.get("time_in_transit");
         if (timeInTransitJsonElement == null || timeInTransitJsonElement.isJsonNull()) {
             timeInTransit = null;

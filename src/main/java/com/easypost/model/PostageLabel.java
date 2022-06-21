@@ -26,24 +26,6 @@ public final class PostageLabel extends EasyPostResource {
     private String labelZplFileType;
 
     /**
-     * Get the ID of this PostageLabel.
-     *
-     * @return ID of this PostageLabel.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this PostageLabel.
-     *
-     * @param id ID of this PostageLabel.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
      * Get the date advance of this PostageLabel.
      *
      * @return Date advance of this PostageLabel.
@@ -62,6 +44,51 @@ public final class PostageLabel extends EasyPostResource {
     }
 
     /**
+     * Get the EPL2 type of this PostageLabel.
+     *
+     * @return EPL2 type of this PostageLabel.
+     */
+    public String getEpl2LabelType() {
+        return labelEpl2Type;
+    }
+
+    /**
+     * Get the ID of this PostageLabel.
+     *
+     * @return ID of this PostageLabel.
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Set the ID of this PostageLabel.
+     *
+     * @param id ID of this PostageLabel.
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the URL of this PostageLabel.
+     *
+     * @return URL of this PostageLabel.
+     */
+    public String getLabelUrl() {
+        return labelUrl;
+    }
+
+    /**
+     * Set the URL of this PostageLabel.
+     *
+     * @param labelUrl URL of this PostageLabel.
+     */
+    public void setLabelUrl(final String labelUrl) {
+        this.labelUrl = labelUrl;
+    }
+
+    /**
      * Get the integrated form of this PostageLabel.
      *
      * @return Integrated form of this PostageLabel.
@@ -77,6 +104,150 @@ public final class PostageLabel extends EasyPostResource {
      */
     public void setIntegratedForm(final String integratedForm) {
         this.integratedForm = integratedForm;
+    }
+
+    /**
+     * Get the EPL2 file type of this PostageLabel.
+     *
+     * @return EPL2 file type of this PostageLabel.
+     */
+    public String getLabelEpl2FileType() {
+        return labelEpl2FileType;
+    }
+
+    /**
+     * Set the EPL2 file type of this PostageLabel.
+     *
+     * @param labelEpl2FileType EPL2 file type of this PostageLabel.
+     */
+    public void setLabelEpl2FileType(final String labelEpl2FileType) {
+        this.labelEpl2FileType = labelEpl2FileType;
+    }
+
+    /**
+     * Get the EPL2 size of this PostageLabel.
+     *
+     * @return EPL2 size of this PostageLabel.
+     */
+    public String getLabelEpl2Size() {
+        return labelEpl2Size;
+    }
+
+    /**
+     * Set the EPL2 size of this PostageLabel.
+     *
+     * @param labelEpl2Size EPL2 size of this PostageLabel.
+     */
+    public void setLabelEpl2Size(final String labelEpl2Size) {
+        this.labelEpl2Size = labelEpl2Size;
+    }
+
+    /**
+     * Get the EPL2 URL of this PostageLabel.
+     *
+     * @return EPL2 URL of this PostageLabel.
+     */
+    public String getLabelEpl2Url() {
+        return labelEpl2Url;
+    }
+
+    /**
+     * Set the EPL2 URL of this PostageLabel.
+     *
+     * @param labelEpl2Url EPL2 URL of this PostageLabel.
+     */
+    public void setLabelEpl2Url(final String labelEpl2Url) {
+        this.labelEpl2Url = labelEpl2Url;
+    }
+
+    /**
+     * Get the file of this PostageLabel.
+     *
+     * @return File of this PostageLabel.
+     */
+    public String getLabelFile() {
+        return labelFile;
+    }
+
+    /**
+     * Set the file of this PostageLabel.
+     *
+     * @param labelFile File of this PostageLabel.
+     */
+    public void setLabelFile(final String labelFile) {
+        this.labelFile = labelFile;
+    }
+
+    /**
+     * Get the file type of this PostageLabel.
+     *
+     * @return File type of this PostageLabel.
+     */
+    public String getLabelFileType() {
+        return labelFileType;
+    }
+
+    /**
+     * Set the file type of this PostageLabel.
+     *
+     * @param labelFileType File type of this PostageLabel.
+     */
+    public void setLabelFileType(final String labelFileType) {
+        this.labelFileType = labelFileType;
+    }
+
+    /**
+     * Get the PDF file type of this PostageLabel.
+     *
+     * @return PDF file type of this PostageLabel.
+     */
+    public String getLabelPdfFileType() {
+        return labelPdfFileType;
+    }
+
+    /**
+     * Set the PDF file type of this PostageLabel.
+     *
+     * @param labelPdfFileType PDF file type of this PostageLabel.
+     */
+    public void setLabelPdfFileType(final String labelPdfFileType) {
+        this.labelPdfFileType = labelPdfFileType;
+    }
+
+    /**
+     * Get the PDF size of this PostageLabel.
+     *
+     * @return PDF size of this PostageLabel.
+     */
+    public String getLabelPdfSize() {
+        return labelPdfSize;
+    }
+
+    /**
+     * Set the PDF size of this PostageLabel.
+     *
+     * @param labelPdfSize PDF size of this PostageLabel.
+     */
+    public void setLabelPdfSize(final String labelPdfSize) {
+        this.labelPdfSize = labelPdfSize;
+    }
+
+    /**
+     * Get the PDF URL of this PostageLabel.
+     *
+     * @return PDF URL of this PostageLabel.
+     */
+    public String getLabelPdfUrl() {
+        return labelPdfUrl;
+    }
+
+    /**
+     * Set the PDF URL of this PostageLabel.
+     *
+     * @param labelPdfUrl PDF URL of this PostageLabel.
+     */
+    public void setLabelPdfUrl(final String labelPdfUrl) {
+        this.labelPdfUrl = labelPdfUrl;
     }
 
     /**
@@ -134,201 +305,21 @@ public final class PostageLabel extends EasyPostResource {
     }
 
     /**
-     * Get the URL of this PostageLabel.
+     * Get the ZPL file type of this PostageLabel.
      *
-     * @return URL of this PostageLabel.
+     * @return ZPL file type of this PostageLabel.
      */
-    public String getLabelUrl() {
-        return labelUrl;
+    public String getLabelZplFileType() {
+        return labelZplFileType;
     }
 
     /**
-     * Set the URL of this PostageLabel.
+     * Set the ZPL file type of this PostageLabel.
      *
-     * @param labelUrl URL of this PostageLabel.
+     * @param labelZplFileType ZPL file type of this PostageLabel.
      */
-    public void setLabelUrl(final String labelUrl) {
-        this.labelUrl = labelUrl;
-    }
-
-    /**
-     * Get the file of this PostageLabel.
-     *
-     * @return File of this PostageLabel.
-     */
-    public String getLabelFile() {
-        return labelFile;
-    }
-
-    /**
-     * Set the file of this PostageLabel.
-     *
-     * @param labelFile File of this PostageLabel.
-     */
-    public void setLabelFile(final String labelFile) {
-        this.labelFile = labelFile;
-    }
-
-    /**
-     * Get the file type of this PostageLabel.
-     *
-     * @return File type of this PostageLabel.
-     */
-    public String getLabelFileType() {
-        return labelFileType;
-    }
-
-    /**
-     * Set the file type of this PostageLabel.
-     *
-     * @param labelFileType File type of this PostageLabel.
-     */
-    public void setLabelFileType(final String labelFileType) {
-        this.labelFileType = labelFileType;
-    }
-
-    /**
-     * Get the PDF size of this PostageLabel.
-     *
-     * @return PDF size of this PostageLabel.
-     */
-    public String getLabelPdfSize() {
-        return labelPdfSize;
-    }
-
-    /**
-     * Set the PDF size of this PostageLabel.
-     *
-     * @param labelPdfSize PDF size of this PostageLabel.
-     */
-    public void setLabelPdfSize(final String labelPdfSize) {
-        this.labelPdfSize = labelPdfSize;
-    }
-
-    /**
-     * Get the PDF type of this PostageLabel.
-     *
-     * @return PDF type of this PostageLabel.
-     */
-    public String getPdfLabelType() {
-        return labelPdfType;
-    }
-
-    /**
-     * Set the PDF type of this PostageLabel.
-     *
-     * @param labelPdfType PDF type of this PostageLabel.
-     */
-    public void setLabelPdfType(final String labelPdfType) {
-        this.labelPdfType = labelPdfType;
-    }
-
-    /**
-     * Get the PDF URL of this PostageLabel.
-     *
-     * @return PDF URL of this PostageLabel.
-     */
-    public String getLabelPdfUrl() {
-        return labelPdfUrl;
-    }
-
-    /**
-     * Set the PDF URL of this PostageLabel.
-     *
-     * @param labelPdfUrl PDF URL of this PostageLabel.
-     */
-    public void setLabelPdfUrl(final String labelPdfUrl) {
-        this.labelPdfUrl = labelPdfUrl;
-    }
-
-    /**
-     * Get the PDF file type of this PostageLabel.
-     *
-     * @return PDF file type of this PostageLabel.
-     */
-    public String getLabelPdfFileType() {
-        return labelPdfFileType;
-    }
-
-    /**
-     * Set the PDF file type of this PostageLabel.
-     *
-     * @param labelPdfFileType PDF file type of this PostageLabel.
-     */
-    public void setLabelPdfFileType(final String labelPdfFileType) {
-        this.labelPdfFileType = labelPdfFileType;
-    }
-
-    /**
-     * Get the EPL2 size of this PostageLabel.
-     *
-     * @return EPL2 size of this PostageLabel.
-     */
-    public String getLabelEpl2Size() {
-        return labelEpl2Size;
-    }
-
-    /**
-     * Set the EPL2 size of this PostageLabel.
-     *
-     * @param labelEpl2Size EPL2 size of this PostageLabel.
-     */
-    public void setLabelEpl2Size(final String labelEpl2Size) {
-        this.labelEpl2Size = labelEpl2Size;
-    }
-
-    /**
-     * Get the EPL2 type of this PostageLabel.
-     *
-     * @return EPL2 type of this PostageLabel.
-     */
-    public String getEpl2LabelType() {
-        return labelEpl2Type;
-    }
-
-    /**
-     * Set the EPL2 type of this PostageLabel.
-     *
-     * @param labelEpl2Type EPL2 type of this PostageLabel.
-     */
-    public void setLabelEpl2Type(final String labelEpl2Type) {
-        this.labelEpl2Type = labelEpl2Type;
-    }
-
-    /**
-     * Get the EPL2 URL of this PostageLabel.
-     *
-     * @return EPL2 URL of this PostageLabel.
-     */
-    public String getLabelEpl2Url() {
-        return labelEpl2Url;
-    }
-
-    /**
-     * Set the EPL2 URL of this PostageLabel.
-     *
-     * @param labelEpl2Url EPL2 URL of this PostageLabel.
-     */
-    public void setLabelEpl2Url(final String labelEpl2Url) {
-        this.labelEpl2Url = labelEpl2Url;
-    }
-
-    /**
-     * Get the EPL2 file type of this PostageLabel.
-     *
-     * @return EPL2 file type of this PostageLabel.
-     */
-    public String getLabelEpl2FileType() {
-        return labelEpl2FileType;
-    }
-
-    /**
-     * Set the EPL2 file type of this PostageLabel.
-     *
-     * @param labelEpl2FileType EPL2 file type of this PostageLabel.
-     */
-    public void setLabelEpl2FileType(final String labelEpl2FileType) {
-        this.labelEpl2FileType = labelEpl2FileType;
+    public void setLabelZplFileType(final String labelZplFileType) {
+        this.labelZplFileType = labelZplFileType;
     }
 
     /**
@@ -350,24 +341,6 @@ public final class PostageLabel extends EasyPostResource {
     }
 
     /**
-     * Get the ZPL type of this PostageLabel.
-     *
-     * @return ZPL type of this PostageLabel.
-     */
-    public String getZplLabelType() {
-        return labelZplType;
-    }
-
-    /**
-     * Set the ZPL type of this PostageLabel.
-     *
-     * @param labelZplType ZPL type of this PostageLabel.
-     */
-    public void setLabelZplType(final String labelZplType) {
-        this.labelZplType = labelZplType;
-    }
-
-    /**
      * Get the ZPL URL of this PostageLabel.
      *
      * @return ZPL URL of this PostageLabel.
@@ -386,20 +359,47 @@ public final class PostageLabel extends EasyPostResource {
     }
 
     /**
-     * Get the ZPL file type of this PostageLabel.
+     * Get the PDF type of this PostageLabel.
      *
-     * @return ZPL file type of this PostageLabel.
+     * @return PDF type of this PostageLabel.
      */
-    public String getLabelZplFileType() {
-        return labelZplFileType;
+    public String getPdfLabelType() {
+        return labelPdfType;
     }
 
     /**
-     * Set the ZPL file type of this PostageLabel.
+     * Get the ZPL type of this PostageLabel.
      *
-     * @param labelZplFileType ZPL file type of this PostageLabel.
+     * @return ZPL type of this PostageLabel.
      */
-    public void setLabelZplFileType(final String labelZplFileType) {
-        this.labelZplFileType = labelZplFileType;
+    public String getZplLabelType() {
+        return labelZplType;
+    }
+
+    /**
+     * Set the PDF type of this PostageLabel.
+     *
+     * @param labelPdfType PDF type of this PostageLabel.
+     */
+    public void setLabelPdfType(final String labelPdfType) {
+        this.labelPdfType = labelPdfType;
+    }
+
+    /**
+     * Set the EPL2 type of this PostageLabel.
+     *
+     * @param labelEpl2Type EPL2 type of this PostageLabel.
+     */
+    public void setLabelEpl2Type(final String labelEpl2Type) {
+        this.labelEpl2Type = labelEpl2Type;
+    }
+
+    /**
+     * Set the ZPL type of this PostageLabel.
+     *
+     * @param labelZplType ZPL type of this PostageLabel.
+     */
+    public void setLabelZplType(final String labelZplType) {
+        this.labelZplType = labelZplType;
     }
 }
