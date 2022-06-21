@@ -1,10 +1,11 @@
 # CHANGELOG
 
-## Next Release
+## v5.5.0 (2022-06-21)
 
-- Adds `billingType` attribute to Rate and CarrierAccount classes.
+- Adds `billingType` attribute to `Rate` and `CarrierAccount` classes.
+- Adds missing attributes to the `CarrierAcccount` object (closes #145)
 
-## v5.4.0
+## v5.4.0 (2022-06-03)
 
 - Adds `PaymentMethod.all()`, `CreditCard.fund()`, and `CreditCard.delete()` functions.
 - Fixes a bug that did not merge local and remote objects correctly on update (eg: User, Referral)
