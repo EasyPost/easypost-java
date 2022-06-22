@@ -1039,7 +1039,7 @@ public final class Shipment extends EasyPostResource {
     public Smartrate lowestSmartRate(int deliveryDay, String deliveryAccuracy) throws EasyPostException {
         List<Smartrate> smartrates = this.getSmartrates();
 
-        Smartrate lowestSmartrate = getLowestSmartRate(smartrates, deliveryDay, deliveryAccuracy);
+        Smartrate lowestSmartrate = findLowestSmartrate(smartrates, deliveryDay, deliveryAccuracy);
 
         return lowestSmartrate;
     }

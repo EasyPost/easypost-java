@@ -5,8 +5,7 @@
 - Some `getX` functions have been deprecated and renamed to simply `X` to avoid confusion with proper getter/setter
   functions.
     - `getSmartrates()` -> `smartrates()`
-    - `getLowestSmartrate()` -> `lowestSmartrate()`
-    - `getSmartRateAccuracy()` -> `smartrateAccuracy()`
+    - `getLowestSmartRate()` -> `findLowestSmartrate()`
 
 ## v5.5.0 (2022-06-21)
 
