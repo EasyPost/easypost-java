@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Next Release
+
+- Some `getX` functions have been deprecated and renamed to simply `X` to avoid confusion with proper getter/setter
+  functions.
+    - `getSmartrates()` -> `smartrates()`
+    - `getLowestSmartRate()` -> `findLowestSmartrate()`
+
 ## v5.5.0 (2022-06-21)
 
 - Adds `billingType` attribute to `Rate` and `CarrierAccount` classes.

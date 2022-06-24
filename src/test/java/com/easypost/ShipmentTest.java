@@ -246,7 +246,7 @@ public final class ShipmentTest {
         assertNotNull(shipment.getRates());
         Rate rate = shipment.getRates().get(0);
 
-        List<Smartrate> smartRates = shipment.getSmartrates();
+        List<Smartrate> smartRates = shipment.smartrates();
         assertInstanceOf(List.class, smartRates);
         Smartrate smartRate = smartRates.get(0);
 
@@ -412,22 +412,22 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate_list");
 
         Shipment shipment = createBasicShipment();
-        List<Smartrate> smartrates = shipment.getSmartrates();
+        List<Smartrate> smartrates = shipment.smartrates();
 
         // Test lowest smartrate with valid filters
-        Smartrate lowestSmartRate = Shipment.getLowestSmartRate(smartrates, 1, "percentile_90");
+        Smartrate lowestSmartRate = Shipment.findLowestSmartrate(smartrates, 1, "percentile_90");
         assertEquals("First", lowestSmartRate.getService());
         assertEquals(5.49, lowestSmartRate.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRate.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict delivery days)
         assertThrows(EasyPostException.class, () -> {
-            Shipment.getLowestSmartRate(smartrates, 0, "percentile_90");
+            Shipment.findLowestSmartrate(smartrates, 0, "percentile_90");
         });
 
         // Test lowest smartrate with invalid filters (should error due to bad delivery accuracy)
         assertThrows(EasyPostException.class, () -> {
-            Shipment.getLowestSmartRate(smartrates, 1, "BAD ACCURACY");
+            Shipment.findLowestSmartrate(smartrates, 1, "BAD ACCURACY");
         });
     }
 }
