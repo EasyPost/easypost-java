@@ -2,7 +2,6 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.CreditCard;
-import com.easypost.model.CreditCardFund;
 import com.easypost.model.CreditCardPriority;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -29,10 +28,8 @@ public final class CreditCardTest {
     @Test
     @Disabled // Skipping due to the lack of an available real credit card in tests
     public void testFund() throws EasyPostException {
-        CreditCardFund creditCardFund = CreditCard.fund("20", CreditCardPriority.PRIMARY);
-
-        assertTrue(creditCardFund != null);
-    }
+        assertTrue(CreditCard.fund("100", CreditCardPriority.PRIMARY));
+       }
 
     /**
      * Test deleting a credit card.
