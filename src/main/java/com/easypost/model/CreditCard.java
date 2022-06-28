@@ -32,7 +32,7 @@ public class CreditCard extends BaseCreditCard {
             throws EasyPostException {
         PaymentMethod paymentMethods = PaymentMethod.all();
         String cardID = null;
-        
+
         switch (primaryOrSecondary) {
             case PRIMARY:
                 cardID = paymentMethods.getPrimaryPaymentMethod().getId();
@@ -49,11 +49,11 @@ public class CreditCard extends BaseCreditCard {
         }
 
         Map<String, Object> params = new HashMap<String, Object>();
-            params.put("amount", amount);
+        params.put("amount", amount);
 
-        request(RequestMethod.POST,
-        String.format("%s/%s/%s/%s", EasyPost.API_BASE, "credit_cards", cardID, "charges"), params,
-        CreditCard.class, apiKey);
+        request(RequestMethod.POST, String.format("%s/%s/%s/%s", EasyPost.API_BASE, "credit_cards", cardID, "charges"),
+                params, CreditCard.class, apiKey);
+
         return true;
     }
 
