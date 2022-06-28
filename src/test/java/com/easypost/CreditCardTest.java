@@ -2,7 +2,6 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.CreditCard;
-import com.easypost.model.CreditCardFund;
 import com.easypost.model.CreditCardPriority;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -11,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class CreditCardTest {
+    private static TestUtils.VCR vcr;
+
     /**
      * Setup the testing environment for this file.
      *
@@ -18,7 +19,7 @@ public final class CreditCardTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        EasyPost.apiKey = System.getenv("EASYPOST_PROD_API_KEY");
+        vcr = new TestUtils.VCR("credit_card", TestUtils.ApiKey.PRODUCTION);
     }
 
     /**
@@ -29,9 +30,8 @@ public final class CreditCardTest {
     @Test
     @Disabled // Skipping due to the lack of an available real credit card in tests
     public void testFund() throws EasyPostException {
-        CreditCardFund creditCardFund = CreditCard.fund("20", CreditCardPriority.PRIMARY);
-
-        assertTrue(creditCardFund != null);
+        vcr.setUpTest("fund");
+        assertTrue(CreditCard.fund("2000", CreditCardPriority.PRIMARY));
     }
 
     /**
@@ -42,6 +42,7 @@ public final class CreditCardTest {
     @Test
     @Disabled // Skipping due to the lack of an available real credit card in tests
     public void testDelete() throws EasyPostException {
+        vcr.setUpTest("delete");
         CreditCard.delete("card_123");
     }
 }

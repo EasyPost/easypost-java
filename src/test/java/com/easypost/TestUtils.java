@@ -78,8 +78,9 @@ public abstract class TestUtils {
         }
 
         String value = System.getenv(keyName);
-        return value != null ? value :
+        value = (value != null && !value.isEmpty()) ? value :
                 API_KEY_FAILED_TO_PULL; // if can't pull from environment, will use a fake key. Won't matter on replay.
+        return value;
     }
 
     public static final class VCR {
