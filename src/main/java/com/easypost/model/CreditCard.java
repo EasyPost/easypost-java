@@ -51,9 +51,9 @@ public class CreditCard extends BaseCreditCard {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("amount", amount);
 
+        // will attempt to serialize the empty response to a CreditCard object (doesn't matter)
         request(RequestMethod.POST, String.format("%s/%s/%s/%s", EasyPost.API_BASE, "credit_cards", cardID, "charges"),
                 params, CreditCard.class, apiKey);
-        // will attempt to serialize the empty response to a CreditCard object (doesn't matter)
 
         return true;
     }

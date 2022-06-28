@@ -19,7 +19,7 @@ public final class CreditCardTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        vcr = new TestUtils.VCR("batch", TestUtils.ApiKey.PRODUCTION);
+        vcr = new TestUtils.VCR("credit_card", TestUtils.ApiKey.PRODUCTION);
     }
 
     /**
