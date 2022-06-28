@@ -11,6 +11,7 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public abstract class TestUtils {
     public enum ApiKey {
@@ -77,13 +78,20 @@ public abstract class TestUtils {
                 break;
         }
 
+        Logger logger = Logger.getLogger(TestUtils.class.getName());
+
         String value = System.getenv(keyName);
-        return value != null ? value :
+        logger.info("Grabbed API key from environment: " + value);
+        value = (value != null && !value.isEmpty()) ? value :
                 API_KEY_FAILED_TO_PULL; // if can't pull from environment, will use a fake key. Won't matter on replay.
+        logger.info("Returning API key: " + value);
+        return value;
     }
 
     public static final class VCR {
         private final com.easypost.easyvcr.VCR vcr;
+
+        private final Logger logger;
 
         private final String apiKey;
 
@@ -124,6 +132,8 @@ public abstract class TestUtils {
          * @param apiKey              The API key to use.
          */
         public VCR(String testCassettesFolder, String apiKey) {
+            logger = Logger.getLogger(VCR.class.getName());
+
             AdvancedSettings advancedSettings = new AdvancedSettings();
             advancedSettings.matchRules =
                     new MatchRules().byMethod().byFullUrl().byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
@@ -183,6 +193,7 @@ public abstract class TestUtils {
         public void setUpTest(String cassetteName, String overrideApiKey) {
             // override api key if needed
             EasyPost.apiKey = overrideApiKey != null ? overrideApiKey : apiKey;
+            logger.info("Using API key: " + EasyPost.apiKey);
 
             // set up cassette
             Cassette cassette = new Cassette(testCassettesFolder, cassetteName);

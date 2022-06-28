@@ -44,7 +44,7 @@ public class CreditCard extends BaseCreditCard {
                 break;
         }
 
-        if (cardID == null || cardID.isEmpty() || !cardID.startsWith("card_")) {
+        if (cardID == null || !cardID.startsWith("card_")) {
             throw new EasyPostException("The chosen payment method is not a credit card. Please try again.");
         }
 
@@ -53,6 +53,7 @@ public class CreditCard extends BaseCreditCard {
 
         request(RequestMethod.POST, String.format("%s/%s/%s/%s", EasyPost.API_BASE, "credit_cards", cardID, "charges"),
                 params, CreditCard.class, apiKey);
+        // will attempt to serialize the empty response to a CreditCard object (doesn't matter)
 
         return true;
     }
