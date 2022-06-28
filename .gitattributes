@@ -1,4 +1,4 @@
 * text=auto
 
-tests/cassettes/* -diff
-tests/cassettes/* linguist-generated
+src/test/java/com/easypost/cassettes/**/* -diff
+src/test/java/com/easypost/cassettes/**/* linguist-generated

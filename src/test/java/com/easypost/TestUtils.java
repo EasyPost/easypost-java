@@ -19,7 +19,7 @@ public abstract class TestUtils {
     }
 
     private static final String API_KEY_FAILED_TO_PULL = "couldnotpullapikey";
-    private static final String CASSETTES_FOLDER = "cassettes";
+    private static final String CASSETTES_FOLDER = "src/test/java/com/easypost/cassettes";
     private static final java.util.List<String> HEADER_CENSORS = new ArrayList<String>() {{
         add("Authorization");
         add("User-Agent");
@@ -135,7 +135,7 @@ public abstract class TestUtils {
             this.apiKey = apiKey;
 
             this.testCassettesFolder = Paths.get(getSourceFileDirectory(), CASSETTES_FOLDER)
-                    .toString(); // create "cassettes" folder in same directory as test files
+                    .toString(); // create the "cassettes" folder
 
             if (testCassettesFolder != null) {
                 this.testCassettesFolder = Paths.get(this.testCassettesFolder, testCassettesFolder)
