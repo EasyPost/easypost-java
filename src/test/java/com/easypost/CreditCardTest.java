@@ -28,7 +28,7 @@ public final class CreditCardTest {
     @Test
     @Disabled // Skipping due to the lack of an available real credit card in tests
     public void testFund() throws EasyPostException {
-        assertTrue(CreditCard.fund("100", CreditCardPriority.PRIMARY));
+        assertTrue(CreditCard.fund("2000", CreditCardPriority.PRIMARY));
        }
 
     /**

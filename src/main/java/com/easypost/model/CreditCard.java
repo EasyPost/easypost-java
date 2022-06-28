@@ -16,7 +16,7 @@ public class CreditCard extends BaseCreditCard {
      * @throws EasyPostException when the request fails.
      */
     public static boolean fund(String amount, CreditCardPriority primaryOrSecondary) throws EasyPostException {
-        return true;
+        return fund(amount, primaryOrSecondary,  null);
     }
 
     /**
@@ -30,28 +30,32 @@ public class CreditCard extends BaseCreditCard {
      */
     public static boolean fund(String amount, CreditCardPriority primaryOrSecondary, String apiKey)
             throws EasyPostException {
-                PaymentMethod paymentMethods = PaymentMethod.all();
-                String cardID = null;
+        PaymentMethod paymentMethods = PaymentMethod.all();
+        String cardID = null;
         
-                switch (primaryOrSecondary) {
-                    case PRIMARY:
-                        cardID = paymentMethods.getPrimaryPaymentMethod().getId();
-                        break;
-                    case SECONDARY:
-                        cardID = paymentMethods.getSecondaryPaymentMethod().getId();
-                        break;
-                    default:
-                        break;
-                }
+        switch (primaryOrSecondary) {
+            case PRIMARY:
+                cardID = paymentMethods.getPrimaryPaymentMethod().getId();
+                break;
+            case SECONDARY:
+                cardID = paymentMethods.getSecondaryPaymentMethod().getId();
+                break;
+            default:
+                break;
+        }
         
-                if (cardID == null || cardID.isEmpty() || !cardID.startsWith("card_")) {
-                    throw new EasyPostException("The chosen payment method is not a credit card. Please try again.");
-                }
-        
-                Map<String, Object> params = new HashMap<String, Object>();
-                params.put("amount", amount);
-        
-                return true;  
+        if (cardID == null || cardID.isEmpty() || !cardID.startsWith("card_")) {
+            throw new EasyPostException("The chosen payment method is not a credit card. Please try again.");
+        }
+    
+        Map<String, Object> params = new HashMap<String, Object>();
+            params.put("amount", amount);
+
+        request(RequestMethod.POST, 
+        String.format("%s/%s/%s/%s", EasyPost.API_BASE, "credit_cards", cardID, "charges"), params,
+        CreditCard.class, apiKey);
+            
+        return true;  
     }
 
     /**
