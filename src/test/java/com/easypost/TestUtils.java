@@ -19,7 +19,7 @@ public abstract class TestUtils {
     }
 
     private static final String API_KEY_FAILED_TO_PULL = "couldnotpullapikey";
-    private static final String CASSETTES_PATH = "src/test/java/com/easypost/cassettes";
+    private static final String CASSETTES_PATH = "src/test/cassettes";
     private static final java.util.List<String> HEADER_CENSORS = new ArrayList<String>() {{
         add("Authorization");
         add("User-Agent");
