@@ -1086,27 +1086,11 @@ public final class Shipment extends EasyPostResource {
      * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #findLowestSmartrate(List, int, String)} instead.
+     * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)} instead.
      */
     @Deprecated
     public static Smartrate getLowestSmartRate(final List<Smartrate> smartrates, int deliveryDay,
                                                String deliveryAccuracy) throws EasyPostException {
-        return findLowestSmartrate(smartrates, deliveryDay, deliveryAccuracy);
-    }
-
-    /**
-     * Find the lowest Smartrate from a list of Smartrates.
-     *
-     * @param smartrates       List of Smartrates to filter from.
-     * @param deliveryDay      Delivery days restriction to use when filtering.
-     * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
-     * @return lowest Smartrate object
-     * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)} instead.
-     */
-    @Deprecated
-    public static Smartrate findLowestSmartrate(final List<Smartrate> smartrates, int deliveryDay,
-                                                String deliveryAccuracy) throws EasyPostException {
         return findLowestSmartrate(smartrates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
     }
 
