@@ -152,7 +152,9 @@ public final class TimeInTransit {
      * @param percentile the percentile to find the corresponding accuracy for
      * @return the delivery accuracy of the specified percentile
      * @throws EasyPostException when the percentile is not valid
+     * @deprecated Use {@link #getBySmartrateAccuracy(SmartrateAccuracy)} instead.
      */
+    @Deprecated
     public int getSmartRateAccuracy(final String percentile) throws EasyPostException {
         switch (percentile) {
             case "percentile_50":
@@ -173,4 +175,33 @@ public final class TimeInTransit {
                 throw new EasyPostException("Invalid percentile value");
         }
     }
+
+    /**
+     * Get the delivery accuracy of a specific percentile of this TimeInTransit.
+     *
+     * @param accuracy the SmartrateAccuracy to find the corresponding accuracy for
+     * @return the delivery accuracy of the specified percentile
+     * @throws EasyPostException when the percentile is not valid
+     */
+    public int getBySmartrateAccuracy(SmartrateAccuracy accuracy) throws EasyPostException {
+        switch (accuracy) {
+            case Percentile50:
+                return this.percentile50;
+            case Percentile75:
+                return this.percentile75;
+            case Percentile85:
+                return this.percentile85;
+            case Percentile90:
+                return this.percentile90;
+            case Percentile95:
+                return this.percentile95;
+            case Percentile97:
+                return this.percentile97;
+            case Percentile99:
+                return this.percentile99;
+            default:
+                throw new EasyPostException("Invalid SmartrateAccuracy enum value.");
+        }
+    }
+
 }
