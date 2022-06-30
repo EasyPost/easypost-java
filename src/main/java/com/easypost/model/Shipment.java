@@ -3,9 +3,7 @@ package com.easypost.model;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -1035,8 +1033,22 @@ public final class Shipment extends EasyPostResource {
      * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
+     * @deprecated use {@link #lowestSmartRate(int, SmartrateAccuracy)} instead.
      */
+    @Deprecated
     public Smartrate lowestSmartRate(int deliveryDay, String deliveryAccuracy) throws EasyPostException {
+        return this.lowestSmartRate(deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
+    }
+
+    /**
+     * Get the lowest smartrate for this Shipment.
+     *
+     * @param deliveryDay      Delivery days restriction to use when filtering.
+     * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
+     * @return lowest Smartrate object
+     * @throws EasyPostException when the request fails.
+     */
+    public Smartrate lowestSmartRate(int deliveryDay, SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
         List<Smartrate> smartrates = this.getSmartrates();
 
         Smartrate lowestSmartrate = findLowestSmartrate(smartrates, deliveryDay, deliveryAccuracy);
@@ -1074,12 +1086,12 @@ public final class Shipment extends EasyPostResource {
      * @param deliveryAccuracy Delivery days accuracy restriction to use when filtering.
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #findLowestSmartrate(List, int, String)} instead.
+     * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)} instead.
      */
     @Deprecated
     public static Smartrate getLowestSmartRate(final List<Smartrate> smartrates, int deliveryDay,
                                                String deliveryAccuracy) throws EasyPostException {
-        return findLowestSmartrate(smartrates, deliveryDay, deliveryAccuracy);
+        return findLowestSmartrate(smartrates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
     }
 
     /**
@@ -1092,19 +1104,11 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Smartrate findLowestSmartrate(final List<Smartrate> smartrates, int deliveryDay,
-                                                String deliveryAccuracy) throws EasyPostException {
+                                                SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
         Smartrate lowestSmartrate = null;
 
-        HashSet<String> validDeliveryAccuracies = new HashSet<String>(
-                Arrays.asList("percentile_50", "percentile_75", "percentile_85", "percentile_90", "percentile_95",
-                        "percentile_97", "percentile_99"));
-
-        if (!validDeliveryAccuracies.contains(deliveryAccuracy.toLowerCase())) {
-            throw new EasyPostException("Invalid delivery_accuracy value, must be one of: " + validDeliveryAccuracies);
-        }
-
         for (Smartrate rate : smartrates) {
-            int smartrateDeliveryDay = rate.getTimeInTransit().getSmartRateAccuracy(deliveryAccuracy);
+            int smartrateDeliveryDay = rate.getTimeInTransit().getBySmartrateAccuracy(deliveryAccuracy);
 
             if (smartrateDeliveryDay > deliveryDay) {
                 continue;

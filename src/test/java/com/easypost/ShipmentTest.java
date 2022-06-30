@@ -7,6 +7,7 @@ import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
 import com.easypost.model.Smartrate;
+import com.easypost.model.SmartrateAccuracy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -384,7 +385,7 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate");
 
         Shipment shipment = createBasicShipment();
-        Smartrate lowestSmartRateFilters = shipment.lowestSmartRate(1, "percentile_90");
+        Smartrate lowestSmartRateFilters = shipment.lowestSmartRate(1, SmartrateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
         assertEquals("First", lowestSmartRateFilters.getService());
@@ -393,12 +394,7 @@ public final class ShipmentTest {
 
         // Test lowest smartrate with invalid filters (should error due to strict delivery days)
         assertThrows(EasyPostException.class, () -> {
-            shipment.lowestSmartRate(0, "percentile_90");
-        });
-
-        // Test lowest smartrate with invalid filters (should error due to invalid delivery accuracy)
-        assertThrows(EasyPostException.class, () -> {
-            shipment.lowestSmartRate(1, "BAD ACCURACY");
+            shipment.lowestSmartRate(0, SmartrateAccuracy.Percentile90);
         });
     }
 
@@ -415,19 +411,14 @@ public final class ShipmentTest {
         List<Smartrate> smartrates = shipment.smartrates();
 
         // Test lowest smartrate with valid filters
-        Smartrate lowestSmartRate = Shipment.findLowestSmartrate(smartrates, 1, "percentile_90");
+        Smartrate lowestSmartRate = Shipment.findLowestSmartrate(smartrates, 1, SmartrateAccuracy.Percentile90);
         assertEquals("First", lowestSmartRate.getService());
         assertEquals(5.49, lowestSmartRate.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRate.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict delivery days)
         assertThrows(EasyPostException.class, () -> {
-            Shipment.findLowestSmartrate(smartrates, 0, "percentile_90");
-        });
-
-        // Test lowest smartrate with invalid filters (should error due to bad delivery accuracy)
-        assertThrows(EasyPostException.class, () -> {
-            Shipment.findLowestSmartrate(smartrates, 1, "BAD ACCURACY");
+            Shipment.findLowestSmartrate(smartrates, 0, SmartrateAccuracy.Percentile90);
         });
     }
 }
