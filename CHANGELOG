@@ -1,3 +1,6 @@
+=== Next Release
+- Backports User-Agent header changes
+
 === 4.0.4 2020-10-29
 - Actually bump User-Agent (which hadn't been bumped since 4.0.0)
 
