@@ -266,8 +266,11 @@ public abstract class EasyPostResource {
     static Map<String, String> getHeaders(String apiKey) {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Accept-Charset", CHARSET);
-        headers.put("User-Agent", String.format("EasyPost/v2 JavaClient/%s Java/%s", EasyPost.VERSION,
-                System.getProperty("java.version")));
+        headers.put("User-Agent", String.format("EasyPost/v2 JavaClient/%s Java/%s OS/%s OSVersion/%s OSArch/%s " +
+                "Implementation/%s", EasyPost.VERSION, System.getProperty("java.version"),
+                convertSpaceToHyphen(System.getProperty("os.name")), System.getProperty("os.version"),
+                convertSpaceToHyphen(System.getProperty("os.arch")),
+                convertSpaceToHyphen(System.getProperties().getProperty("java.vm.name"))));
 
         if (apiKey == null) {
             apiKey = EasyPost.apiKey;
@@ -275,25 +278,11 @@ public abstract class EasyPostResource {
 
         headers.put("Authorization", String.format("Bearer %s", apiKey));
 
-        // debug headers
-        String[] propertyNames = {
-                "os.name",
-                "os.version",
-                "os.arch",
-                "java.version",
-                "java.vendor",
-                "java.vm.version",
-                "java.vm.vendor"
-        };
-        Map<String, String> propertyMap = new HashMap<String, String>();
-        for (String propertyName : propertyNames) {
-            propertyMap.put(propertyName, System.getProperty(propertyName));
-        }
-        propertyMap.put("lang", "Java");
-        propertyMap.put("publisher", "EasyPost");
-        headers.put("X-Client-User-Agent", GSON.toJson(propertyMap));
-
         return headers;
+    }
+
+    private static String convertSpaceToHyphen(String string) {
+        return string.replace(' ', '-');
     }
 
     private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(final String url, final String apiKey,

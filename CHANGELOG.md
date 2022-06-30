@@ -6,6 +6,7 @@
   functions.
     - `getSmartrates()` -> `smartrates()`
     - `getLowestSmartRate()` -> `findLowestSmartrate()`
+- Adds OS specific details to the user-agent header
 
 ## v5.5.0 (2022-06-21)
 
