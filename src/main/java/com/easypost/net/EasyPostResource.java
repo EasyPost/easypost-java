@@ -268,8 +268,9 @@ public abstract class EasyPostResource {
         headers.put("Accept-Charset", CHARSET);
         headers.put("User-Agent", String.format("EasyPost/v2 JavaClient/%s Java/%s OS/%s OSVersion/%s OSArch/%s " +
                 "Implementation/%s", EasyPost.VERSION, System.getProperty("java.version"),
-                System.getProperty("os.name"), System.getProperty("os.version"), System.getProperty("os.arch"),
-                System.getProperties().getProperty("java.vm.name")));
+                convertSpaceToHyphen(System.getProperty("os.name")), System.getProperty("os.version"),
+                convertSpaceToHyphen(System.getProperty("os.arch")),
+                convertSpaceToHyphen(System.getProperties().getProperty("java.vm.name"))));
 
         if (apiKey == null) {
             apiKey = EasyPost.apiKey;
@@ -278,6 +279,10 @@ public abstract class EasyPostResource {
         headers.put("Authorization", String.format("Bearer %s", apiKey));
 
         return headers;
+    }
+
+    private static String convertSpaceToHyphen(String string) {
+        return string.replace(' ', '-');
     }
 
     private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(final String url, final String apiKey,
