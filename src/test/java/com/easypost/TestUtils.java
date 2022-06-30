@@ -18,12 +18,11 @@ public abstract class TestUtils {
         PRODUCTION
     }
 
-    private static final String API_KEY_FAILED_TO_PULL = "couldnotpullapikey";
+    private static final String API_KEY_FAILED_TO_PULL = "couldNotPullApiKey";
     private static final String CASSETTES_PATH = "src/test/cassettes";
     private static final java.util.List<String> HEADER_CENSORS = new ArrayList<String>() {{
         add("Authorization");
         add("User-Agent");
-        add("X-Client-User-Agent");
     }};
     private static final List<String> QUERY_CENSORS = new ArrayList<String>() {{
         add("card[cvc]");
