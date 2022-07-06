@@ -34,8 +34,12 @@ install-checkstyle:
 lint:
 	java -jar checkstyle.jar src -c easypost_java_style.xml -d
 
-## scan - Scan the project for security issues
+## scan - Scan the project for serious security issues
 scan:
-	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true
+	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true -Ddependency-check.failBuildOnCVSS=7 -Ddependency-check.junitFailOnCVSS=7
 
-.PHONY: help build-release build-dev publish test clean install-checkstyle lint scan
+## scan-strict - Scan the project for any security issues (strict mode)
+scan-strict:
+	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true -Ddependency-check.failBuildOnCVSS=0 -Ddependency-check.junitFailOnCVSS=0
+
+.PHONY: help build-release build-dev publish test clean install-checkstyle lint scan scan-strict

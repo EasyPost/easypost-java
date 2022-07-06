@@ -36,17 +36,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run security check
-        uses: dependency-check/Dependency-Check_Action@main
-        id: DepCheck
-        with:
-          project: "EasyPost Java Client Library"
-          path: '.'
-          format: 'HTML'
-          args: >
-            --failOnCVSS 7
-            --enableRetired
+        run: make scan
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
-          name: DepCheck report
+          name: DependencyCheck report
           path: ${{github.workspace}}/reports

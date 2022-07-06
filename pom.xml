@@ -262,6 +262,10 @@
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>7.1.1</version>
+                <configuration>
+                    <failBuildOnCVSS>7</failBuildOnCVSS>
+                    <junitFailOnCVSS>7</junitFailOnCVSS>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
