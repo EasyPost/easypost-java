@@ -31,3 +31,10 @@ jobs:
           fail_on_error: true
           checkstyle_config: easypost_java_style.xml
           tool_name: "style_enforcer"
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run security checks on dependencies
+        run: make scan  # this will take a while, has to download
+        # will make an HTML report inside the runner. In the future, need to extract report since this doesn't throw any errors
