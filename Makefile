@@ -8,6 +8,10 @@ help:
 build-release:
 	mvn clean install -Dgpg.passphrase=${pass}
 
+## build-dev - Build the project for development
+build-dev:
+	mvn clean install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true
+
 ## publish - Publish a release of the project
 # @parameters:
 # pass= - The GPG password to sign the release
@@ -34,4 +38,4 @@ lint:
 scan:
 	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true
 
-.PHONY: help build-release publish test clean install-checkstyle lint scan
+.PHONY: help build-release build-dev publish test clean install-checkstyle lint scan

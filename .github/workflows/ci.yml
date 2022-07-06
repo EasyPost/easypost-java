@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request: ~
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        javaversion: [ "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18" ]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Java ${{ matrix.javaversion }}
@@ -35,6 +35,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run security checks on dependencies
-        run: make scan  # this will take a while, has to download
-        # will make an HTML report inside the runner. In the future, need to extract report since this doesn't throw any errors
+      - name: Run security check
+        uses: dependency-check/Dependency-Check_Action@main
+        id: DepCheck
+        with:
+          project: "EasyPost Java Client Library"
+          path: '.'
+          format: 'HTML'
+          args: >
+            --failOnCVSS 7
+            --enableRetired
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
+        with:
+          name: DepCheck report
+          path: ${{github.workspace}}/reports
