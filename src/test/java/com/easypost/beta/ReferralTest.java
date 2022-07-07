@@ -3,8 +3,8 @@ package com.easypost.beta;
 import com.easypost.Fixture;
 import com.easypost.TestUtils;
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.CreditCardPriority;
-import com.easypost.model.beta.CreditCard;
+import com.easypost.model.PaymentMethod;
+import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.beta.Referral;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -102,12 +102,13 @@ public final class ReferralTest {
         vcr.setUpTest("referral_add_credit_card");
 
         Map<String, String> creditCardDetails = Fixture.creditCardDetails();
-        CreditCard creditCard = Referral.addCreditCard(REFERRAL_USER_PROD_API_KEY, creditCardDetails.get("number"),
-                Integer.parseInt(creditCardDetails.get("expiration_month")),
-                Integer.parseInt(creditCardDetails.get("expiration_year")), creditCardDetails.get("cvc"),
-                CreditCardPriority.PRIMARY);
+        PaymentMethodObject creditCard =
+                Referral.addCreditCardToUser(REFERRAL_USER_PROD_API_KEY, creditCardDetails.get("number"),
+                        Integer.parseInt(creditCardDetails.get("expiration_month")),
+                        Integer.parseInt(creditCardDetails.get("expiration_year")), creditCardDetails.get("cvc"),
+                        PaymentMethod.Priority.PRIMARY);
 
-        assertInstanceOf(CreditCard.class, creditCard);
+        assertInstanceOf(PaymentMethodObject.class, creditCard);
         assertTrue(creditCard.getId().startsWith("card_"));
         assertEquals(Fixture.creditCardDetails().get("number").substring(12), creditCard.getLast4());
     }

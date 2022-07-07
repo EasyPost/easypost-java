@@ -2,6 +2,12 @@ package com.easypost.model;
 
 import com.easypost.net.EasyPostResource;
 
+/**
+ * BaseCreditCard is a model class that represents the base of any credit card.
+ *
+ * @deprecated Use {@link com.easypost.model.PaymentMethodObject} instead.
+ */
+@Deprecated
 public class BaseCreditCard extends EasyPostResource {
     private String id;
     private String object;

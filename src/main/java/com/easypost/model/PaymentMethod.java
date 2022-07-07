@@ -5,10 +5,87 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
 public class PaymentMethod extends EasyPostResource {
+
+    public enum Priority {
+        PRIMARY,
+        SECONDARY
+    }
+
     private String id;
     private String object;
-    private PrimaryPaymentMethod primaryPaymentMethod;
-    private SecondaryPaymentMethod secondaryPaymentMethod;
+    private PaymentMethodObject primaryPaymentMethod;
+    private PaymentMethodObject secondaryPaymentMethod;
+
+    /**
+     * Get the PrimaryPaymentMethod of this PaymentMethod object.
+     *
+     * @deprecated Use {@link #getPrimaryPaymentMethodObject()} instead.
+     *
+     * @return the PrimaryPaymentMethod of this PaymentMethod.
+     */
+    @Deprecated
+    public PrimaryPaymentMethod getPrimaryPaymentMethod() {
+        PrimaryPaymentMethod primaryPaymentMethod = new PrimaryPaymentMethod();
+        primaryPaymentMethod.setId(this.primaryPaymentMethod.getId());
+        primaryPaymentMethod.setObject(this.primaryPaymentMethod.getObject());
+        primaryPaymentMethod.setBrand(this.primaryPaymentMethod.getBrand());
+        primaryPaymentMethod.setExpMonth(this.primaryPaymentMethod.getExpMonth());
+        primaryPaymentMethod.setExpYear(this.primaryPaymentMethod.getExpYear());
+        return primaryPaymentMethod;
+    }
+
+    /**
+     * Get the SecondaryPaymentMethod of this PaymentMethod object.
+     *
+     * @deprecated Use {@link #getSecondaryPaymentMethodObject()} instead.
+     *
+     * @return the SecondaryPaymentMethod of this PaymentMethod.
+     */
+    @Deprecated
+    public SecondaryPaymentMethod getSecondaryPaymentMethod() {
+        SecondaryPaymentMethod secondaryPaymentMethod = new SecondaryPaymentMethod();
+        secondaryPaymentMethod.setId(this.secondaryPaymentMethod.getId());
+        secondaryPaymentMethod.setObject(this.secondaryPaymentMethod.getObject());
+        secondaryPaymentMethod.setBrand(this.secondaryPaymentMethod.getBrand());
+        secondaryPaymentMethod.setExpMonth(this.secondaryPaymentMethod.getExpMonth());
+        secondaryPaymentMethod.setExpYear(this.secondaryPaymentMethod.getExpYear());
+        return secondaryPaymentMethod;
+    }
+
+    /**
+     * List all payment methods.
+     *
+     * @deprecated Use {@link com.easypost.model.Billing#retrievePaymentMethods()} instead.
+     *
+     * @return Billing object.
+     * @throws EasyPostException when the request fails.
+     */
+    @Deprecated
+    public static PaymentMethod all() throws EasyPostException {
+        return all(null);
+    }
+
+    /**
+     * List all payment methods.
+     *
+     * @deprecated Use {@link com.easypost.model.Billing#retrievePaymentMethods()} instead.
+     *
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Billing object.
+     * @throws EasyPostException when the request fails.
+     */
+    @Deprecated
+    public static PaymentMethod all(String apiKey) throws EasyPostException {
+        PaymentMethod response =
+                request(RequestMethod.GET, String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
+                        PaymentMethod.class, apiKey);
+
+        if (response.getId() == null) {
+            throw new EasyPostException("Billing has not been setup for this user. Please add a payment method.");
+        }
+
+        return response;
+    }
 
     /**
      * Get the object of this PaymentMethod object.
@@ -20,50 +97,21 @@ public class PaymentMethod extends EasyPostResource {
     }
 
     /**
-     * Get the PrimaryPaymentMethod of this PaymentMethod object.
+     * Get the primary payment method of this PaymentMethod object.
      *
-     * @return the PrimaryPaymentMethod of this PaymentMethod.
+     * @return a PaymentMethodObject representing the primary payment method.
      */
-    public PrimaryPaymentMethod getPrimaryPaymentMethod() {
+    public PaymentMethodObject getPrimaryPaymentMethodObject() {
         return primaryPaymentMethod;
     }
 
     /**
-     * Get the SecondaryPaymentMethod of this PaymentMethod object.
+     * Get the secondary payment method of this PaymentMethod object.
      *
-     * @return the SecondaryPaymentMethod of this PaymentMethod.
+     * @return a PaymentMethodObject representing the secondary payment method.
      */
-    public SecondaryPaymentMethod getSecondaryPaymentMethod() {
+    public PaymentMethodObject getSecondaryPaymentMethodObject() {
         return secondaryPaymentMethod;
-    }
-
-    /**
-     * List all payment methods.
-     *
-     * @return Billing object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static PaymentMethod all() throws EasyPostException {
-        return all(null);
-    }
-
-    /**
-     * List all payment methods.
-     *
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Billing object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static PaymentMethod all(String apiKey) throws EasyPostException {
-        PaymentMethod response =
-                request(RequestMethod.GET, String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
-                        PaymentMethod.class, apiKey);
-
-        if (response.getId() == null) {
-            throw new EasyPostException("Billing has not been setup for this user. Please add a payment method.");
-        }
-
-        return response;
     }
 
     /**
