@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request: ~
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        javaversion: [ "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18" ]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Java ${{ matrix.javaversion }}
@@ -31,3 +31,14 @@ jobs:
           fail_on_error: true
           checkstyle_config: easypost_java_style.xml
           tool_name: "style_enforcer"
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run security check
+        run: make scan
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
+        with:
+          name: DependencyCheck report
+          path: ${{github.workspace}}/target/dependency-check-report.html

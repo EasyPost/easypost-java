@@ -60,6 +60,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>23.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.easypost</groupId>
             <artifactId>easyvcr</artifactId>
             <version>0.3.0</version>
@@ -249,6 +255,22 @@
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>7.1.1</version>
+                <configuration>
+                    <failBuildOnCVSS>7</failBuildOnCVSS>
+                    <junitFailOnCVSS>7</junitFailOnCVSS>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
