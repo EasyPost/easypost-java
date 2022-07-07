@@ -12,7 +12,7 @@ public final class Billing extends EasyPostResource {
      * Delete a payment method.
      *
      * @param priority Which type of payment method to delete.
-     * @return true if the payment method was deleted successfully, false otherwise.
+     * @return True if successful. Throws an exception if unsuccessful.
      * @throws EasyPostException when the request fails.
      */
     public static boolean deletePaymentMethod(PaymentMethod.Priority priority) throws EasyPostException {
@@ -24,7 +24,7 @@ public final class Billing extends EasyPostResource {
      *
      * @param priority Which type of payment method to delete.
      * @param apiKey   API key to use in request (overrides default API key).
-     * @return true if the payment method was deleted successfully, false otherwise.
+     * @return True if successful. Throws an exception if unsuccessful.
      * @throws EasyPostException when the request fails.
      */
     public static boolean deletePaymentMethod(PaymentMethod.Priority priority, String apiKey) throws EasyPostException {
@@ -39,7 +39,7 @@ public final class Billing extends EasyPostResource {
      * Fund your wallet from the primary payment method.
      *
      * @param amount amount to fund.
-     * @return True if successful, false otherwise.
+     * @return True if successful. Throws an exception if unsuccessful.
      * @throws EasyPostException when the request fails.
      */
     public static boolean fundWallet(String amount) throws EasyPostException {
@@ -51,7 +51,7 @@ public final class Billing extends EasyPostResource {
      *
      * @param amount   amount to fund.
      * @param priority which type of payment method to use to fund the wallet. Defaults to primary.
-     * @return True if successful, false otherwise.
+     * @return True if successful. Throws an exception if unsuccessful.
      * @throws EasyPostException when the request fails.
      */
     public static boolean fundWallet(String amount, PaymentMethod.Priority priority) throws EasyPostException {
@@ -64,14 +64,14 @@ public final class Billing extends EasyPostResource {
      * @param amount   amount to fund.
      * @param priority which type of payment method to use to fund the wallet.
      * @param apiKey   API key to use in request (overrides default API key).
-     * @return True if successful, false otherwise.
+     * @return True if successful. Throws an exception if unsuccessful.
      * @throws EasyPostException when the request fails.
      */
     public static boolean fundWallet(String amount, PaymentMethod.Priority priority, String apiKey)
             throws EasyPostException {
         PaymentMethodObject paymentMethodObject = getPaymentMethodByPriority(priority, apiKey);
 
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("amount", amount);
 
         request(RequestMethod.POST, String.format("%s/%s/%s/%s", EasyPost.API_BASE, paymentMethodObject.getEndpoint(),
