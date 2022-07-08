@@ -19,9 +19,8 @@ public class PaymentMethod extends EasyPostResource {
     /**
      * Get the PrimaryPaymentMethod of this PaymentMethod object.
      *
-     * @deprecated Use {@link #getPrimaryPaymentMethodObject()} instead.
-     *
      * @return the PrimaryPaymentMethod of this PaymentMethod.
+     * @deprecated Use {@link #getPrimaryPaymentMethodObject()} instead. Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public PrimaryPaymentMethod getPrimaryPaymentMethod() {
@@ -37,9 +36,9 @@ public class PaymentMethod extends EasyPostResource {
     /**
      * Get the SecondaryPaymentMethod of this PaymentMethod object.
      *
-     * @deprecated Use {@link #getSecondaryPaymentMethodObject()} instead.
-     *
      * @return the SecondaryPaymentMethod of this PaymentMethod.
+     * @deprecated Use {@link #getSecondaryPaymentMethodObject()} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public SecondaryPaymentMethod getSecondaryPaymentMethod() {
@@ -55,10 +54,10 @@ public class PaymentMethod extends EasyPostResource {
     /**
      * List all payment methods.
      *
-     * @deprecated Use {@link com.easypost.model.Billing#retrievePaymentMethods()} instead.
-     *
      * @return Billing object.
      * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link com.easypost.model.Billing#retrievePaymentMethods()} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public static PaymentMethod all() throws EasyPostException {
@@ -68,11 +67,11 @@ public class PaymentMethod extends EasyPostResource {
     /**
      * List all payment methods.
      *
-     * @deprecated Use {@link com.easypost.model.Billing#retrievePaymentMethods()} instead.
-     *
      * @param apiKey API key to use in request (overrides default API key).
      * @return Billing object.
      * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link com.easypost.model.Billing#retrievePaymentMethods()} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public static PaymentMethod all(String apiKey) throws EasyPostException {

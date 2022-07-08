@@ -10,18 +10,19 @@ import java.util.Map;
  * CreditCard is a model class that represents a credit card.
  *
  * @deprecated Use {@link com.easypost.model.PaymentMethodObject} instead.
+ * Last working version: v4.0.5. Removal: v6.0.0.
  */
 @Deprecated
 public class CreditCard extends BaseCreditCard {
     /**
      * Fund your EasyPost wallet by charging your primary or secondary card on file.
      *
-     * @deprecated Use {@link com.easypost.model.Billing#fundWallet(String, PaymentMethod.Priority)} instead.
-     *
      * @param amount             amount to fund.
      * @param primaryOrSecondary primary or secondary payment method.
      * @return CreditCardFund object.
      * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link com.easypost.model.Billing#fundWallet(String, PaymentMethod.Priority)} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public static boolean fund(String amount, CreditCardPriority primaryOrSecondary) throws EasyPostException {
@@ -31,13 +32,13 @@ public class CreditCard extends BaseCreditCard {
     /**
      * Fund your EasyPost wallet by charging your primary or secondary card on file.
      *
-     * @deprecated Use {@link com.easypost.model.Billing#fundWallet(String, PaymentMethod.Priority, String)} instead.
-     *
      * @param amount             amount to fund.
      * @param primaryOrSecondary primary or secondary payment method.
      * @param apiKey             API key to use in request (overrides default API key).
      * @return CreditCardFund object.
      * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link com.easypost.model.Billing#fundWallet(String, PaymentMethod.Priority, String)} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public static boolean fund(String amount, CreditCardPriority primaryOrSecondary, String apiKey)
@@ -60,7 +61,7 @@ public class CreditCard extends BaseCreditCard {
             throw new EasyPostException("The chosen payment method is not a credit card. Please try again.");
         }
 
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("amount", amount);
 
         // will attempt to serialize the empty response to a CreditCard object (doesn't matter)
@@ -73,10 +74,10 @@ public class CreditCard extends BaseCreditCard {
     /**
      * Delete a credit card by ID.
      *
-     * @deprecated Use {@link com.easypost.model.Billing#deletePaymentMethod(PaymentMethod.Priority)} instead.
-     *
      * @param creditCardId ID of credit card to delete.
      * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link com.easypost.model.Billing#deletePaymentMethod(PaymentMethod.Priority)} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public static void delete(String creditCardId) throws EasyPostException {
@@ -86,11 +87,11 @@ public class CreditCard extends BaseCreditCard {
     /**
      * Delete a credit card by ID.
      *
-     * @deprecated Use {@link com.easypost.model.Billing#deletePaymentMethod(PaymentMethod.Priority, String)} instead.
-     *
      * @param creditCardId ID of credit card to delete.
      * @param apiKey       API key to use in request (overrides default API key).
      * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link com.easypost.model.Billing#deletePaymentMethod(PaymentMethod.Priority, String)} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public static void delete(String creditCardId, String apiKey) throws EasyPostException {

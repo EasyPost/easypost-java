@@ -527,7 +527,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Shipment create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("shipment", params);
 
         return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
@@ -752,7 +752,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates(Map)} instead.
+     * @deprecated Use {@link #smartrates(Map)} instead. Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public List<Smartrate> getSmartrates(final Map<String, Object> params) throws EasyPostException {
@@ -777,7 +777,7 @@ public final class Shipment extends EasyPostResource {
      * @param apiKey API key to use in request (overrides default API key).
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates(Map, String)} instead.
+     * @deprecated Use {@link #smartrates(Map, String)} instead. Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public List<Smartrate> getSmartrates(final Map<String, Object> params, final String apiKey)
@@ -806,7 +806,7 @@ public final class Shipment extends EasyPostResource {
      * @param apiKey API key to use in request (overrides default API key).
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates(String)} instead.
+     * @deprecated Use {@link #smartrates(String)} instead. Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public List<Smartrate> getSmartrates(final String apiKey) throws EasyPostException {
@@ -881,7 +881,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final Rate rate) throws EasyPostException {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("rate", rate);
 
         return this.buy(params, null);
@@ -1034,6 +1034,7 @@ public final class Shipment extends EasyPostResource {
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      * @deprecated use {@link #lowestSmartRate(int, SmartrateAccuracy)} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public Smartrate lowestSmartRate(int deliveryDay, String deliveryAccuracy) throws EasyPostException {
@@ -1049,7 +1050,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Smartrate lowestSmartRate(int deliveryDay, SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
-        List<Smartrate> smartrates = this.getSmartrates();
+        List<Smartrate> smartrates = this.smartrates();
 
         Smartrate lowestSmartrate = findLowestSmartrate(smartrates, deliveryDay, deliveryAccuracy);
 
@@ -1061,7 +1062,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates()} instead.
+     * @deprecated Use {@link #smartrates()} instead. Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public List<Smartrate> getSmartrates() throws EasyPostException {
@@ -1087,6 +1088,7 @@ public final class Shipment extends EasyPostResource {
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public static Smartrate getLowestSmartRate(final List<Smartrate> smartrates, int deliveryDay,

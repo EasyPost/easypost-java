@@ -61,7 +61,7 @@ public class Referral extends BaseUser {
      * @throws EasyPostException when the request fails.
      */
     public static Referral create(Map<String, Object> params, String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("user", params);
 
         return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "referral_customers"),
@@ -90,8 +90,8 @@ public class Referral extends BaseUser {
      * @throws EasyPostException when the request fails.
      */
     public static boolean updateEmail(String email, String userId, String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> wrappedParams = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("email", email);
         wrappedParams.put("user", params);
 
@@ -139,6 +139,7 @@ public class Referral extends BaseUser {
      * @return CreditCard object.
      * @throws Exception when the request fails.
      * @deprecated Use {@link #addCreditCardToUser(String, String, int, int, String)} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     @Deprecated
     public static CreditCard addCreditCard(String referralApiKey, String number, int expirationMonth,
@@ -175,6 +176,7 @@ public class Referral extends BaseUser {
      * @return CreditCard object.
      * @throws Exception when the request fails.
      * @deprecated Use {@link #addCreditCardToUser(String, String, int, int, String, PaymentMethod.Priority)} instead.
+     * Last working version: v4.0.5. Removal: v6.0.0.
      */
     public static CreditCard addCreditCard(String referralApiKey, String number, int expirationMonth,
                                            int expirationYear, String cvc, CreditCardPriority priority)
@@ -201,7 +203,6 @@ public class Referral extends BaseUser {
                 addCreditCardToUser(referralApiKey, number, expirationMonth, expirationYear, cvc, priorityEnum);
 
         // Convert the new PaymentMethodObject back into the deprecated CreditCard object
-
         CreditCard creditCard = new CreditCard();
         creditCard.setId(paymentMethodObject.getId());
         creditCard.setObject(paymentMethodObject.getObject());
