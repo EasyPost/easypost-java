@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1655410386,
+    "recordedAt": 1657315211,
     "request": {
       "body": "",
       "method": "GET",
@@ -10,87 +10,75 @@
         ],
         "User-Agent": [
           "REDACTED"
-        ],
-        "X-Client-User-Agent": [
-          "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/beta/referral_customers?page_size\u003d5"
+      "uri": "https://api.easypost.com/v2/referrals?page_size\u003d5"
     },
     "response": {
-      "body": "[\n  {\n    \"recharge_amount\": null,\n    \"verified\": true,\n    \"created_at\": \"2022-04-26T18:05:30Z\",\n    \"secondary_recharge_amount\": null,\n    \"cc_fee_rate\": \"0.0325\",\n    \"recharge_threshold\": null,\n    \"balance\": \"0.00000\",\n    \"default_insurance_amount\": \"50.00\",\n    \"children\": [],\n    \"parent_id\": null,\n    \"has_billing_method\": null,\n    \"name\": \"Test Referral\",\n    \"insurance_fee_rate\": \"0.005\",\n    \"price_per_shipment\": \"0.00000\",\n    \"phone_number\": \"REDACTED\",\n    \"id\": \"user_f62016a444904e92b1a070c28dc80ec1\",\n    \"insurance_fee_minimum\": \"0.25\",\n    \"email\": \"me2@email.com\",\n    \"object\": \"User\"\n  },\n  {\n    \"recharge_amount\": null,\n    \"verified\": true,\n    \"created_at\": \"2022-04-26T18:24:06Z\",\n    \"secondary_recharge_amount\": null,\n    \"cc_fee_rate\": \"0.0325\",\n    \"recharge_threshold\": null,\n    \"balance\": \"0.00000\",\n    \"default_insurance_amount\": \"50.00\",\n    \"children\": [],\n    \"parent_id\": null,\n    \"has_billing_method\": null,\n    \"name\": \"Test Referral\",\n    \"insurance_fee_rate\": \"0.005\",\n    \"price_per_shipment\": \"0.00000\",\n    \"phone_number\": \"REDACTED\",\n    \"id\": \"user_ddd8473296c748f9928eeaa44f7b932f\",\n    \"insurance_fee_minimum\": \"0.25\",\n    \"email\": \"me@email.com\",\n    \"object\": \"User\"\n  },\n  {\n    \"recharge_amount\": null,\n    \"verified\": true,\n    \"created_at\": \"2022-04-26T18:27:59Z\",\n    \"secondary_recharge_amount\": null,\n    \"cc_fee_rate\": \"0.0325\",\n    \"recharge_threshold\": null,\n    \"balance\": \"0.00000\",\n    \"default_insurance_amount\": \"50.00\",\n    \"children\": [],\n    \"parent_id\": null,\n    \"has_billing_method\": null,\n    \"name\": \"Test Referral\",\n    \"insurance_fee_rate\": \"0.005\",\n    \"price_per_shipment\": \"0.00000\",\n    \"phone_number\": \"REDACTED\",\n    \"id\": \"user_eaec6f7a5c1249259620c4194cbeef1a\",\n    \"insurance_fee_minimum\": \"0.25\",\n    \"email\": \"me@email.com\",\n    \"object\": \"User\"\n  },\n  {\n    \"recharge_amount\": null,\n    \"verified\": true,\n    \"created_at\": \"2022-04-26T18:33:14Z\",\n    \"secondary_recharge_amount\": null,\n    \"cc_fee_rate\": \"0.0325\",\n    \"recharge_threshold\": null,\n    \"balance\": \"0.00000\",\n    \"default_insurance_amount\": \"50.00\",\n    \"children\": [],\n    \"parent_id\": null,\n    \"has_billing_method\": null,\n    \"name\": \"Test Referral\",\n    \"insurance_fee_rate\": \"0.005\",\n    \"price_per_shipment\": \"0.00000\",\n    \"phone_number\": \"REDACTED\",\n    \"id\": \"user_7e1ff06d85964898a17c43a179b046a4\",\n    \"insurance_fee_minimum\": \"0.25\",\n    \"email\": \"me@email.com\",\n    \"object\": \"User\"\n  },\n  {\n    \"recharge_amount\": null,\n    \"verified\": true,\n    \"created_at\": \"2022-04-26T18:36:16Z\",\n    \"secondary_recharge_amount\": null,\n    \"cc_fee_rate\": \"0.0325\",\n    \"recharge_threshold\": null,\n    \"balance\": \"0.00000\",\n    \"default_insurance_amount\": \"50.00\",\n    \"children\": [],\n    \"parent_id\": null,\n    \"has_billing_method\": null,\n    \"name\": \"Test Referral\",\n    \"insurance_fee_rate\": \"0.005\",\n    \"price_per_shipment\": \"0.00000\",\n    \"phone_number\": \"REDACTED\",\n    \"id\": \"user_1353d5275f3a4becb6763132e9c9bcb6\",\n    \"insurance_fee_minimum\": \"0.25\",\n    \"email\": \"me@email.com\",\n    \"object\": \"User\"\n  }\n]",
+      "body": null,
       "httpVersion": null,
       "headers": {
         "null": [
-          "HTTP/1.1 200 OK"
+          "HTTP/1.1 403 Forbidden"
         ],
         "content-length": [
-          "2487"
-        ],
-        "expires": [
-          "0"
+          "149"
         ],
         "x-node": [
-          "bigweb3nuq"
+          "bigweb8nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
+        "x-backend": [
+          "easypost"
         ],
         "strict-transport-security": [
           "max-age\u003d31536000; includeSubDomains; preload"
         ],
-        "pragma": [
-          "no-cache"
+        "x-xss-protection": [
+          "1; mode\u003dblock"
         ],
         "x-content-type-options": [
           "nosniff"
         ],
-        "x-xss-protection": [
-          "1; mode\u003dblock"
-        ],
         "x-ep-request-uuid": [
-          "f462041862ab8ed1e779821f00090df9"
+          "02c8ee3b62c89f8bf656c43500455cdd"
         ],
         "x-proxied": [
-          "extlb3wdc 0910011e7e",
-          "intlb2wdc 0910011e7e",
-          "intlb1nuq 0910011e7e"
+          "intlb1nuq 403f17ff97",
+          "intlb2wdc 403f17ff97",
+          "extlb3wdc 403f17ff97"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.166431"
-        ],
-        "etag": [
-          "W/\"f7b679796ddb4ba5a28b006173df7d35\""
+          "0.007297"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206152126-24f54ae67a-master"
+          "easypost-202207082040-0abd2eaf54-master"
         ],
         "cache-control": [
-          "no-cache, no-store"
+          "no-cache"
         ]
       },
       "status": {
-        "code": 200,
-        "message": "OK"
+        "code": 403,
+        "message": "Forbidden"
       },
-      "errors": null,
-      "uri": "https://api.easypost.com/beta/referral_customers?page_size\u003d5"
+      "errors": "{\n  \"error\": {\n    \"code\": \"APIKEY.INACTIVE\",\n    \"message\": \"This api key is no longer active. Please use a different api key or reactivate this key.\",\n    \"errors\": []\n  }\n}",
+      "uri": "https://api.easypost.com/v2/referrals?page_size\u003d5"
     },
-    "duration": 762
+    "duration": 564
   }
 ]
