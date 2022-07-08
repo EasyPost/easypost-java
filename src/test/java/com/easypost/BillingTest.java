@@ -59,7 +59,7 @@ public final class BillingTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    // @Disabled // Skipping due to having to manually add and remove a payment method from the account.
+    @Disabled // Skipping due to having to manually add and remove a payment method from the account.
     public void testRetrievePaymentMethods() throws EasyPostException {
         vcr.setUpTest("retrieve_payment_methods");
 
