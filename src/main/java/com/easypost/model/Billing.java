@@ -29,9 +29,12 @@ public final class Billing extends EasyPostResource {
      */
     public static boolean deletePaymentMethod(PaymentMethod.Priority priority, String apiKey) throws EasyPostException {
         PaymentMethodObject paymentMethodObject = getPaymentMethodByPriority(priority, apiKey);
+
+        // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
         request(EasyPostResource.RequestMethod.DELETE,
                 String.format("%s/%s/%s", EasyPost.API_BASE, paymentMethodObject.getEndpoint(),
-                        paymentMethodObject.getId()), null, null, apiKey);
+                        paymentMethodObject.getId()), null, PaymentMethod.class, apiKey);
+
         return true;
     }
 
@@ -74,8 +77,9 @@ public final class Billing extends EasyPostResource {
         Map<String, Object> params = new HashMap<>();
         params.put("amount", amount);
 
+        // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
         request(RequestMethod.POST, String.format("%s/%s/%s/%s", EasyPost.API_BASE, paymentMethodObject.getEndpoint(),
-                paymentMethodObject.getId(), "charges"), params, null, apiKey);
+                paymentMethodObject.getId(), "charges"), params, PaymentMethod.class, apiKey);
 
         return true;
     }
