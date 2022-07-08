@@ -6,6 +6,8 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.beta.Referral;
+import com.easypost.model.beta.ReferralCustomerCollection;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class ReferralTest {
@@ -82,13 +85,16 @@ public final class ReferralTest {
     public void testAll() throws EasyPostException {
         vcr.setUpTest("all");
 
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put("page_size", Fixture.pageSize());
 
-        List<Referral> referralUsers = Referral.all(params);
+        ReferralCustomerCollection referallCustomorCollection = Referral.all(params);
 
-        assertTrue(referralUsers.size() <= Fixture.pageSize());
-        assertTrue(referralUsers.stream().allMatch(referral -> referral instanceof Referral));
+        List<Referral> referallUsers = referallCustomorCollection.getReferral();
+
+        assertTrue(referallUsers.size() <= Fixture.pageSize());
+        assertNotNull(referallCustomorCollection.getHasMore());
+        assertTrue(referallUsers.stream().allMatch(referral -> referral instanceof Referral));
     }
 
     /**
