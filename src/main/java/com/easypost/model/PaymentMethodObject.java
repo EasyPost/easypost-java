@@ -38,9 +38,9 @@ public class PaymentMethodObject extends EasyPostResource {
     // both
     private String disabledAt;
     // credit_card
-    private String expMonth;
+    private int expMonth;
     // credit_card
-    private String expYear;
+    private int expYear;
     // both
     private String id;
     // both
@@ -93,7 +93,7 @@ public class PaymentMethodObject extends EasyPostResource {
      *
      * @return the expMonth of this PaymentMethodObject.
      */
-    public String getExpMonth() {
+    public int getExpMonth() {
         return expMonth;
     }
 
@@ -102,7 +102,7 @@ public class PaymentMethodObject extends EasyPostResource {
      *
      * @return the expYear of this PaymentMethodObject.
      */
-    public String getExpYear() {
+    public int getExpYear() {
         return expYear;
     }
 

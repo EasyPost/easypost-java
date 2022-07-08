@@ -28,8 +28,8 @@ public class PaymentMethod extends EasyPostResource {
         primaryPaymentMethod.setId(this.primaryPaymentMethod.getId());
         primaryPaymentMethod.setObject(this.primaryPaymentMethod.getObject());
         primaryPaymentMethod.setBrand(this.primaryPaymentMethod.getBrand());
-        primaryPaymentMethod.setExpMonth(this.primaryPaymentMethod.getExpMonth());
-        primaryPaymentMethod.setExpYear(this.primaryPaymentMethod.getExpYear());
+        primaryPaymentMethod.setExpMonth(String.valueOf(this.primaryPaymentMethod.getExpMonth()));
+        primaryPaymentMethod.setExpYear(String.valueOf(this.primaryPaymentMethod.getExpYear()));
         return primaryPaymentMethod;
     }
 
@@ -46,8 +46,8 @@ public class PaymentMethod extends EasyPostResource {
         secondaryPaymentMethod.setId(this.secondaryPaymentMethod.getId());
         secondaryPaymentMethod.setObject(this.secondaryPaymentMethod.getObject());
         secondaryPaymentMethod.setBrand(this.secondaryPaymentMethod.getBrand());
-        secondaryPaymentMethod.setExpMonth(this.secondaryPaymentMethod.getExpMonth());
-        secondaryPaymentMethod.setExpYear(this.secondaryPaymentMethod.getExpYear());
+        secondaryPaymentMethod.setExpMonth(String.valueOf(this.secondaryPaymentMethod.getExpMonth()));
+        secondaryPaymentMethod.setExpYear(String.valueOf(this.secondaryPaymentMethod.getExpYear()));
         return secondaryPaymentMethod;
     }
 
