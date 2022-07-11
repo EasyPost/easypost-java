@@ -1,17 +1,17 @@
 # CHANGELOG
 
-## Next Release
+## v5.6.0 (2022-07-11)
 
-- Some `getX` functions have been deprecated and renamed to simply `X` to avoid confusion with proper getter/setter
-  functions.
-    - `getSmartrates()` -> `smartrates()`
-    - `getLowestSmartRate()` -> `findLowestSmartrate()`
-- Adds OS specific details to the user-agent header
 - Adds `Billing.retrievePaymentMethods()`, `Billing.fundWallet()`, and `Billing.deletePaymentMethod()` functions
 - Deprecates some existing payment method and credit card functions and features (repleaced by new Billing functions):
   - Deprecates `CreditCard.fund()` and `CreditCard.delete()` functions
   - Deprecates `PaymentMethod.all()` function
   - Deprecates certain `PaymentMethod` object functions
+- Some `getX` functions have been deprecated and renamed to simply `X` to avoid confusion with proper getter/setter
+  functions.
+  - `getSmartrates()` -> `smartrates()`
+  - `getLowestSmartRate()` -> `findLowestSmartrate()`
+- Adds OS specific details to the user-agent header
 
 ## v5.5.0 (2022-06-21)
 
