@@ -752,7 +752,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates(Map)} instead. Last working version: v4.0.5. Removal: v6.0.0.
+     * @deprecated Use {@link #smartrates(Map)} instead. Last working version: v5.5.0. Removal: v7.0.0.
      */
     @Deprecated
     public List<Smartrate> getSmartrates(final Map<String, Object> params) throws EasyPostException {
@@ -777,7 +777,7 @@ public final class Shipment extends EasyPostResource {
      * @param apiKey API key to use in request (overrides default API key).
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates(Map, String)} instead. Last working version: v4.0.5. Removal: v6.0.0.
+     * @deprecated Use {@link #smartrates(Map, String)} instead. Last working version: v5.5.0. Removal: v7.0.0.
      */
     @Deprecated
     public List<Smartrate> getSmartrates(final Map<String, Object> params, final String apiKey)
@@ -806,7 +806,7 @@ public final class Shipment extends EasyPostResource {
      * @param apiKey API key to use in request (overrides default API key).
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates(String)} instead. Last working version: v4.0.5. Removal: v6.0.0.
+     * @deprecated Use {@link #smartrates(String)} instead. Last working version: v5.5.0. Removal: v7.0.0.
      */
     @Deprecated
     public List<Smartrate> getSmartrates(final String apiKey) throws EasyPostException {
@@ -1034,7 +1034,7 @@ public final class Shipment extends EasyPostResource {
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      * @deprecated use {@link #lowestSmartRate(int, SmartrateAccuracy)} instead.
-     * Last working version: v4.0.5. Removal: v6.0.0.
+     * Last working version: v5.5.0. Removal: v7.0.0.
      */
     @Deprecated
     public Smartrate lowestSmartRate(int deliveryDay, String deliveryAccuracy) throws EasyPostException {
@@ -1062,7 +1062,7 @@ public final class Shipment extends EasyPostResource {
      *
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates()} instead. Last working version: v4.0.5. Removal: v6.0.0.
+     * @deprecated Use {@link #smartrates()} instead. Last working version: v5.5.0. Removal: v7.0.0.
      */
     @Deprecated
     public List<Smartrate> getSmartrates() throws EasyPostException {
@@ -1088,7 +1088,7 @@ public final class Shipment extends EasyPostResource {
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)} instead.
-     * Last working version: v4.0.5. Removal: v6.0.0.
+     * Last working version: v5.5.0. Removal: v7.0.0.
      */
     @Deprecated
     public static Smartrate getLowestSmartRate(final List<Smartrate> smartrates, int deliveryDay,

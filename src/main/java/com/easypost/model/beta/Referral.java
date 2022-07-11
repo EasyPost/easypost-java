@@ -139,7 +139,7 @@ public class Referral extends BaseUser {
      * @return CreditCard object.
      * @throws Exception when the request fails.
      * @deprecated Use {@link #addCreditCardToUser(String, String, int, int, String)} instead.
-     * Last working version: v4.0.5. Removal: v6.0.0.
+     * Last working version: v5.5.0. Removal: v7.0.0.
      */
     @Deprecated
     public static CreditCard addCreditCard(String referralApiKey, String number, int expirationMonth,
@@ -176,7 +176,7 @@ public class Referral extends BaseUser {
      * @return CreditCard object.
      * @throws Exception when the request fails.
      * @deprecated Use {@link #addCreditCardToUser(String, String, int, int, String, PaymentMethod.Priority)} instead.
-     * Last working version: v4.0.5. Removal: v6.0.0.
+     * Last working version: v5.5.0. Removal: v7.0.0.
      */
     public static CreditCard addCreditCard(String referralApiKey, String number, int expirationMonth,
                                            int expirationYear, String cvc, CreditCardPriority priority)
