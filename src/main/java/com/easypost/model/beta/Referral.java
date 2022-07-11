@@ -121,7 +121,8 @@ public class Referral extends BaseUser {
      */
     public static ReferralCustomerCollection all(final Map<String, Object> params, String apiKey) 
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Referral.class), params, ReferralCustomerCollection.class, apiKey);
+        return request(RequestMethod.GET, String.format("%s/%s", EasyPost.BETA_API_BASE, "referral_customers"),
+                params, ReferralCustomerCollection.class, apiKey);
     }
 
     /**

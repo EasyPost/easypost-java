@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1657315211,
+    "recordedAt": 1657562429,
     "request": {
       "body": "",
       "method": "GET",
@@ -12,7 +12,7 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/referrals?page_size\u003d5"
+      "uri": "https://api.easypost.com/beta/referral_customers?page_size\u003d5"
     },
     "response": {
       "body": null,
@@ -25,7 +25,7 @@
           "149"
         ],
         "x-node": [
-          "bigweb8nuq"
+          "bigweb3nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -49,24 +49,23 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "02c8ee3b62c89f8bf656c43500455cdd"
+          "0a9e270062cc653df667a9ce000c07d3"
         ],
         "x-proxied": [
-          "intlb1nuq 403f17ff97",
-          "intlb2wdc 403f17ff97",
-          "extlb3wdc 403f17ff97"
+          "intlb2nuq 403f17ff97",
+          "extlb1nuq 403f17ff97"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.007297"
+          "0.007087"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202207082040-0abd2eaf54-master"
+          "easypost-202207082122-f28717e31b-master"
         ],
         "cache-control": [
           "no-cache"
@@ -77,8 +76,8 @@
         "message": "Forbidden"
       },
       "errors": "{\n  \"error\": {\n    \"code\": \"APIKEY.INACTIVE\",\n    \"message\": \"This api key is no longer active. Please use a different api key or reactivate this key.\",\n    \"errors\": []\n  }\n}",
-      "uri": "https://api.easypost.com/v2/referrals?page_size\u003d5"
+      "uri": "https://api.easypost.com/beta/referral_customers?page_size\u003d5"
     },
-    "duration": 564
+    "duration": 97
   }
 ]
