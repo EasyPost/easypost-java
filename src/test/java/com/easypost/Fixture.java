@@ -410,4 +410,25 @@ public abstract class Fixture {
     public static String webhookUrl() {
         return "http://example.com";
     }
+
+    /**
+     * RMA form options.
+     *
+     * @return RMA form options.
+     */
+    public static Map<String, Object> rmaFormOptions() {
+        final int units = 8;
+        Map<String, Object> params = new HashMap<String, Object>() {{
+            put("barcode", "RMA12345678900");
+            put("line_items", new HashMap<String, Object>() {{
+                put("units", units);
+                put("product", new HashMap<String, Object>() {{
+                    put("title", "Square Reader");
+                    put("barcode", "855658003251");
+                }});
+            }});
+        }};
+
+        return params;
+    }
 }

@@ -1158,4 +1158,49 @@ public final class Shipment extends EasyPostResource {
     public Rate lowestRate(final List<String> carriers) throws EasyPostException {
         return this.lowestRate(carriers, null);
     }
+
+    /**
+     * Generate a form for this shipment.
+     *
+     * @param formType the form type for this shipment.
+     * @throws EasyPostException when the request fails.
+     */
+    public void generateForm(final String formType) throws EasyPostException {
+        this.generateForm(formType, null);
+    }
+
+    /**
+     * Generate a form for this shipment.
+     *
+     * @param formType the form type for this shipment.
+     * @param formOptions the form options for this shipment.
+     * @throws EasyPostException when the request fails.
+     */
+    public void generateForm(final String formType, final Map<String, Object> formOptions) throws EasyPostException {
+        this.generateForm(formType, formOptions, null);
+    }
+
+    /**
+     * Generate a form for this shipment.
+     *
+     * @param formType the form type for this shipment.
+     * @param formOptions the form options for this shipment.
+     * @param apiKey API key to use in request (overrides default API key).
+     * 
+     * @throws EasyPostException when the request fails.
+     */
+    public void generateForm(final String formType, final Map<String, Object> formOptions, String apiKey)
+            throws EasyPostException {
+        HashMap<String, Object> params = new HashMap<>();
+        HashMap<String, Object> wrappedParams = new HashMap<>();
+
+        params.put("type", formType);
+        params.putAll(formOptions);
+        wrappedParams.put("form", params);
+
+        Shipment response = request(RequestMethod.POST, String.format("%s/forms",
+            instanceURL(Shipment.class, this.getId())), wrappedParams, Shipment.class, apiKey);
+
+        this.merge(this, response);
+    }
 }

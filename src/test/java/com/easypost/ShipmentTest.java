@@ -2,6 +2,7 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Address;
+import com.easypost.model.Form;
 import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
@@ -420,5 +421,27 @@ public final class ShipmentTest {
         assertThrows(EasyPostException.class, () -> {
             Shipment.findLowestSmartrate(smartrates, 0, SmartrateAccuracy.Percentile90);
         });
+    }
+
+    /**
+     * Test generating a form from a shipment.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGenerateForm() throws EasyPostException {
+        vcr.setUpTest("generate_form");
+
+        Shipment shipment = createOneCallBuyShipment();
+        String formType = "return_packing_slip";
+
+        shipment.generateForm(formType, Fixture.rmaFormOptions());
+
+        assertTrue(shipment.getForms().size() > 0);
+
+        Form form = shipment.getForms().get(0);
+        
+        assertEquals(formType, form.getFormType());
+        assertTrue(form.getFormUrl() != null);
     }
 }
