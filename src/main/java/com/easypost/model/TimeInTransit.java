@@ -153,6 +153,7 @@ public final class TimeInTransit {
      * @return the delivery accuracy of the specified percentile
      * @throws EasyPostException when the percentile is not valid
      * @deprecated Use {@link #getBySmartrateAccuracy(SmartrateAccuracy)} instead.
+     * Last working version: v5.5.0. Removal: v7.0.0.
      */
     @Deprecated
     public int getSmartRateAccuracy(final String percentile) throws EasyPostException {

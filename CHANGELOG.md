@@ -7,6 +7,11 @@
     - `getSmartrates()` -> `smartrates()`
     - `getLowestSmartRate()` -> `findLowestSmartrate()`
 - Adds OS specific details to the user-agent header
+- Adds `Billing.retrievePaymentMethods()`, `Billing.fundWallet()`, and `Billing.deletePaymentMethod()` functions
+- Deprecates some existing payment method and credit card functions and features (repleaced by new Billing functions):
+  - Deprecates `CreditCard.fund()` and `CreditCard.delete()` functions
+  - Deprecates `PaymentMethod.all()` function
+  - Deprecates certain `PaymentMethod` object functions
 
 ## v5.5.0 (2022-06-21)
 

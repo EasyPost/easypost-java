@@ -5,6 +5,8 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.model.ApiKey;
 import com.easypost.model.BaseUser;
 import com.easypost.model.CreditCardPriority;
+import com.easypost.model.PaymentMethod;
+import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.Utilities;
 
 import java.io.BufferedReader;
@@ -59,7 +61,7 @@ public class Referral extends BaseUser {
      * @throws EasyPostException when the request fails.
      */
     public static Referral create(Map<String, Object> params, String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("user", params);
 
         return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "referral_customers"),
@@ -88,8 +90,8 @@ public class Referral extends BaseUser {
      * @throws EasyPostException when the request fails.
      */
     public static boolean updateEmail(String email, String userId, String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> wrappedParams = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("email", email);
         wrappedParams.put("user", params);
 
@@ -136,7 +138,10 @@ public class Referral extends BaseUser {
      * @param cvc             CVC of the credit card.
      * @return CreditCard object.
      * @throws Exception when the request fails.
+     * @deprecated Use {@link #addCreditCardToUser(String, String, int, int, String)} instead.
+     * Last working version: v5.5.0. Removal: v7.0.0.
      */
+    @Deprecated
     public static CreditCard addCreditCard(String referralApiKey, String number, int expirationMonth,
                                            int expirationYear, String cvc) throws Exception {
         return addCreditCard(referralApiKey, number, expirationMonth, expirationYear, cvc, CreditCardPriority.PRIMARY);
@@ -150,13 +155,82 @@ public class Referral extends BaseUser {
      * @param expirationMonth Expiration month of the credit card.
      * @param expirationYear  Expiration year of the credit card.
      * @param cvc             CVC of the credit card.
+     * @return PaymentMethodObject object.
+     * @throws Exception when the request fails.
+     */
+    public static PaymentMethodObject addCreditCardToUser(String referralApiKey, String number, int expirationMonth,
+                                                          int expirationYear, String cvc) throws Exception {
+        return addCreditCardToUser(referralApiKey, number, expirationMonth, expirationYear, cvc,
+                PaymentMethod.Priority.PRIMARY);
+    }
+
+    /**
+     * Add credit card to a referral user. This function requires the Referral User's API key.
+     *
+     * @param referralApiKey  API key of the referral user.
+     * @param number          Credit card number.
+     * @param expirationMonth Expiration month of the credit card.
+     * @param expirationYear  Expiration year of the credit card.
+     * @param cvc             CVC of the credit card.
      * @param priority        Priority of this credit card.
      * @return CreditCard object.
      * @throws Exception when the request fails.
+     * @deprecated Use {@link #addCreditCardToUser(String, String, int, int, String, PaymentMethod.Priority)} instead.
+     * Last working version: v5.5.0. Removal: v7.0.0.
      */
     public static CreditCard addCreditCard(String referralApiKey, String number, int expirationMonth,
                                            int expirationYear, String cvc, CreditCardPriority priority)
             throws Exception {
+
+        // Convert a CreditCardPriority enum to a PaymentMethod.Priority enum
+        PaymentMethod.Priority priorityEnum = null;
+        switch (priority) {
+            case PRIMARY:
+                priorityEnum = PaymentMethod.Priority.PRIMARY;
+                break;
+            case SECONDARY:
+                priorityEnum = PaymentMethod.Priority.SECONDARY;
+                break;
+            default:
+                break;
+        }
+
+        if (priorityEnum == null) {
+            throw new Exception("Invalid credit card priority.");
+        }
+
+        PaymentMethodObject paymentMethodObject =
+                addCreditCardToUser(referralApiKey, number, expirationMonth, expirationYear, cvc, priorityEnum);
+
+        // Convert the new PaymentMethodObject back into the deprecated CreditCard object
+        CreditCard creditCard = new CreditCard();
+        creditCard.setId(paymentMethodObject.getId());
+        creditCard.setObject(paymentMethodObject.getObject());
+        creditCard.setCreatedAt(paymentMethodObject.getCreatedAt());
+        creditCard.setUpdatedAt(paymentMethodObject.getUpdatedAt());
+        creditCard.setBrand(paymentMethodObject.getBrand());
+        creditCard.setLast4(paymentMethodObject.getLast4());
+        creditCard.setFees(paymentMethodObject.getFees());
+        creditCard.setName(paymentMethodObject.getName());
+
+        return creditCard;
+    }
+
+    /**
+     * Add credit card to a referral user. This function requires the Referral User's API key.
+     *
+     * @param referralApiKey  API key of the referral user.
+     * @param number          Credit card number.
+     * @param expirationMonth Expiration month of the credit card.
+     * @param expirationYear  Expiration year of the credit card.
+     * @param cvc             CVC of the credit card.
+     * @param priority        Priority of this credit card.
+     * @return PaymentMethodObject object.
+     * @throws Exception when the request fails.
+     */
+    public static PaymentMethodObject addCreditCardToUser(String referralApiKey, String number, int expirationMonth,
+                                                          int expirationYear, String cvc,
+                                                          PaymentMethod.Priority priority) throws Exception {
         String easypostStripeApiKey = retrieveEasypostStripeApiKey();
         String stripeToken;
 
@@ -248,8 +322,8 @@ public class Referral extends BaseUser {
      * @return CreditCard object.
      * @throws EasyPostException when the request fails.
      */
-    private static CreditCard createEasypostCreditCard(String referralApiKey, String stripeObjectId, String priority)
-            throws EasyPostException {
+    private static PaymentMethodObject createEasypostCreditCard(String referralApiKey, String stripeObjectId,
+                                                                String priority) throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
         params.put("stripe_object_id", stripeObjectId);
         params.put("priority", priority);
@@ -258,6 +332,6 @@ public class Referral extends BaseUser {
         wrappedParams.put("credit_card", params);
 
         return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "credit_cards"),
-                wrappedParams, CreditCard.class, referralApiKey);
+                wrappedParams, PaymentMethodObject.class, referralApiKey);
     }
 }
