@@ -10,7 +10,7 @@ import java.util.Map;
  * CreditCard is a model class that represents a credit card.
  *
  * @deprecated Use {@link com.easypost.model.PaymentMethodObject} instead.
- * Last working version: v5.5.0. Removal: v7.0.0.
+ * Deprecated: v5.5.0 - v7.0.0
  */
 @Deprecated
 public class CreditCard extends BaseCreditCard {
@@ -22,7 +22,7 @@ public class CreditCard extends BaseCreditCard {
      * @return CreditCardFund object.
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link com.easypost.model.Billing#fundWallet(String, PaymentMethod.Priority)} instead.
-     * Last working version: v5.5.0. Removal: v7.0.0.
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public static boolean fund(String amount, CreditCardPriority primaryOrSecondary) throws EasyPostException {
@@ -38,7 +38,7 @@ public class CreditCard extends BaseCreditCard {
      * @return CreditCardFund object.
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link com.easypost.model.Billing#fundWallet(String, PaymentMethod.Priority, String)} instead.
-     * Last working version: v5.5.0. Removal: v7.0.0.
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public static boolean fund(String amount, CreditCardPriority primaryOrSecondary, String apiKey)
@@ -77,7 +77,7 @@ public class CreditCard extends BaseCreditCard {
      * @param creditCardId ID of credit card to delete.
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link com.easypost.model.Billing#deletePaymentMethod(PaymentMethod.Priority)} instead.
-     * Last working version: v5.5.0. Removal: v7.0.0.
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public static void delete(String creditCardId) throws EasyPostException {
@@ -91,7 +91,7 @@ public class CreditCard extends BaseCreditCard {
      * @param apiKey       API key to use in request (overrides default API key).
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link com.easypost.model.Billing#deletePaymentMethod(PaymentMethod.Priority, String)} instead.
-     * Last working version: v5.5.0. Removal: v7.0.0.
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public static void delete(String creditCardId, String apiKey) throws EasyPostException {
