@@ -1166,7 +1166,18 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public void generateForm(final String formType) throws EasyPostException {
-        this.generateForm(formType, null);
+        this.generateForm(formType, null, null);
+    }
+
+    /**
+     * Generate a form for this shipment.
+     *
+     * @param formType the form type for this shipment.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @throws EasyPostException when the request fails.
+     */
+    public void generateForm(final String formType, final String apiKey) throws EasyPostException {
+        this.generateForm(formType, null, apiKey);
     }
 
     /**
@@ -1186,7 +1197,6 @@ public final class Shipment extends EasyPostResource {
      * @param formType the form type for this shipment.
      * @param formOptions the form options for this shipment.
      * @param apiKey API key to use in request (overrides default API key).
-     * 
      * @throws EasyPostException when the request fails.
      */
     public void generateForm(final String formType, final Map<String, Object> formOptions, String apiKey)
