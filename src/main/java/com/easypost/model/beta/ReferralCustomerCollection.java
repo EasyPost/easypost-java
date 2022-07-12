@@ -5,7 +5,7 @@ import com.easypost.net.EasyPostResource;
 import java.util.List;
 
 public final class ReferralCustomerCollection extends EasyPostResource {
-    private List<Referral> referrals;
+    private List<ReferralCustomers> referralCustomers;
     private Boolean hasMore;
 
     /**
@@ -13,17 +13,17 @@ public final class ReferralCustomerCollection extends EasyPostResource {
      *
      * @return List of Batch objects
      */
-    public List<Referral> getReferral() {
-        return referrals;
+    public List<ReferralCustomers> getReferralCustomers() {
+        return referralCustomers;
     }
 
     /**
      * Set a list of referrals.
      *
-     * @param referrals List of Batch objects
+     * @param referralCustomers List of Batch objects
      */
-    public void setReferral(final List<Referral> referrals) {
-        this.referrals = referrals;
+    public void setReferralCustomers(final List<ReferralCustomers> referralCustomers) {
+        this.referralCustomers = referralCustomers;
     }
 
     /**
