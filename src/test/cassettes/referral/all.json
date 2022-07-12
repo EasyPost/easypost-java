@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1657562429,
+    "recordedAt": 1657647310,
     "request": {
       "body": "",
       "method": "GET",
@@ -15,17 +15,20 @@
       "uri": "https://api.easypost.com/beta/referral_customers?page_size\u003d5"
     },
     "response": {
-      "body": null,
+      "body": "{\n  \"referral_customers\": [\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-26T15:50:28Z\",\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"Firstname Lastname\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_634b6daa05744bfaa205058f06864363\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"me2@email.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": \"100.00\",\n      \"verified\": true,\n      \"created_at\": \"2022-04-27T20:20:52Z\",\n      \"secondary_recharge_amount\": \"100.00\",\n      \"cc_fee_rate\": \"0.0325\",\n      \"recharge_threshold\": \"0.00\",\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": true,\n      \"name\": \"Firstname Lastname\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_35cb81fb8af1454dabf1f6afa7330634\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"email@example.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-28T22:34:38Z\",\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"test test\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_fa93cc16bcc24c078ee057ce82f38eed\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"email@example.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-29T19:35:33Z\",\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"test test\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_4a22730cdc844ce1bc2efbed999c869f\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"test@test.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": \"100.00\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-02T18:48:22Z\",\n      \"secondary_recharge_amount\": \"100.00\",\n      \"cc_fee_rate\": \"0.0325\",\n      \"recharge_threshold\": \"0.00\",\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": true,\n      \"name\": \"Firstname Lastname\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_488e391395f4416196a31965fecac409\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"email@example.com\",\n      \"object\": \"User\"\n    }\n  ],\n  \"has_more\": true\n}",
       "httpVersion": null,
       "headers": {
         "null": [
-          "HTTP/1.1 403 Forbidden"
+          "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "149"
+          "2569"
+        ],
+        "expires": [
+          "0"
         ],
         "x-node": [
-          "bigweb3nuq"
+          "bigweb2nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -39,6 +42,9 @@
         "x-backend": [
           "easypost"
         ],
+        "pragma": [
+          "no-cache"
+        ],
         "strict-transport-security": [
           "max-age\u003d31536000; includeSubDomains; preload"
         ],
@@ -49,35 +55,38 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "0a9e270062cc653df667a9ce000c07d3"
+          "db374df562cdb0cef6547d9000726e5f"
         ],
         "x-proxied": [
           "intlb2nuq 403f17ff97",
-          "extlb1nuq 403f17ff97"
+          "extlb2nuq 403f17ff97"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.007087"
+          "0.206413"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
+        "etag": [
+          "W/\"5b291a65ba7838e42637470e6420bc5f\""
+        ],
         "x-version-label": [
-          "easypost-202207082122-f28717e31b-master"
+          "easypost-202207112046-0249502a62-master"
         ],
         "cache-control": [
-          "no-cache"
+          "no-cache, no-store"
         ]
       },
       "status": {
-        "code": 403,
-        "message": "Forbidden"
+        "code": 200,
+        "message": "OK"
       },
-      "errors": "{\n  \"error\": {\n    \"code\": \"APIKEY.INACTIVE\",\n    \"message\": \"This api key is no longer active. Please use a different api key or reactivate this key.\",\n    \"errors\": []\n  }\n}",
+      "errors": null,
       "uri": "https://api.easypost.com/beta/referral_customers?page_size\u003d5"
     },
-    "duration": 97
+    "duration": 305
   }
 ]
