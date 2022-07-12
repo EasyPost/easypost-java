@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Referral extends BaseUser {
+public class ReferralCustomers extends BaseUser {
     private List<ApiKey> apiKeys;
 
     /**
@@ -47,7 +47,7 @@ public class Referral extends BaseUser {
      * @return Referral object.
      * @throws EasyPostException when the request fails.
      */
-    public static Referral create(Map<String, Object> params) throws EasyPostException {
+    public static ReferralCustomers create(Map<String, Object> params) throws EasyPostException {
         return create(params, null);
     }
 
@@ -59,12 +59,12 @@ public class Referral extends BaseUser {
      * @return Referral object.
      * @throws EasyPostException when the request fails.
      */
-    public static Referral create(Map<String, Object> params, String apiKey) throws EasyPostException {
+    public static ReferralCustomers create(Map<String, Object> params, String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("user", params);
 
         return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "referral_customers"),
-                wrappedParams, Referral.class, apiKey);
+                wrappedParams, ReferralCustomers.class, apiKey);
     }
 
     /**
@@ -95,7 +95,7 @@ public class Referral extends BaseUser {
         wrappedParams.put("user", params);
 
         request(RequestMethod.PUT, String.format("%s/%s/%s", EasyPost.BETA_API_BASE, "referral_customers", userId),
-                wrappedParams, Referral.class, apiKey);
+                wrappedParams, ReferralCustomers.class, apiKey);
 
         return true;
     }
