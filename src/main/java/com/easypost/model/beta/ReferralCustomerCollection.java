@@ -31,7 +31,7 @@ public final class ReferralCustomerCollection extends EasyPostResource {
      *
      * @return whether there are more ReferralCustomers to retrieve
      */
-    public Boolean getHasMore() {
+    public boolean getHasMore() {
         return hasMore;
     }
 
