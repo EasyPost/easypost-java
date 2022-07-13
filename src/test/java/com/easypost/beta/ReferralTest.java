@@ -5,7 +5,7 @@ import com.easypost.TestUtils;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
-import com.easypost.model.beta.ReferralCustomers;
+import com.easypost.model.beta.ReferralCustomer;
 import com.easypost.model.beta.ReferralCustomerCollection;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -45,9 +45,9 @@ public final class ReferralTest {
     public void testCreate() throws EasyPostException {
         vcr.setUpTest("create");
 
-        ReferralCustomers referralUser = createReferral();
+        ReferralCustomer referralUser = createReferral();
 
-        assertInstanceOf(ReferralCustomers.class, referralUser);
+        assertInstanceOf(ReferralCustomer.class, referralUser);
         assertTrue(referralUser.getId().startsWith("user_"));
         assertEquals(Fixture.referralUser().get("name"), referralUser.getName());
     }
@@ -57,8 +57,8 @@ public final class ReferralTest {
      *
      * @return Referral object
      */
-    private static ReferralCustomers createReferral() throws EasyPostException {
-        return ReferralCustomers.create(Fixture.referralUser());
+    private static ReferralCustomer createReferral() throws EasyPostException {
+        return ReferralCustomer.create(Fixture.referralUser());
     }
 
     /**
@@ -70,8 +70,8 @@ public final class ReferralTest {
     public void testUpdate() throws EasyPostException {
         vcr.setUpTest("update");
 
-        ReferralCustomers referralUser = createReferral();
-        boolean response = ReferralCustomers.updateEmail("email@example.com", referralUser.getId());
+        ReferralCustomer referralUser = createReferral();
+        boolean response = ReferralCustomer.updateEmail("email@example.com", referralUser.getId());
 
         assertTrue(response);
     }
@@ -88,13 +88,13 @@ public final class ReferralTest {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("page_size", Fixture.pageSize());
 
-        ReferralCustomerCollection referallCustomorCollection = ReferralCustomers.all(params);
+        ReferralCustomerCollection referallCustomorCollection = ReferralCustomer.all(params);
 
-        List<ReferralCustomers> referallUsers = referallCustomorCollection.getReferralCustomers();
+        List<ReferralCustomer> referallUsers = referallCustomorCollection.getReferralCustomers();
 
         assertTrue(referallUsers.size() <= Fixture.pageSize());
         assertNotNull(referallCustomorCollection.getHasMore());
-        assertTrue(referallUsers.stream().allMatch(referral -> referral instanceof ReferralCustomers));
+        assertTrue(referallUsers.stream().allMatch(referral -> referral instanceof ReferralCustomer));
     }
 
     /**
@@ -109,7 +109,7 @@ public final class ReferralTest {
 
         Map<String, String> creditCardDetails = Fixture.creditCardDetails();
         PaymentMethodObject creditCard =
-                ReferralCustomers.addCreditCardToUser(REFERRAL_USER_PROD_API_KEY, creditCardDetails.get("number"),
+                ReferralCustomer.addCreditCardToUser(REFERRAL_USER_PROD_API_KEY, creditCardDetails.get("number"),
                         Integer.parseInt(creditCardDetails.get("expiration_month")),
                         Integer.parseInt(creditCardDetails.get("expiration_year")), creditCardDetails.get("cvc"),
                         PaymentMethod.Priority.PRIMARY);
