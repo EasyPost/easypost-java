@@ -40,7 +40,7 @@ public final class ReferralCustomerCollection extends EasyPostResource {
      *
      * @param hasMore Boolean whether there are more ReferralCustomers to retrieve
      */
-    public void setHasMore(final Boolean hasMore) {
+    public void setHasMore(final boolean hasMore) {
         this.hasMore = hasMore;
     }
 }
