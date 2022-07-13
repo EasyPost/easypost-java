@@ -6,7 +6,7 @@ import java.util.List;
 
 public final class ReferralCustomerCollection extends EasyPostResource {
     private List<ReferralCustomer> referralCustomers;
-    private Boolean hasMore;
+    private boolean hasMore;
 
     /**
      * Get a list of ReferralCustomers.
