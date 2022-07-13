@@ -15,12 +15,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Referral extends BaseUser {
+public class ReferralCustomer extends BaseUser {
     private List<ApiKey> apiKeys;
 
     /**
@@ -48,7 +47,7 @@ public class Referral extends BaseUser {
      * @return Referral object.
      * @throws EasyPostException when the request fails.
      */
-    public static Referral create(Map<String, Object> params) throws EasyPostException {
+    public static ReferralCustomer create(Map<String, Object> params) throws EasyPostException {
         return create(params, null);
     }
 
@@ -60,12 +59,12 @@ public class Referral extends BaseUser {
      * @return Referral object.
      * @throws EasyPostException when the request fails.
      */
-    public static Referral create(Map<String, Object> params, String apiKey) throws EasyPostException {
+    public static ReferralCustomer create(Map<String, Object> params, String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("user", params);
 
         return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "referral_customers"),
-                wrappedParams, Referral.class, apiKey);
+                wrappedParams, ReferralCustomer.class, apiKey);
     }
 
     /**
@@ -96,7 +95,7 @@ public class Referral extends BaseUser {
         wrappedParams.put("user", params);
 
         request(RequestMethod.PUT, String.format("%s/%s/%s", EasyPost.BETA_API_BASE, "referral_customers", userId),
-                wrappedParams, Referral.class, apiKey);
+                wrappedParams, ReferralCustomer.class, apiKey);
 
         return true;
     }
@@ -108,7 +107,7 @@ public class Referral extends BaseUser {
      * @return List<Referral> object.
      * @throws EasyPostException when the request fails.
      */
-    public static List<Referral> all(final Map<String, Object> params) throws EasyPostException {
+    public static ReferralCustomerCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
     }
 
@@ -117,15 +116,13 @@ public class Referral extends BaseUser {
      *
      * @param params Map of parameters.
      * @param apiKey API key to use in request (overrides default API key).
-     * @return List<Referral> object.
+     * @return ReferralCustomerCollection object.
      * @throws EasyPostException when the request fails.
      */
-    public static List<Referral> all(final Map<String, Object> params, String apiKey) throws EasyPostException {
-        Referral[] response =
-                request(RequestMethod.GET, String.format("%s/%s", EasyPost.BETA_API_BASE, "referral_customers"), params,
-                        Referral[].class, apiKey);
-
-        return Arrays.asList(response);
+    public static ReferralCustomerCollection all(final Map<String, Object> params, String apiKey) 
+            throws EasyPostException {
+        return request(RequestMethod.GET, String.format("%s/%s", EasyPost.BETA_API_BASE, "referral_customers"),
+                params, ReferralCustomerCollection.class, apiKey);
     }
 
     /**
