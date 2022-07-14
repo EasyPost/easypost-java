@@ -6,7 +6,11 @@ import java.util.List;
 
 public final class ReferralCustomerCollection extends EasyPostResource {
     private List<ReferralCustomer> referralCustomers;
+<<<<<<< HEAD
     private Boolean hasMore;
+=======
+    private boolean hasMore;
+>>>>>>> 347cdeb6f677412daf600c500abdc5967882a4a3
 
     /**
      * Get a list of ReferralCustomers.
@@ -31,7 +35,11 @@ public final class ReferralCustomerCollection extends EasyPostResource {
      *
      * @return whether there are more ReferralCustomers to retrieve
      */
+<<<<<<< HEAD
     public Boolean getHasMore() {
+=======
+    public boolean getHasMore() {
+>>>>>>> 347cdeb6f677412daf600c500abdc5967882a4a3
         return hasMore;
     }
 
@@ -40,7 +48,11 @@ public final class ReferralCustomerCollection extends EasyPostResource {
      *
      * @param hasMore Boolean whether there are more ReferralCustomers to retrieve
      */
+<<<<<<< HEAD
     public void setHasMore(final Boolean hasMore) {
+=======
+    public void setHasMore(final boolean hasMore) {
+>>>>>>> 347cdeb6f677412daf600c500abdc5967882a4a3
         this.hasMore = hasMore;
     }
 }
