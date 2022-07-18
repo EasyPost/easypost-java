@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Next Release
+## v5.7.0 (2022-07-18)
 
-- Adds `generate_form()` in Shipment class
+- Adds ability to generate a shipment form via `generate_form()` function
 
 ## v5.6.0 (2022-07-11)
 
