@@ -20,7 +20,8 @@ public class PaymentMethod extends EasyPostResource {
      * Get the PrimaryPaymentMethod of this PaymentMethod object.
      *
      * @return the PrimaryPaymentMethod of this PaymentMethod.
-     * @deprecated Use {@link #getPrimaryPaymentMethodObject()} instead. Last working version: v5.5.0. Removal: v7.0.0.
+     * @deprecated Use {@link #getPrimaryPaymentMethodObject()} instead. 
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public PrimaryPaymentMethod getPrimaryPaymentMethod() {
@@ -38,7 +39,7 @@ public class PaymentMethod extends EasyPostResource {
      *
      * @return the SecondaryPaymentMethod of this PaymentMethod.
      * @deprecated Use {@link #getSecondaryPaymentMethodObject()} instead.
-     * Last working version: v5.5.0. Removal: v7.0.0.
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public SecondaryPaymentMethod getSecondaryPaymentMethod() {
@@ -57,7 +58,7 @@ public class PaymentMethod extends EasyPostResource {
      * @return Billing object.
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link com.easypost.model.Billing#retrievePaymentMethods()} instead.
-     * Last working version: v5.5.0. Removal: v7.0.0.
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public static PaymentMethod all() throws EasyPostException {
@@ -71,7 +72,7 @@ public class PaymentMethod extends EasyPostResource {
      * @return Billing object.
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link com.easypost.model.Billing#retrievePaymentMethods()} instead.
-     * Last working version: v5.5.0. Removal: v7.0.0.
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public static PaymentMethod all(String apiKey) throws EasyPostException {
