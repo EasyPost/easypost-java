@@ -112,6 +112,14 @@ public final class RateDeserializer implements JsonDeserializer<Rate> {
             timeInTransit = EasyPostResource.GSON.fromJson(timeInTransitJsonElement, TimeInTransit.class);
         }
 
+        CarbonOffset carbonOffset;
+        JsonElement carbonOffsetJsonElement = jo.get("carbon_offset");
+        if (carbonOffsetJsonElement == null || carbonOffsetJsonElement.isJsonNull()) {
+            carbonOffset = null;
+        } else {
+            carbonOffset = EasyPostResource.GSON.fromJson(carbonOffsetJsonElement, CarbonOffset.class);
+        }
+
         Rate rate = new Rate();
         rate.setId(jo.get("id").getAsString());
         String carrier = jo.get("carrier").getAsString();
@@ -131,6 +139,8 @@ public final class RateDeserializer implements JsonDeserializer<Rate> {
         rate.setEstDeliveryDays(estDeliveryDays);
         rate.setShipmentId(shipmentID);
         rate.setCarrierAccountId(jo.get("carrier_account_id").getAsString());
+        rate.setCarbonOffset(carbonOffset);
+        rate.setBillingType(jo.get("billing_type").getAsString());
 
         return rate;
     }

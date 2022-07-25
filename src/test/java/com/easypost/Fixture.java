@@ -431,4 +431,60 @@ public abstract class Fixture {
 
         return params;
     }
+
+    /**
+     * Basic shipment with different to-from addresses that is reusable in all test coverage.
+     *
+     * @return A map that has the shipment info filled.
+     */
+    public static Map<String, Object> basicCarbonOffsetShipment() {
+        Map<String, Object> basicShipment = new HashMap<>();
+
+        basicShipment.put("to_address", pickupAddress());
+        basicShipment.put("from_address", basicAddress());
+        basicShipment.put("parcel", basicParcel());
+
+        return basicShipment;
+    }
+
+    /**
+     * Shipment that has all detail and different to-from addresses that is reusable in all test coverage.
+     *
+     * @return A map that has the shipment info filled in detail.
+     */
+    public static Map<String, Object> fullCarbonOffsetShipment() {
+        Map<String, Object> fullShipment = new HashMap<>();
+        Map<String, Object> options = new HashMap<>();
+
+        options.put("label_format", "PNG"); // Must be PNG so we can convert to ZPL later.
+        options.put("invoice_number", "123");
+        fullShipment.put("to_address", pickupAddress());
+        fullShipment.put("from_address", basicAddress());
+        fullShipment.put("parcel", basicParcel());
+        fullShipment.put("customs_info", basicCustomsInfo());
+        fullShipment.put("reference", "123");
+        fullShipment.put("options", options);
+
+        return fullShipment;
+    }
+
+    /**
+     * Shipment with one call buy and different to-from addresses that is reusable in all test coverage.
+     *
+     * @return A map that has the shipment info filled for one call buy.
+     */
+    public static Map<String, Object> oneCallBuyCarbonOffsetShipment() {
+        Map<String, Object> oneCallBuyShipment = new HashMap<>();
+        List<Object> carrierAccounts = new ArrayList<>();
+
+        carrierAccounts.add(uspsCarrierAccountID());
+        oneCallBuyShipment.put("to_address", pickupAddress());
+        oneCallBuyShipment.put("from_address", basicAddress());
+        oneCallBuyShipment.put("parcel", basicParcel());
+        oneCallBuyShipment.put("service", uspsService());
+        oneCallBuyShipment.put("carrier_accounts", carrierAccounts);
+        oneCallBuyShipment.put("carrier", usps());
+
+        return oneCallBuyShipment;
+    }
 }
