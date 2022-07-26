@@ -117,13 +117,11 @@ This project uses [EasyVCR](https://github.com/EasyPost/easyvcr-java) to record 
 The following are required on every test run:
 
 - `EASYPOST_TEST_API_KEY`
-
 - `EASYPOST_PROD_API_KEY`
 
 The following are required when you need to re-record cassettes for applicable tests (fallback values are used otherwise):
 
 - `USPS_CARRIER_ACCOUNT_ID` (eg: one-call buying a shipment for non-EasyPost employees)
-
 - `REFERRAL_USER_PROD_API_KEY` (eg: adding a credit card to a referral user)
 
 Some tests may require a user with a particular set of enabled features such as a `Partner` user when creating referrals. We have attempted to call out these functions in their respective docstrings.
