@@ -11,6 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class CarbonOffsetTest {
@@ -101,5 +102,32 @@ public final class CarbonOffsetTest {
             }
         }
         assertTrue(foundCarbonOffset);
+    }
+
+    /**
+     * Test re-rating a shipment with a carbon offset.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testRegenerateRatesWithCarbonOffset() throws EasyPostException {
+        vcr.setUpTest("regenerate_rates_with_carbon_offset");
+
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyCarbonOffsetShipment());
+        assertInstanceOf(Shipment.class, shipment);
+
+        List<Rate> rates = shipment.getRates();
+        assertNotNull(rates);
+
+        Shipment shipmentWithNewRates = shipment.newRates(true);
+
+        List<Rate> newRates = shipmentWithNewRates.getRates();
+        assertNotNull(newRates);
+
+        Rate oldRate = rates.get(0);
+        Rate newRate = newRates.get(0);
+
+        assertNull(oldRate.getCarbonOffset());
+        assertNotNull(newRate.getCarbonOffset());
     }
 }

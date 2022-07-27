@@ -397,7 +397,9 @@ public abstract class EasyPostResource {
 
     private static JsonObject createBody(final Map<String, Object> params) {
         Gson gson = new Gson();
-        return gson.toJsonTree(params).getAsJsonObject();
+        // this is a hack to fix a broken concept: https://github.com/google/gson/issues/1080
+        //noinspection rawtypes,unchecked
+        return gson.toJsonTree(new HashMap(params)).getAsJsonObject();
     }
 
     private static String createQuery(final Map<String, Object> params) throws UnsupportedEncodingException {
