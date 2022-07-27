@@ -2,7 +2,11 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.easypost.utils.Cryptography;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.text.Normalizer;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -228,5 +232,45 @@ public final class Webhook extends EasyPostResource {
      */
     public Webhook update(final Map<String, Object> params) throws EasyPostException {
         return this.update(params, null);
+    }
+
+    /**
+     * Validate a webhook by comparing the HMAC signature header sent from EasyPost to your shared secret.
+     * If the signatures do not match, an error will be raised signifying the webhook either did not originate
+     * from EasyPost or the secrets do not match. If the signatures do match, the `event_body` will be returned as JSON.
+     *
+     * @param data    Data to validate
+     * @param headers Headers received from the webhook
+     * @param secret  Shared secret to use in validation
+     * @return JSON string of the event body if the signatures match, otherwise an error will be raised.
+     * @throws EasyPostException        when the request fails.
+     * @throws NoSuchAlgorithmException when the HMAC algorithm is not available.
+     * @throws InvalidKeyException      when the shared secret is invalid.
+     */
+    @SuppressWarnings ("rawtypes")
+    public static Map validateWebhook(byte[] data, Map<String, Object> headers, String secret)
+            throws EasyPostException, NoSuchAlgorithmException, InvalidKeyException {
+        // Extract the signature from the headers
+        String providedSignature = headers.get("X-Hmac-Signature").toString();
+        if (providedSignature == null) {
+            throw new EasyPostException("Webhook received does not contain an HMAC signature.");
+        }
+
+        // Compute the HMAC hex digest of the data (normalize secret with NFKD profile)
+        String computedSignature = Cryptography.toHMACSHA256HexDigest(data, secret, Normalizer.Form.NFKD);
+
+        // Prepend prefix to computed signature
+        computedSignature = "hmac-sha256-hex=" + computedSignature;
+
+        // Compare the computed signature to the signature in the headers
+        boolean signatureValid = Cryptography.signaturesMatch(providedSignature, computedSignature);
+
+        if (!signatureValid) {
+            throw new EasyPostException(
+                    "Webhook received did not originate from EasyPost or had a webhook secret mismatch.");
+        }
+
+        String dataString = new String(data);
+        return EasyPostResource.GSON.fromJson(dataString, Map.class);
     }
 }
