@@ -5,6 +5,7 @@ import com.easypost.model.Fee;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -79,7 +80,7 @@ public final class CarbonOffsetTest {
     }
 
     /**
-     * Test buying a shipment with a carbon offset.
+     * Test one-call buying a shipment with a carbon offset.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -110,19 +111,15 @@ public final class CarbonOffsetTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
+    @Disabled // re-rating a non-carbon offset shipment with carbon offset is not supported
     public void testRegenerateRatesWithCarbonOffset() throws EasyPostException {
         vcr.setUpTest("regenerate_rates_with_carbon_offset");
 
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyCarbonOffsetShipment());
-        assertInstanceOf(Shipment.class, shipment);
-
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
         List<Rate> rates = shipment.getRates();
-        assertNotNull(rates);
 
         Shipment shipmentWithNewRates = shipment.newRates(true);
-
         List<Rate> newRates = shipmentWithNewRates.getRates();
-        assertNotNull(newRates);
 
         Rate oldRate = rates.get(0);
         Rate newRate = newRates.get(0);
