@@ -5,7 +5,6 @@ import com.easypost.model.Fee;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -54,7 +53,6 @@ public final class CarbonOffsetTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // skip until feature is implemented
     public void testBuyShipmentWithCarbonOffset() throws EasyPostException {
         vcr.setUpTest("buy_shipment_with_carbon_offset");
 
@@ -85,7 +83,6 @@ public final class CarbonOffsetTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // skip until feature is implemented
     public void testOneCallBuyShipmentWithCarbonOffset() throws EasyPostException {
         vcr.setUpTest("one_call_buy_shipment_with_carbon_offset");
 
