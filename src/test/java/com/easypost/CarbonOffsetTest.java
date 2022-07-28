@@ -5,7 +5,6 @@ import com.easypost.model.Fee;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -111,20 +110,24 @@ public final class CarbonOffsetTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // re-rating a non-carbon offset shipment with carbon offset is not supported
     public void testRegenerateRatesWithCarbonOffset() throws EasyPostException {
         vcr.setUpTest("regenerate_rates_with_carbon_offset");
 
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
-        List<Rate> rates = shipment.getRates();
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyCarbonOffsetShipment());
+        List<Rate> baseRates = shipment.getRates();
 
-        Shipment shipmentWithNewRates = shipment.newRates(true);
-        List<Rate> newRates = shipmentWithNewRates.getRates();
+        Shipment shipmentWithNewRatesWithCarbon = shipment.newRates(true);
+        List<Rate> newCarbonRates = shipmentWithNewRatesWithCarbon.getRates();
 
-        Rate oldRate = rates.get(0);
-        Rate newRate = newRates.get(0);
+        Shipment shipmentWithNewRatesWithoutCarbon = shipment.newRates(false);
+        List<Rate> newNonCarbonRates = shipmentWithNewRatesWithoutCarbon.getRates();
 
-        assertNull(oldRate.getCarbonOffset());
-        assertNotNull(newRate.getCarbonOffset());
+        Rate baseRate = baseRates.get(0);
+        Rate newCarbonRate = newCarbonRates.get(0);
+        Rate newNonCarbonRate = newNonCarbonRates.get(0);
+
+        assertNull(baseRate.getCarbonOffset());
+        assertNotNull(newCarbonRate.getCarbonOffset());
+        assertNull(newNonCarbonRate.getCarbonOffset());
     }
 }
