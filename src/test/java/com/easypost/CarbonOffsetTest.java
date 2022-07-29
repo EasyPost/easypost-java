@@ -119,15 +119,10 @@ public final class CarbonOffsetTest {
         Shipment shipmentWithNewRatesWithCarbon = shipment.newRates(true);
         List<Rate> newCarbonRates = shipmentWithNewRatesWithCarbon.getRates();
 
-        Shipment shipmentWithNewRatesWithoutCarbon = shipment.newRates(false);
-        List<Rate> newNonCarbonRates = shipmentWithNewRatesWithoutCarbon.getRates();
-
         Rate baseRate = baseRates.get(0);
         Rate newCarbonRate = newCarbonRates.get(0);
-        Rate newNonCarbonRate = newNonCarbonRates.get(0);
 
         assertNull(baseRate.getCarbonOffset());
         assertNotNull(newCarbonRate.getCarbonOffset());
-        assertNull(newNonCarbonRate.getCarbonOffset());
     }
 }

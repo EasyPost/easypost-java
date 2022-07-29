@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Next Release
+- Adds the ability to create a shipment with carbon offset
+- Adds the ability to buy a shipment with carbon offset
+- Adds the ability to one-call-buy a shipment with carbon offset
+- Adds the ability to re-rate a shipment with carbon offset
+
 ## v5.7.0 (2022-07-18)
 
 - Adds ability to generate a shipment form via `generate_form()` function
