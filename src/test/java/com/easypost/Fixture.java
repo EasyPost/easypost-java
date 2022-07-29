@@ -107,8 +107,8 @@ public abstract class Fixture {
      */
     public static String uspsCarrierAccountID() {
         // Fallback to the EasyPost Java Client Library Test User USPS carrier account
-        return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID") :
-                "ca_f09befdb2e9c410e95c7622ea912c18c";
+        return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID")
+                : "ca_f09befdb2e9c410e95c7622ea912c18c";
     }
 
     /**
@@ -293,16 +293,12 @@ public abstract class Fixture {
     }
 
     /**
-     * Address that is incorrect and had addtional key to verify the address.
+     * Address that is incorrect.
      *
-     * @return A map that has the address info filled and verify key and value.
+     * @return A map that has the address info incorrectly filled
      */
     public static Map<String, Object> incorrectAddressToVerify() {
         Map<String, Object> address = new HashMap<>();
-
-        List<Boolean> verify = new ArrayList<>();
-        verify.add(true);
-        address.put("verify", verify);
 
         address.put("street1", "417 montgomery street");
         address.put("street2", "FL 5");
@@ -418,16 +414,22 @@ public abstract class Fixture {
      */
     public static Map<String, Object> rmaFormOptions() {
         final int units = 8;
-        Map<String, Object> params = new HashMap<String, Object>() {{
-            put("barcode", "RMA12345678900");
-            put("line_items", new HashMap<String, Object>() {{
-                put("units", units);
-                put("product", new HashMap<String, Object>() {{
-                    put("title", "Square Reader");
-                    put("barcode", "855658003251");
-                }});
-            }});
-        }};
+        Map<String, Object> params = new HashMap<String, Object>() {
+            {
+                put("barcode", "RMA12345678900");
+                put("line_items", new HashMap<String, Object>() {
+                    {
+                        put("units", units);
+                        put("product", new HashMap<String, Object>() {
+                            {
+                                put("title", "Square Reader");
+                                put("barcode", "855658003251");
+                            }
+                        });
+                    }
+                });
+            }
+        };
 
         return params;
     }
