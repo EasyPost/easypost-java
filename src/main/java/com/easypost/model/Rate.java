@@ -21,6 +21,7 @@ public class Rate extends EasyPostResource {
     private String shipmentId;
     private String carrierAccountId;
     private String billingType;
+    private CarbonOffset carbonOffset;
 
     /**
      * Get billing type of this rate.
@@ -38,6 +39,24 @@ public class Rate extends EasyPostResource {
      */
     public void setBillingType(final String billingType) {
         this.billingType = billingType;
+    }
+
+    /**
+     * Get the carbon offset of this Rate.
+     *
+     * @return Carbon offset of this Rate.
+     */
+    public CarbonOffset getCarbonOffset() {
+        return carbonOffset;
+    }
+
+    /**
+     * Set the carbon offset of this Rate.
+     *
+     * @param carbonOffset Carbon offset of this Rate.
+     */
+    public void setCarbonOffset(final CarbonOffset carbonOffset) {
+        this.carbonOffset = carbonOffset;
     }
 
     /**

@@ -521,6 +521,18 @@ public final class Shipment extends EasyPostResource {
     /**
      * Create a new Shipment object from a map of parameters.
      *
+     * @param params           the map of parameters.
+     * @param withCarbonOffset whether to include a carbon offset when creating the shipment.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Shipment create(final Map<String, Object> params, boolean withCarbonOffset) throws EasyPostException {
+        return create(params, withCarbonOffset, null);
+    }
+
+    /**
+     * Create a new Shipment object from a map of parameters.
+     *
      * @param params the map of parameters.
      * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
@@ -529,6 +541,24 @@ public final class Shipment extends EasyPostResource {
     public static Shipment create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("shipment", params);
+
+        return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
+    }
+
+    /**
+     * Create a new Shipment object from a map of parameters.
+     *
+     * @param params           the map of parameters.
+     * @param withCarbonOffset whether to include a carbon offset when creating the shipment.
+     * @param apiKey           API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public static Shipment create(final Map<String, Object> params, boolean withCarbonOffset, final String apiKey)
+            throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<>();
+        wrappedParams.put("shipment", params);
+        wrappedParams.put("carbon_offset", withCarbonOffset);
 
         return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
     }
@@ -704,7 +734,65 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment newRates() throws EasyPostException {
-        return this.newRates(null, null);
+        return this.newRates(new HashMap<String, Object>() {}, false, null);
+    }
+
+    /**
+     * Get new rates for this Shipment.
+     *
+     * @param withCarbonOffset whether to include a carbon offset when re-rating the shipment.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment newRates(final boolean withCarbonOffset) throws EasyPostException {
+        return this.newRates(new HashMap<String, Object>() {}, withCarbonOffset, null);
+    }
+
+    /**
+     * Get new rates for this Shipment.
+     *
+     * @param params the options for the query.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment newRates(final Map<String, Object> params) throws EasyPostException {
+        return this.newRates(params, false, null);
+    }
+
+    /**
+     * Get new rates for this Shipment.
+     *
+     * @param params           the options for the query.
+     * @param withCarbonOffset whether to include a carbon offset when re-rating the shipment.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment newRates(final Map<String, Object> params, final boolean withCarbonOffset)
+            throws EasyPostException {
+        return this.newRates(params, withCarbonOffset, null);
+    }
+
+    /**
+     * Get new rates for this Shipment.
+     *
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment newRates(final String apiKey) throws EasyPostException {
+        return this.newRates(new HashMap<String, Object>() {}, false, apiKey);
+    }
+
+    /**
+     * Get new rates for this Shipment.
+     *
+     * @param withCarbonOffset whether to include a carbon offset when re-rating the shipment.
+     * @param apiKey           API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment newRates(final boolean withCarbonOffset, final String apiKey) throws EasyPostException {
+        return this.newRates(new HashMap<String, Object>() {}, withCarbonOffset, apiKey);
     }
 
     /**
@@ -716,34 +804,28 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment newRates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return this.newRates(params, false, apiKey);
+    }
+
+    /**
+     * Get new rates for this Shipment.
+     *
+     * @param params           the options for the query.
+     * @param withCarbonOffset whether to include a carbon offset when re-rating the shipment.
+     * @param apiKey           API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment newRates(final Map<String, Object> params, final boolean withCarbonOffset, final String apiKey)
+            throws EasyPostException {
+        params.put("carbon_offset", withCarbonOffset);
         Shipment response =
                 request(RequestMethod.POST, String.format("%s/rerate", instanceURL(Shipment.class, this.getId())),
                         params, Shipment.class, apiKey);
 
         this.merge(this, response);
+
         return this;
-    }
-
-    /**
-     * Get new rates for this Shipment.
-     *
-     * @param params the options for the query.
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment newRates(final Map<String, Object> params) throws EasyPostException {
-        return this.newRates(params, null);
-    }
-
-    /**
-     * Get new rates for this Shipment.
-     *
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment newRates(final String apiKey) throws EasyPostException {
-        return this.newRates(null, apiKey);
     }
 
     /**
@@ -752,7 +834,7 @@ public final class Shipment extends EasyPostResource {
      * @param params the options for the query.
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates(Map)} instead. 
+     * @deprecated Use {@link #smartrates(Map)} instead.
      * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
@@ -834,24 +916,18 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy() throws EasyPostException {
-        return this.buy(null, null);
+        return this.buy(new HashMap<String, Object>() {}, false, null);
     }
 
     /**
      * Buy this Shipment.
      *
-     * @param params the options for the query.
-     * @param apiKey API key to use in request (overrides default API key).
+     * @param withCarbonOffset whether to include a carbon offset when buying the shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Shipment response =
-                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Shipment.class, this.getId())), params,
-                        Shipment.class, apiKey);
-
-        this.merge(this, response);
-        return this;
+    public Shipment buy(final boolean withCarbonOffset) throws EasyPostException {
+        return this.buy(new HashMap<String, Object>() {}, withCarbonOffset, null);
     }
 
     /**
@@ -862,7 +938,19 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final Map<String, Object> params) throws EasyPostException {
-        return this.buy(params, null);
+        return this.buy(params, false, null);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
+     * @param params           the options for the query.
+     * @param withCarbonOffset whether to include a carbon offset when buying the shipment.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final Map<String, Object> params, final boolean withCarbonOffset) throws EasyPostException {
+        return this.buy(params, withCarbonOffset, null);
     }
 
     /**
@@ -873,7 +961,19 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final String apiKey) throws EasyPostException {
-        return this.buy(null, apiKey);
+        return this.buy(new HashMap<String, Object>() {}, false, apiKey);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
+     * @param withCarbonOffset whether to include a carbon offset when buying the shipment.
+     * @param apiKey           API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final boolean withCarbonOffset, final String apiKey) throws EasyPostException {
+        return this.buy(new HashMap<String, Object>() {}, withCarbonOffset, apiKey);
     }
 
     /**
@@ -887,7 +987,55 @@ public final class Shipment extends EasyPostResource {
         Map<String, Object> params = new HashMap<>();
         params.put("rate", rate);
 
-        return this.buy(params, null);
+        return this.buy(params, false, null);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
+     * @param rate             the Rate to use for this Shipment.
+     * @param withCarbonOffset whether to include a carbon offset when buying the shipment.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final Rate rate, final boolean withCarbonOffset) throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("rate", rate);
+
+        return this.buy(params, withCarbonOffset, null);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
+     * @param params the options for the query.
+     * @param apiKey API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+        return this.buy(params, false, apiKey);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
+     * @param params           the options for the query.
+     * @param withCarbonOffset whether to include a carbon offset when buying the shipment.
+     * @param apiKey           API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final Map<String, Object> params, final boolean withCarbonOffset, final String apiKey)
+            throws EasyPostException {
+        params.put("carbon_offset", withCarbonOffset);
+        Shipment response =
+                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Shipment.class, this.getId())), params,
+                        Shipment.class, apiKey);
+
+        this.merge(this, response);
+
+        return this;
     }
 
     /**
@@ -1177,7 +1325,7 @@ public final class Shipment extends EasyPostResource {
      * Generate a form for this shipment.
      *
      * @param formType the form type for this shipment.
-     * @param apiKey API key to use in request (overrides default API key).
+     * @param apiKey   API key to use in request (overrides default API key).
      * @throws EasyPostException when the request fails.
      */
     public void generateForm(final String formType, final String apiKey) throws EasyPostException {
@@ -1187,7 +1335,7 @@ public final class Shipment extends EasyPostResource {
     /**
      * Generate a form for this shipment.
      *
-     * @param formType the form type for this shipment.
+     * @param formType    the form type for this shipment.
      * @param formOptions the form options for this shipment.
      * @throws EasyPostException when the request fails.
      */
@@ -1198,9 +1346,9 @@ public final class Shipment extends EasyPostResource {
     /**
      * Generate a form for this shipment.
      *
-     * @param formType the form type for this shipment.
+     * @param formType    the form type for this shipment.
      * @param formOptions the form options for this shipment.
-     * @param apiKey API key to use in request (overrides default API key).
+     * @param apiKey      API key to use in request (overrides default API key).
      * @throws EasyPostException when the request fails.
      */
     public void generateForm(final String formType, final Map<String, Object> formOptions, String apiKey)
@@ -1212,8 +1360,9 @@ public final class Shipment extends EasyPostResource {
         params.putAll(formOptions);
         wrappedParams.put("form", params);
 
-        Shipment response = request(RequestMethod.POST, String.format("%s/forms",
-            instanceURL(Shipment.class, this.getId())), wrappedParams, Shipment.class, apiKey);
+        Shipment response =
+                request(RequestMethod.POST, String.format("%s/forms", instanceURL(Shipment.class, this.getId())),
+                        wrappedParams, Shipment.class, apiKey);
 
         this.merge(this, response);
     }
