@@ -2,6 +2,7 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Address;
+import com.easypost.model.Fee;
 import com.easypost.model.Form;
 import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
@@ -206,7 +207,6 @@ public final class ShipmentTest {
 
         Shipment shipment = Shipment.create(shipmentData);
 
-        // TODO: We shouldn't require the end-user to wrap this parameter in a dictionary.
         Shipment shipmentWithInsurance = shipment.insure(insuranceData);
 
         assertEquals("100.00", shipmentWithInsurance.getInsurance());
@@ -322,7 +322,8 @@ public final class ShipmentTest {
      */
     @Test
     @Disabled
-    // TODO: test is for some reason failing to pull a proper recording when playing back. Only test doing this
+    // TODO: test is for some reason failing to pull a proper recording when playing
+    // back. Only test doing this
     public void testCreateWithIds() throws EasyPostException {
         vcr.setUpTest("create_with_ids");
 
@@ -362,7 +363,8 @@ public final class ShipmentTest {
         assertEquals(5.49, lowestRate.getRate(), 0.01);
         assertEquals("USPS", lowestRate.getCarrier());
 
-        // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
+        // Test lowest rate with service filter (this rate is higher than the lowest but
+        // should filter)
         List<String> service = new ArrayList<>(Arrays.asList("Priority"));
         Rate lowestRateService = shipment.lowestRate(null, service);
         assertEquals("Priority", lowestRateService.getService());
@@ -393,7 +395,8 @@ public final class ShipmentTest {
         assertEquals(5.49, lowestSmartRateFilters.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRateFilters.getCarrier());
 
-        // Test lowest smartrate with invalid filters (should error due to strict delivery days)
+        // Test lowest smartrate with invalid filters (should error due to strict
+        // delivery days)
         assertThrows(EasyPostException.class, () -> {
             shipment.lowestSmartRate(0, SmartrateAccuracy.Percentile90);
         });
@@ -417,7 +420,8 @@ public final class ShipmentTest {
         assertEquals(5.49, lowestSmartRate.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRate.getCarrier());
 
-        // Test lowest smartrate with invalid filters (should error due to strict delivery days)
+        // Test lowest smartrate with invalid filters (should error due to strict
+        // delivery days)
         assertThrows(EasyPostException.class, () -> {
             Shipment.findLowestSmartrate(smartrates, 0, SmartrateAccuracy.Percentile90);
         });
@@ -440,8 +444,107 @@ public final class ShipmentTest {
         assertTrue(shipment.getForms().size() > 0);
 
         Form form = shipment.getForms().get(0);
-        
+
         assertEquals(formType, form.getFormType());
         assertTrue(form.getFormUrl() != null);
+    }
+
+    /**
+     * Test creating a shipment with a carbon offset.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateShipmentWithCarbonOffset() throws EasyPostException {
+        vcr.setUpTest("create_shipment_with_carbon_offset");
+
+        Shipment shipment = Shipment.create(Fixture.basicCarbonOffsetShipment(), true);
+
+        assertInstanceOf(Shipment.class, shipment);
+
+        List<Rate> rates = shipment.getRates();
+        assertNotNull(rates);
+
+        Rate rate = rates.get(0);
+        assertNotNull(rate.getCarbonOffset());
+        assertNotNull(rate.getCarbonOffset().getPrice());
+    }
+
+    /**
+     * Test buying a shipment with a carbon offset.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testBuyShipmentWithCarbonOffset() throws EasyPostException {
+        vcr.setUpTest("buy_shipment_with_carbon_offset");
+
+        Shipment shipment = Shipment.create(Fixture.fullCarbonOffsetShipment());
+
+        Rate rate = shipment.lowestRate();
+
+        Shipment boughtShipment = shipment.buy(rate, true);
+
+        assertInstanceOf(Shipment.class, shipment);
+
+        List<Fee> fees = boughtShipment.getFees();
+        assertNotNull(fees);
+
+        boolean foundCarbonOffset = false;
+        for (Fee fee : fees) {
+            if (fee.getType().equals("CarbonOffsetFee")) {
+                foundCarbonOffset = true;
+                break;
+            }
+        }
+        assertTrue(foundCarbonOffset);
+    }
+
+    /**
+     * Test one-call buying a shipment with a carbon offset.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testOneCallBuyShipmentWithCarbonOffset() throws EasyPostException {
+        vcr.setUpTest("one_call_buy_shipment_with_carbon_offset");
+
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyCarbonOffsetShipment(), true);
+
+        assertInstanceOf(Shipment.class, shipment);
+
+        List<Fee> fees = shipment.getFees();
+        assertNotNull(fees);
+
+        boolean foundCarbonOffset = false;
+        for (Fee fee : fees) {
+            if (fee.getType().equals("CarbonOffsetFee")) {
+                foundCarbonOffset = true;
+                break;
+            }
+        }
+        assertTrue(foundCarbonOffset);
+    }
+
+    /**
+     * Test re-rating a shipment with a carbon offset.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testRegenerateRatesWithCarbonOffset() throws EasyPostException {
+        vcr.setUpTest("regenerate_rates_with_carbon_offset");
+
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyCarbonOffsetShipment());
+        List<Rate> baseRates = shipment.getRates();
+
+        Shipment shipmentWithNewRatesWithCarbon = shipment.newRates(true);
+        List<Rate> newCarbonRates = shipmentWithNewRatesWithCarbon.getRates();
+
+        Rate baseRate = baseRates.get(0);
+        Rate newCarbonRate = newCarbonRates.get(0);
+
+        assertNull(baseRate.getCarbonOffset());
+        assertNotNull(newCarbonRate.getCarbonOffset());
     }
 }
