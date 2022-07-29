@@ -30,6 +30,16 @@ public final class AddressTest {
     }
 
     /**
+     * Create a basic address.
+     *
+     * @return basic Address object
+     * @throws EasyPostException
+     */
+    public static Address createBasicAddress() throws EasyPostException {
+        return Address.create(Fixture.basicAddress());
+    }
+
+    /**
      * Test creating an address.
      *
      * @throws EasyPostException when the request fails.
@@ -46,17 +56,28 @@ public final class AddressTest {
     }
 
     /**
-     * Create a basic address.
+     * Test creating an address with the verify param.
+     * We purposefully pass in slightly incorrect data to get the corrected address
+     * back once verified.
      *
-     * @return basic Address object
-     * @throws EasyPostException
+     * @throws EasyPostException when the request fails.
      */
-    public static Address createBasicAddress() throws EasyPostException {
-        return Address.create(Fixture.basicAddress());
+    @Test
+    public void testCreateVerify() throws EasyPostException {
+        vcr.setUpTest("create_verify");
+
+        Map<String, Object> addressData = Fixture.incorrectAddressToVerify();
+        addressData.put("verify", true);
+
+        Address address = Address.create(addressData);
+
+        assertInstanceOf(Address.class, address);
+        assertTrue(address.getId().startsWith("adr_"));
+        assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
     }
 
     /**
-     * Test creating an address with verify_strict param.
+     * Test creating an address with the verify_strict param.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -65,16 +86,36 @@ public final class AddressTest {
         vcr.setUpTest("create_verify_strict");
 
         Map<String, Object> addressData = Fixture.basicAddress();
-
-        List<Boolean> verificationList = new ArrayList<>();
-        verificationList.add(true);
-        addressData.put("verify_strict", verificationList);
+        addressData.put("verify_strict", true);
 
         Address address = Address.create(addressData);
 
         assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
         assertEquals("388 TOWNSEND ST APT 20", address.getStreet1());
+    }
+
+    /**
+     * Test creating an address with the verify param.
+     * We purposefully pass in slightly incorrect data to get the corrected address
+     * back once verified.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateVerifyArray() throws EasyPostException {
+        vcr.setUpTest("create_verify_array");
+
+        Map<String, Object> addressData = Fixture.incorrectAddressToVerify();
+        List<Boolean> verificationList = new ArrayList<>();
+        verificationList.add(true);
+        addressData.put("verify", verificationList);
+
+        Address address = Address.create(addressData);
+
+        assertInstanceOf(Address.class, address);
+        assertTrue(address.getId().startsWith("adr_"));
+        assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
     }
 
     /**
@@ -117,26 +158,8 @@ public final class AddressTest {
 
     /**
      * Test creating a verified address.
-     * We purposefully pass in slightly incorrect data to get the corrected address back once verified.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testCreateVerify() throws EasyPostException {
-        vcr.setUpTest("create_verify");
-
-        Map<String, Object> addressData = Fixture.incorrectAddressToVerify();
-
-        Address address = Address.create(addressData);
-
-        assertInstanceOf(Address.class, address);
-        assertTrue(address.getId().startsWith("adr_"));
-        assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
-    }
-
-    /**
-     * Test creating a verified address.
-     * We purposefully pass in slightly incorrect data to get the corrected address back once verified.
+     * We purposefully pass in slightly incorrect data to get the corrected address
+     * back once verified.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -145,9 +168,6 @@ public final class AddressTest {
         vcr.setUpTest("create_and_verify");
 
         Map<String, Object> addressData = Fixture.basicAddress();
-        List<Boolean> verifications = new ArrayList<>();
-        verifications.add(true);
-        addressData.put("verify", verifications);
 
         Address address = Address.createAndVerify(addressData);
 
@@ -157,7 +177,7 @@ public final class AddressTest {
     }
 
     /**
-     * Test we can verify an already created address.
+     * Test verifying an existing address.
      *
      * @throws EasyPostException when the request fails.
      */
