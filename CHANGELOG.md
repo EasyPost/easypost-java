@@ -7,6 +7,7 @@
   - Adds the ability to buy a shipment with carbon offset
   - Adds the ability to one-call-buy a shipment with carbon offset
   - Adds the ability to re-rate a shipment with carbon offset
+- Adds `validateWebhook` function that returns your webhook or raises an error if there is a webhook secret mismatch
 
 ## v5.7.0 (2022-07-18)
 
