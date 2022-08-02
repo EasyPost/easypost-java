@@ -1,19 +1,15 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.Event;
 import com.easypost.model.Webhook;
 import com.easypost.model.WebhookCollection;
-import com.easypost.net.EasyPostResource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +17,6 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -155,12 +150,10 @@ public final class WebhookTest {
     /**
      * Test validating a webhook.
      *
-     * @throws NoSuchAlgorithmException when the algorithm is not found.
      * @throws EasyPostException        when the request fails.
-     * @throws InvalidKeyException      when the key is invalid.
      */
     @Test
-    public void testValidateWebhook() throws NoSuchAlgorithmException, EasyPostException, InvalidKeyException {
+    public void testValidateWebhook() throws EasyPostException {
         String webhookSecret = "sécret";
         Map<String, Object> headers = new HashMap<String, Object>() {
             {
@@ -169,21 +162,16 @@ public final class WebhookTest {
             }
         };
 
-        String webhookBody = Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+        Event event = Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
 
-        assertEquals("batch.created", webhookBody.getDescription());
+        assertEquals("batch.created", event.getDescription());
     }
 
     /**
      * Test validating a webhook.
-     *
-     * @throws NoSuchAlgorithmException when the algorithm is not found.
-     * @throws EasyPostException        when the request fails.
-     * @throws InvalidKeyException      when the key is invalid.
      */
     @Test
-    public void testValidateWebhookInvalidSecret()
-            throws NoSuchAlgorithmException, EasyPostException, InvalidKeyException {
+    public void testValidateWebhookInvalidSecret() {
         String webhookSecret = "invalid_secret";
         Map<String, Object> headers = new HashMap<String, Object>() {
             {
@@ -198,14 +186,9 @@ public final class WebhookTest {
 
     /**
      * Test validating a webhook.
-     *
-     * @throws NoSuchAlgorithmException when the algorithm is not found.
-     * @throws EasyPostException        when the request fails.
-     * @throws InvalidKeyException      when the key is invalid.
      */
     @Test
-    public void testValidateWebhookMissingSecret()
-            throws NoSuchAlgorithmException, EasyPostException, InvalidKeyException {
+    public void testValidateWebhookMissingSecret() {
         String webhookSecret = "123";
         Map<String, Object> headers = new HashMap<String, Object>() {
             {
