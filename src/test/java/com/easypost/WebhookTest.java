@@ -22,9 +22,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@TestMethodOrder (MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public final class WebhookTest {
     private static String testWebhookId = null;
     private static TestUtils.VCR vcr;
@@ -159,58 +160,8 @@ public final class WebhookTest {
      * @throws InvalidKeyException      when the key is invalid.
      */
     @Test
-    public void testValidation() throws NoSuchAlgorithmException, EasyPostException, InvalidKeyException {
-        vcr.setUpTest("validation");
-
-        Map<String, Object> dataDictionary = new HashMap<String, Object>() {
-            {
-                put("result", new HashMap<String, Object>() {
-                    {
-                        put("id", "batch_123...");
-                        put("object", "Batch");
-                        put("mode", "test");
-                        put("state", "created");
-                        put("num_shipments", 0);
-                        put("reference", null);
-                        put("created_at", "2022-07-26T17:22:32Z");
-                        put("updated_at", "2022-07-26T17:22:32Z");
-                        put("scan_form", null);
-                        put("shipments", new ArrayList<>());
-                        put("status", new HashMap<String, Object>() {
-                            {
-                                put("created", 0);
-                                put("queued_for_purchase", 0);
-                                put("creation_failed", 0);
-                                put("postage_purchased", 0);
-                                put("postage_purchase_failed", 0);
-                            }
-                        });
-                        put("pickup", null);
-                        put("label_url", null);
-                    }
-                });
-            }
-
-            {
-                put("description", "batch.created");
-                put("mode", "test");
-                put("previous_attributes", null);
-                put("completed_urls", null);
-                put("user_id", "user_123...");
-                put("status", "pending");
-                put("object", "Event");
-                put("id", "evt_123...");
-            }
-        };
-
-        String dataString = EasyPostResource.GSON.toJson(dataDictionary, Map.class);
-
-        if (dataString == null) {
-            throw new IllegalArgumentException("Failed to convert dictionary to JSON string");
-        }
-
-        byte[] dataBytes = dataString.getBytes(StandardCharsets.UTF_8);
-
+    public void testValidateWebhook() throws NoSuchAlgorithmException, EasyPostException, InvalidKeyException {
+        String webhookSecret = "sécret";
         Map<String, Object> headers = new HashMap<String, Object>() {
             {
                 put("X-Hmac-Signature",
@@ -218,8 +169,52 @@ public final class WebhookTest {
             }
         };
 
-        //noinspection SpellCheckingInspection,rawtypes
-        Map validData = Webhook.validateWebhook(dataBytes, headers, "sécret");
-        assertNotNull(validData);
+        String webhookBody = Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+
+        assertEquals("batch.created", webhookBody.getDescription());
+    }
+
+    /**
+     * Test validating a webhook.
+     *
+     * @throws NoSuchAlgorithmException when the algorithm is not found.
+     * @throws EasyPostException        when the request fails.
+     * @throws InvalidKeyException      when the key is invalid.
+     */
+    @Test
+    public void testValidateWebhookInvalidSecret()
+            throws NoSuchAlgorithmException, EasyPostException, InvalidKeyException {
+        String webhookSecret = "invalid_secret";
+        Map<String, Object> headers = new HashMap<String, Object>() {
+            {
+                put("X-Hmac-Signature", "some-signature");
+            }
+        };
+
+        assertThrows(EasyPostException.class, () -> {
+            Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+        });
+    }
+
+    /**
+     * Test validating a webhook.
+     *
+     * @throws NoSuchAlgorithmException when the algorithm is not found.
+     * @throws EasyPostException        when the request fails.
+     * @throws InvalidKeyException      when the key is invalid.
+     */
+    @Test
+    public void testValidateWebhookMissingSecret()
+            throws NoSuchAlgorithmException, EasyPostException, InvalidKeyException {
+        String webhookSecret = "123";
+        Map<String, Object> headers = new HashMap<String, Object>() {
+            {
+                put("some-header", "some-value");
+            }
+        };
+
+        assertThrows(EasyPostException.class, () -> {
+            Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+        });
     }
 }

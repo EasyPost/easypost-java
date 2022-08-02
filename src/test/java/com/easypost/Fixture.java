@@ -3,6 +3,10 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Shipment;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -488,5 +492,20 @@ public abstract class Fixture {
         oneCallBuyShipment.put("carrier", usps());
 
         return oneCallBuyShipment;
+    }
+
+    public static byte[] eventBody() {
+        // TODO: Dynamically generate this path
+        String filePath = "/Users/jhammond/git/easypost/easypost-java/src/test/eventBody.json";
+        byte[] data = null;
+
+        try {
+            data = Files
+                    .readAllLines(Paths.get(filePath), StandardCharsets.UTF_8).get(0).getBytes();
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
+
+        return data;
     }
 }
