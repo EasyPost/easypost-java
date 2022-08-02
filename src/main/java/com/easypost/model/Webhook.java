@@ -2,7 +2,10 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.easypost.utils.Cryptography;
 
+import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -228,5 +231,45 @@ public final class Webhook extends EasyPostResource {
      */
     public Webhook update(final Map<String, Object> params) throws EasyPostException {
         return this.update(params, null);
+    }
+
+    /**
+     * Validate a webhook by comparing the HMAC signature header sent from EasyPost to your shared secret.
+     * If the signatures do not match, an error will be raised signifying
+     * the webhook either did not originate from EasyPost or the secrets do not match.
+     * If the signatures do match, the `event_body` will be returned as JSON.
+     *
+     * @param eventBody     Data to validate
+     * @param headers       Headers received from the webhook
+     * @param webhookSecret Shared secret to use in validation
+     * @return JSON string of the event body if the signatures match, otherwise an
+     * error will be raised.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Event validateWebhook(byte[] eventBody, Map<String, Object> headers, String webhookSecret)
+            throws EasyPostException {
+
+        String providedSignature = null;
+        try {
+            providedSignature = headers.get("X-Hmac-Signature").toString();
+        } catch (NullPointerException ignored) { // catch error raised if header key doesn't exist
+        }
+
+        if (providedSignature != null) {
+            String calculatedDigest =
+                    Cryptography.toHMACSHA256HexDigest(eventBody, webhookSecret, Normalizer.Form.NFKD);
+            String calculatedSignature = "hmac-sha256-hex=" + calculatedDigest;
+
+            if (Cryptography.signaturesMatch(providedSignature, calculatedSignature)) {
+                // Serialize data into a JSON string, then into an Event object
+                String json = new String(eventBody, StandardCharsets.UTF_8);
+                return GSON.fromJson(json, Event.class);
+            } else {
+                throw new EasyPostException(
+                        "Webhook received did not originate from EasyPost or had a webhook secret mismatch.");
+            }
+        } else {
+            throw new EasyPostException("Webhook received does not contain an HMAC signature.");
+        }
     }
 }

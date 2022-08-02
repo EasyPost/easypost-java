@@ -49,7 +49,7 @@ public abstract class TestUtils {
      *
      * @return The directory where the program is currently executing
      */
-    private static String getSourceFileDirectory() {
+    public static String getSourceFileDirectory() {
         try {
             return Paths.get("").toAbsolutePath().toString();
         } catch (Exception e) {

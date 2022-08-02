@@ -3,10 +3,16 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Shipment;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.easypost.TestUtils.getSourceFileDirectory;
 
 public abstract class Fixture {
     public static final int PAGE_SIZE = 5;
@@ -107,8 +113,8 @@ public abstract class Fixture {
      */
     public static String uspsCarrierAccountID() {
         // Fallback to the EasyPost Java Client Library Test User USPS carrier account
-        return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID")
-                : "ca_f09befdb2e9c410e95c7622ea912c18c";
+        return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID") :
+                "ca_f09befdb2e9c410e95c7622ea912c18c";
     }
 
     /**
@@ -488,5 +494,24 @@ public abstract class Fixture {
         oneCallBuyShipment.put("carrier", usps());
 
         return oneCallBuyShipment;
+    }
+
+    /**
+     * Get the fixture for a webhook event body as a byte array.
+     *
+     * @return The webhook event body fixture as a byte array.
+     */
+    public static byte[] eventBody() {
+        String relativeFilePath = "src/test/eventBody.json";
+        String fullFilePath = Paths.get(getSourceFileDirectory(), relativeFilePath).toString();
+        byte[] data = null;
+
+        try {
+            data = Files.readAllLines(Paths.get(fullFilePath), StandardCharsets.UTF_8).get(0).getBytes();
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
+
+        return data;
     }
 }

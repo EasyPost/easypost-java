@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.Event;
 import com.easypost.model.Webhook;
 import com.easypost.model.WebhookCollection;
 import org.junit.jupiter.api.AfterEach;
@@ -16,9 +17,10 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@TestMethodOrder (MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public final class WebhookTest {
     private static String testWebhookId = null;
     private static TestUtils.VCR vcr;
@@ -143,5 +145,59 @@ public final class WebhookTest {
         retrievedWebhook.delete();
 
         testWebhookId = null; // need to disable post-test deletion for test to work
+    }
+
+    /**
+     * Test validating a webhook.
+     *
+     * @throws EasyPostException        when the request fails.
+     */
+    @Test
+    public void testValidateWebhook() throws EasyPostException {
+        String webhookSecret = "sécret";
+        Map<String, Object> headers = new HashMap<String, Object>() {
+            {
+                put("X-Hmac-Signature",
+                        "hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115a46b");
+            }
+        };
+
+        Event event = Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+
+        assertEquals("batch.created", event.getDescription());
+    }
+
+    /**
+     * Test validating a webhook.
+     */
+    @Test
+    public void testValidateWebhookInvalidSecret() {
+        String webhookSecret = "invalid_secret";
+        Map<String, Object> headers = new HashMap<String, Object>() {
+            {
+                put("X-Hmac-Signature", "some-signature");
+            }
+        };
+
+        assertThrows(EasyPostException.class, () -> {
+            Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+        });
+    }
+
+    /**
+     * Test validating a webhook.
+     */
+    @Test
+    public void testValidateWebhookMissingSecret() {
+        String webhookSecret = "123";
+        Map<String, Object> headers = new HashMap<String, Object>() {
+            {
+                put("some-header", "some-value");
+            }
+        };
+
+        assertThrows(EasyPostException.class, () -> {
+            Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+        });
     }
 }
