@@ -785,6 +785,11 @@ public abstract class EasyPostResource {
         for (Method fromMethod : methods) {
             if (fromMethod.getName().startsWith("get") || GLOBAL_FIELD_ACCESSORS.contains(fromMethod.getName())) {
 
+                if (fromMethod.isAnnotationPresent(Deprecated.class)) {
+                    // skip deprecated methods
+                    continue;
+                }
+
                 String fromName = fromMethod.getName();
                 String toName = fromName.replace("get", "set");
 
