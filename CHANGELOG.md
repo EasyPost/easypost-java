@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v5.8.1 (2022-08-03)
+
+- Fixes a bug where an erroneous API call to retrieve smartrates would be made behind the scenes whenever a shipment object was updated locally from the API (such as when regenerating rates) due to the deprecated function name being called `getSmartrates` and the library assuming this was a getter and attempting to use it to update the shipment data
+
 ## v5.8.0 (2022-08-02)
 
 - Adds Carbon Offset support
