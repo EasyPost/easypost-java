@@ -91,13 +91,19 @@ Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_G
 
 ```bash
 # Build project
-mvn clean install -Dgpg.skip
+make build
+
+# Lint project
+make lint
 
 # Run tests
-EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... mvn clean test -B
+EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make test
 
 # Run tests with coverage
-EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... mvn clean test -B jacoco:report
+EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make coverage
+
+# Run security analysis
+make scan
 ```
 
 ### Testing
