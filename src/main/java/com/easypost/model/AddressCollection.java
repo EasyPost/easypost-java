@@ -11,7 +11,7 @@ public final class AddressCollection extends EasyPostResource {
     /**
      * Get a list of addresses.
      *
-     * @return List of Batch objects
+     * @return List of Address objects
      */
     public List<Address> getAddresses() {
         return addresses;
@@ -20,7 +20,7 @@ public final class AddressCollection extends EasyPostResource {
     /**
      * Set a list of addresses.
      *
-     * @param addresses List of Batch objects
+     * @param addresses List of Address objects
      */
     public void setAddresses(final List<Address> addresses) {
         this.addresses = addresses;

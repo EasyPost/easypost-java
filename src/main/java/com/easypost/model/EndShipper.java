@@ -1,18 +1,11 @@
-package com.easypost.model.beta;
+package com.easypost.model;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.BaseAddress;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-/**
- * @deprecated Use {@link com.easypost.model.EndShipper} instead.
- * Deprecated: v5.9.0 - v7.0.0
- */
 public final class EndShipper extends BaseAddress {
     /**
      * Create EndShipper object from parameter map.
@@ -38,7 +31,7 @@ public final class EndShipper extends BaseAddress {
 
         wrappedParams.put("address", params);
 
-        return request(RequestMethod.POST, String.format("%s/%s", EasyPost.BETA_API_BASE, "end_shippers"),
+        return request(RequestMethod.POST, String.format("%s/%s", EasyPost.API_BASE, "end_shippers"),
                 wrappedParams, EndShipper.class, apiKey);
     }
 
@@ -62,7 +55,7 @@ public final class EndShipper extends BaseAddress {
      * @throws EasyPostException when the request fails.
      */
     public static EndShipper retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s/%s/%s", EasyPost.BETA_API_BASE, "end_shippers", id), null,
+        return request(RequestMethod.GET, String.format("%s/%s/%s", EasyPost.API_BASE, "end_shippers", id), null,
                 EndShipper.class, apiKey);
     }
 
@@ -70,10 +63,10 @@ public final class EndShipper extends BaseAddress {
      * List all EndShipper objects.
      *
      * @param params Map of parameters.
-     * @return List<EndShipper>.
+     * @return EndShipperCollection object.
      * @throws EasyPostException when the request fails.
      */
-    public static List<EndShipper> all(final Map<String, Object> params) throws EasyPostException {
+    public static EndShipperCollection all(final Map<String, Object> params) throws EasyPostException {
         return all(params, null);
     }
 
@@ -82,15 +75,12 @@ public final class EndShipper extends BaseAddress {
      *
      * @param params Map of parameters.
      * @param apiKey API key to use in request (overrides default API key).
-     * @return List<EndShipper>.
+     * @return EndShipperCollection object.
      * @throws EasyPostException when the request fails.
      */
-    public static List<EndShipper> all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        EndShipper[] response =
-                request(RequestMethod.GET, String.format("%s/%s", EasyPost.BETA_API_BASE, "end_shippers"), params,
-                        EndShipper[].class, apiKey);
-
-        return Arrays.asList(response);
+    public static EndShipperCollection all(final Map<String, Object> params, final String apiKey)
+            throws EasyPostException {
+        return request(RequestMethod.GET, classURL(EndShipper.class), params, EndShipperCollection.class, apiKey);
     }
 
     /**
@@ -118,7 +108,7 @@ public final class EndShipper extends BaseAddress {
         wrappedParams.put("address", params);
 
         EndShipper response = request(RequestMethod.PUT,
-                String.format("%s/%s/%s", EasyPost.BETA_API_BASE, "end_shippers", this.getId()), wrappedParams,
+                String.format("%s/%s/%s", EasyPost.API_BASE, "end_shippers", this.getId()), wrappedParams,
                 EndShipper.class, apiKey);
 
         this.merge(this, response);
