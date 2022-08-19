@@ -8,6 +8,8 @@ import com.easypost.easyvcr.MatchRules;
 import com.easypost.easyvcr.Mode;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,8 @@ import java.util.List;
 public abstract class TestUtils {
     public enum ApiKey {
         TEST,
-        PRODUCTION
+        PRODUCTION,
+        PARTNER
     }
 
     private static final String API_KEY_FAILED_TO_PULL = "couldNotPullApiKey";
@@ -44,6 +47,23 @@ public abstract class TestUtils {
         add(new CensorElement("updatedAt", false));
     }};
 
+    public static String readFile(Path path) {
+        List<String> data = new ArrayList<>();
+        try {
+            data = java.nio.file.Files.readAllLines(path);
+        } catch (IOException ignored) {
+            return null;
+        }
+        if (data.isEmpty()) {
+            return null;
+        }
+        StringBuilder contents = new StringBuilder();
+        for (String line : data) {
+            contents.append(line);
+        }
+        return contents.toString();
+    }
+
     /**
      * Get the directory where the program is currently executing.
      *
@@ -71,6 +91,9 @@ public abstract class TestUtils {
                 break;
             case PRODUCTION:
                 keyName = "EASYPOST_PROD_API_KEY";
+                break;
+            case PARTNER:
+                keyName = "PARTNER_USER_PROD_API_KEY";
                 break;
             default:
                 break;

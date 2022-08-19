@@ -7,7 +7,6 @@ import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.beta.ReferralCustomer;
 import com.easypost.model.beta.ReferralCustomerCollection;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -22,8 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class ReferralTest {
-    private static final String REFERRAL_USER_PROD_API_KEY =
-            System.getenv("REFERRAL_USER_PROD_API_KEY") == null ? "123" : System.getenv("REFERRAL_USER_PROD_API_KEY");
     private static TestUtils.VCR vcr;
 
     /**
@@ -33,7 +30,7 @@ public final class ReferralTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        vcr = new TestUtils.VCR("referral", REFERRAL_USER_PROD_API_KEY);
+        vcr = new TestUtils.VCR("referral", TestUtils.ApiKey.PARTNER);
     }
 
     /**
@@ -49,7 +46,7 @@ public final class ReferralTest {
 
         assertInstanceOf(ReferralCustomer.class, referralUser);
         assertTrue(referralUser.getId().startsWith("user_"));
-        assertEquals(Fixture.referralUser().get("name"), referralUser.getName());
+        assertEquals("Test Referral", referralUser.getName());
     }
 
     /**
@@ -58,7 +55,11 @@ public final class ReferralTest {
      * @return Referral object
      */
     private static ReferralCustomer createReferral() throws EasyPostException {
-        return ReferralCustomer.create(Fixture.referralUser());
+        return ReferralCustomer.create(new HashMap<String, Object>() {{
+            put("name", "Test Referral");
+            put("email", "test@example.com");
+            put("phone", "1111111111");
+        }});
     }
 
     /**
@@ -107,15 +108,15 @@ public final class ReferralTest {
     public void testReferralAddCreditCard() throws Exception {
         vcr.setUpTest("referral_add_credit_card");
 
-        Map<String, String> creditCardDetails = Fixture.creditCardDetails();
+        Map<String, Object> creditCardDetails = Fixture.creditCardDetails();
         PaymentMethodObject creditCard =
-                ReferralCustomer.addCreditCardToUser(REFERRAL_USER_PROD_API_KEY, creditCardDetails.get("number"),
-                        Integer.parseInt(creditCardDetails.get("expiration_month")),
-                        Integer.parseInt(creditCardDetails.get("expiration_year")), creditCardDetails.get("cvc"),
+                ReferralCustomer.addCreditCardToUser(TestUtils.getApiKey(TestUtils.ApiKey.PARTNER), (String)creditCardDetails.get("number"),
+                        Integer.parseInt((String)creditCardDetails.get("expiration_month")),
+                        Integer.parseInt((String)creditCardDetails.get("expiration_year")), (String)creditCardDetails.get("cvc"),
                         PaymentMethod.Priority.PRIMARY);
 
         assertInstanceOf(PaymentMethodObject.class, creditCard);
         assertTrue(creditCard.getId().startsWith("card_"));
-        assertEquals(Fixture.creditCardDetails().get("number").substring(12), creditCard.getLast4());
+        assertEquals(((String)Fixture.creditCardDetails().get("number")).substring(12), creditCard.getLast4());
     }
 }

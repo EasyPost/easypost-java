@@ -1,508 +1,219 @@
 package com.easypost;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.model.Shipment;
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static com.easypost.TestUtils.getSourceFileDirectory;
+import static com.easypost.TestUtils.readFile;
 
 public abstract class Fixture {
-    public static final int PAGE_SIZE = 5;
 
-    /**
-     * A basic carrier account data structure.
-     *
-     * @return a map with the carrier account data filled in.
-     */
-    public static Map<String, Object> basicCarrierAccount() {
-        Map<String, Object> carrierAccount = new HashMap<>();
-        Map<String, Object> credentials = new HashMap<>();
-
-        credentials.put("account_number", "A1A1A1");
-        credentials.put("user_id", "USERID");
-        credentials.put("password", "PASSWORD");
-        credentials.put("access_license_number", "ALN");
-        carrierAccount.put("type", "UpsAccount");
-        carrierAccount.put("credentials", credentials);
-
-        return carrierAccount;
+    private static String readFixtureData() {
+        Path fixtureDataPath =
+                Paths.get(getSourceFileDirectory(), "examples/official/fixtures/client-library-fixtures.json");
+        return readFile(fixtureDataPath);
     }
 
-    /**
-     * A basic insurance data structure
-     * This fixture will require you to add a `tracking_code` key with the tracking
-     * code of a shipment.
-     *
-     * @return a map with the insurance data filled in.
-     */
-    public static Map<String, Object> basicInsurance() throws EasyPostException {
-        Shipment shipment = Shipment.create(oneCallBuyShipment());
-
-        Map<String, Object> insurance = new HashMap<>();
-
-        insurance.put("to_address", Fixture.basicAddress());
-        insurance.put("from_address", Fixture.basicAddress());
-        insurance.put("carrier", Fixture.usps());
-        insurance.put("amount", "100");
-        insurance.put("tracking_code", shipment.getTrackingCode());
-
-        return insurance;
+    private static Map<String, Object> createFixture(String data) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<Map<String, Object>>() {}.getType();
+        return gson.fromJson(data, type);
     }
 
-    /**
-     * Shipment with one call buy that is reusable in all test coverage.
-     *
-     * @return A map that has the shipment info filled for one call buy.
-     */
-    public static Map<String, Object> oneCallBuyShipment() {
-        Map<String, Object> oneCallBuyShipment = new HashMap<>();
-        List<Object> carrierAccounts = new ArrayList<>();
+    private static Map<String, Object> createFixture(String... keyPath) {
+        // load fixture data as a JSON string
+        String fixtureData = readFixtureData();
+        if (fixtureData == null) {
+            return null;
+        }
 
-        carrierAccounts.add(uspsCarrierAccountID());
-        oneCallBuyShipment.put("to_address", basicAddress());
-        oneCallBuyShipment.put("from_address", basicAddress());
-        oneCallBuyShipment.put("parcel", basicParcel());
-        oneCallBuyShipment.put("service", uspsService());
-        oneCallBuyShipment.put("carrier_accounts", carrierAccounts);
-        oneCallBuyShipment.put("carrier", usps());
+        // parse fixture data as a JSON object
+        Gson gson = new Gson();
+        Type type = new TypeToken<LinkedTreeMap<String, Object>>() {}.getType();
 
-        return oneCallBuyShipment;
+        // traverse the fixture data to find the requested fixture
+        LinkedTreeMap<String, Object> fixture = gson.fromJson(fixtureData, type);
+        for (String key : keyPath) {
+            if (fixture.containsKey(key)) {
+                fixture = (LinkedTreeMap<String, Object>) fixture.get(key);
+            } else {
+                return null;
+            }
+        }
+
+        type = new TypeToken<HashMap<String, Object>>() {}.getType();
+        String fixtureJson = gson.toJson(fixture, type);
+        return gson.fromJson(fixtureJson, type);
     }
 
-    /**
-     * Basic address that is reusable in all test coverage.
-     *
-     * @return A map that has the address info filled.
-     */
-    public static Map<String, Object> basicAddress() {
-        Map<String, Object> address = new HashMap<>();
+    private static int createFixtureInt(String... keyPath) {
+        String lastKey = keyPath[keyPath.length - 1];
+        List<String> beginningKeys = new ArrayList<>(Arrays.asList(keyPath)).subList(0, keyPath.length - 1);
+        Map<String, Object> fixture = createFixture(beginningKeys.toArray(new String[0]));
 
-        address.put("name", "Jack Sparrow");
-        address.put("company", "EasyPost");
-        address.put("street1", "388 Townsend St");
-        address.put("street2", "Apt 20");
-        address.put("city", "San Francisco");
-        address.put("state", "CA");
-        address.put("zip", "94107");
-        address.put("phone", "5555555555");
-
-        return address;
+        if (fixture == null) {
+            // not a fan of this default value
+            return 0;
+        }
+        if (fixture.containsKey(lastKey)) {
+            return ((Double) fixture.get(lastKey)).intValue();
+        }
+        return 0;
     }
 
-    /**
-     * We use USPS as carrier in our test coverage.
-     *
-     * @return USPS carrier.
-     */
-    public static String usps() {
-        return "USPS";
+    private static String createFixtureString(String... keyPath) {
+        String lastKey = keyPath[keyPath.length - 1];
+        List<String> beginningKeys = new ArrayList<>(Arrays.asList(keyPath)).subList(0, keyPath.length - 1);
+        Map<String, Object> fixture = createFixture(beginningKeys.toArray(new String[0]));
+
+        if (fixture == null) {
+            // not a fan of this default value
+            return "";
+        }
+        if (fixture.containsKey(lastKey)) {
+            return (String) fixture.get(lastKey);
+        }
+        return "";
     }
 
-    /**
-     * USPS Carrier Account ID.
-     *
-     * @return USPS Carrier Account ID.
-     */
+    private static Map<String, Object> createFixtureMap(String... keyPath) {
+        return createFixture(keyPath);
+    }
+
+    public static int pageSize() {
+        return createFixtureInt("page_sizes", "five_results");
+    }
+
     public static String uspsCarrierAccountID() {
         // Fallback to the EasyPost Java Client Library Test User USPS carrier account
         return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID") :
                 "ca_f09befdb2e9c410e95c7622ea912c18c";
     }
 
-    /**
-     * Basic parcel that is reusable in all test coverage.
-     *
-     * @return A map that has the parcel info filled.
-     */
-    public static Map<String, Object> basicParcel() {
-        Map<String, Object> basicParcel = new HashMap<>();
-
-        basicParcel.put("length", "10");
-        basicParcel.put("width", "8");
-        basicParcel.put("height", "4");
-        basicParcel.put("weight", "15.4");
-
-        return basicParcel;
+    public static String usps() {
+        return createFixtureString("carrier_strings", "usps");
     }
 
-    /**
-     * We use USPS `First` service in our test coverage.
-     *
-     * @return USPS `First` service.
-     */
     public static String uspsService() {
-        return "First";
+        return createFixtureString("service_names", "usps", "first_service");
     }
 
-    /**
-     * A basic order data structure.
-     *
-     * @return a map with the insurance data filled in.
-     */
-    public static Map<String, Object> basicOrder() {
-        Map<String, Object> order = new HashMap<>();
-        List<Object> shipments = new ArrayList<>();
-
-        shipments.add(Fixture.basicShipment());
-
-        order.put("to_address", Fixture.basicAddress());
-        order.put("from_address", Fixture.basicAddress());
-        order.put("shipments", shipments);
-
-        return order;
-    }
-
-    /**
-     * Basic shipment that is reusable in all test coverage.
-     *
-     * @return A map that has the shipment info filled.
-     */
-    public static Map<String, Object> basicShipment() {
-        Map<String, Object> basicShipment = new HashMap<>();
-
-        basicShipment.put("to_address", basicAddress());
-        basicShipment.put("from_address", basicAddress());
-        basicShipment.put("parcel", basicParcel());
-
-        return basicShipment;
-    }
-
-    /**
-     * This fixture will require you to add a `shipment` key with a Shipment object
-     * from a test.
-     * If you need to re-record cassettes, increment the date below and ensure it is
-     * one day in the future,
-     * USPS only does "next-day" pickups including Saturday but not Sunday or
-     * Holidays.
-     *
-     * @return A map that has the pickup.
-     */
-    public static Map<String, Object> basicPickup() {
-        Map<String, Object> basicPickup = new HashMap<>();
-
-        String pickupDate = "2022-07-28";
-
-        basicPickup.put("address", basicAddress());
-        basicPickup.put("min_datetime", pickupDate);
-        basicPickup.put("max_datetime", pickupDate);
-        basicPickup.put("instructions", "Pickup at front door");
-
-        return basicPickup;
-    }
-
-    /**
-     * Basic credit card that is reusable in all test coverage.
-     *
-     * @return A map that has the credit card info filled.
-     */
-    public static Map<String, String> creditCardDetails() {
-        // The credit card details below are for a valid proxy card usable
-        // for tests only and cannot be used for real transactions.
-        // DO NOT alter these details with real credit card information.
-        Map<String, String> creditCardDetails = new HashMap<String, String>();
-
-        creditCardDetails.put("number", "4536410136126170");
-        creditCardDetails.put("expiration_month", "05");
-        creditCardDetails.put("expiration_year", "2028");
-        creditCardDetails.put("cvc", "778");
-
-        return creditCardDetails;
-    }
-
-    /**
-     * Basic EndShipper address that is reusable in all test coverage.
-     *
-     * @return A map that has the EndShipper address info filled.
-     */
-    public static Map<String, Object> endShipperAddress() {
-        Map<String, Object> address = new HashMap<>();
-
-        address.put("name", "Jack Sparrow");
-        address.put("company", "EasyPost");
-        address.put("street1", "388 Townsend St");
-        address.put("street2", "Apt 20");
-        address.put("city", "San Francisco");
-        address.put("state", "CA");
-        address.put("zip", "94107");
-        address.put("phone", "5555555555");
-        address.put("country", "US");
-        address.put("email", "test@example.com");
-
-        return address;
-    }
-
-    /**
-     * Shipment that has all detail and is reusable in all test coverage.
-     *
-     * @return A map that has the shipment info filled in detail.
-     */
-    public static Map<String, Object> fullShipment() {
-        Map<String, Object> fullShipment = new HashMap<>();
-        Map<String, Object> options = new HashMap<>();
-
-        options.put("label_format", "PNG"); // Must be PNG so we can convert to ZPL later.
-        options.put("invoice_number", "123");
-        fullShipment.put("to_address", basicAddress());
-        fullShipment.put("from_address", basicAddress());
-        fullShipment.put("parcel", basicParcel());
-        fullShipment.put("customs_info", basicCustomsInfo());
-        fullShipment.put("reference", "123");
-        fullShipment.put("options", options);
-
-        return fullShipment;
-    }
-
-    /**
-     * Basic customs Info that is reusable in all test coverage.
-     *
-     * @return A map that has the customs Info info filled.
-     */
-    public static Map<String, Object> basicCustomsInfo() {
-        Map<String, Object> customsInfo = new HashMap<>();
-
-        customsInfo.put("eel_pfc", "NOEEI 30.37(a)");
-        customsInfo.put("customs_certify", true);
-        customsInfo.put("customs_signer", "Steve Brule");
-        customsInfo.put("contents_type", "merchandise");
-        customsInfo.put("contents_explanation", "");
-        customsInfo.put("restriction_type", "none");
-        customsInfo.put("non_delivery_option", "return");
-        customsInfo.put("custom_items", basicCustomsItem());
-
-        return customsInfo;
-    }
-
-    /**
-     * Basic customs item that is reusable in all test coverage.
-     *
-     * @return A map that has the customs item info filled.
-     */
-    public static Map<String, Object> basicCustomsItem() {
-        Map<String, Object> customsItem = new HashMap<>();
-
-        customsItem.put("description", "Sweet shirts");
-        customsItem.put("quantity", "2");
-        customsItem.put("weight", "11");
-        customsItem.put("value", "23");
-        customsItem.put("hs_tariff_number", "654321");
-        customsItem.put("origin_country", "US");
-
-        return customsItem;
-    }
-
-    /**
-     * Address that is incorrect.
-     *
-     * @return A map that has the address info incorrectly filled
-     */
-    public static Map<String, Object> incorrectAddressToVerify() {
-        Map<String, Object> address = new HashMap<>();
-
-        address.put("street1", "417 montgomery street");
-        address.put("street2", "FL 5");
-        address.put("city", "San Francisco");
-        address.put("state", "CA");
-        address.put("zip", "94104");
-        address.put("country", "US");
-        address.put("company", "EasyPost");
-        address.put("phone", "415-123-4567");
-
-        return address;
-    }
-
-    /**
-     * We keep the page size of retrieving `all` records small.
-     *
-     * @return Number of page size.
-     */
-    public static int pageSize() {
-        return PAGE_SIZE;
-    }
-
-    /**
-     * Pickup address that is reusable in all test coverage.
-     *
-     * @return A map that has the pickup address info filled.
-     */
-    public static Map<String, Object> pickupAddress() {
-        Map<String, Object> pickupAddress = new HashMap<>();
-
-        pickupAddress.put("name", "Dr. Steve Brule");
-        pickupAddress.put("street1", "179 N Harbor Dr");
-        pickupAddress.put("city", "Redondo Beach");
-        pickupAddress.put("state", "CA");
-        pickupAddress.put("country", "US");
-        pickupAddress.put("zip", "90277");
-        pickupAddress.put("phone", "3331114444");
-
-        return pickupAddress;
-    }
-
-    /**
-     * The pickup service to use.
-     *
-     * @return USPS `NextDay` service.
-     */
     public static String pickupService() {
-        return "NextDay";
+        return createFixtureString("service_names", "usps", "pickup_service");
     }
 
-    /**
-     * Basic Referral user that is reusable in all test coverage.
-     *
-     * @return A map that has the Referral detail info filled.
-     */
-    public static Map<String, Object> referralUser() {
-        Map<String, Object> referralUser = new HashMap<>();
-
-        referralUser.put("name", "test test");
-        referralUser.put("email", "test@test.com");
-        referralUser.put("phone", "8888888888");
-
-        return referralUser;
+    public static String pickupDate() {
+        /*
+        If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
+        USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
+         */
+        return "2022-08-17";
     }
 
-    /**
-     * Report start date for ReportTest.
-     *
-     * @return start date for report.
-     */
-    public static String reportDate() {
-        return "2022-04-12";
-    }
-
-    /**
-     * Report type.
-     *
-     * @return report type.
-     */
     public static String reportType() {
-        return "shipment";
+        return createFixtureString("report_types", "shipment");
     }
 
-    /**
-     * Basic tax identifier that is reusable in all test coverage.
-     *
-     * @return A map that has the tax identifier info filled.
-     */
-    public static Map<String, Object> taxIdentifier() {
-        Map<String, Object> taxIdentifier = new HashMap<>();
-
-        taxIdentifier.put("entity", "SENDER");
-        taxIdentifier.put("tax_id_type", "IOSS");
-        taxIdentifier.put("tax_id", "12345");
-        taxIdentifier.put("issuing_country", "GB");
-
-        return taxIdentifier;
+    public static String reportDate() {
+        return "2022-05-04";
     }
 
-    /**
-     * Webhook URL.
-     *
-     * @return webhook URL.
-     */
+    public static String reportIdPrefix() {
+        return "shprep_";
+    }
+
     public static String webhookUrl() {
-        return "http://example.com";
+        return createFixtureString("webhook_url");
     }
 
-    /**
-     * RMA form options.
-     *
-     * @return RMA form options.
-     */
-    public static Map<String, Object> rmaFormOptions() {
-        final int units = 8;
-        Map<String, Object> params = new HashMap<String, Object>() {
-            {
-                put("barcode", "RMA12345678900");
-                put("line_items", new HashMap<String, Object>() {
-                    {
-                        put("units", units);
-                        put("product", new HashMap<String, Object>() {
-                            {
-                                put("title", "Square Reader");
-                                put("barcode", "855658003251");
-                            }
-                        });
-                    }
-                });
-            }
-        };
-
-        return params;
+    public static Map<String, Object> caAddress1() {
+        return createFixtureMap("addresses", "ca_address_1");
     }
 
-    /**
-     * Basic shipment with different to-from addresses that is reusable in all test coverage.
-     *
-     * @return A map that has the shipment info filled.
-     */
-    public static Map<String, Object> basicCarbonOffsetShipment() {
-        Map<String, Object> basicShipment = new HashMap<>();
-
-        basicShipment.put("to_address", pickupAddress());
-        basicShipment.put("from_address", basicAddress());
-        basicShipment.put("parcel", basicParcel());
-
-        return basicShipment;
+    public static Map<String, Object> caAddress2() {
+        return createFixtureMap("addresses", "ca_address_2");
     }
 
-    /**
-     * Shipment that has all detail and different to-from addresses that is reusable in all test coverage.
-     *
-     * @return A map that has the shipment info filled in detail.
-     */
-    public static Map<String, Object> fullCarbonOffsetShipment() {
-        Map<String, Object> fullShipment = new HashMap<>();
-        Map<String, Object> options = new HashMap<>();
-
-        options.put("label_format", "PNG"); // Must be PNG so we can convert to ZPL later.
-        options.put("invoice_number", "123");
-        fullShipment.put("to_address", pickupAddress());
-        fullShipment.put("from_address", basicAddress());
-        fullShipment.put("parcel", basicParcel());
-        fullShipment.put("customs_info", basicCustomsInfo());
-        fullShipment.put("reference", "123");
-        fullShipment.put("options", options);
-
-        return fullShipment;
+    public static Map<String, Object> incorrectAddress() {
+        return createFixtureMap("addresses", "incorrect");
     }
 
-    /**
-     * Shipment with one call buy and different to-from addresses that is reusable in all test coverage.
-     *
-     * @return A map that has the shipment info filled for one call buy.
-     */
-    public static Map<String, Object> oneCallBuyCarbonOffsetShipment() {
-        Map<String, Object> oneCallBuyShipment = new HashMap<>();
-        List<Object> carrierAccounts = new ArrayList<>();
-
-        carrierAccounts.add(uspsCarrierAccountID());
-        oneCallBuyShipment.put("to_address", pickupAddress());
-        oneCallBuyShipment.put("from_address", basicAddress());
-        oneCallBuyShipment.put("parcel", basicParcel());
-        oneCallBuyShipment.put("service", uspsService());
-        oneCallBuyShipment.put("carrier_accounts", carrierAccounts);
-        oneCallBuyShipment.put("carrier", usps());
-
-        return oneCallBuyShipment;
+    public static Map<String, Object> basicParcel() {
+        return createFixtureMap("parcels", "basic");
     }
 
-    /**
-     * Get the fixture for a webhook event body as a byte array.
-     *
-     * @return The webhook event body fixture as a byte array.
-     */
-    public static byte[] eventBody() {
-        String relativeFilePath = "src/test/eventBody.json";
+    public static Map<String, Object> basicCustomsItem() {
+        return createFixtureMap("custom_items", "basic");
+    }
+
+    public static Map<String, Object> basicCustomsInfo() {
+        return createFixtureMap("customs_infos", "basic");
+    }
+
+    public static Map<String, Object> taxIdentifier() {
+        return createFixtureMap("tax_identifiers", "basic");
+    }
+
+    public static Map<String, Object> basicShipment() {
+        return createFixtureMap("shipments", "basic_domestic");
+    }
+
+    public static Map<String, Object> fullShipment() {
+        return createFixtureMap("shipments", "full");
+    }
+
+    public static Map<String, Object> oneCallBuyShipment() {
+        return new HashMap<String, Object>() {{
+            put("to_address", caAddress1());
+            put("from_address", caAddress2());
+            put("parcel", basicParcel());
+            put("service", uspsService());
+            put("carrier_accounts", new ArrayList<String>() {{
+                add(uspsCarrierAccountID());
+            }});
+            put("carrier", usps());
+        }};
+    }
+
+    public static Map<String, Object> basicPickup() {
+        Map<String, Object> fixture = createFixtureMap("pickups", "basic");
+
+        fixture.put("min_datetime", pickupDate());
+        fixture.put("max_datetime", pickupDate());
+
+        return fixture;
+    }
+
+    public static Map<String, Object> basicCarrierAccount() {
+        return createFixtureMap("carrier_accounts", "basic");
+    }
+
+    public static Map<String, Object> basicInsurance() {
+        /*
+        This fixture will require you to append a `tracking_code` key with the shipment's tracking code.
+         */
+        return createFixtureMap("insurances", "basic");
+    }
+
+    public static Map<String, Object> basicOrder() {
+        return createFixtureMap("orders", "basic");
+    }
+
+    public static byte[] eventBytes() {
+        String relativeFilePath = "examples/official/fixtures/event-body.json";
         String fullFilePath = Paths.get(getSourceFileDirectory(), relativeFilePath).toString();
         byte[] data = null;
 
@@ -513,5 +224,17 @@ public abstract class Fixture {
         }
 
         return data;
+    }
+
+    public static Map<String, Object> creditCardDetails() {
+        /*
+        The credit card details below are for a valid proxy card usable for tests only and cannot be used for real transactions.
+        DO NOT alter these details with real credit card information.
+         */
+        return createFixtureMap("credit_cards", "test");
+    }
+
+    public static Map<String, Object> rmaFormOptions() {
+        return createFixtureMap("form_options", "rma");
     }
 }

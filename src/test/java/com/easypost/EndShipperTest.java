@@ -50,7 +50,7 @@ public final class EndShipperTest {
      * @return EndShipper object.
      */
     private static EndShipper createEndShipper() throws EasyPostException {
-        return EndShipper.create(Fixture.endShipperAddress());
+        return EndShipper.create(Fixture.caAddress1());
     }
 
     /**

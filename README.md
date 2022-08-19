@@ -90,6 +90,10 @@ Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_G
 ### Tests
 
 ```bash
+# Update submodules
+git submodule init
+git submodule update --remote
+
 # Build project
 make build
 

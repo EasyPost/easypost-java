@@ -60,6 +60,7 @@ public final class CarrierAccountTest {
 
         assertInstanceOf(CarrierAccount.class, carrierAccount);
         assertTrue(carrierAccount.getId().startsWith("ca_"));
+        assertEquals("DhlEcsAccount", carrierAccount.getType());
     }
 
     private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {

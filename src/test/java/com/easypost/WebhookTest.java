@@ -162,7 +162,7 @@ public final class WebhookTest {
             }
         };
 
-        Event event = Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+        Event event = Webhook.validateWebhook(Fixture.eventBytes(), headers, webhookSecret);
 
         assertEquals("batch.created", event.getDescription());
     }
@@ -180,7 +180,7 @@ public final class WebhookTest {
         };
 
         assertThrows(EasyPostException.class, () -> {
-            Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+            Webhook.validateWebhook(Fixture.eventBytes(), headers, webhookSecret);
         });
     }
 
@@ -197,7 +197,7 @@ public final class WebhookTest {
         };
 
         assertThrows(EasyPostException.class, () -> {
-            Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+            Webhook.validateWebhook(Fixture.eventBytes(), headers, webhookSecret);
         });
     }
 }
