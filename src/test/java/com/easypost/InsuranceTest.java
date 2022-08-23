@@ -3,6 +3,8 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Insurance;
 import com.easypost.model.InsuranceCollection;
+import com.easypost.model.Shipment;
+import com.easypost.utils.Fixture;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -50,7 +52,12 @@ public final class InsuranceTest {
      * @return Insurance object
      */
     private static Insurance createBasicInsurance() throws EasyPostException {
-        return Insurance.create(Fixture.basicInsurance());
+        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+
+        HashMap<String, Object> params = Fixture.basicInsurance();
+        params.put("tracking_code", shipment.getTrackingCode());
+
+        return Insurance.create(params);
     }
 
     /**

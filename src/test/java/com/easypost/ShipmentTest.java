@@ -10,6 +10,7 @@ import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
 import com.easypost.model.Smartrate;
 import com.easypost.model.SmartrateAccuracy;
+import com.easypost.utils.Fixture;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -388,7 +389,7 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate");
 
         Shipment shipment = createBasicShipment();
-        Smartrate lowestSmartRateFilters = shipment.lowestSmartRate(1, SmartrateAccuracy.Percentile90);
+        Smartrate lowestSmartRateFilters = shipment.lowestSmartRate(2, SmartrateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
         assertEquals("First", lowestSmartRateFilters.getService());
@@ -415,7 +416,7 @@ public final class ShipmentTest {
         List<Smartrate> smartrates = shipment.smartrates();
 
         // Test lowest smartrate with valid filters
-        Smartrate lowestSmartRate = Shipment.findLowestSmartrate(smartrates, 1, SmartrateAccuracy.Percentile90);
+        Smartrate lowestSmartRate = Shipment.findLowestSmartrate(smartrates, 2, SmartrateAccuracy.Percentile90);
         assertEquals("First", lowestSmartRate.getService());
         assertEquals(5.57, lowestSmartRate.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRate.getCarrier());

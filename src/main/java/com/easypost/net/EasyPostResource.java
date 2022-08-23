@@ -22,6 +22,7 @@ import com.easypost.model.TrackingDetail;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -58,6 +59,8 @@ public abstract class EasyPostResource {
     public static final String EASYPOST_SUPPORT_EMAIL = "support@easypost.com";
     public static final Gson GSON =
             new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                    .serializeNulls()
+                    .registerTypeAdapter(HashMap.class, new HashMapSerializer())
                     .registerTypeAdapter(Event.class, new EventDeserializer())
                     .registerTypeAdapter(Rate.class, new RateDeserializer())
                     .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer()).create();
@@ -396,10 +399,11 @@ public abstract class EasyPostResource {
     }
 
     private static JsonObject createBody(final Map<String, Object> params) {
-        Gson gson = new Gson();
         // this is a hack to fix a broken concept: https://github.com/google/gson/issues/1080
         //noinspection rawtypes,unchecked
-        return gson.toJsonTree(new HashMap(params)).getAsJsonObject();
+        JsonElement jsonElement = GSON.toJsonTree(new HashMap(params));
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        return jsonObject;
     }
 
     private static String createQuery(final Map<String, Object> params) throws UnsupportedEncodingException {

@@ -1,0 +1,92 @@
+[
+  {
+    "recordedAt": 1661456541,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/reports/shipment/?page_size\u003d5\u0026type\u003dshipment"
+    },
+    "response": {
+      "body": "{\n  \"reports\": [\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-08-25T19:42:21Z\",\n      \"created_at\": \"2022-08-25T19:42:21Z\",\n      \"id\": \"shprep_1c5d6cf0c59441a696e4151b1c168cdb\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"new\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-08-25T19:42:21Z\",\n      \"created_at\": \"2022-08-25T19:42:21Z\",\n      \"id\": \"shprep_62427e8273914444ba72e718526e2ac8\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-08-23T20:41:37Z\",\n      \"created_at\": \"2022-08-23T20:41:37Z\",\n      \"id\": \"shprep_358fc2d3177442ddbb2fee9e443f1a79\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-08-23T20:41:36Z\",\n      \"created_at\": \"2022-08-23T20:41:36Z\",\n      \"id\": \"shprep_c541d35b4fe34747b9b537f19b0180f3\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-08-23T20:41:36Z\",\n      \"created_at\": \"2022-08-23T20:41:36Z\",\n      \"id\": \"shprep_682d5d6ee84a446cb08f0d39b55553cb\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    }\n  ],\n  \"has_more\": true\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "1457"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb2nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "07323c3e6307d09df7cae2f800088cb5"
+        ],
+        "x-proxied": [
+          "extlb2nuq 9ce216bfac",
+          "intlb2nuq 6aa9972c1e"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.025242"
+        ],
+        "etag": [
+          "W/\"6e0dfa315976d1002ef27082565f3b1d\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202208251932-b2da22d2d6-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "errors": null,
+      "uri": "https://api.easypost.com/v2/reports/shipment/?page_size\u003d5\u0026type\u003dshipment"
+    },
+    "duration": 154
+  }
+]

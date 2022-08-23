@@ -1,0 +1,92 @@
+[
+  {
+    "recordedAt": 1661456596,
+    "request": {
+      "body": "{}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/shipments"
+    },
+    "response": {
+      "body": null,
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 422 Unprocessable Entity"
+        ],
+        "content-length": [
+          "139"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb6nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "07323c386307d0d4f7a874350008a8d9"
+        ],
+        "x-proxied": [
+          "extlb2nuq 9ce216bfac",
+          "intlb1nuq 6aa9972c1e"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.035329"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202208242214-2a3e1e3aa6-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 422,
+        "message": "Unprocessable Entity"
+      },
+      "errors": "{\n  \"error\": {\n    \"code\": \"PARAMETER.REQUIRED\",\n    \"message\": \"Missing required parameter.\",\n    \"errors\": [\n      {\n        \"field\": \"shipment\",\n        \"message\": \"cannot be blank\"\n      }\n    ]\n  }\n}",
+      "uri": "https://api.easypost.com/v2/shipments"
+    },
+    "duration": 157
+  }
+]

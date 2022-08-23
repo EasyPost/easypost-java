@@ -1,0 +1,92 @@
+[
+  {
+    "recordedAt": 1661458464,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/beta/referral_customers?page_size\u003d5"
+    },
+    "response": {
+      "body": "{\n  \"referral_customers\": [\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-26T18:05:30Z\",\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"Test Referral\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_f62016a444904e92b1a070c28dc80ec1\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"me2@email.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-26T18:24:06Z\",\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"Test Referral\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_ddd8473296c748f9928eeaa44f7b932f\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"me@email.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-26T18:27:59Z\",\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"Test Referral\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_eaec6f7a5c1249259620c4194cbeef1a\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"me@email.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-26T18:33:14Z\",\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"Test Referral\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_7e1ff06d85964898a17c43a179b046a4\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"me@email.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-26T18:36:16Z\",\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"Test Referral\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_1353d5275f3a4becb6763132e9c9bcb6\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"me@email.com\",\n      \"object\": \"User\"\n    }\n  ],\n  \"has_more\": true\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "2526"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb6nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "b57a92346307d820f7bb21bf000b4b12"
+        ],
+        "x-proxied": [
+          "extlb1nuq 9ce216bfac",
+          "intlb2nuq 6aa9972c1e"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.163011"
+        ],
+        "etag": [
+          "W/\"6e3e058710013488866f6ee06e4621ff\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202208251932-b2da22d2d6-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "errors": null,
+      "uri": "https://api.easypost.com/beta/referral_customers?page_size\u003d5"
+    },
+    "duration": 494
+  }
+]

@@ -4,6 +4,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.model.Event;
 import com.easypost.model.Webhook;
 import com.easypost.model.WebhookCollection;
+import com.easypost.utils.Fixture;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;

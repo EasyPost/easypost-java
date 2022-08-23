@@ -1,4 +1,4 @@
-package com.easypost;
+package com.easypost.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
@@ -16,9 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.easypost.TestUtils.getSourceFileDirectory;
-import static com.easypost.TestUtils.readFile;
+import static com.easypost.utils.Files.getSourceFileDirectory;
+import static com.easypost.utils.Files.readFile;
 
+
+/*
+ * This class needs to exist in the main package (rather than the test package) because this class needs to be referenced in the `HashMapSerializer`.
+ */
 public abstract class Fixture {
 
     private static String readFixtureData() {
@@ -27,13 +31,13 @@ public abstract class Fixture {
         return readFile(fixtureDataPath);
     }
 
-    private static Map<String, Object> createFixture(String data) {
+    private static HashMap<String, Object> createFixture(String data) {
         Gson gson = new Gson();
-        Type type = new TypeToken<Map<String, Object>>() {}.getType();
+        Type type = new TypeToken<HashMap<String, Object>>() {}.getType();
         return gson.fromJson(data, type);
     }
 
-    private static Map<String, Object> createFixture(String... keyPath) {
+    private static HashMap<String, Object> createFixture(String... keyPath) {
         // load fixture data as a JSON string
         String fixtureData = readFixtureData();
         if (fixtureData == null) {
@@ -42,10 +46,10 @@ public abstract class Fixture {
 
         // parse fixture data as a JSON object
         Gson gson = new Gson();
-        Type type = new TypeToken<LinkedTreeMap<String, Object>>() {}.getType();
+        Type linkedTreeMapType = new TypeToken<LinkedTreeMap<String, Object>>() {}.getType();
 
         // traverse the fixture data to find the requested fixture
-        LinkedTreeMap<String, Object> fixture = gson.fromJson(fixtureData, type);
+        LinkedTreeMap<String, Object> fixture = gson.fromJson(fixtureData, linkedTreeMapType);
         for (String key : keyPath) {
             if (fixture.containsKey(key)) {
                 fixture = (LinkedTreeMap<String, Object>) fixture.get(key);
@@ -54,9 +58,10 @@ public abstract class Fixture {
             }
         }
 
-        type = new TypeToken<HashMap<String, Object>>() {}.getType();
-        String fixtureJson = gson.toJson(fixture, type);
-        return gson.fromJson(fixtureJson, type);
+        String fixtureJson = gson.toJson(fixture, linkedTreeMapType);
+
+        Type hashMapType = new TypeToken<HashMap<String, Object>>() {}.getType();
+        return gson.fromJson(fixtureJson, hashMapType);
     }
 
     private static int createFixtureInt(String... keyPath) {
@@ -77,7 +82,7 @@ public abstract class Fixture {
     private static String createFixtureString(String... keyPath) {
         String lastKey = keyPath[keyPath.length - 1];
         List<String> beginningKeys = new ArrayList<>(Arrays.asList(keyPath)).subList(0, keyPath.length - 1);
-        Map<String, Object> fixture = createFixture(beginningKeys.toArray(new String[0]));
+        HashMap<String, Object> fixture = createFixture(beginningKeys.toArray(new String[0]));
 
         if (fixture == null) {
             // not a fan of this default value
@@ -89,7 +94,7 @@ public abstract class Fixture {
         return "";
     }
 
-    private static Map<String, Object> createFixtureMap(String... keyPath) {
+    private static HashMap<String, Object> createFixtureMap(String... keyPath) {
         return createFixture(keyPath);
     }
 
@@ -120,7 +125,7 @@ public abstract class Fixture {
         If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
         USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
          */
-        return "2022-08-17";
+        return "2022-08-30";
     }
 
     public static String reportType() {
@@ -139,43 +144,43 @@ public abstract class Fixture {
         return createFixtureString("webhook_url");
     }
 
-    public static Map<String, Object> caAddress1() {
+    public static HashMap<String, Object> caAddress1() {
         return createFixtureMap("addresses", "ca_address_1");
     }
 
-    public static Map<String, Object> caAddress2() {
+    public static HashMap<String, Object> caAddress2() {
         return createFixtureMap("addresses", "ca_address_2");
     }
 
-    public static Map<String, Object> incorrectAddress() {
+    public static HashMap<String, Object> incorrectAddress() {
         return createFixtureMap("addresses", "incorrect");
     }
 
-    public static Map<String, Object> basicParcel() {
+    public static HashMap<String, Object> basicParcel() {
         return createFixtureMap("parcels", "basic");
     }
 
-    public static Map<String, Object> basicCustomsItem() {
-        return createFixtureMap("custom_items", "basic");
+    public static HashMap<String, Object> basicCustomsItem() {
+        return createFixtureMap("customs_items", "basic");
     }
 
-    public static Map<String, Object> basicCustomsInfo() {
+    public static HashMap<String, Object> basicCustomsInfo() {
         return createFixtureMap("customs_infos", "basic");
     }
 
-    public static Map<String, Object> taxIdentifier() {
+    public static HashMap<String, Object> taxIdentifier() {
         return createFixtureMap("tax_identifiers", "basic");
     }
 
-    public static Map<String, Object> basicShipment() {
+    public static HashMap<String, Object> basicShipment() {
         return createFixtureMap("shipments", "basic_domestic");
     }
 
-    public static Map<String, Object> fullShipment() {
+    public static HashMap<String, Object> fullShipment() {
         return createFixtureMap("shipments", "full");
     }
 
-    public static Map<String, Object> oneCallBuyShipment() {
+    public static HashMap<String, Object> oneCallBuyShipment() {
         return new HashMap<String, Object>() {{
             put("to_address", caAddress1());
             put("from_address", caAddress2());
@@ -188,8 +193,8 @@ public abstract class Fixture {
         }};
     }
 
-    public static Map<String, Object> basicPickup() {
-        Map<String, Object> fixture = createFixtureMap("pickups", "basic");
+    public static HashMap<String, Object> basicPickup() {
+        HashMap<String, Object> fixture = createFixtureMap("pickups", "basic");
 
         fixture.put("min_datetime", pickupDate());
         fixture.put("max_datetime", pickupDate());
@@ -197,18 +202,18 @@ public abstract class Fixture {
         return fixture;
     }
 
-    public static Map<String, Object> basicCarrierAccount() {
+    public static HashMap<String, Object> basicCarrierAccount() {
         return createFixtureMap("carrier_accounts", "basic");
     }
 
-    public static Map<String, Object> basicInsurance() {
+    public static HashMap<String, Object> basicInsurance() {
         /*
         This fixture will require you to append a `tracking_code` key with the shipment's tracking code.
          */
         return createFixtureMap("insurances", "basic");
     }
 
-    public static Map<String, Object> basicOrder() {
+    public static HashMap<String, Object> basicOrder() {
         return createFixtureMap("orders", "basic");
     }
 
@@ -226,7 +231,7 @@ public abstract class Fixture {
         return data;
     }
 
-    public static Map<String, Object> creditCardDetails() {
+    public static HashMap<String, Object> creditCardDetails() {
         /*
         The credit card details below are for a valid proxy card usable for tests only and cannot be used for real transactions.
         DO NOT alter these details with real credit card information.
@@ -234,7 +239,11 @@ public abstract class Fixture {
         return createFixtureMap("credit_cards", "test");
     }
 
-    public static Map<String, Object> rmaFormOptions() {
+    public static HashMap<String, Object> rmaFormOptions() {
         return createFixtureMap("form_options", "rma");
+    }
+
+    public static HashMap<String, Object> referralUser() {
+        return createFixtureMap("users", "referral");
     }
 }

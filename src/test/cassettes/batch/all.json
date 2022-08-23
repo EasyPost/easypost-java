@@ -1,0 +1,92 @@
+[
+  {
+    "recordedAt": 1661456471,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/batches?page_size\u003d5"
+    },
+    "response": {
+      "body": "{\n  \"batches\": [\n    {\n      \"scan_form\": null,\n      \"created_at\": \"2022-08-18T20:38:12Z\",\n      \"pickup\": null,\n      \"shipments\": [],\n      \"label_url\": null,\n      \"mode\": \"test\",\n      \"reference\": null,\n      \"num_shipments\": 0.0,\n      \"updated_at\": \"2022-08-18T20:38:12Z\",\n      \"id\": \"batch_c891c51065294fabb519c4e1c529e728\",\n      \"state\": \"created\",\n      \"object\": \"Batch\",\n      \"status\": {\n        \"postage_purchased\": 0.0,\n        \"queued_for_purchase\": 0.0,\n        \"created\": 0.0,\n        \"postage_purchase_failed\": 0.0,\n        \"creation_failed\": 0.0\n      }\n    },\n    {\n      \"scan_form\": null,\n      \"created_at\": \"2022-08-18T20:38:13Z\",\n      \"pickup\": null,\n      \"shipments\": [],\n      \"label_url\": null,\n      \"mode\": \"test\",\n      \"reference\": null,\n      \"num_shipments\": 0.0,\n      \"updated_at\": \"2022-08-18T20:38:13Z\",\n      \"id\": \"batch_22e1465de75f4a13835e6d4063b4cdef\",\n      \"state\": \"created\",\n      \"object\": \"Batch\",\n      \"status\": {\n        \"postage_purchased\": 0.0,\n        \"queued_for_purchase\": 0.0,\n        \"created\": 0.0,\n        \"postage_purchase_failed\": 0.0,\n        \"creation_failed\": 0.0\n      }\n    },\n    {\n      \"scan_form\": null,\n      \"created_at\": \"2022-08-18T20:38:14Z\",\n      \"pickup\": null,\n      \"shipments\": [],\n      \"label_url\": null,\n      \"mode\": \"test\",\n      \"reference\": null,\n      \"num_shipments\": 0.0,\n      \"updated_at\": \"2022-08-18T20:38:14Z\",\n      \"id\": \"batch_7cc212e648a44a8d92cf65c5e5567ae0\",\n      \"state\": \"created\",\n      \"object\": \"Batch\",\n      \"status\": {\n        \"postage_purchased\": 0.0,\n        \"queued_for_purchase\": 0.0,\n        \"created\": 0.0,\n        \"postage_purchase_failed\": 0.0,\n        \"creation_failed\": 0.0\n      }\n    },\n    {\n      \"scan_form\": null,\n      \"created_at\": \"2022-08-18T20:38:15Z\",\n      \"pickup\": null,\n      \"shipments\": [\n        {\n          \"reference\": null,\n          \"batch_message\": null,\n          \"batch_status\": \"created\",\n          \"id\": \"shp_2666d45e6e5e4e6b851ea76fcc3b1df3\",\n          \"tracking_code\": null\n        }\n      ],\n      \"label_url\": null,\n      \"mode\": \"test\",\n      \"reference\": null,\n      \"num_shipments\": 1.0,\n      \"updated_at\": \"2022-08-18T20:38:15Z\",\n      \"id\": \"batch_d0d29fcacb374bea8b9e7d4abba07d6a\",\n      \"state\": \"created\",\n      \"object\": \"Batch\",\n      \"status\": {\n        \"postage_purchased\": 0.0,\n        \"queued_for_purchase\": 0.0,\n        \"created\": 1.0,\n        \"postage_purchase_failed\": 0.0,\n        \"creation_failed\": 0.0\n      }\n    },\n    {\n      \"scan_form\": null,\n      \"created_at\": \"2022-08-18T20:38:16Z\",\n      \"pickup\": null,\n      \"shipments\": [\n        {\n          \"reference\": null,\n          \"batch_message\": null,\n          \"batch_status\": \"created\",\n          \"id\": \"shp_774445e863ce4723bc35b3e0110daaab\",\n          \"tracking_code\": null\n        }\n      ],\n      \"label_url\": null,\n      \"mode\": \"test\",\n      \"reference\": null,\n      \"num_shipments\": 1.0,\n      \"updated_at\": \"2022-08-18T20:38:16Z\",\n      \"id\": \"batch_23418e12a10b4989b36187dbba8683d0\",\n      \"state\": \"created\",\n      \"object\": \"Batch\",\n      \"status\": {\n        \"postage_purchased\": 0.0,\n        \"queued_for_purchase\": 0.0,\n        \"created\": 1.0,\n        \"postage_purchase_failed\": 0.0,\n        \"creation_failed\": 0.0\n      }\n    }\n  ],\n  \"has_more\": true\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "2207"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb4nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "07323c386307d057f7dd07320008692f"
+        ],
+        "x-proxied": [
+          "extlb2nuq 9ce216bfac",
+          "intlb1nuq 6aa9972c1e"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.054775"
+        ],
+        "etag": [
+          "W/\"33383c0871df679832ee47a5bd04a6e3\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202208242214-2a3e1e3aa6-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "errors": null,
+      "uri": "https://api.easypost.com/v2/batches?page_size\u003d5"
+    },
+    "duration": 186
+  }
+]

@@ -3,6 +3,7 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Report;
 import com.easypost.model.ReportCollection;
+import com.easypost.utils.Fixture;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
