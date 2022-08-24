@@ -1,7 +1,5 @@
-package com.easypost.beta;
+package com.easypost;
 
-import com.easypost.Fixture;
-import com.easypost.TestUtils;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.EndShipper;
 import com.easypost.model.EndShipperCollection;
