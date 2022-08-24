@@ -17,7 +17,7 @@ public final class EndShipper extends BaseAddress {
     /**
      * Create EndShipper object from parameter map.
      *
-     * @param params Map of end shipper parameters.
+     * @param params Map of EndShipper parameters.
      * @return EndShipper object.
      * @throws EasyPostException when the request fails.
      */
@@ -28,7 +28,7 @@ public final class EndShipper extends BaseAddress {
     /**
      * Create EndShipper object from parameter map.
      *
-     * @param params Map of end shipper parameters.
+     * @param params Map of EndShipper parameters.
      * @param apiKey Optional API key to use for this request.
      * @return EndShipper object.
      * @throws EasyPostException when the request fails.
@@ -45,7 +45,7 @@ public final class EndShipper extends BaseAddress {
     /**
      * Retrieve EndShipper object from API.
      *
-     * @param id ID of end shipper to retrieve.
+     * @param id ID of EndShipper to retrieve.
      * @return EndShipper object.
      * @throws EasyPostException when the request fails.
      */
@@ -56,7 +56,7 @@ public final class EndShipper extends BaseAddress {
     /**
      * Retrieve EndShipper object from API.
      *
-     * @param id     ID of end shipper to retrieve.
+     * @param id     ID of EndShipper to retrieve.
      * @param apiKey API key to use in request (overrides default API key).
      * @return EndShipper object.
      * @throws EasyPostException when the request fails.
