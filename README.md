@@ -15,7 +15,7 @@ Add this to your project's POM:
 <dependency>
   <groupId>com.easypost</groupId>
   <artifactId>easypost-api-client</artifactId>
-  <version>5.8.1</version>
+  <version>5.9.0</version>
 </dependency>
 ```
 
