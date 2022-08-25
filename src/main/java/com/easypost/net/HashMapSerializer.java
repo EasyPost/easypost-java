@@ -12,17 +12,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
- * This class is needed to override how HashMaps are serialized to JSON by the Gson library.
- * Specifically, this needs to on-the-fly convert Fixture class objects
+ * This class overrides how HashMaps are serialized to JSON by the Gson library.
+ *
+ * Effectively every JSON body for every HTTP call will flow through this serializer.
+ *
+ * The reason this custom ruleset is needed is for testing purposes, to on-the-fly convert Fixture class objects
  * (the data maps generated for fixtures used in unit tests) back into HashMaps.
  * Without this, Fixture classes will not serialize properly, causing the final JSON body to be empty.
  */
 public final class HashMapSerializer implements JsonSerializer<HashMap<String, Object>> {
 
+    /**
+     * Check if an object is an anonymous subclass of Fixture.
+     * @param object The object to check.
+     * @return True if the object is an anonymous subclass of Fixture, false otherwise.
+     */
     private boolean isFixture(Object object) {
         return object.getClass().getName().startsWith("com.easypost.utils.Fixture");
     }
 
+    /**
+     * Checks if an object is a primitive type, including null.
+     * @param object the object to check
+     * @return true if the object is a primitive type, false otherwise
+     */
     private boolean isPrimitive(Object object) {
         if (object == null) {
             return true;
@@ -31,6 +44,12 @@ public final class HashMapSerializer implements JsonSerializer<HashMap<String, O
                 object instanceof Double;
     }
 
+    /**
+     * Converts a Fixture class object into an ArrayList.
+     * @param fixture The Fixture class object to convert.
+     * @return An ArrayList representation of the Fixture class object.
+     */
+    @SuppressWarnings ("unchecked")
     private ArrayList<Object> fixtureToArrayList(Object fixture) {
         ArrayList<Object> arrayList = (ArrayList<Object>) fixture;
 
@@ -44,6 +63,12 @@ public final class HashMapSerializer implements JsonSerializer<HashMap<String, O
         return newArrayList;
     }
 
+    /**
+     * Converts a Fixture class object into a HashMap.
+     * @param fixture The Fixture class object to convert.
+     * @return A HashMap representation of the Fixture class object.
+     */
+    @SuppressWarnings ("unchecked")
     private HashMap<String, Object> fixtureToHashMap(Object fixture) {
         Type type = fixture.getClass().getGenericSuperclass();
         Map<String, Object> fixtureMap = (Map<String, Object>) fixture;
@@ -60,6 +85,11 @@ public final class HashMapSerializer implements JsonSerializer<HashMap<String, O
         return hashMap;
     }
 
+    /**
+     * Converts a Fixture class object into a HashMap or ArrayList if needed.
+     * @param fixture The object to analyze and potentially convert.
+     * @return The converted object, or the original object if no conversion was needed.
+     */
     private Object fixtureToObject(Object fixture) {
         if (isPrimitive(fixture)) {
             return fixture;
@@ -74,18 +104,17 @@ public final class HashMapSerializer implements JsonSerializer<HashMap<String, O
         }
     }
 
+    /**
+     * Convert any fixtures in a hash map to their corresponding objects.
+     * @param hashMap the hash map to scrub
+     * @return the scrubbed hash map
+     */
+    @SuppressWarnings ("unchecked")
     private HashMap<String, Object> removeFixturesFromHashMap(HashMap<String, Object> hashMap) {
         HashMap<String, Object> newHashMap = new HashMap<>();
         for (Map.Entry<String, Object> entry : hashMap.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-
-            /*
-            if (isPrimitive(value)) {
-                newHashMap.put(key, value);
-                continue;
-            }
-             */
 
             value = fixtureToObject(value);
 
@@ -100,16 +129,15 @@ public final class HashMapSerializer implements JsonSerializer<HashMap<String, O
         return newHashMap;
     }
 
+    /**
+     * Convert any fixtures in an array list to their corresponding objects.
+     * @param arrayList the array list to scrub
+     * @return the scrubbed array list
+     */
+    @SuppressWarnings ("unchecked")
     private ArrayList<Object> removeFixturesFromArrayList(ArrayList<Object> arrayList) {
         ArrayList<Object> newArrayList = new ArrayList<>();
         for (Object object : arrayList) {
-
-            /*
-            if (isPrimitive(object)) {
-                newArrayList.add(object);
-                continue;
-            }
-             */
 
             object = fixtureToObject(object);
 
