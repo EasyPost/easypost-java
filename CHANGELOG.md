@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## v5.9.0 (2022-08-25)
 
+- Moves EndShipper out of beta into the general library namespace
 - Removes the unusable `ParcelCollection` and `all` function of the Parcel object
 
 ## v5.8.1 (2022-08-03)
