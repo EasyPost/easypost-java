@@ -1,9 +1,8 @@
-package com.easypost.beta;
+package com.easypost;
 
-import com.easypost.Fixture;
-import com.easypost.TestUtils;
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.beta.EndShipper;
+import com.easypost.model.EndShipper;
+import com.easypost.model.EndShipperCollection;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +12,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class EndShipperTest {
@@ -82,9 +82,12 @@ public final class EndShipperTest {
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixture.pageSize());
 
-        List<EndShipper> endShippers = EndShipper.all(params);
+        EndShipperCollection endShipperCollection = EndShipper.all(params);
+
+        List<EndShipper> endShippers = endShipperCollection.getEndShippers();
 
         assertTrue(endShippers.size() <= Fixture.pageSize());
+        assertNotNull(endShipperCollection.getHasMore());
         assertTrue(endShippers.stream().allMatch(endShipper -> endShipper instanceof EndShipper));
     }
 
