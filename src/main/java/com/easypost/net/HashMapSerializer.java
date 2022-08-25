@@ -13,10 +13,11 @@ import java.util.Map;
 
 /*
  * This class is needed to override how HashMaps are serialized to JSON by the Gson library.
- * Specifically, this needs to on-the-fly convert Fixture class objects (the data maps generated for fixtures used in unit tests) back into HashMaps.
+ * Specifically, this needs to on-the-fly convert Fixture class objects
+ * (the data maps generated for fixtures used in unit tests) back into HashMaps.
  * Without this, Fixture classes will not serialize properly, causing the final JSON body to be empty.
  */
-public class HashMapSerializer implements JsonSerializer<HashMap<String, Object>> {
+public final class HashMapSerializer implements JsonSerializer<HashMap<String, Object>> {
 
     private boolean isFixture(Object object) {
         return object.getClass().getName().startsWith("com.easypost.utils.Fixture");
@@ -26,7 +27,8 @@ public class HashMapSerializer implements JsonSerializer<HashMap<String, Object>
         if (object == null) {
             return true;
         }
-        return object instanceof String || object instanceof Integer || object instanceof Boolean || object instanceof Double;
+        return object instanceof String || object instanceof Integer || object instanceof Boolean ||
+                object instanceof Double;
     }
 
     private ArrayList<Object> fixtureToArrayList(Object fixture) {

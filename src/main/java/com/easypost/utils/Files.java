@@ -19,6 +19,12 @@ public abstract class Files {
         }
     }
 
+    /**
+     * Read the contents of a file.
+     *
+     * @param path The path to the file
+     * @return The contents of the file
+     */
     public static String readFile(Path path) {
         List<String> data;
         try {

@@ -110,13 +110,13 @@ public final class ReferralTest {
 
         Map<String, Object> creditCardDetails = Fixture.creditCardDetails();
         PaymentMethodObject creditCard =
-                ReferralCustomer.addCreditCardToUser(referralUserKey(), (String)creditCardDetails.get("number"),
-                        Integer.parseInt((String)creditCardDetails.get("expiration_month")),
-                        Integer.parseInt((String)creditCardDetails.get("expiration_year")), (String)creditCardDetails.get("cvc"),
-                        PaymentMethod.Priority.PRIMARY);
+                ReferralCustomer.addCreditCardToUser(referralUserKey(), (String) creditCardDetails.get("number"),
+                        Integer.parseInt((String) creditCardDetails.get("expiration_month")),
+                        Integer.parseInt((String) creditCardDetails.get("expiration_year")),
+                        (String) creditCardDetails.get("cvc"), PaymentMethod.Priority.PRIMARY);
 
         assertInstanceOf(PaymentMethodObject.class, creditCard);
         assertTrue(creditCard.getId().startsWith("card_"));
-        assertEquals(((String)Fixture.creditCardDetails().get("number")).substring(12), creditCard.getLast4());
+        assertEquals(((String) Fixture.creditCardDetails().get("number")).substring(12), creditCard.getLast4());
     }
 }

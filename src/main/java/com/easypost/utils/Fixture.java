@@ -19,9 +19,9 @@ import java.util.Map;
 import static com.easypost.utils.Files.getSourceFileDirectory;
 import static com.easypost.utils.Files.readFile;
 
-
 /*
- * This class needs to exist in the main package (rather than the test package) because this class needs to be referenced in the `HashMapSerializer`.
+ * This class needs to exist in the main package (rather than the test package)
+ * because this class needs to be referenced in the `HashMapSerializer`.
  */
 public abstract class Fixture {
 
@@ -98,28 +98,58 @@ public abstract class Fixture {
         return createFixture(keyPath);
     }
 
+    /**
+     * Get the default page size for the API.
+     *
+     * @return The default page size for the API
+     */
     public static int pageSize() {
         return createFixtureInt("page_sizes", "five_results");
     }
 
+    /**
+     * Get the default USPS carrier account ID.
+     *
+     * @return The default USPS carrier account ID
+     */
     public static String uspsCarrierAccountID() {
         // Fallback to the EasyPost Java Client Library Test User USPS carrier account
         return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID") :
                 "ca_f09befdb2e9c410e95c7622ea912c18c";
     }
 
+    /**
+     * Get the USPS carrier name.
+     *
+     * @return The USPS carrier name
+     */
     public static String usps() {
         return createFixtureString("carrier_strings", "usps");
     }
 
+    /**
+     * Get the default USPS service level.
+     *
+     * @return The default USPS service level
+     */
     public static String uspsService() {
         return createFixtureString("service_names", "usps", "first_service");
     }
 
+    /**
+     * Get the default pickup service level.
+     *
+     * @return The default pickup service level
+     */
     public static String pickupService() {
         return createFixtureString("service_names", "usps", "pickup_service");
     }
 
+    /**
+     * Get the default pickup date.
+     *
+     * @return The default pickup date
+     */
     public static String pickupDate() {
         /*
         If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
@@ -128,58 +158,128 @@ public abstract class Fixture {
         return "2022-08-30";
     }
 
+    /**
+     * Get the default report type.
+     *
+     * @return The default report type
+     */
     public static String reportType() {
         return createFixtureString("report_types", "shipment");
     }
 
+    /**
+     * Get the default report date.
+     *
+     * @return The default report date
+     */
     public static String reportDate() {
         return "2022-05-04";
     }
 
+    /**
+     * Get the default report prefix.
+     *
+     * @return The default report prefix
+     */
     public static String reportIdPrefix() {
         return "shprep_";
     }
 
+    /**
+     * Get the default webhook URL.
+     *
+     * @return The default webhook URL
+     */
     public static String webhookUrl() {
         return createFixtureString("webhook_url");
     }
 
+    /**
+     * Get the first default address.
+     *
+     * @return The first default address
+     */
     public static HashMap<String, Object> caAddress1() {
         return createFixtureMap("addresses", "ca_address_1");
     }
 
+    /**
+     * Get the second default address.
+     *
+     * @return The second default address
+     */
     public static HashMap<String, Object> caAddress2() {
         return createFixtureMap("addresses", "ca_address_2");
     }
 
+    /**
+     * Get the default incorrect address.
+     *
+     * @return The default incorrect address
+     */
     public static HashMap<String, Object> incorrectAddress() {
         return createFixtureMap("addresses", "incorrect");
     }
 
+    /**
+     * Get the default parcel.
+     *
+     * @return The default parcel
+     */
     public static HashMap<String, Object> basicParcel() {
         return createFixtureMap("parcels", "basic");
     }
 
+    /**
+     * Get the default customs item.
+     *
+     * @return The default customs item
+     */
     public static HashMap<String, Object> basicCustomsItem() {
         return createFixtureMap("customs_items", "basic");
     }
 
+    /**
+     * Get the default customs info.
+     *
+     * @return The default customs info
+     */
     public static HashMap<String, Object> basicCustomsInfo() {
         return createFixtureMap("customs_infos", "basic");
     }
 
+    /**
+     * Get the default tax identifier.
+     *
+     * @return The default tax identifier
+     */
     public static HashMap<String, Object> taxIdentifier() {
         return createFixtureMap("tax_identifiers", "basic");
     }
 
+    /**
+     * Get the default shipment.
+     *
+     * @return The default shipment
+     */
     public static HashMap<String, Object> basicShipment() {
         return createFixtureMap("shipments", "basic_domestic");
     }
 
+    /**
+     * Get the default full shipment.
+     *
+     * @return The default full shipment
+     */
     public static HashMap<String, Object> fullShipment() {
         return createFixtureMap("shipments", "full");
     }
 
+    /**
+     * Get the default one-call-buy shipment.
+     *
+     * @return The default one-call-buy shipment
+     */
     public static HashMap<String, Object> oneCallBuyShipment() {
         return new HashMap<String, Object>() {{
             put("to_address", caAddress1());
@@ -193,6 +293,11 @@ public abstract class Fixture {
         }};
     }
 
+    /**
+     * Get the default pickup.
+     *
+     * @return The default pickup
+     */
     public static HashMap<String, Object> basicPickup() {
         HashMap<String, Object> fixture = createFixtureMap("pickups", "basic");
 
@@ -202,10 +307,20 @@ public abstract class Fixture {
         return fixture;
     }
 
+    /**
+     * Get the default carrier account.
+     *
+     * @return The default carrier account
+     */
     public static HashMap<String, Object> basicCarrierAccount() {
         return createFixtureMap("carrier_accounts", "basic");
     }
 
+    /**
+     * Get the default insurance.
+     *
+     * @return The default insurance
+     */
     public static HashMap<String, Object> basicInsurance() {
         /*
         This fixture will require you to append a `tracking_code` key with the shipment's tracking code.
@@ -213,10 +328,20 @@ public abstract class Fixture {
         return createFixtureMap("insurances", "basic");
     }
 
+    /**
+     * Get the default order.
+     *
+     * @return The default order
+     */
     public static HashMap<String, Object> basicOrder() {
         return createFixtureMap("orders", "basic");
     }
 
+    /**
+     * Get the bytes of the default event webhook body.
+     *
+     * @return The bytes of the default event webhook body
+     */
     public static byte[] eventBytes() {
         String relativeFilePath = "examples/official/fixtures/event-body.json";
         String fullFilePath = Paths.get(getSourceFileDirectory(), relativeFilePath).toString();
@@ -231,18 +356,34 @@ public abstract class Fixture {
         return data;
     }
 
+    /**
+     * Get the default credit card details.
+     *
+     * @return The default credit card details
+     */
     public static HashMap<String, Object> creditCardDetails() {
         /*
-        The credit card details below are for a valid proxy card usable for tests only and cannot be used for real transactions.
+        The credit card details below are for a valid proxy card usable for tests only
+        and cannot be used for real transactions.
         DO NOT alter these details with real credit card information.
          */
         return createFixtureMap("credit_cards", "test");
     }
 
+    /**
+     * Get the default RMA form options.
+     *
+     * @return The default RMA form options
+     */
     public static HashMap<String, Object> rmaFormOptions() {
         return createFixtureMap("form_options", "rma");
     }
 
+    /**
+     * Get the default referral user.
+     *
+     * @return The default referral user
+     */
     public static HashMap<String, Object> referralUser() {
         return createFixtureMap("users", "referral");
     }
