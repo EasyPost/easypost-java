@@ -146,19 +146,6 @@ public abstract class Fixture {
     }
 
     /**
-     * Get the default pickup date.
-     *
-     * @return The default pickup date
-     */
-    public static String pickupDate() {
-        /*
-        If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
-        USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
-         */
-        return "2022-08-30";
-    }
-
-    /**
      * Get the default report type.
      *
      * @return The default report type
@@ -301,8 +288,14 @@ public abstract class Fixture {
     public static HashMap<String, Object> basicPickup() {
         HashMap<String, Object> fixture = createFixtureMap("pickups", "basic");
 
-        fixture.put("min_datetime", pickupDate());
-        fixture.put("max_datetime", pickupDate());
+        /*
+        If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
+        USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
+         */
+        String pickupDate = "2022-08-30";
+
+        fixture.put("min_datetime", pickupDate);
+        fixture.put("max_datetime", pickupDate);
 
         return fixture;
     }

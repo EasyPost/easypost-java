@@ -19,7 +19,7 @@ install-checkstyle:
 	wget -O checkstyle.jar -q https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.3.1/checkstyle-10.3.1-all.jar
 
 ## install-dev - Install dev requirements
-install-dev:
+install:
 	git submodule init
 	git submodule update
 

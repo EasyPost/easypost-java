@@ -90,10 +90,6 @@ Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_G
 ### Tests
 
 ```bash
-# Update submodules
-git submodule init
-git submodule update --remote
-
 # Build project
 make build
 
@@ -108,6 +104,10 @@ EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make coverage
 
 # Run security analysis
 make scan
+
+# Update submodules
+git submodule init
+git submodule update --remote
 ```
 
 ### Testing

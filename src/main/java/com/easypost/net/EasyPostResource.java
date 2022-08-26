@@ -59,7 +59,6 @@ public abstract class EasyPostResource {
     public static final String EASYPOST_SUPPORT_EMAIL = "support@easypost.com";
     public static final Gson GSON =
             new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                    .serializeNulls()
                     .registerTypeAdapter(HashMap.class, new HashMapSerializer())
                     .registerTypeAdapter(Event.class, new EventDeserializer())
                     .registerTypeAdapter(Rate.class, new RateDeserializer())
