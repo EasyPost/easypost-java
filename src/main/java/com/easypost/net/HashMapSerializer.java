@@ -19,21 +19,21 @@ import java.util.Map;
 public final class HashMapSerializer implements JsonSerializer<HashMap<String, Object>> {
 
     /**
-     * Convert any fixtures in a hash map to their corresponding objects.
+     * Clean a hash map.
      * @param hashMap the hash map to scrub
      * @return the scrubbed hash map
      */
     @SuppressWarnings ("unchecked")
-    private HashMap<String, Object> removeFixturesFromHashMap(HashMap<String, Object> hashMap) {
+    private HashMap<String, Object> cleanHashMap(HashMap<String, Object> hashMap) {
         HashMap<String, Object> newHashMap = new HashMap<>();
         for (Map.Entry<String, Object> entry : hashMap.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
 
             if (value instanceof HashMap) {
-                value = removeFixturesFromHashMap((HashMap<String, Object>) value);
+                value = cleanHashMap((HashMap<String, Object>) value);
             } else if (value instanceof ArrayList) {
-                value = removeFixturesFromArrayList((ArrayList<Object>) value);
+                value = cleanArrayList((ArrayList<Object>) value);
             }
 
             newHashMap.put(key, value);
@@ -42,19 +42,19 @@ public final class HashMapSerializer implements JsonSerializer<HashMap<String, O
     }
 
     /**
-     * Convert any fixtures in an array list to their corresponding objects.
+     * Clean an array list.
      * @param arrayList the array list to scrub
      * @return the scrubbed array list
      */
     @SuppressWarnings ("unchecked")
-    private ArrayList<Object> removeFixturesFromArrayList(ArrayList<Object> arrayList) {
+    private ArrayList<Object> cleanArrayList(ArrayList<Object> arrayList) {
         ArrayList<Object> newArrayList = new ArrayList<>();
         for (Object object : arrayList) {
 
             if (object instanceof HashMap) {
-                object = removeFixturesFromHashMap((HashMap<String, Object>) object);
+                object = cleanHashMap((HashMap<String, Object>) object);
             } else if (object instanceof ArrayList) {
-                object = removeFixturesFromArrayList((ArrayList<Object>) object);
+                object = cleanArrayList((ArrayList<Object>) object);
             }
 
             newArrayList.add(object);
@@ -68,7 +68,7 @@ public final class HashMapSerializer implements JsonSerializer<HashMap<String, O
 
         Gson gson = new Gson();
 
-        HashMap<String, Object> cleanedHashMap = removeFixturesFromHashMap(src);
+        HashMap<String, Object> cleanedHashMap = cleanHashMap(src);
 
         for (Map.Entry<String, Object> entry : cleanedHashMap.entrySet()) {
             String key = entry.getKey();
