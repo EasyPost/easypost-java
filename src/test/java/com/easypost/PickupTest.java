@@ -4,7 +4,6 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.model.Pickup;
 import com.easypost.model.PickupRate;
 import com.easypost.model.Shipment;
-import com.easypost.utils.Fixture;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

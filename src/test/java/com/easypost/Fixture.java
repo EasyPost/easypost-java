@@ -1,7 +1,7 @@
-package com.easypost.utils;
+package com.easypost;
 
+import com.easypost.fixtures.FixtureData;
 import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
@@ -11,91 +11,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
-import static com.easypost.utils.Files.getSourceFileDirectory;
-import static com.easypost.utils.Files.readFile;
+import static com.easypost.TestUtils.getSourceFileDirectory;
+import static com.easypost.TestUtils.readFile;
 
-/*
- * This class needs to exist in the main package (rather than the test package)
- * because this class needs to be referenced in the `HashMapSerializer`.
- */
 public abstract class Fixture {
-
     private static String readFixtureData() {
         Path fixtureDataPath =
                 Paths.get(getSourceFileDirectory(), "examples/official/fixtures/client-library-fixtures.json");
         return readFile(fixtureDataPath);
     }
 
-    private static HashMap<String, Object> createFixture(String data) {
-        Gson gson = new Gson();
-        Type type = new TypeToken<HashMap<String, Object>>() {}.getType();
-        return gson.fromJson(data, type);
-    }
-
-    private static HashMap<String, Object> createFixture(String... keyPath) {
+    private static FixtureData getFixtureData() {
         // load fixture data as a JSON string
         String fixtureData = readFixtureData();
         if (fixtureData == null) {
             return null;
         }
 
-        // parse fixture data as a JSON object
         Gson gson = new Gson();
-        Type linkedTreeMapType = new TypeToken<LinkedTreeMap<String, Object>>() {}.getType();
-
-        // traverse the fixture data to find the requested fixture
-        LinkedTreeMap<String, Object> fixture = gson.fromJson(fixtureData, linkedTreeMapType);
-        for (String key : keyPath) {
-            if (fixture.containsKey(key)) {
-                fixture = (LinkedTreeMap<String, Object>) fixture.get(key);
-            } else {
-                return null;
-            }
-        }
-
-        String fixtureJson = gson.toJson(fixture, linkedTreeMapType);
-
-        Type hashMapType = new TypeToken<HashMap<String, Object>>() {}.getType();
-        return gson.fromJson(fixtureJson, hashMapType);
-    }
-
-    private static int createFixtureInt(String... keyPath) {
-        String lastKey = keyPath[keyPath.length - 1];
-        List<String> beginningKeys = new ArrayList<>(Arrays.asList(keyPath)).subList(0, keyPath.length - 1);
-        Map<String, Object> fixture = createFixture(beginningKeys.toArray(new String[0]));
-
-        if (fixture == null) {
-            // not a fan of this default value
-            return 0;
-        }
-        if (fixture.containsKey(lastKey)) {
-            return ((Double) fixture.get(lastKey)).intValue();
-        }
-        return 0;
-    }
-
-    private static String createFixtureString(String... keyPath) {
-        String lastKey = keyPath[keyPath.length - 1];
-        List<String> beginningKeys = new ArrayList<>(Arrays.asList(keyPath)).subList(0, keyPath.length - 1);
-        HashMap<String, Object> fixture = createFixture(beginningKeys.toArray(new String[0]));
-
-        if (fixture == null) {
-            // not a fan of this default value
-            return "";
-        }
-        if (fixture.containsKey(lastKey)) {
-            return (String) fixture.get(lastKey);
-        }
-        return "";
-    }
-
-    private static HashMap<String, Object> createFixtureMap(String... keyPath) {
-        return createFixture(keyPath);
+        Type type = new TypeToken<FixtureData>() {}.getType();
+        return gson.fromJson(fixtureData, type);
     }
 
     /**
@@ -104,7 +42,7 @@ public abstract class Fixture {
      * @return The default page size for the API
      */
     public static int pageSize() {
-        return createFixtureInt("page_sizes", "five_results");
+        return Objects.requireNonNull(getFixtureData()).pageSizes.five;
     }
 
     /**
@@ -124,7 +62,7 @@ public abstract class Fixture {
      * @return The USPS carrier name
      */
     public static String usps() {
-        return createFixtureString("carrier_strings", "usps");
+        return Objects.requireNonNull(getFixtureData()).carrierStrings.usps;
     }
 
     /**
@@ -133,7 +71,7 @@ public abstract class Fixture {
      * @return The default USPS service level
      */
     public static String uspsService() {
-        return createFixtureString("service_names", "usps", "first_service");
+        return Objects.requireNonNull(getFixtureData()).serviceNames.usps.firstService;
     }
 
     /**
@@ -142,7 +80,7 @@ public abstract class Fixture {
      * @return The default pickup service level
      */
     public static String pickupService() {
-        return createFixtureString("service_names", "usps", "pickup_service");
+        return Objects.requireNonNull(getFixtureData()).serviceNames.usps.pickupService;
     }
 
     /**
@@ -151,7 +89,7 @@ public abstract class Fixture {
      * @return The default report type
      */
     public static String reportType() {
-        return createFixtureString("report_types", "shipment");
+        return Objects.requireNonNull(getFixtureData()).reportTypes.shipment;
     }
 
     /**
@@ -178,7 +116,7 @@ public abstract class Fixture {
      * @return The default webhook URL
      */
     public static String webhookUrl() {
-        return createFixtureString("webhook_url");
+        return Objects.requireNonNull(getFixtureData()).webhookUrl;
     }
 
     /**
@@ -187,7 +125,7 @@ public abstract class Fixture {
      * @return The first default address
      */
     public static HashMap<String, Object> caAddress1() {
-        return createFixtureMap("addresses", "ca_address_1");
+        return Objects.requireNonNull(getFixtureData()).addresses.caAddress1;
     }
 
     /**
@@ -196,7 +134,7 @@ public abstract class Fixture {
      * @return The second default address
      */
     public static HashMap<String, Object> caAddress2() {
-        return createFixtureMap("addresses", "ca_address_2");
+        return Objects.requireNonNull(getFixtureData()).addresses.caAddress2;
     }
 
     /**
@@ -205,7 +143,7 @@ public abstract class Fixture {
      * @return The default incorrect address
      */
     public static HashMap<String, Object> incorrectAddress() {
-        return createFixtureMap("addresses", "incorrect");
+        return Objects.requireNonNull(getFixtureData()).addresses.incorrectAddress;
     }
 
     /**
@@ -214,7 +152,7 @@ public abstract class Fixture {
      * @return The default parcel
      */
     public static HashMap<String, Object> basicParcel() {
-        return createFixtureMap("parcels", "basic");
+        return Objects.requireNonNull(getFixtureData()).parcels.basic;
     }
 
     /**
@@ -223,7 +161,7 @@ public abstract class Fixture {
      * @return The default customs item
      */
     public static HashMap<String, Object> basicCustomsItem() {
-        return createFixtureMap("customs_items", "basic");
+        return Objects.requireNonNull(getFixtureData()).customsItems.basic;
     }
 
     /**
@@ -232,7 +170,7 @@ public abstract class Fixture {
      * @return The default customs info
      */
     public static HashMap<String, Object> basicCustomsInfo() {
-        return createFixtureMap("customs_infos", "basic");
+        return Objects.requireNonNull(getFixtureData()).customsInfos.basic;
     }
 
     /**
@@ -241,7 +179,7 @@ public abstract class Fixture {
      * @return The default tax identifier
      */
     public static HashMap<String, Object> taxIdentifier() {
-        return createFixtureMap("tax_identifiers", "basic");
+        return Objects.requireNonNull(getFixtureData()).taxIdentifiers.basic;
     }
 
     /**
@@ -250,7 +188,7 @@ public abstract class Fixture {
      * @return The default shipment
      */
     public static HashMap<String, Object> basicShipment() {
-        return createFixtureMap("shipments", "basic_domestic");
+        return Objects.requireNonNull(getFixtureData()).shipments.basicDomestic;
     }
 
     /**
@@ -259,7 +197,7 @@ public abstract class Fixture {
      * @return The default full shipment
      */
     public static HashMap<String, Object> fullShipment() {
-        return createFixtureMap("shipments", "full");
+        return Objects.requireNonNull(getFixtureData()).shipments.full;
     }
 
     /**
@@ -286,7 +224,7 @@ public abstract class Fixture {
      * @return The default pickup
      */
     public static HashMap<String, Object> basicPickup() {
-        HashMap<String, Object> fixture = createFixtureMap("pickups", "basic");
+        HashMap<String, Object> fixture = Objects.requireNonNull(getFixtureData()).pickups.basic;
 
         /*
         If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
@@ -306,7 +244,7 @@ public abstract class Fixture {
      * @return The default carrier account
      */
     public static HashMap<String, Object> basicCarrierAccount() {
-        return createFixtureMap("carrier_accounts", "basic");
+        return Objects.requireNonNull(getFixtureData()).carrierAccounts.basic;
     }
 
     /**
@@ -318,7 +256,7 @@ public abstract class Fixture {
         /*
         This fixture will require you to append a `tracking_code` key with the shipment's tracking code.
          */
-        return createFixtureMap("insurances", "basic");
+        return Objects.requireNonNull(getFixtureData()).insurances.basic;
     }
 
     /**
@@ -327,7 +265,7 @@ public abstract class Fixture {
      * @return The default order
      */
     public static HashMap<String, Object> basicOrder() {
-        return createFixtureMap("orders", "basic");
+        return Objects.requireNonNull(getFixtureData()).orders.basic;
     }
 
     /**
@@ -360,7 +298,7 @@ public abstract class Fixture {
         and cannot be used for real transactions.
         DO NOT alter these details with real credit card information.
          */
-        return createFixtureMap("credit_cards", "test");
+        return Objects.requireNonNull(getFixtureData()).creditCards.test;
     }
 
     /**
@@ -369,7 +307,7 @@ public abstract class Fixture {
      * @return The default RMA form options
      */
     public static HashMap<String, Object> rmaFormOptions() {
-        return createFixtureMap("form_options", "rma");
+        return Objects.requireNonNull(getFixtureData()).formOptions.rma;
     }
 
     /**
@@ -378,6 +316,6 @@ public abstract class Fixture {
      * @return The default referral user
      */
     public static HashMap<String, Object> referralUser() {
-        return createFixtureMap("users", "referral");
+        return Objects.requireNonNull(getFixtureData()).users.referral;
     }
 }

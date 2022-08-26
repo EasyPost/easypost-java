@@ -16,4 +16,7 @@
     <!-- Don't do any CheckStyle checks on any non-Java files. -->
     <suppress files=".+\.(?:txt|xml|csv|sh|thrift|html|sql|eot|ttf|woff|css|png)$"
               checks=".*"/>
+    <!-- Don't enforce VisibilityModifier on any com.easypost.fixtures files. -->
+    <suppress checks="VisibilityModifier"
+              files="com[\\/]easypost[\\/]fixtures[\\/]"/>
 </suppressions>

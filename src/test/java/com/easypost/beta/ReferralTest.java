@@ -1,12 +1,12 @@
 package com.easypost.beta;
 
+import com.easypost.Fixture;
 import com.easypost.TestUtils;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.beta.ReferralCustomer;
 import com.easypost.model.beta.ReferralCustomerCollection;
-import com.easypost.utils.Fixture;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
