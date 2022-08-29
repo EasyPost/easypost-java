@@ -64,7 +64,7 @@ public final class WebhookTest {
 
         assertInstanceOf(Webhook.class, webhook);
         assertTrue(webhook.getId().startsWith("hook_"));
-        assertEquals(Fixture.webhookUrl(), webhook.getUrl());
+        assertEquals(Fixtures.webhookUrl(), webhook.getUrl());
     }
 
     /**
@@ -74,7 +74,7 @@ public final class WebhookTest {
      */
     private static Webhook createBasicWebhook() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
-        params.put("url", Fixture.webhookUrl());
+        params.put("url", Fixtures.webhookUrl());
 
         Webhook webhook = Webhook.create(params);
         testWebhookId = webhook.getId(); // trigger deletion after test
@@ -162,7 +162,7 @@ public final class WebhookTest {
             }
         };
 
-        Event event = Webhook.validateWebhook(Fixture.eventBytes(), headers, webhookSecret);
+        Event event = Webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
 
         assertEquals("batch.created", event.getDescription());
     }
@@ -180,7 +180,7 @@ public final class WebhookTest {
         };
 
         assertThrows(EasyPostException.class, () -> {
-            Webhook.validateWebhook(Fixture.eventBytes(), headers, webhookSecret);
+            Webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
         });
     }
 
@@ -197,7 +197,7 @@ public final class WebhookTest {
         };
 
         assertThrows(EasyPostException.class, () -> {
-            Webhook.validateWebhook(Fixture.eventBytes(), headers, webhookSecret);
+            Webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
         });
     }
 }

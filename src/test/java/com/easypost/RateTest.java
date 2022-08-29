@@ -31,7 +31,7 @@ public final class RateTest {
     public void testRetrieve() throws EasyPostException {
         vcr.setUpTest("retrieve");
 
-        Shipment shipment = Shipment.create(Fixture.basicShipment());
+        Shipment shipment = Shipment.create(Fixtures.basicShipment());
         Rate rate = shipment.getRates().get(0);
 
         Rate retrievedRate = Rate.retrieve(rate.getId());

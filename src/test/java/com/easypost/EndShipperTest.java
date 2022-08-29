@@ -50,7 +50,7 @@ public final class EndShipperTest {
      * @return EndShipper object.
      */
     private static EndShipper createEndShipper() throws EasyPostException {
-        return EndShipper.create(Fixture.caAddress1());
+        return EndShipper.create(Fixtures.caAddress1());
     }
 
     /**
@@ -80,13 +80,13 @@ public final class EndShipperTest {
         vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
-        params.put("page_size", Fixture.pageSize());
+        params.put("page_size", Fixtures.pageSize());
 
         EndShipperCollection endShipperCollection = EndShipper.all(params);
 
         List<EndShipper> endShippers = endShipperCollection.getEndShippers();
 
-        assertTrue(endShippers.size() <= Fixture.pageSize());
+        assertTrue(endShippers.size() <= Fixtures.pageSize());
         assertNotNull(endShipperCollection.getHasMore());
         assertTrue(endShippers.stream().allMatch(endShipper -> endShipper instanceof EndShipper));
     }

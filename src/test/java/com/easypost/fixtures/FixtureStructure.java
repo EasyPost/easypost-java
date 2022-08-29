@@ -1,25 +1,25 @@
 package com.easypost.fixtures;
 
-import com.easypost.fixtures.sections.Addresses;
-import com.easypost.fixtures.sections.CarrierAccounts;
-import com.easypost.fixtures.sections.CarrierStrings;
-import com.easypost.fixtures.sections.CreditCards;
-import com.easypost.fixtures.sections.CustomsInfos;
-import com.easypost.fixtures.sections.CustomsItems;
-import com.easypost.fixtures.sections.FormOptions;
-import com.easypost.fixtures.sections.Insurances;
-import com.easypost.fixtures.sections.Orders;
-import com.easypost.fixtures.sections.PageSizes;
-import com.easypost.fixtures.sections.Parcels;
-import com.easypost.fixtures.sections.Pickups;
-import com.easypost.fixtures.sections.ReportTypes;
-import com.easypost.fixtures.sections.ServiceNames;
-import com.easypost.fixtures.sections.Shipments;
-import com.easypost.fixtures.sections.TaxIdentifiers;
-import com.easypost.fixtures.sections.Users;
+import com.easypost.fixtures.components.Addresses;
+import com.easypost.fixtures.components.CarrierAccounts;
+import com.easypost.fixtures.components.CarrierStrings;
+import com.easypost.fixtures.components.CreditCards;
+import com.easypost.fixtures.components.CustomsInfos;
+import com.easypost.fixtures.components.CustomsItems;
+import com.easypost.fixtures.components.FormOptions;
+import com.easypost.fixtures.components.Insurances;
+import com.easypost.fixtures.components.Orders;
+import com.easypost.fixtures.components.PageSizes;
+import com.easypost.fixtures.components.Parcels;
+import com.easypost.fixtures.components.Pickups;
+import com.easypost.fixtures.components.ReportTypes;
+import com.easypost.fixtures.components.ServiceNames;
+import com.easypost.fixtures.components.Shipments;
+import com.easypost.fixtures.components.TaxIdentifiers;
+import com.easypost.fixtures.components.Users;
 import com.google.gson.annotations.SerializedName;
 
-public final class FixtureData {
+public final class FixtureStructure {
 
     @SerializedName ("addresses")
     public Addresses addresses;

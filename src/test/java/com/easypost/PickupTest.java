@@ -56,9 +56,9 @@ public final class PickupTest {
      * @return Pickup object
      */
     private static Pickup createBasicPickup() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment());
 
-        Map<String, Object> pickupData = Fixture.basicPickup();
+        Map<String, Object> pickupData = Fixtures.basicPickup();
         pickupData.put("shipment", shipment);
 
         return Pickup.create(pickupData);
@@ -93,8 +93,8 @@ public final class PickupTest {
         Pickup pickup = createBasicPickup();
 
         Map<String, Object> params = new HashMap<>();
-        params.put("carrier", Fixture.usps());
-        params.put("service", Fixture.pickupService());
+        params.put("carrier", Fixtures.usps());
+        params.put("service", Fixtures.pickupService());
 
         Pickup boughtPickup = pickup.buy(params);
 
@@ -116,8 +116,8 @@ public final class PickupTest {
         Pickup pickup = createBasicPickup();
 
         Map<String, Object> params = new HashMap<>();
-        params.put("carrier", Fixture.usps());
-        params.put("service", Fixture.pickupService());
+        params.put("carrier", Fixtures.usps());
+        params.put("service", Fixtures.pickupService());
         Pickup boughtPickup = pickup.buy(params);
 
         Pickup cancelledPickup = boughtPickup.cancel();

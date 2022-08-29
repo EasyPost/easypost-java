@@ -55,13 +55,13 @@ public final class RefundTest {
      * @return List of Refund objects
      */
     private static List<Refund> createBasicRefundList() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment());
 
         // We need to retrieve the shipment so that the tracking_code has time to populate
         Shipment retrievedShipment = Shipment.retrieve(shipment.getId());
 
         Map<String, Object> params = new HashMap<>();
-        params.put("carrier", Fixture.usps());
+        params.put("carrier", Fixtures.usps());
         params.put("tracking_codes", retrievedShipment.getTrackingCode());
 
         return Refund.create(params);
@@ -77,13 +77,13 @@ public final class RefundTest {
         vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
-        params.put("page_size", Fixture.pageSize());
+        params.put("page_size", Fixtures.pageSize());
 
         RefundCollection refundCollection = Refund.all(params);
 
         List<Refund> refunds = refundCollection.getRefunds();
 
-        assertTrue(refunds.size() <= Fixture.pageSize());
+        assertTrue(refunds.size() <= Fixtures.pageSize());
         assertNotNull(refundCollection.getHasMore());
         assertTrue(refunds.stream().allMatch(refund -> refund instanceof Refund));
     }

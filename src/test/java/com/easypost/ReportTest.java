@@ -53,9 +53,9 @@ public final class ReportTest {
     private static Report createBasicReport() throws EasyPostException {
         Map<String, Object> reportParams = new HashMap<>();
 
-        reportParams.put("start_date", Fixture.reportDate());
-        reportParams.put("end_date", Fixture.reportDate());
-        reportParams.put("type", Fixture.reportType());
+        reportParams.put("start_date", Fixtures.reportDate());
+        reportParams.put("end_date", Fixtures.reportDate());
+        reportParams.put("type", Fixtures.reportType());
 
         return Report.create(reportParams);
     }
@@ -88,9 +88,9 @@ public final class ReportTest {
     }
 
     private static Report createAdvancedReport(Map<String, Object> parameters) throws EasyPostException {
-        parameters.put("start_date", Fixture.reportDate());
-        parameters.put("end_date", Fixture.reportDate());
-        parameters.put("type", Fixture.reportType());
+        parameters.put("start_date", Fixtures.reportDate());
+        parameters.put("end_date", Fixtures.reportDate());
+        parameters.put("type", Fixtures.reportType());
 
         return Report.create(parameters);
     }
@@ -150,14 +150,14 @@ public final class ReportTest {
 
         Map<String, Object> params = new HashMap<>();
 
-        params.put("type", Fixture.reportType());
-        params.put("page_size", Fixture.pageSize());
+        params.put("type", Fixtures.reportType());
+        params.put("page_size", Fixtures.pageSize());
 
         ReportCollection reports = Report.all(params);
 
         List<Report> reportsList = reports.getReports();
 
-        assertTrue(reportsList.size() <= Fixture.pageSize());
+        assertTrue(reportsList.size() <= Fixtures.pageSize());
         assertNotNull(reports.getHasMore());
         assertTrue(reportsList.stream().allMatch(report -> report instanceof Report));
     }

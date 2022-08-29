@@ -54,7 +54,7 @@ public final class OrderTest {
      * @return Order object
      */
     private static Order createBasicOrder() throws EasyPostException {
-        return Order.create(Fixture.basicOrder());
+        return Order.create(Fixtures.basicOrder());
     }
 
     /**
@@ -107,8 +107,8 @@ public final class OrderTest {
         Order order = createBasicOrder();
 
         Map<String, Object> params = new HashMap<>();
-        params.put("carrier", Fixture.usps());
-        params.put("service", Fixture.uspsService());
+        params.put("carrier", Fixtures.usps());
+        params.put("service", Fixtures.uspsService());
 
         order.buy(params);
 

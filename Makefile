@@ -18,7 +18,7 @@ coverage:
 install-checkstyle:
 	wget -O checkstyle.jar -q https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.3.1/checkstyle-10.3.1-all.jar
 
-## install-dev - Install dev requirements
+## install - Install requirements
 install:
 	git submodule init
 	git submodule update
@@ -52,4 +52,4 @@ scan:
 test:
 	mvn --batch-mode install -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true
 
-.PHONY: help build clean install-checkstyle install-dev lint publish publish-dry release scan scan-strict test
+.PHONY: help build clean install-checkstyle install lint publish publish-dry release scan scan-strict test

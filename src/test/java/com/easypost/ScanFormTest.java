@@ -51,7 +51,7 @@ public final class ScanFormTest {
      * @return ScanForm object
      */
     private static ScanForm getBasicScanForm() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment());
 
         List<Shipment> shipments = new ArrayList<>();
         shipments.add(shipment);
@@ -90,12 +90,12 @@ public final class ScanFormTest {
         vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
-        params.put("page_size", Fixture.pageSize());
+        params.put("page_size", Fixtures.pageSize());
 
         ScanFormCollection scanForms = ScanForm.all(params);
         List<ScanForm> scanFormsList = scanForms.getScanForms();
 
-        assertTrue(scanFormsList.size() <= Fixture.pageSize());
+        assertTrue(scanFormsList.size() <= Fixtures.pageSize());
         assertNotNull(scanForms.getHasMore());
         assertTrue(scanFormsList.stream().allMatch(scanForm -> scanForm instanceof ScanForm));
     }

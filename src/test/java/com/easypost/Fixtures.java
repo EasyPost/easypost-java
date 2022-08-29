@@ -1,6 +1,6 @@
 package com.easypost;
 
-import com.easypost.fixtures.FixtureData;
+import com.easypost.fixtures.FixtureStructure;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -17,14 +17,14 @@ import java.util.Objects;
 import static com.easypost.TestUtils.getSourceFileDirectory;
 import static com.easypost.TestUtils.readFile;
 
-public abstract class Fixture {
+public abstract class Fixtures {
     private static String readFixtureData() {
         Path fixtureDataPath =
                 Paths.get(getSourceFileDirectory(), "examples/official/fixtures/client-library-fixtures.json");
         return readFile(fixtureDataPath);
     }
 
-    private static FixtureData getFixtureData() {
+    private static FixtureStructure getFixtureData() {
         // load fixture data as a JSON string
         String fixtureData = readFixtureData();
         if (fixtureData == null) {
@@ -32,7 +32,7 @@ public abstract class Fixture {
         }
 
         Gson gson = new Gson();
-        Type type = new TypeToken<FixtureData>() {}.getType();
+        Type type = new TypeToken<FixtureStructure>() {}.getType();
         return gson.fromJson(fixtureData, type);
     }
 
@@ -220,6 +220,7 @@ public abstract class Fixture {
 
     /**
      * Get the default pickup.
+     * If you need to re-record cassettes, increment the date (see comment).
      *
      * @return The default pickup
      */

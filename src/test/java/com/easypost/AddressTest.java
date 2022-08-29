@@ -36,7 +36,7 @@ public final class AddressTest {
      * @throws EasyPostException
      */
     public static Address createBasicAddress() throws EasyPostException {
-        return Address.create(Fixture.caAddress1());
+        return Address.create(Fixtures.caAddress1());
     }
 
     /**
@@ -66,7 +66,7 @@ public final class AddressTest {
     public void testCreateVerify() throws EasyPostException {
         vcr.setUpTest("create_verify");
 
-        Map<String, Object> addressData = Fixture.incorrectAddress();
+        Map<String, Object> addressData = Fixtures.incorrectAddress();
         addressData.put("verify", true);
 
         Address address = Address.create(addressData);
@@ -85,7 +85,7 @@ public final class AddressTest {
     public void testCreateVerifyStrict() throws EasyPostException {
         vcr.setUpTest("create_verify_strict");
 
-        Map<String, Object> addressData = Fixture.caAddress1();
+        Map<String, Object> addressData = Fixtures.caAddress1();
         addressData.put("verify_strict", true);
 
         Address address = Address.create(addressData);
@@ -106,7 +106,7 @@ public final class AddressTest {
     public void testCreateVerifyArray() throws EasyPostException {
         vcr.setUpTest("create_verify_array");
 
-        Map<String, Object> addressData = Fixture.incorrectAddress();
+        Map<String, Object> addressData = Fixtures.incorrectAddress();
         List<Boolean> verificationList = new ArrayList<>();
         verificationList.add(true);
         addressData.put("verify", verificationList);
@@ -145,13 +145,13 @@ public final class AddressTest {
         vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
-        params.put("page_size", Fixture.pageSize());
+        params.put("page_size", Fixtures.pageSize());
 
         AddressCollection addresses = Address.all(params);
 
         List<Address> addressesList = addresses.getAddresses();
 
-        assertTrue(addressesList.size() <= Fixture.pageSize());
+        assertTrue(addressesList.size() <= Fixtures.pageSize());
         assertNotNull(addresses.getHasMore());
         assertTrue(addressesList.stream().allMatch(address -> address instanceof Address));
     }
@@ -167,7 +167,7 @@ public final class AddressTest {
     public void testCreateAndVerify() throws EasyPostException {
         vcr.setUpTest("create_and_verify");
 
-        Map<String, Object> addressData = Fixture.caAddress1();
+        Map<String, Object> addressData = Fixtures.caAddress1();
 
         Address address = Address.createAndVerify(addressData);
 

@@ -45,7 +45,7 @@ public final class CustomsInfoTest {
      * @return CustomsInfo object.
      */
     private static CustomsInfo createBasicCustomsInfo() throws EasyPostException {
-        return CustomsInfo.create(Fixture.basicCustomsInfo());
+        return CustomsInfo.create(Fixtures.basicCustomsInfo());
     }
 
     /**

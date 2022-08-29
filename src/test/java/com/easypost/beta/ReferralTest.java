@@ -1,6 +1,6 @@
 package com.easypost.beta;
 
-import com.easypost.Fixture;
+import com.easypost.Fixtures;
 import com.easypost.TestUtils;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.PaymentMethod;
@@ -43,7 +43,7 @@ public final class ReferralTest {
      * @return Referral object
      */
     private static ReferralCustomer createReferral() throws EasyPostException {
-        return ReferralCustomer.create(Fixture.referralUser());
+        return ReferralCustomer.create(Fixtures.referralUser());
     }
 
     /**
@@ -87,13 +87,13 @@ public final class ReferralTest {
         vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("page_size", Fixture.pageSize());
+        params.put("page_size", Fixtures.pageSize());
 
         ReferralCustomerCollection referralCustomerCollection = ReferralCustomer.all(params);
 
         List<ReferralCustomer> referralUsers = referralCustomerCollection.getReferralCustomers();
 
-        assertTrue(referralUsers.size() <= Fixture.pageSize());
+        assertTrue(referralUsers.size() <= Fixtures.pageSize());
         assertNotNull(referralCustomerCollection.getHasMore());
         assertTrue(referralUsers.stream().allMatch(referral -> referral instanceof ReferralCustomer));
     }
@@ -108,7 +108,7 @@ public final class ReferralTest {
     public void testReferralAddCreditCard() throws Exception {
         vcr.setUpTest("referral_add_credit_card");
 
-        Map<String, Object> creditCardDetails = Fixture.creditCardDetails();
+        Map<String, Object> creditCardDetails = Fixtures.creditCardDetails();
         PaymentMethodObject creditCard =
                 ReferralCustomer.addCreditCardToUser(referralUserKey(), (String) creditCardDetails.get("number"),
                         Integer.parseInt((String) creditCardDetails.get("expiration_month")),
@@ -117,6 +117,6 @@ public final class ReferralTest {
 
         assertInstanceOf(PaymentMethodObject.class, creditCard);
         assertTrue(creditCard.getId().startsWith("card_"));
-        assertEquals(((String) Fixture.creditCardDetails().get("number")).substring(12), creditCard.getLast4());
+        assertEquals(((String) Fixtures.creditCardDetails().get("number")).substring(12), creditCard.getLast4());
     }
 }

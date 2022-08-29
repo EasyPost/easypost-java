@@ -41,7 +41,7 @@ public final class EventTest {
 
         List<Event> eventsList = events.getEvents();
 
-        assertTrue(eventsList.size() <= Fixture.pageSize());
+        assertTrue(eventsList.size() <= Fixtures.pageSize());
         assertNotNull(events.getHasMore());
         assertTrue(eventsList.stream().allMatch(event -> event instanceof Event));
     }
@@ -53,7 +53,7 @@ public final class EventTest {
      */
     private static EventCollection getBasicEventCollection() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
-        params.put("page_size", Fixture.pageSize());
+        params.put("page_size", Fixtures.pageSize());
         return Event.all(params);
     }
 

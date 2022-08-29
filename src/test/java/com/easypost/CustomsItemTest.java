@@ -45,7 +45,7 @@ public final class CustomsItemTest {
      * @return CustomsItem object.
      */
     private static CustomsItem createBasicCustomsItem() throws EasyPostException {
-        return CustomsItem.create(Fixture.basicCustomsItem());
+        return CustomsItem.create(Fixtures.basicCustomsItem());
     }
 
     /**

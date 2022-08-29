@@ -45,7 +45,7 @@ public final class ParcelTest {
      * @return Parcel object
      */
     private static Parcel createBasicParcel() throws EasyPostException {
-        return Parcel.create(Fixture.basicParcel());
+        return Parcel.create(Fixtures.basicParcel());
     }
 
     /**

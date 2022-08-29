@@ -6,4 +6,4 @@
  * @see <a href="https://www.easypost.com/docs">EasyPost API documentation</a>
  * @since 1.0
  */
-package com.easypost.fixtures.sections;
+package com.easypost.fixtures.components;

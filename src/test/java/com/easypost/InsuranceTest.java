@@ -51,9 +51,9 @@ public final class InsuranceTest {
      * @return Insurance object
      */
     private static Insurance createBasicInsurance() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment());
 
-        HashMap<String, Object> params = Fixture.basicInsurance();
+        HashMap<String, Object> params = Fixtures.basicInsurance();
         params.put("tracking_code", shipment.getTrackingCode());
 
         return Insurance.create(params);
@@ -87,13 +87,13 @@ public final class InsuranceTest {
         vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
-        params.put("page_size", Fixture.pageSize());
+        params.put("page_size", Fixtures.pageSize());
 
         InsuranceCollection insuranceCollection = Insurance.all(params);
 
         List<Insurance> insurances = insuranceCollection.getInsurances();
 
-        assertTrue(insurances.size() <= Fixture.pageSize());
+        assertTrue(insurances.size() <= Fixtures.pageSize());
         assertNotNull(insuranceCollection.getHasMore());
         assertTrue(insurances.stream().allMatch(insurance -> insurance instanceof Insurance));
     }
