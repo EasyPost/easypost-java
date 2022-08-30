@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1655410312,
+    "recordedAt": 1661456596,
     "request": {
       "body": "{}",
       "method": "POST",
@@ -13,9 +13,6 @@
         ],
         "Content-Type": [
           "application/json"
-        ],
-        "X-Client-User-Agent": [
-          "REDACTED"
         ]
       },
       "uri": "https://api.easypost.com/v2/shipments"
@@ -28,13 +25,13 @@
           "HTTP/1.1 422 Unprocessable Entity"
         ],
         "content-length": [
-          "211"
+          "139"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb4nuq"
+          "bigweb6nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -61,36 +58,35 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "f462041862ab8e88e79b8b2d0008f875"
+          "07323c386307d0d4f7a874350008a8d9"
         ],
         "x-proxied": [
-          "extlb3wdc 0910011e7e",
-          "intlb1wdc 0910011e7e",
-          "intlb2nuq 0910011e7e"
+          "extlb2nuq 9ce216bfac",
+          "intlb1nuq 6aa9972c1e"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.019133"
+          "0.035329"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202206152126-24f54ae67a-master"
+          "easypost-202208242214-2a3e1e3aa6-master"
         ],
         "cache-control": [
-          "no-cache, no-store"
+          "private, no-cache, no-store"
         ]
       },
       "status": {
         "code": 422,
         "message": "Unprocessable Entity"
       },
-      "errors": "{\n  \"error\": {\n    \"code\": \"SHIPMENT.INVALID_PARAMS\",\n    \"message\": \"Unable to create shipment, one or more parameters were invalid.\",\n    \"errors\": [\n      {\n        \"to_address\": \"Required and missing.\"\n      },\n      {\n        \"from_address\": \"Required and missing.\"\n      }\n    ]\n  }\n}",
+      "errors": "{\n  \"error\": {\n    \"code\": \"PARAMETER.REQUIRED\",\n    \"message\": \"Missing required parameter.\",\n    \"errors\": [\n      {\n        \"field\": \"shipment\",\n        \"message\": \"cannot be blank\"\n      }\n    ]\n  }\n}",
       "uri": "https://api.easypost.com/v2/shipments"
     },
-    "duration": 529
+    "duration": 157
   }
 ]

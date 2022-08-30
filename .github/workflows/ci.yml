@@ -13,6 +13,8 @@ jobs:
         javaversion: [ "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18" ]
     steps:
       - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: make install
       - name: Set up Java ${{ matrix.javaversion }}
         uses: actions/setup-java@v3
         with:

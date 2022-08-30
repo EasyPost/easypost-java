@@ -51,7 +51,7 @@ public final class TrackerTest {
      */
     private static Tracker createBasicTracker() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
-        params.put("carrier", Fixture.usps());
+        params.put("carrier", Fixtures.usps());
         params.put("tracking_code", "EZ1000000001");
 
         return Tracker.create(params);
@@ -85,13 +85,13 @@ public final class TrackerTest {
         vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
-        params.put("page_size", Fixture.pageSize());
+        params.put("page_size", Fixtures.pageSize());
 
         TrackerCollection trackers = Tracker.all(params);
 
         List<Tracker> trackersList = trackers.getTrackers();
 
-        assertTrue(trackersList.size() <= Fixture.pageSize());
+        assertTrue(trackersList.size() <= Fixtures.pageSize());
         assertNotNull(trackers.getHasMore());
         assertTrue(trackersList.stream().allMatch(tracker -> tracker instanceof Tracker));
     }

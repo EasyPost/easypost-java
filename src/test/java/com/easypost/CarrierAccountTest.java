@@ -60,10 +60,11 @@ public final class CarrierAccountTest {
 
         assertInstanceOf(CarrierAccount.class, carrierAccount);
         assertTrue(carrierAccount.getId().startsWith("ca_"));
+        assertEquals("DhlEcsAccount", carrierAccount.getType());
     }
 
     private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
-        CarrierAccount carrierAccount = CarrierAccount.create(Fixture.basicCarrierAccount());
+        CarrierAccount carrierAccount = CarrierAccount.create(Fixtures.basicCarrierAccount());
         testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
         return carrierAccount;
     }

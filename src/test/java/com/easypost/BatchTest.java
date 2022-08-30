@@ -55,7 +55,7 @@ public final class BatchTest {
         Map<String, Object> params = new HashMap<>();
 
         List<Object> shipments = new ArrayList<>();
-        shipments.add(Fixture.basicShipment());
+        shipments.add(Fixtures.basicShipment());
         params.put("shipments", shipments);
 
         return Batch.create(params);
@@ -89,13 +89,13 @@ public final class BatchTest {
         vcr.setUpTest("all");
 
         Map<String, Object> params = new HashMap<>();
-        params.put("page_size", Fixture.pageSize());
+        params.put("page_size", Fixtures.pageSize());
 
         BatchCollection batches = Batch.all(params);
 
         List<Batch> batchesList = batches.getBatches();
 
-        assertTrue(batchesList.size() <= Fixture.pageSize());
+        assertTrue(batchesList.size() <= Fixtures.pageSize());
         assertNotNull(batches.getHasMore());
         assertTrue(batchesList.stream().allMatch(batch -> batch instanceof Batch));
     }
@@ -112,7 +112,7 @@ public final class BatchTest {
         Map<String, Object> params = new HashMap<>();
 
         List<Object> shipmentData = new ArrayList<>();
-        shipmentData.add(Fixture.oneCallBuyShipment());
+        shipmentData.add(Fixtures.oneCallBuyShipment());
 
         params.put("shipments", shipmentData);
 
@@ -144,7 +144,7 @@ public final class BatchTest {
         Map<String, Object> params = new HashMap<>();
 
         List<Object> shipments = new ArrayList<>();
-        shipments.add(Fixture.oneCallBuyShipment());
+        shipments.add(Fixtures.oneCallBuyShipment());
         params.put("shipments", shipments);
 
         return Batch.create(params);
@@ -182,7 +182,7 @@ public final class BatchTest {
     public void testAddRemoveShipment() throws EasyPostException {
         vcr.setUpTest("add_remove_shipment");
 
-        Shipment shipment = Shipment.create(Fixture.oneCallBuyShipment());
+        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment());
 
         Batch batch = Batch.create();
 

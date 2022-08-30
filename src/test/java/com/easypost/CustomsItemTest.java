@@ -36,7 +36,7 @@ public final class CustomsItemTest {
 
         assertInstanceOf(CustomsItem.class, customsItem);
         assertTrue(customsItem.getId().startsWith("cstitem_"));
-        assertEquals(23.0, customsItem.getValue(), 0.01);
+        assertEquals(23.25, customsItem.getValue(), 0.01);
     }
 
     /**
@@ -45,7 +45,7 @@ public final class CustomsItemTest {
      * @return CustomsItem object.
      */
     private static CustomsItem createBasicCustomsItem() throws EasyPostException {
-        return CustomsItem.create(Fixture.basicCustomsItem());
+        return CustomsItem.create(Fixtures.basicCustomsItem());
     }
 
     /**

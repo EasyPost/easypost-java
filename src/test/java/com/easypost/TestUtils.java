@@ -8,6 +8,8 @@ import com.easypost.easyvcr.MatchRules;
 import com.easypost.easyvcr.Mode;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,8 @@ import java.util.List;
 public abstract class TestUtils {
     public enum ApiKey {
         TEST,
-        PRODUCTION
+        PRODUCTION,
+        REFERRAL
     }
 
     private static final String API_KEY_FAILED_TO_PULL = "couldNotPullApiKey";
@@ -58,6 +61,29 @@ public abstract class TestUtils {
     }
 
     /**
+     * Read the contents of a file.
+     *
+     * @param path The path to the file
+     * @return The contents of the file
+     */
+    public static String readFile(Path path) {
+        List<String> data;
+        try {
+            data = java.nio.file.Files.readAllLines(path);
+        } catch (IOException ignored) {
+            return null;
+        }
+        if (data.isEmpty()) {
+            return null;
+        }
+        StringBuilder contents = new StringBuilder();
+        for (String line : data) {
+            contents.append(line);
+        }
+        return contents.toString();
+    }
+
+    /**
      * Get an API key from the environment.
      *
      * @param apiKey Type of API key to get
@@ -71,6 +97,9 @@ public abstract class TestUtils {
                 break;
             case PRODUCTION:
                 keyName = "EASYPOST_PROD_API_KEY";
+                break;
+            case REFERRAL:
+                keyName = "REFERRAL_USER_PROD_API_KEY";
                 break;
             default:
                 break;
