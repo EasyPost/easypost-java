@@ -13,6 +13,13 @@ jobs:
         javaversion: [ "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18" ]
     steps:
       - uses: actions/checkout@v3
+      - name: Load Maven dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-build${{ matrix.javaversion }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Install dependencies
         run: make install
       - name: Set up Java ${{ matrix.javaversion }}
@@ -37,6 +44,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Load Maven dependencies and CVE database cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository # The CVE database is included in the Maven repository folder
+          key: ${{ runner.os }}-maven-security-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Run security analysis
         run: make scan
       - name: Upload Test results
