@@ -16,10 +16,10 @@ coverage:
 
 ## install-checkstyle - Install CheckStyle
 install-checkstyle:
-	wget -O checkstyle.jar -q https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.3.1/checkstyle-10.3.1-all.jar
+	curl -LJs https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.3.1/checkstyle-10.3.1-all.jar -o checkstyle.jar
 
 ## install - Install requirements
-install:
+install: | install-checkstyle
 	git submodule init
 	git submodule update
 
