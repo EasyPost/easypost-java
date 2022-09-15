@@ -979,18 +979,6 @@ public final class Shipment extends EasyPostResource {
     /**
      * Buy this Shipment.
      *
-     * @param endShipperId the id of the end shipper to use for this purchase.
-     * @param apiKey       API key to use in request (overrides default API key).
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment buy(final String endShipperId, final String apiKey) throws EasyPostException {
-        return this.buy(new HashMap<String, Object>() {}, endShipperId, apiKey);
-    }
-
-    /**
-     * Buy this Shipment.
-     *
      * @param rate the Rate to use for this Shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
@@ -1039,11 +1027,10 @@ public final class Shipment extends EasyPostResource {
      * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
-     *
-     * When Java Client Library rewrite happens, the apiKey param will be replaced with endShipperId
      */
     public Shipment buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return this.buy(params, false, null, apiKey);
+      // TODO: When Java Client Library rewrite happens, the apiKey param will be replaced with endShipperId  
+      return this.buy(params, false, null, apiKey);
     }
 
     /**
@@ -1098,13 +1085,14 @@ public final class Shipment extends EasyPostResource {
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment buy(final Map<String, Object> params, final boolean withCarbonOffset, 
+    public Shipment buy(final Map<String, Object> params, final boolean withCarbonOffset,
         final String endShipperId, final String apiKey) throws EasyPostException {
+        params.put("carbon_offset", withCarbonOffset);
+
         if (endShipperId != null && !endShipperId.isEmpty()) {
-            params.put("end_shipper_id", endShipperId);
+          params.put("end_shipper_id", endShipperId);
         }
 
-        params.put("carbon_offset", withCarbonOffset);
         Shipment response =
                 request(RequestMethod.POST, String.format("%s/buy", instanceURL(Shipment.class, this.getId())), params,
                         Shipment.class, apiKey);
