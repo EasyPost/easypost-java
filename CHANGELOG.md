@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Next Release
+
+- Can indicate an EndShipper ID when buying a shipment
+- Removes unusable shipment `buy` functions that did not contain a rate parameter
+
 ## v5.9.0 (2022-08-25)
 
 - Moves EndShipper out of beta into the general library namespace
