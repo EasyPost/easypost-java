@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Can indicate an EndShipper ID when buying a shipment
+
 ## v5.9.0 (2022-08-25)
 
 - Moves EndShipper out of beta into the general library namespace

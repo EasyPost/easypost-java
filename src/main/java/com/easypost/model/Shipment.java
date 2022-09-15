@@ -979,6 +979,18 @@ public final class Shipment extends EasyPostResource {
     /**
      * Buy this Shipment.
      *
+     * @param endShipperId the id of the end shipper to use for this purchase.
+     * @param apiKey       API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final String endShipperId, final String apiKey) throws EasyPostException {
+        return this.buy(new HashMap<String, Object>() {}, endShipperId, apiKey);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
      * @param rate the Rate to use for this Shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
@@ -1002,7 +1014,22 @@ public final class Shipment extends EasyPostResource {
         Map<String, Object> params = new HashMap<>();
         params.put("rate", rate);
 
-        return this.buy(params, withCarbonOffset, null);
+        return this.buy(params, withCarbonOffset, null, null);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
+     * @param rate the Rate to use for this Shipment.
+     * @param endShipperId     the id of the end shipper to use for this purchase.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final Rate rate, final String endShipperId) throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("rate", rate);
+
+        return this.buy(params, false, endShipperId, null);
     }
 
     /**
@@ -1012,9 +1039,25 @@ public final class Shipment extends EasyPostResource {
      * @param apiKey API key to use in request (overrides default API key).
      * @return Shipment object
      * @throws EasyPostException when the request fails.
+     *
+     * When Java Client Library rewrite happens, the apiKey param will be replaced with endShipperId
      */
     public Shipment buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return this.buy(params, false, apiKey);
+        return this.buy(params, false, null, apiKey);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
+     * @param withCarbonOffset whether to include a carbon offset when buying the shipment.
+     * @param endShipperId     the id of the end shipper to use for this purchase.
+     * @param apiKey           API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final boolean withCarbonOffset, final String endShipperId, final String apiKey)
+      throws EasyPostException {
+      return this.buy(new HashMap<String, Object>() {}, withCarbonOffset, endShipperId, null);
     }
 
     /**
@@ -1028,6 +1071,39 @@ public final class Shipment extends EasyPostResource {
      */
     public Shipment buy(final Map<String, Object> params, final boolean withCarbonOffset, final String apiKey)
             throws EasyPostException {
+        return this.buy(params, withCarbonOffset, null, apiKey);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
+     * @param params           the options for the query.
+     * @param endShipperId     the id of the end shipper to use for this purchase.
+     * @param apiKey           API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final Map<String, Object> params, final String endShipperId, final String apiKey)
+            throws EasyPostException {
+        return this.buy(params, false, endShipperId, apiKey);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
+     * @param params           the options for the query.
+     * @param withCarbonOffset whether to include a carbon offset when buying the shipment.
+     * @param endShipperId     the id of the end shipper to use for this purchase.
+     * @param apiKey           API key to use in request (overrides default API key).
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final Map<String, Object> params, final boolean withCarbonOffset, 
+        final String endShipperId, final String apiKey) throws EasyPostException {
+        if (endShipperId != null && !endShipperId.isEmpty()) {
+            params.put("end_shipper_id", endShipperId);
+        }
+
         params.put("carbon_offset", withCarbonOffset);
         Shipment response =
                 request(RequestMethod.POST, String.format("%s/buy", instanceURL(Shipment.class, this.getId())), params,
