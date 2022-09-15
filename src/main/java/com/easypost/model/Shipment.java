@@ -980,6 +980,18 @@ public final class Shipment extends EasyPostResource {
     /**
      * Buy this Shipment.
      *
+     * @param params           the options for the query.
+     * @param withCarbonOffset whether to include a carbon offset when buying the shipment.
+     * @return Shipment object
+     * @throws EasyPostException when the request fails.
+     */
+    public Shipment buy(final Map<String, Object> params, final boolean withCarbonOffset) throws EasyPostException {
+      return this.buy(params, withCarbonOffset, null);
+    }
+
+    /**
+     * Buy this Shipment.
+     *
      * @param rate the Rate to use for this Shipment.
      * @param withCarbonOffset whether to include a carbon offset when buying the shipment.
      * @param endShipperId     the id of the end shipper to use for this purchase.
