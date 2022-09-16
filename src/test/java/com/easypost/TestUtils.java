@@ -18,7 +18,8 @@ public abstract class TestUtils {
     public enum ApiKey {
         TEST,
         PRODUCTION,
-        REFERRAL
+        REFERRAL,
+        PARTNER
     }
 
     private static final String API_KEY_FAILED_TO_PULL = "couldNotPullApiKey";
@@ -100,6 +101,9 @@ public abstract class TestUtils {
                 break;
             case REFERRAL:
                 keyName = "REFERRAL_USER_PROD_API_KEY";
+                break;
+            case PARTNER:
+                keyName = "PARTNER_USER_PROD_API_KEY";
                 break;
             default:
                 break;

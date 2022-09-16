@@ -1,12 +1,10 @@
-package com.easypost.beta;
+package com.easypost;
 
-import com.easypost.Fixtures;
-import com.easypost.TestUtils;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
-import com.easypost.model.beta.ReferralCustomer;
-import com.easypost.model.beta.ReferralCustomerCollection;
+import com.easypost.model.ReferralCustomer;
+import com.easypost.model.ReferralCustomerCollection;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -30,7 +28,7 @@ public final class ReferralTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        vcr = new TestUtils.VCR("beta_referral", TestUtils.ApiKey.PARTNER);
+        vcr = new TestUtils.VCR("referral", TestUtils.ApiKey.PARTNER);
     }
 
     private static String referralUserKey() {
