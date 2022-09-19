@@ -25,7 +25,7 @@ import com.easypost.easyvcr.VCR;
  * <p>
  * If you ever run across a section of code where your IDE says it cannot find, i.e. `EasyPost.apiKey`,
  * it's likely because this file has not been compiled yet.
- * Simply run `mvn install` (or `make build-dev`) to compile this code and your IDE will be able to find the variable.
+ * Simply run `make build` to compile this code and your IDE will be able to find the variable.
  */
 
 public abstract class EasyPost {

@@ -6,10 +6,6 @@ help:
 build:
 	mvn clean install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true
 
-## build-deps - Build the project dependencies
-build-deps:
-	mvn install
-
 ## clean - Cleans the project
 clean:
 	mvn clean
