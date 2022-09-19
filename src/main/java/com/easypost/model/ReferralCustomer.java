@@ -46,7 +46,7 @@ public class ReferralCustomer extends BaseUser {
     }
 
     /**
-     * Create a Referral object from parameter map. This function requires the Partner User's API key.
+     * Create a Referral Customer object from parameter map. This function requires the Partner User's API key.
      *
      * @param params Map of the referral user parameters.
      * @param apiKey API key to use in request (overrides default API key).
