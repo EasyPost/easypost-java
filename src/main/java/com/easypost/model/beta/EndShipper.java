@@ -11,7 +11,6 @@ import java.util.Map;
 
 /**
  * @deprecated Use {@link com.easypost.model.EndShipper} instead.
- * Deprecated: v5.9.0 - v7.0.0
  */
 public final class EndShipper extends BaseAddress {
     /**

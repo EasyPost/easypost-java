@@ -1,12 +1,9 @@
-package com.easypost.model.beta;
+package com.easypost.model;
 
 import com.easypost.net.EasyPostResource;
 
 import java.util.List;
 
-/**
- * @deprecated Use {@link com.easypost.model.ReferralCustomerCollection} instead.
- */
 public final class ReferralCustomerCollection extends EasyPostResource {
     private List<ReferralCustomer> referralCustomers;
     private boolean hasMore;
