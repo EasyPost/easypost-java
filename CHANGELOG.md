@@ -1,9 +1,14 @@
 # CHANGELOG
 
-## Next Release
+## v5.10.0 (2022-09-21)
 
-- Can indicate an EndShipper ID when buying a shipment
-- Removes unusable shipment `buy` functions that did not contain a rate parameter
+- Adds support to pass an `EndShipper ID` when buying a shipment
+- Removes the unusable overload shipment `buy` functions that did not contain a rate parameter
+- Add White Label support:
+  - Create a referral customer
+  - Update a referral customer's email address
+  - List all referral customers
+  - Add a credit card to a referral customer's account
 
 ## v5.9.0 (2022-08-25)
 
