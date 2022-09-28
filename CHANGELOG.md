@@ -2,8 +2,9 @@
 
 ## V6 (Next release)
 
-- Remove `createAndVerifyWithCarrier` function
-- Remove `verifyWithCarrier` function
+- Removes `createAndVerifyWithCarrier` function
+- Removes `verifyWithCarrier` function
+- Changes the type of Insurance `Amount` from Float to String
 
 ## v5.10.0 (2022-09-21)
 

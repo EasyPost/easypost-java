@@ -42,7 +42,7 @@ public final class InsuranceTest {
 
         assertInstanceOf(Insurance.class, insurance);
         assertTrue(insurance.getId().startsWith("ins_"));
-        assertEquals(100.0, insurance.getAmount(), 0.01);
+        assertEquals("100.00000", insurance.getAmount());
     }
 
     /**
