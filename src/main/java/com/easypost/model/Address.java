@@ -263,15 +263,11 @@ public final class Address extends BaseAddress {
                                                      final String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("address", params);
-        wrappedParams.put("carrier", carrier);
 
         AddressVerifyResponse response;
         response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
                 wrappedParams, AddressVerifyResponse.class, apiKey);
 
-        if (response.getMessage() != null) {
-            response.getAddress().setMessage(response.getMessage());
-        }
         return response.getAddress();
     }
 
@@ -298,9 +294,6 @@ public final class Address extends BaseAddress {
                 request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null,
                         AddressVerifyResponse.class, apiKey);
 
-        if (response.getMessage() != null) {
-            response.getAddress().setMessage(response.getMessage());
-        }
         return response.getAddress();
     }
 
@@ -324,17 +317,11 @@ public final class Address extends BaseAddress {
      * @throws EasyPostException when the request fails.
      */
     public Address verifyWithCarrier(final String carrier, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("carrier", carrier);
-
         AddressVerifyResponse response;
         response =
                 request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null,
                         AddressVerifyResponse.class, apiKey);
 
-        if (response.getMessage() != null) {
-            response.getAddress().setMessage(response.getMessage());
-        }
         return response.getAddress();
     }
 }
