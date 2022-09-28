@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## V6 (Next release)
+
+- Remove `createAndVerifyWithCarrier` function
+- Remove `verifyWithCarrier` function
+
 ## v5.10.0 (2022-09-21)
 
 - Adds support to pass an `EndShipper ID` when buying a shipment
