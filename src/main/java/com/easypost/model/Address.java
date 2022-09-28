@@ -236,42 +236,6 @@ public final class Address extends BaseAddress {
     }
 
     /**
-     * Create Address object from parameter map
-     * and immediately verify it with a specific carrier.
-     *
-     * @param params  Map of address parameters.
-     * @param carrier Carrier to verify address with.
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier)
-            throws EasyPostException {
-        return createAndVerifyWithCarrier(params, carrier, null);
-    }
-
-    /**
-     * Create Address object from parameter map
-     * and immediately verify it with a specific carrier.
-     *
-     * @param params  Map of address parameters.
-     * @param carrier Carrier to verify address with.
-     * @param apiKey  API key to use in request (overrides default API key).
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Address createAndVerifyWithCarrier(final Map<String, Object> params, final String carrier,
-                                                     final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("address", params);
-
-        AddressVerifyResponse response;
-        response = request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
-                wrappedParams, AddressVerifyResponse.class, apiKey);
-
-        return response.getAddress();
-    }
-
-    /**
      * Verify this Address object.
      *
      * @return Address object.
@@ -289,34 +253,6 @@ public final class Address extends BaseAddress {
      * @throws EasyPostException when the request fails.
      */
     public Address verify(final String apiKey) throws EasyPostException {
-        AddressVerifyResponse response;
-        response =
-                request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null,
-                        AddressVerifyResponse.class, apiKey);
-
-        return response.getAddress();
-    }
-
-    /**
-     * Verify this Address object with a specific carrier.
-     *
-     * @param carrier Carrier to verify address with.
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Address verifyWithCarrier(final String carrier) throws EasyPostException {
-        return this.verifyWithCarrier(carrier, null);
-    }
-
-    /**
-     * Verify this Address object with a specific carrier.
-     *
-     * @param carrier Carrier to verify address with.
-     * @param apiKey  API key to use in request (overrides default API key).
-     * @return Address object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Address verifyWithCarrier(final String carrier, final String apiKey) throws EasyPostException {
         AddressVerifyResponse response;
         response =
                 request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null,
