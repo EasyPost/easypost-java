@@ -19,7 +19,7 @@ public final class Insurance extends EasyPostResource {
     private String trackingCode;
     private String status;
     private String shipmentId;
-    private Float amount;
+    private String amount;
     private List<String> messages;
 
     /**
@@ -27,7 +27,7 @@ public final class Insurance extends EasyPostResource {
      *
      * @return the amount of the Insurance
      */
-    public Float getAmount() {
+    public String getAmount() {
         return amount;
     }
 
@@ -36,7 +36,7 @@ public final class Insurance extends EasyPostResource {
      *
      * @param amount the amount of the Insurance
      */
-    public void setAmount(final Float amount) {
+    public void setAmount(final String amount) {
         this.amount = amount;
     }
 
