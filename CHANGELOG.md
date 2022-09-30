@@ -5,6 +5,8 @@
 - Removes `createAndVerifyWithCarrier` function
 - Removes `verifyWithCarrier` function
 - Changes the type of Insurance `Amount` from Float to String
+- Removes `getUpdate` and `setUpdate` from Tracker class
+- Removes all beta features and corrsponding unit tests
 
 ## v5.10.0 (2022-09-21)
 

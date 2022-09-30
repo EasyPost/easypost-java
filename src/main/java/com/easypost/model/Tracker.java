@@ -240,25 +240,6 @@ public final class Tracker extends EasyPostResource {
     }
 
     /**
-     * Get when the tracker was updated.
-     *
-     * @return when the tracker was updated.
-     */
-    // This method is a misspelling, but it persists to avoid breaking backwards compatibility
-    public Date getUpdateAt() {
-        return getUpdatedAt();
-    }
-
-    /**
-     * Set when the tracker was updated.
-     *
-     * @param updatedAt when the tracker was updated.
-     */
-    public void setUpdateAt(final Date updatedAt) {
-        setUpdatedAt(updatedAt);
-    }
-
-    /**
      * Get the weight of the Tracker.
      *
      * @return the weight of the Tracker.
