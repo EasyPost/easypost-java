@@ -7,6 +7,7 @@
 - Changes the type of Insurance `Amount` from Float to String
 - Removes `getUpdate` and `setUpdate` from Tracker class
 - Removes all beta features and corrsponding unit tests
+- Remove `serviceCode` from `Rate` class since this value is internal use only
 
 ## v5.10.0 (2022-09-21)
 

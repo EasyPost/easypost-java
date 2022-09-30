@@ -7,7 +7,6 @@ public class Rate extends EasyPostResource {
     private String id;
     private String carrier;
     private String service;
-    private String serviceCode;
     private Float rate;
     private String currency;
     private Float listRate;
@@ -327,24 +326,6 @@ public class Rate extends EasyPostResource {
      */
     public void setService(final String service) {
         this.service = service;
-    }
-
-    /**
-     * Get the service code of this Rate.
-     *
-     * @return Service code of this Rate.
-     */
-    public String getServiceCode() {
-        return serviceCode;
-    }
-
-    /**
-     * Set the service code of this Rate.
-     *
-     * @param serviceCode Service code of this Rate.
-     */
-    public void setServiceCode(final String serviceCode) {
-        this.serviceCode = serviceCode;
     }
 
     /**
