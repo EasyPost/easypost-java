@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -135,7 +136,7 @@ public final class CarrierAccountTest {
 
         CarrierAccount carrierAccount = createBasicCarrierAccount();
 
-        carrierAccount.delete();
+        assertDoesNotThrow(() -> carrierAccount.delete());
     }
 
     /**

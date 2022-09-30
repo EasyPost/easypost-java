@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -142,7 +143,7 @@ public final class WebhookTest {
         Webhook webhook = createBasicWebhook();
         Webhook retrievedWebhook = Webhook.retrieve(webhook.getId());
 
-        retrievedWebhook.delete();
+        assertDoesNotThrow(() -> retrievedWebhook.delete()); 
 
         testWebhookId = null; // need to disable post-test deletion for test to work
     }
