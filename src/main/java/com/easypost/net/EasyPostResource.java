@@ -13,8 +13,6 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.model.Event;
 import com.easypost.model.EventDeserializer;
 import com.easypost.model.Fee;
-import com.easypost.model.Rate;
-import com.easypost.model.RateDeserializer;
 import com.easypost.model.Shipment;
 import com.easypost.model.SmartrateCollection;
 import com.easypost.model.SmartrateCollectionDeserializer;
@@ -61,7 +59,6 @@ public abstract class EasyPostResource {
             new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .registerTypeAdapter(HashMap.class, new HashMapSerializer())
                     .registerTypeAdapter(Event.class, new EventDeserializer())
-                    .registerTypeAdapter(Rate.class, new RateDeserializer())
                     .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer()).create();
     public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
