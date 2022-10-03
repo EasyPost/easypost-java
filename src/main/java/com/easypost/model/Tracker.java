@@ -334,11 +334,10 @@ public final class Tracker extends EasyPostResource {
      * Create a list of Trackers.
      *
      * @param params Map of parameters used to create the Trackers.
-     * @return whether the creation was successful.
      * @throws EasyPostException when the request fails.
      */
-    public static boolean createList(final Map<String, Object> params) throws EasyPostException {
-        return createList(params, null);
+    public static void createList(final Map<String, Object> params) throws EasyPostException {
+        createList(params, null);
     }
 
     /**
@@ -346,17 +345,14 @@ public final class Tracker extends EasyPostResource {
      *
      * @param params Map of parameters used to create the Trackers.
      * @param apiKey API key to use in request (overrides default API key).
-     * @return whether the creation was successful.
      * @throws EasyPostException when the request fails.
      */
-    public static boolean createList(final Map<String, Object> params, final String apiKey) throws EasyPostException {
+    public static void createList(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         String createListUrl = String.format("%s/create_list", classURL(Tracker.class));
 
         Map<String, Object> newParams = new HashMap<String, Object>();
         newParams.put("trackers", params);
 
         request(RequestMethod.POST, createListUrl, newParams, Object.class, apiKey);
-        // This endpoint does not return a response so we return true here
-        return true;
     }
 }

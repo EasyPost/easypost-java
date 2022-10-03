@@ -7,8 +7,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class BillingTest {
     private static TestUtils.VCR vcr;
@@ -33,9 +33,7 @@ public final class BillingTest {
     public void testDeletePaymentMethod() throws EasyPostException {
         vcr.setUpTest("delete_payment_method");
 
-        boolean success = Billing.deletePaymentMethod(PaymentMethod.Priority.PRIMARY);
-
-        assertTrue(success);
+        assertDoesNotThrow(() -> Billing.deletePaymentMethod(PaymentMethod.Priority.PRIMARY));
     }
 
     /**
@@ -48,9 +46,7 @@ public final class BillingTest {
     public void testFundWallet() throws EasyPostException {
         vcr.setUpTest("fund_wallet");
 
-        boolean success = Billing.fundWallet("2000", PaymentMethod.Priority.PRIMARY);
-
-        assertTrue(success);
+        assertDoesNotThrow(() -> Billing.fundWallet("2000", PaymentMethod.Priority.PRIMARY));
     }
 
     /**

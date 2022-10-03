@@ -12,11 +12,10 @@ public final class Billing extends EasyPostResource {
      * Delete a payment method.
      *
      * @param priority Which type of payment method to delete.
-     * @return True if successful. Throws an exception if unsuccessful.
      * @throws EasyPostException when the request fails.
      */
-    public static boolean deletePaymentMethod(PaymentMethod.Priority priority) throws EasyPostException {
-        return deletePaymentMethod(priority, null);
+    public static void deletePaymentMethod(PaymentMethod.Priority priority) throws EasyPostException {
+        deletePaymentMethod(priority, null);
     }
 
     /**
@@ -24,29 +23,25 @@ public final class Billing extends EasyPostResource {
      *
      * @param priority Which type of payment method to delete.
      * @param apiKey   API key to use in request (overrides default API key).
-     * @return True if successful. Throws an exception if unsuccessful.
      * @throws EasyPostException when the request fails.
      */
-    public static boolean deletePaymentMethod(PaymentMethod.Priority priority, String apiKey) throws EasyPostException {
+    public static void deletePaymentMethod(PaymentMethod.Priority priority, String apiKey) throws EasyPostException {
         PaymentMethodObject paymentMethodObject = getPaymentMethodByPriority(priority, apiKey);
 
         // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
         request(EasyPostResource.RequestMethod.DELETE,
                 String.format("%s/%s/%s", EasyPost.API_BASE, paymentMethodObject.getEndpoint(),
                         paymentMethodObject.getId()), null, PaymentMethod.class, apiKey);
-
-        return true;
     }
 
     /**
      * Fund your wallet from the primary payment method.
      *
      * @param amount amount to fund.
-     * @return True if successful. Throws an exception if unsuccessful.
      * @throws EasyPostException when the request fails.
      */
-    public static boolean fundWallet(String amount) throws EasyPostException {
-        return fundWallet(amount, PaymentMethod.Priority.PRIMARY, null);
+    public static void fundWallet(String amount) throws EasyPostException {
+        fundWallet(amount, PaymentMethod.Priority.PRIMARY, null);
     }
 
     /**
@@ -54,11 +49,10 @@ public final class Billing extends EasyPostResource {
      *
      * @param amount   amount to fund.
      * @param priority which type of payment method to use to fund the wallet. Defaults to primary.
-     * @return True if successful. Throws an exception if unsuccessful.
      * @throws EasyPostException when the request fails.
      */
-    public static boolean fundWallet(String amount, PaymentMethod.Priority priority) throws EasyPostException {
-        return fundWallet(amount, priority, null);
+    public static void fundWallet(String amount, PaymentMethod.Priority priority) throws EasyPostException {
+        fundWallet(amount, priority, null);
     }
 
     /**
@@ -67,10 +61,9 @@ public final class Billing extends EasyPostResource {
      * @param amount   amount to fund.
      * @param priority which type of payment method to use to fund the wallet.
      * @param apiKey   API key to use in request (overrides default API key).
-     * @return True if successful. Throws an exception if unsuccessful.
      * @throws EasyPostException when the request fails.
      */
-    public static boolean fundWallet(String amount, PaymentMethod.Priority priority, String apiKey)
+    public static void fundWallet(String amount, PaymentMethod.Priority priority, String apiKey)
             throws EasyPostException {
         PaymentMethodObject paymentMethodObject = getPaymentMethodByPriority(priority, apiKey);
 
@@ -80,8 +73,6 @@ public final class Billing extends EasyPostResource {
         // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
         request(RequestMethod.POST, String.format("%s/%s/%s/%s", EasyPost.API_BASE, paymentMethodObject.getEndpoint(),
                 paymentMethodObject.getId(), "charges"), params, PaymentMethod.class, apiKey);
-
-        return true;
     }
 
     /**

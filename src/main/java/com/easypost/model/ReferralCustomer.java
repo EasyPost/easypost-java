@@ -66,11 +66,10 @@ public class ReferralCustomer extends BaseUser {
      *
      * @param email  Email of the referral user to update.
      * @param userId ID of the referral user to update.
-     * @return true if success.
      * @throws EasyPostException when the request fails.
      */
-    public static boolean updateEmail(String email, String userId) throws EasyPostException {
-        return updateEmail(email, userId, null);
+    public static void updateEmail(String email, String userId) throws EasyPostException {
+        updateEmail(email, userId, null);
     }
 
     /**
@@ -79,10 +78,9 @@ public class ReferralCustomer extends BaseUser {
      * @param email  Email of the referral user to update.
      * @param userId ID of the referral user to update.
      * @param apiKey API key to use in request (overrides default API key).
-     * @return true if success.
      * @throws EasyPostException when the request fails.
      */
-    public static boolean updateEmail(String email, String userId, String apiKey) throws EasyPostException {
+    public static void updateEmail(String email, String userId, String apiKey) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<>();
         Map<String, Object> params = new HashMap<>();
         params.put("email", email);
@@ -90,8 +88,6 @@ public class ReferralCustomer extends BaseUser {
 
         request(RequestMethod.PUT, String.format("%s/%s/%s", EasyPost.API_BASE, "referral_customers", userId),
                 wrappedParams, ReferralCustomer.class, apiKey);
-
-        return true;
     }
 
     /**

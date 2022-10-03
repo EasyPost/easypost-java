@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -70,9 +71,8 @@ public final class ReferralTest {
         vcr.setUpTest("update");
 
         ReferralCustomer referralUser = createReferral();
-        boolean response = ReferralCustomer.updateEmail("email@example.com", referralUser.getId());
 
-        assertTrue(response);
+        assertDoesNotThrow(() -> ReferralCustomer.updateEmail("email@example.com", referralUser.getId()));
     }
 
     /**
