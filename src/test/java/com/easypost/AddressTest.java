@@ -131,7 +131,7 @@ public final class AddressTest {
         Address retrievedAddress = Address.retrieve(address.getId());
 
         assertInstanceOf(Address.class, retrievedAddress);
-        assertEquals(address.getId(), retrievedAddress.getId());
+        assertTrue(address.equals(retrievedAddress));
 
     }
 

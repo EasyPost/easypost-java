@@ -5,7 +5,6 @@ import com.easypost.model.CustomsItem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -62,6 +61,6 @@ public final class CustomsItemTest {
         CustomsItem retrieveCustomsItem = CustomsItem.retrieve(customsItem.getId());
 
         assertInstanceOf(CustomsItem.class, customsItem);
-        assertThat(customsItem).usingRecursiveComparison().isEqualTo(retrieveCustomsItem);
+        assertTrue(customsItem.equals(retrieveCustomsItem));
     }
 }

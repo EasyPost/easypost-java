@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -84,7 +83,7 @@ public final class ShipmentTest {
         Shipment retrievedShipment = Shipment.retrieve(shipment.getId());
 
         assertInstanceOf(Shipment.class, retrievedShipment);
-        assertThat(shipment).usingRecursiveComparison().isEqualTo(retrievedShipment);
+        assertTrue(shipment.equals(retrievedShipment));
     }
 
     /**

@@ -874,4 +874,27 @@ public abstract class EasyPostResource {
         }
     }
 
+    /**
+     * Override the hashCode method because it is needed when overriding equals().
+     *
+     * @return The hashcode of current object.
+     */
+    @Override
+    public int hashCode() {
+      return GSON.toJson(this).hashCode();
+    }
+
+    /**
+     * Override the equals method, convert objects to Json strings for comparsion.
+     *
+     * @param object Object of any class.
+     * @return If two objects have the same properties.
+     */
+    @Override
+    public boolean equals(Object object) {
+      String currentObject = GSON.toJson(this);
+      String newObject = GSON.toJson(object);
+
+      return currentObject.equals(newObject);
+    }
 }

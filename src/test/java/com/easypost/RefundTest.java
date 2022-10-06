@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -103,6 +102,6 @@ public final class RefundTest {
         Refund retrievedRefund = Refund.retrieve(refund.getId());
 
         assertInstanceOf(Refund.class, retrievedRefund);
-        assertThat(refund).usingRecursiveComparison().isEqualTo(retrievedRefund);
+        assertTrue(refund.equals(retrievedRefund));
     }
 }
