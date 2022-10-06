@@ -44,7 +44,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+// import java.util.Random;
 import java.util.Scanner;
 
 public abstract class EasyPostResource {
@@ -878,13 +878,11 @@ public abstract class EasyPostResource {
     /**
      * Override the hashCode method because it is needed when overriding equals().
      *
-     * @return A random number.
+     * @return The hashcode of current object.
      */
     @Override
     public int hashCode() {
-      Random random = new Random();
-
-      return random.nextInt();
+      return GSON.toJson(this).hashCode();
     }
 
     /**
@@ -895,9 +893,8 @@ public abstract class EasyPostResource {
      */
     @Override
     public boolean equals(Object object) {
-      Gson gson = new Gson();
-      String currentObject = gson.toJson(this);
-      String newObject = gson.toJson(object);
+      String currentObject = GSON.toJson(this);
+      String newObject = GSON.toJson(object);
 
       return currentObject.equals(newObject);
     }
