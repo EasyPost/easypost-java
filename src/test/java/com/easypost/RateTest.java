@@ -6,8 +6,8 @@ import com.easypost.model.Shipment;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class RateTest {
     private static TestUtils.VCR vcr;
@@ -37,6 +37,6 @@ public final class RateTest {
         Rate retrievedRate = Rate.retrieve(rate.getId());
 
         assertInstanceOf(Rate.class, rate);
-        assertThat(rate).usingRecursiveComparison().isEqualTo(retrievedRate);
+        assertTrue(rate.equals(retrievedRate));
     }
 }

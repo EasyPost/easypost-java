@@ -44,6 +44,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 public abstract class EasyPostResource {
@@ -874,4 +875,30 @@ public abstract class EasyPostResource {
         }
     }
 
+    /**
+     * Override the hashCode method because it is needed when overriding equals().
+     *
+     * @return A random number.
+     */
+    @Override
+    public int hashCode() {
+      Random random = new Random();
+
+      return random.nextInt();
+    }
+
+    /**
+     * Override the equals method, convert objects to Json strings for comparsion.
+     *
+     * @param object Object of any class.
+     * @return If two objects have the same properties.
+     */
+    @Override
+    public boolean equals(Object object) {
+      Gson gson = new Gson();
+      String currentObject = gson.toJson(this);
+      String newObject = gson.toJson(object);
+
+      return currentObject.equals(newObject);
+    }
 }

@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -77,7 +76,7 @@ public final class ScanFormTest {
         ScanForm retrievedScanForm = ScanForm.retrieve(scanForm.getId());
 
         assertInstanceOf(ScanForm.class, retrievedScanForm);
-        assertThat(scanForm).usingRecursiveComparison().isEqualTo(retrievedScanForm);
+        assertTrue(scanForm.equals(retrievedScanForm));
     }
 
     /**

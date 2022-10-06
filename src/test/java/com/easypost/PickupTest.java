@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -78,7 +77,7 @@ public final class PickupTest {
         Pickup retrievedPickup = Pickup.retrieve(pickup.getId());
 
         assertInstanceOf(Pickup.class, retrievedPickup);
-        assertThat(pickup).usingRecursiveComparison().isEqualTo(retrievedPickup);
+        assertTrue(pickup.equals(retrievedPickup));
     }
 
     /**
