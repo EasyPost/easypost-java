@@ -1,6 +1,8 @@
 package com.easypost.model;
 
+import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.FilteringError;
 import com.easypost.net.EasyPostResource;
 
 import java.util.HashMap;
@@ -1296,7 +1298,7 @@ public final class Shipment extends EasyPostResource {
         }
 
         if (lowestSmartrate == null) {
-            throw new EasyPostException("No rates found.");
+            throw new FilteringError(String.format(Constants.NO_OBJECT_FOUND, "rate"));
         }
 
         return lowestSmartrate;

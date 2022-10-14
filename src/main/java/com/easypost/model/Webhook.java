@@ -1,6 +1,8 @@
 package com.easypost.model;
 
+import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.SignatureVerificationError;
 import com.easypost.net.EasyPostResource;
 import com.easypost.utils.Cryptography;
 
@@ -265,11 +267,10 @@ public final class Webhook extends EasyPostResource {
                 String json = new String(eventBody, StandardCharsets.UTF_8);
                 return GSON.fromJson(json, Event.class);
             } else {
-                throw new EasyPostException(
-                        "Webhook received did not originate from EasyPost or had a webhook secret mismatch.");
+                throw new SignatureVerificationError(Constants.WEBHOOK_DOES_NOT_MATCH);
             }
         } else {
-            throw new EasyPostException("Webhook received does not contain an HMAC signature.");
+            throw new SignatureVerificationError(Constants.INVALID_WEBHOOK_SIGNATURE);
         }
     }
 }

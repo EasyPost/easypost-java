@@ -1,6 +1,8 @@
 package com.easypost.model;
 
+import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.FilteringError;
 
 import java.net.URLEncoder;
 import java.util.List;
@@ -49,7 +51,8 @@ public final class Utilities {
         }
 
         if (lowestRate == null) {
-            throw new EasyPostException("Unable to find lowest rate matching required criteria.");
+            throw new FilteringError(String.format(
+                Constants.NO_OBJECT_FOUND, "lowest rate matching required criteria"));
         }
 
         return lowestRate;

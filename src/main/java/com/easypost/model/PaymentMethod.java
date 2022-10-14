@@ -1,7 +1,9 @@
 package com.easypost.model;
 
 import com.easypost.EasyPost;
+import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.net.EasyPostResource;
 
 public class PaymentMethod extends EasyPostResource {
@@ -81,7 +83,7 @@ public class PaymentMethod extends EasyPostResource {
                         PaymentMethod.class, apiKey);
 
         if (response.getId() == null) {
-            throw new EasyPostException("Billing has not been setup for this user. Please add a payment method.");
+            throw new InvalidObjectError(Constants.NO_PAYMENT_METHODS);
         }
 
         return response;

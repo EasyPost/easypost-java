@@ -1,7 +1,9 @@
 package com.easypost.model;
 
 import com.easypost.EasyPost;
+import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.net.EasyPostResource;
 
 import java.util.HashMap;
@@ -98,7 +100,7 @@ public final class Billing extends EasyPostResource {
                         PaymentMethod.class, apiKey);
 
         if (response.getId() == null) {
-            throw new EasyPostException("Billing has not been setup for this user. Please add a payment method.");
+            throw new InvalidObjectError(Constants.NO_PAYMENT_METHODS);
         }
 
         return response;
@@ -128,7 +130,7 @@ public final class Billing extends EasyPostResource {
         }
 
         if (paymentMethod == null || paymentMethod.getId() == null) {
-            throw new EasyPostException("The chosen payment method is not set up yet.");
+            throw new InvalidObjectError(Constants.NO_PAYMENT_METHODS);
         }
 
         return paymentMethod;

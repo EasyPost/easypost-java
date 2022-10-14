@@ -1,7 +1,8 @@
 package com.easypost.model;
 
+import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.exception.General.FilteringError;
 
 import java.util.HashMap;
 import java.util.List;
@@ -156,9 +157,8 @@ public class User extends BaseUser {
                 return parentKeys.getChildren().get(i).getKeys();
             }
         }
-
-        throw new EasyPostException(
-                String.format("Unable to find api key. Please contact %s.", EasyPostResource.EASYPOST_SUPPORT_EMAIL));
+        
+        throw new FilteringError(String.format(Constants.NO_OBJECT_FOUND, "API keys"));
     }
 
     /**

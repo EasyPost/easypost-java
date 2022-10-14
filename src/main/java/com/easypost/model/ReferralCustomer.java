@@ -1,7 +1,9 @@
 package com.easypost.model;
 
 import com.easypost.EasyPost;
+import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.ExternalApiError;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -153,7 +155,7 @@ public class ReferralCustomer extends BaseUser {
         try {
             stripeToken = createStripeToken(number, expirationMonth, expirationYear, cvc, easypostStripeApiKey);
         } catch (Exception e) {
-            throw new Exception("Could not send card details to Stripe, please try again later", e);
+            throw new ExternalApiError(String.format(Constants.EXTERNAL_API_CALL_FAILED, "Stripe"));
         }
 
         return createEasypostCreditCard(referralApiKey, stripeToken, priority.toString().toLowerCase());

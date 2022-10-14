@@ -11,47 +11,73 @@ package com.easypost.exception;
 public class EasyPostException extends Exception {
 
     private static final long serialVersionUID = 1L;
-    private final String param;
+    private final String code;
+    private final Integer statusCode;
+    private final String message;
 
     /**
-     * Get the parameter name.
-     *
-     * @return the parameter name
-     */
-    public String getParam() {
-        return param;
-    }
-
-    /**
-     * Constructor.
+     * EasyPostException constructor.
      *
      * @param message the exception message
      */
     public EasyPostException(final String message) {
-        super(message, null);
-        this.param = null;
+        super(message);
+        this.code = null;
+        this.statusCode = null;
+        this.message = message;
     }
 
     /**
-     * Constructor.
+     * EasyPostException constructor.
      *
      * @param message the exception message
      * @param ex      the exception cause
      */
     public EasyPostException(final String message, final Throwable ex) {
         super(message, ex);
-        this.param = null;
+        this.code = null;
+        this.statusCode = null;
+        this.message = message;
     }
 
     /**
-     * Constructor.
+     * EasyPostException constructor.
      *
      * @param message the exception message
-     * @param param   the parameter name
-     * @param ex      the exception cause
+     * @param code the exception code
+     * @param statusCode the exception status code
      */
-    public EasyPostException(final String message, final String param, final Throwable ex) {
-        super(message, ex);
-        this.param = param;
+    public EasyPostException(final String message, final String code, final int statusCode) {
+        super(message);
+        this.code = code;
+        this.statusCode = statusCode;
+        this.message = message;
+    }
+
+    /**
+     * Get status code of the error object.
+     * 
+     * @return statusCode the status code of the error object
+     */
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    /**
+     * Get code of the error object.
+     *
+     * @return code the code of the error object
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * Get message of the error object.
+     *
+     * @return message the message of the error object
+     */
+    public String getMessage() {
+        return message;
     }
 }

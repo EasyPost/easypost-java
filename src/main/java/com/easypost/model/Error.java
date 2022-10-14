@@ -1,10 +1,29 @@
 package com.easypost.model;
 
+import java.util.List;
+
 public final class Error {
-    private String field;
     private String message;
-    private String suggestion;
     private String code;
+    private List<Error> errors;
+
+    /**
+     * Get the errors from an Error object.
+     *
+     * @return errors
+     */
+    public List<Error> getError() {
+        return errors;
+    }
+
+    /**
+     * set the errors for an Error object.
+     * 
+     * @param errors errors
+     */
+    public void setError(List<Error> errors) {
+        this.errors = errors;
+    }
 
     /**
      * Get the error code.
@@ -25,24 +44,6 @@ public final class Error {
     }
 
     /**
-     * Get the field that caused the error.
-     *
-     * @return field
-     */
-    public String getField() {
-        return field;
-    }
-
-    /**
-     * Set the field that caused the error.
-     *
-     * @param field field
-     */
-    public void setField(final String field) {
-        this.field = field;
-    }
-
-    /**
      * Get the error message.
      *
      * @return message
@@ -58,23 +59,5 @@ public final class Error {
      */
     public void setMessage(final String message) {
         this.message = message;
-    }
-
-    /**
-     * Get the suggestion for the error.
-     *
-     * @return suggestion
-     */
-    public String getSuggestion() {
-        return suggestion;
-    }
-
-    /**
-     * Set the suggestion for the error.
-     *
-     * @param suggestion suggestion
-     */
-    public void setSuggestion(final String suggestion) {
-        this.suggestion = suggestion;
     }
 }
