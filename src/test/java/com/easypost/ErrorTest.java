@@ -56,7 +56,7 @@ public final class ErrorTest extends EasyPostResource{
     }
 
     /**
-     * Test every error type and make sure each errro has property.
+     * Test every error type and make sure each error has the correct properties.
      * 
      * @throws EasyPostException
      */

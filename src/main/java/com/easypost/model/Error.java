@@ -17,7 +17,7 @@ public final class Error {
     }
 
     /**
-     * set the errors for an Error object.
+     * Set the errors for an Error object.
      * 
      * @param errors errors
      */
