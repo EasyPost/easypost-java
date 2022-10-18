@@ -463,6 +463,9 @@ public abstract class EasyPostResource {
     }
 
     private static String getResponseBody(final InputStream responseStream) throws IOException {
+        if (responseStream == null) {
+            return "";
+        }
         @SuppressWarnings ("resource") String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next();
         responseStream.close();
         return rBody;
@@ -620,7 +623,10 @@ public abstract class EasyPostResource {
      * @param rBody Body of the error message.
      * @param rCode Status code of the error messsage.
      */
-    protected static void handleAPIError(final String rBody, final int rCode) throws EasyPostException {
+    protected static void handleAPIError(String rBody, final int rCode) throws EasyPostException {
+        if (rBody == null || rBody.length() == 0) {
+            rBody = "{}";
+        }
         Error error = GSON.fromJson(rBody, Error.class);
         String errorMessage = error.getMessage();
         String errorCode = error.getCode();
