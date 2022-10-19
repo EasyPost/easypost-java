@@ -165,6 +165,7 @@ public final class WebhookTest {
         Event event = Webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
 
         assertEquals("batch.created", event.getDescription());
+        assertEquals("batch_123...", event.getResult().get("id"));
     }
 
     /**
