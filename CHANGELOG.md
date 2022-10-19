@@ -17,6 +17,8 @@
 - Improves error exception handling
   - Specific error types for each category of error
   - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
+- Adds two missing attributes in the Event class: `pendingUrls` and `completedUrls`
+- Changes the type `result` of Event from `EasyPostResource` to `Map<String, Object>`
 
 ## v5.10.0 (2022-09-21)
 
