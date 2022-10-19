@@ -12,6 +12,8 @@
   - `fundWallet()` and `deletePaymentMethod()` in Billing class
   - `createList()` in Tracker class
   - `updateEmail()` in ReferralCustomer class
+- Adds two missing attributes in the Event class: `pendingUrls` and `completedUrls`
+- Changes the type `result` of Event from `EasyPostResource` to `Map<String, Object>`
 
 ## v5.10.0 (2022-09-21)
 

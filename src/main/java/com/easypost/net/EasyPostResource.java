@@ -10,8 +10,6 @@ package com.easypost.net;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.Event;
-import com.easypost.model.EventDeserializer;
 import com.easypost.model.Fee;
 import com.easypost.model.Shipment;
 import com.easypost.model.SmartrateCollection;
@@ -58,11 +56,9 @@ public abstract class EasyPostResource {
     public static final Gson GSON =
             new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .registerTypeAdapter(HashMap.class, new HashMapSerializer())
-                    .registerTypeAdapter(Event.class, new EventDeserializer())
                     .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer()).create();
     public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .registerTypeAdapter(Event.class, new EventDeserializer()).create();
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
     public static final String CHARSET = "UTF-8";
     public static final ArrayList<String> GLOBAL_FIELD_ACCESSORS =
             new ArrayList<>(Arrays.asList("getCreatedAt", "getUpdatedAt", "getFees"));

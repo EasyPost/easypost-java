@@ -3,14 +3,17 @@ package com.easypost.model;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
+import java.util.List;
 import java.util.Map;
 
 public final class Event extends EasyPostResource {
     private String id;
     private String description;
     private String mode;
-    private EasyPostResource result;
+    private Map<String, Object> result;
     private Map<String, Object> previousAttributes;
+    private List<String> pendingUrls;
+    private List<String> completedUrls;
 
     /**
      * Get the description of this Event.
@@ -89,7 +92,7 @@ public final class Event extends EasyPostResource {
      *
      * @return Event's result
      */
-    public EasyPostResource getResult() {
+    public Map<String, Object> getResult() {
         return result;
     }
 
@@ -98,8 +101,42 @@ public final class Event extends EasyPostResource {
      *
      * @param result Event's result
      */
-    public void setResult(final EasyPostResource result) {
+    public void setResult(final Map<String, Object> result) {
         this.result = result;
+    }
+
+    /**
+     * Get the pendingUrls of this Event.
+     *
+     * @return Event's pendingUrls
+     */
+    public List<String> getPendingUrls() {
+        return this.pendingUrls;
+    }
+
+    /**
+     * 
+     * @param pendingUrls pendingUrls of this Event
+     */
+    public void setPendingUrls(List<String> pendingUrls) {
+        this.pendingUrls = pendingUrls;
+    }
+
+    /**
+     * Get the completedUrls of this Event.
+     *
+     * @return Event's completedUrls
+     */
+    public List<String> getCompletedUrls() {
+        return this.completedUrls;
+    }
+
+    /**
+     *
+     * @param completedUrls pendingUrls of this Event
+     */
+    public void setCompletedUrls(List<String> completedUrls) {
+        this.completedUrls = completedUrls;
     }
 
     /**
