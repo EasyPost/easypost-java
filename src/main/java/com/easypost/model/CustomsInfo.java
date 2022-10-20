@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class CustomsInfo extends EasyPostResource {
-    private String id;
     private String contentsType;
     private String contentsExplanation;
     private boolean customsCertify;
@@ -144,24 +143,6 @@ public final class CustomsInfo extends EasyPostResource {
      */
     public void setEelPfc(String eelPfc) {
         this.eelPfc = eelPfc;
-    }
-
-    /**
-     * Get this CustomsInfo's ID.
-     *
-     * @return the ID of this CustomsInfo.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set this CustomsInfo's ID.
-     *
-     * @param id the ID of this CustomsInfo.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**

@@ -4,7 +4,6 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
 
 public class Rate extends EasyPostResource {
-    private String id;
     private String carrier;
     private String service;
     private Float rate;
@@ -182,24 +181,6 @@ public class Rate extends EasyPostResource {
      */
     public void setEstDeliveryDays(final Number estDeliveryDays) {
         this.estDeliveryDays = estDeliveryDays;
-    }
-
-    /**
-     * Get the ID of this Rate.
-     *
-     * @return ID of this Rate.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Rate.
-     *
-     * @param id ID of this Rate.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**

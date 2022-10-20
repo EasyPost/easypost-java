@@ -12,7 +12,6 @@ public class Brand extends EasyPostResource {
     private String name;
     private String userID;
     private String theme;
-    private String id;
 
     /**
      * Get the ad of the Brand.
@@ -84,24 +83,6 @@ public class Brand extends EasyPostResource {
      */
     public void setColor(String color) {
         this.color = color;
-    }
-
-    /**
-     * Get the ID of the Brand.
-     *
-     * @return the ID of the Brand.
-     */
-    public String getId() {
-        return this.id;
-    }
-
-    /**
-     * Set the ID of the Brand.
-     *
-     * @param id the id of the Brand.
-     */
-    public void setId(String id) {
-        this.id = id;
     }
 
     /**

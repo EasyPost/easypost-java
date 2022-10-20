@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class Refund extends EasyPostResource {
-    private String id;
     private String trackingCode;
     private String confirmationNumber;
     private String status;
@@ -50,24 +49,6 @@ public final class Refund extends EasyPostResource {
      */
     public void setConfirmationNumber(final String confirmationNumber) {
         this.confirmationNumber = confirmationNumber;
-    }
-
-    /**
-     * Get refund ID.
-     *
-     * @return refund ID
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set refund ID.
-     *
-     * @param id refund ID
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**

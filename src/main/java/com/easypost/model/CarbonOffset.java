@@ -3,7 +3,6 @@ package com.easypost.model;
 import com.easypost.net.EasyPostResource;
 
 public final class CarbonOffset extends EasyPostResource {
-
     private String currency;
     private int grams;
     private String price;

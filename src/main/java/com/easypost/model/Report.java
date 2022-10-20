@@ -13,10 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class Report extends EasyPostResource {
-    private String id;
     private Date startDate;
     private Date endDate;
-    private String mode;
     private String status;
     private Boolean includeChildren;
     private String url;
@@ -38,42 +36,6 @@ public final class Report extends EasyPostResource {
      */
     public void setEndDate(final Date endDate) {
         this.endDate = endDate;
-    }
-
-    /**
-     * Get the ID of this Report.
-     *
-     * @return the ID of this Report.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Report.
-     *
-     * @param id the ID of this Report.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of this Report.
-     *
-     * @return the mode of this Report
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of this Report.
-     *
-     * @param mode the mode of this Report.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**

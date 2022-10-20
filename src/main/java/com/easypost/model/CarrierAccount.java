@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class CarrierAccount extends EasyPostResource {
-    private String id;
     private String object;
     private String type;
     private Fields fields;
@@ -316,24 +315,6 @@ public final class CarrierAccount extends EasyPostResource {
 
         this.merge(this, response);
         return this;
-    }
-
-    /**
-     * Get ID of the carrier account.
-     *
-     * @return ID of the carrier account.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set ID of the carrier account.
-     *
-     * @param id ID of the carrier account.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**

@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class Event extends EasyPostResource {
-    private String id;
     private String description;
-    private String mode;
     private Map<String, Object> result;
     private Map<String, Object> previousAttributes;
     private List<String> pendingUrls;
@@ -31,42 +29,6 @@ public final class Event extends EasyPostResource {
      */
     public void setDescription(final String description) {
         this.description = description;
-    }
-
-    /**
-     * Get this Event's ID.
-     *
-     * @return Event's ID
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set this Event's ID.
-     *
-     * @param id Event's ID
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of this Event.
-     *
-     * @return Event's mode
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of this Event.
-     *
-     * @param mode Event's mode
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**

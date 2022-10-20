@@ -3,6 +3,7 @@ package com.easypost.model;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.SignatureVerificationError;
+import com.easypost.net.Constant;
 import com.easypost.net.EasyPostResource;
 import com.easypost.utils.Cryptography;
 
@@ -13,8 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class Webhook extends EasyPostResource {
-    private String id;
-    private String mode;
     private String url;
     private Date disabledAt;
 
@@ -158,42 +157,6 @@ public final class Webhook extends EasyPostResource {
     }
 
     /**
-     * Get the ID of the webhook.
-     *
-     * @return the ID of the webhook
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of the webhook.
-     *
-     * @param id the ID of the webhook
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of the webhook.
-     *
-     * @return the mode of the webhook
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of the webhook.
-     *
-     * @param mode the mode of the webhook
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
-    }
-
-    /**
      * Update this webhook.
      *
      * @return Webhook object
@@ -265,7 +228,7 @@ public final class Webhook extends EasyPostResource {
             if (Cryptography.signaturesMatch(providedSignature, calculatedSignature)) {
                 // Serialize data into a JSON string, then into an Event object
                 String json = new String(eventBody, StandardCharsets.UTF_8);
-                return GSON.fromJson(json, Event.class);
+                return Constant.GSON.fromJson(json, Event.class);
             } else {
                 throw new SignatureVerificationError(Constants.WEBHOOK_DOES_NOT_MATCH);
             }

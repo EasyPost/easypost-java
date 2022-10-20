@@ -5,7 +5,6 @@ import com.easypost.net.EasyPostResource;
 import java.util.List;
 
 public class BaseUser extends EasyPostResource {
-    private String id;
     private String name;
     private String email;
     private String phoneNumber;
@@ -130,24 +129,6 @@ public class BaseUser extends EasyPostResource {
      */
     public void setHasBillingMethod(boolean hasBillingMethod) {
         this.hasBillingMethod = hasBillingMethod;
-    }
-
-    /**
-     * Get the ID of the User.
-     *
-     * @return the ID of the User.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of the User.
-     *
-     * @param id the ID of the User.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**

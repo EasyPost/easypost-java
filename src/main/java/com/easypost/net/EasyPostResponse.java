@@ -9,7 +9,6 @@
 package com.easypost.net;
 
 public class EasyPostResponse {
-
     private int responseCode;
     private String responseBody;
 

@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class Batch extends EasyPostResource {
-    private String id;
-    private String mode;
     private String state;
     private BatchStatus status;
     private Number numShipments;
@@ -240,48 +238,12 @@ public final class Batch extends EasyPostResource {
     }
 
     /**
-     * Get ID of this batch.
-     *
-     * @return ID of this batch.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set ID of this batch.
-     *
-     * @param id ID of this batch.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
      * Get label URL of this batch.
      *
      * @return Label URL of this batch.x
      */
     public String getLabelUrl() {
         return labelUrl;
-    }
-
-    /**
-     * Get mode of this batch.
-     *
-     * @return mode of this batch.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set mode of this batch.
-     *
-     * @param mode mode of this batch.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**

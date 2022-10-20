@@ -13,7 +13,6 @@ public class PaymentMethod extends EasyPostResource {
         SECONDARY
     }
 
-    private String id;
     private String object;
     private PaymentMethodObject primaryPaymentMethod;
     private PaymentMethodObject secondaryPaymentMethod;
@@ -114,14 +113,5 @@ public class PaymentMethod extends EasyPostResource {
      */
     public PaymentMethodObject getSecondaryPaymentMethodObject() {
         return secondaryPaymentMethod;
-    }
-
-    /**
-     * Get ID of this PaymentMethod object.
-     *
-     * @return ID of this PaymentMethod.
-     */
-    public String getId() {
-        return id;
     }
 }

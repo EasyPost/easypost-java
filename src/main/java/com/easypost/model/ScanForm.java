@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ScanForm extends EasyPostResource {
-    private String id;
     private String status;
     private String message;
     private Address fromAddress;
@@ -69,24 +68,6 @@ public class ScanForm extends EasyPostResource {
      */
     public void setFromAddress(final Address fromAddress) {
         this.fromAddress = fromAddress;
-    }
-
-    /**
-     * Get the ID of the ScanForm.
-     *
-     * @return the ID of the ScanForm.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of the ScanForm.
-     *
-     * @param id the ID of the ScanForm.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**

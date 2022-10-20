@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class Address extends BaseAddress {
-
-    private String mode;
     private String message;
     private String carrierFacility;
     private String federalTaxId;
@@ -66,24 +64,6 @@ public final class Address extends BaseAddress {
      */
     public void setMessage(final String message) {
         this.message = message;
-    }
-
-    /**
-     * Get address mode.
-     *
-     * @return address mode
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set address mode.
-     *
-     * @param mode address mode
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**

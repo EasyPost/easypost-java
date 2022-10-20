@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class Insurance extends EasyPostResource {
-    private String id;
-    private String mode;
     private String reference;
     private Address toAddress;
     private Address fromAddress;
@@ -260,42 +258,6 @@ public final class Insurance extends EasyPostResource {
     public Insurance refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, String.format("%s", instanceURL(Insurance.class, this.getId())), params,
                 Insurance.class, apiKey);
-    }
-
-    /**
-     * Get the ID of this Insurance.
-     *
-     * @return the ID of the Insurance
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Insurance.
-     *
-     * @param id the ID of the Insurance
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of this Insurance.
-     *
-     * @return the mode of the Insurance
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of this Insurance.
-     *
-     * @param mode the mode of the Insurance
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**

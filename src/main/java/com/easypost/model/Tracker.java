@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class Tracker extends EasyPostResource {
-    private String id;
-    private String mode;
     private String trackingCode;
     private String status;
     private String shipmentId;
@@ -75,42 +73,6 @@ public final class Tracker extends EasyPostResource {
      */
     public void setEstDeliveryDate(final Date estDeliveryDate) {
         this.estDeliveryDate = estDeliveryDate;
-    }
-
-    /**
-     * Get the ID of the Tracker.
-     *
-     * @return the ID of the Tracker.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of the Tracker.
-     *
-     * @param id the ID of the Tracker.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of the Tracker.
-     *
-     * @return the mode of the Tracker.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of the Tracker.
-     *
-     * @param mode the mode of the Tracker.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**

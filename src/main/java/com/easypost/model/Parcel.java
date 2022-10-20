@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class Parcel extends EasyPostResource {
-    private String id;
     private String predefinedPackage;
     private Float weight;
     private Float length;
@@ -30,24 +29,6 @@ public final class Parcel extends EasyPostResource {
      */
     public void setHeight(final Float height) {
         this.height = height;
-    }
-
-    /**
-     * Get the ID of this Parcel.
-     *
-     * @return the ID of this Parcel.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Parcel.
-     *
-     * @param id the ID of this Parcel.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**

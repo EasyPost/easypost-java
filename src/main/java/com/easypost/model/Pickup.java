@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class Pickup extends EasyPostResource {
-    private String id;
-    private String mode;
     private String status;
     private String reference;
     private Date minDatetime;
@@ -256,42 +254,6 @@ public final class Pickup extends EasyPostResource {
     public Pickup refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, String.format("%s", instanceURL(Pickup.class, this.getId())), params,
                 Pickup.class, apiKey);
-    }
-
-    /**
-     * Get the ID of this Pickup.
-     *
-     * @return the ID of this Pickup.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Pickup.
-     *
-     * @param id the ID of this Pickup.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of this Pickup.
-     *
-     * @return the mode of this Pickup.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of this Pickup.
-     *
-     * @param mode the mode of this Pickup.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**

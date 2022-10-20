@@ -4,6 +4,7 @@ import com.easypost.EasyPost;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.ExternalApiError;
+import com.easypost.net.Constant;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -226,7 +227,8 @@ public class ReferralCustomer extends BaseUser {
 
         String responseBody = response.toString();
 
-        @SuppressWarnings ("unchecked") Map<String, Object> responseMap = GSON.fromJson(responseBody, Map.class);
+        @SuppressWarnings ("unchecked") Map<String, Object> responseMap =
+            Constant.GSON.fromJson(responseBody, Map.class);
 
         return responseMap.get("id").toString();
     }

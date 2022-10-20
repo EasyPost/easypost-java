@@ -3,7 +3,6 @@ package com.easypost.model;
 import com.easypost.net.EasyPostResource;
 
 public final class TaxIdentifier extends EasyPostResource {
-
     private String entity;
     private String taxId;
     private String taxIdType;

@@ -3,7 +3,6 @@ package com.easypost.model;
 import com.easypost.net.EasyPostResource;
 
 public final class PostageLabel extends EasyPostResource {
-    private String id;
     private int dateAdvance;
     private String integratedForm;
     private int labelResolution;
@@ -50,24 +49,6 @@ public final class PostageLabel extends EasyPostResource {
      */
     public String getEpl2LabelType() {
         return labelEpl2Type;
-    }
-
-    /**
-     * Get the ID of this PostageLabel.
-     *
-     * @return ID of this PostageLabel.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this PostageLabel.
-     *
-     * @param id ID of this PostageLabel.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**

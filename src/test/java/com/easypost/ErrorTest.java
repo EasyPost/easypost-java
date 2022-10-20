@@ -1,7 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.Constants;
-import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.RedirectError;
 import com.easypost.exception.API.ServiceUnavailablError;
@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class ErrorTest extends EasyPostResource{
+public final class ErrorTest extends Requestor {
     private static TestUtils.VCR vcr;
 
     /**
@@ -91,7 +91,7 @@ public final class ErrorTest extends EasyPostResource{
 
         for (Map.Entry<Integer, Class<?>> entry: apiErrorsMap.entrySet()) {
             EasyPostException exception = assertThrows(EasyPostException.class,
-                () -> EasyPostResource.handleAPIError("{}", entry.getKey()));
+                () -> handleAPIError("{}", entry.getKey()));
 
             assertEquals(Constants.API_DID_NOT_RETURN_ERROR_DETAILS, exception.getMessage());
             assertEquals("NO RESPONSE CODE", exception.getCode());
@@ -110,7 +110,7 @@ public final class ErrorTest extends EasyPostResource{
         String errorMessageStringJson =
             "{\"error\": {\"code\": \"ERROR_CODE\", \"message\": \"ERROR_MESSAGE_1\", \"errors\": []}}";
         EasyPostException exception = assertThrows(EasyPostException.class,
-            () -> EasyPostResource.handleAPIError(errorMessageStringJson, 400));
+            () -> handleAPIError(errorMessageStringJson, 400));
 
         assertEquals("ERROR_MESSAGE_1", exception.getMessage());
     }
@@ -126,7 +126,7 @@ public final class ErrorTest extends EasyPostResource{
             "[\"ERROR_MESSAGE_1\", \"ERROR_MESSAGE_2\"], \"errors\": []}}";
 
         EasyPostException exception = assertThrows(EasyPostException.class,
-            () -> EasyPostResource.handleAPIError(errorMessageArrayJson, 400));
+            () -> handleAPIError(errorMessageArrayJson, 400));
 
         assertEquals("ERROR_MESSAGE_1, ERROR_MESSAGE_2", exception.getMessage());
     }

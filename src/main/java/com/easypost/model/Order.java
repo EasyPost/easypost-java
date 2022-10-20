@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class Order extends EasyPostResource {
-    private String id;
-    private String mode;
     private String service;
     private String reference;
     private Boolean isReturn;
@@ -310,42 +308,6 @@ public final class Order extends EasyPostResource {
     public Order refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, String.format("%s", instanceURL(Order.class, this.getId())), params,
                 Order.class, apiKey);
-    }
-
-    /**
-     * Get the ID of the Order.
-     *
-     * @return the ID of the Order.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of the Order.
-     *
-     * @param id the ID of the Order.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of the Order.
-     *
-     * @return the mode of the Order.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of the Order.
-     *
-     * @param mode the mode of the Order.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**

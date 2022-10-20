@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class Shipment extends EasyPostResource {
-    private String id;
-    private String mode;
     private String reference;
     private Boolean isReturn;
     private Address toAddress;
@@ -40,6 +38,7 @@ public final class Shipment extends EasyPostResource {
     private List<TaxIdentifier> taxIdentifiers;
     private List<CarrierAccount> carrierAccounts;
     private String service;
+    private List<Fee> fees;
 
     /**
      * Get the batch ID of this Shipment.
@@ -510,6 +509,22 @@ public final class Shipment extends EasyPostResource {
     }
 
     /**
+     * @return the Fees associated with this object
+     */
+    public List<Fee> getFees() {
+        return fees;
+    }
+
+    /**
+     * Set the Fees associated with this object.
+     *
+     * @param fees the Fees associated with this object
+     */
+    public void setFees(final List<Fee> fees) {
+        this.fees = fees;
+    }
+
+    /**
      * Create a new Shipment object from a map of parameters.
      *
      * @param params the map of parameters.
@@ -633,42 +648,6 @@ public final class Shipment extends EasyPostResource {
     public Shipment refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         return request(RequestMethod.GET, String.format("%s", instanceURL(Shipment.class, this.getId())), params,
                 Shipment.class, apiKey);
-    }
-
-    /**
-     * Get the ID of this Shipment.
-     *
-     * @return the ID of this Shipment.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Shipment.
-     *
-     * @param id the ID of this Shipment.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of this Shipment.
-     *
-     * @return the mode of this Shipment.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of this Shipment.
-     *
-     * @param mode the mode of this Shipment.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**

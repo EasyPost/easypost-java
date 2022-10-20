@@ -6,7 +6,6 @@ import com.easypost.net.EasyPostResource;
 import java.util.List;
 
 public final class ApiKeys extends EasyPostResource {
-    private String id;
     private List<ApiKey> keys;
     private List<ApiKeys> children;
 
@@ -26,24 +25,6 @@ public final class ApiKeys extends EasyPostResource {
      */
     public void setChildren(final List<ApiKeys> children) {
         this.children = children;
-    }
-
-    /**
-     * Get API key ID.
-     *
-     * @return API key ID.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set API key ID.
-     *
-     * @param id API key ID.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**

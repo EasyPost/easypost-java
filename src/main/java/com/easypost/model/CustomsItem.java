@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class CustomsItem extends EasyPostResource {
-    private String id;
     private String description;
     private String hsTariffNumber;
     private String originCountry;
@@ -87,24 +86,6 @@ public final class CustomsItem extends EasyPostResource {
      */
     public void setHsTariffNumber(final String hsTariffNumber) {
         this.hsTariffNumber = hsTariffNumber;
-    }
-
-    /**
-     * Get this CustomsItem's ID.
-     *
-     * @return the ID of this CustomsItem.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set this CustomsItem's ID.
-     *
-     * @param id the ID of this CustomsItem.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**
