@@ -7,13 +7,16 @@
 - Changes the type of Insurance `Amount` from Float to String
 - Removes `getUpdate` and `setUpdate` from Tracker class
 - Removes all beta features and corrsponding unit tests
-- Remove `serviceCode` from `Rate` class since this value is internal use only
+- Removes `serviceCode` from `Rate` class since this value is internal use only
 - Converts return type from boolean to void in empty response body functions
   - `fundWallet()` and `deletePaymentMethod()` in Billing class
   - `createList()` in Tracker class
   - `updateEmail()` in ReferralCustomer class
 - Adds two missing attributes in the Event class: `pendingUrls` and `completedUrls`
 - Changes the type `result` of Event from `EasyPostResource` to `Map<String, Object>`
+- Improves error exception handling
+  - Specific error types for each category of error
+  - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
 
 ## v5.10.0 (2022-09-21)
 

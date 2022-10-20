@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1666294010,
+    "recordedAt": 1666294101,
     "request": {
       "body": "{}",
       "method": "POST",
@@ -15,23 +15,23 @@
           "application/json"
         ]
       },
-      "uri": "https://api.easypost.com/v2/shipments"
+      "uri": "https://api.easypost.com/v2/addresses/create_and_verify"
     },
     "response": {
-      "body": "{\n  \"error\": {\n    \"code\": \"PARAMETER.REQUIRED\",\n    \"message\": \"Missing required parameter.\",\n    \"errors\": [\n      {\n        \"field\": \"shipment\",\n        \"message\": \"cannot be blank\"\n      }\n    ]\n  }\n}",
+      "body": "{\n  \"error\": {\n    \"code\": \"PARAMETER.REQUIRED\",\n    \"message\": \"Missing required parameter.\",\n    \"errors\": [\n      {\n        \"field\": \"address\",\n        \"message\": \"cannot be blank\"\n      }\n    ]\n  }\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 422 Unprocessable Entity"
         ],
         "content-length": [
-          "139"
+          "138"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb6nuq"
+          "bigweb4nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,17 +58,17 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "a224a4296351a0fae0ebf30a0005e4b2"
+          "a224a4276351a154e0ebf65d0006037b"
         ],
         "x-proxied": [
           "extlb1nuq 29913d444b",
-          "intlb1nuq 29913d444b"
+          "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.032120"
+          "0.037111"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
@@ -84,8 +84,8 @@
         "code": 422,
         "message": "Unprocessable Entity"
       },
-      "uri": "https://api.easypost.com/v2/shipments"
+      "uri": "https://api.easypost.com/v2/addresses/create_and_verify"
     },
-    "duration": 309
+    "duration": 301
   }
 ]

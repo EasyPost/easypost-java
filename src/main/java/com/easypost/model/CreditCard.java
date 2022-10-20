@@ -1,6 +1,7 @@
 package com.easypost.model;
 
 import com.easypost.EasyPost;
+import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 
 import java.util.HashMap;
@@ -58,7 +59,7 @@ public class CreditCard extends BaseCreditCard {
         }
 
         if (cardID == null || !cardID.startsWith("card_")) {
-            throw new EasyPostException("The chosen payment method is not a credit card. Please try again.");
+            throw new EasyPostException(Constants.INVALID_PAYMENT);
         }
 
         Map<String, Object> params = new HashMap<>();

@@ -9,7 +9,24 @@
 package com.easypost.net;
 
 import com.easypost.EasyPost;
+import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.API.ForbiddenError;
+import com.easypost.exception.API.GatewayTimeoutError;
+import com.easypost.exception.API.InternalServerError;
+import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.API.MethodNotAllowedError;
+import com.easypost.exception.API.NotFoundError;
+import com.easypost.exception.API.PaymentError;
+import com.easypost.exception.API.RateLimitError;
+import com.easypost.exception.API.RedirectError;
+import com.easypost.exception.API.ServiceUnavailablError;
+import com.easypost.exception.API.TimeoutError;
+import com.easypost.exception.API.UnauthorizedError;
+import com.easypost.exception.API.UnknownApiError;
+import com.easypost.exception.General.MissingParameterError;
+import com.easypost.model.Error;
+import com.easypost.model.ErrorDeserializer;
 import com.easypost.model.Fee;
 import com.easypost.model.Shipment;
 import com.easypost.model.SmartrateCollection;
@@ -56,7 +73,8 @@ public abstract class EasyPostResource {
     public static final Gson GSON =
             new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .registerTypeAdapter(HashMap.class, new HashMapSerializer())
-                    .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer()).create();
+                    .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer())
+                    .registerTypeAdapter(Error.class, new ErrorDeserializer()).create();
     public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
     public static final String CHARSET = "UTF-8";
@@ -445,6 +463,11 @@ public abstract class EasyPostResource {
     }
 
     private static String getResponseBody(final InputStream responseStream) throws IOException {
+        if (responseStream.available() == 0) {
+            // Return empty string if the InputSteam is empty to avoid exceptions.
+            return "";
+        }
+
         @SuppressWarnings ("resource") String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next();
         responseStream.close();
         return rBody;
@@ -536,11 +559,7 @@ public abstract class EasyPostResource {
                                     final boolean apiKeyRequired) throws EasyPostException {
         if ((EasyPost.apiKey == null || EasyPost.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
             if (apiKeyRequired) {
-                throw new EasyPostException(String.format(
-                        "No API key provided. (set your API key using 'EasyPost.apiKey = {KEY}'. " +
-                                "Your API key can be found in your EasyPost dashboard, " +
-                                "or you can email us at %s for assistance.", EasyPostResource.EASYPOST_SUPPORT_EMAIL));
-
+                throw new MissingParameterError(Constants.INVALID_API_KEY_TYPE);
             }
         }
 
@@ -600,18 +619,50 @@ public abstract class EasyPostResource {
         return GSON.fromJson(rBody, clazz);
     }
 
-    private static void handleAPIError(final String rBody, final int rCode) throws EasyPostException {
-        try {
-            EasyPostResource.Error error = GSON.fromJson(rBody, EasyPostResource.Error.class);
+    /**
+     * Handles API error based on the error status code.
+     *
+     * @param rBody Body of the error message.
+     * @param rCode Status code of the error messsage.
+     */
+    protected static void handleAPIError(String rBody, final int rCode) throws EasyPostException {
+        if (rBody == null || rBody.length() == 0) {
+            rBody = "{}";
+        }
+        Error error = GSON.fromJson(rBody, Error.class);
+        String errorMessage = error.getMessage();
+        String errorCode = error.getCode();
+        List<Error> errors = error.getErrors();
 
-            if (error.getError().length() > 0) {
-                throw new EasyPostException(error.getError());
-            }
+        if (rCode >= Constants.ErrorCode.REDIRECT_CODE_BEGIN && rCode <= Constants.ErrorCode.REDIRECT_CODE_END) {
+            throw new RedirectError(errorMessage, errorCode, rCode, errors);
+        }
 
-            throw new EasyPostException(error.getMessage(), error.getParam(), null);
-        } catch (Exception e) {
-            throw new EasyPostException(
-                    String.format("An error occurred. Response code: %s Response body: %s", rCode, rBody));
+        switch (rCode) {
+            case Constants.ErrorCode.UNAUTHORIZED_ERROR:
+                throw new UnauthorizedError(errorMessage, errorCode, rCode, errors);
+            case Constants.ErrorCode.FORBIDDEN_ERROR:
+                throw new ForbiddenError(errorMessage, errorCode, rCode, errors);
+            case Constants.ErrorCode.PAYMENT_ERROR:
+                throw new PaymentError(errorMessage, errorCode, rCode, errors);
+            case Constants.ErrorCode.NOT_FOUND_ERROR:
+                throw new NotFoundError(errorMessage, errorCode, rCode, errors);
+            case Constants.ErrorCode.METHOD_NOT_ALLOWED_ERROR:
+                throw new MethodNotAllowedError(errorMessage, errorCode, rCode, errors);
+            case Constants.ErrorCode.TIMEOUT_ERROR:
+                throw new TimeoutError(errorMessage, errorCode, rCode, errors);
+            case Constants.ErrorCode.INVALID_REQUEST_ERROR:
+                throw new InvalidRequestError(errorMessage, errorCode, rCode, errors);
+            case Constants.ErrorCode.RATE_LIMIT_ERROR:
+                throw new RateLimitError(errorMessage, errorCode, rCode, errors);
+            case Constants.ErrorCode.INTERNAL_SERVER_ERROR:
+                throw new InternalServerError(errorMessage, errorCode, rCode, errors);
+            case Constants.ErrorCode.SERVICE_UNAVAILABLE_ERROR:
+                throw new ServiceUnavailablError(errorMessage, errorCode, rCode, errors);
+            case Constants.ErrorCode.GATEWAY_TIMEOUT_ERROR:
+                throw new GatewayTimeoutError(errorMessage, errorCode, rCode, errors);
+            default:
+                throw new UnknownApiError(errorMessage, errorCode, rCode, errors);
         }
     }
 
@@ -837,37 +888,7 @@ public abstract class EasyPostResource {
 
     @SuppressWarnings ("unused")
     private static class ErrorContainer {
-        private EasyPostResource.Error error;
-    }
-
-    private static class Error {
-        private String type;
-        private String message;
-        private String code;
-        private String param;
-        private String error;
-
-        @SuppressWarnings ("unused")
-        public String getCode() {
-            return code;
-        }
-
-        public String getError() {
-            return error;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public String getParam() {
-            return param;
-        }
-
-        @SuppressWarnings ("unused")
-        public String getType() {
-            return type;
-        }
+        private Error error;
     }
 
     /**
