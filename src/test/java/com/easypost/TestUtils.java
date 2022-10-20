@@ -4,8 +4,10 @@ import com.easypost.easyvcr.AdvancedSettings;
 import com.easypost.easyvcr.Cassette;
 import com.easypost.easyvcr.CensorElement;
 import com.easypost.easyvcr.Censors;
+import com.easypost.easyvcr.ExpirationActions;
 import com.easypost.easyvcr.MatchRules;
 import com.easypost.easyvcr.Mode;
+import com.easypost.easyvcr.TimeFrame;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,29 +26,37 @@ public abstract class TestUtils {
 
     private static final String API_KEY_FAILED_TO_PULL = "couldNotPullApiKey";
     private static final String CASSETTES_PATH = "src/test/cassettes";
-    private static final java.util.List<String> HEADER_CENSORS = new ArrayList<String>() {{
-        add("Authorization");
-        add("User-Agent");
-    }};
-    private static final List<String> QUERY_CENSORS = new ArrayList<String>() {{
-        add("card[cvc]");
-        add("card[number]");
-    }};
-    private static final List<String> BODY_CENSORS = new ArrayList<String>() {{
-        add("api_keys");
-        add("client_ip");
-        add("credentials");
-        add("key");
-        add("keys");
-        add("phone_number");
-        add("phone");
-        add("test_credentials");
-    }};
-    private static final List<CensorElement> BODY_ELEMENTS_TO_IGNORE_ON_MATCH = new ArrayList<CensorElement>() {{
-        // Timezone difference between machines causing failure on replay
-        add(new CensorElement("createdAt", false));
-        add(new CensorElement("updatedAt", false));
-    }};
+    private static final java.util.List<String> HEADER_CENSORS = new ArrayList<String>() {
+        {
+            add("Authorization");
+            add("User-Agent");
+        }
+    };
+    private static final List<String> QUERY_CENSORS = new ArrayList<String>() {
+        {
+            add("card[cvc]");
+            add("card[number]");
+        }
+    };
+    private static final List<String> BODY_CENSORS = new ArrayList<String>() {
+        {
+            add("api_keys");
+            add("client_ip");
+            add("credentials");
+            add("key");
+            add("keys");
+            add("phone_number");
+            add("phone");
+            add("test_credentials");
+        }
+    };
+    private static final List<CensorElement> BODY_ELEMENTS_TO_IGNORE_ON_MATCH = new ArrayList<CensorElement>() {
+        {
+            // Timezone difference between machines causing failure on replay
+            add(new CensorElement("createdAt", false));
+            add(new CensorElement("updatedAt", false));
+        }
+    };
 
     /**
      * Get the directory where the program is currently executing.
@@ -110,8 +120,9 @@ public abstract class TestUtils {
         }
 
         String value = System.getenv(keyName);
-        value = (value != null && !value.isEmpty()) ? value :
-                API_KEY_FAILED_TO_PULL; // if can't pull from environment, will use a fake key. Won't matter on replay.
+        value = (value != null && !value.isEmpty()) ? value : API_KEY_FAILED_TO_PULL; // if can't pull from environment,
+                                                                                      // will use a fake key. Won't
+                                                                                      // matter on replay.
         return value;
     }
 
@@ -158,10 +169,13 @@ public abstract class TestUtils {
          */
         public VCR(String testCassettesFolder, String apiKey) {
             AdvancedSettings advancedSettings = new AdvancedSettings();
-            advancedSettings.matchRules =
-                    new MatchRules().byMethod().byFullUrl().byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
+            advancedSettings.matchRules = new MatchRules().byMethod().byFullUrl()
+                    .byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
             advancedSettings.censors = new Censors("REDACTED").censorHeadersByKeys(HEADER_CENSORS)
                     .censorQueryParametersByKeys(QUERY_CENSORS).censorBodyElementsByKeys(BODY_CENSORS);
+
+            advancedSettings.timeFrame = TimeFrame.months6();
+            advancedSettings.whenExpired = ExpirationActions.Warn;
 
             vcr = new com.easypost.easyvcr.VCR(advancedSettings);
 
