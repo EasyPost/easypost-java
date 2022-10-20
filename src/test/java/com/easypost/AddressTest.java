@@ -14,6 +14,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class AddressTest {
@@ -191,5 +192,21 @@ public final class AddressTest {
         assertInstanceOf(Address.class, address);
         assertTrue(verifiedAddress.getId().startsWith("adr_"));
         assertEquals("388 TOWNSEND ST APT 20", verifiedAddress.getStreet1());
+    }
+
+    /**
+     * Test creating invalid address creation to see if the error has correct properties.
+     *
+     * @throws EasyPostException
+     */
+    @Test
+    public void testInvalidAddressCreation() throws EasyPostException {
+        vcr.setUpTest("error_address_creation");
+        EasyPostException exception = assertThrows(EasyPostException.class,
+                () -> Address.createAndVerify(null));
+
+        assertEquals("PARAMETER.REQUIRED", exception.getCode());
+        assertEquals(422, exception.getStatusCode());
+        assertEquals("Missing required parameter.", exception.getMessage());
     }
 }

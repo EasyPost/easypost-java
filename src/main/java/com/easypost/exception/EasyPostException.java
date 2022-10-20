@@ -8,12 +8,17 @@
 
 package com.easypost.exception;
 
+import com.easypost.model.Error;
+
+import java.util.List;
+
 public class EasyPostException extends Exception {
 
     private static final long serialVersionUID = 1L;
     private final String code;
     private final Integer statusCode;
     private final String message;
+    private final List<Error> errors;
 
     /**
      * EasyPostException constructor.
@@ -21,10 +26,7 @@ public class EasyPostException extends Exception {
      * @param message the exception message
      */
     public EasyPostException(final String message) {
-        super(message);
-        this.code = null;
-        this.statusCode = null;
-        this.message = message;
+        this(message, null);
     }
 
     /**
@@ -34,24 +36,37 @@ public class EasyPostException extends Exception {
      * @param ex      the exception cause
      */
     public EasyPostException(final String message, final Throwable ex) {
-        super(message, ex);
-        this.code = null;
-        this.statusCode = null;
-        this.message = message;
+        this(message, null, null, null, ex);
     }
 
     /**
      * EasyPostException constructor.
      *
-     * @param message the exception message
-     * @param code the exception code
+     * @param message    the exception message
+     * @param code       the exception code
      * @param statusCode the exception status code
+     * @param errors     the errors array
      */
-    public EasyPostException(final String message, final String code, final int statusCode) {
-        super(message);
+    public EasyPostException(final String message, final String code, final int statusCode, List<Error> errors) {
+        this(message, code, statusCode, errors, null);
+    }
+
+    /**
+     * EasyPostException constructor.
+     *
+     * @param message    the exception message
+     * @param code       the exception code
+     * @param statusCode the exception status code
+     * @param errors     the errors array
+     * @param ex         the exception cause
+     */
+    public EasyPostException(final String message, final String code, final Integer statusCode,
+        final List<Error> errors, final Throwable ex) {
+        super(message, ex);
         this.code = code;
         this.statusCode = statusCode;
         this.message = message;
+        this.errors = errors;
     }
 
     /**
@@ -79,5 +94,14 @@ public class EasyPostException extends Exception {
      */
     public String getMessage() {
         return message;
+    }
+
+    /**
+     * Get errors array of the exception.
+     *
+     * @return errors of the exception
+     */
+    public List<Error> getErrors() {
+        return errors;
     }
 }

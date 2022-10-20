@@ -632,36 +632,37 @@ public abstract class EasyPostResource {
         Error error = GSON.fromJson(rBody, Error.class);
         String errorMessage = error.getMessage();
         String errorCode = error.getCode();
-        
+        List<Error> errors = error.getErrors();
+
         if (rCode >= Constants.ErrorCode.REDIRECT_CODE_BEGIN && rCode <= Constants.ErrorCode.REDIRECT_CODE_END) {
-            throw new RedirectError(errorMessage, errorCode, rCode);
+            throw new RedirectError(errorMessage, errorCode, rCode, errors);
         }
 
         switch (rCode) {
             case Constants.ErrorCode.UNAUTHORIZED_ERROR:
-                throw new UnauthorizedError(errorMessage, errorCode, rCode);
+                throw new UnauthorizedError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCode.FORBIDDEN_ERROR:
-                throw new ForbiddenError(errorMessage, errorCode, rCode);
+                throw new ForbiddenError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCode.PAYMENT_ERROR:
-                throw new PaymentError(errorMessage, errorCode, rCode);
+                throw new PaymentError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCode.NOT_FOUND_ERROR:
-                throw new NotFoundError(errorMessage, errorCode, rCode);
+                throw new NotFoundError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCode.METHOD_NOT_ALLOWED_ERROR:
-                throw new MethodNotAllowedError(errorMessage, errorCode, rCode);
+                throw new MethodNotAllowedError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCode.TIMEOUT_ERROR:
-                throw new TimeoutError(errorMessage, errorCode, rCode);
+                throw new TimeoutError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCode.INVALID_REQUEST_ERROR:
-                throw new InvalidRequestError(errorMessage, errorCode, rCode);
+                throw new InvalidRequestError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCode.RATE_LIMIT_ERROR:
-                throw new RateLimitError(errorMessage, errorCode, rCode);
+                throw new RateLimitError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCode.INTERNAL_SERVER_ERROR:
-                throw new InternalServerError(errorMessage, errorCode, rCode);
+                throw new InternalServerError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCode.SERVICE_UNAVAILABLE_ERROR:
-                throw new ServiceUnavailablError(errorMessage, errorCode, rCode);
+                throw new ServiceUnavailablError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCode.GATEWAY_TIMEOUT_ERROR:
-                throw new GatewayTimeoutError(errorMessage, errorCode, rCode);
+                throw new GatewayTimeoutError(errorMessage, errorCode, rCode, errors);
             default:
-                throw new UnknownApiError(errorMessage, errorCode, rCode);
+                throw new UnknownApiError(errorMessage, errorCode, rCode, errors);
         }
     }
 

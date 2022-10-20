@@ -1,7 +1,6 @@
 package com.easypost;
 
 import com.easypost.exception.Constants;
-import com.easypost.model.Address;
 import com.easypost.net.EasyPostResource;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.RedirectError;
@@ -49,16 +48,19 @@ public final class ErrorTest extends EasyPostResource{
     @Test
     public void testError() throws EasyPostException {
         vcr.setUpTest("error");
+        
+        EasyPostException exception = assertThrows(InvalidRequestError.class, () -> Shipment.create(null));
 
-        // should throw EasyPostException,
-        // but might throw NullPointerException due to a bug in the VCR grabbing response content,
-        // so we'll just check fo a generic exception
-        assertThrows(Exception.class, () -> Shipment.create(null));
+        assertEquals(422, exception.getStatusCode());
+        assertEquals("PARAMETER.REQUIRED", exception.getCode());
+        assertEquals("Missing required parameter.", exception.getMessage());
+        assertEquals("cannot be blank", exception.getErrors().get(0).getMessage());
+        assertEquals("shipment", exception.getErrors().get(0).getField());
     }
 
     /**
      * Test every error type and make sure each error has the correct properties.
-     * 
+     *
      * @throws EasyPostException
      */
     @Test
@@ -127,21 +129,5 @@ public final class ErrorTest extends EasyPostResource{
             () -> EasyPostResource.handleAPIError(errorMessageArrayJson, 400));
 
         assertEquals("ERROR_MESSAGE_1, ERROR_MESSAGE_2", exception.getMessage());
-    }
-
-    /**
-     * Test creating invalid address creation to see if the error has correct properties.
-     *
-     * @throws EasyPostException
-     */
-    @Test
-    public void testInvalidAddressCreation() throws EasyPostException {
-        vcr.setUpTest("error_address_creation");
-        EasyPostException exception = assertThrows(EasyPostException.class,
-                () -> Address.createAndVerify(null));
-
-        assertEquals("PARAMETER.REQUIRED", exception.getCode());
-        assertEquals(422, exception.getStatusCode());
-        assertEquals("Missing required parameter.", exception.getMessage());
     }
 }

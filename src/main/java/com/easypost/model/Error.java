@@ -6,13 +6,51 @@ public final class Error {
     private String message;
     private String code;
     private List<Error> errors;
+    private String suggestion;
+    private String field;
+
+    /**
+     * Get the field of the error.
+     *
+     * @return field
+     */
+    public String getField() {
+        return field;
+    }
+
+    /**
+     * Set the field of the error.
+     *
+     * @param field field
+     */
+    public void setField(final String field) {
+        this.field = field;
+    }
+
+    /**
+     * Get the suggestion of the error.
+     *
+     * @return suggestion
+     */
+    public String getSuggestion() {
+        return suggestion;
+    }
+
+    /**
+     * Set the suggestion of the error.
+     *
+     * @param suggestion suggestion
+     */
+    public void setSuggestion(final String suggestion) {
+        this.suggestion = suggestion;
+    }
 
     /**
      * Get the errors from an Error object.
      *
      * @return errors
      */
-    public List<Error> getError() {
+    public List<Error> getErrors() {
         return errors;
     }
 
@@ -21,7 +59,7 @@ public final class Error {
      * 
      * @param errors errors
      */
-    public void setError(List<Error> errors) {
+    public void setErrors(List<Error> errors) {
         this.errors = errors;
     }
 
