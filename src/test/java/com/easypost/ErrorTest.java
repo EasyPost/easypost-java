@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.Constants;
+import com.easypost.model.Address;
 import com.easypost.net.EasyPostResource;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.RedirectError;
@@ -126,5 +127,21 @@ public final class ErrorTest extends EasyPostResource{
             () -> EasyPostResource.handleAPIError(errorMessageArrayJson, 400));
 
         assertEquals("ERROR_MESSAGE_1, ERROR_MESSAGE_2", exception.getMessage());
+    }
+
+    /**
+     * Test creating invalid address creation to see if the error has correct properties.
+     *
+     * @throws EasyPostException
+     */
+    @Test
+    public void testInvalidAddressCreation() throws EasyPostException {
+        vcr.setUpTest("error_address_creation");
+        EasyPostException exception = assertThrows(EasyPostException.class,
+                () -> Address.createAndVerify(null));
+
+        assertEquals("PARAMETER.REQUIRED", exception.getCode());
+        assertEquals(422, exception.getStatusCode());
+        assertEquals("Missing required parameter.", exception.getMessage());
     }
 }

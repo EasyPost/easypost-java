@@ -132,7 +132,6 @@ public final class AddressTest {
 
         assertInstanceOf(Address.class, retrievedAddress);
         assertTrue(address.equals(retrievedAddress));
-
     }
 
     /**

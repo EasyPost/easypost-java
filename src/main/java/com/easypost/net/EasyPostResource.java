@@ -463,9 +463,11 @@ public abstract class EasyPostResource {
     }
 
     private static String getResponseBody(final InputStream responseStream) throws IOException {
-        if (responseStream == null) {
+        if (responseStream.available() == 0) {
+            // Return empty string if the InputSteam is empty to avoid exceptions.
             return "";
         }
+
         @SuppressWarnings ("resource") String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next();
         responseStream.close();
         return rBody;
