@@ -2,6 +2,7 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Address;
+import com.easypost.model.EndShipper;
 import com.easypost.model.Fee;
 import com.easypost.model.Form;
 import com.easypost.model.Parcel;
@@ -545,5 +546,23 @@ public final class ShipmentTest {
 
         assertNull(baseRate.getCarbonOffset());
         assertNotNull(newCarbonRate.getCarbonOffset());
+    }
+
+    /**
+     * Test buying a shipment with an EndShipper ID.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testBuyShipmentWithEndShipperId() throws EasyPostException {
+        vcr.setUpTest("buy_shipment_with_end_shipper_id");
+
+        EndShipper endShipper = EndShipper.create(Fixtures.caAddress1());
+
+        Shipment shipment = Shipment.create(Fixtures.basicShipment());
+        Rate rate = shipment.lowestRate();
+        Shipment boughtShipment = shipment.buy(rate, endShipper.getId());
+
+        assertNotNull(boughtShipment.getPostageLabel());
     }
 }

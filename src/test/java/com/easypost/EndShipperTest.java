@@ -25,7 +25,7 @@ public final class EndShipperTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        vcr = new TestUtils.VCR("end_shipper", TestUtils.ApiKey.PRODUCTION);
+        vcr = new TestUtils.VCR("end_shipper", TestUtils.ApiKey.TEST);
     }
 
     /**
