@@ -19,6 +19,14 @@ Add this to your project's POM:
 </dependency>
 ```
 
+### Gradle
+
+Add this to your project's build file:
+
+```groovy
+implementation "com.easypost:easypost-api-client:5.10.0"
+```
+
 **NOTE:** [Google Gson](http://code.google.com/p/google-gson/) is required.
 
 ## Usage

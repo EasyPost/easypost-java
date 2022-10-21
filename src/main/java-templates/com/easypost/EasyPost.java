@@ -8,12 +8,13 @@ import com.easypost.easyvcr.VCR;
  * This file exists as a template for the Templating Maven Plugin (https://www.mojohaus.org/templating-maven-plugin/)
  * If you notice the VERSION = ${project.version} below, that's an example of a template variable.
  * <p>
- * In Maven (and Gradle), you can set variables inside the pom.xml file
+ * In Maven, you can set variables inside the pom.xml file
  * (https://maven.apache.org/guides/introduction/introduction-to-the-pom.html#available-variables)
  * <p>
  * The Templating Maven Plugin, at compile time, will extract these variables and add them into the source code.
  * <p>
  * Specifically here, VERSION = ${project.version} will be replaced with, i.e. VERSION = 1.0.0 when compiling the code.
+ * NOTE: The VERSION will not populate if built with Gradle.
  * <p>
  * The placement of this file is important.
  * The Templating Maven Plugin will look for any template files in this specific `java-templates` directory.
