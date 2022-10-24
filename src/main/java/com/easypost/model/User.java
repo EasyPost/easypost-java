@@ -4,7 +4,6 @@ import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
 import com.easypost.net.Requestor;
-import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.List;

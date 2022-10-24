@@ -6,7 +6,6 @@ import com.easypost.exception.General.SignatureVerificationError;
 import com.easypost.net.Constant;
 import com.easypost.net.EasyPostResource;
 import com.easypost.net.Requestor;
-import com.easypost.net.Requestor.RequestMethod;
 import com.easypost.utils.Cryptography;
 
 import java.nio.charset.StandardCharsets;

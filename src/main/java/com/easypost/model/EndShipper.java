@@ -3,7 +3,6 @@ package com.easypost.model;
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.Requestor;
-import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;

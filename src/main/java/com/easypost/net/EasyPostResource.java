@@ -20,6 +20,13 @@ import java.util.List;
 import com.easypost.EasyPost;
 
 public abstract class EasyPostResource {
+    protected enum RequestMethod {
+        GET,
+        POST,
+        DELETE,
+        PUT
+    }
+
     private String id;
     private String mode;
     private Date createdAt;

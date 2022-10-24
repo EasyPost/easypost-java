@@ -6,7 +6,6 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.net.EasyPostResource;
 import com.easypost.net.Requestor;
-import com.easypost.net.Requestor.RequestMethod;
 
 public class PaymentMethod extends EasyPostResource {
 
