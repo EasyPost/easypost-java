@@ -1,7 +1,6 @@
 package com.easypost.exception;
 
 public abstract class Constants {
-    
     public static final String EXTERNAL_API_CALL_FAILED = "Could not send card details to %s, please try again later";
     public static final String ENCODED_ERROR = "Encode error for %s";
     public static final String INVALID_API_KEY_TYPE = "Invalid API key type.";

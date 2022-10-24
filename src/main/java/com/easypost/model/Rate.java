@@ -1,10 +1,10 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 public class Rate extends EasyPostResource {
-    private String id;
     private String carrier;
     private String service;
     private Float rate;
@@ -185,24 +185,6 @@ public class Rate extends EasyPostResource {
     }
 
     /**
-     * Get the ID of this Rate.
-     *
-     * @return ID of this Rate.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Rate.
-     *
-     * @param id ID of this Rate.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
      * Get the ID of the shipment of this Rate.
      *
      * @return ID of the shipment of this Rate.
@@ -349,7 +331,7 @@ public class Rate extends EasyPostResource {
      */
     public static Rate retrieve(final String id, final String apiKey) throws EasyPostException {
         Rate response;
-        response = request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
+        response = Requestor.request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
 
         return response;
     }

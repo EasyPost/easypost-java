@@ -1,9 +1,6 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 public class BaseAddress extends EasyPostResource {
-    private String id;
     private String name;
     private String company;
     private String street1;
@@ -85,24 +82,6 @@ public class BaseAddress extends EasyPostResource {
      */
     public void setEmail(final String email) {
         this.email = email;
-    }
-
-    /**
-     * Get Address ID.
-     *
-     * @return Address ID
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set Address ID.
-     *
-     * @param id Address ID
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**

@@ -1,15 +1,14 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.List;
 import java.util.Map;
 
 public final class Event extends EasyPostResource {
-    private String id;
     private String description;
-    private String mode;
     private Map<String, Object> result;
     private Map<String, Object> previousAttributes;
     private List<String> pendingUrls;
@@ -31,42 +30,6 @@ public final class Event extends EasyPostResource {
      */
     public void setDescription(final String description) {
         this.description = description;
-    }
-
-    /**
-     * Get this Event's ID.
-     *
-     * @return Event's ID
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set this Event's ID.
-     *
-     * @param id Event's ID
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of this Event.
-     *
-     * @return Event's mode
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of this Event.
-     *
-     * @param mode Event's mode
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**
@@ -159,7 +122,7 @@ public final class Event extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Event retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, apiKey);
     }
 
     /**
@@ -182,6 +145,6 @@ public final class Event extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static EventCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Event.class), params, EventCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(Event.class), params, EventCollection.class, apiKey);
     }
 }

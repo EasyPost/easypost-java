@@ -231,7 +231,7 @@ public abstract class Fixtures {
         If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
         USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
          */
-        String pickupDate = "2022-10-01";
+        String pickupDate = "2022-11-01";
 
         fixture.put("min_datetime", pickupDate);
         fixture.put("max_datetime", pickupDate);

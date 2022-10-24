@@ -1,7 +1,8 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class CarrierAccount extends EasyPostResource {
-    private String id;
     private String object;
     private String type;
     private Fields fields;
@@ -135,7 +135,8 @@ public final class CarrierAccount extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("carrier_account", params);
 
-        return request(RequestMethod.POST, classURL(CarrierAccount.class), wrappedParams, CarrierAccount.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(CarrierAccount.class),
+            wrappedParams, CarrierAccount.class, apiKey);
     }
 
     /**
@@ -158,7 +159,8 @@ public final class CarrierAccount extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static CarrierAccount retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(CarrierAccount.class, id), null, CarrierAccount.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(CarrierAccount.class, id),
+            null, CarrierAccount.class, apiKey);
     }
 
     /**
@@ -181,8 +183,9 @@ public final class CarrierAccount extends EasyPostResource {
      */
     public static List<CarrierAccount> all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        CarrierAccount[] response =
-                request(RequestMethod.GET, classURL(CarrierAccount.class), params, CarrierAccount[].class, apiKey);
+        CarrierAccount[] response = Requestor.request(RequestMethod.GET,
+            classURL(CarrierAccount.class), params, CarrierAccount[].class, apiKey);
+        
         return Arrays.asList(response);
     }
 
@@ -311,29 +314,11 @@ public final class CarrierAccount extends EasyPostResource {
         wrappedParams.put("carrier_account", params);
 
         CarrierAccount response =
-                request(RequestMethod.PUT, instanceURL(CarrierAccount.class, this.getId()), wrappedParams,
-                        CarrierAccount.class, apiKey);
+            Requestor.request(RequestMethod.PUT, instanceURL(CarrierAccount.class, this.getId()), wrappedParams,
+                CarrierAccount.class, apiKey);
 
         this.merge(this, response);
         return this;
-    }
-
-    /**
-     * Get ID of the carrier account.
-     *
-     * @return ID of the carrier account.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set ID of the carrier account.
-     *
-     * @param id ID of the carrier account.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**
@@ -352,7 +337,7 @@ public final class CarrierAccount extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String apiKey) throws EasyPostException {
-        request(RequestMethod.DELETE, instanceURL(CarrierAccount.class, this.getId()), null, CarrierAccount.class,
-                apiKey);
+        Requestor.request(RequestMethod.DELETE, instanceURL(CarrierAccount.class, this.getId()),
+            null, CarrierAccount.class, apiKey);
     }
 }

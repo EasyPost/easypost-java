@@ -1,13 +1,13 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public final class CustomsItem extends EasyPostResource {
-    private String id;
     private String description;
     private String hsTariffNumber;
     private String originCountry;
@@ -87,24 +87,6 @@ public final class CustomsItem extends EasyPostResource {
      */
     public void setHsTariffNumber(final String hsTariffNumber) {
         this.hsTariffNumber = hsTariffNumber;
-    }
-
-    /**
-     * Get this CustomsItem's ID.
-     *
-     * @return the ID of this CustomsItem.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set this CustomsItem's ID.
-     *
-     * @param id the ID of this CustomsItem.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**
@@ -202,7 +184,8 @@ public final class CustomsItem extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("customs_item", params);
 
-        return request(RequestMethod.POST, classURL(CustomsItem.class), wrappedParams, CustomsItem.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(CustomsItem.class),
+            wrappedParams, CustomsItem.class, apiKey);
     }
 
     /**
@@ -225,6 +208,7 @@ public final class CustomsItem extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static CustomsItem retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(CustomsItem.class, id), null, CustomsItem.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(CustomsItem.class, id),
+            null, CustomsItem.class, apiKey);
     }
 }

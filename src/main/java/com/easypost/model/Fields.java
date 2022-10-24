@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 public class Fields extends EasyPostResource {
     private Field credentials;
     private Field testCredentials;

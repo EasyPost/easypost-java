@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 /**
  * BaseCreditCard is a model class that represents the base of any credit card.
  *
@@ -10,7 +8,6 @@ import com.easypost.net.EasyPostResource;
  */
 @Deprecated
 public class BaseCreditCard extends EasyPostResource {
-    private String id;
     private String object;
     private String name;
     private String last4;
@@ -70,24 +67,6 @@ public class BaseCreditCard extends EasyPostResource {
      */
     public void setExpYear(String expYear) {
         this.expYear = expYear;
-    }
-
-    /**
-     * Get ID of this CreditCard object.
-     *
-     * @return ID of this CreditCard.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set ID of this CreditCard object.
-     *
-     * @param id ID of this CreditCard.
-     */
-    public void setId(String id) {
-        this.id = id;
     }
 
     /**

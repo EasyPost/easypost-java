@@ -1,7 +1,8 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.Arrays;
 import java.util.List;
@@ -104,7 +105,7 @@ public final class CarrierType extends EasyPostResource {
      */
     public static List<CarrierType> all(final String apikey) throws EasyPostException {
         CarrierType[] response =
-                request(RequestMethod.GET, classURL(CarrierType.class), null, CarrierType[].class, apikey);
+            Requestor.request(RequestMethod.GET, classURL(CarrierType.class), null, CarrierType[].class, apikey);
         return Arrays.asList(response);
     }
 }

@@ -13,7 +13,6 @@ import com.easypost.model.Error;
 import java.util.List;
 
 public class EasyPostException extends Exception {
-
     private static final long serialVersionUID = 1L;
     private final String code;
     private final Integer statusCode;
@@ -47,7 +46,7 @@ public class EasyPostException extends Exception {
      * @param statusCode the exception status code
      * @param errors     the errors array
      */
-    public EasyPostException(final String message, final String code, final int statusCode, List<Error> errors) {
+    public EasyPostException(final String message, final String code, final int statusCode, final List<Error> errors) {
         this(message, code, statusCode, errors, null);
     }
 

@@ -1,8 +1,6 @@
 package com.easypost.model;
 
-public final class Form {
-    private String id;
-    private String mode;
+public final class Form extends EasyPostResource {
     private String formType;
     private String formUrl;
     private Boolean submittedElectronically;
@@ -41,42 +39,6 @@ public final class Form {
      */
     public void setFormUrl(final String formUrl) {
         this.formUrl = formUrl;
-    }
-
-    /**
-     * Get the ID of the Form.
-     *
-     * @return the ID of the Form.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of the Form.
-     *
-     * @param id the ID of the Form.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of the Form.
-     *
-     * @return the mode of the Form.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of the Form.
-     *
-     * @param mode the mode of the Form.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**

@@ -1,13 +1,13 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.List;
 import java.util.Map;
 
 public class ScanForm extends EasyPostResource {
-    private String id;
     private String status;
     private String message;
     private Address fromAddress;
@@ -69,24 +69,6 @@ public class ScanForm extends EasyPostResource {
      */
     public void setFromAddress(final Address fromAddress) {
         this.fromAddress = fromAddress;
-    }
-
-    /**
-     * Get the ID of the ScanForm.
-     *
-     * @return the ID of the ScanForm.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of the ScanForm.
-     *
-     * @param id the ID of the ScanForm.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**
@@ -217,7 +199,7 @@ public class ScanForm extends EasyPostResource {
      * @throws EasyPostException when the request fails. when the request fails.
      */
     public static ScanForm create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, classURL(ScanForm.class), params, ScanForm.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(ScanForm.class), params, ScanForm.class, apiKey);
     }
 
     /**
@@ -240,7 +222,7 @@ public class ScanForm extends EasyPostResource {
      * @throws EasyPostException when the request fails. when the request fails.
      */
     public static ScanForm retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(ScanForm.class, id), null, ScanForm.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(ScanForm.class, id), null, ScanForm.class, apiKey);
     }
 
     /**
@@ -264,6 +246,6 @@ public class ScanForm extends EasyPostResource {
      */
     public static ScanFormCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(ScanForm.class), params, ScanFormCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(ScanForm.class), params, ScanFormCollection.class, apiKey);
     }
 }

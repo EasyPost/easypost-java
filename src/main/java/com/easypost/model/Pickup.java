@@ -1,7 +1,8 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public final class Pickup extends EasyPostResource {
-    private String id;
-    private String mode;
     private String status;
     private String reference;
     private Date minDatetime;
@@ -209,7 +208,7 @@ public final class Pickup extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("pickup", params);
 
-        return request(RequestMethod.POST, classURL(Pickup.class), wrappedParams, Pickup.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Pickup.class), wrappedParams, Pickup.class, apiKey);
     }
 
     /**
@@ -232,7 +231,7 @@ public final class Pickup extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Pickup retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Pickup.class, id), null, Pickup.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Pickup.class, id), null, Pickup.class, apiKey);
     }
 
     /**
@@ -254,44 +253,8 @@ public final class Pickup extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Pickup refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s", instanceURL(Pickup.class, this.getId())), params,
-                Pickup.class, apiKey);
-    }
-
-    /**
-     * Get the ID of this Pickup.
-     *
-     * @return the ID of this Pickup.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Pickup.
-     *
-     * @param id the ID of this Pickup.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of this Pickup.
-     *
-     * @return the mode of this Pickup.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of this Pickup.
-     *
-     * @param mode the mode of this Pickup.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
+        return Requestor.request(RequestMethod.GET, String.format("%s",
+            instanceURL(Pickup.class, this.getId())), params, Pickup.class, apiKey);
     }
 
     /**
@@ -353,9 +316,8 @@ public final class Pickup extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Pickup buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Pickup response =
-                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Pickup.class, this.getId())), params,
-                        Pickup.class, apiKey);
+        Pickup response = Requestor.request(RequestMethod.POST, String.format("%s/buy",
+            instanceURL(Pickup.class, this.getId())), params, Pickup.class, apiKey);
 
         this.merge(this, response);
         return this;
@@ -416,8 +378,8 @@ public final class Pickup extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Pickup cancel(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, String.format("%s/cancel", instanceURL(Pickup.class, this.getId())), params,
-                Pickup.class, apiKey);
+        return Requestor.request(RequestMethod.POST, String.format("%s/cancel",
+            instanceURL(Pickup.class, this.getId())), params, Pickup.class, apiKey);
     }
 
     /**

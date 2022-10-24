@@ -5,7 +5,8 @@ import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.exception.General.InvalidParameterError;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.net.URLEncoder;
 import java.util.Date;
@@ -13,10 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class Report extends EasyPostResource {
-    private String id;
     private Date startDate;
     private Date endDate;
-    private String mode;
     private String status;
     private Boolean includeChildren;
     private String url;
@@ -38,42 +37,6 @@ public final class Report extends EasyPostResource {
      */
     public void setEndDate(final Date endDate) {
         this.endDate = endDate;
-    }
-
-    /**
-     * Get the ID of this Report.
-     *
-     * @return the ID of this Report.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Report.
-     *
-     * @param id the ID of this Report.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of this Report.
-     *
-     * @return the mode of this Report
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of this Report.
-     *
-     * @param mode the mode of this Report.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**
@@ -189,8 +152,8 @@ public final class Report extends EasyPostResource {
         if (params.containsKey("type")) {
             HashMap<String, Object> paramsWithoutType = new HashMap<>(params);
             paramsWithoutType.remove("type");
-            return request(RequestMethod.POST, reportURL((String) params.get("type")), paramsWithoutType, Report.class,
-                    apiKey);
+            return Requestor.request(RequestMethod.POST, 
+                reportURL((String) params.get("type")), paramsWithoutType, Report.class, apiKey);
         } else {
             throw new InvalidObjectError(String.format(Constants.MISSING_REQUIRED_PARAMETER, "type"));
         }
@@ -232,7 +195,7 @@ public final class Report extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Report retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Report.class, id), null, Report.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Report.class, id), null, Report.class, apiKey);
     }
 
     /**
@@ -256,6 +219,6 @@ public final class Report extends EasyPostResource {
      */
     public static ReportCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
         String type = (String) params.get("type");
-        return request(RequestMethod.GET, reportURL(type), params, ReportCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, reportURL(type), params, ReportCollection.class, apiKey);
     }
 }

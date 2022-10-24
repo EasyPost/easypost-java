@@ -1,15 +1,14 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public final class Order extends EasyPostResource {
-    private String id;
-    private String mode;
     private String service;
     private String reference;
     private Boolean isReturn;
@@ -263,7 +262,7 @@ public final class Order extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("order", params);
 
-        return request(RequestMethod.POST, classURL(Order.class), wrappedParams, Order.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Order.class), wrappedParams, Order.class, apiKey);
     }
 
     /**
@@ -286,7 +285,7 @@ public final class Order extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Order retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, apiKey);
     }
 
     /**
@@ -308,44 +307,8 @@ public final class Order extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Order refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s", instanceURL(Order.class, this.getId())), params,
+        return Requestor.request(RequestMethod.GET, String.format("%s", instanceURL(Order.class, this.getId())), params,
                 Order.class, apiKey);
-    }
-
-    /**
-     * Get the ID of the Order.
-     *
-     * @return the ID of the Order.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of the Order.
-     *
-     * @param id the ID of the Order.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of the Order.
-     *
-     * @return the mode of the Order.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of the Order.
-     *
-     * @param mode the mode of the Order.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**
@@ -407,9 +370,8 @@ public final class Order extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Order newRates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Order response =
-                request(RequestMethod.GET, String.format("%s/rates", instanceURL(Order.class, this.getId())), params,
-                        Order.class, apiKey);
+        Order response = Requestor.request(RequestMethod.GET, String.format("%s/rates", 
+            instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
 
         this.merge(this, response);
         return this;
@@ -457,9 +419,8 @@ public final class Order extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Order buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Order response =
-                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Order.class, this.getId())), params,
-                        Order.class, apiKey);
+        Order response = Requestor.request(RequestMethod.POST, String.format("%s/buy",
+            instanceURL(Order.class, this.getId())), params, Order.class, apiKey);
 
         this.merge(this, response);
         return this;

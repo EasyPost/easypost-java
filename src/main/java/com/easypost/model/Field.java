@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 public class Field extends EasyPostResource {
     private String key;
     private String visibility;

@@ -1,12 +1,12 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.List;
 
 public final class ApiKeys extends EasyPostResource {
-    private String id;
     private List<ApiKey> keys;
     private List<ApiKeys> children;
 
@@ -26,24 +26,6 @@ public final class ApiKeys extends EasyPostResource {
      */
     public void setChildren(final List<ApiKeys> children) {
         this.children = children;
-    }
-
-    /**
-     * Get API key ID.
-     *
-     * @return API key ID.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set API key ID.
-     *
-     * @param id API key ID.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**
@@ -82,9 +64,6 @@ public final class ApiKeys extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static ApiKeys all(final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
     }
-
 }
-
-

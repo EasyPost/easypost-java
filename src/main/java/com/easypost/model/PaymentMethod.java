@@ -4,7 +4,8 @@ import com.easypost.EasyPost;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 public class PaymentMethod extends EasyPostResource {
 
@@ -13,7 +14,6 @@ public class PaymentMethod extends EasyPostResource {
         SECONDARY
     }
 
-    private String id;
     private String object;
     private PaymentMethodObject primaryPaymentMethod;
     private PaymentMethodObject secondaryPaymentMethod;
@@ -79,7 +79,7 @@ public class PaymentMethod extends EasyPostResource {
     @Deprecated
     public static PaymentMethod all(String apiKey) throws EasyPostException {
         PaymentMethod response =
-                request(RequestMethod.GET, String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
+            Requestor.request(RequestMethod.GET, String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
                         PaymentMethod.class, apiKey);
 
         if (response.getId() == null) {
@@ -114,14 +114,5 @@ public class PaymentMethod extends EasyPostResource {
      */
     public PaymentMethodObject getSecondaryPaymentMethodObject() {
         return secondaryPaymentMethod;
-    }
-
-    /**
-     * Get ID of this PaymentMethod object.
-     *
-     * @return ID of this PaymentMethod.
-     */
-    public String getId() {
-        return id;
     }
 }

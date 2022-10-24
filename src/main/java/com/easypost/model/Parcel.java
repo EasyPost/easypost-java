@@ -1,13 +1,13 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public final class Parcel extends EasyPostResource {
-    private String id;
     private String predefinedPackage;
     private Float weight;
     private Float length;
@@ -30,24 +30,6 @@ public final class Parcel extends EasyPostResource {
      */
     public void setHeight(final Float height) {
         this.height = height;
-    }
-
-    /**
-     * Get the ID of this Parcel.
-     *
-     * @return the ID of this Parcel.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this Parcel.
-     *
-     * @param id the ID of this Parcel.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**
@@ -145,7 +127,7 @@ public final class Parcel extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("parcel", params);
 
-        return request(RequestMethod.POST, classURL(Parcel.class), wrappedParams, Parcel.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Parcel.class), wrappedParams, Parcel.class, apiKey);
     }
 
     /**
@@ -168,6 +150,6 @@ public final class Parcel extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Parcel retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Parcel.class, id), null, Parcel.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Parcel.class, id), null, Parcel.class, apiKey);
     }
 }

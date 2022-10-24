@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-package com.easypost.net;
+package com.easypost.http;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.Constants;
@@ -25,16 +25,8 @@ import com.easypost.exception.API.TimeoutError;
 import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.General.MissingParameterError;
+import com.easypost.model.EasyPostResource;
 import com.easypost.model.Error;
-import com.easypost.model.ErrorDeserializer;
-import com.easypost.model.Fee;
-import com.easypost.model.Shipment;
-import com.easypost.model.SmartrateCollection;
-import com.easypost.model.SmartrateCollectionDeserializer;
-import com.easypost.model.TrackingDetail;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -44,53 +36,31 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.URLStreamHandler;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public abstract class EasyPostResource {
-    protected enum RequestMethod {
+public abstract class Requestor {
+    public enum RequestMethod {
         GET,
         POST,
         DELETE,
         PUT
     }
 
-    public static final String EASYPOST_SUPPORT_EMAIL = "support@easypost.com";
-    public static final Gson GSON =
-            new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                    .registerTypeAdapter(HashMap.class, new HashMapSerializer())
-                    .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer())
-                    .registerTypeAdapter(Error.class, new ErrorDeserializer()).create();
-    public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-    public static final String CHARSET = "UTF-8";
-    public static final ArrayList<String> GLOBAL_FIELD_ACCESSORS =
-            new ArrayList<>(Arrays.asList("getCreatedAt", "getUpdatedAt", "getFees"));
-    public static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
-    public static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
-    public static final double DEFAULT_APP_ENGINE_TIMEOUT_SECONDS = 20.0;
     private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
-    private static int connectTimeoutMilliseconds = DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;
-    private static int readTimeoutMilliseconds = DEFAULT_READ_TIMEOUT_MILLISECONDS;
-    private static double appEngineTimeoutSeconds = DEFAULT_APP_ENGINE_TIMEOUT_SECONDS;
-    private Date createdAt;
-    private Date updatedAt;
-    private ArrayList<Fee> fees;
+    private static int connectTimeoutMilliseconds = Constant.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;
+    private static int readTimeoutMilliseconds = Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS;
+    private static double appEngineTimeoutSeconds = Constant.DEFAULT_APP_ENGINE_TIMEOUT_SECONDS;
 
     /**
      * Get the timeout in milliseconds for App Engine API requests.
@@ -129,59 +99,6 @@ public abstract class EasyPostResource {
     }
 
     /**
-     * @return the Date this object was created
-     */
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * Set the Date this object was created.
-     *
-     * @param createdAt the Date this object was created
-     */
-    public void setCreatedAt(final Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    /**
-     * @return the Fees associated with this object
-     */
-    public ArrayList<Fee> getFees() {
-        return fees;
-    }
-
-    /**
-     * Set the Fees associated with this object.
-     *
-     * @param fees the Fees associated with this object
-     */
-    public void setFees(final ArrayList<Fee> fees) {
-        this.fees = fees;
-    }
-
-    /**
-     * @return the ID of this object
-     */
-    public String getId() {
-        return "";
-    }
-
-    /**
-     * @return the URL of the label for this object
-     */
-    public String getLabelUrl() {
-        return "";
-    }
-
-    /**
-     * @return the API mode used to create this object
-     */
-    public String getMode() {
-        return "";
-    }
-
-    /**
      * Get the timeout in milliseconds for reading API responses.
      *
      * @return the timeout in milliseconds
@@ -199,86 +116,14 @@ public abstract class EasyPostResource {
         readTimeoutMilliseconds = milliseconds;
     }
 
-    /**
-     * @return the ID of this shipment
-     */
-    public String getShipmentId() {
-        return "";
-    }
-
-    /**
-     * @return the list of shipments in this batch
-     */
-    public List<Shipment> getShipments() {
-        return new ArrayList<Shipment>();
-    }
-
-    /**
-     * @return the status of this object
-     */
-    public String getStatus() {
-        return "";
-    }
-
-    /**
-     * @return the tracking code of this shipment
-     */
-    public String getTrackingCode() {
-        return "";
-    }
-
-    /**
-     * @return the tracking details of this shipment
-     */
-    public List<TrackingDetail> getTrackingDetails() {
-        return new ArrayList<TrackingDetail>();
-    }
-
-    /**
-     * @return the Date this object was last updated
-     */
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    /**
-     * Set the Date this object was last updated.
-     *
-     * @param updatedAt the Date this object was last updated
-     */
-    public void setUpdatedAt(final Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    protected static String instanceURL(final Class<?> clazz, final String id) {
-        return String.format("%s/%s", classURL(clazz), id);
-    }
-
-    protected static String classURL(final Class<?> clazz) {
-        String singleURL = singleClassURL(clazz);
-        if (singleURL.charAt(singleURL.length() - 1) == 's' || singleURL.charAt(singleURL.length() - 1) == 'h') {
-            return String.format("%ses", singleClassURL(clazz));
-        } else {
-            return String.format("%ss", singleClassURL(clazz));
-        }
-    }
-
-    protected static String singleClassURL(final Class<?> clazz) {
-        return String.format("%s/%s", EasyPost.API_BASE, className(clazz));
-    }
-
-    private static String className(final Class<?> clazz) {
-        return clazz.getSimpleName().replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase().replace("$", "");
-
-    }
-
     private static String urlEncodePair(final String key, final String value) throws UnsupportedEncodingException {
-        return String.format("%s=%s", URLEncoder.encode(key, CHARSET), URLEncoder.encode(value, CHARSET));
+        return String.format("%s=%s",
+                URLEncoder.encode(key, Constant.CHARSET), URLEncoder.encode(value, Constant.CHARSET));
     }
 
     static Map<String, String> getHeaders(String apiKey) {
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Accept-Charset", CHARSET);
+        headers.put("Accept-Charset", Constant.CHARSET);
         headers.put("User-Agent", String.format("EasyPost/v2 JavaClient/%s Java/%s OS/%s OSVersion/%s OSArch/%s " +
                 "Implementation/%s", EasyPost.VERSION, System.getProperty("java.version"),
                 convertSpaceToHyphen(System.getProperty("os.name")), System.getProperty("os.version"),
@@ -299,14 +144,15 @@ public abstract class EasyPostResource {
     }
 
     private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(final String url, final String apiKey,
-                                                                             final String method) throws IOException {
+            final String method) throws IOException {
         HttpsURLConnection conn = null;
         String customURLStreamHandlerClassName = System.getProperty(CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
         if (customURLStreamHandlerClassName != null) {
             // instantiate the custom handler provided
             try {
-                @SuppressWarnings ("unchecked") Class<URLStreamHandler> clazz =
-                        (Class<URLStreamHandler>) Class.forName(customURLStreamHandlerClassName);
+                @SuppressWarnings("unchecked")
+                Class<URLStreamHandler> clazz = (Class<URLStreamHandler>) Class
+                        .forName(customURLStreamHandlerClassName);
                 Constructor<URLStreamHandler> constructor = clazz.getConstructor();
                 URLStreamHandler customHandler = constructor.newInstance();
                 URL urlObj = new URL(null, url, customHandler);
@@ -356,7 +202,7 @@ public abstract class EasyPostResource {
     }
 
     private static javax.net.ssl.HttpsURLConnection writeBody(final javax.net.ssl.HttpsURLConnection conn,
-                                                              final JsonObject body) throws IOException {
+            final JsonObject body) throws IOException {
         if (body != null) {
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/json");
@@ -364,7 +210,7 @@ public abstract class EasyPostResource {
             try {
                 output = conn.getOutputStream();
                 String jsonString = body.toString();
-                output.write(jsonString.getBytes(CHARSET));
+                output.write(jsonString.getBytes(Constant.CHARSET));
             } finally {
                 if (output != null) {
                     output.close();
@@ -375,7 +221,7 @@ public abstract class EasyPostResource {
     }
 
     private static javax.net.ssl.HttpsURLConnection createGetConnection(final String url, final String query,
-                                                                        final String apiKey) throws IOException {
+            final String apiKey) throws IOException {
         String getURL = url;
         if (query != null) {
             getURL = String.format("%s?%s", url, query);
@@ -385,14 +231,14 @@ public abstract class EasyPostResource {
     }
 
     private static javax.net.ssl.HttpsURLConnection createPostConnection(final String url, final JsonObject body,
-                                                                         final String apiKey) throws IOException {
+            final String apiKey) throws IOException {
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey, "POST");
         conn = writeBody(conn, body);
         return conn;
     }
 
     private static javax.net.ssl.HttpsURLConnection createDeleteConnection(final String url, final String query,
-                                                                           final String apiKey) throws IOException {
+            final String apiKey) throws IOException {
         String deleteUrl = url;
         if (query != null) {
             deleteUrl = String.format("%s?%s", url, query);
@@ -402,16 +248,17 @@ public abstract class EasyPostResource {
     }
 
     private static javax.net.ssl.HttpsURLConnection createPutConnection(final String url, final JsonObject body,
-                                                                        final String apiKey) throws IOException {
+            final String apiKey) throws IOException {
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey, "PUT");
         conn = writeBody(conn, body);
         return conn;
     }
 
     private static JsonObject createBody(final Map<String, Object> params) {
-        // this is a hack to fix a broken concept: https://github.com/google/gson/issues/1080
-        //noinspection rawtypes,unchecked
-        JsonElement jsonElement = GSON.toJsonTree(new HashMap(params));
+        // this is a hack to fix a broken concept:
+        // https://github.com/google/gson/issues/1080
+        // noinspection rawtypes,unchecked
+        JsonElement jsonElement = Constant.GSON.toJsonTree(new HashMap(params));
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         return jsonObject;
     }
@@ -468,14 +315,15 @@ public abstract class EasyPostResource {
             return "";
         }
 
-        @SuppressWarnings ("resource") String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next();
+        @SuppressWarnings("resource")
+        String rBody = new Scanner(responseStream, Constant.CHARSET).useDelimiter("\\A").next();
         responseStream.close();
         return rBody;
     }
 
-    private static EasyPostResponse makeURLConnectionRequest(final EasyPostResource.RequestMethod method,
-                                                             final String url, final String query,
-                                                             final JsonObject body, final String apiKey)
+    private static EasyPostResponse makeURLConnectionRequest(final RequestMethod method,
+            final String url, final String query,
+            final JsonObject body, final String apiKey)
             throws EasyPostException {
         javax.net.ssl.HttpsURLConnection conn = null;
         try {
@@ -495,7 +343,7 @@ public abstract class EasyPostResource {
                 default:
                     throw new EasyPostException(
                             String.format("Unrecognized HTTP method %s. Please contact EasyPost at %s.", method,
-                                    EasyPostResource.EASYPOST_SUPPORT_EMAIL));
+                                    Constant.EASYPOST_SUPPORT_EMAIL));
             }
             conn.connect(); // This line is crucial for getting VCR to work
             // (triggers internal pre-request processing needed for VCR)
@@ -512,7 +360,7 @@ public abstract class EasyPostResource {
         } catch (IOException e) {
             throw new EasyPostException(String.format("Could not connect to EasyPost (%s). " +
                     "Please check your internet connection and try again. If this problem persists," +
-                    "please contact us at %s.", EasyPost.API_BASE, EasyPostResource.EASYPOST_SUPPORT_EMAIL), e);
+                    "please contact us at %s.", EasyPost.API_BASE, Constant.EASYPOST_SUPPORT_EMAIL), e);
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -520,15 +368,42 @@ public abstract class EasyPostResource {
         }
     }
 
-    protected static <T> T request(final EasyPostResource.RequestMethod method, final String url,
-                                   final Map<String, Object> params, final Class<T> clazz, final String apiKey)
+    /**
+     * Send an HTTP request to EasyPost.
+     *
+     * @param <T>    Any class.
+     * @param method The method of the API request.
+     * @param url    The URL of the API request.
+     * @param params The params of the API request.
+     * @param clazz  The class of the object for deserialization
+     * @param apiKey The API key for this API request.
+     * 
+     * @return A class object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static <T> T request(final RequestMethod method, final String url,
+            final Map<String, Object> params, final Class<T> clazz, final String apiKey)
             throws EasyPostException {
         return request(method, url, params, clazz, apiKey, true);
     }
 
-    protected static <T> T request(final EasyPostResource.RequestMethod method, final String url,
-                                   final Map<String, Object> params, final Class<T> clazz, final String apiKey,
-                                   final boolean apiKeyRequired) throws EasyPostException {
+    /**
+     * Send an HTTP request to EasyPost.
+     *
+     * @param <T>            Any class.
+     * @param method         The method of the API request.
+     * @param url            The URL of the API request.
+     * @param params         The params of the API request.
+     * @param clazz          The class of the object for deserialization
+     * @param apiKey         The API key for this API request.
+     * @param apiKeyRequired The API key for this HTTP request call if needed.
+     *
+     * @return A class object.
+     * @throws EasyPostException when the request fails.
+     */
+    protected static <T> T request(final RequestMethod method, final String url,
+            final Map<String, Object> params, final Class<T> clazz, final String apiKey,
+            final boolean apiKeyRequired) throws EasyPostException {
         String originalDNSCacheTTL = null;
         boolean allowedToSetTTL = true;
         try {
@@ -553,10 +428,10 @@ public abstract class EasyPostResource {
         }
     }
 
-    @SuppressWarnings ("checkstyle:methodname")
-    protected static <T> T _request(final EasyPostResource.RequestMethod method, final String url,
-                                    final Map<String, Object> params, final Class<T> clazz, String apiKey,
-                                    final boolean apiKeyRequired) throws EasyPostException {
+    @SuppressWarnings("checkstyle:methodname")
+    protected static <T> T _request(final RequestMethod method, final String url,
+            final Map<String, Object> params, final Class<T> clazz, String apiKey,
+            final boolean apiKeyRequired) throws EasyPostException {
         if ((EasyPost.apiKey == null || EasyPost.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
             if (apiKeyRequired) {
                 throw new MissingParameterError(Constants.INVALID_API_KEY_TYPE);
@@ -578,7 +453,8 @@ public abstract class EasyPostResource {
                     } catch (UnsupportedEncodingException e) {
                         throw new EasyPostException(
                                 String.format("Unable to encode parameters to %s. Please email %s for assistance.",
-                                        CHARSET, EasyPostResource.EASYPOST_SUPPORT_EMAIL), e);
+                                        Constant.CHARSET, Constant.EASYPOST_SUPPORT_EMAIL),
+                                e);
                     }
                     break;
                 case POST:
@@ -588,14 +464,13 @@ public abstract class EasyPostResource {
                     } catch (Exception e) {
                         throw new EasyPostException(String.format(
                                 "Unable to create JSON body from parameters. Please email %s for assistance.",
-                                EasyPostResource.EASYPOST_SUPPORT_EMAIL), e);
+                                Constant.EASYPOST_SUPPORT_EMAIL), e);
                     }
                     break;
                 default:
                     break;
             }
         }
-
 
         EasyPostResponse response;
         try {
@@ -616,7 +491,7 @@ public abstract class EasyPostResource {
             handleAPIError(rBody, rCode);
         }
 
-        return GSON.fromJson(rBody, clazz);
+        return Constant.GSON.fromJson(rBody, clazz);
     }
 
     /**
@@ -629,7 +504,7 @@ public abstract class EasyPostResource {
         if (rBody == null || rBody.length() == 0) {
             rBody = "{}";
         }
-        Error error = GSON.fromJson(rBody, Error.class);
+        Error error = Constant.GSON.fromJson(rBody, Error.class);
         String errorMessage = error.getMessage();
         String errorCode = error.getCode();
         List<Error> errors = error.getErrors();
@@ -667,11 +542,12 @@ public abstract class EasyPostResource {
     }
 
     private static EasyPostResponse makeAppEngineRequest(final RequestMethod method, String url, final String query,
-                                                         final JsonObject body, final String apiKey)
+            final JsonObject body, final String apiKey)
             throws EasyPostException {
         String unknownErrorMessage = String.format(
                 "Sorry, an unknown error occurred while trying to use the Google App Engine runtime." +
-                        "Please email %s for assistance.", EasyPostResource.EASYPOST_SUPPORT_EMAIL);
+                        "Please email %s for assistance.",
+                Constant.EASYPOST_SUPPORT_EMAIL);
         try {
             if ((method == RequestMethod.GET || method == RequestMethod.DELETE) && query != null) {
                 url = String.format("%s?%s", url, query);
@@ -689,13 +565,15 @@ public abstract class EasyPostResource {
                 System.err.printf(
                         "Warning: this App Engine SDK version does not allow verification of SSL certificates;" +
                                 "this exposes you to a MITM attack. Please upgrade your App Engine SDK to >=1.5.0. " +
-                                "If you have questions, email %s.%n", EasyPostResource.EASYPOST_SUPPORT_EMAIL);
+                                "If you have questions, email %s.%n",
+                        Constant.EASYPOST_SUPPORT_EMAIL);
                 fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("withDefaults").invoke(null);
             }
 
             Class<?> fetchOptionsClass = Class.forName("com.google.appengine.api.urlfetch.FetchOptions");
 
-            // Heroku times out after 30s, so leave some time for the API to return a response
+            // Heroku times out after 30s, so leave some time for the API to return a
+            // response
             fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class)
                     .invoke(fetchOptions, getAppEngineTimeoutSeconds());
 
@@ -724,8 +602,8 @@ public abstract class EasyPostResource {
             Object response = fetchMethod.invoke(urlFetchService, request);
 
             int responseCode = (Integer) response.getClass().getDeclaredMethod("getResponseCode").invoke(response);
-            String responseBody =
-                    new String((byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response), CHARSET);
+            String responseBody = new String(
+                    (byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response), Constant.CHARSET);
 
             return new EasyPostResponse(responseCode, responseBody);
 
@@ -750,168 +628,5 @@ public abstract class EasyPostResource {
         } catch (UnsupportedEncodingException e) {
             throw new EasyPostException(unknownErrorMessage, e);
         }
-    }
-
-    /**
-     * Get all static methods for a particular class.
-     *
-     * @param type Class type to get methods for.
-     * @return List of class methods.
-     */
-    private static List<Method> getAllStaticMethods(Class<?> type) {
-        List<Method> allMethods = getAllMethods(type);
-
-        List<Method> staticMethods = new ArrayList<>();
-        for (Method method : allMethods) {
-            if (Modifier.isStatic(method.getModifiers())) {
-                staticMethods.add(method);
-            }
-        }
-
-        return staticMethods;
-    }
-
-    /**
-     * Get all methods for a particular class.
-     *
-     * @param type Class type to get methods for.
-     * @return List of class methods.
-     */
-    private static List<Method> getAllMethods(Class<?> type) {
-        return Arrays.asList(type.getMethods());
-    }
-
-    /**
-     * Returns a string representation of the object.
-     */
-    @Override
-    public String toString() {
-
-        return (String) this.getIdString();
-    }
-
-    private Object getIdString() {
-        try {
-            Field idField = this.getClass().getDeclaredField("id");
-            return idField.get(this);
-        } catch (SecurityException e) {
-            return "";
-        } catch (NoSuchFieldException e) {
-            return "";
-        } catch (IllegalArgumentException e) {
-            return "";
-        } catch (IllegalAccessException e) {
-            return "";
-        }
-    }
-
-    /**
-     * Pretty print the JSON representation of the object.
-     *
-     * @return the JSON representation of the object.
-     */
-    public String prettyPrint() {
-        return String.format("<%s@%s id=%s> JSON: %s", this.getClass().getName(), System.identityHashCode(this),
-                this.getIdString(), PRETTY_PRINT_GSON.toJson(this));
-    }
-
-    /**
-     * Merge two EasyPostResource objects.
-     *
-     * @param obj    the base object
-     * @param update the object to merge
-     */
-    public void merge(final EasyPostResource obj, final EasyPostResource update) {
-        if (!obj.getClass().isAssignableFrom(update.getClass())) {
-            return;
-        }
-
-        // get all methods from the obj class and its superclasses
-        List<Method> methods = getAllNonStaticMethods(obj.getClass());
-
-        for (Method fromMethod : methods) {
-            if (fromMethod.getName().startsWith("get") || GLOBAL_FIELD_ACCESSORS.contains(fromMethod.getName())) {
-
-                if (fromMethod.isAnnotationPresent(Deprecated.class)) {
-                    // skip deprecated methods
-                    continue;
-                }
-
-                String fromName = fromMethod.getName();
-                String toName = fromName.replace("get", "set");
-
-                try {
-                    Object value = fromMethod.invoke(update, (Object[]) null);
-                    if (value != null) {
-                        Method toMethod = obj.getClass().getMethod(toName, fromMethod.getReturnType());
-                        toMethod.invoke(obj, value);
-                    }
-                } catch (Exception e) {
-                    // TODO: Address situation below
-                    /*
-                      The method getSmartrates() on the Shipment object is causing this exception.
-                      Since it found a method with "get" in the name, it expects there to be a "set" equivalent.
-                      There is not, causing this exception to be thrown, although nothing wrong has really happened.
-                      This code block was copy-pasted from StackOverflow: https://stackoverflow.com/a/7526414/13343799
-                      Per the comments, there are some built-in expectations for how this will work,
-                      and should eventually be re-written or removed entirely
-                      (explore returning a brand-new object rather than modifying the existing one).
-                      For now, the easiest fix would be to
-                      a) just ignore this exception, or
-                      b) rename getSmartrates() in the Shipment class to just smartrates()
-                      (similar to how the other methods are named).
-                     */
-                    // e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    /**
-     * Get all non-static methods for a particular class.
-     *
-     * @param type Class type to get methods for.
-     * @return List of class methods.
-     */
-    private static List<Method> getAllNonStaticMethods(Class<?> type) {
-        List<Method> allMethods = getAllMethods(type);
-
-        List<Method> nonStaticMethods = new ArrayList<>();
-        for (Method method : allMethods) {
-            if (!Modifier.isStatic(method.getModifiers())) {
-                nonStaticMethods.add(method);
-            }
-        }
-
-        return nonStaticMethods;
-    }
-
-    @SuppressWarnings ("unused")
-    private static class ErrorContainer {
-        private Error error;
-    }
-
-    /**
-     * Override the hashCode method because it is needed when overriding equals().
-     *
-     * @return The hashcode of current object.
-     */
-    @Override
-    public int hashCode() {
-      return GSON.toJson(this).hashCode();
-    }
-
-    /**
-     * Override the equals method, convert objects to Json strings for comparsion.
-     *
-     * @param object Object of any class.
-     * @return If two objects have the same properties.
-     */
-    @Override
-    public boolean equals(Object object) {
-      String currentObject = GSON.toJson(this);
-      String newObject = GSON.toJson(object);
-
-      return currentObject.equals(newObject);
     }
 }

@@ -1,14 +1,14 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public final class CustomsInfo extends EasyPostResource {
-    private String id;
     private String contentsType;
     private String contentsExplanation;
     private boolean customsCertify;
@@ -147,24 +147,6 @@ public final class CustomsInfo extends EasyPostResource {
     }
 
     /**
-     * Get this CustomsInfo's ID.
-     *
-     * @return the ID of this CustomsInfo.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set this CustomsInfo's ID.
-     *
-     * @param id the ID of this CustomsInfo.
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
      * Get the non-delivery option of this CustomsInfo.
      *
      * @return the non-delivery option of this CustomsInfo.
@@ -241,7 +223,8 @@ public final class CustomsInfo extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("customs_info", params);
 
-        return request(RequestMethod.POST, classURL(CustomsInfo.class), wrappedParams, CustomsInfo.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(CustomsInfo.class),
+            wrappedParams, CustomsInfo.class, apiKey);
     }
 
     /**
@@ -264,6 +247,7 @@ public final class CustomsInfo extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static CustomsInfo retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(CustomsInfo.class, id), null, CustomsInfo.class, apiKey);
+        return Requestor.request(RequestMethod.GET,
+            instanceURL(CustomsInfo.class, id), null, CustomsInfo.class, apiKey);
     }
 }

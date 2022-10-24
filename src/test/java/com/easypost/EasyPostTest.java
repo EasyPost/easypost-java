@@ -1,8 +1,9 @@
 package com.easypost;
 
-import com.easypost.net.EasyPostResource;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import com.easypost.http.Requestor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,12 +26,12 @@ public final class EasyPostTest {
 
         int testTimeout = 1;
 
-        EasyPostResource.setConnectTimeoutMilliseconds(testTimeout);
+        Requestor.setConnectTimeoutMilliseconds(testTimeout);
 
-        assertEquals(1, EasyPostResource.getConnectTimeoutMilliseconds());
+        assertEquals(1, Requestor.getConnectTimeoutMilliseconds());
 
         // We have to set the connection timeout back to default to avoid other unit tests getting timeout.
-        EasyPostResource.setConnectTimeoutMilliseconds(30000);
+        Requestor.setConnectTimeoutMilliseconds(30000);
     }
 
     /**
@@ -40,11 +41,11 @@ public final class EasyPostTest {
     public void testRequestTimeout() {
         int testTimeout = 1;
 
-        EasyPostResource.setReadTimeoutMilliseconds(testTimeout);
+        Requestor.setReadTimeoutMilliseconds(testTimeout);
 
-        assertEquals(1, EasyPostResource.getReadTimeoutMilliseconds());
+        assertEquals(1, Requestor.getReadTimeoutMilliseconds());
 
         // We have to set the connection timeout back to default to avoid other unit tests getting timeout.
-        EasyPostResource.setReadTimeoutMilliseconds(60000);
+        Requestor.setReadTimeoutMilliseconds(60000);
     }
 }

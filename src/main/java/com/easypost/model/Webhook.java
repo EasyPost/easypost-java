@@ -3,7 +3,9 @@ package com.easypost.model;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.SignatureVerificationError;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Constant;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.utils.Cryptography;
 
 import java.nio.charset.StandardCharsets;
@@ -13,8 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class Webhook extends EasyPostResource {
-    private String id;
-    private String mode;
     private String url;
     private Date disabledAt;
 
@@ -77,7 +77,7 @@ public final class Webhook extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("webhook", params);
 
-        return request(RequestMethod.POST, classURL(Webhook.class), wrappedParams, Webhook.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Webhook.class), wrappedParams, Webhook.class, apiKey);
     }
 
     /**
@@ -100,7 +100,7 @@ public final class Webhook extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Webhook retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Webhook.class, id), null, Webhook.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Webhook.class, id), null, Webhook.class, apiKey);
     }
 
     /**
@@ -124,7 +124,7 @@ public final class Webhook extends EasyPostResource {
      */
     public static WebhookCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
     }
 
     /**
@@ -154,43 +154,7 @@ public final class Webhook extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String apiKey) throws EasyPostException {
-        request(RequestMethod.DELETE, instanceURL(Webhook.class, this.getId()), null, Webhook.class, apiKey);
-    }
-
-    /**
-     * Get the ID of the webhook.
-     *
-     * @return the ID of the webhook
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of the webhook.
-     *
-     * @param id the ID of the webhook
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Get the mode of the webhook.
-     *
-     * @return the mode of the webhook
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the mode of the webhook.
-     *
-     * @param mode the mode of the webhook
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
+        Requestor.request(RequestMethod.DELETE, instanceURL(Webhook.class, this.getId()), null, Webhook.class, apiKey);
     }
 
     /**
@@ -216,9 +180,8 @@ public final class Webhook extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("webhook", params);
 
-        Webhook response =
-                request(RequestMethod.PUT, instanceURL(Webhook.class, this.getId()), wrappedParams, Webhook.class,
-                        apiKey);
+        Webhook response = Requestor.request(RequestMethod.PUT, 
+            instanceURL(Webhook.class, this.getId()), wrappedParams, Webhook.class, apiKey);
 
         this.merge(this, response);
         return this;
@@ -265,7 +228,7 @@ public final class Webhook extends EasyPostResource {
             if (Cryptography.signaturesMatch(providedSignature, calculatedSignature)) {
                 // Serialize data into a JSON string, then into an Event object
                 String json = new String(eventBody, StandardCharsets.UTF_8);
-                return GSON.fromJson(json, Event.class);
+                return Constant.GSON.fromJson(json, Event.class);
             } else {
                 throw new SignatureVerificationError(Constants.WEBHOOK_DOES_NOT_MATCH);
             }

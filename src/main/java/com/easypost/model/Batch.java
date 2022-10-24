@@ -1,15 +1,14 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public final class Batch extends EasyPostResource {
-    private String id;
-    private String mode;
     private String state;
     private BatchStatus status;
     private Number numShipments;
@@ -130,7 +129,7 @@ public final class Batch extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("batch", params);
 
-        return request(RequestMethod.POST, classURL(Batch.class), wrappedParams, Batch.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Batch.class), wrappedParams, Batch.class, apiKey);
     }
 
     /**
@@ -164,7 +163,7 @@ public final class Batch extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Batch retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Batch.class, id), null, Batch.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Batch.class, id), null, Batch.class, apiKey);
     }
 
     /**
@@ -187,7 +186,7 @@ public final class Batch extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static BatchCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Batch.class), params, BatchCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(Batch.class), params, BatchCollection.class, apiKey);
     }
 
     /**
@@ -213,7 +212,7 @@ public final class Batch extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("batch", params);
 
-        return request(RequestMethod.POST, classURL(Batch.class), wrappedParams, Batch.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Batch.class), wrappedParams, Batch.class, apiKey);
     }
 
     /**
@@ -235,26 +234,8 @@ public final class Batch extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Batch refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s", instanceURL(Batch.class, this.getId())), params,
+        return Requestor.request(RequestMethod.GET, String.format("%s", instanceURL(Batch.class, this.getId())), params,
                 Batch.class, apiKey);
-    }
-
-    /**
-     * Get ID of this batch.
-     *
-     * @return ID of this batch.
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set ID of this batch.
-     *
-     * @param id ID of this batch.
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**
@@ -264,24 +245,6 @@ public final class Batch extends EasyPostResource {
      */
     public String getLabelUrl() {
         return labelUrl;
-    }
-
-    /**
-     * Get mode of this batch.
-     *
-     * @return mode of this batch.
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set mode of this batch.
-     *
-     * @param mode mode of this batch.
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
     }
 
     /**
@@ -352,8 +315,8 @@ public final class Batch extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Batch label(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, String.format("%s/label", instanceURL(Batch.class, this.getId())), params,
-                Batch.class, apiKey);
+        return Requestor.request(RequestMethod.POST, String.format("%s/label",
+            instanceURL(Batch.class, this.getId())), params, Batch.class, apiKey);
     }
 
     /**
@@ -389,8 +352,8 @@ public final class Batch extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Batch addShipments(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, String.format("%s/add_shipments", instanceURL(Batch.class, this.getId())),
-                params, Batch.class, apiKey);
+        return Requestor.request(RequestMethod.POST, String.format("%s/add_shipments",
+            instanceURL(Batch.class, this.getId())), params, Batch.class, apiKey);
     }
 
     /**
@@ -404,6 +367,7 @@ public final class Batch extends EasyPostResource {
     public Batch addShipments(final List<Shipment> shipments, final String apiKey) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("shipments", shipments);
+
         return this.addShipments(params, apiKey);
     }
 
@@ -428,6 +392,7 @@ public final class Batch extends EasyPostResource {
     public Batch removeShipments(final List<Shipment> shipments) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("shipments", shipments);
+
         return this.removeShipments(params, null);
     }
 
@@ -440,8 +405,8 @@ public final class Batch extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Batch removeShipments(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, String.format("%s/remove_shipments", instanceURL(Batch.class, this.getId())),
-                params, Batch.class, apiKey);
+        return Requestor.request(RequestMethod.POST, String.format("%s/remove_shipments",
+            instanceURL(Batch.class, this.getId())), params, Batch.class, apiKey);
     }
 
     /**
@@ -455,6 +420,7 @@ public final class Batch extends EasyPostResource {
     public Batch removeShipments(final List<Shipment> shipments, final String apiKey) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("shipments", shipments);
+
         return this.removeShipments(params, apiKey);
     }
 
@@ -488,8 +454,8 @@ public final class Batch extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Batch buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, String.format("%s/buy", instanceURL(Batch.class, this.getId())), params,
-                Batch.class, apiKey);
+        return Requestor.request(RequestMethod.POST, String.format("%s/buy",
+            instanceURL(Batch.class, this.getId())), params, Batch.class, apiKey);
     }
 
     /**
@@ -522,8 +488,8 @@ public final class Batch extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Batch createScanForm(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, String.format("%s/scan_form", instanceURL(Batch.class, this.getId())),
-                params, Batch.class, apiKey);
+        return Requestor.request(RequestMethod.POST, String.format("%s/scan_form",
+            instanceURL(Batch.class, this.getId())), params, Batch.class, apiKey);
     }
 
     /**
