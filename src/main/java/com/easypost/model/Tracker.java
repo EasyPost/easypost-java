@@ -2,6 +2,8 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -242,7 +244,7 @@ public final class Tracker extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("tracker", params);
 
-        return request(RequestMethod.POST, classURL(Tracker.class), wrappedParams, Tracker.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Tracker.class), wrappedParams, Tracker.class, apiKey);
     }
 
     /**
@@ -265,7 +267,7 @@ public final class Tracker extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Tracker retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Tracker.class, id), null, Tracker.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Tracker.class, id), null, Tracker.class, apiKey);
     }
 
     /**
@@ -289,7 +291,7 @@ public final class Tracker extends EasyPostResource {
      */
     public static TrackerCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Tracker.class), params, TrackerCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(Tracker.class), params, TrackerCollection.class, apiKey);
     }
 
     /**
@@ -315,6 +317,6 @@ public final class Tracker extends EasyPostResource {
         Map<String, Object> newParams = new HashMap<String, Object>();
         newParams.put("trackers", params);
 
-        request(RequestMethod.POST, createListUrl, newParams, Object.class, apiKey);
+        Requestor.request(RequestMethod.POST, createListUrl, newParams, Object.class, apiKey);
     }
 }

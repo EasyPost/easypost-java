@@ -5,6 +5,8 @@ import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +33,7 @@ public final class Billing extends EasyPostResource {
         PaymentMethodObject paymentMethodObject = getPaymentMethodByPriority(priority, apiKey);
 
         // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
-        request(EasyPostResource.RequestMethod.DELETE,
+        Requestor.request(RequestMethod.DELETE,
                 String.format("%s/%s/%s", EasyPost.API_BASE, paymentMethodObject.getEndpoint(),
                         paymentMethodObject.getId()), null, PaymentMethod.class, apiKey);
     }
@@ -73,8 +75,9 @@ public final class Billing extends EasyPostResource {
         params.put("amount", amount);
 
         // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
-        request(RequestMethod.POST, String.format("%s/%s/%s/%s", EasyPost.API_BASE, paymentMethodObject.getEndpoint(),
-                paymentMethodObject.getId(), "charges"), params, PaymentMethod.class, apiKey);
+        Requestor.request(RequestMethod.POST, String.format("%s/%s/%s/%s", EasyPost.API_BASE, 
+            paymentMethodObject.getEndpoint(), paymentMethodObject.getId(), "charges"),
+                params, PaymentMethod.class, apiKey);
     }
 
     /**
@@ -96,8 +99,8 @@ public final class Billing extends EasyPostResource {
      */
     public static PaymentMethod retrievePaymentMethods(String apiKey) throws EasyPostException {
         PaymentMethod response =
-                request(RequestMethod.GET, String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
-                        PaymentMethod.class, apiKey);
+            Requestor.request(RequestMethod.GET, String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
+                PaymentMethod.class, apiKey);
 
         if (response.getId() == null) {
             throw new InvalidObjectError(Constants.NO_PAYMENT_METHODS);

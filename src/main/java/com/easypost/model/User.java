@@ -3,6 +3,8 @@ package com.easypost.model;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +32,7 @@ public class User extends BaseUser {
      * @throws EasyPostException when the request fails.
      */
     public static User retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(User.class, id), null, User.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(User.class, id), null, User.class, apiKey);
     }
 
     /**
@@ -51,7 +53,7 @@ public class User extends BaseUser {
      * @throws EasyPostException when the request fails.
      */
     public static User retrieveMe(final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(User.class), null, User.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(User.class), null, User.class, apiKey);
     }
 
     /**
@@ -76,7 +78,7 @@ public class User extends BaseUser {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
-        return request(RequestMethod.POST, classURL(User.class), wrappedParams, User.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(User.class), wrappedParams, User.class, apiKey);
     }
 
     /**
@@ -113,8 +115,8 @@ public class User extends BaseUser {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
-        User response =
-                request(RequestMethod.PUT, instanceURL(User.class, this.getId()), wrappedParams, User.class, apiKey);
+        User response = Requestor.request(RequestMethod.PUT,
+            instanceURL(User.class, this.getId()), wrappedParams, User.class, apiKey);
 
         this.merge(this, response);
         return this;
@@ -136,7 +138,7 @@ public class User extends BaseUser {
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String apiKey) throws EasyPostException {
-        request(RequestMethod.DELETE, instanceURL(User.class, this.getId()), null, User.class, apiKey);
+        Requestor.request(RequestMethod.DELETE, instanceURL(User.class, this.getId()), null, User.class, apiKey);
     }
 
     /**
@@ -184,6 +186,6 @@ public class User extends BaseUser {
         String updateBrandUrl = String.format("%s/brand", instanceURL(User.class, this.getId()));
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("brand", params);
-        return request(RequestMethod.PUT, updateBrandUrl, wrappedParams, Brand.class, apiKey);
+        return Requestor.request(RequestMethod.PUT, updateBrandUrl, wrappedParams, Brand.class, apiKey);
     }
 }

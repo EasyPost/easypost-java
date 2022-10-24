@@ -2,6 +2,8 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.List;
 import java.util.Map;
@@ -121,7 +123,7 @@ public final class Event extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Event retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, apiKey);
     }
 
     /**
@@ -144,6 +146,6 @@ public final class Event extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static EventCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Event.class), params, EventCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(Event.class), params, EventCollection.class, apiKey);
     }
 }

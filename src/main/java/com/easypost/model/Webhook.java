@@ -5,6 +5,8 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.SignatureVerificationError;
 import com.easypost.net.Constant;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 import com.easypost.utils.Cryptography;
 
 import java.nio.charset.StandardCharsets;
@@ -76,7 +78,7 @@ public final class Webhook extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("webhook", params);
 
-        return request(RequestMethod.POST, classURL(Webhook.class), wrappedParams, Webhook.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Webhook.class), wrappedParams, Webhook.class, apiKey);
     }
 
     /**
@@ -99,7 +101,7 @@ public final class Webhook extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Webhook retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Webhook.class, id), null, Webhook.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Webhook.class, id), null, Webhook.class, apiKey);
     }
 
     /**
@@ -123,7 +125,7 @@ public final class Webhook extends EasyPostResource {
      */
     public static WebhookCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(Webhook.class), params, WebhookCollection.class, apiKey);
     }
 
     /**
@@ -153,7 +155,7 @@ public final class Webhook extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String apiKey) throws EasyPostException {
-        request(RequestMethod.DELETE, instanceURL(Webhook.class, this.getId()), null, Webhook.class, apiKey);
+        Requestor.request(RequestMethod.DELETE, instanceURL(Webhook.class, this.getId()), null, Webhook.class, apiKey);
     }
 
     /**
@@ -179,9 +181,8 @@ public final class Webhook extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("webhook", params);
 
-        Webhook response =
-                request(RequestMethod.PUT, instanceURL(Webhook.class, this.getId()), wrappedParams, Webhook.class,
-                        apiKey);
+        Webhook response = Requestor.request(RequestMethod.PUT, 
+            instanceURL(Webhook.class, this.getId()), wrappedParams, Webhook.class, apiKey);
 
         this.merge(this, response);
         return this;

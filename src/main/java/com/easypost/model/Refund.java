@@ -2,6 +2,8 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -128,7 +130,9 @@ public final class Refund extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("refund", params);
 
-        Refund[] response = request(RequestMethod.POST, classURL(Refund.class), wrappedParams, Refund[].class, apiKey);
+        Refund[] response = Requestor.request(RequestMethod.POST, classURL(Refund.class),
+            wrappedParams, Refund[].class, apiKey);
+
         return Arrays.asList(response);
     }
 
@@ -152,7 +156,7 @@ public final class Refund extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Refund retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Refund.class, id), null, Refund.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Refund.class, id), null, Refund.class, apiKey);
     }
 
     /**
@@ -175,6 +179,6 @@ public final class Refund extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static RefundCollection all(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Refund.class), params, RefundCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(Refund.class), params, RefundCollection.class, apiKey);
     }
 }

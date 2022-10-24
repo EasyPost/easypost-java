@@ -48,7 +48,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public abstract class Requestor {
-    protected enum RequestMethod {
+    public enum RequestMethod {
         GET,
         POST,
         DELETE,
@@ -57,89 +57,10 @@ public abstract class Requestor {
 
     private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
-    private static int connectTimeoutMilliseconds = Constant.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;
-    private static int readTimeoutMilliseconds = Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS;
-    private static double appEngineTimeoutSeconds = Constant.DEFAULT_APP_ENGINE_TIMEOUT_SECONDS;
-
-    /**
-     * Get the timeout in milliseconds for App Engine API requests.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static double getAppEngineTimeoutSeconds() {
-        return appEngineTimeoutSeconds;
-    }
-
-    /**
-     * Set the timeout in seconds for App Engine API requests.
-     *
-     * @param seconds the timeout in seconds
-     */
-    public static void setAppEngineTimeoutSeconds(double seconds) {
-        appEngineTimeoutSeconds = seconds;
-    }
-
-    /**
-     * Get the timeout in milliseconds for connecting to the API.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static int getConnectTimeoutMilliseconds() {
-        return connectTimeoutMilliseconds;
-    }
-
-    /**
-     * Set the timeout in milliseconds for connecting to the API.
-     *
-     * @param milliseconds the timeout in milliseconds
-     */
-    public static void setConnectTimeoutMilliseconds(int milliseconds) {
-        connectTimeoutMilliseconds = milliseconds;
-    }
-
-    /**
-     * Get the timeout in milliseconds for reading API responses.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static int getReadTimeoutMilliseconds() {
-        return readTimeoutMilliseconds;
-    }
-
-    /**
-     * Set the timeout in milliseconds for reading API responses.
-     *
-     * @param milliseconds the timeout in milliseconds
-     */
-    public static void setReadTimeoutMilliseconds(int milliseconds) {
-        readTimeoutMilliseconds = milliseconds;
-    }
-
-    protected static String instanceURL(final Class<?> clazz, final String id) {
-        return String.format("%s/%s", classURL(clazz), id);
-    }
-
-    protected static String classURL(final Class<?> clazz) {
-        String singleURL = singleClassURL(clazz);
-        if (singleURL.charAt(singleURL.length() - 1) == 's' || singleURL.charAt(singleURL.length() - 1) == 'h') {
-            return String.format("%ses", singleClassURL(clazz));
-        } else {
-            return String.format("%ss", singleClassURL(clazz));
-        }
-    }
-
-    protected static String singleClassURL(final Class<?> clazz) {
-        return String.format("%s/%s", EasyPost.API_BASE, className(clazz));
-    }
-
-    private static String className(final Class<?> clazz) {
-        return clazz.getSimpleName().replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase().replace("$", "");
-
-    }
 
     private static String urlEncodePair(final String key, final String value) throws UnsupportedEncodingException {
         return String.format("%s=%s",
-            URLEncoder.encode(key, Constant.CHARSET), URLEncoder.encode(value, Constant.CHARSET));
+                URLEncoder.encode(key, Constant.CHARSET), URLEncoder.encode(value, Constant.CHARSET));
     }
 
     static Map<String, String> getHeaders(String apiKey) {
@@ -203,14 +124,14 @@ public abstract class Requestor {
             URL urlObj = new URL(null, url);
             conn = (javax.net.ssl.HttpsURLConnection) urlObj.openConnection();
         }
-        conn.setConnectTimeout(getConnectTimeoutMilliseconds());
+        conn.setConnectTimeout(EasyPostResource.getConnectTimeoutMilliseconds());
         conn.setRequestMethod(method);
 
         int readTimeout;
         if (EasyPost.readTimeout != 0) {
             readTimeout = EasyPost.readTimeout;
         } else {
-            readTimeout = getReadTimeoutMilliseconds();
+            readTimeout = EasyPostResource.getReadTimeoutMilliseconds();
         }
         conn.setReadTimeout(readTimeout);
 
@@ -276,8 +197,9 @@ public abstract class Requestor {
     }
 
     private static JsonObject createBody(final Map<String, Object> params) {
-        // this is a hack to fix a broken concept: https://github.com/google/gson/issues/1080
-        //noinspection rawtypes,unchecked
+        // this is a hack to fix a broken concept:
+        // https://github.com/google/gson/issues/1080
+        // noinspection rawtypes,unchecked
         JsonElement jsonElement = Constant.GSON.toJsonTree(new HashMap(params));
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         return jsonObject;
@@ -335,15 +257,15 @@ public abstract class Requestor {
             return "";
         }
 
-        @SuppressWarnings ("resource") String rBody =
-            new Scanner(responseStream, Constant.CHARSET).useDelimiter("\\A").next();
+        @SuppressWarnings("resource")
+        String rBody = new Scanner(responseStream, Constant.CHARSET).useDelimiter("\\A").next();
         responseStream.close();
         return rBody;
     }
 
-        private static EasyPostResponse makeURLConnectionRequest(final RequestMethod method,
-                                                             final String url, final String query,
-                                                             final JsonObject body, final String apiKey)
+    private static EasyPostResponse makeURLConnectionRequest(final RequestMethod method,
+            final String url, final String query,
+            final JsonObject body, final String apiKey)
             throws EasyPostException {
         javax.net.ssl.HttpsURLConnection conn = null;
         try {
@@ -363,7 +285,7 @@ public abstract class Requestor {
                 default:
                     throw new EasyPostException(
                             String.format("Unrecognized HTTP method %s. Please contact EasyPost at %s.", method,
-                                Constant.EASYPOST_SUPPORT_EMAIL));
+                                    Constant.EASYPOST_SUPPORT_EMAIL));
             }
             conn.connect(); // This line is crucial for getting VCR to work
             // (triggers internal pre-request processing needed for VCR)
@@ -388,15 +310,42 @@ public abstract class Requestor {
         }
     }
 
-        protected static <T> T request(final RequestMethod method, final String url,
-                                   final Map<String, Object> params, final Class<T> clazz, final String apiKey)
+    /**
+     * Send an HTTP request to EasyPost.
+     *
+     * @param <T>    Any class.
+     * @param method The method of the API request.
+     * @param url    The URL of the API request.
+     * @param params The params of the API request.
+     * @param clazz  The class of the object for deserialization
+     * @param apiKey The API key for this API request.
+     * 
+     * @return A class object.
+     * @throws EasyPostException when the request fails.
+     */
+    public static <T> T request(final RequestMethod method, final String url,
+            final Map<String, Object> params, final Class<T> clazz, final String apiKey)
             throws EasyPostException {
         return request(method, url, params, clazz, apiKey, true);
     }
 
+    /**
+     * Send an HTTP request to EasyPost.
+     *
+     * @param <T>            Any class.
+     * @param method         The method of the API request.
+     * @param url            The URL of the API request.
+     * @param params         The params of the API request.
+     * @param clazz          The class of the object for deserialization
+     * @param apiKey         The API key for this API request.
+     * @param apiKeyRequired The API key for this HTTP request call if needed.
+     *
+     * @return A class object.
+     * @throws EasyPostException when the request fails.
+     */
     protected static <T> T request(final RequestMethod method, final String url,
-                                   final Map<String, Object> params, final Class<T> clazz, final String apiKey,
-                                   final boolean apiKeyRequired) throws EasyPostException {
+            final Map<String, Object> params, final Class<T> clazz, final String apiKey,
+            final boolean apiKeyRequired) throws EasyPostException {
         String originalDNSCacheTTL = null;
         boolean allowedToSetTTL = true;
         try {
@@ -421,10 +370,10 @@ public abstract class Requestor {
         }
     }
 
-    @SuppressWarnings ("checkstyle:methodname")
+    @SuppressWarnings("checkstyle:methodname")
     protected static <T> T _request(final RequestMethod method, final String url,
-                                    final Map<String, Object> params, final Class<T> clazz, String apiKey,
-                                    final boolean apiKeyRequired) throws EasyPostException {
+            final Map<String, Object> params, final Class<T> clazz, String apiKey,
+            final boolean apiKeyRequired) throws EasyPostException {
         if ((EasyPost.apiKey == null || EasyPost.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
             if (apiKeyRequired) {
                 throw new MissingParameterError(Constants.INVALID_API_KEY_TYPE);
@@ -446,7 +395,8 @@ public abstract class Requestor {
                     } catch (UnsupportedEncodingException e) {
                         throw new EasyPostException(
                                 String.format("Unable to encode parameters to %s. Please email %s for assistance.",
-                                    Constant.CHARSET, Constant.EASYPOST_SUPPORT_EMAIL), e);
+                                        Constant.CHARSET, Constant.EASYPOST_SUPPORT_EMAIL),
+                                e);
                     }
                     break;
                 case POST:
@@ -532,13 +482,14 @@ public abstract class Requestor {
                 throw new UnknownApiError(errorMessage, errorCode, rCode, errors);
         }
     }
-    
-        private static EasyPostResponse makeAppEngineRequest(final RequestMethod method, String url, final String query,
-                                                         final JsonObject body, final String apiKey)
+
+    private static EasyPostResponse makeAppEngineRequest(final RequestMethod method, String url, final String query,
+            final JsonObject body, final String apiKey)
             throws EasyPostException {
         String unknownErrorMessage = String.format(
                 "Sorry, an unknown error occurred while trying to use the Google App Engine runtime." +
-                        "Please email %s for assistance.", Constant.EASYPOST_SUPPORT_EMAIL);
+                        "Please email %s for assistance.",
+                Constant.EASYPOST_SUPPORT_EMAIL);
         try {
             if ((method == RequestMethod.GET || method == RequestMethod.DELETE) && query != null) {
                 url = String.format("%s?%s", url, query);
@@ -556,15 +507,17 @@ public abstract class Requestor {
                 System.err.printf(
                         "Warning: this App Engine SDK version does not allow verification of SSL certificates;" +
                                 "this exposes you to a MITM attack. Please upgrade your App Engine SDK to >=1.5.0. " +
-                                "If you have questions, email %s.%n", Constant.EASYPOST_SUPPORT_EMAIL);
+                                "If you have questions, email %s.%n",
+                        Constant.EASYPOST_SUPPORT_EMAIL);
                 fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("withDefaults").invoke(null);
             }
 
             Class<?> fetchOptionsClass = Class.forName("com.google.appengine.api.urlfetch.FetchOptions");
 
-            // Heroku times out after 30s, so leave some time for the API to return a response
+            // Heroku times out after 30s, so leave some time for the API to return a
+            // response
             fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class)
-                    .invoke(fetchOptions, getAppEngineTimeoutSeconds());
+                    .invoke(fetchOptions, EasyPostResource.getAppEngineTimeoutSeconds());
 
             Class<?> requestClass = Class.forName("com.google.appengine.api.urlfetch.HTTPRequest");
 
@@ -591,8 +544,8 @@ public abstract class Requestor {
             Object response = fetchMethod.invoke(urlFetchService, request);
 
             int responseCode = (Integer) response.getClass().getDeclaredMethod("getResponseCode").invoke(response);
-            String responseBody = new String((byte[])
-                response.getClass().getDeclaredMethod("getContent").invoke(response), Constant.CHARSET);
+            String responseBody = new String(
+                    (byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response), Constant.CHARSET);
 
             return new EasyPostResponse(responseCode, responseBody);
 

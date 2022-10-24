@@ -4,6 +4,8 @@ import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.List;
@@ -559,7 +561,7 @@ public final class Shipment extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("shipment", params);
 
-        return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
     }
 
     /**
@@ -577,7 +579,7 @@ public final class Shipment extends EasyPostResource {
         wrappedParams.put("shipment", params);
         wrappedParams.put("carbon_offset", withCarbonOffset);
 
-        return request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Shipment.class), wrappedParams, Shipment.class, apiKey);
     }
 
     /**
@@ -600,7 +602,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Shipment retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Shipment.class, id), null, Shipment.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Shipment.class, id), null, Shipment.class, apiKey);
     }
 
     /**
@@ -624,7 +626,7 @@ public final class Shipment extends EasyPostResource {
      */
     public static ShipmentCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Shipment.class), params, ShipmentCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(Shipment.class), params, ShipmentCollection.class, apiKey);
     }
 
     /**
@@ -646,8 +648,8 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s", instanceURL(Shipment.class, this.getId())), params,
-                Shipment.class, apiKey);
+        return Requestor.request(RequestMethod.GET, String.format("%s",
+            instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
     }
 
     /**
@@ -800,9 +802,8 @@ public final class Shipment extends EasyPostResource {
     public Shipment newRates(final Map<String, Object> params, final boolean withCarbonOffset, final String apiKey)
             throws EasyPostException {
         params.put("carbon_offset", withCarbonOffset);
-        Shipment response =
-                request(RequestMethod.POST, String.format("%s/rerate", instanceURL(Shipment.class, this.getId())),
-                        params, Shipment.class, apiKey);
+        Shipment response = Requestor.request(RequestMethod.POST, String.format("%s/rerate",
+            instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
 
         this.merge(this, response);
 
@@ -859,9 +860,9 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public List<Smartrate> smartrates(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        SmartrateCollection smartrateCollection =
-                request(RequestMethod.GET, String.format("%s/smartrate", instanceURL(Shipment.class, this.getId())),
-                        params, SmartrateCollection.class, apiKey);
+        SmartrateCollection smartrateCollection = Requestor.request(RequestMethod.GET, String.format("%s/smartrate",
+            instanceURL(Shipment.class, this.getId())), params, SmartrateCollection.class, apiKey);
+        
         return smartrateCollection.getSmartrates();
     }
 
@@ -954,7 +955,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-      // TODO: When Java Client Library rewrite happens, the apiKey param will be replaced with endShipperId  
+      // TODO: When Java Client Library rewrite happens, the apiKey param will be replaced with endShipperId
       return this.buy(params, false, null, apiKey);
     }
 
@@ -1034,9 +1035,8 @@ public final class Shipment extends EasyPostResource {
           params.put("end_shipper_id", endShipperId);
         }
 
-        Shipment response =
-                request(RequestMethod.POST, String.format("%s/buy", instanceURL(Shipment.class, this.getId())), params,
-                        Shipment.class, apiKey);
+        Shipment response = Requestor.request(RequestMethod.POST, String.format("%s/buy",
+            instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
 
         this.merge(this, response);
 
@@ -1062,8 +1062,8 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s/refund", instanceURL(Shipment.class, this.getId())), params,
-                Shipment.class, apiKey);
+        return Requestor.request(RequestMethod.GET, String.format("%s/refund",
+            instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
     }
 
     /**
@@ -1107,9 +1107,8 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment label(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Shipment response =
-                request(RequestMethod.GET, String.format("%s/label", instanceURL(Shipment.class, this.getId())), params,
-                        Shipment.class, apiKey);
+        Shipment response = Requestor.request(RequestMethod.GET, String.format("%s/label",
+            instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
 
         this.merge(this, response);
         return this;
@@ -1156,8 +1155,8 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment insure(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, String.format("%s/insure", instanceURL(Shipment.class, this.getId())),
-                params, Shipment.class, apiKey);
+        return Requestor.request(RequestMethod.POST, String.format("%s/insure",
+            instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
     }
 
     /**
@@ -1365,9 +1364,8 @@ public final class Shipment extends EasyPostResource {
         params.putAll(formOptions);
         wrappedParams.put("form", params);
 
-        Shipment response =
-                request(RequestMethod.POST, String.format("%s/forms", instanceURL(Shipment.class, this.getId())),
-                        wrappedParams, Shipment.class, apiKey);
+        Shipment response = Requestor.request(RequestMethod.POST, String.format("%s/forms",
+            instanceURL(Shipment.class, this.getId())), wrappedParams, Shipment.class, apiKey);
 
         this.merge(this, response);
     }

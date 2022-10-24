@@ -2,6 +2,8 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -183,7 +185,8 @@ public final class CustomsItem extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("customs_item", params);
 
-        return request(RequestMethod.POST, classURL(CustomsItem.class), wrappedParams, CustomsItem.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(CustomsItem.class),
+            wrappedParams, CustomsItem.class, apiKey);
     }
 
     /**
@@ -206,6 +209,7 @@ public final class CustomsItem extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static CustomsItem retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(CustomsItem.class, id), null, CustomsItem.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(CustomsItem.class, id),
+            null, CustomsItem.class, apiKey);
     }
 }

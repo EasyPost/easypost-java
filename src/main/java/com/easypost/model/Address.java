@@ -1,6 +1,8 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -134,7 +136,7 @@ public final class Address extends BaseAddress {
 
         wrappedParams.put("address", params);
 
-        return request(RequestMethod.POST, classURL(Address.class), wrappedParams, Address.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Address.class), wrappedParams, Address.class, apiKey);
     }
 
     /**
@@ -157,7 +159,7 @@ public final class Address extends BaseAddress {
      * @throws EasyPostException when the request fails.
      */
     public static Address retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Address.class, id), null, Address.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Address.class, id), null, Address.class, apiKey);
     }
 
     /**
@@ -181,7 +183,7 @@ public final class Address extends BaseAddress {
      */
     public static AddressCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Address.class), params, AddressCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(Address.class), params, AddressCollection.class, apiKey);
     }
 
     /**
@@ -209,8 +211,8 @@ public final class Address extends BaseAddress {
         wrappedParams.put("address", params);
 
         AddressVerifyResponse response =
-                request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
-                        wrappedParams, AddressVerifyResponse.class, apiKey);
+            Requestor.request(RequestMethod.POST, String.format("%s/create_and_verify", classURL(Address.class)),
+                wrappedParams, AddressVerifyResponse.class, apiKey);
 
         return response.getAddress();
     }
@@ -235,8 +237,8 @@ public final class Address extends BaseAddress {
     public Address verify(final String apiKey) throws EasyPostException {
         AddressVerifyResponse response;
         response =
-                request(RequestMethod.GET, String.format("%s/verify", instanceURL(Address.class, this.getId())), null,
-                        AddressVerifyResponse.class, apiKey);
+            Requestor.request(RequestMethod.GET, String.format("%s/verify", 
+                instanceURL(Address.class, this.getId())), null, AddressVerifyResponse.class, apiKey);
 
         return response.getAddress();
     }

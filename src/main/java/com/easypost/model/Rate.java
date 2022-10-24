@@ -2,6 +2,8 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 public class Rate extends EasyPostResource {
     private String carrier;
@@ -330,7 +332,7 @@ public class Rate extends EasyPostResource {
      */
     public static Rate retrieve(final String id, final String apiKey) throws EasyPostException {
         Rate response;
-        response = request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
+        response = Requestor.request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
 
         return response;
     }

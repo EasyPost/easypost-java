@@ -3,6 +3,8 @@ package com.easypost.model;
 import com.easypost.EasyPost;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,8 +68,8 @@ public class CreditCard extends BaseCreditCard {
         params.put("amount", amount);
 
         // will attempt to serialize the empty response to a CreditCard object (doesn't matter)
-        request(RequestMethod.POST, String.format("%s/%s/%s/%s", EasyPost.API_BASE, "credit_cards", cardID, "charges"),
-                params, CreditCard.class, apiKey);
+        Requestor.request(RequestMethod.POST, String.format("%s/%s/%s/%s", 
+            EasyPost.API_BASE, "credit_cards", cardID, "charges"), params, CreditCard.class, apiKey);
 
         return true;
     }
@@ -96,7 +98,7 @@ public class CreditCard extends BaseCreditCard {
      */
     @Deprecated
     public static void delete(String creditCardId, String apiKey) throws EasyPostException {
-        request(RequestMethod.DELETE, String.format("%s/%s/%s", EasyPost.API_BASE, "credit_cards", creditCardId), null,
-                CreditCard.class, apiKey);
+        Requestor.request(RequestMethod.DELETE, String.format("%s/%s/%s",
+            EasyPost.API_BASE, "credit_cards", creditCardId), null, CreditCard.class, apiKey);
     }
 }

@@ -2,6 +2,8 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.List;
@@ -187,7 +189,7 @@ public final class Insurance extends EasyPostResource {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("insurance", params);
 
-        return request(RequestMethod.POST, classURL(Insurance.class), wrappedParams, Insurance.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(Insurance.class), wrappedParams, Insurance.class, apiKey);
     }
 
     /**
@@ -210,7 +212,7 @@ public final class Insurance extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static Insurance retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(Insurance.class, id), null, Insurance.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(Insurance.class, id), null, Insurance.class, apiKey);
     }
 
     /**
@@ -234,7 +236,8 @@ public final class Insurance extends EasyPostResource {
      */
     public static InsuranceCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(Insurance.class), params, InsuranceCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(Insurance.class),
+            params, InsuranceCollection.class, apiKey);
     }
 
     /**
@@ -256,8 +259,8 @@ public final class Insurance extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Insurance refresh(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s", instanceURL(Insurance.class, this.getId())), params,
-                Insurance.class, apiKey);
+        return Requestor.request(RequestMethod.GET, 
+            String.format("%s", instanceURL(Insurance.class, this.getId())), params, Insurance.class, apiKey);
     }
 
     /**

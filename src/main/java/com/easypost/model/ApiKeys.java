@@ -2,6 +2,8 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.List;
 
@@ -63,9 +65,6 @@ public final class ApiKeys extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public static ApiKeys all(final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(ApiKey.class), null, ApiKeys.class, apiKey);
     }
-
 }
-
-

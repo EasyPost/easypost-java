@@ -17,11 +17,70 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public abstract class EasyPostResource extends Requestor {
+import com.easypost.EasyPost;
+
+public abstract class EasyPostResource {
     private String id;
     private String mode;
     private Date createdAt;
     private Date updatedAt;
+    private static int connectTimeoutMilliseconds = Constant.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;
+    private static int readTimeoutMilliseconds = Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS;
+    private static double appEngineTimeoutSeconds = Constant.DEFAULT_APP_ENGINE_TIMEOUT_SECONDS;
+
+    /**
+     * Get the timeout in milliseconds for App Engine API requests.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static double getAppEngineTimeoutSeconds() {
+        return appEngineTimeoutSeconds;
+    }
+
+    /**
+     * Set the timeout in seconds for App Engine API requests.
+     *
+     * @param seconds the timeout in seconds
+     */
+    public static void setAppEngineTimeoutSeconds(double seconds) {
+        appEngineTimeoutSeconds = seconds;
+    }
+
+    /**
+     * Get the timeout in milliseconds for connecting to the API.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static int getConnectTimeoutMilliseconds() {
+        return connectTimeoutMilliseconds;
+    }
+
+    /**
+     * Set the timeout in milliseconds for connecting to the API.
+     *
+     * @param milliseconds the timeout in milliseconds
+     */
+    public static void setConnectTimeoutMilliseconds(int milliseconds) {
+        connectTimeoutMilliseconds = milliseconds;
+    }
+
+    /**
+     * Get the timeout in milliseconds for reading API responses.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static int getReadTimeoutMilliseconds() {
+        return readTimeoutMilliseconds;
+    }
+
+    /**
+     * Set the timeout in milliseconds for reading API responses.
+     *
+     * @param milliseconds the timeout in milliseconds
+     */
+    public static void setReadTimeoutMilliseconds(int milliseconds) {
+        readTimeoutMilliseconds = milliseconds;
+    }
 
     /**
      * @return the Date this object was created
@@ -87,6 +146,27 @@ public abstract class EasyPostResource extends Requestor {
         this.updatedAt = updatedAt;
     }
 
+    protected static String instanceURL(final Class<?> clazz, final String id) {
+        return String.format("%s/%s", classURL(clazz), id);
+    }
+
+    protected static String classURL(final Class<?> clazz) {
+        String singleURL = singleClassURL(clazz);
+        if (singleURL.charAt(singleURL.length() - 1) == 's' || singleURL.charAt(singleURL.length() - 1) == 'h') {
+            return String.format("%ses", singleClassURL(clazz));
+        } else {
+            return String.format("%ss", singleClassURL(clazz));
+        }
+    }
+
+    protected static String singleClassURL(final Class<?> clazz) {
+        return String.format("%s/%s", EasyPost.API_BASE, className(clazz));
+    }
+
+    private static String className(final Class<?> clazz) {
+        return clazz.getSimpleName().replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase().replace("$", "");
+    }
+
     /**
      * Get all static methods for a particular class.
      *
@@ -129,16 +209,14 @@ public abstract class EasyPostResource extends Requestor {
             Field idField = this.getClass().getDeclaredField("id");
             return idField.get(this);
         } catch (SecurityException e) {
-            e.printStackTrace();
+            return "";
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            return "";
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            return "";
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            return "";
         }
-
-        return this;
     }
 
     /**
@@ -167,7 +245,7 @@ public abstract class EasyPostResource extends Requestor {
 
         for (Method fromMethod : methods) {
             if (fromMethod.getName().startsWith("get")
-                || Constant.GLOBAL_FIELD_ACCESSORS.contains(fromMethod.getName())) {
+                    || Constant.GLOBAL_FIELD_ACCESSORS.contains(fromMethod.getName())) {
 
                 if (fromMethod.isAnnotationPresent(Deprecated.class)) {
                     // skip deprecated methods
@@ -186,17 +264,22 @@ public abstract class EasyPostResource extends Requestor {
                 } catch (Exception e) {
                     // TODO: Address situation below
                     /*
-                      The method getSmartrates() on the Shipment object is causing this exception.
-                      Since it found a method with "get" in the name, it expects there to be a "set" equivalent.
-                      There is not, causing this exception to be thrown, although nothing wrong has really happened.
-                      This code block was copy-pasted from StackOverflow: https://stackoverflow.com/a/7526414/13343799
-                      Per the comments, there are some built-in expectations for how this will work,
-                      and should eventually be re-written or removed entirely
-                      (explore returning a brand-new object rather than modifying the existing one).
-                      For now, the easiest fix would be to
-                      a) just ignore this exception, or
-                      b) rename getSmartrates() in the Shipment class to just smartrates()
-                      (similar to how the other methods are named).
+                     * The method getSmartrates() on the Shipment object is causing this exception.
+                     * Since it found a method with "get" in the name, it expects there to be a
+                     * "set" equivalent.
+                     * There is not, causing this exception to be thrown, although nothing wrong has
+                     * really happened.
+                     * This code block was copy-pasted from StackOverflow:
+                     * https://stackoverflow.com/a/7526414/13343799
+                     * Per the comments, there are some built-in expectations for how this will
+                     * work,
+                     * and should eventually be re-written or removed entirely
+                     * (explore returning a brand-new object rather than modifying the existing
+                     * one).
+                     * For now, the easiest fix would be to
+                     * a) just ignore this exception, or
+                     * b) rename getSmartrates() in the Shipment class to just smartrates()
+                     * (similar to how the other methods are named).
                      */
                     // e.printStackTrace();
                 }
@@ -230,7 +313,7 @@ public abstract class EasyPostResource extends Requestor {
      */
     @Override
     public int hashCode() {
-      return Constant.GSON.toJson(this).hashCode();
+        return Constant.GSON.toJson(this).hashCode();
     }
 
     /**
@@ -241,9 +324,9 @@ public abstract class EasyPostResource extends Requestor {
      */
     @Override
     public boolean equals(Object object) {
-      String currentObject = Constant.GSON.toJson(this);
-      String newObject = Constant.GSON.toJson(object);
+        String currentObject = Constant.GSON.toJson(this);
+        String newObject = Constant.GSON.toJson(object);
 
-      return currentObject.equals(newObject);
+        return currentObject.equals(newObject);
     }
 }

@@ -5,6 +5,8 @@ import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 public class PaymentMethod extends EasyPostResource {
 
@@ -78,7 +80,7 @@ public class PaymentMethod extends EasyPostResource {
     @Deprecated
     public static PaymentMethod all(String apiKey) throws EasyPostException {
         PaymentMethod response =
-                request(RequestMethod.GET, String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
+            Requestor.request(RequestMethod.GET, String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
                         PaymentMethod.class, apiKey);
 
         if (response.getId() == null) {

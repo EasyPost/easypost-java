@@ -2,6 +2,8 @@ package com.easypost.model;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +33,7 @@ public final class EndShipper extends BaseAddress {
 
         wrappedParams.put("address", params);
 
-        return request(RequestMethod.POST, String.format("%s/%s", EasyPost.API_BASE, "end_shippers"),
+        return Requestor.request(RequestMethod.POST, String.format("%s/%s", EasyPost.API_BASE, "end_shippers"),
                 wrappedParams, EndShipper.class, apiKey);
     }
 
@@ -55,8 +57,8 @@ public final class EndShipper extends BaseAddress {
      * @throws EasyPostException when the request fails.
      */
     public static EndShipper retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, String.format("%s/%s/%s", EasyPost.API_BASE, "end_shippers", id), null,
-                EndShipper.class, apiKey);
+        return Requestor.request(RequestMethod.GET, 
+            String.format("%s/%s/%s", EasyPost.API_BASE, "end_shippers", id), null, EndShipper.class, apiKey);
     }
 
     /**
@@ -80,7 +82,8 @@ public final class EndShipper extends BaseAddress {
      */
     public static EndShipperCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(EndShipper.class), params, EndShipperCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET,
+            classURL(EndShipper.class), params, EndShipperCollection.class, apiKey);
     }
 
     /**
@@ -107,7 +110,7 @@ public final class EndShipper extends BaseAddress {
 
         wrappedParams.put("address", params);
 
-        EndShipper response = request(RequestMethod.PUT,
+        EndShipper response = Requestor.request(RequestMethod.PUT,
                 String.format("%s/%s/%s", EasyPost.API_BASE, "end_shippers", this.getId()), wrappedParams,
                 EndShipper.class, apiKey);
 

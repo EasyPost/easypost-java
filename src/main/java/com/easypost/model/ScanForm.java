@@ -2,6 +2,8 @@ package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.net.EasyPostResource;
+import com.easypost.net.Requestor;
+import com.easypost.net.Requestor.RequestMethod;
 
 import java.util.List;
 import java.util.Map;
@@ -198,7 +200,7 @@ public class ScanForm extends EasyPostResource {
      * @throws EasyPostException when the request fails. when the request fails.
      */
     public static ScanForm create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.POST, classURL(ScanForm.class), params, ScanForm.class, apiKey);
+        return Requestor.request(RequestMethod.POST, classURL(ScanForm.class), params, ScanForm.class, apiKey);
     }
 
     /**
@@ -221,7 +223,7 @@ public class ScanForm extends EasyPostResource {
      * @throws EasyPostException when the request fails. when the request fails.
      */
     public static ScanForm retrieve(final String id, final String apiKey) throws EasyPostException {
-        return request(RequestMethod.GET, instanceURL(ScanForm.class, id), null, ScanForm.class, apiKey);
+        return Requestor.request(RequestMethod.GET, instanceURL(ScanForm.class, id), null, ScanForm.class, apiKey);
     }
 
     /**
@@ -245,6 +247,6 @@ public class ScanForm extends EasyPostResource {
      */
     public static ScanFormCollection all(final Map<String, Object> params, final String apiKey)
             throws EasyPostException {
-        return request(RequestMethod.GET, classURL(ScanForm.class), params, ScanFormCollection.class, apiKey);
+        return Requestor.request(RequestMethod.GET, classURL(ScanForm.class), params, ScanFormCollection.class, apiKey);
     }
 }
