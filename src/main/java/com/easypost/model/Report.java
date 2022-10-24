@@ -5,8 +5,8 @@ import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.exception.General.InvalidParameterError;
-import com.easypost.net.EasyPostResource;
-import com.easypost.net.Requestor;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.net.URLEncoder;
 import java.util.Date;

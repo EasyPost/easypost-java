@@ -1,12 +1,12 @@
 package com.easypost;
 
 import com.easypost.exception.Constants;
-import com.easypost.net.Requestor;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.RedirectError;
 import com.easypost.exception.API.ServiceUnavailablError;
 import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
+import com.easypost.http.Requestor;
 import com.easypost.exception.API.PaymentError;
 import com.easypost.exception.API.RateLimitError;
 import com.easypost.exception.API.NotFoundError;

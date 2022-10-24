@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 public class AddressVerifications extends EasyPostResource {
     private AddressVerification zip4;
     private AddressVerification delivery;

@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-package com.easypost.net;
+package com.easypost.http;
 
 public class EasyPostResponse {
     private int responseCode;

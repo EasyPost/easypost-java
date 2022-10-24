@@ -3,9 +3,9 @@ package com.easypost.model;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.SignatureVerificationError;
-import com.easypost.net.Constant;
-import com.easypost.net.EasyPostResource;
-import com.easypost.net.Requestor;
+import com.easypost.http.Constant;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.utils.Cryptography;
 
 import java.nio.charset.StandardCharsets;

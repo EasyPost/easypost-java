@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 public class BaseAddress extends EasyPostResource {
     private String name;
     private String company;

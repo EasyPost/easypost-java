@@ -1,4 +1,4 @@
-package com.easypost.net;
+package com.easypost.http;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 public final class ApiKey extends EasyPostResource {
     private String key;
 

@@ -1,8 +1,9 @@
 package com.easypost;
 
-import com.easypost.net.Requestor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import com.easypost.http.Requestor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

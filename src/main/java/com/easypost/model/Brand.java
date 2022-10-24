@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 public class Brand extends EasyPostResource {
     private String backgroundColor;
     private String color;

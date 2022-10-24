@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 public class PaymentMethodObject extends EasyPostResource {
 
     public enum PaymentMethodType {

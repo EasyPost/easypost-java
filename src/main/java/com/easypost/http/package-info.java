@@ -6,4 +6,4 @@
  * @see <a href="https://www.easypost.com/docs/api.html">EasyPost API</a>
  * @since 1.0
  */
-package com.easypost.net;
+package com.easypost.http;

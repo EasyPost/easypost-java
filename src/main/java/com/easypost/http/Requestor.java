@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-package com.easypost.net;
+package com.easypost.http;
 
 import com.easypost.EasyPost;
 import com.easypost.exception.Constants;
@@ -25,8 +25,8 @@ import com.easypost.exception.API.TimeoutError;
 import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.General.MissingParameterError;
+import com.easypost.model.EasyPostResource;
 import com.easypost.model.Error;
-import com.easypost.net.EasyPostResource.RequestMethod;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -49,6 +49,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 public abstract class Requestor {
+    public enum RequestMethod {
+        GET,
+        POST,
+        DELETE,
+        PUT
+    }
+
     private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
     private static int connectTimeoutMilliseconds = Constant.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;

@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 /**
  * BaseCreditCard is a model class that represents the base of any credit card.
  *

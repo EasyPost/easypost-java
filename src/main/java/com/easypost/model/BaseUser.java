@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 import java.util.List;
 
 public class BaseUser extends EasyPostResource {

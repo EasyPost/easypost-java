@@ -4,8 +4,9 @@ import com.easypost.EasyPost;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.ExternalApiError;
-import com.easypost.net.Constant;
-import com.easypost.net.Requestor;
+import com.easypost.http.Constant;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

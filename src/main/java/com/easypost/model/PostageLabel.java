@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 public final class PostageLabel extends EasyPostResource {
     private int dateAdvance;
     private String integratedForm;

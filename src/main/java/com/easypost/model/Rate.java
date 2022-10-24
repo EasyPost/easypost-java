@@ -1,8 +1,8 @@
 package com.easypost.model;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.net.EasyPostResource;
-import com.easypost.net.Requestor;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 public class Rate extends EasyPostResource {
     private String carrier;

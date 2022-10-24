@@ -1,4 +1,4 @@
-package com.easypost.net;
+package com.easypost.http;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

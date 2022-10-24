@@ -1,7 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.net.EasyPostResource;
-
 public final class Form extends EasyPostResource {
     private String formType;
     private String formUrl;

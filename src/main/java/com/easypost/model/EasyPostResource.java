@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-package com.easypost.net;
+package com.easypost.model;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -18,15 +18,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.easypost.EasyPost;
+import com.easypost.http.Constant;
 
 public abstract class EasyPostResource {
-    protected enum RequestMethod {
-        GET,
-        POST,
-        DELETE,
-        PUT
-    }
-
     private String id;
     private String mode;
     private Date createdAt;
