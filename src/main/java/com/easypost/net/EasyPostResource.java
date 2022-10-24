@@ -24,63 +24,6 @@ public abstract class EasyPostResource {
     private String mode;
     private Date createdAt;
     private Date updatedAt;
-    private static int connectTimeoutMilliseconds = Constant.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;
-    private static int readTimeoutMilliseconds = Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS;
-    private static double appEngineTimeoutSeconds = Constant.DEFAULT_APP_ENGINE_TIMEOUT_SECONDS;
-
-    /**
-     * Get the timeout in milliseconds for App Engine API requests.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static double getAppEngineTimeoutSeconds() {
-        return appEngineTimeoutSeconds;
-    }
-
-    /**
-     * Set the timeout in seconds for App Engine API requests.
-     *
-     * @param seconds the timeout in seconds
-     */
-    public static void setAppEngineTimeoutSeconds(double seconds) {
-        appEngineTimeoutSeconds = seconds;
-    }
-
-    /**
-     * Get the timeout in milliseconds for connecting to the API.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static int getConnectTimeoutMilliseconds() {
-        return connectTimeoutMilliseconds;
-    }
-
-    /**
-     * Set the timeout in milliseconds for connecting to the API.
-     *
-     * @param milliseconds the timeout in milliseconds
-     */
-    public static void setConnectTimeoutMilliseconds(int milliseconds) {
-        connectTimeoutMilliseconds = milliseconds;
-    }
-
-    /**
-     * Get the timeout in milliseconds for reading API responses.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static int getReadTimeoutMilliseconds() {
-        return readTimeoutMilliseconds;
-    }
-
-    /**
-     * Set the timeout in milliseconds for reading API responses.
-     *
-     * @param milliseconds the timeout in milliseconds
-     */
-    public static void setReadTimeoutMilliseconds(int milliseconds) {
-        readTimeoutMilliseconds = milliseconds;
-    }
 
     /**
      * @return the Date this object was created

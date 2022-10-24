@@ -57,6 +57,63 @@ public abstract class Requestor {
 
     private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
+    private static int connectTimeoutMilliseconds = Constant.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;
+    private static int readTimeoutMilliseconds = Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS;
+    private static double appEngineTimeoutSeconds = Constant.DEFAULT_APP_ENGINE_TIMEOUT_SECONDS;
+
+    /**
+     * Get the timeout in milliseconds for App Engine API requests.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static double getAppEngineTimeoutSeconds() {
+        return appEngineTimeoutSeconds;
+    }
+
+    /**
+     * Set the timeout in seconds for App Engine API requests.
+     *
+     * @param seconds the timeout in seconds
+     */
+    public static void setAppEngineTimeoutSeconds(double seconds) {
+        appEngineTimeoutSeconds = seconds;
+    }
+
+    /**
+     * Get the timeout in milliseconds for connecting to the API.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static int getConnectTimeoutMilliseconds() {
+        return connectTimeoutMilliseconds;
+    }
+
+    /**
+     * Set the timeout in milliseconds for connecting to the API.
+     *
+     * @param milliseconds the timeout in milliseconds
+     */
+    public static void setConnectTimeoutMilliseconds(int milliseconds) {
+        connectTimeoutMilliseconds = milliseconds;
+    }
+
+    /**
+     * Get the timeout in milliseconds for reading API responses.
+     *
+     * @return the timeout in milliseconds
+     */
+    public static int getReadTimeoutMilliseconds() {
+        return readTimeoutMilliseconds;
+    }
+
+    /**
+     * Set the timeout in milliseconds for reading API responses.
+     *
+     * @param milliseconds the timeout in milliseconds
+     */
+    public static void setReadTimeoutMilliseconds(int milliseconds) {
+        readTimeoutMilliseconds = milliseconds;
+    }
 
     private static String urlEncodePair(final String key, final String value) throws UnsupportedEncodingException {
         return String.format("%s=%s",
@@ -124,14 +181,14 @@ public abstract class Requestor {
             URL urlObj = new URL(null, url);
             conn = (javax.net.ssl.HttpsURLConnection) urlObj.openConnection();
         }
-        conn.setConnectTimeout(EasyPostResource.getConnectTimeoutMilliseconds());
+        conn.setConnectTimeout(getConnectTimeoutMilliseconds());
         conn.setRequestMethod(method);
 
         int readTimeout;
         if (EasyPost.readTimeout != 0) {
             readTimeout = EasyPost.readTimeout;
         } else {
-            readTimeout = EasyPostResource.getReadTimeoutMilliseconds();
+            readTimeout = getReadTimeoutMilliseconds();
         }
         conn.setReadTimeout(readTimeout);
 
@@ -517,7 +574,7 @@ public abstract class Requestor {
             // Heroku times out after 30s, so leave some time for the API to return a
             // response
             fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class)
-                    .invoke(fetchOptions, EasyPostResource.getAppEngineTimeoutSeconds());
+                    .invoke(fetchOptions, getAppEngineTimeoutSeconds());
 
             Class<?> requestClass = Class.forName("com.google.appengine.api.urlfetch.HTTPRequest");
 
