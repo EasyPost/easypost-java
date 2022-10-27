@@ -27,6 +27,7 @@ import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.model.EasyPostResource;
 import com.easypost.model.Error;
+import com.easypost.service.EasyPostClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -385,6 +386,15 @@ public abstract class Requestor {
             final Map<String, Object> params, final Class<T> clazz, final String apiKey)
             throws EasyPostException {
         return request(method, url, params, clazz, apiKey, true);
+    }
+
+    // request method with client object to make thread-safe
+    public static <T> T requestThreadSafe(final RequestMethod method, final String url,
+            final Map<String, Object> params, final Class<T> clazz, final EasyPostClient client)
+            throws EasyPostException {
+        // `client.getApiKey()` will eventually be replaced to `client` object once we
+        // update rest of `request` functions in the rewrite
+        return request(method, url, params, clazz, client.getApiKey(), true);
     }
 
     /**
