@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1666236543,
+    "recordedAt": 1667593159,
     "request": {
       "body": "{\n  \"address\": {\n    \"zip\": \"94107\",\n    \"country\": \"US\",\n    \"city\": \"San Francisco\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Jack Sparrow\",\n    \"street1\": \"388 Townsend St\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\",\n    \"email\": \"test@example.com\"\n  }\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/end_shippers"
     },
     "response": {
-      "body": "{\n  \"zip\": \"94107-1670\",\n  \"country\": \"US\",\n  \"city\": \"SAN FRANCISCO\",\n  \"created_at\": \"2022-10-20T03:29:03+00:00\",\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-10-20T03:29:03+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"JACK SPARROW\",\n  \"company\": null,\n  \"street1\": \"388 TOWNSEND ST APT 20\",\n  \"id\": \"es_2d007aa105de4b5e97cbcddf386a29b3\",\n  \"street2\": \"\",\n  \"state\": \"CA\",\n  \"email\": \"TEST@EXAMPLE.COM\",\n  \"object\": \"EndShipper\"\n}",
+      "body": "{\n  \"zip\": \"94107-1670\",\n  \"country\": \"US\",\n  \"city\": \"SAN FRANCISCO\",\n  \"created_at\": \"2022-11-04T20:19:19+00:00\",\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-04T20:19:19+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"JACK SPARROW\",\n  \"company\": null,\n  \"street1\": \"388 TOWNSEND ST APT 20\",\n  \"id\": \"es_5447e7d4cbc748369cb9d06ca776868d\",\n  \"street2\": \"\",\n  \"state\": \"CA\",\n  \"email\": \"TEST@EXAMPLE.COM\",\n  \"object\": \"EndShipper\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb6nuq"
+          "bigweb8nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,27 +58,27 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "85b6f8c76350c07fe2cb9fd300096206"
+          "8b8ec6ba636573c7e0daf2e500097d2a"
         ],
         "x-proxied": [
-          "extlb4wdc 29913d444b",
-          "intlb1wdc 29913d444b",
+          "extlb3wdc 29913d444b",
+          "intlb2wdc 29913d444b",
           "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.046669"
+          "0.043483"
         ],
         "etag": [
-          "W/\"6b5c4d30ad53fe0538a717341448426c\""
+          "W/\"1e597bffcb58027d5c241a3710d6a3d1\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202210192121-de6c7d8326-master"
+          "easypost-202211041941-0810f963fd-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -88,13 +88,12 @@
         "code": 201,
         "message": "Created"
       },
-      "errors": null,
       "uri": "https://api.easypost.com/v2/end_shippers"
     },
-    "duration": 392
+    "duration": 283
   },
   {
-    "recordedAt": 1666236544,
+    "recordedAt": 1667593159,
     "request": {
       "body": "{\n  \"address\": {\n    \"zip\": \"94107\",\n    \"country\": \"US\",\n    \"city\": \"San Francisco\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"NEW NAME\",\n    \"company\": \"EasyPost\",\n    \"street1\": \"388 Townsend St\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\",\n    \"email\": \"test@example.com\"\n  }\n}",
       "method": "PUT",
@@ -109,10 +108,10 @@
           "application/json"
         ]
       },
-      "uri": "https://api.easypost.com/v2/end_shippers/es_2d007aa105de4b5e97cbcddf386a29b3"
+      "uri": "https://api.easypost.com/v2/end_shippers/es_5447e7d4cbc748369cb9d06ca776868d"
     },
     "response": {
-      "body": "{\n  \"zip\": \"94107-1670\",\n  \"country\": \"US\",\n  \"city\": \"SAN FRANCISCO\",\n  \"created_at\": \"2022-10-20T03:29:03+00:00\",\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-10-20T03:29:04+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"NEW NAME\",\n  \"company\": \"EASYPOST\",\n  \"street1\": \"388 TOWNSEND ST APT 20\",\n  \"id\": \"es_2d007aa105de4b5e97cbcddf386a29b3\",\n  \"street2\": \"\",\n  \"state\": \"CA\",\n  \"email\": \"TEST@EXAMPLE.COM\",\n  \"object\": \"EndShipper\"\n}",
+      "body": "{\n  \"zip\": \"94107-1670\",\n  \"country\": \"US\",\n  \"city\": \"SAN FRANCISCO\",\n  \"created_at\": \"2022-11-04T20:19:19+00:00\",\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-04T20:19:19+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"NEW NAME\",\n  \"company\": \"EASYPOST\",\n  \"street1\": \"388 TOWNSEND ST APT 20\",\n  \"id\": \"es_5447e7d4cbc748369cb9d06ca776868d\",\n  \"street2\": \"\",\n  \"state\": \"CA\",\n  \"email\": \"TEST@EXAMPLE.COM\",\n  \"object\": \"EndShipper\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -152,27 +151,27 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "85b6f8c36350c080e2cb9fd50009621e"
+          "8b8ec6be636573c7e0daf2e700097d4e"
         ],
         "x-proxied": [
-          "extlb4wdc 29913d444b",
+          "extlb3wdc 29913d444b",
           "intlb1wdc 29913d444b",
-          "intlb1nuq 29913d444b"
+          "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.059590"
+          "0.063896"
         ],
         "etag": [
-          "W/\"2618dc0063694be8677069fa6f9018fc\""
+          "W/\"7b0b4cf180cedb936b50cc7e30870bb7\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202210192121-de6c7d8326-master"
+          "easypost-202211041941-0810f963fd-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -182,9 +181,8 @@
         "code": 200,
         "message": "OK"
       },
-      "errors": null,
-      "uri": "https://api.easypost.com/v2/end_shippers/es_2d007aa105de4b5e97cbcddf386a29b3"
+      "uri": "https://api.easypost.com/v2/end_shippers/es_5447e7d4cbc748369cb9d06ca776868d"
     },
-    "duration": 432
+    "duration": 351
   }
 ]

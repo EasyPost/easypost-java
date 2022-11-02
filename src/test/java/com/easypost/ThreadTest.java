@@ -2,6 +2,8 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Order;
+import com.easypost.service.EasyPostClient;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -108,11 +110,12 @@ public final class ThreadTest {
         }
 
         public void run() {
+            EasyPostClient client = new EasyPostClient(System.getenv("EASYPOST_TEST_API_KEY"));
             try {
                 for (int i = 0; i < this.orders.size(); i++) {
                     System.out.format("Thread %s: starting order creation...%n", Thread.currentThread().getName());
 
-                    Order order = Order.create(this.orders.get(i));
+                    Order order = client.order.create(this.orders.get(i));
                     // save order id to database or buy now
 
                     System.out.format("Thread %s: created order %s%n", Thread.currentThread().getName(), order.getId());

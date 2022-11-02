@@ -8,6 +8,7 @@ import com.easypost.easyvcr.ExpirationActions;
 import com.easypost.easyvcr.MatchRules;
 import com.easypost.easyvcr.Mode;
 import com.easypost.easyvcr.TimeFrame;
+import com.easypost.service.EasyPostClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -128,10 +129,9 @@ public abstract class TestUtils {
 
     public static final class VCR {
         private final com.easypost.easyvcr.VCR vcr;
-
-        private final String apiKey;
-
         private String testCassettesFolder;
+        private String apiKey;
+        EasyPostClient client;
 
         /**
          * Get whether the VCR is recording.
@@ -140,6 +140,13 @@ public abstract class TestUtils {
          */
         public boolean isRecording() {
             return vcr.getMode() == Mode.Record;
+        }
+
+        /**
+        * Constructor.
+        */
+        public VCR() {
+            this(null, ApiKey.TEST);
         }
 
         /**
@@ -164,6 +171,15 @@ public abstract class TestUtils {
         /**
          * Constructor.
          *
+         * @param apiKey The API key to use.
+         */
+        public VCR(ApiKey apiKey) {
+            this(null, apiKey);
+        }
+
+        /**
+         * Constructor.
+         *
          * @param testCassettesFolder The folder where the cassettes will be stored.
          * @param apiKey              The API key to use.
          */
@@ -180,7 +196,7 @@ public abstract class TestUtils {
             vcr = new com.easypost.easyvcr.VCR(advancedSettings);
 
             this.apiKey = apiKey;
-
+            this.client = new EasyPostClient(apiKey);
             this.testCassettesFolder = Paths.get(getSourceFileDirectory(), CASSETTES_PATH)
                     .toString(); // create the "cassettes" folder
 
@@ -197,28 +213,12 @@ public abstract class TestUtils {
         }
 
         /**
-         * Constructor.
-         *
-         * @param apiKey The API key to use.
-         */
-        public VCR(ApiKey apiKey) {
-            this(null, apiKey);
-        }
-
-        /**
-         * Constructor.
-         */
-        public VCR() {
-            this(null, ApiKey.TEST);
-        }
-
-        /**
          * Set up the VCR for a unit test.
          *
          * @param cassetteName The name of the cassette to use.
          */
         public void setUpTest(String cassetteName) {
-            setUpTest(cassetteName, null);
+            setUpTest(cassetteName, "");
         }
 
         /**
@@ -229,8 +229,8 @@ public abstract class TestUtils {
          */
         public void setUpTest(String cassetteName, String overrideApiKey) {
             // override api key if needed
-            EasyPost.apiKey = overrideApiKey != null ? overrideApiKey : apiKey;
-
+            client = new EasyPostClient(overrideApiKey.isEmpty() ? this.apiKey : overrideApiKey);
+            
             // set up cassette
             Cassette cassette = new Cassette(testCassettesFolder, cassetteName);
 

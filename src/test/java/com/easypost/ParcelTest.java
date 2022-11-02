@@ -44,7 +44,7 @@ public final class ParcelTest {
      * @return Parcel object
      */
     private static Parcel createBasicParcel() throws EasyPostException {
-        return Parcel.create(Fixtures.basicParcel());
+        return vcr.client.parcel.create(Fixtures.basicParcel());
     }
 
     /**
@@ -58,7 +58,7 @@ public final class ParcelTest {
 
         Parcel parcel = createBasicParcel();
 
-        Parcel retrievedParcel = Parcel.retrieve(parcel.getId());
+        Parcel retrievedParcel = vcr.client.parcel.retrieve(parcel.getId());
 
         assertInstanceOf(Parcel.class, retrievedParcel);
         assertTrue(parcel.equals(retrievedParcel));

@@ -16,7 +16,6 @@ import com.easypost.exception.API.ForbiddenError;
 import com.easypost.exception.API.GatewayTimeoutError;
 import com.easypost.exception.API.InternalServerError;
 import com.easypost.exception.API.InvalidRequestError;
-import com.easypost.model.Shipment;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +48,7 @@ public final class ErrorTest extends Requestor {
     public void testError() throws EasyPostException {
         vcr.setUpTest("error");
         
-        EasyPostException exception = assertThrows(InvalidRequestError.class, () -> Shipment.create(null));
+        EasyPostException exception = assertThrows(InvalidRequestError.class, () -> vcr.client.shipment.create(null));
 
         assertEquals(422, exception.getStatusCode());
         assertEquals("PARAMETER.REQUIRED", exception.getCode());

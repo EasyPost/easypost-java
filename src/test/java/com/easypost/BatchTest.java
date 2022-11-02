@@ -58,7 +58,7 @@ public final class BatchTest {
         shipments.add(Fixtures.basicShipment());
         params.put("shipments", shipments);
 
-        return Batch.create(params);
+        return vcr.client.batch.create(params);
     }
 
     /**
@@ -72,7 +72,7 @@ public final class BatchTest {
 
         Batch batch = createBasicBatch();
 
-        Batch retrievedBatch = Batch.retrieve(batch.getId());
+        Batch retrievedBatch = vcr.client.batch.retrieve(batch.getId());
 
         assertInstanceOf(Batch.class, batch);
         // Must compare IDs since elements of batch (i.e. status) may be different
@@ -91,7 +91,7 @@ public final class BatchTest {
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixtures.pageSize());
 
-        BatchCollection batches = Batch.all(params);
+        BatchCollection batches = vcr.client.batch.all(params);
 
         List<Batch> batchesList = batches.getBatches();
 
@@ -116,7 +116,7 @@ public final class BatchTest {
 
         params.put("shipments", shipmentData);
 
-        Batch batch = Batch.createAndBuy(params);
+        Batch batch = vcr.client.batch.createAndBuy(params);
 
         assertInstanceOf(Batch.class, batch);
         assertTrue(batch.getId().startsWith("batch_"));
@@ -134,7 +134,7 @@ public final class BatchTest {
 
         Batch batch = createOneCallBuyBatch();
 
-        batch = batch.buy();
+        batch = vcr.client.batch.buy(batch.getId());
 
         assertInstanceOf(Batch.class, batch);
         assertEquals(1, batch.getNumShipments().intValue());
@@ -147,7 +147,7 @@ public final class BatchTest {
         shipments.add(Fixtures.oneCallBuyShipment());
         params.put("shipments", shipments);
 
-        return Batch.create(params);
+        return vcr.client.batch.create(params);
     }
 
     /**
@@ -160,13 +160,13 @@ public final class BatchTest {
         vcr.setUpTest("create_scanform");
 
         Batch batch = createOneCallBuyBatch();
-        batch = batch.buy();
+        batch = vcr.client.batch.buy(batch.getId());
 
         if (vcr.isRecording()) {
             Thread.sleep(10000); // Wait enough time for processing
         }
 
-        Batch batchWithScanForm = batch.createScanForm();
+        Batch batchWithScanForm = vcr.client.batch.createScanForm(batch.getId());
 
         // We can't assert anything meaningful here
         // because the scanform gets queued for generation and may not be immediately available
@@ -182,9 +182,9 @@ public final class BatchTest {
     public void testAddRemoveShipment() throws EasyPostException {
         vcr.setUpTest("add_remove_shipment");
 
-        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment());
+        Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
 
-        Batch batch = Batch.create();
+        Batch batch = vcr.client.batch.create();
 
         List<Shipment> shipmentData = new ArrayList<>();
         Map<String, Object> params = new HashMap<>();
@@ -192,11 +192,11 @@ public final class BatchTest {
         shipmentData.add(shipment);
         params.put("shipments", shipmentData);
 
-        Batch batchWithAddedShipment = batch.addShipments(params);
+        Batch batchWithAddedShipment = vcr.client.batch.addShipments(params, batch.getId());
 
         assertEquals(1, batchWithAddedShipment.getNumShipments().intValue());
 
-        Batch batchWithoutShipment = batch.removeShipments(params);
+        Batch batchWithoutShipment = vcr.client.batch.removeShipments(params, batch.getId());
 
         assertEquals(0, batchWithoutShipment.getNumShipments().intValue());
     }
@@ -212,7 +212,7 @@ public final class BatchTest {
 
         Batch batch = createOneCallBuyBatch();
 
-        batch = batch.buy();
+        batch = vcr.client.batch.buy(batch.getId());
 
         if (vcr.isRecording()) {
             Thread.sleep(10000); // Wait enough time for processing
@@ -221,7 +221,7 @@ public final class BatchTest {
         Map<String, Object> params = new HashMap<>();
         params.put("file_format", "ZPL");
 
-        Batch batchWithLabel = batch.label(params);
+        Batch batchWithLabel = vcr.client.batch.label(params, batch.getId());
 
         // We can't assert anything meaningful here
         // because the label gets queued for generation and may not be immediately available

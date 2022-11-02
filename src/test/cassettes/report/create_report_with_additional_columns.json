@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1661456542,
+    "recordedAt": 1667593085,
     "request": {
       "body": "{\n  \"end_date\": \"2022-05-04\",\n  \"additional_columns\": [\n    \"from_name\",\n    \"from_company\"\n  ],\n  \"start_date\": \"2022-05-04\"\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/reports/shipment/"
     },
     "response": {
-      "body": "{\n  \"end_date\": \"2022-05-04\",\n  \"mode\": \"test\",\n  \"include_children\": false,\n  \"updated_at\": \"2022-08-25T19:42:22Z\",\n  \"created_at\": \"2022-08-25T19:42:22Z\",\n  \"id\": \"shprep_5577d686558d4d1c9ee0f819afda080f\",\n  \"url_expires_at\": null,\n  \"url\": null,\n  \"object\": \"ShipmentReport\",\n  \"start_date\": \"2022-05-04\",\n  \"status\": \"new\"\n}",
+      "body": "{\n  \"end_date\": \"2022-05-04\",\n  \"mode\": \"test\",\n  \"include_children\": false,\n  \"updated_at\": \"2022-11-04T20:18:06Z\",\n  \"created_at\": \"2022-11-04T20:18:06Z\",\n  \"id\": \"shprep_fc3d1dd5296e4ad6bcbeceb1b1c77892\",\n  \"url_expires_at\": null,\n  \"url\": null,\n  \"object\": \"ShipmentReport\",\n  \"start_date\": \"2022-05-04\",\n  \"status\": \"new\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb2nuq"
+          "bigweb4nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,26 +58,27 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "07323c3c6307d09ef7ed8ff100088cd8"
+          "8b8ec6bd6365737de0daeddb00096a22"
         ],
         "x-proxied": [
-          "extlb2nuq 9ce216bfac",
-          "intlb2nuq 6aa9972c1e"
+          "extlb3wdc 29913d444b",
+          "intlb2wdc 29913d444b",
+          "intlb1nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.047198"
+          "0.046376"
         ],
         "etag": [
-          "W/\"cca3721f64482bcc3713c62fc3a5938e\""
+          "W/\"e5e25c086a535ceb62b48add2ed0c2c0\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202208251932-b2da22d2d6-master"
+          "easypost-202211041941-0810f963fd-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -87,9 +88,8 @@
         "code": 201,
         "message": "Created"
       },
-      "errors": null,
       "uri": "https://api.easypost.com/v2/reports/shipment/"
     },
-    "duration": 187
+    "duration": 271
   }
 ]

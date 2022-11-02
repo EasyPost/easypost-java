@@ -42,8 +42,8 @@ public final class WebhookTest {
     public void cleanup() {
         if (testWebhookId != null) {
             try {
-                Webhook webhook = Webhook.retrieve(testWebhookId);
-                webhook.delete();
+                Webhook webhook = vcr.client.webhook.retrieve(testWebhookId);
+                vcr.client.webhook.delete(webhook.getId());
                 testWebhookId = null;
             } catch (Exception e) {
                 // in case we try to delete something that's already been deleted
@@ -76,7 +76,7 @@ public final class WebhookTest {
         Map<String, Object> params = new HashMap<>();
         params.put("url", Fixtures.webhookUrl());
 
-        Webhook webhook = Webhook.create(params);
+        Webhook webhook = vcr.client.webhook.create(params);
         testWebhookId = webhook.getId(); // trigger deletion after test
         return webhook;
     }
@@ -92,7 +92,7 @@ public final class WebhookTest {
 
         Webhook webhook = createBasicWebhook();
 
-        Webhook retrievedWebhook = Webhook.retrieve(webhook.getId());
+        Webhook retrievedWebhook = vcr.client.webhook.retrieve(webhook.getId());
 
         assertInstanceOf(Webhook.class, retrievedWebhook);
         assertTrue(webhook.equals(retrievedWebhook));
@@ -107,7 +107,7 @@ public final class WebhookTest {
     public void testAll() throws EasyPostException {
         vcr.setUpTest("all");
 
-        WebhookCollection webhooks = Webhook.all();
+        WebhookCollection webhooks = vcr.client.webhook.all();
 
         List<Webhook> webhooksList = webhooks.getWebhooks();
 
@@ -125,7 +125,7 @@ public final class WebhookTest {
 
         Webhook webhook = createBasicWebhook();
 
-        webhook.update();
+        vcr.client.webhook.update(webhook.getId());
 
         assertInstanceOf(Webhook.class, webhook);
     }
@@ -140,9 +140,9 @@ public final class WebhookTest {
         vcr.setUpTest("delete");
 
         Webhook webhook = createBasicWebhook();
-        Webhook retrievedWebhook = Webhook.retrieve(webhook.getId());
+        Webhook retrievedWebhook = vcr.client.webhook.retrieve(webhook.getId());
 
-        assertDoesNotThrow(() -> retrievedWebhook.delete()); 
+        assertDoesNotThrow(() -> vcr.client.webhook.delete(retrievedWebhook.getId())); 
 
         testWebhookId = null; // need to disable post-test deletion for test to work
     }
@@ -162,7 +162,7 @@ public final class WebhookTest {
             }
         };
 
-        Event event = Webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
+        Event event = vcr.client.webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
 
         assertEquals("batch.created", event.getDescription());
         assertEquals("batch_123...", event.getResult().get("id"));
@@ -181,7 +181,7 @@ public final class WebhookTest {
         };
 
         assertThrows(EasyPostException.class, () -> {
-            Webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
+            vcr.client.webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
         });
     }
 
@@ -198,7 +198,7 @@ public final class WebhookTest {
         };
 
         assertThrows(EasyPostException.class, () -> {
-            Webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
+            vcr.client.webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
         });
     }
 }

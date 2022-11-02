@@ -55,7 +55,7 @@ public final class TrackerTest {
         params.put("carrier", Fixtures.usps());
         params.put("tracking_code", "EZ1000000001");
 
-        return Tracker.create(params);
+        return vcr.client.tracker.create(params);
     }
 
     /**
@@ -69,7 +69,7 @@ public final class TrackerTest {
 
         Tracker tracker = createBasicTracker();
 
-        Tracker retrievedTracker = Tracker.retrieve(tracker.getId());
+        Tracker retrievedTracker = vcr.client.tracker.retrieve(tracker.getId());
 
         assertInstanceOf(Tracker.class, tracker);
         assertTrue(retrievedTracker.getId().startsWith("trk_"));
@@ -88,7 +88,7 @@ public final class TrackerTest {
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixtures.pageSize());
 
-        TrackerCollection trackers = Tracker.all(params);
+        TrackerCollection trackers = vcr.client.tracker.all(params);
 
         List<Tracker> trackersList = trackers.getTrackers();
 
@@ -120,6 +120,6 @@ public final class TrackerTest {
             params.put(String.valueOf(i), tracker);
         }
 
-        assertDoesNotThrow(() -> Tracker.createList(params));
+        assertDoesNotThrow(() -> vcr.client.tracker.createList(params));
     }
 }

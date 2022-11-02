@@ -1,12 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.http.Requestor;
-import com.easypost.http.Requestor.RequestMethod;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public final class CustomsItem extends EasyPostResource {
     private String description;
     private String hsTariffNumber;
@@ -159,56 +152,5 @@ public final class CustomsItem extends EasyPostResource {
      */
     public void setWeight(final Float weight) {
         this.weight = weight;
-    }
-
-    /**
-     * Create a CustomsItem from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @return CustomsItem object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsItem create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a CustomsItem from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return CustomsItem object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsItem create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("customs_item", params);
-
-        return Requestor.request(RequestMethod.POST, classURL(CustomsItem.class),
-            wrappedParams, CustomsItem.class, apiKey);
-    }
-
-    /**
-     * Retrieve a CustomsItem from the API.
-     *
-     * @param id the ID of the CustomsItem to retrieve.
-     * @return CustomsItem object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsItem retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a CustomsItem from the API.
-     *
-     * @param id     the ID of the CustomsItem to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return CustomsItem object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsItem retrieve(final String id, final String apiKey) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, instanceURL(CustomsItem.class, id),
-            null, CustomsItem.class, apiKey);
     }
 }

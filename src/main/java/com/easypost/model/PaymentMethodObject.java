@@ -172,7 +172,7 @@ public class PaymentMethodObject extends EasyPostResource {
      *
      * @return the endpoint for this PaymentMethodObject.
      */
-    String getEndpoint() {
+    public String getEndpoint() {
         PaymentMethodType type = getType();
         if (type == null) {
             return null;

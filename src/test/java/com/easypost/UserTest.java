@@ -40,8 +40,8 @@ public final class UserTest {
     public void cleanup() {
         if (testUserId != null) {
             try {
-                User user = User.retrieve(testUserId);
-                user.delete();
+                User user = vcr.client.user.retrieve(testUserId);
+                vcr.client.user.delete(user.getId());
                 testUserId = null;
             } catch (Exception e) {
                 // in case we try to delete something that's already been deleted
@@ -73,7 +73,7 @@ public final class UserTest {
     private static User createUser() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
         params.put("name", "Test User");
-        User user = User.create(params);
+        User user = vcr.client.user.create(params);
         testUserId = user.getId(); // trigger deletion after test
         return user;
     }
@@ -91,7 +91,7 @@ public final class UserTest {
 
         String userId = authenticatedUser.getId();
 
-        User user = User.retrieve(userId);
+        User user = vcr.client.user.retrieve(userId);
 
         assertInstanceOf(User.class, user);
         assertTrue(user.getId().startsWith("user_"));
@@ -104,7 +104,7 @@ public final class UserTest {
      * @return User object
      */
     private static User retrieveMe() throws EasyPostException {
-        return User.retrieveMe();
+        return vcr.client.user.retrieveMe();
     }
 
     /**
@@ -116,7 +116,7 @@ public final class UserTest {
     public void testRetrieveMe() throws EasyPostException {
         vcr.setUpTest("retrieve_me");
 
-        User user = User.retrieveMe();
+        User user = vcr.client.user.retrieveMe();
 
         assertInstanceOf(User.class, user);
         assertTrue(user.getId().startsWith("user_"));
@@ -138,7 +138,7 @@ public final class UserTest {
 
         params.put("name", testName);
 
-        User updatedUser = user.update(params);
+        User updatedUser = vcr.client.user.update(params, user.getId());
 
         assertInstanceOf(User.class, updatedUser);
         assertTrue(updatedUser.getId().startsWith("user_"));
@@ -156,7 +156,7 @@ public final class UserTest {
 
         User user = createUser();
 
-        assertDoesNotThrow(() -> user.delete());
+        assertDoesNotThrow(() -> vcr.client.user.delete(user.getId()));
     }
 
     /**
@@ -168,7 +168,7 @@ public final class UserTest {
     public void testAllApiKeys() throws EasyPostException {
         vcr.setUpTest("all_api_keys");
 
-        ApiKeys apikeys = ApiKeys.all();
+        ApiKeys apikeys = vcr.client.apikeys.all();
 
         assertInstanceOf(ApiKeys.class, apikeys);
     }
@@ -184,7 +184,7 @@ public final class UserTest {
 
         User user = createUser();
 
-        List<ApiKey> apiKeys = user.apiKeys();
+        List<ApiKey> apiKeys = vcr.client.user.apiKeys(user.getId());
         assertNotNull(apiKeys);
     }
 
@@ -204,7 +204,7 @@ public final class UserTest {
         Map<String, Object> params = new HashMap<>();
         params.put("color", color);
 
-        Brand brand = user.updateBrand(params);
+        Brand brand = vcr.client.user.updateBrand(params, user.getId());
 
         assertInstanceOf(Brand.class, brand);
         assertTrue(brand.getId().startsWith("brd_"));

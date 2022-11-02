@@ -1,13 +1,7 @@
 package com.easypost.model;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.http.Requestor;
-import com.easypost.http.Requestor.RequestMethod;
-
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public final class Tracker extends EasyPostResource {
     private String trackingCode;
@@ -218,104 +212,5 @@ public final class Tracker extends EasyPostResource {
      */
     public void setWeight(final float weight) {
         this.weight = weight;
-    }
-
-    /**
-     * Create a new Tracker object using a map of parameters.
-     *
-     * @param params Map of parameters used to create the Tracker.
-     * @return Tracker object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Tracker create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a new Tracker object using a map of parameters.
-     *
-     * @param params Map of parameters used to create the Tracker.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Tracker object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Tracker create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("tracker", params);
-
-        return Requestor.request(RequestMethod.POST, classURL(Tracker.class), wrappedParams, Tracker.class, apiKey);
-    }
-
-    /**
-     * Retrieve a Tracker object from the API.
-     *
-     * @param id ID of the Tracker to retrieve.
-     * @return Tracker object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Tracker retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Tracker object from the API.
-     *
-     * @param id     ID of the Tracker to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Tracker object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Tracker retrieve(final String id, final String apiKey) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, instanceURL(Tracker.class, id), null, Tracker.class, apiKey);
-    }
-
-    /**
-     * Get a list of all Tracker objects.
-     *
-     * @param params Map of parameters used to filter the list of Trackers.
-     * @return TrackerCollection object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static TrackerCollection all(final Map<String, Object> params) throws EasyPostException {
-        return all(params, null);
-    }
-
-    /**
-     * Get a list of all Tracker objects.
-     *
-     * @param params Map of parameters used to filter the list of Trackers.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return TrackerCollection object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static TrackerCollection all(final Map<String, Object> params, final String apiKey)
-            throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, classURL(Tracker.class), params, TrackerCollection.class, apiKey);
-    }
-
-    /**
-     * Create a list of Trackers.
-     *
-     * @param params Map of parameters used to create the Trackers.
-     * @throws EasyPostException when the request fails.
-     */
-    public static void createList(final Map<String, Object> params) throws EasyPostException {
-        createList(params, null);
-    }
-
-    /**
-     * Create a list of Trackers.
-     *
-     * @param params Map of parameters used to create the Trackers.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @throws EasyPostException when the request fails.
-     */
-    public static void createList(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        String createListUrl = String.format("%s/create_list", classURL(Tracker.class));
-
-        Map<String, Object> newParams = new HashMap<String, Object>();
-        newParams.put("trackers", params);
-
-        Requestor.request(RequestMethod.POST, createListUrl, newParams, Object.class, apiKey);
     }
 }

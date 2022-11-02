@@ -1,9 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.http.Requestor;
-import com.easypost.http.Requestor.RequestMethod;
-
 public class Rate extends EasyPostResource {
     private String carrier;
     private String service;
@@ -308,31 +304,5 @@ public class Rate extends EasyPostResource {
      */
     public void setService(final String service) {
         this.service = service;
-    }
-
-    /**
-     * Retrieve a Rate from the API.
-     *
-     * @param id ID of the Rate to retrieve.
-     * @return Rate object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Rate retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Rate from the API.
-     *
-     * @param id     ID of the Rate to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Rate object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Rate retrieve(final String id, final String apiKey) throws EasyPostException {
-        Rate response;
-        response = Requestor.request(RequestMethod.GET, instanceURL(Rate.class, id), null, Rate.class, apiKey);
-
-        return response;
     }
 }

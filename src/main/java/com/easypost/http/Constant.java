@@ -19,7 +19,6 @@ public abstract class Constant {
             Arrays.asList("getCreatedAt", "getUpdatedAt", "getFees"));
     public static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
     public static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
-    public static final double DEFAULT_APP_ENGINE_TIMEOUT_SECONDS = 20.0;
     public static final Gson GSON = new GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .registerTypeAdapter(HashMap.class, new HashMapSerializer())

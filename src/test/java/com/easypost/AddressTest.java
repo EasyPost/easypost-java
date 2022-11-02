@@ -3,6 +3,7 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -36,8 +37,8 @@ public final class AddressTest {
      * @return basic Address object
      * @throws EasyPostException
      */
-    public static Address createBasicAddress() throws EasyPostException {
-        return Address.create(Fixtures.caAddress1());
+    public Address createBasicAddress() throws EasyPostException {
+        return vcr.client.address.create(Fixtures.caAddress1());
     }
 
     /**
@@ -70,7 +71,7 @@ public final class AddressTest {
         Map<String, Object> addressData = Fixtures.incorrectAddress();
         addressData.put("verify", true);
 
-        Address address = Address.create(addressData);
+        Address address = vcr.client.address.create(addressData);
 
         assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
@@ -89,7 +90,7 @@ public final class AddressTest {
         Map<String, Object> addressData = Fixtures.caAddress1();
         addressData.put("verify_strict", true);
 
-        Address address = Address.create(addressData);
+        Address address = vcr.client.address.create(addressData);
 
         assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
@@ -112,7 +113,7 @@ public final class AddressTest {
         verificationList.add(true);
         addressData.put("verify", verificationList);
 
-        Address address = Address.create(addressData);
+        Address address = vcr.client.address.create(addressData);
 
         assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
@@ -129,7 +130,7 @@ public final class AddressTest {
         vcr.setUpTest("retrieve");
 
         Address address = createBasicAddress();
-        Address retrievedAddress = Address.retrieve(address.getId());
+        Address retrievedAddress = vcr.client.address.retrieve(address.getId());
 
         assertInstanceOf(Address.class, retrievedAddress);
         assertTrue(address.equals(retrievedAddress));
@@ -147,7 +148,7 @@ public final class AddressTest {
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixtures.pageSize());
 
-        AddressCollection addresses = Address.all(params);
+        AddressCollection addresses = vcr.client.address.all(params);
 
         List<Address> addressesList = addresses.getAddresses();
 
@@ -169,7 +170,7 @@ public final class AddressTest {
 
         Map<String, Object> addressData = Fixtures.caAddress1();
 
-        Address address = Address.createAndVerify(addressData);
+        Address address = vcr.client.address.createAndVerify(addressData);
 
         assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
@@ -187,7 +188,7 @@ public final class AddressTest {
 
         Address address = createBasicAddress();
 
-        Address verifiedAddress = address.verify();
+        Address verifiedAddress = vcr.client.address.verify(address.getId());
 
         assertInstanceOf(Address.class, address);
         assertTrue(verifiedAddress.getId().startsWith("adr_"));
@@ -203,7 +204,7 @@ public final class AddressTest {
     public void testInvalidAddressCreation() throws EasyPostException {
         vcr.setUpTest("error_address_creation");
         EasyPostException exception = assertThrows(EasyPostException.class,
-                () -> Address.createAndVerify(null));
+                () -> vcr.client.address.createAndVerify(null));
 
         assertEquals("PARAMETER.REQUIRED", exception.getCode());
         assertEquals(422, exception.getStatusCode());

@@ -29,6 +29,15 @@ public final class EndShipperTest {
     }
 
     /**
+     * Create an EndShipper.
+     *
+     * @return EndShipper object.
+     */
+    private static EndShipper createEndShipper() throws EasyPostException {
+        return vcr.client.endShipper.create(Fixtures.caAddress1());
+    }
+
+    /**
      * Test creating an EndShipper object.
      *
      * @throws EasyPostException when the request fails.
@@ -45,15 +54,6 @@ public final class EndShipperTest {
     }
 
     /**
-     * Create an EndShipper.
-     *
-     * @return EndShipper object.
-     */
-    private static EndShipper createEndShipper() throws EasyPostException {
-        return EndShipper.create(Fixtures.caAddress1());
-    }
-
-    /**
      * Test retrieving an EndShipper object.
      *
      * @throws EasyPostException when the request fails.
@@ -64,7 +64,7 @@ public final class EndShipperTest {
 
         EndShipper endShipper = createEndShipper();
 
-        EndShipper retrievedEndShipper = EndShipper.retrieve(endShipper.getId());
+        EndShipper retrievedEndShipper = vcr.client.endShipper.retrieve(endShipper.getId());
 
         assertInstanceOf(EndShipper.class, retrievedEndShipper);
         assertEquals(endShipper.getStreet1(), retrievedEndShipper.getStreet1());
@@ -82,7 +82,7 @@ public final class EndShipperTest {
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixtures.pageSize());
 
-        EndShipperCollection endShipperCollection = EndShipper.all(params);
+        EndShipperCollection endShipperCollection = vcr.client.endShipper.all(params);
 
         List<EndShipper> endShippers = endShipperCollection.getEndShippers();
 
@@ -115,7 +115,7 @@ public final class EndShipperTest {
         updateParams.put("phone", "9999999999");
         updateParams.put("email", "test@example.com");
 
-        EndShipper updatedEndShipper = endShipper.update(updateParams);
+        EndShipper updatedEndShipper = vcr.client.endShipper.update(updateParams, endShipper.getId());
 
         assertInstanceOf(EndShipper.class, updatedEndShipper);
         assertTrue(updatedEndShipper.getId().startsWith("es_"));

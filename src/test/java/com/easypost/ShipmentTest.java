@@ -67,7 +67,7 @@ public final class ShipmentTest {
      * @return Shipment object
      */
     private static Shipment createFullShipment() throws EasyPostException {
-        return Shipment.create(Fixtures.fullShipment());
+        return vcr.client.shipment.create(Fixtures.fullShipment());
     }
 
     /**
@@ -81,7 +81,7 @@ public final class ShipmentTest {
 
         Shipment shipment = createFullShipment();
 
-        Shipment retrievedShipment = Shipment.retrieve(shipment.getId());
+        Shipment retrievedShipment = vcr.client.shipment.retrieve(shipment.getId());
 
         assertInstanceOf(Shipment.class, retrievedShipment);
         assertTrue(shipment.equals(retrievedShipment));
@@ -99,7 +99,7 @@ public final class ShipmentTest {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("page_size", Fixtures.pageSize());
 
-        ShipmentCollection shipmentCollection = Shipment.all(params);
+        ShipmentCollection shipmentCollection = vcr.client.shipment.all(params);
 
         List<Shipment> shipments = shipmentCollection.getShipments();
 
@@ -119,7 +119,8 @@ public final class ShipmentTest {
 
         Shipment shipment = createBasicShipment();
 
-        Shipment boughtShipment = shipment.buy(shipment.lowestRate());
+        Rate lowestRate = vcr.client.shipment.lowestRate(shipment);
+        Shipment boughtShipment = vcr.client.shipment.buy(lowestRate, shipment.getId());
 
         assertNotNull(boughtShipment.getPostageLabel());
     }
@@ -130,7 +131,7 @@ public final class ShipmentTest {
      * @return Shipment object
      */
     private static Shipment createBasicShipment() throws EasyPostException {
-        return Shipment.create(Fixtures.basicShipment());
+        return vcr.client.shipment.create(Fixtures.basicShipment());
     }
 
     /**
@@ -144,7 +145,7 @@ public final class ShipmentTest {
 
         Shipment shipment = createFullShipment();
 
-        Shipment shipmentWithNewRates = shipment.newRates();
+        Shipment shipmentWithNewRates = vcr.client.shipment.newRates(shipment.getId());
 
         List<Rate> rates = shipmentWithNewRates.getRates();
 
@@ -169,7 +170,7 @@ public final class ShipmentTest {
         Map<String, Object> params = new HashMap<>();
         params.put("file_format", "ZPL");
 
-        Shipment shipmentWithLabel = shipment.label(params);
+        Shipment shipmentWithLabel = vcr.client.shipment.label(params, shipment.getId());
 
         assertNotNull(shipmentWithLabel.getPostageLabel().getLabelZplUrl());
     }
@@ -180,7 +181,7 @@ public final class ShipmentTest {
      * @return Shipment object
      */
     private static Shipment createOneCallBuyShipment() throws EasyPostException {
-        return Shipment.create(Fixtures.oneCallBuyShipment());
+        return vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
     }
 
     /**
@@ -205,9 +206,9 @@ public final class ShipmentTest {
         Map<String, Object> insuranceData = new HashMap<>();
         insuranceData.put("amount", "100");
 
-        Shipment shipment = Shipment.create(shipmentData);
+        Shipment shipment = vcr.client.shipment.create(shipmentData);
 
-        Shipment shipmentWithInsurance = shipment.insure(insuranceData);
+        Shipment shipmentWithInsurance = vcr.client.shipment.insure(insuranceData, shipment.getId());
 
         assertEquals("100.00", shipmentWithInsurance.getInsurance());
     }
@@ -229,7 +230,7 @@ public final class ShipmentTest {
 
         Shipment shipment = createOneCallBuyShipment();
 
-        Shipment refundedShipment = shipment.refund();
+        Shipment refundedShipment = vcr.client.shipment.refund(shipment.getId());
 
         assertEquals("submitted", refundedShipment.getRefundStatus());
     }
@@ -248,7 +249,7 @@ public final class ShipmentTest {
         assertNotNull(shipment.getRates());
         Rate rate = shipment.getRates().get(0);
 
-        List<Smartrate> smartRates = shipment.smartrates();
+        List<Smartrate> smartRates = vcr.client.shipment.smartrates(shipment.getId());
         assertInstanceOf(List.class, smartRates);
         Smartrate smartRate = smartRates.get(0);
 
@@ -282,7 +283,7 @@ public final class ShipmentTest {
         shipmentData.put("tax_identifiers", null);
         shipmentData.put("reference", "");
 
-        Shipment shipment = Shipment.create(shipmentData);
+        Shipment shipment = vcr.client.shipment.create(shipmentData);
 
         assertInstanceOf(Shipment.class, shipment);
         assertTrue(shipment.getId().startsWith("shp_"));
@@ -308,7 +309,7 @@ public final class ShipmentTest {
         taxIdentifiers.add(Fixtures.taxIdentifier());
         shipmentData.put("tax_identifiers", taxIdentifiers);
 
-        Shipment shipmentWithTaxIdentifiers = Shipment.create(shipmentData);
+        Shipment shipmentWithTaxIdentifiers = vcr.client.shipment.create(shipmentData);
 
         assertInstanceOf(Shipment.class, shipmentWithTaxIdentifiers);
         assertTrue(shipmentWithTaxIdentifiers.getId().startsWith("shp_"));
@@ -327,16 +328,18 @@ public final class ShipmentTest {
     public void testCreateWithIds() throws EasyPostException {
         vcr.setUpTest("create_with_ids");
 
-        Address fromAddress = Address.create(Fixtures.caAddress1());
-        Address toAddress = Address.create(Fixtures.caAddress1());
-        Parcel parcel = Parcel.create(Fixtures.basicParcel());
+        Address fromAddress = vcr.client.address.create(Fixtures.caAddress1());
+        Address toAddress = vcr.client.address.create(Fixtures.caAddress1());
+        Parcel parcel = vcr.client.parcel.create(Fixtures.basicParcel());
 
         Map<String, Object> shipmentData = Fixtures.basicShipment();
-        shipmentData.put("from_address", Collections.singletonMap("id", fromAddress.getId()));
-        shipmentData.put("to_address", Collections.singletonMap("id", toAddress.getId()));
+        shipmentData.put("from_address", Collections.singletonMap("id",
+                fromAddress.getId()));
+        shipmentData.put("to_address", Collections.singletonMap("id",
+                toAddress.getId()));
         shipmentData.put("parcel", Collections.singletonMap("id", parcel.getId()));
 
-        Shipment shipment = Shipment.create(shipmentData);
+        Shipment shipment = vcr.client.shipment.create(shipmentData);
 
         assertInstanceOf(Shipment.class, shipment);
         assertTrue(shipment.getId().startsWith("shp_"));
@@ -358,23 +361,23 @@ public final class ShipmentTest {
         Shipment shipment = createFullShipment();
 
         // Test lowest rate with no filters
-        Rate lowestRate = shipment.lowestRate();
+        Rate lowestRate = vcr.client.shipment.lowestRate(shipment);
         assertEquals("First", lowestRate.getService());
-        assertEquals(5.57, lowestRate.getRate(), 0.01);
+        assertEquals(5.82, lowestRate.getRate(), 0.01);
         assertEquals("USPS", lowestRate.getCarrier());
 
         // Test lowest rate with service filter (this rate is higher than the lowest but
         // should filter)
         List<String> service = new ArrayList<>(Arrays.asList("Priority"));
-        Rate lowestRateService = shipment.lowestRate(null, service);
+        Rate lowestRateService = vcr.client.shipment.lowestRate(null, service, shipment);
         assertEquals("Priority", lowestRateService.getService());
-        assertEquals(7.90, lowestRateService.getRate(), 0.01);
+        assertEquals(8.15, lowestRateService.getRate(), 0.01);
         assertEquals("USPS", lowestRateService.getCarrier());
 
         // Test lowest rate with carrier filter (should error due to bad carrier)
         List<String> carrier = new ArrayList<>(Arrays.asList("BAD CARRIER"));
         assertThrows(EasyPostException.class, () -> {
-            shipment.lowestRate(null, carrier);
+            vcr.client.shipment.lowestRate(carrier, null, shipment);
         });
     }
 
@@ -388,17 +391,18 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate");
 
         Shipment shipment = createBasicShipment();
-        Smartrate lowestSmartRateFilters = shipment.lowestSmartRate(2, SmartrateAccuracy.Percentile90);
+        Smartrate lowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(2, SmartrateAccuracy.Percentile90,
+                shipment.getId());
 
         // Test lowest smartrate with valid filters
         assertEquals("First", lowestSmartRateFilters.getService());
-        assertEquals(5.57, lowestSmartRateFilters.getRate(), 0.01);
+        assertEquals(5.82, lowestSmartRateFilters.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRateFilters.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict
         // delivery days)
         assertThrows(EasyPostException.class, () -> {
-            shipment.lowestSmartRate(0, SmartrateAccuracy.Percentile90);
+            vcr.client.shipment.lowestSmartRate(0, SmartrateAccuracy.Percentile90, shipment.getId());
         });
     }
 
@@ -412,18 +416,19 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate_list");
 
         Shipment shipment = createBasicShipment();
-        List<Smartrate> smartrates = shipment.smartrates();
+        List<Smartrate> smartrates = vcr.client.shipment.smartrates(shipment.getId());
 
         // Test lowest smartrate with valid filters
-        Smartrate lowestSmartRate = Shipment.findLowestSmartrate(smartrates, 2, SmartrateAccuracy.Percentile90);
+        Smartrate lowestSmartRate = vcr.client.shipment.findLowestSmartrate(smartrates, 2,
+                SmartrateAccuracy.Percentile90);
         assertEquals("First", lowestSmartRate.getService());
-        assertEquals(5.57, lowestSmartRate.getRate(), 0.01);
+        assertEquals(5.82, lowestSmartRate.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRate.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict
         // delivery days)
         assertThrows(EasyPostException.class, () -> {
-            Shipment.findLowestSmartrate(smartrates, 0, SmartrateAccuracy.Percentile90);
+            vcr.client.shipment.findLowestSmartrate(smartrates, 0, SmartrateAccuracy.Percentile90);
         });
     }
 
@@ -439,11 +444,12 @@ public final class ShipmentTest {
         Shipment shipment = createOneCallBuyShipment();
         String formType = "return_packing_slip";
 
-        shipment.generateForm(formType, Fixtures.rmaFormOptions());
+        Shipment shipmentWithForm = vcr.client.shipment.generateForm(formType, Fixtures.rmaFormOptions(),
+                shipment.getId());
 
-        assertTrue(shipment.getForms().size() > 0);
+        assertTrue(shipmentWithForm.getForms().size() > 0);
 
-        Form form = shipment.getForms().get(0);
+        Form form = shipmentWithForm.getForms().get(0);
 
         assertEquals(formType, form.getFormType());
         assertTrue(form.getFormUrl() != null);
@@ -458,7 +464,7 @@ public final class ShipmentTest {
     public void testCreateShipmentWithCarbonOffset() throws EasyPostException {
         vcr.setUpTest("create_shipment_with_carbon_offset");
 
-        Shipment shipment = Shipment.create(Fixtures.basicShipment(), true);
+        Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment(), true);
 
         assertInstanceOf(Shipment.class, shipment);
 
@@ -479,11 +485,11 @@ public final class ShipmentTest {
     public void testBuyShipmentWithCarbonOffset() throws EasyPostException {
         vcr.setUpTest("buy_shipment_with_carbon_offset");
 
-        Shipment shipment = Shipment.create(Fixtures.fullShipment());
+        Shipment shipment = vcr.client.shipment.create(Fixtures.fullShipment());
 
-        Rate rate = shipment.lowestRate();
+        Rate rate = vcr.client.shipment.lowestRate(shipment);
 
-        Shipment boughtShipment = shipment.buy(rate, true);
+        Shipment boughtShipment = vcr.client.shipment.buy(rate, true, shipment.getId());
 
         assertInstanceOf(Shipment.class, shipment);
 
@@ -509,7 +515,7 @@ public final class ShipmentTest {
     public void testOneCallBuyShipmentWithCarbonOffset() throws EasyPostException {
         vcr.setUpTest("one_call_buy_shipment_with_carbon_offset");
 
-        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment(), true);
+        Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment(), true);
 
         assertInstanceOf(Shipment.class, shipment);
 
@@ -535,10 +541,10 @@ public final class ShipmentTest {
     public void testRegenerateRatesWithCarbonOffset() throws EasyPostException {
         vcr.setUpTest("regenerate_rates_with_carbon_offset");
 
-        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment());
+        Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
         List<Rate> baseRates = shipment.getRates();
 
-        Shipment shipmentWithNewRatesWithCarbon = shipment.newRates(true);
+        Shipment shipmentWithNewRatesWithCarbon = vcr.client.shipment.newRates(true, shipment.getId());
         List<Rate> newCarbonRates = shipmentWithNewRatesWithCarbon.getRates();
 
         Rate baseRate = baseRates.get(0);
@@ -557,11 +563,11 @@ public final class ShipmentTest {
     public void testBuyShipmentWithEndShipperId() throws EasyPostException {
         vcr.setUpTest("buy_shipment_with_end_shipper_id");
 
-        EndShipper endShipper = EndShipper.create(Fixtures.caAddress1());
+        EndShipper endShipper = vcr.client.endShipper.create(Fixtures.caAddress1());
 
-        Shipment shipment = Shipment.create(Fixtures.basicShipment());
-        Rate rate = shipment.lowestRate();
-        Shipment boughtShipment = shipment.buy(rate, endShipper.getId());
+        Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
+        Rate rate = vcr.client.shipment.lowestRate(shipment);
+        Shipment boughtShipment = vcr.client.shipment.buy(rate, endShipper.getId(), shipment.getId());
 
         assertNotNull(boughtShipment.getPostageLabel());
     }

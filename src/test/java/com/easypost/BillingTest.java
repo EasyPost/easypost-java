@@ -1,7 +1,6 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.model.Billing;
 import com.easypost.model.PaymentMethod;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -33,7 +32,7 @@ public final class BillingTest {
     public void testDeletePaymentMethod() throws EasyPostException {
         vcr.setUpTest("delete_payment_method");
 
-        assertDoesNotThrow(() -> Billing.deletePaymentMethod(PaymentMethod.Priority.PRIMARY));
+        assertDoesNotThrow(() -> vcr.client.billing.deletePaymentMethod(PaymentMethod.Priority.PRIMARY));
     }
 
     /**
@@ -46,7 +45,7 @@ public final class BillingTest {
     public void testFundWallet() throws EasyPostException {
         vcr.setUpTest("fund_wallet");
 
-        assertDoesNotThrow(() -> Billing.fundWallet("2000", PaymentMethod.Priority.PRIMARY));
+        assertDoesNotThrow(() -> vcr.client.billing.fundWallet("2000", PaymentMethod.Priority.PRIMARY));
     }
 
     /**
@@ -59,7 +58,7 @@ public final class BillingTest {
     public void testRetrievePaymentMethods() throws EasyPostException {
         vcr.setUpTest("retrieve_payment_methods");
 
-        PaymentMethod paymentMethods = Billing.retrievePaymentMethods();
+        PaymentMethod paymentMethods = vcr.client.billing.retrievePaymentMethods();
 
         assertNotNull(paymentMethods.getPrimaryPaymentMethodObject());
         assertNotNull(paymentMethods.getSecondaryPaymentMethodObject());

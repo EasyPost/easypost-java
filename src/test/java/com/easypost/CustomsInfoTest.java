@@ -23,6 +23,15 @@ public final class CustomsInfoTest {
     }
 
     /**
+     * Create a customs info object.
+     *
+     * @return CustomsInfo object.
+     */
+    private static CustomsInfo createBasicCustomsInfo() throws EasyPostException {
+        return vcr.client.customsInfo.create(Fixtures.basicCustomsInfo());
+    }
+
+    /**
      * Test creating a CustomsInfo.
      *
      * @throws EasyPostException when the request fails.
@@ -39,15 +48,6 @@ public final class CustomsInfoTest {
     }
 
     /**
-     * Create a customs info object.
-     *
-     * @return CustomsInfo object.
-     */
-    private static CustomsInfo createBasicCustomsInfo() throws EasyPostException {
-        return CustomsInfo.create(Fixtures.basicCustomsInfo());
-    }
-
-    /**
      * Test retrieving a CustomsInfo.
      *
      * @throws EasyPostException when the request fails.
@@ -58,7 +58,7 @@ public final class CustomsInfoTest {
 
         CustomsInfo customsInfo = createBasicCustomsInfo();
 
-        CustomsInfo retrievedCustomsInfo = CustomsInfo.retrieve(customsInfo.getId());
+        CustomsInfo retrievedCustomsInfo = vcr.client.customsInfo.retrieve(customsInfo.getId());
 
         assertInstanceOf(CustomsInfo.class, retrievedCustomsInfo);
         assertTrue(customsInfo.equals(retrievedCustomsInfo));

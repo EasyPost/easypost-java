@@ -34,6 +34,20 @@ public final class PickupTest {
     }
 
     /**
+     * Create a pickup.
+     *
+     * @return Pickup object
+     */
+    private static Pickup createBasicPickup() throws EasyPostException {
+        Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
+
+        Map<String, Object> pickupData = Fixtures.basicPickup();
+        pickupData.put("shipment", shipment);
+
+        return vcr.client.pickup.create(pickupData);
+    }
+
+    /**
      * Test creating a pickup.
      *
      * @throws EasyPostException when the request fails.
@@ -46,21 +60,7 @@ public final class PickupTest {
 
         assertInstanceOf(Pickup.class, pickup);
         assertTrue(pickup.getId().startsWith("pickup_"));
-        assertNotNull(pickup.getPickupRates());
-    }
-
-    /**
-     * Create a pickup.
-     *
-     * @return Pickup object
-     */
-    private static Pickup createBasicPickup() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment());
-
-        Map<String, Object> pickupData = Fixtures.basicPickup();
-        pickupData.put("shipment", shipment);
-
-        return Pickup.create(pickupData);
+        assertNotNull(pickup.getPickoutRates());
     }
 
     /**
@@ -74,7 +74,7 @@ public final class PickupTest {
 
         Pickup pickup = createBasicPickup();
 
-        Pickup retrievedPickup = Pickup.retrieve(pickup.getId());
+        Pickup retrievedPickup = vcr.client.pickup.retrieve(pickup.getId());
 
         assertInstanceOf(Pickup.class, retrievedPickup);
         assertTrue(pickup.equals(retrievedPickup));
@@ -95,7 +95,7 @@ public final class PickupTest {
         params.put("carrier", Fixtures.usps());
         params.put("service", Fixtures.pickupService());
 
-        Pickup boughtPickup = pickup.buy(params);
+        Pickup boughtPickup = vcr.client.pickup.buy(params, pickup.getId());
 
         assertInstanceOf(Pickup.class, boughtPickup);
         assertTrue(boughtPickup.getId().startsWith("pickup_"));
@@ -117,9 +117,9 @@ public final class PickupTest {
         Map<String, Object> params = new HashMap<>();
         params.put("carrier", Fixtures.usps());
         params.put("service", Fixtures.pickupService());
-        Pickup boughtPickup = pickup.buy(params);
+        Pickup boughtPickup = vcr.client.pickup.buy(params, pickup.getId());
 
-        Pickup cancelledPickup = boughtPickup.cancel();
+        Pickup cancelledPickup = vcr.client.pickup.cancel(boughtPickup.getId());
 
         assertInstanceOf(Pickup.class, cancelledPickup);
         assertTrue(cancelledPickup.getId().startsWith("pickup_"));
@@ -138,7 +138,7 @@ public final class PickupTest {
         Pickup pickup = createBasicPickup();
 
         // Test lowest rate with no filters
-        PickupRate lowestRate = pickup.lowestRate();
+        PickupRate lowestRate = vcr.client.pickup.lowestRate(pickup);
         assertEquals("NextDay", lowestRate.getService());
         assertEquals(0.00, lowestRate.getRate(), 0.01);
         assertEquals("USPS", lowestRate.getCarrier());
@@ -146,13 +146,13 @@ public final class PickupTest {
         // Test lowest rate with service filter (should error due to bad service)
         List<String> services = new ArrayList<>(Arrays.asList("BAD SERVICE"));
         assertThrows(EasyPostException.class, () -> {
-            pickup.lowestRate(null, services);
+            vcr.client.pickup.lowestRate(null, services, pickup);
         });
 
         // Test lowest rate with carrier filter (should error due to bad carrier)
         List<String> carriers = new ArrayList<>(Arrays.asList("BAD CARRIER"));
         assertThrows(EasyPostException.class, () -> {
-            pickup.lowestRate(carriers, null);
+            vcr.client.pickup.lowestRate(carriers, null, pickup);
         });
     }
 }

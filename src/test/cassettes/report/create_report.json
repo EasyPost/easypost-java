@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1661456541,
+    "recordedAt": 1667593084,
     "request": {
       "body": "{\n  \"end_date\": \"2022-05-04\",\n  \"start_date\": \"2022-05-04\"\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/reports/shipment/"
     },
     "response": {
-      "body": "{\n  \"end_date\": \"2022-05-04\",\n  \"mode\": \"test\",\n  \"include_children\": false,\n  \"updated_at\": \"2022-08-25T19:42:21Z\",\n  \"created_at\": \"2022-08-25T19:42:21Z\",\n  \"id\": \"shprep_62427e8273914444ba72e718526e2ac8\",\n  \"url_expires_at\": null,\n  \"url\": null,\n  \"object\": \"ShipmentReport\",\n  \"start_date\": \"2022-05-04\",\n  \"status\": \"new\"\n}",
+      "body": "{\n  \"end_date\": \"2022-05-04\",\n  \"mode\": \"test\",\n  \"include_children\": false,\n  \"updated_at\": \"2022-11-04T20:18:05Z\",\n  \"created_at\": \"2022-11-04T20:18:05Z\",\n  \"id\": \"shprep_65cf6638597241049b20ae2860514e00\",\n  \"url_expires_at\": null,\n  \"url\": null,\n  \"object\": \"ShipmentReport\",\n  \"start_date\": \"2022-05-04\",\n  \"status\": \"new\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -58,26 +58,27 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "07323c396307d09df7ecfb1200088c6e"
+          "8b8ec6bc6365737ce0daeac8000969e6"
         ],
         "x-proxied": [
-          "extlb2nuq 9ce216bfac",
-          "intlb2nuq 6aa9972c1e"
+          "extlb3wdc 29913d444b",
+          "intlb2wdc 29913d444b",
+          "intlb1nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.037700"
+          "0.040526"
         ],
         "etag": [
-          "W/\"59bf1176c35d457d37c7488881fcb842\""
+          "W/\"89c686671f35b7646a11ef12c87456c5\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202208251932-b2da22d2d6-master"
+          "easypost-202211041941-0810f963fd-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -87,9 +88,8 @@
         "code": 201,
         "message": "Created"
       },
-      "errors": null,
       "uri": "https://api.easypost.com/v2/reports/shipment/"
     },
-    "duration": 166
+    "duration": 278
   }
 ]

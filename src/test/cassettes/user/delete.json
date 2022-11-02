@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1661456591,
+    "recordedAt": 1667593151,
     "request": {
       "body": "{\n  \"user\": {\n    \"name\": \"Test User\"\n  }\n}",
       "method": "POST",
@@ -18,20 +18,20 @@
       "uri": "https://api.easypost.com/v2/users"
     },
     "response": {
-      "body": "{\n  \"children\": [],\n  \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n  \"name\": \"Test User\",\n  \"verified\": true,\n  \"created_at\": \"2022-08-25T19:43:10Z\",\n  \"phone_number\": \"REDACTED\",\n  \"id\": \"user_c7e290a08e454feb9e093d1283a8bb2d\",\n  \"api_keys\": [],\n  \"object\": \"User\"\n}",
+      "body": "{\n  \"children\": [],\n  \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n  \"name\": \"Test User\",\n  \"verified\": true,\n  \"created_at\": \"2022-11-04T20:19:11Z\",\n  \"default_carbon_offset\": false,\n  \"phone_number\": \"REDACTED\",\n  \"id\": \"user_ca0eaf9cee044c26bde6385b654efa57\",\n  \"api_keys\": [],\n  \"object\": \"User\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 201 Created"
         ],
         "content-length": [
-          "634"
+          "664"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb3nuq"
+          "bigweb1nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,26 +58,27 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "07323c386307d0cef7db7cbd0008a5f1"
+          "8b8ec6b9636573bee0daf2bf00097b13"
         ],
         "x-proxied": [
-          "extlb2nuq 9ce216bfac",
-          "intlb2nuq 6aa9972c1e"
+          "extlb3wdc 29913d444b",
+          "intlb2wdc 29913d444b",
+          "intlb1nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.753074"
+          "0.859031"
         ],
         "etag": [
-          "W/\"eb40c89b723a084b9c6b0bc789f891d6\""
+          "W/\"ccf09f43371c1d16ad6f14016542ef2f\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202208242214-2a3e1e3aa6-master"
+          "easypost-202211041941-0810f963fd-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -87,13 +88,12 @@
         "code": 201,
         "message": "Created"
       },
-      "errors": null,
       "uri": "https://api.easypost.com/v2/users"
     },
-    "duration": 875
+    "duration": 1102
   },
   {
-    "recordedAt": 1661456591,
+    "recordedAt": 1667593151,
     "request": {
       "body": "",
       "method": "DELETE",
@@ -105,7 +105,7 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/users/user_c7e290a08e454feb9e093d1283a8bb2d"
+      "uri": "https://api.easypost.com/v2/users/user_ca0eaf9cee044c26bde6385b654efa57"
     },
     "response": {
       "body": "",
@@ -113,90 +113,6 @@
       "headers": {
         "null": [
           "HTTP/1.1 204 No Content"
-        ],
-        "expires": [
-          "0"
-        ],
-        "x-node": [
-          "bigweb5nuq"
-        ],
-        "x-frame-options": [
-          "SAMEORIGIN"
-        ],
-        "x-backend": [
-          "easypost"
-        ],
-        "x-permitted-cross-domain-policies": [
-          "none"
-        ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
-        ],
-        "pragma": [
-          "no-cache"
-        ],
-        "x-content-type-options": [
-          "nosniff"
-        ],
-        "x-xss-protection": [
-          "1; mode\u003dblock"
-        ],
-        "x-ep-request-uuid": [
-          "07323c3b6307d0cff7bb984f0008a669"
-        ],
-        "x-proxied": [
-          "extlb2nuq 9ce216bfac",
-          "intlb1nuq 6aa9972c1e"
-        ],
-        "referrer-policy": [
-          "strict-origin-when-cross-origin"
-        ],
-        "x-runtime": [
-          "0.119947"
-        ],
-        "x-version-label": [
-          "easypost-202208251932-b2da22d2d6-master"
-        ],
-        "cache-control": [
-          "private, no-cache, no-store"
-        ]
-      },
-      "status": {
-        "code": 204,
-        "message": "No Content"
-      },
-      "errors": null,
-      "uri": "https://api.easypost.com/v2/users/user_c7e290a08e454feb9e093d1283a8bb2d"
-    },
-    "duration": 246
-  },
-  {
-    "recordedAt": 1661456591,
-    "request": {
-      "body": "",
-      "method": "GET",
-      "headers": {
-        "Accept-Charset": [
-          "UTF-8"
-        ],
-        "User-Agent": [
-          "REDACTED"
-        ]
-      },
-      "uri": "https://api.easypost.com/v2/users/user_c7e290a08e454feb9e093d1283a8bb2d"
-    },
-    "response": {
-      "body": null,
-      "httpVersion": null,
-      "headers": {
-        "null": [
-          "HTTP/1.1 404 Not Found"
-        ],
-        "content-length": [
-          "97"
         ],
         "expires": [
           "0"
@@ -229,23 +145,108 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "07323c3b6307d0cff7bb984f0008a677"
+          "8b8ec6c0636573bfe0daf2c000097b57"
         ],
         "x-proxied": [
-          "extlb2nuq 9ce216bfac",
-          "intlb2nuq 6aa9972c1e"
+          "extlb3wdc 29913d444b",
+          "intlb1wdc 29913d444b",
+          "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.042449"
+          "0.253554"
+        ],
+        "x-version-label": [
+          "easypost-202211041941-0810f963fd-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 204,
+        "message": "No Content"
+      },
+      "uri": "https://api.easypost.com/v2/users/user_ca0eaf9cee044c26bde6385b654efa57"
+    },
+    "duration": 481
+  },
+  {
+    "recordedAt": 1667593152,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/users/user_ca0eaf9cee044c26bde6385b654efa57"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"NOT_FOUND\",\n    \"message\": \"The requested resource could not be found.\",\n    \"errors\": []\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 404 Not Found"
+        ],
+        "content-length": [
+          "97"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb9nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "8b8ec6c0636573c0e0daf2c000097b69"
+        ],
+        "x-proxied": [
+          "extlb3wdc 29913d444b",
+          "intlb1wdc 29913d444b",
+          "intlb2nuq 29913d444b"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.040606"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202208242214-2a3e1e3aa6-master"
+          "easypost-202211041941-0810f963fd-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -255,9 +256,8 @@
         "code": 404,
         "message": "Not Found"
       },
-      "errors": "{\n  \"error\": {\n    \"code\": \"NOT_FOUND\",\n    \"message\": \"The requested resource could not be found.\",\n    \"errors\": []\n  }\n}",
-      "uri": "https://api.easypost.com/v2/users/user_c7e290a08e454feb9e093d1283a8bb2d"
+      "uri": "https://api.easypost.com/v2/users/user_ca0eaf9cee044c26bde6385b654efa57"
     },
-    "duration": 77
+    "duration": 213
   }
 ]

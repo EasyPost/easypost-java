@@ -3,7 +3,8 @@ package com.easypost;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.easypost.http.Requestor;
+import com.easypost.http.Constant;
+import com.easypost.service.EasyPostClient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,15 +24,9 @@ public final class EasyPostTest {
      */
     @Test
     public void testConnectionTimeout() {
+        EasyPostClient client = new EasyPostClient("fake_api_key", 1);
 
-        int testTimeout = 1;
-
-        Requestor.setConnectTimeoutMilliseconds(testTimeout);
-
-        assertEquals(1, Requestor.getConnectTimeoutMilliseconds());
-
-        // We have to set the connection timeout back to default to avoid other unit tests getting timeout.
-        Requestor.setConnectTimeoutMilliseconds(30000);
+        assertEquals(1, client.getConnectionTimeoutMilliseconds());
     }
 
     /**
@@ -39,13 +34,25 @@ public final class EasyPostTest {
      */
     @Test
     public void testRequestTimeout() {
-        int testTimeout = 1;
+        EasyPostClient client = new EasyPostClient("fake_api_key", 1, 10);
 
-        Requestor.setReadTimeoutMilliseconds(testTimeout);
+        assertEquals(10, client.getReadTimeoutMilliseconds());
+    }
 
-        assertEquals(1, Requestor.getReadTimeoutMilliseconds());
+    /**
+     * Test create multiple EasyPostClient with different API keys.
+     */
+    @Test
+    public void testMultipleClients() {
+        EasyPostClient clientOne = new EasyPostClient("fake_api_key_1", 22222, 33333);
+        EasyPostClient clientTwo = new EasyPostClient("fake_api_key_2", 55555);
 
-        // We have to set the connection timeout back to default to avoid other unit tests getting timeout.
-        Requestor.setReadTimeoutMilliseconds(60000);
+        assertEquals("fake_api_key_1", clientOne.getApiKey());
+        assertEquals(22222, clientOne.getConnectionTimeoutMilliseconds());
+        assertEquals(33333, clientOne.getReadTimeoutMilliseconds());
+
+        assertEquals("fake_api_key_2", clientTwo.getApiKey());
+        assertEquals(55555, clientTwo.getConnectionTimeoutMilliseconds());
+        assertEquals(Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS, clientTwo.getReadTimeoutMilliseconds());
     }
 }
