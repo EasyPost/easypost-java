@@ -27,7 +27,7 @@ public class ThreadSafeTest {
     public void testAddress() throws EasyPostException {
         vcr.setUpTest("create");
         EasyPostClient client = new EasyPostClient(System.getenv("EASYPOST_TEST_API_KEY"));
-        
+
         AddressThreadSafe address = client.Address().create(Fixtures.caAddress1());
         assertInstanceOf(AddressThreadSafe.class, address);
         assertTrue(address.getId().startsWith("adr_"));
@@ -41,7 +41,8 @@ public class ThreadSafeTest {
     }
 
     // Test creating multiple EasyPostClient objects
-    @Test void testMulitpleClient() {
+    @Test 
+    public void testMulitpleClient() {
         EasyPostClient client1 = new EasyPostClient("123");
         EasyPostClient client2 = new EasyPostClient("321", 10000, 20000);
 
