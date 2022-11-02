@@ -263,6 +263,9 @@
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
+        "location": [
+          "/api/v2/shipments/shp_0dc181566b544ec093cc08a6460a4d8f"
+        ],
         "x-version-label": [
           "easypost-202211142148-00c0334849-master"
         ],
@@ -271,8 +274,8 @@
         ]
       },
       "status": {
-        "code": 200,
-        "message": "OK"
+        "code": 201,
+        "message": "Created"
       },
       "uri": "https://api.easypost.com/v2/scan_forms/sf_a9d1d7345f73431f836f2d700698a215"
     },

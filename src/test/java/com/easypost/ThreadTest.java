@@ -113,6 +113,7 @@ public final class ThreadTest {
         }
 
         public void run() {
+            EasyPostClient client = new EasyPostClient(System.getenv("EASYPOST_TEST_API_KEY"));
             try {
                 for (int i = 0; i < this.orders.size(); i++) {
                     System.out.format("Thread %s: starting order creation...%n", Thread.currentThread().getName());

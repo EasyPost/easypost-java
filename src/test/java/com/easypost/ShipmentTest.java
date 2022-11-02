@@ -360,7 +360,7 @@ public final class ShipmentTest {
         Shipment shipment = createFullShipment();
 
         // Test lowest rate with no filters
-        Rate lowestRate = shipment.lowestRate();
+        Rate lowestRate = vcr.client.shipment.lowestRate(shipment);
         assertEquals("First", lowestRate.getService());
         assertEquals(5.82, lowestRate.getRate(), 0.01);
         assertEquals("USPS", lowestRate.getCarrier());
@@ -368,7 +368,7 @@ public final class ShipmentTest {
         // Test lowest rate with service filter (this rate is higher than the lowest but
         // should filter)
         List<String> service = new ArrayList<>(Arrays.asList("Priority"));
-        Rate lowestRateService = shipment.lowestRate(null, service);
+        Rate lowestRateService = vcr.client.shipment.lowestRate(null, service, shipment);
         assertEquals("Priority", lowestRateService.getService());
         assertEquals(8.15, lowestRateService.getRate(), 0.01);
         assertEquals("USPS", lowestRateService.getCarrier());

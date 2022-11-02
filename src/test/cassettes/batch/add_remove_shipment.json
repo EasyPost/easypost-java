@@ -31,6 +31,102 @@
           "0"
         ],
         "x-node": [
+          "bigweb5nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "8b8ec6bf6365732ee0dae60300095511"
+        ],
+        "x-proxied": [
+          "extlb3wdc 29913d444b",
+          "intlb2wdc 29913d444b",
+          "intlb2nuq 29913d444b"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "1.119297"
+        ],
+        "etag": [
+          "W/\"93d43d6bacba9ab0291a122e2238d8e2\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "location": [
+          "/api/v2/shipments/shp_406d8b2a01944ede8d54e5e4d29a235d"
+        ],
+        "x-version-label": [
+          "easypost-202211041941-0810f963fd-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 201,
+        "message": "Created"
+      },
+      "uri": "https://api.easypost.com/v2/shipments"
+    },
+    "duration": 1377
+  },
+  {
+    "recordedAt": 1667593008,
+    "request": {
+      "body": "{}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/batches"
+    },
+    "response": {
+      "body": "{\n  \"scan_form\": null,\n  \"created_at\": \"2022-11-04T20:16:48Z\",\n  \"pickup\": null,\n  \"shipments\": [],\n  \"label_url\": null,\n  \"mode\": \"test\",\n  \"reference\": null,\n  \"num_shipments\": 0.0,\n  \"updated_at\": \"2022-11-04T20:16:48Z\",\n  \"id\": \"batch_e16a137320594cda807751716b231f44\",\n  \"state\": \"created\",\n  \"object\": \"Batch\",\n  \"status\": {\n    \"postage_purchased\": 0.0,\n    \"queued_for_purchase\": 0.0,\n    \"created\": 0.0,\n    \"postage_purchase_failed\": 0.0,\n    \"creation_failed\": 0.0\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "383"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
           "bigweb4nuq"
         ],
         "x-frame-options": [
@@ -146,6 +242,9 @@
         ],
         "pragma": [
           "no-cache"
+        ],
+        "x-canary": [
+          "direct"
         ],
         "x-content-type-options": [
           "nosniff"

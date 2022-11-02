@@ -121,7 +121,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb7nuq"
+          "bigweb9nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -140,9 +140,6 @@
         ],
         "pragma": [
           "no-cache"
-        ],
-        "x-canary": [
-          "direct"
         ],
         "x-content-type-options": [
           "nosniff"

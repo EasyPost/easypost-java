@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb3nuq"
+          "bigweb2nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -61,9 +61,9 @@
           "3a8b2e0e6372c5b8e0da507c0019d7b0"
         ],
         "x-proxied": [
-          "extlb4wdc 29913d444b",
-          "intlb1wdc 29913d444b",
-          "intlb2nuq 29913d444b"
+          "extlb3wdc 29913d444b",
+          "intlb2wdc 29913d444b",
+          "intlb1nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
@@ -186,6 +186,6 @@
       },
       "uri": "https://api.easypost.com/v2/shipments/shp_81bfa1e93c434991bd2a38ad0fb27ef9/buy"
     },
-    "duration": 1557
+    "duration": 1717
   }
 ]

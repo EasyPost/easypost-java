@@ -1,5 +1,6 @@
 package com.easypost.utils;
 
+import com.easypost.EasyPost;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
