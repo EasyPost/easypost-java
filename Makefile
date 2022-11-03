@@ -10,14 +10,14 @@ build:
 clean:
 	mvn clean
 
+## coverage - Test the project and generate a coverage report
+coverage:
+	mvn --batch-mode install -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report
+
 ## docs - Generates library documentation
 docs:
 	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true
 	cp -R target/apidocs docs
-
-## coverage - Test the project and generate a coverage report
-coverage:
-	mvn --batch-mode install -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report
 
 ## install-checkstyle - Install CheckStyle
 install-checkstyle:
@@ -57,4 +57,4 @@ scan:
 test:
 	mvn --batch-mode install -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true
 
-.PHONY: help build clean docs install-checkstyle install lint publish publish-dry release scan scan-strict test
+.PHONY: help build clean coverage docs install-checkstyle install lint publish publish-dry release scan scan-strict test
