@@ -151,7 +151,7 @@
                     <doclint>-html</doclint>
                     <quiet>true</quiet>
                 </configuration>
-                <version>3.3.1</version>
+                <version>3.4.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
