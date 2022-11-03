@@ -30,9 +30,14 @@ jobs:
           java-version: ${{ matrix.javaversion }}
       - name: Build and test with Maven
         run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make coverage
+      - name: Load Rust cache
+        if: github.ref == 'refs/heads/master'
+        uses: Swatinem/rust-cache@v2
       - name: Install grcov
+        if: github.ref == 'refs/heads/master'
         run: cargo install grcov
       - name: Convert coverage report
+        if: github.ref == 'refs/heads/master'
         run: grcov target/site/jacoco/jacoco.xml --output-type lcov > coverage.lcov
       - name: Coveralls
         if: github.ref == 'refs/heads/master'
