@@ -12,6 +12,7 @@
 *.class
 *.iml
 *.jar
+*.lcov
 Icon
 settings.xml
 src/scratch
