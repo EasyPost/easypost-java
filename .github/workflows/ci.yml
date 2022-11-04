@@ -38,7 +38,7 @@ jobs:
         run: cargo install grcov
       - name: Convert coverage report
         if: github.ref == 'refs/heads/master'
-        run: grcov target/site/jacoco/jacoco.xml --output-type lcov > coverage.lcov
+        run: grcov target/site/jacoco/jacoco.xml --source-dir ./ --ignore "target/*" > coverage.lcov
       - name: Coveralls
         if: github.ref == 'refs/heads/master'
         uses: coverallsapp/github-action@master
