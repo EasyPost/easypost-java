@@ -1061,7 +1061,7 @@ public final class Shipment extends EasyPostResource {
      * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, String.format("%s/refund",
+        return Requestor.request(RequestMethod.POST, String.format("%s/refund",
             instanceURL(Shipment.class, this.getId())), params, Shipment.class, apiKey);
     }
 
