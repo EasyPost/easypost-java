@@ -421,11 +421,13 @@ public abstract class Requestor {
      * @return A class object.
      * @throws EasyPostException when the request fails.
      */
-    public static <T> T request(final RequestMethod method, final String url,
+    public static <T> T request(final RequestMethod method, String url,
             final Map<String, Object> params, final Class<T> clazz, final EasyPostClient client)
             throws EasyPostException {
         String originalDNSCacheTTL = null;
         boolean allowedToSetTTL = true;
+        url = String.format(url, client.getApiBase());
+
         try {
             originalDNSCacheTTL = java.security.Security.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
             // disable DNS cache
@@ -465,10 +467,6 @@ public abstract class Requestor {
     protected static <T> T httpRequest(final RequestMethod method, final String url,
             final Map<String, Object> params, final Class<T> clazz, final EasyPostClient client)
             throws EasyPostException {
-        if (client.getApiKey() == null || client.getApiKey().isEmpty()) {
-            throw new MissingParameterError(Constants.INVALID_API_KEY_TYPE);
-        }
-
         String query = null;
         JsonObject body = null;
         if (params != null) {

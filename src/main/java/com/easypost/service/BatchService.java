@@ -95,18 +95,18 @@ public class BatchService {
      * @throws EasyPostException when the request fails.
      */
     public Batch refresh(String id) throws EasyPostException {
-        return this.refresh(null, id);
+        return this.refresh(id, null);
     }
 
     /**
      * Refresh this Batch object.
      *
-     * @param params Map of parameters.
      * @param id The ID of batch.
+     * @param params Map of parameters.
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
-    public Batch refresh(final Map<String, Object> params, String id) throws EasyPostException {
+    public Batch refresh(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.GET,
                 String.format("%s", Utilities.instanceURL(Batch.class, id)), params,
                 Batch.class, client);
@@ -120,18 +120,18 @@ public class BatchService {
      * @throws EasyPostException when the request fails.
      */
     public Batch label(String id) throws EasyPostException {
-        return this.label(null, id);
+        return this.label(id, null);
     }
 
     /**
      * Label this Batch object.
      *
-     * @param params Map of parameters.
      * @param id The ID of batch.
+     * @param params Map of parameters.
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
-    public Batch label(final Map<String, Object> params, String id) throws EasyPostException {
+    public Batch label(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.POST, String.format("%s/label",
                 Utilities.instanceURL(Batch.class, id)), params, Batch.class, client);
     }
@@ -139,12 +139,12 @@ public class BatchService {
     /**
      * Add shipments to this Batch object.
      *
-     * @param params Map of parameters.
      * @param id The ID of batch.
+     * @param params Map of parameters.
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
-    public Batch addShipments(final Map<String, Object> params, String id) throws EasyPostException {
+    public Batch addShipments(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.POST, String.format("%s/add_shipments",
                 Utilities.instanceURL(Batch.class, id)), params, Batch.class, client);
     }
@@ -152,27 +152,27 @@ public class BatchService {
     /**
      * Add shipments to this Batch object.
      *
-     * @param shipments List of Shipment objects.
      * @param id The ID of batch.
+     * @param shipments List of Shipment objects.
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
-    public Batch addShipments(final List<Shipment> shipments, String id) throws EasyPostException {
+    public Batch addShipments(final String id, final List<Shipment> shipments) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("shipments", shipments);
 
-        return this.addShipments(params, id);
+        return this.addShipments(id, params);
     }
 
     /**
      * Remove shipments from this Batch object.
      *
-     * @param params Map of parameters.
      * @param id The ID of batch.
+     * @param params Map of parameters.
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
-    public Batch removeShipments(final Map<String, Object> params, String id) throws EasyPostException {
+    public Batch removeShipments(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.POST, String.format("%s/remove_shipments",
                 Utilities.instanceURL(Batch.class, id)), params, Batch.class, client);
     }
@@ -180,16 +180,16 @@ public class BatchService {
     /**
      * Remove shipments from this Batch object.
      *
-     * @param shipments List of Shipment objects.
      * @param id The ID of batch.
+     * @param shipments List of Shipment objects.
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
-    public Batch removeShipments(final List<Shipment> shipments, String id) throws EasyPostException {
+    public Batch removeShipments(final String id, final List<Shipment> shipments) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("shipments", shipments);
 
-        return this.removeShipments(params, id);
+        return this.removeShipments(id, params);
     }
 
     /**
@@ -199,19 +199,19 @@ public class BatchService {
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
-    public Batch buy(String id) throws EasyPostException {
-        return this.buy(null, id);
+    public Batch buy(final String id) throws EasyPostException {
+        return this.buy(id, null);
     }
 
     /**
      * Buy this batch.
      *
+     * @param id The ID of batch.
      * @param params Map of parameters.
-     * @param id The ID of batch.
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
-    public Batch buy(final Map<String, Object> params, String id) throws EasyPostException {
+    public Batch buy(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.POST, String.format("%s/buy",
                 Utilities.instanceURL(Batch.class, id)), params, Batch.class, client);
     }
@@ -223,19 +223,19 @@ public class BatchService {
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
-    public Batch createScanForm(String id) throws EasyPostException {
-        return this.createScanForm(null, id);
+    public Batch createScanForm(final String id) throws EasyPostException {
+        return this.createScanForm(id, null);
     }
 
     /**
      * Create a scan form for this batch.
      *
-     * @param params Map of parameters.
      * @param id The ID of batch.
+     * @param params Map of parameters.
      * @return Batch object.
      * @throws EasyPostException when the request fails.
      */
-    public Batch createScanForm(final Map<String, Object> params, String id) throws EasyPostException {
+    public Batch createScanForm(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.POST, String.format("%s/scan_form",
                 Utilities.instanceURL(Batch.class, id)), params, Batch.class, client);
     }

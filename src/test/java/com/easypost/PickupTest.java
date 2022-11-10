@@ -95,7 +95,7 @@ public final class PickupTest {
         params.put("carrier", Fixtures.usps());
         params.put("service", Fixtures.pickupService());
 
-        Pickup boughtPickup = vcr.client.pickup.buy(params, pickup.getId());
+        Pickup boughtPickup = vcr.client.pickup.buy(pickup.getId(), params);
 
         assertInstanceOf(Pickup.class, boughtPickup);
         assertTrue(boughtPickup.getId().startsWith("pickup_"));
@@ -117,7 +117,7 @@ public final class PickupTest {
         Map<String, Object> params = new HashMap<>();
         params.put("carrier", Fixtures.usps());
         params.put("service", Fixtures.pickupService());
-        Pickup boughtPickup = vcr.client.pickup.buy(params, pickup.getId());
+        Pickup boughtPickup = vcr.client.pickup.buy(pickup.getId(), params);
 
         Pickup cancelledPickup = vcr.client.pickup.cancel(boughtPickup.getId());
 

@@ -1,11 +1,14 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.http.Constant;
 import com.easypost.model.Order;
 import com.easypost.service.EasyPostClient;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +27,7 @@ public final class ThreadTest {
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setUp() {
+    public static void setUp() throws EasyPostException {
         vcr = new TestUtils.VCR("thread", TestUtils.ApiKey.TEST);
 
         defaultFromAddress.put("name", "EasyPost");
@@ -110,11 +113,11 @@ public final class ThreadTest {
         }
 
         public void run() {
-            EasyPostClient client = new EasyPostClient(System.getenv("EASYPOST_TEST_API_KEY"));
             try {
                 for (int i = 0; i < this.orders.size(); i++) {
                     System.out.format("Thread %s: starting order creation...%n", Thread.currentThread().getName());
 
+                    EasyPostClient client = new EasyPostClient(System.getenv("EASYPOST_TEST_API_KEY"));
                     Order order = client.order.create(this.orders.get(i));
                     // save order id to database or buy now
 
@@ -124,6 +127,24 @@ public final class ThreadTest {
                 System.out.println("EasyPost Exception caught creating order.");
             }
         }
+    }
+
+    /**
+     * Test create multiple EasyPostClient with different API keys.
+     * @throws EasyPostException
+     */
+    @Test
+    public void testMultipleClients() throws EasyPostException {
+        EasyPostClient clientOne = new EasyPostClient("fake_api_key_1", 22222, 33333);
+        EasyPostClient clientTwo = new EasyPostClient("fake_api_key_2", 55555);
+
+        assertEquals("fake_api_key_1", clientOne.getApiKey());
+        assertEquals(22222, clientOne.getConnectionTimeoutMilliseconds());
+        assertEquals(33333, clientOne.getReadTimeoutMilliseconds());
+
+        assertEquals("fake_api_key_2", clientTwo.getApiKey());
+        assertEquals(55555, clientTwo.getConnectionTimeoutMilliseconds());
+        assertEquals(Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS, clientTwo.getReadTimeoutMilliseconds());
     }
 }
 

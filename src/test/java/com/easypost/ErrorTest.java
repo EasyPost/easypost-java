@@ -6,6 +6,7 @@ import com.easypost.exception.API.RedirectError;
 import com.easypost.exception.API.ServiceUnavailablError;
 import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
+import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Requestor;
 import com.easypost.exception.API.PaymentError;
 import com.easypost.exception.API.RateLimitError;
@@ -31,11 +32,12 @@ public final class ErrorTest extends Requestor {
 
     /**
      * Set up the testing environment for this file.
+     * @throws MissingParameterError
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() {
+    public static void setup() throws MissingParameterError {
         vcr = new TestUtils.VCR("error", TestUtils.ApiKey.TEST);
     }
 

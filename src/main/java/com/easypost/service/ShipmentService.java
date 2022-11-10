@@ -92,18 +92,18 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment refresh(String id) throws EasyPostException {
-        return this.refresh(null, id);
+        return this.refresh(id, null);
     }
 
     /**
      * Refresh this Shipment.
      *
-     * @param params The options for the query.
      * @param id     The ID of shipment.
+     * @param params The options for the query.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment refresh(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Shipment refresh(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.GET, String.format("%s",
                 Utilities.instanceURL(Shipment.class, id)), params, Shipment.class, client);
     }
@@ -116,47 +116,47 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment newRates(final String id) throws EasyPostException {
-        return this.newRates(new HashMap<String, Object>() {
-        }, false, id);
+        return this.newRates(id, new HashMap<String, Object>() {
+        }, false);
     }
 
     /**
      * Get new rates for this Shipment.
      *
+     * @param id               The ID of shipment.
      * @param withCarbonOffset Whether to include a carbon offset when re-rating the
      *                         shipment.
-     * @param id               The ID of shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment newRates(final boolean withCarbonOffset, final String id) throws EasyPostException {
-        return this.newRates(new HashMap<String, Object>() {
-        }, withCarbonOffset, id);
+    public Shipment newRates(final String id, final boolean withCarbonOffset) throws EasyPostException {
+        return this.newRates(id, new HashMap<String, Object>() {
+        }, withCarbonOffset);
     }
 
     /**
      * Get new rates for this Shipment.
      *
-     * @param params The options for the query.
      * @param id     The ID of shipment.
+     * @param params The options for the query.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment newRates(final Map<String, Object> params, final String id) throws EasyPostException {
-        return this.newRates(params, false, id);
+    public Shipment newRates(final String id, final Map<String, Object> params) throws EasyPostException {
+        return this.newRates(id, params, false);
     }
 
     /**
      * Get new rates for this Shipment.
      *
+     * @param id               The ID of shipment.
      * @param params           The options for the query.
      * @param withCarbonOffset Whether to include a carbon offset when re-rating the
      *                         shipment.
-     * @param id               The ID of shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment newRates(final Map<String, Object> params, final boolean withCarbonOffset, final String id)
+    public Shipment newRates(final String id, final Map<String, Object> params, final boolean withCarbonOffset)
             throws EasyPostException {
         params.put("carbon_offset", withCarbonOffset);
         return Requestor.request(RequestMethod.POST, String.format("%s/rerate",
@@ -176,7 +176,7 @@ public class ShipmentService {
     @Deprecated
     public List<Smartrate> getSmartrates(final Map<String, Object> params, final String id)
             throws EasyPostException {
-        return this.smartrates(params, id);
+        return this.smartrates(id, params);
     }
 
     /**
@@ -187,18 +187,18 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public List<Smartrate> smartrates(final String id) throws EasyPostException {
-        return this.smartrates(null, id);
+        return this.smartrates(id, null);
     }
 
     /**
      * Get Smartrates for this Shipment.
      *
-     * @param params The options for the query.
      * @param id     The ID of shipment.
+     * @param params The options for the query.
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<Smartrate> smartrates(final Map<String, Object> params, final String id)
+    public List<Smartrate> smartrates(final String id, final Map<String, Object> params)
             throws EasyPostException {
         SmartrateCollection smartrateCollection = Requestor.request(RequestMethod.GET, String.format("%s/smartrate",
                 Utilities.instanceURL(Shipment.class, id)), params, SmartrateCollection.class, client);
@@ -209,106 +209,106 @@ public class ShipmentService {
     /**
      * Buy this Shipment.
      *
-     * @param params The options for the query.
      * @param id     The ID of shipment.
+     * @param params The options for the query.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment buy(final Map<String, Object> params, final String id) throws EasyPostException {
-        return this.buy(params, false, null, id);
+    public Shipment buy(final String id, final Map<String, Object> params) throws EasyPostException {
+        return this.buy(id, params, false, null);
     }
 
     /**
      * Buy this Shipment.
      *
-     * @param rate The Rate to use for this Shipment.
      * @param id   The ID of shipment.
+     * @param rate The Rate to use for this Shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment buy(final Rate rate, final String id) throws EasyPostException {
+    public Shipment buy(final String id, final Rate rate) throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
         params.put("rate", rate);
 
-        return this.buy(params, false, null, id);
+        return this.buy(id, params, false, null);
     }
 
     /**
      * Buy this Shipment.
      *
+     * @param id               The ID of shipment.
      * @param rate             The Rate to use for this Shipment.
      * @param withCarbonOffset Whether to include a carbon offset when buying the
      *                         shipment.
-     * @param id               The ID of shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment buy(final Rate rate, final boolean withCarbonOffset, final String id)
+    public Shipment buy(final String id, final Rate rate, final boolean withCarbonOffset)
             throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
         params.put("rate", rate);
 
-        return this.buy(params, withCarbonOffset, null, id);
+        return this.buy(id, params, withCarbonOffset, null);
     }
 
     /**
      * Buy this Shipment.
      *
+     * @param id           The ID of shipment.
      * @param rate         The Rate to use for this Shipment.
      * @param endShipperId The id of the end shipper to use for this purchase.
-     * @param id           The ID of shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment buy(final Rate rate, final String endShipperId, final String id) throws EasyPostException {
+    public Shipment buy(final String id, final Rate rate, final String endShipperId) throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
         params.put("rate", rate);
 
-        return this.buy(params, false, endShipperId, id);
+        return this.buy(id, params, false, endShipperId);
     }
 
     /**
      * Buy this Shipment.
      *
+     * @param id           The ID of shipment.
      * @param params       The options for the query.
      * @param endShipperId The ID of the endshipper.
-     * @param id           The ID of shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment buy(final Map<String, Object> params, final String endShipperId, final String id)
+    public Shipment buy(final String id, final Map<String, Object> params, final String endShipperId)
             throws EasyPostException {
-        return this.buy(params, false, endShipperId, id);
+        return this.buy(id, params, false, endShipperId);
     }
 
     /**
      * Buy this Shipment.
      *
+     * @param id               The ID of shipment.
      * @param params           The options for the query.
      * @param withCarbonOffset Whether to include a carbon offset when buying the
      *                         shipment.
-     * @param id               The ID of shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment buy(final Map<String, Object> params, final boolean withCarbonOffset, final String id)
+    public Shipment buy(final String id, final Map<String, Object> params, final boolean withCarbonOffset)
             throws EasyPostException {
-        return this.buy(params, withCarbonOffset, null, id);
+        return this.buy(id, params, withCarbonOffset, null);
     }
 
     /**
      * Buy this Shipment.
      *
+     * @param id               The ID of shipment.
      * @param params           The options for the query.
      * @param withCarbonOffset Whether to include a carbon offset when buying the
      *                         shipment.
      * @param endShipperId     The id of the end shipper to use for this purchase.
-     * @param id               The ID of shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment buy(final Map<String, Object> params, final boolean withCarbonOffset,
-            final String endShipperId, final String id) throws EasyPostException {
+    public Shipment buy(final String id, final Map<String, Object> params, final boolean withCarbonOffset,
+            final String endShipperId) throws EasyPostException {
         params.put("carbon_offset", withCarbonOffset);
 
         if (endShipperId != null && !endShipperId.isEmpty()) {
@@ -394,10 +394,10 @@ public class ShipmentService {
     /**
      * Get the lowest smartrate for this Shipment.
      *
+     * @param id               The ID of shipment.
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when
      *                         filtering.
-     * @param id               The ID of shipment.
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      * @deprecated use {@link #lowestSmartRate(int, SmartrateAccuracy, Shipment)}
@@ -405,24 +405,24 @@ public class ShipmentService {
      *             Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public Smartrate lowestSmartRate(int deliveryDay, String deliveryAccuracy, final String id)
+    public Smartrate lowestSmartRate(final String id, int deliveryDay, String deliveryAccuracy)
             throws EasyPostException {
-        return this.lowestSmartRate(deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy), id);
+        return this.lowestSmartRate(id, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
     }
 
     /**
      * Get the lowest smartrate for this Shipment.
      *
+     * @param id               The ID of shipment.
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when
      *                         filtering.
-     * @param id               The ID of shipment.
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      */
-    public Smartrate lowestSmartRate(int deliveryDay, SmartrateAccuracy deliveryAccuracy, final String id)
+    public Smartrate lowestSmartRate(final String id, final int deliveryDay, SmartrateAccuracy deliveryAccuracy)
             throws EasyPostException {
-        List<Smartrate> smartrates = this.smartrates(null, id);
+        List<Smartrate> smartrates = this.smartrates(id, null);
 
         Smartrate lowestSmartrate = findLowestSmartrate(smartrates, deliveryDay, deliveryAccuracy);
 
@@ -440,7 +440,7 @@ public class ShipmentService {
      */
     @Deprecated
     public List<Smartrate> getSmartrates(final String id) throws EasyPostException {
-        return this.smartrates(null, id);
+        return this.smartrates(id, null);
     }
 
     /**

@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1667593006,
+    "recordedAt": 1668122781,
     "request": {
       "body": "{\n  \"parcel\": {\n    \"length\": 10.0,\n    \"width\": 8.0,\n    \"weight\": 15.4,\n    \"height\": 4.0\n  }\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/parcels"
     },
     "response": {
-      "body": "{\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-04T20:16:46Z\",\n  \"predefined_package\": null,\n  \"length\": 10.0,\n  \"width\": 8.0,\n  \"created_at\": \"2022-11-04T20:16:46Z\",\n  \"weight\": 15.4,\n  \"id\": \"prcl_9ec904f16f004ee58ab52ee46bed039a\",\n  \"object\": \"Parcel\",\n  \"height\": 4.0\n}",
+      "body": "{\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-10T23:26:21Z\",\n  \"predefined_package\": null,\n  \"length\": 10.0,\n  \"width\": 8.0,\n  \"created_at\": \"2022-11-10T23:26:21Z\",\n  \"weight\": 15.4,\n  \"id\": \"prcl_4841562714d8459bb14cb2a535bbf304\",\n  \"object\": \"Parcel\",\n  \"height\": 4.0\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb8nuq"
+          "bigweb5nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,30 +58,30 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6ba6365732ee0dae601000954ee"
+          "bdc5d27b636d889de0ec717d000aae63"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
           "intlb2wdc 29913d444b",
-          "intlb1nuq 29913d444b"
+          "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.024946"
+          "0.024081"
         ],
         "etag": [
-          "W/\"b09daf39aa4ab7dfed95bedca4c1bd43\""
+          "W/\"e13157a99de8f728628c7d4350df2116\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "location": [
-          "/api/prcl_9ec904f16f004ee58ab52ee46bed039a/parcels"
+          "/api/prcl_4841562714d8459bb14cb2a535bbf304/parcels"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -93,6 +93,6 @@
       },
       "uri": "https://api.easypost.com/v2/parcels"
     },
-    "duration": 264
+    "duration": 257
   }
 ]

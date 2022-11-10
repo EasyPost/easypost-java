@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1667593005,
+    "recordedAt": 1668122780,
     "request": {
       "body": "{\n  \"parcel\": {\n    \"length\": 10.0,\n    \"width\": 8.0,\n    \"weight\": 15.4,\n    \"height\": 4.0\n  }\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/parcels"
     },
     "response": {
-      "body": "{\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-04T20:16:45Z\",\n  \"predefined_package\": null,\n  \"length\": 10.0,\n  \"width\": 8.0,\n  \"created_at\": \"2022-11-04T20:16:45Z\",\n  \"weight\": 15.4,\n  \"id\": \"prcl_3c106e9034814b3c990eda3bbc7feed6\",\n  \"object\": \"Parcel\",\n  \"height\": 4.0\n}",
+      "body": "{\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-10T23:26:20Z\",\n  \"predefined_package\": null,\n  \"length\": 10.0,\n  \"width\": 8.0,\n  \"created_at\": \"2022-11-10T23:26:20Z\",\n  \"weight\": 15.4,\n  \"id\": \"prcl_bac881bffbd448bebba47c9f9357b149\",\n  \"object\": \"Parcel\",\n  \"height\": 4.0\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb2nuq"
+          "bigweb7nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -51,6 +51,9 @@
         "pragma": [
           "no-cache"
         ],
+        "x-canary": [
+          "direct"
+        ],
         "x-content-type-options": [
           "nosniff"
         ],
@@ -58,30 +61,30 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6bc6365732de0dae5fe000954c5"
+          "bdc5d276636d889ce0ec717a000aae30"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
           "intlb1wdc 29913d444b",
-          "intlb1nuq 29913d444b"
+          "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.026132"
+          "0.024925"
         ],
         "etag": [
-          "W/\"51537ace98de2d631fce4abd6ab520ca\""
+          "W/\"595271a0b6d0a9791613f126b94a62db\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "location": [
-          "/api/prcl_3c106e9034814b3c990eda3bbc7feed6/parcels"
+          "/api/prcl_bac881bffbd448bebba47c9f9357b149/parcels"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -93,10 +96,10 @@
       },
       "uri": "https://api.easypost.com/v2/parcels"
     },
-    "duration": 249
+    "duration": 257
   },
   {
-    "recordedAt": 1667593006,
+    "recordedAt": 1668122780,
     "request": {
       "body": "",
       "method": "GET",
@@ -108,10 +111,10 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/parcels/prcl_3c106e9034814b3c990eda3bbc7feed6"
+      "uri": "https://api.easypost.com/v2/parcels/prcl_bac881bffbd448bebba47c9f9357b149"
     },
     "response": {
-      "body": "{\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-04T20:16:45Z\",\n  \"predefined_package\": null,\n  \"length\": 10.0,\n  \"width\": 8.0,\n  \"created_at\": \"2022-11-04T20:16:45Z\",\n  \"weight\": 15.4,\n  \"id\": \"prcl_3c106e9034814b3c990eda3bbc7feed6\",\n  \"object\": \"Parcel\",\n  \"height\": 4.0\n}",
+      "body": "{\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-10T23:26:20Z\",\n  \"predefined_package\": null,\n  \"length\": 10.0,\n  \"width\": 8.0,\n  \"created_at\": \"2022-11-10T23:26:20Z\",\n  \"weight\": 15.4,\n  \"id\": \"prcl_bac881bffbd448bebba47c9f9357b149\",\n  \"object\": \"Parcel\",\n  \"height\": 4.0\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -124,7 +127,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb9nuq"
+          "bigweb7nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -144,6 +147,9 @@
         "pragma": [
           "no-cache"
         ],
+        "x-canary": [
+          "direct"
+        ],
         "x-content-type-options": [
           "nosniff"
         ],
@@ -151,27 +157,27 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6bd6365732ee0dae5ff000954dd"
+          "bdc5d276636d889ce0ec717b000aae40"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
-          "intlb1wdc 29913d444b",
+          "intlb2wdc 29913d444b",
           "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.019956"
+          "0.016450"
         ],
         "etag": [
-          "W/\"51537ace98de2d631fce4abd6ab520ca\""
+          "W/\"595271a0b6d0a9791613f126b94a62db\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -181,8 +187,8 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/parcels/prcl_3c106e9034814b3c990eda3bbc7feed6"
+      "uri": "https://api.easypost.com/v2/parcels/prcl_bac881bffbd448bebba47c9f9357b149"
     },
-    "duration": 237
+    "duration": 248
   }
 ]

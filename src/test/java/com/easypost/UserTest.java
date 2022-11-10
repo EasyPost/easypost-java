@@ -138,7 +138,7 @@ public final class UserTest {
 
         params.put("name", testName);
 
-        User updatedUser = vcr.client.user.update(params, user.getId());
+        User updatedUser = vcr.client.user.update(user.getId(), params);
 
         assertInstanceOf(User.class, updatedUser);
         assertTrue(updatedUser.getId().startsWith("user_"));
@@ -204,7 +204,7 @@ public final class UserTest {
         Map<String, Object> params = new HashMap<>();
         params.put("color", color);
 
-        Brand brand = vcr.client.user.updateBrand(params, user.getId());
+        Brand brand = vcr.client.user.updateBrand(user.getId(), params);
 
         assertInstanceOf(Brand.class, brand);
         assertTrue(brand.getId().startsWith("brd_"));

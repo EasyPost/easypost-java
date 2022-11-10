@@ -110,7 +110,7 @@ public final class OrderTest {
         params.put("carrier", Fixtures.usps());
         params.put("service", Fixtures.uspsService());
 
-        Order boughtOrder = vcr.client.order.buy(params, order.getId());
+        Order boughtOrder = vcr.client.order.buy(order.getId(), params);
 
         List<Shipment> shipments = boughtOrder.getShipments();
 

@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1667593047,
+    "recordedAt": 1668122822,
     "request": {
       "body": "{\n  \"customs_info\": {\n    \"restriction_type\": \"none\",\n    \"customs_items\": [\n      {\n        \"quantity\": 2.0,\n        \"description\": \"Sweet shirts\",\n        \"weight\": 11.0,\n        \"hs_tariff_number\": \"654321\",\n        \"value\": 23.25,\n        \"origin_country\": \"US\"\n      }\n    ],\n    \"customs_certify\": true,\n    \"eel_pfc\": \"NOEEI 30.37(a)\",\n    \"customs_signer\": \"Steve Brule\",\n    \"contents_explanation\": \"\",\n    \"non_delivery_option\": \"return\",\n    \"contents_type\": \"merchandise\"\n  }\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/customs_infos"
     },
     "response": {
-      "body": "{\n  \"restriction_type\": \"none\",\n  \"created_at\": \"2022-11-04T20:17:28Z\",\n  \"declaration\": null,\n  \"mode\": \"test\",\n  \"customs_items\": [\n    {\n      \"quantity\": 2.0,\n      \"code\": null,\n      \"eccn\": null,\n      \"created_at\": \"2022-11-04T20:17:28Z\",\n      \"description\": \"Sweet shirts\",\n      \"weight\": 11.0,\n      \"printed_commodity_identifier\": null,\n      \"origin_country\": \"US\",\n      \"manufacturer\": null,\n      \"mode\": \"test\",\n      \"updated_at\": \"2022-11-04T20:17:28Z\",\n      \"currency\": null,\n      \"id\": \"cstitem_605ba45aceaf4b81865714a573f81876\",\n      \"hs_tariff_number\": \"654321\",\n      \"value\": \"23.25\",\n      \"object\": \"CustomsItem\"\n    }\n  ],\n  \"restriction_comments\": null,\n  \"updated_at\": \"2022-11-04T20:17:28Z\",\n  \"customs_certify\": true,\n  \"eel_pfc\": \"NOEEI 30.37(a)\",\n  \"customs_signer\": \"Steve Brule\",\n  \"id\": \"cstinfo_ae5aaba6a4ea48a29cc31adcd0b61400\",\n  \"contents_explanation\": \"\",\n  \"non_delivery_option\": \"return\",\n  \"object\": \"CustomsInfo\",\n  \"contents_type\": \"merchandise\"\n}",
+      "body": "{\n  \"restriction_type\": \"none\",\n  \"created_at\": \"2022-11-10T23:27:02Z\",\n  \"declaration\": null,\n  \"mode\": \"test\",\n  \"customs_items\": [\n    {\n      \"quantity\": 2.0,\n      \"code\": null,\n      \"eccn\": null,\n      \"created_at\": \"2022-11-10T23:27:02Z\",\n      \"description\": \"Sweet shirts\",\n      \"weight\": 11.0,\n      \"printed_commodity_identifier\": null,\n      \"origin_country\": \"US\",\n      \"manufacturer\": null,\n      \"mode\": \"test\",\n      \"updated_at\": \"2022-11-10T23:27:02Z\",\n      \"currency\": null,\n      \"id\": \"cstitem_7e3b4d029ac945ddb09ce4e12334fb66\",\n      \"hs_tariff_number\": \"654321\",\n      \"value\": \"23.25\",\n      \"object\": \"CustomsItem\"\n    }\n  ],\n  \"restriction_comments\": null,\n  \"updated_at\": \"2022-11-10T23:27:02Z\",\n  \"customs_certify\": true,\n  \"eel_pfc\": \"NOEEI 30.37(a)\",\n  \"customs_signer\": \"Steve Brule\",\n  \"id\": \"cstinfo_24cb87db016d465fad05536ede3d7919\",\n  \"contents_explanation\": \"\",\n  \"non_delivery_option\": \"return\",\n  \"object\": \"CustomsInfo\",\n  \"contents_type\": \"merchandise\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -58,7 +58,7 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6bb63657357e0dae9de00096181"
+          "bdc5d276636d88c6e0ec7262000aba3b"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
@@ -69,19 +69,19 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.032781"
+          "0.042855"
         ],
         "etag": [
-          "W/\"af4fafa93036a0e38dc8caac8a4c512d\""
+          "W/\"6ddf7634f371d77997f70ff0c4f1cd73\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "location": [
-          "/api/v2/customs_infos/cstinfo_ae5aaba6a4ea48a29cc31adcd0b61400"
+          "/api/v2/customs_infos/cstinfo_24cb87db016d465fad05536ede3d7919"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -93,6 +93,6 @@
       },
       "uri": "https://api.easypost.com/v2/customs_infos"
     },
-    "duration": 281
+    "duration": 288
   }
 ]

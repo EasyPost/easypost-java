@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1667593132,
+    "recordedAt": 1668122905,
     "request": {
       "body": "{\n  \"carrier_account\": {\n    \"test_credentials\": {},\n    \"credentials\": {},\n    \"type\": \"DhlEcsAccount\"\n  }\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/carrier_accounts"
     },
     "response": {
-      "body": "{\n  \"readable\": \"DHL eCommerce Solutions\",\n  \"test_credentials\": {},\n  \"credentials\": {},\n  \"created_at\": \"2022-11-04T20:18:52Z\",\n  \"description\": \"DHL eCommerce Solutions Account\",\n  \"type\": \"DhlEcsAccount\",\n  \"reference\": null,\n  \"updated_at\": \"2022-11-04T20:18:52Z\",\n  \"clone\": false,\n  \"billing_type\": \"carrier\",\n  \"logo\": null,\n  \"id\": \"ca_2430927c2a0c427aa7bc191d60e9d4c5\",\n  \"fields\": {\n    \"test_credentials\": {},\n    \"credentials\": {}\n  },\n  \"object\": \"CarrierAccount\"\n}",
+      "body": "{\n  \"readable\": \"DHL eCommerce Solutions\",\n  \"test_credentials\": {},\n  \"credentials\": {},\n  \"created_at\": \"2022-11-10T23:28:25Z\",\n  \"description\": \"DHL eCommerce Solutions Account\",\n  \"type\": \"DhlEcsAccount\",\n  \"reference\": null,\n  \"updated_at\": \"2022-11-10T23:28:25Z\",\n  \"clone\": false,\n  \"billing_type\": \"carrier\",\n  \"logo\": null,\n  \"id\": \"ca_d4bad655739247d4939335d18b3f3b3c\",\n  \"fields\": {\n    \"test_credentials\": {},\n    \"credentials\": {}\n  },\n  \"object\": \"CarrierAccount\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -58,27 +58,27 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6ba636573ace0daef0400097608"
+          "bdc5d27b636d8919e0ec7a64000acfc4"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
           "intlb2wdc 29913d444b",
-          "intlb1nuq 29913d444b"
+          "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.180558"
+          "0.119591"
         ],
         "etag": [
-          "W/\"0df8a97e3999415535308ea4438ec870\""
+          "W/\"020f992ecfad246a3fe864fcbd4e1add\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -90,10 +90,10 @@
       },
       "uri": "https://api.easypost.com/v2/carrier_accounts"
     },
-    "duration": 478
+    "duration": 350
   },
   {
-    "recordedAt": 1667593132,
+    "recordedAt": 1668122905,
     "request": {
       "body": "",
       "method": "GET",
@@ -105,10 +105,10 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_2430927c2a0c427aa7bc191d60e9d4c5"
+      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_d4bad655739247d4939335d18b3f3b3c"
     },
     "response": {
-      "body": "{\n  \"readable\": \"DHL eCommerce Solutions\",\n  \"test_credentials\": {},\n  \"credentials\": {},\n  \"created_at\": \"2022-11-04T20:18:52Z\",\n  \"description\": \"DHL eCommerce Solutions Account\",\n  \"type\": \"DhlEcsAccount\",\n  \"reference\": null,\n  \"updated_at\": \"2022-11-04T20:18:52Z\",\n  \"clone\": false,\n  \"billing_type\": \"carrier\",\n  \"logo\": null,\n  \"id\": \"ca_2430927c2a0c427aa7bc191d60e9d4c5\",\n  \"fields\": {\n    \"test_credentials\": {},\n    \"credentials\": {}\n  },\n  \"object\": \"CarrierAccount\"\n}",
+      "body": "{\n  \"readable\": \"DHL eCommerce Solutions\",\n  \"test_credentials\": {},\n  \"credentials\": {},\n  \"created_at\": \"2022-11-10T23:28:25Z\",\n  \"description\": \"DHL eCommerce Solutions Account\",\n  \"type\": \"DhlEcsAccount\",\n  \"reference\": null,\n  \"updated_at\": \"2022-11-10T23:28:25Z\",\n  \"clone\": false,\n  \"billing_type\": \"carrier\",\n  \"logo\": null,\n  \"id\": \"ca_d4bad655739247d4939335d18b3f3b3c\",\n  \"fields\": {\n    \"test_credentials\": {},\n    \"credentials\": {}\n  },\n  \"object\": \"CarrierAccount\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -121,7 +121,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb9nuq"
+          "bigweb8nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -148,27 +148,27 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6bb636573ace0daef0600097632"
+          "bdc5d27b636d8919e0ec7a7d000acfe7"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
-          "intlb1wdc 29913d444b",
+          "intlb2wdc 29913d444b",
           "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.025184"
+          "0.026066"
         ],
         "etag": [
-          "W/\"0df8a97e3999415535308ea4438ec870\""
+          "W/\"020f992ecfad246a3fe864fcbd4e1add\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -178,12 +178,12 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_2430927c2a0c427aa7bc191d60e9d4c5"
+      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_d4bad655739247d4939335d18b3f3b3c"
     },
-    "duration": 246
+    "duration": 244
   },
   {
-    "recordedAt": 1667593133,
+    "recordedAt": 1668122906,
     "request": {
       "body": "",
       "method": "DELETE",
@@ -195,7 +195,7 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_2430927c2a0c427aa7bc191d60e9d4c5"
+      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_d4bad655739247d4939335d18b3f3b3c"
     },
     "response": {
       "body": "{}",
@@ -211,7 +211,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb1nuq"
+          "bigweb7nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -231,6 +231,9 @@
         "pragma": [
           "no-cache"
         ],
+        "x-canary": [
+          "direct"
+        ],
         "x-content-type-options": [
           "nosniff"
         ],
@@ -238,18 +241,18 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6b9636573ade0daef0700097648"
+          "bdc5d27b636d891ae0ec7a7e000acffc"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
           "intlb1wdc 29913d444b",
-          "intlb1nuq 29913d444b"
+          "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.137771"
+          "0.133120"
         ],
         "etag": [
           "W/\"44136fa355b3678a1146ad16f7e8649e\""
@@ -258,7 +261,7 @@
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -268,8 +271,8 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_2430927c2a0c427aa7bc191d60e9d4c5"
+      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_d4bad655739247d4939335d18b3f3b3c"
     },
-    "duration": 364
+    "duration": 411
   }
 ]

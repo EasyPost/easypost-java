@@ -99,18 +99,18 @@ public class WebhookService {
      */
     public Webhook update(final String id) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
-        return this.update(params, id);
+        return this.update(id, params);
     }
 
     /**
      * Update this webhook.
      *
-     * @param params  Map of parameters
      * @param id The ID of webhook.
+     * @param params  Map of parameters
      * @return Webhook object
      * @throws EasyPostException when the request fails.
      */
-    public Webhook update(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Webhook update(final String id, final Map<String, Object> params) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("webhook", params);
 

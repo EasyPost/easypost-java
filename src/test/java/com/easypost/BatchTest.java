@@ -192,11 +192,11 @@ public final class BatchTest {
         shipmentData.add(shipment);
         params.put("shipments", shipmentData);
 
-        Batch batchWithAddedShipment = vcr.client.batch.addShipments(params, batch.getId());
+        Batch batchWithAddedShipment = vcr.client.batch.addShipments(batch.getId(), params);
 
         assertEquals(1, batchWithAddedShipment.getNumShipments().intValue());
 
-        Batch batchWithoutShipment = vcr.client.batch.removeShipments(params, batch.getId());
+        Batch batchWithoutShipment = vcr.client.batch.removeShipments(batch.getId(), params);
 
         assertEquals(0, batchWithoutShipment.getNumShipments().intValue());
     }
@@ -221,7 +221,7 @@ public final class BatchTest {
         Map<String, Object> params = new HashMap<>();
         params.put("file_format", "ZPL");
 
-        Batch batchWithLabel = vcr.client.batch.label(params, batch.getId());
+        Batch batchWithLabel = vcr.client.batch.label(batch.getId(), params);
 
         // We can't assert anything meaningful here
         // because the label gets queued for generation and may not be immediately available

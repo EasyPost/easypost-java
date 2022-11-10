@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1667593137,
+    "recordedAt": 1668122910,
     "request": {
       "body": "{\n  \"customs_item\": {\n    \"quantity\": 2.0,\n    \"description\": \"Sweet shirts\",\n    \"weight\": 11.0,\n    \"hs_tariff_number\": \"654321\",\n    \"value\": 23.25,\n    \"origin_country\": \"US\"\n  }\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/customs_items"
     },
     "response": {
-      "body": "{\n  \"quantity\": 2.0,\n  \"code\": null,\n  \"eccn\": null,\n  \"created_at\": \"2022-11-04T20:18:57Z\",\n  \"description\": \"Sweet shirts\",\n  \"weight\": 11.0,\n  \"printed_commodity_identifier\": null,\n  \"origin_country\": \"US\",\n  \"manufacturer\": null,\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-04T20:18:57Z\",\n  \"currency\": null,\n  \"id\": \"cstitem_5e8c183e071446db8431afcd16fd05ca\",\n  \"hs_tariff_number\": \"654321\",\n  \"value\": \"23.25\",\n  \"object\": \"CustomsItem\"\n}",
+      "body": "{\n  \"quantity\": 2.0,\n  \"code\": null,\n  \"eccn\": null,\n  \"created_at\": \"2022-11-10T23:28:30Z\",\n  \"description\": \"Sweet shirts\",\n  \"weight\": 11.0,\n  \"printed_commodity_identifier\": null,\n  \"origin_country\": \"US\",\n  \"manufacturer\": null,\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-10T23:28:30Z\",\n  \"currency\": null,\n  \"id\": \"cstitem_10029c8611f64971aa279d675a203e38\",\n  \"hs_tariff_number\": \"654321\",\n  \"value\": \"23.25\",\n  \"object\": \"CustomsItem\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb3nuq"
+          "bigweb1nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,30 +58,30 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6b9636573b1e0daf23c0009776d"
+          "bdc5d278636d891ee0ec7abe000ad14a"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
-          "intlb1wdc 29913d444b",
+          "intlb2wdc 29913d444b",
           "intlb1nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.028601"
+          "0.031055"
         ],
         "etag": [
-          "W/\"82977df8a1a8d7745f50135bf5db77f6\""
+          "W/\"04b6522034f7238daa8c682d3fac4a6c\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "location": [
-          "/api/v2/customs_items/cstitem_5e8c183e071446db8431afcd16fd05ca"
+          "/api/v2/customs_items/cstitem_10029c8611f64971aa279d675a203e38"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -93,10 +93,10 @@
       },
       "uri": "https://api.easypost.com/v2/customs_items"
     },
-    "duration": 247
+    "duration": 256
   },
   {
-    "recordedAt": 1667593138,
+    "recordedAt": 1668122911,
     "request": {
       "body": "",
       "method": "GET",
@@ -108,10 +108,10 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/customs_items/cstitem_5e8c183e071446db8431afcd16fd05ca"
+      "uri": "https://api.easypost.com/v2/customs_items/cstitem_10029c8611f64971aa279d675a203e38"
     },
     "response": {
-      "body": "{\n  \"quantity\": 2.0,\n  \"code\": null,\n  \"eccn\": null,\n  \"created_at\": \"2022-11-04T20:18:57Z\",\n  \"description\": \"Sweet shirts\",\n  \"weight\": 11.0,\n  \"printed_commodity_identifier\": null,\n  \"origin_country\": \"US\",\n  \"manufacturer\": null,\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-04T20:18:57Z\",\n  \"currency\": null,\n  \"id\": \"cstitem_5e8c183e071446db8431afcd16fd05ca\",\n  \"hs_tariff_number\": \"654321\",\n  \"value\": \"23.25\",\n  \"object\": \"CustomsItem\"\n}",
+      "body": "{\n  \"quantity\": 2.0,\n  \"code\": null,\n  \"eccn\": null,\n  \"created_at\": \"2022-11-10T23:28:30Z\",\n  \"description\": \"Sweet shirts\",\n  \"weight\": 11.0,\n  \"printed_commodity_identifier\": null,\n  \"origin_country\": \"US\",\n  \"manufacturer\": null,\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-10T23:28:30Z\",\n  \"currency\": null,\n  \"id\": \"cstitem_10029c8611f64971aa279d675a203e38\",\n  \"hs_tariff_number\": \"654321\",\n  \"value\": \"23.25\",\n  \"object\": \"CustomsItem\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -151,7 +151,7 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6bc636573b2e0daf23d0009777f"
+          "bdc5d27a636d891fe0ec7abf000ad15b"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
@@ -162,16 +162,16 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.019124"
+          "0.020987"
         ],
         "etag": [
-          "W/\"82977df8a1a8d7745f50135bf5db77f6\""
+          "W/\"04b6522034f7238daa8c682d3fac4a6c\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -181,8 +181,8 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/customs_items/cstitem_5e8c183e071446db8431afcd16fd05ca"
+      "uri": "https://api.easypost.com/v2/customs_items/cstitem_10029c8611f64971aa279d675a203e38"
     },
-    "duration": 236
+    "duration": 242
   }
 ]

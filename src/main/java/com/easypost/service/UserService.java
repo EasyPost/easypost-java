@@ -66,12 +66,12 @@ public class UserService {
     /**
      * Update this User.
      *
-     * @param params Map of User parameters.
      * @param id     The ID of user.
+     * @param params Map of User parameters.
      * @return User object.
      * @throws EasyPostException when the request fails.
      */
-    public User update(final Map<String, Object> params, final String id) throws EasyPostException {
+    public User update(final String id, final Map<String, Object> params) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
@@ -116,12 +116,12 @@ public class UserService {
     /**
      * Update the user brand.
      *
-     * @param params Map of parameters.
      * @param id     The ID of user.
+     * @param params Map of parameters.
      * @return Brand object.
      * @throws EasyPostException when the request fails.
      */
-    public Brand updateBrand(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Brand updateBrand(final String id, final Map<String, Object> params) throws EasyPostException {
         String updateBrandUrl = String.format("%s/brand", Utilities.instanceURL(User.class, id));
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("brand", params);

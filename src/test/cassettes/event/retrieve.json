@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1667593083,
+    "recordedAt": 1668122858,
     "request": {
       "body": "",
       "method": "GET",
@@ -15,20 +15,20 @@
       "uri": "https://api.easypost.com/v2/events?page_size\u003d5"
     },
     "response": {
-      "body": "{\n  \"has_more\": true,\n  \"events\": [\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.created\",\n      \"created_at\": \"2022-11-04T20:18:02.870Z\",\n      \"id\": \"evt_c8d94a905c7d11ed97464b8b4c310338\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.created\",\n      \"created_at\": \"2022-11-04T20:18:00.025Z\",\n      \"id\": \"evt_c72738385c7d11edb2ca7113cf3b5d6c\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.updated\",\n      \"created_at\": \"2022-11-04T20:17:52.826Z\",\n      \"id\": \"evt_c2dcc89c5c7d11ed89df198328db8307\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.updated\",\n      \"created_at\": \"2022-11-04T20:17:51.877Z\",\n      \"id\": \"evt_c24be2325c7d11edba4f6537678e7a51\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"batch.created\",\n      \"created_at\": \"2022-11-04T20:17:51.845Z\",\n      \"id\": \"evt_c246f29a5c7d11edaf23356afdffdaf9\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    }\n  ]\n}",
+      "body": "{\n  \"has_more\": true,\n  \"events\": [\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.updated\",\n      \"created_at\": \"2022-11-10T23:27:38.191Z\",\n      \"id\": \"evt_438bfa0a614f11ed8a6c69e161b1fed7\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.created\",\n      \"created_at\": \"2022-11-10T23:27:37.320Z\",\n      \"id\": \"evt_430730cc614f11ed83346dbe32cc7d44\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.created\",\n      \"created_at\": \"2022-11-10T23:27:34.357Z\",\n      \"id\": \"evt_4143082e614f11ed9fc24f395da4adeb\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.updated\",\n      \"created_at\": \"2022-11-10T23:27:27.469Z\",\n      \"id\": \"evt_3d28017c614f11ed86227f9be755be65\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.updated\",\n      \"created_at\": \"2022-11-10T23:27:26.486Z\",\n      \"id\": \"evt_3c91f682614f11ed875a452b08dde734\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    }\n  ]\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "1116"
+          "1118"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb6nuq"
+          "bigweb5nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -55,7 +55,7 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6c06365737be0daeac300096992"
+          "bdc5d276636d88e9e0ec7644000ac35d"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
@@ -66,16 +66,16 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.194054"
+          "0.353037"
         ],
         "etag": [
-          "W/\"734b371197a614fe964e8007755095a8\""
+          "W/\"fcf1666a9b4f57dda6b94dceb95cd05e\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -87,10 +87,10 @@
       },
       "uri": "https://api.easypost.com/v2/events?page_size\u003d5"
     },
-    "duration": 486
+    "duration": 648
   },
   {
-    "recordedAt": 1667593084,
+    "recordedAt": 1668122858,
     "request": {
       "body": "",
       "method": "GET",
@@ -102,23 +102,23 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/events/evt_c8d94a905c7d11ed97464b8b4c310338"
+      "uri": "https://api.easypost.com/v2/events/evt_438bfa0a614f11ed8a6c69e161b1fed7"
     },
     "response": {
-      "body": "{\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-04T20:18:03.000Z\",\n  \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n  \"pending_urls\": [],\n  \"description\": \"tracker.created\",\n  \"previous_attributes\": {},\n  \"created_at\": \"2022-11-04T20:18:03.000Z\",\n  \"id\": \"evt_c8d94a905c7d11ed97464b8b4c310338\",\n  \"completed_urls\": [],\n  \"status\": \"pending\",\n  \"object\": \"Event\"\n}",
+      "body": "{\n  \"mode\": \"test\",\n  \"updated_at\": \"2022-11-10T23:27:38.000Z\",\n  \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n  \"pending_urls\": [],\n  \"description\": \"tracker.updated\",\n  \"previous_attributes\": {\n    \"status\": \"unknown\"\n  },\n  \"created_at\": \"2022-11-10T23:27:38.000Z\",\n  \"id\": \"evt_438bfa0a614f11ed8a6c69e161b1fed7\",\n  \"completed_urls\": [],\n  \"status\": \"pending\",\n  \"object\": \"Event\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "320"
+          "338"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb2nuq"
+          "bigweb9nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -145,7 +145,7 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "8b8ec6be6365737ce0daeac4000969b9"
+          "bdc5d275636d88eae0ec765c000ac389"
         ],
         "x-proxied": [
           "extlb3wdc 29913d444b",
@@ -156,16 +156,16 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.026177"
+          "0.035269"
         ],
         "etag": [
-          "W/\"9dbabf416ca09a739c700d6881dd7882\""
+          "W/\"7c04c0074eac76d55c295381cd948f43\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211041941-0810f963fd-master"
+          "easypost-202211102043-5e82a6be5e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -175,8 +175,8 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/events/evt_c8d94a905c7d11ed97464b8b4c310338"
+      "uri": "https://api.easypost.com/v2/events/evt_438bfa0a614f11ed8a6c69e161b1fed7"
     },
-    "duration": 237
+    "duration": 266
   }
 ]

@@ -26,6 +26,7 @@
 - Changes the type `result` of Event from `EasyPostResource` to `Map<String, Object>`
 - AppEngine default timeout is now the same as connection timeout
 - Removes invalid function `User.create()` since creating a child-user requires a name
+- Removes deprecated class `CreditCard`, please use alternative `Billing` class
 
 ## v5.10.0 (2022-09-21)
 

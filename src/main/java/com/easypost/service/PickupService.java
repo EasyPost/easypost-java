@@ -60,7 +60,7 @@ public class PickupService {
      * @throws EasyPostException when the request fails.
      */
     public Pickup refresh(final String id) throws EasyPostException {
-        return this.refresh(null, id);
+        return this.refresh(id, null);
     }
 
     /**
@@ -71,7 +71,7 @@ public class PickupService {
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
-    public Pickup refresh(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Pickup refresh(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.GET, String.format("%s",
                 Utilities.instanceURL(Pickup.class, id)), params, Pickup.class, client);
     }
@@ -85,18 +85,18 @@ public class PickupService {
      */
     public Pickup buy(final String id) throws EasyPostException {
         // Pass in empty map to avoid method ambiguous.
-        return this.buy(new HashMap<String, Object>(), id);
+        return this.buy(id, new HashMap<String, Object>());
     }
 
     /**
      * Buy this Pickup.
      *
-     * @param params Map of parameters.
      * @param id The ID of pickup.
+     * @param params Map of parameters.
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
-    public Pickup buy(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Pickup buy(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.POST, String.format("%s/buy",
                 Utilities.instanceURL(Pickup.class, id)), params, Pickup.class, client);
     }
@@ -104,16 +104,16 @@ public class PickupService {
     /**
      * Buy this Pickup.
      *
-     * @param pickupRate PickupRate to buy.
      * @param id The ID of pickup.
+     * @param pickupRate PickupRate to buy.
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
-    public Pickup buy(final PickupRate pickupRate, final String id) throws EasyPostException {
+    public Pickup buy(final String id, final PickupRate pickupRate) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("rate", pickupRate);
 
-        return this.buy(params, id);
+        return this.buy(id, params);
     }
 
     /**
@@ -124,18 +124,18 @@ public class PickupService {
      * @throws EasyPostException when the request fails.
      */
     public Pickup cancel(final String id) throws EasyPostException {
-        return this.cancel(null, id);
+        return this.cancel(id, null);
     }
 
     /**
      * Cancel this Pickup.
      *
-     * @param params Map of parameters.
      * @param id The ID of pickup.
+     * @param params Map of parameters.
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
-    public Pickup cancel(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Pickup cancel(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.POST, String.format("%s/cancel",
                 Utilities.instanceURL(Pickup.class, id)), params, Pickup.class, client);
     }

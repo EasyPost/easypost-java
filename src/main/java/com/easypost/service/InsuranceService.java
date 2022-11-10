@@ -69,8 +69,8 @@ public class InsuranceService {
      * @return Insurance object
      * @throws EasyPostException when the request fails.
      */
-    public Insurance refresh(String id) throws EasyPostException {
-        return this.refresh(null, id);
+    public Insurance refresh(final String id) throws EasyPostException {
+        return this.refresh(id, null);
     }
 
     /**
@@ -81,7 +81,7 @@ public class InsuranceService {
      * @return Insurance object
      * @throws EasyPostException when the request fails.
      */
-    public Insurance refresh(final Map<String, Object> params, String id) throws EasyPostException {
+    public Insurance refresh(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.GET,
                 String.format("%s", Utilities.instanceURL(Insurance.class, id)), params, Insurance.class,
                 client);

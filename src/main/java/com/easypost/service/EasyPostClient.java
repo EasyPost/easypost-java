@@ -1,16 +1,20 @@
 package com.easypost.service;
 
+import com.easypost.exception.Constants;
+import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Constant;
 
 public class EasyPostClient {
+    private final int connectTimeoutMilliseconds;
+    private final int readTimeoutMilliseconds;
+    private final String apiBase = "v2";
+    private final String apiKey;
     public final AddressService address;
     public final ApiKeyService apikeys;
-    public final UserService user;
     public final BatchService batch;
     public final BillingService billing;
     public final CarrierAccountService carrierAccount;
     public final CarrierTypeService carrierType;
-    public final CreditCardService creditCard;
     public final CustomsInfoService customsInfo;
     public final CustomsItemService customsItem;
     public final EndShipperService endShipper;
@@ -27,17 +31,16 @@ public class EasyPostClient {
     public final ScanformService scanform;
     public final ShipmentService shipment;
     public final TrackerService tracker;
+    public final UserService user;
     public final WebhookService webhook;
-    private final String apiKey;
-    private final int connectTimeoutMilliseconds;
-    private final int readTimeoutMilliseconds;
 
     /**
      * EasyPostClient constructor.
      *
      * @param apiKey API key for API calls.
+     * @throws MissingParameterError
      */
-    public EasyPostClient(String apiKey) {
+    public EasyPostClient(String apiKey) throws MissingParameterError {
         this(apiKey, Constant.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS);
     }
 
@@ -46,8 +49,9 @@ public class EasyPostClient {
      *
      * @param apiKey                     API key for API calls.
      * @param connectTimeoutMilliseconds timeout for connection.
+     * @throws MissingParameterError
      */
-    public EasyPostClient(String apiKey, int connectTimeoutMilliseconds) {
+    public EasyPostClient(String apiKey, int connectTimeoutMilliseconds) throws MissingParameterError {
         this(apiKey, connectTimeoutMilliseconds, Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS);
     }
 
@@ -57,8 +61,13 @@ public class EasyPostClient {
      * @param apiKey                     API key for API calls.
      * @param connectTimeoutMilliseconds timeout for connection.
      * @param readTimeoutMilliseconds    timeout for read.
+     * @throws MissingParameterError
      */
-    public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, int readTimeoutMilliseconds) {
+    public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, int readTimeoutMilliseconds)
+            throws MissingParameterError {
+        if (apiKey == null || apiKey.isEmpty()) {
+            throw new MissingParameterError(Constants.INVALID_API_KEY_TYPE);
+        }
         this.apiKey = apiKey;
         this.connectTimeoutMilliseconds = connectTimeoutMilliseconds;
         this.readTimeoutMilliseconds = readTimeoutMilliseconds;
@@ -68,7 +77,6 @@ public class EasyPostClient {
         this.billing = new BillingService(this);
         this.carrierAccount = new CarrierAccountService(this);
         this.carrierType = new CarrierTypeService(this);
-        this.creditCard = new CreditCardService(this);
         this.customsInfo = new CustomsInfoService(this);
         this.customsItem = new CustomsItemService(this);
         this.endShipper = new EndShipperService(this);
@@ -114,5 +122,14 @@ public class EasyPostClient {
      */
     public String getApiKey() {
         return apiKey;
+    }
+
+    /**
+     * Get API base for this EasyPostClient object.
+     * 
+     * @return the API base for this EasyPostClient object.
+     */
+    public String getApiBase() {
+        return apiBase;
     }
 }

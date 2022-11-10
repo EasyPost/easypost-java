@@ -3,27 +3,32 @@ package com.easypost;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.easypost.http.Constant;
+import com.easypost.exception.General.MissingParameterError;
 import com.easypost.service.EasyPostClient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class EasyPostTest {
     private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
+     * 
+     * @throws MissingParameterError
      */
     @BeforeAll
-    public static void setup() {
+    public static void setup() throws MissingParameterError {
         vcr = new TestUtils.VCR("client", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Test connection timeout getter and setter.
+     *
+     * @throws MissingParameterError
      */
     @Test
-    public void testConnectionTimeout() {
+    public void testConnectionTimeout() throws MissingParameterError {
         EasyPostClient client = new EasyPostClient("fake_api_key", 1);
 
         assertEquals(1, client.getConnectionTimeoutMilliseconds());
@@ -31,28 +36,24 @@ public final class EasyPostTest {
 
     /**
      * Test read timeout getter and setter.
+     *
+     * @throws MissingParameterError
      */
     @Test
-    public void testRequestTimeout() {
+    public void testRequestTimeout() throws MissingParameterError {
         EasyPostClient client = new EasyPostClient("fake_api_key", 1, 10);
 
         assertEquals(10, client.getReadTimeoutMilliseconds());
     }
 
     /**
-     * Test create multiple EasyPostClient with different API keys.
+     * Test create EasyPostClient with invalid API key.
+     *
+     * @throws MissingParameterError
      */
     @Test
-    public void testMultipleClients() {
-        EasyPostClient clientOne = new EasyPostClient("fake_api_key_1", 22222, 33333);
-        EasyPostClient clientTwo = new EasyPostClient("fake_api_key_2", 55555);
-
-        assertEquals("fake_api_key_1", clientOne.getApiKey());
-        assertEquals(22222, clientOne.getConnectionTimeoutMilliseconds());
-        assertEquals(33333, clientOne.getReadTimeoutMilliseconds());
-
-        assertEquals("fake_api_key_2", clientTwo.getApiKey());
-        assertEquals(55555, clientTwo.getConnectionTimeoutMilliseconds());
-        assertEquals(Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS, clientTwo.getReadTimeoutMilliseconds());
+    public void testCreateEasyPostClientWithInvalidKey() throws MissingParameterError {
+        assertThrows(MissingParameterError.class, () -> new EasyPostClient(null));
+        assertThrows(MissingParameterError.class, () -> new EasyPostClient(null));
     }
 }

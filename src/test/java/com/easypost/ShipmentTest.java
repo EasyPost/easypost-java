@@ -119,7 +119,7 @@ public final class ShipmentTest {
 
         Shipment shipment = createBasicShipment();
 
-        Shipment boughtShipment = vcr.client.shipment.buy(shipment.lowestRate(), shipment.getId());
+        Shipment boughtShipment = vcr.client.shipment.buy(shipment.getId(), shipment.lowestRate());
 
         assertNotNull(boughtShipment.getPostageLabel());
     }
@@ -390,18 +390,18 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate");
 
         Shipment shipment = createBasicShipment();
-        Smartrate lowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(2, SmartrateAccuracy.Percentile90,
-                shipment.getId());
+        Smartrate lowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
+                SmartrateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
-        assertEquals("First", lowestSmartRateFilters.getService());
-        assertEquals(5.82, lowestSmartRateFilters.getRate(), 0.01);
+        assertEquals("Priority", lowestSmartRateFilters.getService());
+        assertEquals(8.15, lowestSmartRateFilters.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRateFilters.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict
         // delivery days)
         assertThrows(EasyPostException.class, () -> {
-            vcr.client.shipment.lowestSmartRate(0, SmartrateAccuracy.Percentile90, shipment.getId());
+            vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartrateAccuracy.Percentile90);
         });
     }
 
@@ -420,8 +420,8 @@ public final class ShipmentTest {
         // Test lowest smartrate with valid filters
         Smartrate lowestSmartRate = vcr.client.shipment.findLowestSmartrate(smartrates, 2,
                 SmartrateAccuracy.Percentile90);
-        assertEquals("First", lowestSmartRate.getService());
-        assertEquals(5.82, lowestSmartRate.getRate(), 0.01);
+        assertEquals("Priority", lowestSmartRate.getService());
+        assertEquals(8.15, lowestSmartRate.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRate.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict
@@ -486,7 +486,7 @@ public final class ShipmentTest {
 
         Shipment shipment = vcr.client.shipment.create(Fixtures.fullShipment());
 
-        Shipment boughtShipment = vcr.client.shipment.buy(shipment.lowestRate(), true, shipment.getId());
+        Shipment boughtShipment = vcr.client.shipment.buy(shipment.getId(), shipment.lowestRate(), true);
 
         assertInstanceOf(Shipment.class, shipment);
 
@@ -541,7 +541,7 @@ public final class ShipmentTest {
         Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
         List<Rate> baseRates = shipment.getRates();
 
-        Shipment shipmentWithNewRatesWithCarbon = vcr.client.shipment.newRates(true, shipment.getId());
+        Shipment shipmentWithNewRatesWithCarbon = vcr.client.shipment.newRates(shipment.getId(), true);
         List<Rate> newCarbonRates = shipmentWithNewRatesWithCarbon.getRates();
 
         Rate baseRate = baseRates.get(0);
@@ -563,7 +563,7 @@ public final class ShipmentTest {
         EndShipper endShipper = vcr.client.endShipper.create(Fixtures.caAddress1());
 
         Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
-        Shipment boughtShipment = vcr.client.shipment.buy(shipment.lowestRate(), endShipper.getId(), shipment.getId());
+        Shipment boughtShipment = vcr.client.shipment.buy(shipment.getId(), shipment.lowestRate(), endShipper.getId());
 
         assertNotNull(boughtShipment.getPostageLabel());
     }

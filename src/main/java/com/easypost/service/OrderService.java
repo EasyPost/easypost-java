@@ -57,18 +57,18 @@ public class OrderService {
      * @throws EasyPostException when the request fails.
      */
     public Order refresh(final String id) throws EasyPostException {
-        return this.refresh(null, id);
+        return this.refresh(id, null);
     }
 
     /**
      * Refresh this Order object.
      *
-     * @param params Map of parameters.
      * @param id     The ID of order.
+     * @param params Map of parameters.
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */
-    public Order refresh(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Order refresh(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.GET,
                 String.format("%s", Utilities.instanceURL(Order.class, id)), params,
                 Order.class, client);
@@ -82,18 +82,18 @@ public class OrderService {
      * @throws EasyPostException when the request fails.
      */
     public Order newRates(final String id) throws EasyPostException {
-        return this.newRates(null, id);
+        return this.newRates(id, null);
     }
 
     /**
      * Get new rates for this Order.
      *
-     * @param params Map of parameters.
      * @param id     The ID of order.
+     * @param params Map of parameters.
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */
-    public Order newRates(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Order newRates(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.GET, String.format("%s/rates",
                 Utilities.instanceURL(Order.class, id)), params, Order.class, client);
     }
@@ -101,12 +101,12 @@ public class OrderService {
     /**
      * Buy this Order.
      *
-     * @param params Map of parameters.
      * @param id     The ID of order.
+     * @param params Map of parameters.
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */
-    public Order buy(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Order buy(final String id, final Map<String, Object> params) throws EasyPostException {
         return Requestor.request(RequestMethod.POST, String.format("%s/buy",
                 Utilities.instanceURL(Order.class, id)), params, Order.class, client);
     }
@@ -114,17 +114,17 @@ public class OrderService {
     /**
      * Buy this Order.
      *
-     * @param rate Rate to buy.
      * @param id   The ID of order.
+     * @param rate Rate to buy.
      * @return Order object.
      * @throws EasyPostException when the request fails.
      */
-    public Order buy(final Rate rate, final String id) throws EasyPostException {
+    public Order buy(final String id, final Rate rate) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("carrier", rate.getCarrier());
         params.put("service", rate.getService());
 
-        return this.buy(params, id);
+        return this.buy(id, params);
     }
 
     /**
