@@ -5,10 +5,10 @@
 - Library is now thread-safe
   - Initialize a `EasyPostClient` object with an API key, connection and readtime milliseconds are optional, otherwise it will be set to default.
   - All methods (i.e. `create`, `retrieve`, retrieve `all` of a resource) exist in services, accessed via property of the client
-    - E.g. Static method -> `client.address.create(params)`
-    - E.g. Instance method -> `client.shipment.buy(lowestRate, shipmentID)`
+    - E.g. Static method -> `Shipment shipment = client.address.create(params)`
+    - E.g. Instance method -> `Shipment boughtShipment = client.shipment.buy(lowestRate, shipmentID)`
   - All functions are now taking object ID instead of an object, which means the functions are returning the response value directly instead of updating the current object
-    - E.g. `client.shipment.buy(lowestRate, shipmentID)`
+    - E.g. `Shipment boughtShipment = client.shipment.buy(lowestRate, shipmentID)`
 - Improves error exception handling
   - Specific error types for each category of error
   - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
