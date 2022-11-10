@@ -27,6 +27,7 @@
 - AppEngine default timeout is now the same as connection timeout
 - Removes invalid function `User.create()` since creating a child-user requires a name
 - Removes deprecated class `CreditCard`, please use alternative `Billing` class
+- Removes all the getters of each object
 
 ## v5.10.0 (2022-09-21)
 

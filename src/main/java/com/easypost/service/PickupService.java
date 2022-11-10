@@ -167,7 +167,7 @@ public class PickupService {
             throws EasyPostException {
         List<Rate> rates = new ArrayList<Rate>();
 
-        for (PickupRate rate : pickup.getPickoutRates()) {
+        for (PickupRate rate : pickup.getPickupRates()) {
             rates.add((Rate) rate);
         }
 

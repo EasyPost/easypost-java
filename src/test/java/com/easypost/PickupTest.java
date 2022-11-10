@@ -60,7 +60,7 @@ public final class PickupTest {
 
         assertInstanceOf(Pickup.class, pickup);
         assertTrue(pickup.getId().startsWith("pickup_"));
-        assertNotNull(pickup.getPickoutRates());
+        assertNotNull(pickup.getPickupRates());
     }
 
     /**
