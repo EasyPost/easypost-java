@@ -494,43 +494,6 @@ public class ShipmentService {
     }
 
     /**
-     * Get the lowest rate for this Shipment.
-     *
-     * @param shipment The shipment object.
-     * @return lowest Rate object
-     * @throws EasyPostException when the request fails.
-     */
-    public Rate lowestRate(final Shipment shipment) throws EasyPostException {
-        return this.lowestRate(null, shipment);
-    }
-
-    /**
-     * Get the lowest rate for this Shipment.
-     *
-     * @param carriers the carriers to use in the filter.
-     * @param services the services to use in the filter.
-     * @param shipment The shipment object.
-     * @return lowest Rate object
-     * @throws EasyPostException when the request fails.
-     */
-    public Rate lowestRate(final List<String> carriers, final List<String> services, final Shipment shipment)
-            throws EasyPostException {
-        return Utilities.getLowestObjectRate(shipment.getRates(), carriers, services);
-    }
-
-    /**
-     * Get the lowest rate for this shipment.
-     *
-     * @param carriers the carriers to use in the query.
-     * @param shipment The shipment object.
-     * @return Rate object
-     * @throws EasyPostException when the request fails.
-     */
-    public Rate lowestRate(final List<String> carriers, final Shipment shipment) throws EasyPostException {
-        return this.lowestRate(carriers, null, shipment);
-    }
-
-    /**
      * Generate a form for this shipment.
      *
      * @param formType The form type for this shipment.

@@ -3,6 +3,9 @@ package com.easypost.model;
 import java.util.List;
 import java.util.Map;
 
+import com.easypost.exception.EasyPostException;
+import com.easypost.utils.Utilities;
+
 public final class Shipment extends EasyPostResource {
     private String reference;
     private Boolean isReturn;
@@ -552,5 +555,39 @@ public final class Shipment extends EasyPostResource {
      */
     public void setStatus(final String status) {
         this.status = status;
+    }
+
+    /**
+     * Get the lowest rate for this Shipment.
+     *
+     * @return lowest Rate object
+     * @throws EasyPostException when the request fails.
+     */
+    public Rate lowestRate() throws EasyPostException {
+        return this.lowestRate(null, null);
+    }
+
+    /**
+     * Get the lowest rate for this Shipment.
+     *
+     * @param carriers the carriers to use in the filter.
+     * @param services the services to use in the filter.
+     * @return lowest Rate object
+     * @throws EasyPostException when the request fails.
+     */
+    public Rate lowestRate(final List<String> carriers, final List<String> services)
+            throws EasyPostException {
+        return Utilities.getLowestObjectRate(this.getRates(), carriers, services);
+    }
+
+    /**
+     * Get the lowest rate for this shipment.
+     *
+     * @param carriers the carriers to use in the query.
+     * @return Rate object
+     * @throws EasyPostException when the request fails.
+     */
+    public Rate lowestRate(final List<String> carriers) throws EasyPostException {
+        return this.lowestRate(carriers, null);
     }
 }

@@ -119,8 +119,7 @@ public final class ShipmentTest {
 
         Shipment shipment = createBasicShipment();
 
-        Rate lowestRate = vcr.client.shipment.lowestRate(shipment);
-        Shipment boughtShipment = vcr.client.shipment.buy(lowestRate, shipment.getId());
+        Shipment boughtShipment = vcr.client.shipment.buy(shipment.lowestRate(), shipment.getId());
 
         assertNotNull(boughtShipment.getPostageLabel());
     }
@@ -361,7 +360,7 @@ public final class ShipmentTest {
         Shipment shipment = createFullShipment();
 
         // Test lowest rate with no filters
-        Rate lowestRate = vcr.client.shipment.lowestRate(shipment);
+        Rate lowestRate = shipment.lowestRate();
         assertEquals("First", lowestRate.getService());
         assertEquals(5.82, lowestRate.getRate(), 0.01);
         assertEquals("USPS", lowestRate.getCarrier());
@@ -369,7 +368,7 @@ public final class ShipmentTest {
         // Test lowest rate with service filter (this rate is higher than the lowest but
         // should filter)
         List<String> service = new ArrayList<>(Arrays.asList("Priority"));
-        Rate lowestRateService = vcr.client.shipment.lowestRate(null, service, shipment);
+        Rate lowestRateService = shipment.lowestRate(null, service);
         assertEquals("Priority", lowestRateService.getService());
         assertEquals(8.15, lowestRateService.getRate(), 0.01);
         assertEquals("USPS", lowestRateService.getCarrier());
@@ -377,7 +376,7 @@ public final class ShipmentTest {
         // Test lowest rate with carrier filter (should error due to bad carrier)
         List<String> carrier = new ArrayList<>(Arrays.asList("BAD CARRIER"));
         assertThrows(EasyPostException.class, () -> {
-            vcr.client.shipment.lowestRate(carrier, null, shipment);
+            shipment.lowestRate(carrier, null);
         });
     }
 
@@ -487,9 +486,7 @@ public final class ShipmentTest {
 
         Shipment shipment = vcr.client.shipment.create(Fixtures.fullShipment());
 
-        Rate rate = vcr.client.shipment.lowestRate(shipment);
-
-        Shipment boughtShipment = vcr.client.shipment.buy(rate, true, shipment.getId());
+        Shipment boughtShipment = vcr.client.shipment.buy(shipment.lowestRate(), true, shipment.getId());
 
         assertInstanceOf(Shipment.class, shipment);
 
@@ -566,8 +563,7 @@ public final class ShipmentTest {
         EndShipper endShipper = vcr.client.endShipper.create(Fixtures.caAddress1());
 
         Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
-        Rate rate = vcr.client.shipment.lowestRate(shipment);
-        Shipment boughtShipment = vcr.client.shipment.buy(rate, endShipper.getId(), shipment.getId());
+        Shipment boughtShipment = vcr.client.shipment.buy(shipment.lowestRate(), endShipper.getId(), shipment.getId());
 
         assertNotNull(boughtShipment.getPostageLabel());
     }
