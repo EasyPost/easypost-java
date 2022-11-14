@@ -1,6 +1,5 @@
 package com.easypost.service;
 
-import com.easypost.EasyPost;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
@@ -35,7 +34,8 @@ public class BillingService {
 
         // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
         Requestor.request(RequestMethod.DELETE,
-                String.format("%s/%s/%s", EasyPost.API_BASE, paymentMethodObject.getEndpoint(),
+                String.format("%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(),
+                        paymentMethodObject.getEndpoint(),
                         paymentMethodObject.getId()),
                 null, PaymentMethod.class, client);
     }
@@ -65,8 +65,9 @@ public class BillingService {
         params.put("amount", amount);
 
         // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
-        Requestor.request(RequestMethod.POST, String.format("%s/%s/%s/%s", EasyPost.API_BASE,
-                paymentMethodObject.getEndpoint(), paymentMethodObject.getId(), "charges"),
+        Requestor.request(RequestMethod.POST,
+                String.format("%s/%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(),
+                        paymentMethodObject.getEndpoint(), paymentMethodObject.getId(), "charges"),
                 params, PaymentMethod.class, client);
     }
 
@@ -74,11 +75,12 @@ public class BillingService {
      * List all payment methods for this account.
      *
      * @return an EasyPost.PaymentMethod summary object.
-     * @throws EasyPostException when the request fails or billing has not been set up.
+     * @throws EasyPostException when the request fails or billing has not been set
+     *                           up.
      */
     public PaymentMethod retrievePaymentMethods() throws EasyPostException {
         PaymentMethod response = Requestor.request(RequestMethod.GET,
-                String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
+                String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "payment_methods"), null,
                 PaymentMethod.class, client);
 
         if (response.getId() == null) {

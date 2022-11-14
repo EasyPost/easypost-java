@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1668122913,
+    "recordedAt": 1668466133,
     "request": {
       "body": "{\n  \"address\": {\n    \"zip\": \"94107\",\n    \"country\": \"US\",\n    \"city\": \"San Francisco\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Jack Sparrow\",\n    \"street1\": \"388 Townsend St\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\",\n    \"email\": \"test@example.com\"\n  },\n  \"verify_strict\": true\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/addresses"
     },
     "response": {
-      "body": "{\n  \"zip\": \"94107-1670\",\n  \"country\": \"US\",\n  \"city\": \"SAN FRANCISCO\",\n  \"created_at\": \"2022-11-10T23:28:33+00:00\",\n  \"verifications\": {\n    \"delivery\": {\n      \"success\": true,\n      \"details\": {\n        \"latitude\": 37.77551,\n        \"time_zone\": \"America/Los_Angeles\",\n        \"longitude\": -122.39697\n      },\n      \"errors\": []\n    },\n    \"zip4\": {\n      \"success\": true,\n      \"details\": null,\n      \"errors\": []\n    }\n  },\n  \"mode\": \"test\",\n  \"federal_tax_id\": null,\n  \"state_tax_id\": null,\n  \"carrier_facility\": null,\n  \"residential\": true,\n  \"updated_at\": \"2022-11-10T23:28:33+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"JACK SPARROW\",\n  \"company\": null,\n  \"street1\": \"388 TOWNSEND ST APT 20\",\n  \"id\": \"adr_64770515614f11ed8229ac1f6bc72124\",\n  \"street2\": \"\",\n  \"state\": \"CA\",\n  \"email\": \"TEST@EXAMPLE.COM\",\n  \"object\": \"Address\"\n}",
+      "body": "{\n  \"zip\": \"94107-1670\",\n  \"country\": \"US\",\n  \"city\": \"SAN FRANCISCO\",\n  \"created_at\": \"2022-11-14T22:48:53+00:00\",\n  \"verifications\": {\n    \"delivery\": {\n      \"success\": true,\n      \"details\": {\n        \"latitude\": 37.77551,\n        \"time_zone\": \"America/Los_Angeles\",\n        \"longitude\": -122.39697\n      },\n      \"errors\": []\n    },\n    \"zip4\": {\n      \"success\": true,\n      \"details\": null,\n      \"errors\": []\n    }\n  },\n  \"mode\": \"test\",\n  \"federal_tax_id\": null,\n  \"state_tax_id\": null,\n  \"carrier_facility\": null,\n  \"residential\": true,\n  \"updated_at\": \"2022-11-14T22:48:53+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"JACK SPARROW\",\n  \"company\": null,\n  \"street1\": \"388 TOWNSEND ST APT 20\",\n  \"id\": \"adr_83b617b0646e11ed876cac1f6bc7b362\",\n  \"street2\": \"\",\n  \"state\": \"CA\",\n  \"email\": \"TEST@EXAMPLE.COM\",\n  \"object\": \"Address\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb8nuq"
+          "bigweb2nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,30 +58,30 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "bdc5d275636d8921e0ec7ae1000ad1e2"
+          "3a8b2e096372c5d5e0da519f0019e3e5"
         ],
         "x-proxied": [
-          "extlb3wdc 29913d444b",
+          "extlb4wdc 29913d444b",
           "intlb2wdc 29913d444b",
-          "intlb1nuq 29913d444b"
+          "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.051262"
+          "0.043868"
         ],
         "etag": [
-          "W/\"a99c8a62739d2480337cd63faa171ae7\""
+          "W/\"276615d6bc50ecb316f736c66d348823\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "location": [
-          "/api/v2/addresses/adr_64770515614f11ed8229ac1f6bc72124"
+          "/api/v2/addresses/adr_83b617b0646e11ed876cac1f6bc7b362"
         ],
         "x-version-label": [
-          "easypost-202211102043-5e82a6be5e-master"
+          "easypost-202211142148-00c0334849-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -93,6 +93,6 @@
       },
       "uri": "https://api.easypost.com/v2/addresses"
     },
-    "duration": 281
+    "duration": 262
   }
 ]

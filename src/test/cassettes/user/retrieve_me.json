@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1668122928,
+    "recordedAt": 1668466147,
     "request": {
       "body": "",
       "method": "GET",
@@ -28,7 +28,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb7nuq"
+          "bigweb3nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -48,9 +48,6 @@
         "pragma": [
           "no-cache"
         ],
-        "x-canary": [
-          "direct"
-        ],
         "x-content-type-options": [
           "nosniff"
         ],
@@ -58,10 +55,10 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "bdc5d277636d892fe0ec7e5b000ad569"
+          "3a8b2e0a6372c5e3e0da55200019e919"
         ],
         "x-proxied": [
-          "extlb3wdc 29913d444b",
+          "extlb4wdc 29913d444b",
           "intlb1wdc 29913d444b",
           "intlb2nuq 29913d444b"
         ],
@@ -69,7 +66,7 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.245283"
+          "0.165559"
         ],
         "etag": [
           "W/\"55e92a7e5a5cb86f801e5b4aa4a73532\""
@@ -78,7 +75,7 @@
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211102043-5e82a6be5e-master"
+          "easypost-202211142148-00c0334849-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -90,6 +87,6 @@
       },
       "uri": "https://api.easypost.com/v2/users"
     },
-    "duration": 508
+    "duration": 406
   }
 ]

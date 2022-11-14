@@ -1,6 +1,5 @@
 package com.easypost.utils;
 
-import com.easypost.EasyPost;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
@@ -120,7 +119,7 @@ public abstract class Utilities {
      * @return String that has API base and class name.
      */
     private static String singleClassURL(final Class<?> clazz) {
-        return String.format("%s/%s", EasyPost.API_BASE, className(clazz));
+        return String.format("%s/%s", "%s/%s", className(clazz));
     }
 
     /**

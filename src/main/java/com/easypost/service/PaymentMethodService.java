@@ -1,6 +1,5 @@
 package com.easypost.service;
 
-import com.easypost.EasyPost;
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
@@ -31,7 +30,7 @@ public class PaymentMethodService {
     @Deprecated
     public PaymentMethod all() throws EasyPostException {
         PaymentMethod response =
-            Requestor.request(RequestMethod.GET, String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
+            Requestor.request(RequestMethod.GET, String.format("%s/%s", client.getApiBase(), "payment_methods"), null,
                         PaymentMethod.class, client);
 
         if (response.getId() == null) {

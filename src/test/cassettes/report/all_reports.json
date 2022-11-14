@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1668122860,
+    "recordedAt": 1668466081,
     "request": {
       "body": "",
       "method": "GET",
@@ -15,20 +15,20 @@
       "uri": "https://api.easypost.com/v2/reports/shipment/?page_size\u003d5\u0026type\u003dshipment"
     },
     "response": {
-      "body": "{\n  \"reports\": [\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-11-10T23:27:40Z\",\n      \"created_at\": \"2022-11-10T23:27:39Z\",\n      \"id\": \"shprep_d31e28fe5267419081e321f5664b976b\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-11-10T23:27:39Z\",\n      \"created_at\": \"2022-11-10T23:27:39Z\",\n      \"id\": \"shprep_5881c959cdc441519ad091d6792f6481\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-11-04T20:18:06Z\",\n      \"created_at\": \"2022-11-04T20:18:06Z\",\n      \"id\": \"shprep_c6e86e8520ab4966a9688788c0da52d4\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-11-04T20:18:07Z\",\n      \"created_at\": \"2022-11-04T20:18:06Z\",\n      \"id\": \"shprep_fc3d1dd5296e4ad6bcbeceb1b1c77892\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-11-04T20:18:05Z\",\n      \"created_at\": \"2022-11-04T20:18:05Z\",\n      \"id\": \"shprep_3db72f01380443658ea518daec5daa9d\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    }\n  ],\n  \"has_more\": true\n}",
+      "body": "{\n  \"reports\": [\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-11-14T22:48:00Z\",\n      \"created_at\": \"2022-11-14T22:48:00Z\",\n      \"id\": \"shprep_4b64f327f677441a81f3a3bb83d6c7ee\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"new\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-11-14T22:48:00Z\",\n      \"created_at\": \"2022-11-14T22:48:00Z\",\n      \"id\": \"shprep_dfcc28ede23d4caaae3383e654ccb159\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"new\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-11-10T23:27:41Z\",\n      \"created_at\": \"2022-11-10T23:27:41Z\",\n      \"id\": \"shprep_73c5b243ae2b410b9e25ec673c0d0277\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-11-10T23:27:40Z\",\n      \"created_at\": \"2022-11-10T23:27:40Z\",\n      \"id\": \"shprep_4f6ef686287b4fdf85d2670db384954e\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    },\n    {\n      \"end_date\": \"2022-05-04\",\n      \"mode\": \"test\",\n      \"include_children\": false,\n      \"updated_at\": \"2022-11-10T23:27:40Z\",\n      \"created_at\": \"2022-11-10T23:27:39Z\",\n      \"id\": \"shprep_d31e28fe5267419081e321f5664b976b\",\n      \"url_expires_at\": null,\n      \"url\": null,\n      \"object\": \"ShipmentReport\",\n      \"start_date\": \"2022-05-04\",\n      \"status\": \"empty\"\n    }\n  ],\n  \"has_more\": true\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "1459"
+          "1455"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb7nuq"
+          "bigweb2nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -48,9 +48,6 @@
         "pragma": [
           "no-cache"
         ],
-        "x-canary": [
-          "direct"
-        ],
         "x-content-type-options": [
           "nosniff"
         ],
@@ -58,10 +55,10 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "bdc5d275636d88ebe0ec7663000ac3ec"
+          "3a8b2e0a6372c5a0e0d9eb070019cc48"
         ],
         "x-proxied": [
-          "extlb3wdc 29913d444b",
+          "extlb4wdc 29913d444b",
           "intlb2wdc 29913d444b",
           "intlb1nuq 29913d444b"
         ],
@@ -69,16 +66,16 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.038975"
+          "0.035794"
         ],
         "etag": [
-          "W/\"2a3e68ef8591db23f70476630082c67d\""
+          "W/\"b4fff8b911e5a84a81d6146b677026a9\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211102043-5e82a6be5e-master"
+          "easypost-202211142148-00c0334849-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -90,6 +87,6 @@
       },
       "uri": "https://api.easypost.com/v2/reports/shipment/?page_size\u003d5\u0026type\u003dshipment"
     },
-    "duration": 253
+    "duration": 261
   }
 ]

@@ -1,6 +1,5 @@
 package com.easypost.service;
 
-import com.easypost.EasyPost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
@@ -35,7 +34,8 @@ public class EndShipperService {
 
         wrappedParams.put("address", params);
 
-        return Requestor.request(RequestMethod.POST, String.format("%s/%s", EasyPost.API_BASE, "end_shippers"),
+        return Requestor.request(RequestMethod.POST,
+                String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "end_shippers"),
                 wrappedParams, EndShipper.class, client);
     }
 
@@ -48,7 +48,8 @@ public class EndShipperService {
      */
     public EndShipper retrieve(final String id) throws EasyPostException {
         return Requestor.request(RequestMethod.GET,
-                String.format("%s/%s/%s", EasyPost.API_BASE, "end_shippers", id), null, EndShipper.class, client);
+                String.format("%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(), "end_shippers", id), null,
+                EndShipper.class, client);
     }
 
     /**
@@ -77,7 +78,8 @@ public class EndShipperService {
 
         wrappedParams.put("address", params);
 
-        return Requestor.request(RequestMethod.PUT, String.format("%s/%s/%s", EasyPost.API_BASE, "end_shippers", id),
+        return Requestor.request(RequestMethod.PUT,
+                String.format("%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(), "end_shippers", id),
                 wrappedParams, EndShipper.class, client);
     }
 }

@@ -47,6 +47,18 @@ public final class EasyPostTest {
     }
 
     /**
+     * Test setting API base.
+     *
+     * @throws MissingParameterError
+     */
+    @Test
+    public void testApiBase() throws MissingParameterError {
+        EasyPostClient client = new EasyPostClient("fake_api_key", "https://api.easypostExample.com");
+
+        assertEquals("https://api.easypostExample.com", client.getApiBase());
+    }
+
+    /**
      * Test create EasyPostClient with invalid API key.
      *
      * @throws MissingParameterError

@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1668122932,
+    "recordedAt": 1668466152,
     "request": {
       "body": "{\n  \"carbon_offset\": false\n}",
       "method": "POST",
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb4nuq"
+          "bigweb5nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,10 +58,10 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "bdc5d277636d8934e0ec7e7f000ad670"
+          "3a8b2e0d6372c5e8e0da555a0019eac6"
         ],
         "x-proxied": [
-          "extlb3wdc 29913d444b",
+          "extlb4wdc 29913d444b",
           "intlb2wdc 29913d444b",
           "intlb1nuq 29913d444b"
         ],
@@ -69,13 +69,13 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.095282"
+          "0.035705"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211102043-5e82a6be5e-master"
+          "easypost-202211142148-00c0334849-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -87,6 +87,6 @@
       },
       "uri": "https://api.easypost.com/v2/shipments"
     },
-    "duration": 392
+    "duration": 262
   }
 ]

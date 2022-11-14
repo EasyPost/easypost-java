@@ -400,7 +400,7 @@ public abstract class Requestor {
         } catch (IOException e) {
             throw new EasyPostException(String.format("Could not connect to EasyPost (%s). " +
                     "Please check your internet connection and try again. If this problem persists," +
-                    "please contact us at %s.", EasyPost.API_BASE, Constant.EASYPOST_SUPPORT_EMAIL), e);
+                    "please contact us at %s.", client.getApiBase(), Constant.EASYPOST_SUPPORT_EMAIL), e);
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -426,7 +426,7 @@ public abstract class Requestor {
             throws EasyPostException {
         String originalDNSCacheTTL = null;
         boolean allowedToSetTTL = true;
-        url = String.format(url, client.getApiBase());
+        url = String.format(url, client.getApiBase(), client.getApiVersion());
 
         try {
             originalDNSCacheTTL = java.security.Security.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);

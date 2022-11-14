@@ -7,8 +7,9 @@ import com.easypost.http.Constant;
 public class EasyPostClient {
     private final int connectTimeoutMilliseconds;
     private final int readTimeoutMilliseconds;
-    private final String apiBase = "v2";
     private final String apiKey;
+    private final String apiVersion = "v2";
+    private String apiBase;
     public final AddressService address;
     public final ApiKeyService apikeys;
     public final BatchService batch;
@@ -47,27 +48,67 @@ public class EasyPostClient {
     /**
      * EasyPostClient constructor.
      *
-     * @param apiKey                     API key for API calls.
-     * @param connectTimeoutMilliseconds timeout for connection.
+     * @param apiKey  API key for API calls.
+     * @param apiBase API base for API calls.
      * @throws MissingParameterError
      */
-    public EasyPostClient(String apiKey, int connectTimeoutMilliseconds) throws MissingParameterError {
-        this(apiKey, connectTimeoutMilliseconds, Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS);
+    public EasyPostClient(String apiKey, String apiBase) throws MissingParameterError {
+        this(apiKey, Constant.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS, Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS,
+                apiBase);
     }
 
     /**
      * EasyPostClient constructor.
      *
      * @param apiKey                     API key for API calls.
-     * @param connectTimeoutMilliseconds timeout for connection.
-     * @param readTimeoutMilliseconds    timeout for read.
+     * @param connectTimeoutMilliseconds Timeout for connection.
+     * @throws MissingParameterError
+     */
+    public EasyPostClient(String apiKey, int connectTimeoutMilliseconds) throws MissingParameterError {
+        this(apiKey, connectTimeoutMilliseconds, Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS, Constant.API_BASE);
+    }
+
+    /**
+     * EasyPostClient constructor.
+     *
+     * @param apiKey                     API key for API calls.
+     * @param connectTimeoutMilliseconds Timeout for connection.
+     * @param apiBase                    API base for API calls.
+     * @throws MissingParameterError
+     */
+    public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, String apiBase) throws MissingParameterError {
+        this(apiKey, connectTimeoutMilliseconds, Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS, apiBase);
+    }
+
+    /**
+     * EasyPostClient constructor.
+     *
+     * @param apiKey                     API key for API calls.
+     * @param connectTimeoutMilliseconds Timeout for connection.
+     * @param readTimeoutMilliseconds    Timeout for read.
      * @throws MissingParameterError
      */
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, int readTimeoutMilliseconds)
             throws MissingParameterError {
+        this(apiKey, connectTimeoutMilliseconds, readTimeoutMilliseconds, Constant.API_BASE);
+    }
+
+    /**
+     * EasyPostClient constructor.
+     *
+     * @param apiKey                     API key for API calls.
+     * @param connectTimeoutMilliseconds Timeout for connection.
+     * @param readTimeoutMilliseconds    Timeout for read.
+     * @param apiBase                    API base for API calls.
+     * @throws MissingParameterError
+     */
+    public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, int readTimeoutMilliseconds, String apiBase)
+            throws MissingParameterError {
         if (apiKey == null || apiKey.isEmpty()) {
             throw new MissingParameterError(Constants.INVALID_API_KEY_TYPE);
         }
+
+        this.apiBase = apiBase;
         this.apiKey = apiKey;
         this.connectTimeoutMilliseconds = connectTimeoutMilliseconds;
         this.readTimeoutMilliseconds = readTimeoutMilliseconds;
@@ -125,8 +166,17 @@ public class EasyPostClient {
     }
 
     /**
-     * Get API base for this EasyPostClient object.
+     * Get API version for this EasyPostClient object.
      * 
+     * @return the API version for this EasyPostClient object.
+     */
+    public String getApiVersion() {
+        return apiVersion;
+    }
+
+    /**
+     * Get API base for this EasyPostClient object.
+     *
      * @return the API base for this EasyPostClient object.
      */
     public String getApiBase() {

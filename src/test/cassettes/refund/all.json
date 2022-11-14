@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1668122822,
+    "recordedAt": 1668466044,
     "request": {
       "body": "",
       "method": "GET",
@@ -15,20 +15,20 @@
       "uri": "https://api.easypost.com/v2/refunds?page_size\u003d5"
     },
     "response": {
-      "body": "{\n  \"has_more\": true,\n  \"refunds\": [\n    {\n      \"confirmation_number\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-11-09T20:29:31Z\",\n      \"created_at\": \"2022-11-08T20:29:30Z\",\n      \"id\": \"rfnd_ddc51a320ff546c3b2e13dc0278cb3b2\",\n      \"shipment_id\": \"shp_1b71762adf7047ef89a8767945487d58\",\n      \"tracking_code\": \"9400100106068148394497\",\n      \"object\": \"Refund\",\n      \"status\": \"rejected\"\n    },\n    {\n      \"confirmation_number\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-11-09T20:07:28Z\",\n      \"created_at\": \"2022-11-08T20:07:27Z\",\n      \"id\": \"rfnd_4c22248ddfc2442582f08b0ae014ad61\",\n      \"shipment_id\": \"shp_2c48e2fe4b5d4fcaa44ddb4470102e9c\",\n      \"tracking_code\": \"9400100106068148390079\",\n      \"object\": \"Refund\",\n      \"status\": \"rejected\"\n    },\n    {\n      \"confirmation_number\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-11-05T20:18:45Z\",\n      \"created_at\": \"2022-11-04T20:18:45Z\",\n      \"id\": \"rfnd_a90d94b81b414dc5aedc35f00bb10533\",\n      \"shipment_id\": \"shp_3e4e0a3cf8b642b08f7bdc32673fa71b\",\n      \"tracking_code\": \"9400100106068147467413\",\n      \"object\": \"Refund\",\n      \"status\": \"rejected\"\n    },\n    {\n      \"confirmation_number\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-11-05T20:17:33Z\",\n      \"created_at\": \"2022-11-04T20:17:33Z\",\n      \"id\": \"rfnd_5de36f172f3245f390957fa05703c3ab\",\n      \"shipment_id\": \"shp_e48a58aed861419eba5b5e78ba484e8a\",\n      \"tracking_code\": \"9400100106068147467031\",\n      \"object\": \"Refund\",\n      \"status\": \"rejected\"\n    },\n    {\n      \"confirmation_number\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-11-05T20:17:30Z\",\n      \"created_at\": \"2022-11-04T20:17:30Z\",\n      \"id\": \"rfnd_a408cf48dc224177b4f73db72e67fdb8\",\n      \"shipment_id\": \"shp_2288c463538f47088dd7b9a33acaac0d\",\n      \"tracking_code\": \"9400100106068147467000\",\n      \"object\": \"Refund\",\n      \"status\": \"rejected\"\n    }\n  ]\n}",
+      "body": "{\n  \"has_more\": true,\n  \"refunds\": [\n    {\n      \"confirmation_number\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-11-14T22:12:06Z\",\n      \"created_at\": \"2022-11-14T22:12:06Z\",\n      \"id\": \"rfnd_85fe06838c4f4be3950c4db28dcb36c8\",\n      \"shipment_id\": \"shp_5b9ebe87de724620befedae5a81cd488\",\n      \"tracking_code\": \"9400100106068149670484\",\n      \"object\": \"Refund\",\n      \"status\": \"submitted\"\n    },\n    {\n      \"confirmation_number\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-11-14T22:11:00Z\",\n      \"created_at\": \"2022-11-14T22:11:00Z\",\n      \"id\": \"rfnd_43cf4f74822b4af198db31b792a22251\",\n      \"shipment_id\": \"shp_856a0fa92d574c75ac9ab47b56ee368f\",\n      \"tracking_code\": \"9400100106068149670156\",\n      \"object\": \"Refund\",\n      \"status\": \"submitted\"\n    },\n    {\n      \"confirmation_number\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-11-14T22:10:57Z\",\n      \"created_at\": \"2022-11-14T22:10:57Z\",\n      \"id\": \"rfnd_94f0478e71594eb5a3f2b96ce4dbac46\",\n      \"shipment_id\": \"shp_727bd8985e9f44588627c0d9f841ccc7\",\n      \"tracking_code\": \"9400100106068149670149\",\n      \"object\": \"Refund\",\n      \"status\": \"submitted\"\n    },\n    {\n      \"confirmation_number\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-11-11T23:28:17Z\",\n      \"created_at\": \"2022-11-10T23:28:17Z\",\n      \"id\": \"rfnd_72cb040702894f3292b7285a64e34d28\",\n      \"shipment_id\": \"shp_8379c1916ac1461b99264261881ddf2f\",\n      \"tracking_code\": \"9400100106068148866420\",\n      \"object\": \"Refund\",\n      \"status\": \"rejected\"\n    },\n    {\n      \"confirmation_number\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2022-11-11T23:27:34Z\",\n      \"created_at\": \"2022-11-10T23:27:08Z\",\n      \"id\": \"rfnd_ef8892b842fc4f3b82657ac34411760c\",\n      \"shipment_id\": \"shp_458052a99b484090a2e4c8a932023269\",\n      \"tracking_code\": \"9400100106068148866116\",\n      \"object\": \"Refund\",\n      \"status\": \"rejected\"\n    }\n  ]\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "1504"
+          "1507"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb1nuq"
+          "bigweb8nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -55,27 +55,27 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "bdc5d27b636d88c6e0ec7263000aba4a"
+          "3a8b2e0d6372c57ce0d9e7060019b9e4"
         ],
         "x-proxied": [
-          "extlb3wdc 29913d444b",
+          "extlb4wdc 29913d444b",
           "intlb2wdc 29913d444b",
-          "intlb2nuq 29913d444b"
+          "intlb1nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.069440"
+          "0.047991"
         ],
         "etag": [
-          "W/\"7da3aca4c232d5eec5eb1d5281c9b66a\""
+          "W/\"4e4c69a6ae1a8a1397f017edbe4d812a\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211102043-5e82a6be5e-master"
+          "easypost-202211142148-00c0334849-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -87,6 +87,6 @@
       },
       "uri": "https://api.easypost.com/v2/refunds?page_size\u003d5"
     },
-    "duration": 351
+    "duration": 262
   }
 ]

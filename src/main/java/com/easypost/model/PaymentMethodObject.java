@@ -40,8 +40,6 @@ public class PaymentMethodObject extends EasyPostResource {
     // credit_card
     private int expYear;
     // both
-    private String id;
-    // both
     private String last4;
     // credit_card
     private String name;
@@ -102,15 +100,6 @@ public class PaymentMethodObject extends EasyPostResource {
      */
     public int getExpYear() {
         return expYear;
-    }
-
-    /**
-     * Get ID of this PaymentMethodObject object.
-     *
-     * @return ID of this PaymentMethodObject.
-     */
-    public String getId() {
-        return id;
     }
 
     /**
