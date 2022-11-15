@@ -171,7 +171,7 @@ public final class AddressTest {
         Map<String, Object> addressData = Fixtures.caAddress1();
 
         Address address = vcr.client.address.createAndVerify(addressData);
-        
+
         assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
         assertEquals("388 TOWNSEND ST APT 20", address.getStreet1());

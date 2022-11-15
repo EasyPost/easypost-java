@@ -6,7 +6,7 @@
   - Initialize a `EasyPostClient` object with an API key, connection and readtime milliseconds are optional, otherwise it will be set to default.
   - All methods (i.e. `create`, `retrieve`, retrieve `all` of a resource) exist in services, accessed via property of the client
     - E.g. Static method -> `Shipment shipment = client.address.create(params)`
-    - E.g. Instance method -> `Shipment boughtShipment = client.shipment.buy(shipmentID,lowestRate)`
+    - E.g. Instance method -> `Shipment boughtShipment = client.shipment.buy(shipmentID, lowestRate)`
   - All functions are now taking object ID instead of an object, which means the functions are returning the response value directly instead of updating the current object
     - E.g. `Shipment boughtShipment = client.shipment.buy(shipmentID, lowestRate)`
 - Improves error exception handling
@@ -27,8 +27,10 @@
 - AppEngine default timeout is now the same as connection timeout
 - Removes invalid function `User.create()` since creating a child-user requires a name
 - Removes deprecated class `CreditCard`, please use alternative `Billing` class
-- Removes all the getters of each object
+- Removes all the setters of each object
+- Setters are now available via lombok and aren't explicitly in the code anymore
 - Fixes a typo `getPickoutRates()` is now `getPickupRates()`
+- Change the type `hasMore` in ReferralCustomerCollection from `boolean` to `Boolean`
 
 ## v5.10.0 (2022-09-21)
 
