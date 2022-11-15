@@ -3,49 +3,69 @@ package com.easypost;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.easypost.http.Requestor;
+import com.easypost.exception.General.MissingParameterError;
+import com.easypost.service.EasyPostClient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class EasyPostTest {
     private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
+     * 
+     * @throws MissingParameterError
      */
     @BeforeAll
-    public static void setup() {
+    public static void setup() throws MissingParameterError {
         vcr = new TestUtils.VCR("client", TestUtils.ApiKey.TEST);
     }
 
     /**
      * Test connection timeout getter and setter.
+     *
+     * @throws MissingParameterError
      */
     @Test
-    public void testConnectionTimeout() {
+    public void testConnectionTimeout() throws MissingParameterError {
+        EasyPostClient client = new EasyPostClient("fake_api_key", 1);
 
-        int testTimeout = 1;
-
-        Requestor.setConnectTimeoutMilliseconds(testTimeout);
-
-        assertEquals(1, Requestor.getConnectTimeoutMilliseconds());
-
-        // We have to set the connection timeout back to default to avoid other unit tests getting timeout.
-        Requestor.setConnectTimeoutMilliseconds(30000);
+        assertEquals(1, client.getConnectionTimeoutMilliseconds());
     }
 
     /**
      * Test read timeout getter and setter.
+     *
+     * @throws MissingParameterError
      */
     @Test
-    public void testRequestTimeout() {
-        int testTimeout = 1;
+    public void testRequestTimeout() throws MissingParameterError {
+        EasyPostClient client = new EasyPostClient("fake_api_key", 1, 10);
 
-        Requestor.setReadTimeoutMilliseconds(testTimeout);
+        assertEquals(10, client.getReadTimeoutMilliseconds());
+    }
 
-        assertEquals(1, Requestor.getReadTimeoutMilliseconds());
+    /**
+     * Test setting API base.
+     *
+     * @throws MissingParameterError
+     */
+    @Test
+    public void testApiBase() throws MissingParameterError {
+        EasyPostClient client = new EasyPostClient("fake_api_key", "https://api.easypostExample.com");
 
-        // We have to set the connection timeout back to default to avoid other unit tests getting timeout.
-        Requestor.setReadTimeoutMilliseconds(60000);
+        assertEquals("https://api.easypostExample.com", client.getApiBase());
+    }
+
+    /**
+     * Test create EasyPostClient with invalid API key.
+     *
+     * @throws MissingParameterError
+     */
+    @Test
+    public void testCreateEasyPostClientWithInvalidKey() throws MissingParameterError {
+        assertThrows(MissingParameterError.class, () -> new EasyPostClient(null));
+        assertThrows(MissingParameterError.class, () -> new EasyPostClient(null));
     }
 }

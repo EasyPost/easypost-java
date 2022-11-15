@@ -54,7 +54,7 @@ public final class EventTest {
     private static EventCollection getBasicEventCollection() throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixtures.pageSize());
-        return Event.all(params);
+        return vcr.client.event.all(params);
     }
 
     /**
@@ -70,7 +70,7 @@ public final class EventTest {
         List<Event> events = eventCollection.getEvents();
         Event event = events.get(0);
 
-        Event retrievedEvent = Event.retrieve(event.getId());
+        Event retrievedEvent = vcr.client.event.retrieve(event.getId());
 
         assertInstanceOf(Event.class, retrievedEvent);
         // Must compare IDs since can't do whole-object comparisons currently

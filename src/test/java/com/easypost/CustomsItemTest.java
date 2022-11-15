@@ -23,6 +23,15 @@ public final class CustomsItemTest {
     }
 
     /**
+     * Create a customs item.
+     *
+     * @return CustomsItem object.
+     */
+    private static CustomsItem createBasicCustomsItem() throws EasyPostException {
+        return vcr.client.customsItem.create(Fixtures.basicCustomsItem());
+    }
+
+    /**
      * Test creating a CustomsItem.
      *
      * @throws EasyPostException when the request fails.
@@ -39,15 +48,6 @@ public final class CustomsItemTest {
     }
 
     /**
-     * Create a customs item.
-     *
-     * @return CustomsItem object.
-     */
-    private static CustomsItem createBasicCustomsItem() throws EasyPostException {
-        return CustomsItem.create(Fixtures.basicCustomsItem());
-    }
-
-    /**
      * Test retrieving a CustomsItem.
      *
      * @throws EasyPostException when the request fails.
@@ -58,7 +58,7 @@ public final class CustomsItemTest {
 
         CustomsItem customsItem = createBasicCustomsItem();
 
-        CustomsItem retrieveCustomsItem = CustomsItem.retrieve(customsItem.getId());
+        CustomsItem retrieveCustomsItem = vcr.client.customsItem.retrieve(customsItem.getId());
 
         assertInstanceOf(CustomsItem.class, customsItem);
         assertTrue(customsItem.equals(retrieveCustomsItem));

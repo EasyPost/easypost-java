@@ -2,6 +2,16 @@
 
 ## V6 (Next release)
 
+- Library is now thread-safe
+  - Initialize a `EasyPostClient` object with an API key, connection and readtime milliseconds are optional, otherwise it will be set to default.
+  - All methods (i.e. `create`, `retrieve`, retrieve `all` of a resource) exist in services, accessed via property of the client
+    - E.g. Static method -> `Shipment shipment = client.address.create(params)`
+    - E.g. Instance method -> `Shipment boughtShipment = client.shipment.buy(lowestRate, shipmentID)`
+  - All functions are now taking object ID instead of an object, which means the functions are returning the response value directly instead of updating the current object
+    - E.g. `Shipment boughtShipment = client.shipment.buy(lowestRate, shipmentID)`
+- Improves error exception handling
+  - Specific error types for each category of error
+  - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
 - Removes `createAndVerifyWithCarrier` function
 - Removes `verifyWithCarrier` function
 - Changes the type of Insurance `Amount` from Float to String
@@ -14,9 +24,9 @@
   - `updateEmail()` in ReferralCustomer class
 - Adds two missing attributes in the Event class: `pendingUrls` and `completedUrls`
 - Changes the type `result` of Event from `EasyPostResource` to `Map<String, Object>`
-- Improves error exception handling
-  - Specific error types for each category of error
-  - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
+- AppEngine default timeout is now the same as connection timeout
+- Removes invalid function `User.create()` since creating a child-user requires a name
+- Removes deprecated class `CreditCard`, please use alternative `Billing` class
 
 ## v5.10.0 (2022-09-21)
 

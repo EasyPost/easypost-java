@@ -30,6 +30,20 @@ public final class InsuranceTest {
     }
 
     /**
+     * Create insurance object.
+     *
+     * @return Insurance object
+     */
+    private static Insurance createBasicInsurance() throws EasyPostException {
+        Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
+
+        HashMap<String, Object> params = Fixtures.basicInsurance();
+        params.put("tracking_code", shipment.getTrackingCode());
+
+        return vcr.client.insurance.create(params);
+    }
+
+    /**
      * Test creating an insurance object.
      *
      * @throws EasyPostException when the request fails.
@@ -46,20 +60,6 @@ public final class InsuranceTest {
     }
 
     /**
-     * Create insurance object.
-     *
-     * @return Insurance object
-     */
-    private static Insurance createBasicInsurance() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment());
-
-        HashMap<String, Object> params = Fixtures.basicInsurance();
-        params.put("tracking_code", shipment.getTrackingCode());
-
-        return Insurance.create(params);
-    }
-
-    /**
      * Test retrieving an insurance object.
      *
      * @throws EasyPostException when the request fails.
@@ -70,7 +70,7 @@ public final class InsuranceTest {
 
         Insurance insurance = createBasicInsurance();
 
-        Insurance retrievedInsurance = Insurance.retrieve(insurance.getId());
+        Insurance retrievedInsurance = vcr.client.insurance.retrieve(insurance.getId());
 
         assertInstanceOf(Insurance.class, insurance);
         // Must compare IDs since can't do whole-object comparisons currently
@@ -89,7 +89,7 @@ public final class InsuranceTest {
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixtures.pageSize());
 
-        InsuranceCollection insuranceCollection = Insurance.all(params);
+        InsuranceCollection insuranceCollection = vcr.client.insurance.all(params);
 
         List<Insurance> insurances = insuranceCollection.getInsurances();
 

@@ -1,12 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.http.Requestor;
-import com.easypost.http.Requestor.RequestMethod;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public final class Parcel extends EasyPostResource {
     private String predefinedPackage;
     private Float weight;
@@ -102,54 +95,5 @@ public final class Parcel extends EasyPostResource {
      */
     public void setWidth(final Float width) {
         this.width = width;
-    }
-
-    /**
-     * Create a Parcel from a map of parameters.
-     *
-     * @param params the map of the parameters to create a Parcel from.
-     * @return Parcel object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Parcel create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a Parcel from a map of parameters.
-     *
-     * @param params the map of the parameters to create a Parcel from.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Parcel object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Parcel create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("parcel", params);
-
-        return Requestor.request(RequestMethod.POST, classURL(Parcel.class), wrappedParams, Parcel.class, apiKey);
-    }
-
-    /**
-     * Retrieve a Parcel from the API.
-     *
-     * @param id the ID of the Parcel to retrieve.
-     * @return Parcel object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Parcel retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a Parcel from the API.
-     *
-     * @param id     the ID of the Parcel to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Parcel object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static Parcel retrieve(final String id, final String apiKey) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, instanceURL(Parcel.class, id), null, Parcel.class, apiKey);
     }
 }

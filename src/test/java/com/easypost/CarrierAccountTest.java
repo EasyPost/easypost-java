@@ -38,8 +38,8 @@ public final class CarrierAccountTest {
     public void cleanup() {
         if (testCarrierAccountId != null) {
             try {
-                CarrierAccount carrierAccount = CarrierAccount.retrieve(testCarrierAccountId);
-                carrierAccount.delete();
+                CarrierAccount carrierAccount = vcr.client.carrierAccount.retrieve(testCarrierAccountId);
+                vcr.client.carrierAccount.delete(carrierAccount.getId());
                 testCarrierAccountId = null;
             } catch (Exception e) {
                 // in case we try to delete something that's already been deleted
@@ -64,7 +64,7 @@ public final class CarrierAccountTest {
     }
 
     private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
-        CarrierAccount carrierAccount = CarrierAccount.create(Fixtures.basicCarrierAccount());
+        CarrierAccount carrierAccount = vcr.client.carrierAccount.create(Fixtures.basicCarrierAccount());
         testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
         return carrierAccount;
     }
@@ -80,7 +80,7 @@ public final class CarrierAccountTest {
 
         CarrierAccount carrierAccount = createBasicCarrierAccount();
 
-        CarrierAccount retrieveCarrierAccount = CarrierAccount.retrieve(carrierAccount.getId());
+        CarrierAccount retrieveCarrierAccount = vcr.client.carrierAccount.retrieve(carrierAccount.getId());
 
         assertInstanceOf(CarrierAccount.class, retrieveCarrierAccount);
         assertTrue(retrieveCarrierAccount.getId().startsWith("ca_"));
@@ -96,7 +96,7 @@ public final class CarrierAccountTest {
     public void testAll() throws EasyPostException {
         vcr.setUpTest("all");
 
-        List<CarrierAccount> carrierAccounts = CarrierAccount.all();
+        List<CarrierAccount> carrierAccounts = vcr.client.carrierAccount.all();
 
         assertTrue(carrierAccounts.stream().allMatch(carrier -> carrier instanceof CarrierAccount));
     }
@@ -117,7 +117,7 @@ public final class CarrierAccountTest {
         Map<String, Object> updateParams = new HashMap<>();
         updateParams.put("description", testDescription);
 
-        CarrierAccount updatedCarrierAccount = carrierAccount.update(updateParams);
+        CarrierAccount updatedCarrierAccount = vcr.client.carrierAccount.update(updateParams, carrierAccount.getId());
 
         assertInstanceOf(CarrierAccount.class, carrierAccount);
         assertTrue(updatedCarrierAccount.getId().startsWith("ca_"));
@@ -135,7 +135,7 @@ public final class CarrierAccountTest {
 
         CarrierAccount carrierAccount = createBasicCarrierAccount();
 
-        assertDoesNotThrow(() -> carrierAccount.delete());
+        assertDoesNotThrow(() -> vcr.client.carrierAccount.delete(carrierAccount.getId()));
     }
 
     /**
@@ -147,7 +147,7 @@ public final class CarrierAccountTest {
     public void testTypes() throws EasyPostException {
         vcr.setUpTest("types");
 
-        List<CarrierType> types = CarrierType.all();
+        List<CarrierType> types = vcr.client.carrierType.all();
 
         assertInstanceOf(List.class, types);
         assertTrue(types.stream().allMatch(type -> type instanceof CarrierType));

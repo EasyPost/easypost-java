@@ -31,6 +31,35 @@ public final class ReportTest {
     }
 
     /**
+     * Create a report.
+     *
+     * @return Report object
+     */
+    private static Report createBasicReport() throws EasyPostException {
+        Map<String, Object> reportParams = new HashMap<>();
+
+        reportParams.put("start_date", Fixtures.reportDate());
+        reportParams.put("end_date", Fixtures.reportDate());
+        reportParams.put("type", Fixtures.reportType());
+
+        return vcr.client.report.create(reportParams);
+    }
+
+    /**
+     * Create a advanced report.
+     *
+     * @param parameters Map of parameters for create a advanced report.
+     * @return Report object
+     */
+    private static Report createAdvancedReport(Map<String, Object> parameters) throws EasyPostException {
+        parameters.put("start_date", Fixtures.reportDate());
+        parameters.put("end_date", Fixtures.reportDate());
+        parameters.put("type", Fixtures.reportType());
+
+        return vcr.client.report.create(parameters);
+    }
+
+    /**
      * Test creating a report.
      *
      * @throws EasyPostException when the request fails.
@@ -43,21 +72,6 @@ public final class ReportTest {
 
         assertInstanceOf(Report.class, report);
         assertTrue(report.getId().startsWith("shprep_"));
-    }
-
-    /**
-     * Create a report.
-     *
-     * @return Report object
-     */
-    private static Report createBasicReport() throws EasyPostException {
-        Map<String, Object> reportParams = new HashMap<>();
-
-        reportParams.put("start_date", Fixtures.reportDate());
-        reportParams.put("end_date", Fixtures.reportDate());
-        reportParams.put("type", Fixtures.reportType());
-
-        return Report.create(reportParams);
     }
 
     /**
@@ -79,20 +93,14 @@ public final class ReportTest {
         Report reportWithColumns = createAdvancedReport(reportWithAdditionalColumnsParams);
 
         // verify parameters by checking VCR cassette for correct URL
-        // Some reports take a long time to generate, so we won't be able to consistently pull the report
+        // Some reports take a long time to generate, so we won't be able to
+        // consistently pull the report
         // There's unfortunately no way to check if the columns
         // were included in the final report without parsing the CSV
-        // so we assume, if we haven't gotten an error by this point, we've made the API calls correctly
+        // so we assume, if we haven't gotten an error by this point, we've made the API
+        // calls correctly
         // any failure at this point is a server-side issue
         assertInstanceOf(Report.class, reportWithColumns);
-    }
-
-    private static Report createAdvancedReport(Map<String, Object> parameters) throws EasyPostException {
-        parameters.put("start_date", Fixtures.reportDate());
-        parameters.put("end_date", Fixtures.reportDate());
-        parameters.put("type", Fixtures.reportType());
-
-        return Report.create(parameters);
     }
 
     /**
@@ -113,10 +121,12 @@ public final class ReportTest {
         Report reportWithColumns = createAdvancedReport(reportWithAdditionalColumnsParams);
 
         // verify parameters by checking VCR cassette for correct URL
-        // Some reports take a long time to generate, so we won't be able to consistently pull the report
+        // Some reports take a long time to generate, so we won't be able to
+        // consistently pull the report
         // There's unfortunately no way to check if the columns
         // were included in the final report without parsing the CSV
-        // so we assume, if we haven't gotten an error by this point, we've made the API calls correctly
+        // so we assume, if we haven't gotten an error by this point, we've made the API
+        // calls correctly
         // any failure at this point is a server-side issue
         assertInstanceOf(Report.class, reportWithColumns);
     }
@@ -132,7 +142,7 @@ public final class ReportTest {
 
         Report report = createBasicReport();
 
-        Report retrievedReport = Report.retrieve(report.getId());
+        Report retrievedReport = vcr.client.report.retrieve(report.getId());
 
         assertInstanceOf(Report.class, retrievedReport);
         assertEquals(report.getStartDate(), retrievedReport.getStartDate());
@@ -153,7 +163,7 @@ public final class ReportTest {
         params.put("type", Fixtures.reportType());
         params.put("page_size", Fixtures.pageSize());
 
-        ReportCollection reports = Report.all(params);
+        ReportCollection reports = vcr.client.report.all(params);
 
         List<Report> reportsList = reports.getReports();
 
@@ -175,9 +185,10 @@ public final class ReportTest {
         params.put("type", "test");
 
         // should throw EasyPostException,
-        // but might throw NullPointerException due to a bug in the VCR grabbing response content,
+        // but might throw NullPointerException due to a bug in the VCR grabbing
+        // response content,
         // so we'll just check fo a generic exception
-        assertThrows(Exception.class, () -> Report.create(params));
+        assertThrows(Exception.class, () -> vcr.client.report.create(params));
     }
 
     /**
@@ -193,8 +204,9 @@ public final class ReportTest {
         params.put("type", "test");
 
         // should throw EasyPostException,
-        // but might throw NullPointerException due to a bug in the VCR grabbing response content,
+        // but might throw NullPointerException due to a bug in the VCR grabbing
+        // response content,
         // so we'll just check fo a generic exception
-        assertThrows(Exception.class, () -> Report.all(params));
+        assertThrows(Exception.class, () -> vcr.client.report.all(params));
     }
 }

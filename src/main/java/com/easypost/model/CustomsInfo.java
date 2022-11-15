@@ -1,12 +1,6 @@
 package com.easypost.model;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.http.Requestor;
-import com.easypost.http.Requestor.RequestMethod;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public final class CustomsInfo extends EasyPostResource {
     private String contentsType;
@@ -198,56 +192,5 @@ public final class CustomsInfo extends EasyPostResource {
      */
     public void setRestrictionType(final String restrictionType) {
         this.restrictionType = restrictionType;
-    }
-
-    /**
-     * Create a CustomsInfo from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @return CustomsInfo object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsInfo create(final Map<String, Object> params) throws EasyPostException {
-        return create(params, null);
-    }
-
-    /**
-     * Create a CustomsInfo from a map of parameters.
-     *
-     * @param params the map of parameters.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return CustomsInfo object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsInfo create(final Map<String, Object> params, final String apiKey) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("customs_info", params);
-
-        return Requestor.request(RequestMethod.POST, classURL(CustomsInfo.class),
-            wrappedParams, CustomsInfo.class, apiKey);
-    }
-
-    /**
-     * Retrieve a CustomsInfo from the API.
-     *
-     * @param id the ID of the CustomsInfo to retrieve.
-     * @return CustomsInfo object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsInfo retrieve(final String id) throws EasyPostException {
-        return retrieve(id, null);
-    }
-
-    /**
-     * Retrieve a CustomsInfo from the API.
-     *
-     * @param id     the ID of the CustomsInfo to retrieve.
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return CustomsInfo object.
-     * @throws EasyPostException when the request fails.
-     */
-    public static CustomsInfo retrieve(final String id, final String apiKey) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET,
-            instanceURL(CustomsInfo.class, id), null, CustomsInfo.class, apiKey);
     }
 }

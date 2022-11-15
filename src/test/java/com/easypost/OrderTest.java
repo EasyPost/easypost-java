@@ -33,6 +33,15 @@ public final class OrderTest {
     }
 
     /**
+     * Create an order.
+     *
+     * @return Order object
+     */
+    private static Order createBasicOrder() throws EasyPostException {
+        return vcr.client.order.create(Fixtures.basicOrder());
+    }
+
+    /**
      * Test creating an Order.
      *
      * @throws EasyPostException when the request fails.
@@ -49,15 +58,6 @@ public final class OrderTest {
     }
 
     /**
-     * Create an order.
-     *
-     * @return Order object
-     */
-    private static Order createBasicOrder() throws EasyPostException {
-        return Order.create(Fixtures.basicOrder());
-    }
-
-    /**
      * Test retrieving an Order.
      *
      * @throws EasyPostException when the request fails.
@@ -68,7 +68,7 @@ public final class OrderTest {
 
         Order order = createBasicOrder();
 
-        Order retrievedOrder = Order.retrieve(order.getId());
+        Order retrievedOrder = vcr.client.order.retrieve(order.getId());
 
         assertInstanceOf(Order.class, retrievedOrder);
         // Must compare IDs since other elements of objects may be different
@@ -101,7 +101,7 @@ public final class OrderTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testBuy() throws EasyPostException {
+    public void testBuy() throws EasyPostException, InterruptedException {
         vcr.setUpTest("buy");
 
         Order order = createBasicOrder();
@@ -110,9 +110,9 @@ public final class OrderTest {
         params.put("carrier", Fixtures.usps());
         params.put("service", Fixtures.uspsService());
 
-        order.buy(params);
+        Order boughtOrder = vcr.client.order.buy(order.getId(), params);
 
-        List<Shipment> shipments = order.getShipments();
+        List<Shipment> shipments = boughtOrder.getShipments();
 
         assertInstanceOf(Order.class, order);
         for (Shipment shipment : shipments) {
@@ -132,22 +132,22 @@ public final class OrderTest {
         Order order = createBasicOrder();
 
         // Test lowest rate with no filters
-        Rate lowestRate = order.lowestRate();
+        Rate lowestRate = vcr.client.order.lowestRate(order);
         assertEquals("First", lowestRate.getService());
-        assertEquals(5.57, lowestRate.getRate(), 0.01);
+        assertEquals(5.82, lowestRate.getRate(), 0.01);
         assertEquals("USPS", lowestRate.getCarrier());
 
         // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
         List<String> services = new ArrayList<>(Arrays.asList("Priority"));
-        Rate lowestRateService = order.lowestRate(null, services);
+        Rate lowestRateService = vcr.client.order.lowestRate(null, services, order);
         assertEquals("Priority", lowestRateService.getService());
-        assertEquals(7.90, lowestRateService.getRate(), 0.01);
+        assertEquals(8.15, lowestRateService.getRate(), 0.01);
         assertEquals("USPS", lowestRateService.getCarrier());
 
         // Test lowest rate with carrier filter (should error due to bad carrier)
         List<String> carriers = new ArrayList<>(Arrays.asList("BAD CARRIER"));
         assertThrows(EasyPostException.class, () -> {
-            order.lowestRate(carriers, null);
+            vcr.client.order.lowestRate(carriers, null, order);
         });
     }
 }

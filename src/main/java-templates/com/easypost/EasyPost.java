@@ -31,10 +31,6 @@ import com.easypost.easyvcr.VCR;
 
 public abstract class EasyPost {
     public static final String VERSION = "${project.version}";
-    public static final String API_BASE = "https://api.easypost.com/v2";
-    public static final String BETA_API_BASE = "https://api.easypost.com/beta";
-    public static String apiKey;
-    public static int readTimeout;
 
     /**
      * Set a VCR to be used for all HTTP requests.

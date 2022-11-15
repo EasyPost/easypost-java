@@ -27,6 +27,7 @@ import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.model.EasyPostResource;
 import com.easypost.model.Error;
+import com.easypost.service.EasyPostClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -58,70 +59,20 @@ public abstract class Requestor {
 
     private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
-    private static int connectTimeoutMilliseconds = Constant.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS;
-    private static int readTimeoutMilliseconds = Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS;
-    private static double appEngineTimeoutSeconds = Constant.DEFAULT_APP_ENGINE_TIMEOUT_SECONDS;
-
-    /**
-     * Get the timeout in milliseconds for App Engine API requests.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static double getAppEngineTimeoutSeconds() {
-        return appEngineTimeoutSeconds;
-    }
-
-    /**
-     * Set the timeout in seconds for App Engine API requests.
-     *
-     * @param seconds the timeout in seconds
-     */
-    public static void setAppEngineTimeoutSeconds(double seconds) {
-        appEngineTimeoutSeconds = seconds;
-    }
-
-    /**
-     * Get the timeout in milliseconds for connecting to the API.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static int getConnectTimeoutMilliseconds() {
-        return connectTimeoutMilliseconds;
-    }
-
-    /**
-     * Set the timeout in milliseconds for connecting to the API.
-     *
-     * @param milliseconds the timeout in milliseconds
-     */
-    public static void setConnectTimeoutMilliseconds(int milliseconds) {
-        connectTimeoutMilliseconds = milliseconds;
-    }
-
-    /**
-     * Get the timeout in milliseconds for reading API responses.
-     *
-     * @return the timeout in milliseconds
-     */
-    public static int getReadTimeoutMilliseconds() {
-        return readTimeoutMilliseconds;
-    }
-
-    /**
-     * Set the timeout in milliseconds for reading API responses.
-     *
-     * @param milliseconds the timeout in milliseconds
-     */
-    public static void setReadTimeoutMilliseconds(int milliseconds) {
-        readTimeoutMilliseconds = milliseconds;
-    }
 
     private static String urlEncodePair(final String key, final String value) throws UnsupportedEncodingException {
         return String.format("%s=%s",
                 URLEncoder.encode(key, Constant.CHARSET), URLEncoder.encode(value, Constant.CHARSET));
     }
 
-    static Map<String, String> getHeaders(String apiKey) {
+    /**
+     * Set the header of the HTTP request.
+     * 
+     * @param apiKey API of this HTTP request.
+     * @return HTTP header
+     * @throws MissingParameterError
+     */
+    static Map<String, String> generateHeaders(String apiKey) throws MissingParameterError {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Accept-Charset", Constant.CHARSET);
         headers.put("User-Agent", String.format("EasyPost/v2 JavaClient/%s Java/%s OS/%s OSVersion/%s OSArch/%s " +
@@ -130,8 +81,8 @@ public abstract class Requestor {
                 convertSpaceToHyphen(System.getProperty("os.arch")),
                 convertSpaceToHyphen(System.getProperties().getProperty("java.vm.name"))));
 
-        if (apiKey == null) {
-            apiKey = EasyPost.apiKey;
+        if (apiKey == null || apiKey.isEmpty()) {
+            throw new MissingParameterError(Constants.INVALID_API_KEY_TYPE);
         }
 
         headers.put("Authorization", String.format("Bearer %s", apiKey));
@@ -139,12 +90,29 @@ public abstract class Requestor {
         return headers;
     }
 
+    /**
+     * Convert space to hyphen.
+     *
+     * @param string Input string.
+     * @return String that has hyphen instead of space.
+     */
     private static String convertSpaceToHyphen(String string) {
         return string.replace(' ', '-');
     }
 
-    private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(final String url, final String apiKey,
-            final String method) throws IOException {
+    /**
+     * Create connection to EasyPost API endpoint.
+     *
+     * @param url    URL of the HTTP request.
+     * @param client EasyPostClient object.
+     * @param method Method of the API request.
+     * @return HttpsURLConnection
+     * @throws IOException
+     * @throws MissingParameterError
+     */
+    private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(final String url,
+            final EasyPostClient client,
+            final String method) throws IOException, MissingParameterError {
         HttpsURLConnection conn = null;
         String customURLStreamHandlerClassName = System.getProperty(CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
         if (customURLStreamHandlerClassName != null) {
@@ -182,25 +150,26 @@ public abstract class Requestor {
             URL urlObj = new URL(null, url);
             conn = (javax.net.ssl.HttpsURLConnection) urlObj.openConnection();
         }
-        conn.setConnectTimeout(getConnectTimeoutMilliseconds());
+        conn.setConnectTimeout(client.getConnectionTimeoutMilliseconds());
         conn.setRequestMethod(method);
-
-        int readTimeout;
-        if (EasyPost.readTimeout != 0) {
-            readTimeout = EasyPost.readTimeout;
-        } else {
-            readTimeout = getReadTimeoutMilliseconds();
-        }
-        conn.setReadTimeout(readTimeout);
+        conn.setReadTimeout(client.getReadTimeoutMilliseconds());
 
         conn.setUseCaches(false);
-        for (Map.Entry<String, String> header : getHeaders(apiKey).entrySet()) {
+        for (Map.Entry<String, String> header : generateHeaders(client.getApiKey()).entrySet()) {
             conn.setRequestProperty(header.getKey(), header.getValue());
         }
 
         return conn;
     }
 
+    /**
+     * Set the property to the HttpsURLConnection for Post and Put methods.
+     *
+     * @param conn EasyPost HttpsURLConnection
+     * @param body Input body
+     * @return HttpsURLConnection
+     * @throws IOException
+     */
     private static javax.net.ssl.HttpsURLConnection writeBody(final javax.net.ssl.HttpsURLConnection conn,
             final JsonObject body) throws IOException {
         if (body != null) {
@@ -220,49 +189,102 @@ public abstract class Requestor {
         return conn;
     }
 
+    /**
+     * Create GET HTTP request connection.
+     *
+     * @param url    URL of the HTTP request.
+     * @param query  Query of the HTTP request.
+     * @param client EasyPostClient object.
+     * @return HttpsURLConnection object.
+     * @throws IOException
+     * @throws MissingParameterError
+     */
     private static javax.net.ssl.HttpsURLConnection createGetConnection(final String url, final String query,
-            final String apiKey) throws IOException {
+            final EasyPostClient client) throws IOException, MissingParameterError {
         String getURL = url;
         if (query != null) {
             getURL = String.format("%s?%s", url, query);
         }
-        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(getURL, apiKey, "GET");
+        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(getURL, client, "GET");
         return conn;
     }
 
+    /**
+     * Create POST HTTP request connection.
+     *
+     * @param url    URL of the HTTP request.
+     * @param body   Body of the HTTP request.
+     * @param client EasyPostClient object.
+     * @return HttpsURLConnection object.
+     * @throws IOException
+     * @throws MissingParameterError
+     */
     private static javax.net.ssl.HttpsURLConnection createPostConnection(final String url, final JsonObject body,
-            final String apiKey) throws IOException {
-        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey, "POST");
+            final EasyPostClient client) throws IOException, MissingParameterError {
+        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, client, "POST");
         conn = writeBody(conn, body);
         return conn;
     }
 
+    /**
+     * Create DELETE HTTP request connection.
+     *
+     * @param url    URL of the HTTP request.
+     * @param query  Query of the HTTP request.
+     * @param client EasyPostClient object.
+     * @return HttpsURLConnection object.
+     * @throws IOException
+     * @throws MissingParameterError
+     */
     private static javax.net.ssl.HttpsURLConnection createDeleteConnection(final String url, final String query,
-            final String apiKey) throws IOException {
+            final EasyPostClient client) throws IOException, MissingParameterError {
         String deleteUrl = url;
         if (query != null) {
             deleteUrl = String.format("%s?%s", url, query);
         }
-        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(deleteUrl, apiKey, "DELETE");
+        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(deleteUrl, client, "DELETE");
         return conn;
     }
 
+    /**
+     * Create PUT HTTP request connection.
+     *
+     * @param url    URL of the HTTP request.
+     * @param body   Body of the HTTP request.
+     * @param client EasyPostClient object.
+     * @return HttpsURLConnection object.
+     * @throws IOException
+     * @throws MissingParameterError
+     */
     private static javax.net.ssl.HttpsURLConnection createPutConnection(final String url, final JsonObject body,
-            final String apiKey) throws IOException {
-        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, apiKey, "PUT");
+            final EasyPostClient client) throws IOException, MissingParameterError {
+        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, client, "PUT");
         conn = writeBody(conn, body);
         return conn;
     }
 
+    /**
+     * Create body for the HTTP request.
+     *
+     * @param params Map of parameter for the HTTP request body.
+     * @return JsonObject of the Map object.
+     */
     private static JsonObject createBody(final Map<String, Object> params) {
         // this is a hack to fix a broken concept:
         // https://github.com/google/gson/issues/1080
         // noinspection rawtypes,unchecked
-        JsonElement jsonElement = Constant.GSON.toJsonTree(new HashMap(params));
+        JsonElement jsonElement = Constant.GSON.toJsonTree(new HashMap<>(params));
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         return jsonObject;
     }
 
+    /**
+     * Create query for the HTTP request.
+     *
+     * @param params Map of parameter for the HTTP request body.
+     * @return Query string of the Map object.
+     * @throws UnsupportedEncodingException
+     */
     private static String createQuery(final Map<String, Object> params) throws UnsupportedEncodingException {
         Map<String, String> flatParams = flattenParams(params);
         StringBuilder queryStringBuilder = new StringBuilder();
@@ -309,6 +331,13 @@ public abstract class Requestor {
         return flatParams;
     }
 
+    /**
+     * Get response body from the InputStream.
+     *
+     * @param responseStream The InputStream from the response body.
+     * @return InputStream in string value.
+     * @throws IOException
+     */
     private static String getResponseBody(final InputStream responseStream) throws IOException {
         if (responseStream.available() == 0) {
             // Return empty string if the InputSteam is empty to avoid exceptions.
@@ -321,24 +350,35 @@ public abstract class Requestor {
         return rBody;
     }
 
+    /**
+     * Make URL connection request based on the API method.
+     *
+     * @param method API method.
+     * @param url    URL of the HTTP request.
+     * @param query  Query string of the HTTP request.
+     * @param body   Body of the HTTP request.
+     * @param client EasyPostClient object
+     * @return EasyPostResponse object.
+     * @throws EasyPostException
+     */
     private static EasyPostResponse makeURLConnectionRequest(final RequestMethod method,
             final String url, final String query,
-            final JsonObject body, final String apiKey)
+            final JsonObject body, final EasyPostClient client)
             throws EasyPostException {
         javax.net.ssl.HttpsURLConnection conn = null;
         try {
             switch (method) {
                 case GET:
-                    conn = createGetConnection(url, query, apiKey);
+                    conn = createGetConnection(url, query, client);
                     break;
                 case POST:
-                    conn = createPostConnection(url, body, apiKey);
+                    conn = createPostConnection(url, body, client);
                     break;
                 case PUT:
-                    conn = createPutConnection(url, body, apiKey);
+                    conn = createPutConnection(url, body, client);
                     break;
                 case DELETE:
-                    conn = createDeleteConnection(url, query, apiKey);
+                    conn = createDeleteConnection(url, query, client);
                     break;
                 default:
                     throw new EasyPostException(
@@ -360,7 +400,7 @@ public abstract class Requestor {
         } catch (IOException e) {
             throw new EasyPostException(String.format("Could not connect to EasyPost (%s). " +
                     "Please check your internet connection and try again. If this problem persists," +
-                    "please contact us at %s.", EasyPost.API_BASE, Constant.EASYPOST_SUPPORT_EMAIL), e);
+                    "please contact us at %s.", client.getApiBase(), Constant.EASYPOST_SUPPORT_EMAIL), e);
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -376,36 +416,18 @@ public abstract class Requestor {
      * @param url    The URL of the API request.
      * @param params The params of the API request.
      * @param clazz  The class of the object for deserialization
-     * @param apiKey The API key for this API request.
-     * 
+     * @param client The EasyPostClient object.
+     *
      * @return A class object.
      * @throws EasyPostException when the request fails.
      */
-    public static <T> T request(final RequestMethod method, final String url,
-            final Map<String, Object> params, final Class<T> clazz, final String apiKey)
+    public static <T> T request(final RequestMethod method, String url,
+            final Map<String, Object> params, final Class<T> clazz, final EasyPostClient client)
             throws EasyPostException {
-        return request(method, url, params, clazz, apiKey, true);
-    }
-
-    /**
-     * Send an HTTP request to EasyPost.
-     *
-     * @param <T>            Any class.
-     * @param method         The method of the API request.
-     * @param url            The URL of the API request.
-     * @param params         The params of the API request.
-     * @param clazz          The class of the object for deserialization
-     * @param apiKey         The API key for this API request.
-     * @param apiKeyRequired The API key for this HTTP request call if needed.
-     *
-     * @return A class object.
-     * @throws EasyPostException when the request fails.
-     */
-    protected static <T> T request(final RequestMethod method, final String url,
-            final Map<String, Object> params, final Class<T> clazz, final String apiKey,
-            final boolean apiKeyRequired) throws EasyPostException {
         String originalDNSCacheTTL = null;
         boolean allowedToSetTTL = true;
+        url = String.format(url, client.getApiBase(), client.getApiVersion());
+
         try {
             originalDNSCacheTTL = java.security.Security.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
             // disable DNS cache
@@ -415,7 +437,7 @@ public abstract class Requestor {
         }
 
         try {
-            return _request(method, url, params, clazz, apiKey, apiKeyRequired);
+            return httpRequest(method, url, params, clazz, client);
         } finally {
             if (allowedToSetTTL) {
                 if (originalDNSCacheTTL == null) {
@@ -428,20 +450,23 @@ public abstract class Requestor {
         }
     }
 
+    /**
+     * Send an HTTP request to EasyPost.
+     *
+     * @param <T>    Any class.
+     * @param method The method of the API request.
+     * @param url    The URL of the API request.
+     * @param params The params of the API request.
+     * @param clazz  The class of the object for deserialization
+     * @param client The EasyPostClient object.
+     *
+     * @return A class object.
+     * @throws EasyPostException when the request fails.
+     */
     @SuppressWarnings("checkstyle:methodname")
-    protected static <T> T _request(final RequestMethod method, final String url,
-            final Map<String, Object> params, final Class<T> clazz, String apiKey,
-            final boolean apiKeyRequired) throws EasyPostException {
-        if ((EasyPost.apiKey == null || EasyPost.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
-            if (apiKeyRequired) {
-                throw new MissingParameterError(Constants.INVALID_API_KEY_TYPE);
-            }
-        }
-
-        if (apiKey == null) {
-            apiKey = EasyPost.apiKey;
-        }
-
+    protected static <T> T httpRequest(final RequestMethod method, final String url,
+            final Map<String, Object> params, final Class<T> clazz, final EasyPostClient client)
+            throws EasyPostException {
         String query = null;
         JsonObject body = null;
         if (params != null) {
@@ -475,12 +500,12 @@ public abstract class Requestor {
         EasyPostResponse response;
         try {
             // HTTPSURLConnection verifies SSL cert by default
-            response = makeURLConnectionRequest(method, url, query, body, apiKey);
+            response = makeURLConnectionRequest(method, url, query, body, client);
         } catch (ClassCastException ce) {
             // appengine
             String appEngineEnv = System.getProperty("com.google.appengine.runtime.environment", null);
             if (appEngineEnv != null) {
-                response = makeAppEngineRequest(method, url, query, body, apiKey);
+                response = makeAppEngineRequest(method, url, query, body, client);
             } else {
                 throw ce;
             }
@@ -542,7 +567,7 @@ public abstract class Requestor {
     }
 
     private static EasyPostResponse makeAppEngineRequest(final RequestMethod method, String url, final String query,
-            final JsonObject body, final String apiKey)
+            final JsonObject body, final EasyPostClient client)
             throws EasyPostException {
         String unknownErrorMessage = String.format(
                 "Sorry, an unknown error occurred while trying to use the Google App Engine runtime." +
@@ -575,7 +600,7 @@ public abstract class Requestor {
             // Heroku times out after 30s, so leave some time for the API to return a
             // response
             fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class)
-                    .invoke(fetchOptions, getAppEngineTimeoutSeconds());
+                    .invoke(fetchOptions, client.getConnectionTimeoutMilliseconds());
 
             Class<?> requestClass = Class.forName("com.google.appengine.api.urlfetch.HTTPRequest");
 
@@ -587,7 +612,7 @@ public abstract class Requestor {
                 requestClass.getDeclaredMethod("setPayload", byte[].class).invoke(request, bodyString.getBytes());
             }
 
-            for (Map.Entry<String, String> header : getHeaders(apiKey).entrySet()) {
+            for (Map.Entry<String, String> header : generateHeaders(client.getApiKey()).entrySet()) {
                 Class<?> httpHeaderClass = Class.forName("com.google.appengine.api.urlfetch.HTTPHeader");
                 Object reqHeader = httpHeaderClass.getDeclaredConstructor(String.class, String.class)
                         .newInstance(header.getKey(), header.getValue());

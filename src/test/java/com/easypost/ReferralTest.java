@@ -42,7 +42,7 @@ public final class ReferralTest {
      * @return Referral object
      */
     private static ReferralCustomer createReferral() throws EasyPostException {
-        return ReferralCustomer.create(Fixtures.referralUser());
+        return vcr.client.referralCustomer.create(Fixtures.referralUser());
     }
 
     /**
@@ -72,7 +72,7 @@ public final class ReferralTest {
 
         ReferralCustomer referralUser = createReferral();
 
-        assertDoesNotThrow(() -> ReferralCustomer.updateEmail("email@example.com", referralUser.getId()));
+        assertDoesNotThrow(() -> vcr.client.referralCustomer.updateEmail("email@example.com", referralUser.getId()));
     }
 
     /**
@@ -87,7 +87,7 @@ public final class ReferralTest {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("page_size", Fixtures.pageSize());
 
-        ReferralCustomerCollection referralCustomerCollection = ReferralCustomer.all(params);
+        ReferralCustomerCollection referralCustomerCollection = vcr.client.referralCustomer.all(params);
 
         List<ReferralCustomer> referralUsers = referralCustomerCollection.getReferralCustomers();
 
@@ -107,11 +107,11 @@ public final class ReferralTest {
         vcr.setUpTest("referral_add_credit_card");
 
         Map<String, Object> creditCardDetails = Fixtures.creditCardDetails();
-        PaymentMethodObject creditCard =
-                ReferralCustomer.addCreditCardToUser(referralUserKey(), (String) creditCardDetails.get("number"),
-                        Integer.parseInt((String) creditCardDetails.get("expiration_month")),
-                        Integer.parseInt((String) creditCardDetails.get("expiration_year")),
-                        (String) creditCardDetails.get("cvc"), PaymentMethod.Priority.PRIMARY);
+        PaymentMethodObject creditCard = vcr.client.referralCustomer.addCreditCardToUser(referralUserKey(),
+                (String) creditCardDetails.get("number"),
+                Integer.parseInt((String) creditCardDetails.get("expiration_month")),
+                Integer.parseInt((String) creditCardDetails.get("expiration_year")),
+                (String) creditCardDetails.get("cvc"), PaymentMethod.Priority.PRIMARY);
 
         assertInstanceOf(PaymentMethodObject.class, creditCard);
         assertTrue(creditCard.getId().startsWith("card_"));

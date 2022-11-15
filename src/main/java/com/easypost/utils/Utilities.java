@@ -1,19 +1,16 @@
-package com.easypost.model;
+package com.easypost.utils;
 
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
+import com.easypost.model.Rate;
 
 import java.net.URLEncoder;
+
 import java.util.List;
 import java.util.Map;
 
-public final class Utilities {
-    private Utilities() {
-        // Do not instantiate this class.
-        throw new IllegalStateException("Cannot be instantiated");
-    }
-
+public abstract class Utilities {
     /**
      * Get the lowest rate from a list of rates.
      *
@@ -52,7 +49,7 @@ public final class Utilities {
 
         if (lowestRate == null) {
             throw new FilteringError(String.format(
-                Constants.NO_OBJECT_FOUND, "lowest rate matching required criteria"));
+                    Constants.NO_OBJECT_FOUND, "lowest rate matching required criteria"));
         }
 
         return lowestRate;
@@ -87,5 +84,51 @@ public final class Utilities {
         }
 
         return result.toString();
+    }
+
+    /**
+     * Get the URL for the instance object.
+     * 
+     * @param clazz The class of the instance object.
+     * @param id    The id of the object.
+     * @return The string of instance object name and its id.
+     */
+    public static String instanceURL(final Class<?> clazz, final String id) {
+        return String.format("%s/%s", classURL(clazz), id);
+    }
+
+    /**
+     * Get the URL for the class.
+     *
+     * @param clazz The class of the URL.
+     * @return The string of the class name.
+     */
+    public static String classURL(final Class<?> clazz) {
+        String singleURL = singleClassURL(clazz);
+        if (singleURL.charAt(singleURL.length() - 1) == 's' || singleURL.charAt(singleURL.length() - 1) == 'h') {
+            return String.format("%ses", singleClassURL(clazz));
+        } else {
+            return String.format("%ss", singleClassURL(clazz));
+        }
+    }
+
+    /**
+     * Get the URL for this class with the API base url.
+     *
+     * @param clazz The class name.
+     * @return String that has API base and class name.
+     */
+    private static String singleClassURL(final Class<?> clazz) {
+        return String.format("%s/%s", "%s/%s", className(clazz));
+    }
+
+    /**
+     * Get the class name from the given parameter.
+     *
+     * @param clazz The class name.
+     * @return String of class name.
+     */
+    private static String className(final Class<?> clazz) {
+        return clazz.getSimpleName().replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase().replace("$", "");
     }
 }

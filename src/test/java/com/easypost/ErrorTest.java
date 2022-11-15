@@ -6,6 +6,7 @@ import com.easypost.exception.API.RedirectError;
 import com.easypost.exception.API.ServiceUnavailablError;
 import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
+import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Requestor;
 import com.easypost.exception.API.PaymentError;
 import com.easypost.exception.API.RateLimitError;
@@ -16,7 +17,6 @@ import com.easypost.exception.API.ForbiddenError;
 import com.easypost.exception.API.GatewayTimeoutError;
 import com.easypost.exception.API.InternalServerError;
 import com.easypost.exception.API.InvalidRequestError;
-import com.easypost.model.Shipment;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -32,11 +32,12 @@ public final class ErrorTest extends Requestor {
 
     /**
      * Set up the testing environment for this file.
+     * @throws MissingParameterError
      *
      * @throws EasyPostException when the request fails.
      */
     @BeforeAll
-    public static void setup() {
+    public static void setup() throws MissingParameterError {
         vcr = new TestUtils.VCR("error", TestUtils.ApiKey.TEST);
     }
 
@@ -49,7 +50,7 @@ public final class ErrorTest extends Requestor {
     public void testError() throws EasyPostException {
         vcr.setUpTest("error");
         
-        EasyPostException exception = assertThrows(InvalidRequestError.class, () -> Shipment.create(null));
+        EasyPostException exception = assertThrows(InvalidRequestError.class, () -> vcr.client.shipment.create(null));
 
         assertEquals(422, exception.getStatusCode());
         assertEquals("PARAMETER.REQUIRED", exception.getCode());

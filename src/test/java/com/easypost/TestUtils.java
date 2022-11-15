@@ -8,6 +8,8 @@ import com.easypost.easyvcr.ExpirationActions;
 import com.easypost.easyvcr.MatchRules;
 import com.easypost.easyvcr.Mode;
 import com.easypost.easyvcr.TimeFrame;
+import com.easypost.exception.General.MissingParameterError;
+import com.easypost.service.EasyPostClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -128,10 +130,9 @@ public abstract class TestUtils {
 
     public static final class VCR {
         private final com.easypost.easyvcr.VCR vcr;
-
-        private final String apiKey;
-
         private String testCassettesFolder;
+        private String apiKey;
+        EasyPostClient client;
 
         /**
          * Get whether the VCR is recording.
@@ -143,11 +144,20 @@ public abstract class TestUtils {
         }
 
         /**
+        * Constructor.
+         * @throws MissingParameterError
+        */
+        public VCR() throws MissingParameterError {
+            this(null, ApiKey.TEST);
+        }
+
+        /**
          * Constructor.
          *
          * @param testCassettesFolder The folder where the cassettes will be stored.
+         * @throws MissingParameterError
          */
-        public VCR(String testCassettesFolder) {
+        public VCR(String testCassettesFolder) throws MissingParameterError {
             this(testCassettesFolder, ApiKey.TEST);
         }
 
@@ -156,9 +166,20 @@ public abstract class TestUtils {
          *
          * @param testCassettesFolder The folder where the cassettes will be stored.
          * @param apiKey              The API key to use.
+         * @throws MissingParameterError
          */
-        public VCR(String testCassettesFolder, ApiKey apiKey) {
+        public VCR(String testCassettesFolder, ApiKey apiKey) throws MissingParameterError {
             this(testCassettesFolder, getApiKey(apiKey));
+        }
+
+        /**
+         * Constructor.
+         *
+         * @param apiKey The API key to use.
+         * @throws MissingParameterError
+         */
+        public VCR(ApiKey apiKey) throws MissingParameterError {
+            this(null, apiKey);
         }
 
         /**
@@ -166,8 +187,9 @@ public abstract class TestUtils {
          *
          * @param testCassettesFolder The folder where the cassettes will be stored.
          * @param apiKey              The API key to use.
+         * @throws MissingParameterError
          */
-        public VCR(String testCassettesFolder, String apiKey) {
+        public VCR(String testCassettesFolder, String apiKey) throws MissingParameterError {
             AdvancedSettings advancedSettings = new AdvancedSettings();
             advancedSettings.matchRules = new MatchRules().byMethod().byFullUrl()
                     .byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
@@ -180,7 +202,7 @@ public abstract class TestUtils {
             vcr = new com.easypost.easyvcr.VCR(advancedSettings);
 
             this.apiKey = apiKey;
-
+            this.client = new EasyPostClient(apiKey);
             this.testCassettesFolder = Paths.get(getSourceFileDirectory(), CASSETTES_PATH)
                     .toString(); // create the "cassettes" folder
 
@@ -197,28 +219,13 @@ public abstract class TestUtils {
         }
 
         /**
-         * Constructor.
-         *
-         * @param apiKey The API key to use.
-         */
-        public VCR(ApiKey apiKey) {
-            this(null, apiKey);
-        }
-
-        /**
-         * Constructor.
-         */
-        public VCR() {
-            this(null, ApiKey.TEST);
-        }
-
-        /**
          * Set up the VCR for a unit test.
          *
          * @param cassetteName The name of the cassette to use.
+         * @throws MissingParameterError
          */
-        public void setUpTest(String cassetteName) {
-            setUpTest(cassetteName, null);
+        public void setUpTest(String cassetteName) throws MissingParameterError {
+            setUpTest(cassetteName, "");
         }
 
         /**
@@ -226,11 +233,12 @@ public abstract class TestUtils {
          *
          * @param cassetteName   The name of the cassette to use.
          * @param overrideApiKey The API key to use.
+         * @throws MissingParameterError
          */
-        public void setUpTest(String cassetteName, String overrideApiKey) {
+        public void setUpTest(String cassetteName, String overrideApiKey) throws MissingParameterError {
             // override api key if needed
-            EasyPost.apiKey = overrideApiKey != null ? overrideApiKey : apiKey;
-
+            client = new EasyPostClient(overrideApiKey.isEmpty() ? this.apiKey : overrideApiKey);
+            
             // set up cassette
             Cassette cassette = new Cassette(testCassettesFolder, cassetteName);
 

@@ -1,12 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.EasyPost;
-import com.easypost.exception.Constants;
-import com.easypost.exception.EasyPostException;
-import com.easypost.exception.General.InvalidObjectError;
-import com.easypost.http.Requestor;
-import com.easypost.http.Requestor.RequestMethod;
-
 public class PaymentMethod extends EasyPostResource {
 
     public enum Priority {
@@ -52,41 +45,6 @@ public class PaymentMethod extends EasyPostResource {
         secondaryPaymentMethod.setExpMonth(String.valueOf(this.secondaryPaymentMethod.getExpMonth()));
         secondaryPaymentMethod.setExpYear(String.valueOf(this.secondaryPaymentMethod.getExpYear()));
         return secondaryPaymentMethod;
-    }
-
-    /**
-     * List all payment methods.
-     *
-     * @return Billing object.
-     * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link com.easypost.model.Billing#retrievePaymentMethods()} instead.
-     * Deprecated: v5.5.0 - v7.0.0
-     */
-    @Deprecated
-    public static PaymentMethod all() throws EasyPostException {
-        return all(null);
-    }
-
-    /**
-     * List all payment methods.
-     *
-     * @param apiKey API key to use in request (overrides default API key).
-     * @return Billing object.
-     * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link com.easypost.model.Billing#retrievePaymentMethods()} instead.
-     * Deprecated: v5.5.0 - v7.0.0
-     */
-    @Deprecated
-    public static PaymentMethod all(String apiKey) throws EasyPostException {
-        PaymentMethod response =
-            Requestor.request(RequestMethod.GET, String.format("%s/%s", EasyPost.API_BASE, "payment_methods"), null,
-                        PaymentMethod.class, apiKey);
-
-        if (response.getId() == null) {
-            throw new InvalidObjectError(Constants.NO_PAYMENT_METHODS);
-        }
-
-        return response;
     }
 
     /**

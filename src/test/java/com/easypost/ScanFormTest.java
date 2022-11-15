@@ -50,7 +50,7 @@ public final class ScanFormTest {
      * @return ScanForm object
      */
     private static ScanForm getBasicScanForm() throws EasyPostException {
-        Shipment shipment = Shipment.create(Fixtures.oneCallBuyShipment());
+        Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
 
         List<Shipment> shipments = new ArrayList<>();
         shipments.add(shipment);
@@ -58,7 +58,7 @@ public final class ScanFormTest {
         Map<String, Object> params = new HashMap<>();
         params.put("shipments", shipments);
 
-        ScanForm scanForm = ScanForm.create(params);
+        ScanForm scanForm = vcr.client.scanform.create(params);
         return scanForm;
     }
 
@@ -73,7 +73,7 @@ public final class ScanFormTest {
 
         ScanForm scanForm = getBasicScanForm();
 
-        ScanForm retrievedScanForm = ScanForm.retrieve(scanForm.getId());
+        ScanForm retrievedScanForm = vcr.client.scanform.retrieve(scanForm.getId());
 
         assertInstanceOf(ScanForm.class, retrievedScanForm);
         assertTrue(scanForm.equals(retrievedScanForm));
@@ -91,7 +91,7 @@ public final class ScanFormTest {
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixtures.pageSize());
 
-        ScanFormCollection scanForms = ScanForm.all(params);
+        ScanFormCollection scanForms = vcr.client.scanform.all(params);
         List<ScanForm> scanFormsList = scanForms.getScanForms();
 
         assertTrue(scanFormsList.size() <= Fixtures.pageSize());
