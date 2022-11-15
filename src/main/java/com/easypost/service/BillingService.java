@@ -100,10 +100,10 @@ public class BillingService {
         PaymentMethodObject paymentMethod = null;
         switch (priority) {
             case PRIMARY:
-                paymentMethod = paymentMethods.getPrimaryPaymentMethodObject();
+                paymentMethod = paymentMethods.getPrimaryPaymentMethod();
                 break;
             case SECONDARY:
-                paymentMethod = paymentMethods.getSecondaryPaymentMethodObject();
+                paymentMethod = paymentMethods.getSecondaryPaymentMethod();
                 break;
             default:
                 break;

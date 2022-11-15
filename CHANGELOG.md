@@ -26,11 +26,14 @@
 - Changes the type `result` of Event from `EasyPostResource` to `Map<String, Object>`
 - AppEngine default timeout is now the same as connection timeout
 - Removes invalid function `User.create()` since creating a child-user requires a name
-- Removes deprecated class `CreditCard`, please use alternative `Billing` class
+- Removes deprecated class `CreditCard` and its associated classes `PrimaryPaymentMethod`, `SecondaryPaymentMethod`, and `BaseCreditCard`, please use alternative `Billing` class
 - Removes all the setters of each object
 - Setters are now available via lombok and aren't explicitly in the code anymore
-- Fixes a typo `getPickoutRates()` is now `getPickupRates()`
 - Change the type `hasMore` in ReferralCustomerCollection from `boolean` to `Boolean`
+- Rename some getters
+  - Pickup class: `getPickoutRates()` -> `getPickupRates()`
+  - PaymentMethod class: `getPrimaryPaymentMethodObject()` -> `getPrimaryPaymentMethod()`
+  - PaymentMethod class: `getSecondaryPaymentMethodObject()` -> `getSecondaryPaymentMethod()`
 
 ## v5.10.0 (2022-09-21)
 
