@@ -6,9 +6,9 @@
   - Initialize a `EasyPostClient` object with an API key, connection and readtime milliseconds are optional, otherwise it will be set to default.
   - All methods (i.e. `create`, `retrieve`, retrieve `all` of a resource) exist in services, accessed via property of the client
     - E.g. Static method -> `Shipment shipment = client.address.create(params)`
-    - E.g. Instance method -> `Shipment boughtShipment = client.shipment.buy(lowestRate, shipmentID)`
+    - E.g. Instance method -> `Shipment boughtShipment = client.shipment.buy(shipmentID,lowestRate)`
   - All functions are now taking object ID instead of an object, which means the functions are returning the response value directly instead of updating the current object
-    - E.g. `Shipment boughtShipment = client.shipment.buy(lowestRate, shipmentID)`
+    - E.g. `Shipment boughtShipment = client.shipment.buy(shipmentID, lowestRate)`
 - Improves error exception handling
   - Specific error types for each category of error
   - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
@@ -28,7 +28,7 @@
 - Removes invalid function `User.create()` since creating a child-user requires a name
 - Removes deprecated class `CreditCard`, please use alternative `Billing` class
 - Removes all the getters of each object
-- Fixes a typo `getPickoutRates()` is now `getPickupRates`
+- Fixes a typo `getPickoutRates()` is now `getPickupRates()`
 
 ## v5.10.0 (2022-09-21)
 
