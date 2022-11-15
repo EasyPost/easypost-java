@@ -51,9 +51,6 @@
         "pragma": [
           "no-cache"
         ],
-        "x-canary": [
-          "direct"
-        ],
         "x-content-type-options": [
           "nosniff"
         ],
@@ -250,9 +247,9 @@
           "3a8b2e0f6372c588e0d9ea610019bf28"
         ],
         "x-proxied": [
-          "extlb3wdc 29913d444b",
-          "intlb1wdc 29913d444b",
-          "intlb1nuq 29913d444b"
+          "extlb4wdc 29913d444b",
+          "intlb2wdc 29913d444b",
+          "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
