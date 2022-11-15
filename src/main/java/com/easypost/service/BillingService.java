@@ -1,9 +1,5 @@
 package com.easypost.service;
 
-<<<<<<< HEAD
-=======
-import com.easypost.EasyPost;
->>>>>>> f9789c1 (Add thread-safe to the library)
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
