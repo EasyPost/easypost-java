@@ -29,9 +29,9 @@ public class PaymentMethodService {
      */
     @Deprecated
     public PaymentMethod all() throws EasyPostException {
+        String url = String.format("%s/%s", client.getApiBase(), "payment_methods");
         PaymentMethod response =
-            Requestor.request(RequestMethod.GET, String.format("%s/%s", client.getApiBase(), "payment_methods"), null,
-                        PaymentMethod.class, client);
+            Requestor.request(RequestMethod.GET, url, null, PaymentMethod.class, client);
 
         if (response.getId() == null) {
             throw new InvalidObjectError(Constants.NO_PAYMENT_METHODS);

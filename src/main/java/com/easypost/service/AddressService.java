@@ -84,9 +84,9 @@ public class AddressService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("address", params);
 
-        AddressVerifyResponse response = Requestor.request(RequestMethod.POST,
-                String.format("%s/create_and_verify", Utilities.classURL(Address.class)),
-                wrappedParams, AddressVerifyResponse.class, client);
+        String url = String.format("%s/create_and_verify", Utilities.classURL(Address.class));
+        AddressVerifyResponse response = Requestor.request(RequestMethod.POST, url, wrappedParams,
+                AddressVerifyResponse.class, client);
 
         return response.getAddress();
     }
@@ -99,9 +99,9 @@ public class AddressService {
      * @throws EasyPostException when the request fails.
      */
     public Address verify(String id) throws EasyPostException {
-        AddressVerifyResponse response;
-        response = Requestor.request(RequestMethod.GET, String.format("%s/verify",
-                Utilities.instanceURL(Address.class, id)), null, AddressVerifyResponse.class, client);
+        String url = String.format("%s/verify", Utilities.instanceURL(Address.class, id));
+        AddressVerifyResponse response = Requestor.request(RequestMethod.GET, url, null, AddressVerifyResponse.class,
+                client);
 
         return response.getAddress();
     }

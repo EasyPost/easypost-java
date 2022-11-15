@@ -125,6 +125,7 @@ public class UserService {
         String updateBrandUrl = String.format("%s/brand", Utilities.instanceURL(User.class, id));
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("brand", params);
+
         return Requestor.request(RequestMethod.PUT, updateBrandUrl, wrappedParams, Brand.class, client);
     }
 }

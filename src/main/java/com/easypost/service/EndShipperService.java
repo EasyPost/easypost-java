@@ -34,9 +34,9 @@ public class EndShipperService {
 
         wrappedParams.put("address", params);
 
-        return Requestor.request(RequestMethod.POST,
-                String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "end_shippers"),
-                wrappedParams, EndShipper.class, client);
+        String url = String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "end_shippers");
+
+        return Requestor.request(RequestMethod.POST, url, wrappedParams, EndShipper.class, client);
     }
 
     /**
@@ -47,9 +47,9 @@ public class EndShipperService {
      * @throws EasyPostException when the request fails.
      */
     public EndShipper retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET,
-                String.format("%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(), "end_shippers", id), null,
-                EndShipper.class, client);
+        String url = String.format("%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(), "end_shippers", id);
+
+        return Requestor.request(RequestMethod.GET, url, null, EndShipper.class, client);
     }
 
     /**
@@ -78,8 +78,8 @@ public class EndShipperService {
 
         wrappedParams.put("address", params);
 
-        return Requestor.request(RequestMethod.PUT,
-                String.format("%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(), "end_shippers", id),
-                wrappedParams, EndShipper.class, client);
+        String url = String.format("%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(), "end_shippers", id);
+
+        return Requestor.request(RequestMethod.PUT, url, wrappedParams, EndShipper.class, client);
     }
 }

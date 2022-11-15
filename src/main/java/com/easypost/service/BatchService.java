@@ -107,9 +107,9 @@ public class BatchService {
      * @throws EasyPostException when the request fails.
      */
     public Batch refresh(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET,
-                String.format("%s", Utilities.instanceURL(Batch.class, id)), params,
-                Batch.class, client);
+        String url = String.format("%s", Utilities.instanceURL(Batch.class, id));
+
+        return Requestor.request(RequestMethod.GET, url, params, Batch.class, client);
     }
 
     /**
@@ -132,8 +132,9 @@ public class BatchService {
      * @throws EasyPostException when the request fails.
      */
     public Batch label(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, String.format("%s/label",
-                Utilities.instanceURL(Batch.class, id)), params, Batch.class, client);
+        String url = String.format("%s/label", Utilities.instanceURL(Batch.class, id));
+
+        return Requestor.request(RequestMethod.POST, url, params, Batch.class, client);
     }
 
     /**
@@ -145,8 +146,9 @@ public class BatchService {
      * @throws EasyPostException when the request fails.
      */
     public Batch addShipments(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, String.format("%s/add_shipments",
-                Utilities.instanceURL(Batch.class, id)), params, Batch.class, client);
+        String url = String.format("%s/add_shipments", Utilities.instanceURL(Batch.class, id));
+
+        return Requestor.request(RequestMethod.POST, url, params, Batch.class, client);
     }
 
     /**
@@ -173,8 +175,9 @@ public class BatchService {
      * @throws EasyPostException when the request fails.
      */
     public Batch removeShipments(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, String.format("%s/remove_shipments",
-                Utilities.instanceURL(Batch.class, id)), params, Batch.class, client);
+        String url = String.format("%s/remove_shipments", Utilities.instanceURL(Batch.class, id));
+
+        return Requestor.request(RequestMethod.POST, url, params, Batch.class, client);
     }
 
     /**
@@ -212,8 +215,9 @@ public class BatchService {
      * @throws EasyPostException when the request fails.
      */
     public Batch buy(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, String.format("%s/buy",
-                Utilities.instanceURL(Batch.class, id)), params, Batch.class, client);
+        String url = String.format("%s/buy", Utilities.instanceURL(Batch.class, id));
+
+        return Requestor.request(RequestMethod.POST, url, params, Batch.class, client);
     }
 
     /**
@@ -236,7 +240,8 @@ public class BatchService {
      * @throws EasyPostException when the request fails.
      */
     public Batch createScanForm(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, String.format("%s/scan_form",
-                Utilities.instanceURL(Batch.class, id)), params, Batch.class, client);
+        String url = String.format("%s/scan_form", Utilities.instanceURL(Batch.class, id));
+
+        return Requestor.request(RequestMethod.POST, url, params, Batch.class, client);
     }
 }

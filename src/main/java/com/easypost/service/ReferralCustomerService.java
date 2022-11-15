@@ -45,9 +45,9 @@ public class ReferralCustomerService {
         Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("user", params);
 
-        return Requestor.request(RequestMethod.POST,
-                String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "referral_customers"),
-                wrappedParams, ReferralCustomer.class, client);
+        String url = String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "referral_customers");
+
+        return Requestor.request(RequestMethod.POST, url, wrappedParams, ReferralCustomer.class, client);
     }
 
     /**
@@ -64,9 +64,10 @@ public class ReferralCustomerService {
         params.put("email", email);
         wrappedParams.put("user", params);
 
-        Requestor.request(RequestMethod.PUT,
-                String.format("%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(), "referral_customers", userId),
-                wrappedParams, ReferralCustomer.class, client);
+        String url = String.format("%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(), "referral_customers",
+                userId);
+
+        Requestor.request(RequestMethod.PUT, url, wrappedParams, ReferralCustomer.class, client);
     }
 
     /**
@@ -78,9 +79,9 @@ public class ReferralCustomerService {
      */
     public ReferralCustomerCollection all(final Map<String, Object> params)
             throws EasyPostException {
-        return Requestor.request(RequestMethod.GET,
-                String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "referral_customers"),
-                params, ReferralCustomerCollection.class, client);
+        String url = String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "referral_customers");
+
+        return Requestor.request(RequestMethod.GET, url, params, ReferralCustomerCollection.class, client);
     }
 
     /**
@@ -138,9 +139,10 @@ public class ReferralCustomerService {
      * @throws EasyPostException when the request fails.
      */
     private String retrieveEasypostStripeApiKey() throws EasyPostException {
+        String url = String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(),
+                "partners/stripe_public_key");
         @SuppressWarnings("unchecked")
-        Map<String, String> response = Requestor.request(RequestMethod.GET, String.format("%s/%s/%s",
-                client.getApiBase(), client.getApiVersion(), "partners/stripe_public_key"), null, Map.class, client);
+        Map<String, String> response = Requestor.request(RequestMethod.GET, url, null, Map.class, client);
 
         return response.getOrDefault("public_key", "");
     }
@@ -167,8 +169,10 @@ public class ReferralCustomerService {
 
         URL stripeUrl = new URL("https://api.stripe.com/v1/tokens");
         HttpURLConnection conn = (HttpURLConnection) stripeUrl.openConnection();
+        String apiToken = String.format("%s %s", "Bearer", easypostStripeApiKey);
+
         conn.setRequestMethod("POST");
-        conn.setRequestProperty("Authorization", String.format("%s %s", "Bearer", easypostStripeApiKey));
+        conn.setRequestProperty("Authorization", apiToken);
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
 
@@ -222,8 +226,8 @@ public class ReferralCustomerService {
         wrappedParams.put("credit_card", params);
 
         EasyPostClient referralClient = new EasyPostClient(referralApiKey);
-        return Requestor.request(RequestMethod.POST,
-                String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "credit_cards"),
-                wrappedParams, PaymentMethodObject.class, referralClient);
+        String url = String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "credit_cards");
+
+        return Requestor.request(RequestMethod.POST, url, wrappedParams, PaymentMethodObject.class, referralClient);
     }
 }

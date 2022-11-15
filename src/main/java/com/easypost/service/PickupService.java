@@ -72,8 +72,9 @@ public class PickupService {
      * @throws EasyPostException when the request fails.
      */
     public Pickup refresh(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, String.format("%s",
-                Utilities.instanceURL(Pickup.class, id)), params, Pickup.class, client);
+        String url = String.format("%s", Utilities.instanceURL(Pickup.class, id));
+
+        return Requestor.request(RequestMethod.GET, url, params, Pickup.class, client);
     }
 
     /**
@@ -97,8 +98,9 @@ public class PickupService {
      * @throws EasyPostException when the request fails.
      */
     public Pickup buy(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, String.format("%s/buy",
-                Utilities.instanceURL(Pickup.class, id)), params, Pickup.class, client);
+        String url = String.format("%s/buy", Utilities.instanceURL(Pickup.class, id));
+
+        return Requestor.request(RequestMethod.POST, url, params, Pickup.class, client);
     }
 
     /**
@@ -136,8 +138,9 @@ public class PickupService {
      * @throws EasyPostException when the request fails.
      */
     public Pickup cancel(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, String.format("%s/cancel",
-                Utilities.instanceURL(Pickup.class, id)), params, Pickup.class, client);
+        String url = String.format("%s/cancel", Utilities.instanceURL(Pickup.class, id));
+
+        return Requestor.request(RequestMethod.POST, url, params, Pickup.class, client);
     }
 
     /**
