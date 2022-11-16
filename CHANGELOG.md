@@ -6,9 +6,9 @@
   - Initialize a `EasyPostClient` object with an API key, connection and readtime milliseconds are optional, otherwise it will be set to default.
   - All methods (i.e. `create`, `retrieve`, retrieve `all` of a resource) exist in services, accessed via property of the client
     - E.g. Static method -> `Shipment shipment = client.address.create(params)`
-    - E.g. Instance method -> `Shipment boughtShipment = client.shipment.buy(lowestRate, shipmentID)`
+    - E.g. Instance method -> `Shipment boughtShipment = client.shipment.buy(shipmentID, lowestRate)`
   - All functions are now taking object ID instead of an object, which means the functions are returning the response value directly instead of updating the current object
-    - E.g. `Shipment boughtShipment = client.shipment.buy(lowestRate, shipmentID)`
+    - E.g. `Shipment boughtShipment = client.shipment.buy(shipmentID, lowestRate)`
 - Improves error exception handling
   - Specific error types for each category of error
   - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
@@ -26,7 +26,14 @@
 - Changes the type `result` of Event from `EasyPostResource` to `Map<String, Object>`
 - AppEngine default timeout is now the same as connection timeout
 - Removes invalid function `User.create()` since creating a child-user requires a name
-- Removes deprecated class `CreditCard`, please use alternative `Billing` class
+- Removes deprecated class `CreditCard` and its associated classes `PrimaryPaymentMethod`, `SecondaryPaymentMethod`, and `BaseCreditCard`, please use alternative `Billing` class
+- Removes all the setters of each object
+- Setters are now available via lombok and aren't explicitly in the code anymore
+- Change the type `hasMore` in ReferralCustomerCollection from `boolean` to `Boolean`
+- Rename some getters
+  - Pickup class: `getPickoutRates()` -> `getPickupRates()`
+  - PaymentMethod class: `getPrimaryPaymentMethodObject()` -> `getPrimaryPaymentMethod()`
+  - PaymentMethod class: `getSecondaryPaymentMethodObject()` -> `getSecondaryPaymentMethod()`
 
 ## v5.10.0 (2022-09-21)
 

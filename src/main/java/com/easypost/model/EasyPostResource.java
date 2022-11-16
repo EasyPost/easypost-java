@@ -13,76 +13,14 @@ import java.lang.reflect.Field;
 import java.util.Date;
 
 import com.easypost.http.Constant;
+import lombok.Getter;
 
+@Getter
 public abstract class EasyPostResource {
     private String id;
     private String mode;
     private Date createdAt;
     private Date updatedAt;
-
-    /**
-     * @return the Date this object was created
-     */
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * Set the Date this object was created.
-     *
-     * @param createdAt the Date this object was created
-     */
-    public void setCreatedAt(final Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    /**
-     * @return the ID of this object
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Set the ID of this object.
-     *
-     * @param id the ID of this object
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the API mode used to create this object
-     */
-    public String getMode() {
-        return mode;
-    }
-
-    /**
-     * Set the API mode used to create this object.
-     *
-     * @param mode the Mode of this object
-     */
-    public void setMode(final String mode) {
-        this.mode = mode;
-    }
-
-    /**
-     * @return the Date this object was last updated
-     */
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    /**
-     * Set the Date this object was last updated.
-     *
-     * @param updatedAt the Date this object was last updated
-     */
-    public void setUpdatedAt(final Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     /**
      * Returns a string representation of the object.

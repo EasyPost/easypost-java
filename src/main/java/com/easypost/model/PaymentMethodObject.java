@@ -1,5 +1,8 @@
 package com.easypost.model;
 
+import lombok.Getter;
+
+@Getter
 public class PaymentMethodObject extends EasyPostResource {
 
     public enum PaymentMethodType {
@@ -47,96 +50,6 @@ public class PaymentMethodObject extends EasyPostResource {
     private String object;
     // bank_account
     private boolean verified;
-
-    /**
-     * Get the bank name of this PaymentMethodObject object.
-     *
-     * @return the bank name of this PaymentMethodObject.
-     */
-    public String getBankName() {
-        return bankName;
-    }
-
-    /**
-     * Get the brand of this PaymentMethodObject object.
-     *
-     * @return the brand of this PaymentMethodObject.
-     */
-    public String getBrand() {
-        return brand;
-    }
-
-    /**
-     * Get the country of this PaymentMethodObject object.
-     *
-     * @return the country of this PaymentMethodObject.
-     */
-    public String getCountry() {
-        return country;
-    }
-
-    /**
-     * Get when this PaymentMethodObject object was disabled.
-     *
-     * @return when this PaymentMethodObject was disabled.
-     */
-    public String getDisabledAt() {
-        return disabledAt;
-    }
-
-    /**
-     * Get the expMonth of this PaymentMethodObject object.
-     *
-     * @return the expMonth of this PaymentMethodObject.
-     */
-    public int getExpMonth() {
-        return expMonth;
-    }
-
-    /**
-     * Get the expYear of this PaymentMethodObject object.
-     *
-     * @return the expYear of this PaymentMethodObject.
-     */
-    public int getExpYear() {
-        return expYear;
-    }
-
-    /**
-     * Get the last 4 digits of this PaymentMethodObject object.
-     *
-     * @return the last 4 digits of this PaymentMethodObject.
-     */
-    public String getLast4() {
-        return last4;
-    }
-
-    /**
-     * Get the name of this PaymentMethodObject object.
-     *
-     * @return the name of this PaymentMethodObject.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Get the object of this PaymentMethodObject object.
-     *
-     * @return the object of this PaymentMethodObject.
-     */
-    public String getObject() {
-        return object;
-    }
-
-    /**
-     * Get whether this PaymentMethodObject object is verified.
-     *
-     * @return true if this PaymentMethodObject is verified, false otherwise.
-     */
-    public boolean isVerified() {
-        return verified;
-    }
 
     /**
      * Get the type of this PaymentMethodObject object.

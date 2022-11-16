@@ -1,14 +1,8 @@
 package com.easypost.model;
 
+import lombok.Getter;
+
+@Getter
 public class Smartrate extends Rate {
     private TimeInTransit timeInTransit;
-
-    /**
-     * Get the time in transit for this rate.
-     *
-     * @return timeInTransit
-     */
-    public TimeInTransit getTimeInTransit() {
-        return timeInTransit;
-    }
 }

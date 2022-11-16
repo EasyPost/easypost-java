@@ -9,7 +9,7 @@ public class EasyPostClient {
     private final int readTimeoutMilliseconds;
     private final String apiKey;
     private final String apiVersion = "v2";
-    private String apiBase;
+    private final String apiBase;
     public final AddressService address;
     public final ApiKeyService apikeys;
     public final BatchService batch;

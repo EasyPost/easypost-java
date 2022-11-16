@@ -4,6 +4,9 @@ import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidParameterError;
 
+import lombok.Getter;
+
+@Getter
 public enum SmartrateAccuracy {
     Percentile50("percentile_50"),
     Percentile75("percentile_75"),
@@ -22,15 +25,6 @@ public enum SmartrateAccuracy {
      */
     SmartrateAccuracy(String keyName) {
         this.keyName = keyName;
-    }
-
-    /**
-     * Get the internal key name for this enum value.
-     *
-     * @return the internal key name
-     */
-    public String getKeyName() {
-        return keyName;
     }
 
     /**

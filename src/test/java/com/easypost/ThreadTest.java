@@ -147,4 +147,3 @@ public final class ThreadTest {
         assertEquals(Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS, clientTwo.getReadTimeoutMilliseconds());
     }
 }
-

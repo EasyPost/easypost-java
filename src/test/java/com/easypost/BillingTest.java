@@ -60,7 +60,7 @@ public final class BillingTest {
 
         PaymentMethod paymentMethods = vcr.client.billing.retrievePaymentMethods();
 
-        assertNotNull(paymentMethods.getPrimaryPaymentMethodObject());
-        assertNotNull(paymentMethods.getSecondaryPaymentMethodObject());
+        assertNotNull(paymentMethods.getPrimaryPaymentMethod());
+        assertNotNull(paymentMethods.getSecondaryPaymentMethod());
     }
 }
