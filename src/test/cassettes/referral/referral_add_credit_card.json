@@ -1,0 +1,183 @@
+[
+  {
+    "recordedAt": 1669142059,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/partners/stripe_public_key"
+    },
+    "response": {
+      "body": "{\n  \"public_key\": \"pk_x3JSr5eOVWNTLRej8cZDde9VQ0AT5\"\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "49"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb12nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "816b7d7e637d162be0ed0b67003d3f7b"
+        ],
+        "x-proxied": [
+          "extlb1nuq 29913d444b",
+          "intlb1nuq 29913d444b"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.017105"
+        ],
+        "etag": [
+          "W/\"86cc970265a111486b443bf66ef85e91\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202211211953-c7d3fecdcf-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/partners/stripe_public_key"
+    },
+    "duration": 400
+  },
+  {
+    "recordedAt": 1669142064,
+    "request": {
+      "body": "{\n  \"credit_card\": {\n    \"stripe_object_id\": \"tok_0M71IWDqT4huGUvdZspMYMfr\",\n    \"priority\": \"primary\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/credit_cards"
+    },
+    "response": {
+      "body": "{\n  \"last4\": \"6170\",\n  \"disabled_at\": null,\n  \"name\": null,\n  \"exp_month\": 5.0,\n  \"id\": \"card_5eeca4edec3045c8ada6ccd52824d6c1\",\n  \"exp_year\": 2028.0,\n  \"brand\": \"Visa\",\n  \"object\": \"CreditCard\"\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 201 Created"
+        ],
+        "content-length": [
+          "159"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb6nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "d96d15b1637d162ce0ed0b81003bbeb2"
+        ],
+        "x-proxied": [
+          "extlb2nuq 29913d444b",
+          "intlb2nuq 29913d444b"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "3.862250"
+        ],
+        "etag": [
+          "W/\"195f283080f5458e3b2402386b36ff63\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202211211953-c7d3fecdcf-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 201,
+        "message": "Created"
+      },
+      "uri": "https://api.easypost.com/v2/credit_cards"
+    },
+    "duration": 4116
+  }
+]

@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1669226766,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/payment_methods"
+    },
+    "response": {
+      "body": "{\n  \"secondary_payment_method\": null,\n  \"id\": \"cust_815cb5adf39548fc8ec9ee928cd51a96\",\n  \"primary_payment_method\": null,\n  \"object\": \"PaymentMethods\"\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "134"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb6nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "9a15e554637e610de78a0329002127ef"
+        ],
+        "x-proxied": [
+          "extlb1nuq 29913d444b",
+          "intlb1nuq 29913d444b"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.020070"
+        ],
+        "etag": [
+          "W/\"a9da3fd4f7563256345830987de33ece\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202211222057-6fd042c9a6-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/payment_methods"
+    },
+    "duration": 505
+  }
+]

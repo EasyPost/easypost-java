@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.InvalidParameterError;
 import com.easypost.model.Address;
 import com.easypost.model.EndShipper;
 import com.easypost.model.Fee;
@@ -40,6 +41,15 @@ public final class ShipmentTest {
     @BeforeAll
     public static void setup() throws EasyPostException {
         vcr = new TestUtils.VCR("shipment", TestUtils.ApiKey.TEST);
+    }
+
+    /**
+     * Create a basic shipment.
+     *
+     * @return Shipment object
+     */
+    private static Shipment createBasicShipment() throws EasyPostException {
+        return vcr.client.shipment.create(Fixtures.basicShipment());
     }
 
     /**
@@ -109,13 +119,13 @@ public final class ShipmentTest {
     }
 
     /**
-     * Test buying a shipment.
+     * Test buying a shipment with lowest rate.
      *
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testBuy() throws EasyPostException {
-        vcr.setUpTest("buy");
+    public void testBuyWithRate() throws EasyPostException {
+        vcr.setUpTest("buy_with_rate");
 
         Shipment shipment = createBasicShipment();
 
@@ -125,12 +135,22 @@ public final class ShipmentTest {
     }
 
     /**
-     * Create a basic shipment.
+     * Test buying a shipment with params.
      *
-     * @return Shipment object
+     * @throws EasyPostException when the request fails.
      */
-    private static Shipment createBasicShipment() throws EasyPostException {
-        return vcr.client.shipment.create(Fixtures.basicShipment());
+    @Test
+    public void testBuyWithParams() throws EasyPostException {
+        vcr.setUpTest("buy_with_params");
+
+        Shipment shipment = createBasicShipment();
+        HashMap<String, Object> buyMap = new HashMap<String, Object>();
+        buyMap.put("rate", shipment.lowestRate());
+        buyMap.put("insurance", 249.99);
+
+        Shipment boughtShipment = vcr.client.shipment.buy(shipment.getId(), buyMap);
+
+        assertNotNull(boughtShipment.getPostageLabel());
     }
 
     /**
@@ -169,7 +189,7 @@ public final class ShipmentTest {
         Map<String, Object> params = new HashMap<>();
         params.put("file_format", "ZPL");
 
-        Shipment shipmentWithLabel = vcr.client.shipment.label(params, shipment.getId());
+        Shipment shipmentWithLabel = vcr.client.shipment.label(shipment.getId(), params);
 
         assertNotNull(shipmentWithLabel.getPostageLabel().getLabelZplUrl());
     }
@@ -207,7 +227,7 @@ public final class ShipmentTest {
 
         Shipment shipment = vcr.client.shipment.create(shipmentData);
 
-        Shipment shipmentWithInsurance = vcr.client.shipment.insure(insuranceData, shipment.getId());
+        Shipment shipmentWithInsurance = vcr.client.shipment.insure(shipment.getId(), insuranceData);
 
         assertEquals("100.00", shipmentWithInsurance.getInsurance());
     }
@@ -260,6 +280,9 @@ public final class ShipmentTest {
         assertNotNull(smartRate.getTimeInTransit().getPercentile95());
         assertNotNull(smartRate.getTimeInTransit().getPercentile97());
         assertNotNull(smartRate.getTimeInTransit().getPercentile99());
+
+        assertThrows(InvalidParameterError.class,
+                () -> smartRate.getTimeInTransit().getSmartRateAccuracy("percentile_100"));
     }
 
     /**
@@ -403,6 +426,62 @@ public final class ShipmentTest {
         assertThrows(EasyPostException.class, () -> {
             vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartrateAccuracy.Percentile90);
         });
+
+        // Test deprecated smart rate filter function
+        Smartrate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
+                "percentile_90");
+
+        // Test lowest smartrate with valid filters
+        assertEquals("Priority", deprecatedLowestSmartRateFilters.getService());
+        assertEquals(8.15, deprecatedLowestSmartRateFilters.getRate(), 0.01);
+        assertEquals("USPS", deprecatedLowestSmartRateFilters.getCarrier());
+
+        // Test lowest smartrate with invalid filters (should error due to strict
+        // delivery days)
+        assertThrows(EasyPostException.class, () -> {
+            vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartrateAccuracy.Percentile90);
+        });
+    }
+
+    /**
+     * Test getting smart rates for a shipment.
+     * 
+     * @throws EasyPostException
+     */
+    @Test
+    public void testGetSmartRate() throws EasyPostException {
+        vcr.setUpTest("get_smartrate_list");
+        // Test deprecated getSmartrates() function
+
+        Shipment shipment = createBasicShipment();
+
+        List<Smartrate> rates = vcr.client.shipment.getSmartrates(shipment.getId());
+
+        assertInstanceOf(List.class, rates);
+
+        for (Smartrate rate: rates) {
+            assertInstanceOf(Smartrate.class, rate);
+        }
+    }
+
+    /**
+     * Test retriving lowest smart rate.
+     *
+     * @throws EasyPostException
+     */
+    @Test
+    public void testGetLowestSmartRate() throws EasyPostException {
+        vcr.setUpTest("get_lowest_smartrate");
+        // Test deprecated getLowestSmartRate() function
+
+        Shipment shipment = createBasicShipment();
+
+        List<Smartrate> rates = vcr.client.shipment.getSmartrates(shipment.getId());
+        Smartrate lowestSmartrate = vcr.client.shipment.getLowestSmartRate(rates, 3, "percentile_85");
+
+        assertEquals("First", lowestSmartrate.getService());
+        assertEquals(5.82, lowestSmartrate.getRate(), 0.01);
+        assertEquals("USPS", lowestSmartrate.getCarrier());
     }
 
     /**
@@ -438,7 +517,29 @@ public final class ShipmentTest {
      */
     @Test
     public void testGenerateForm() throws EasyPostException {
-        vcr.setUpTest("generate_form");
+        vcr.setUpTest("generate_form_with");
+
+        Shipment shipment = createOneCallBuyShipment();
+        String formType = "return_packing_slip";
+
+        Shipment shipmentWithForm = vcr.client.shipment.generateForm(formType, shipment.getId());
+
+        assertTrue(shipmentWithForm.getForms().size() > 0);
+
+        Form form = shipmentWithForm.getForms().get(0);
+
+        assertEquals(formType, form.getFormType());
+        assertTrue(form.getFormUrl() != null);
+    }
+
+    /**
+     * Test generating a form from a shipment with option.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGenerateFormWithOption() throws EasyPostException {
+        vcr.setUpTest("generate_form_with_option");
 
         Shipment shipment = createOneCallBuyShipment();
         String formType = "return_packing_slip";
@@ -552,18 +653,39 @@ public final class ShipmentTest {
     }
 
     /**
-     * Test buying a shipment with an EndShipper ID.
+     * Test buying a shipment with an EndShipper ID with lowest rate.
      *
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testBuyShipmentWithEndShipperId() throws EasyPostException {
-        vcr.setUpTest("buy_shipment_with_end_shipper_id");
+    public void testBuyShipmentWithEndShipperIdWithRate() throws EasyPostException {
+        vcr.setUpTest("buy_shipment_with_end_shipper_id_with_rate");
 
         EndShipper endShipper = vcr.client.endShipper.create(Fixtures.caAddress1());
 
         Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
         Shipment boughtShipment = vcr.client.shipment.buy(shipment.getId(), shipment.lowestRate(), endShipper.getId());
+
+        assertNotNull(boughtShipment.getPostageLabel());
+    }
+
+    /**
+     * Test buying a shipment with an EndShipper ID with params.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testBuyShipmentWithEndShipperId() throws EasyPostException {
+        vcr.setUpTest("buy_shipment_with_end_shipper_id_with_rate_with_params");
+
+        EndShipper endShipper = vcr.client.endShipper.create(Fixtures.caAddress1());
+
+        Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
+        HashMap<String, Object> buyMap = new HashMap<String, Object>();
+        buyMap.put("rate", shipment.lowestRate());
+        buyMap.put("insurance", 249.99);
+
+        Shipment boughtShipment = vcr.client.shipment.buy(shipment.getId(), buyMap, endShipper.getId());
 
         assertNotNull(boughtShipment.getPostageLabel());
     }

@@ -29,11 +29,13 @@
 - Removes deprecated class `CreditCard` and its associated classes `PrimaryPaymentMethod`, `SecondaryPaymentMethod`, and `BaseCreditCard`, please use alternative `Billing` class
 - Removes all the setters of each object
 - Setters are now available via lombok and aren't explicitly in the code anymore
-- Change the type `hasMore` in ReferralCustomerCollection from `boolean` to `Boolean`
-- Rename some getters
+- Changes the type `hasMore` in ReferralCustomerCollection from `boolean` to `Boolean`
+- Renames some getters
   - Pickup class: `getPickoutRates()` -> `getPickupRates()`
   - PaymentMethod class: `getPrimaryPaymentMethodObject()` -> `getPrimaryPaymentMethod()`
   - PaymentMethod class: `getSecondaryPaymentMethodObject()` -> `getSecondaryPaymentMethod()`
+- Removes the `refresh()` function in all classes, please use `retrieve()` function instead
+- Removes invalid functions that allow users to make an API request without providing required parameters
 
 ## v5.10.0 (2022-09-21)
 

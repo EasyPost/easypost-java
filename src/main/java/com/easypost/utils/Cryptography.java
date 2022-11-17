@@ -35,15 +35,6 @@ public abstract class Cryptography {
         HmacAlgorithm(String algorithmString) {
             this.algorithmString = algorithmString;
         }
-
-        /**
-         * Get the algorithm string.
-         *
-         * @return the algorithm string.
-         */
-        String getAlgorithmString() {
-            return algorithmString;
-        }
     }
 
     /**
@@ -54,16 +45,6 @@ public abstract class Cryptography {
      */
     public static String hexEncodeToString(byte @NotNull [] bytes) {
         return new String(Hex.encodeHex(bytes));
-    }
-
-    /**
-     * Hex-encode a byte array to a char array.
-     *
-     * @param bytes the byte array to hex-encode.
-     * @return the hex-encoded byte array char array.
-     */
-    public static char[] hexEncode(byte @NotNull [] bytes) {
-        return Hex.encodeHex(bytes);
     }
 
     /**
@@ -82,20 +63,6 @@ public abstract class Cryptography {
 
         byte[] hmacBytes = createHMAC(data, key, HmacAlgorithm.SHA256);
         return hexEncodeToString(hmacBytes);
-    }
-
-    /**
-     * Calculate the HMAC-SHA256 hex digest of a string.
-     *
-     * @param data              Data to calculate hex digest for.
-     * @param key               Key to use in HMAC calculation.
-     * @param normalizationForm {@link Normalizer.Form} to use when normalizing key. No normalization when null.
-     * @return Hex digest of data.
-     */
-    public static String toHMACSHA256HexDigest(@NotNull String data, @NotNull String key,
-                                               @Nullable Normalizer.Form normalizationForm) {
-        byte[] dataBytes = data.getBytes();
-        return toHMACSHA256HexDigest(dataBytes, key, normalizationForm);
     }
 
     /**

@@ -1,10 +1,12 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.ExternalApiError;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.ReferralCustomer;
 import com.easypost.model.ReferralCustomerCollection;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class ReferralTest {
@@ -32,6 +35,11 @@ public final class ReferralTest {
         vcr = new TestUtils.VCR("referral", TestUtils.ApiKey.PARTNER);
     }
 
+    /**
+     * Return the referral user key from the system environment.
+     * 
+     * @return Referral user key.
+     */
     private static String referralUserKey() {
         return TestUtils.getApiKey(TestUtils.ApiKey.REFERRAL);
     }
@@ -116,5 +124,18 @@ public final class ReferralTest {
         assertInstanceOf(PaymentMethodObject.class, creditCard);
         assertTrue(creditCard.getId().startsWith("card_"));
         assertEquals(((String) Fixtures.creditCardDetails().get("number")).substring(12), creditCard.getLast4());
+    }
+
+    /**
+     * Test creating bad Stripe token with invalid input parameters.
+     *
+     * @throws Exception when the request fails.
+     */
+    @Test
+    public void testCreateBadStripeToken() throws Exception {
+        vcr.setUpTest("create_bad_stripe_token");
+
+        assertThrows(ExternalApiError.class, () -> vcr.client.referralCustomer.addCreditCardToUser(referralUserKey(),
+                "1234", 1234, 1234, "1234", PaymentMethod.Priority.PRIMARY));
     }
 }

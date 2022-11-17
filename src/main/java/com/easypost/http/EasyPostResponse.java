@@ -8,45 +8,12 @@
 
 package com.easypost.http;
 
+import lombok.Getter;
+
+@Getter
 public class EasyPostResponse {
     private int responseCode;
     private String responseBody;
-
-    /**
-     * Get HTTP response body.
-     *
-     * @return HTTP response body
-     */
-    public String getResponseBody() {
-        return responseBody;
-    }
-
-    /**
-     * Set HTTP response body.
-     *
-     * @param responseBody HTTP response body
-     */
-    public void setResponseBody(final String responseBody) {
-        this.responseBody = responseBody;
-    }
-
-    /**
-     * Get HTTP response code.
-     *
-     * @return HTTP response code
-     */
-    public int getResponseCode() {
-        return responseCode;
-    }
-
-    /**
-     * Set HTTP response code.
-     *
-     * @param responseCode HTTP response code
-     */
-    public void setResponseCode(final int responseCode) {
-        this.responseCode = responseCode;
-    }
 
     /**
      * Constructor.

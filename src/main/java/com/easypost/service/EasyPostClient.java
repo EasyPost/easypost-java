@@ -65,7 +65,7 @@ public class EasyPostClient {
      * @throws MissingParameterError
      */
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds) throws MissingParameterError {
-        this(apiKey, connectTimeoutMilliseconds, Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS, Constant.API_BASE);
+        this(apiKey, connectTimeoutMilliseconds, Constant.API_BASE);
     }
 
     /**

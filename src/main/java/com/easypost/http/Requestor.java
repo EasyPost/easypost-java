@@ -31,6 +31,8 @@ import com.easypost.service.EasyPostClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import lombok.Generated;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.io.InputStream;
@@ -80,10 +82,6 @@ public abstract class Requestor {
                 convertSpaceToHyphen(System.getProperty("os.name")), System.getProperty("os.version"),
                 convertSpaceToHyphen(System.getProperty("os.arch")),
                 convertSpaceToHyphen(System.getProperties().getProperty("java.vm.name"))));
-
-        if (apiKey == null || apiKey.isEmpty()) {
-            throw new MissingParameterError(Constants.INVALID_API_KEY_TYPE);
-        }
 
         headers.put("Authorization", String.format("Bearer %s", apiKey));
 
@@ -566,6 +564,7 @@ public abstract class Requestor {
         }
     }
 
+    @Generated // Exclude from the jacoco test coverage
     private static EasyPostResponse makeAppEngineRequest(final RequestMethod method, String url, final String query,
             final JsonObject body, final EasyPostClient client)
             throws EasyPostException {

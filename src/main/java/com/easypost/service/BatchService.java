@@ -88,42 +88,6 @@ public class BatchService {
     }
 
     /**
-     * Refresh this Batch object.
-     *
-     * @param id The ID of batch.
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Batch refresh(String id) throws EasyPostException {
-        return this.refresh(id, null);
-    }
-
-    /**
-     * Refresh this Batch object.
-     *
-     * @param id The ID of batch.
-     * @param params Map of parameters.
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Batch refresh(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s", Utilities.instanceURL(Batch.class, id));
-
-        return Requestor.request(RequestMethod.GET, url, params, Batch.class, client);
-    }
-
-    /**
-     * Label this Batch object.
-     *
-     * @param id The ID of batch.
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Batch label(String id) throws EasyPostException {
-        return this.label(id, null);
-    }
-
-    /**
      * Label this Batch object.
      *
      * @param id The ID of batch.
