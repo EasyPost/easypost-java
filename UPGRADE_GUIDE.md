@@ -11,21 +11,25 @@ Use the following guide to assist in the upgrade process of the `easypost-java` 
 
 - [Client Instance](#60-client-instance)
 - [Error Types](#60-error-types)
-- [Uniform empty response](#60-uniform-empty-response)
+- [Empty Response Function Return Types](#60-empty-response-function-return-types)
+- [Services and Resources](#60-services-and-resources)
+
+### 6.0 Medium Impact Changes
+
+- [Removal of Setters](#60-removal-of-setters)
+- [Rename Some Getters](#60-rename-some-getters)
 
 ### 6.0 Low Impact Changes
 
-- [Services and Resources](#60-services-and-resources)
+- [Type Changes](#60-type-changes)
 
 ## 6.0 Client Instance
 
 *Likelihood of Impact: **High***
 
-The library is now designed around the idea of a `EasyPostClient`. Users will initialize a `EasyPostClient` instance with their API key
-and then use that instance to make API calls.
+The library is now designed around the idea of a `EasyPostClient`. Users will initialize an `EasyPostClient` instance with their API key and then use that instance to make API calls.
 
-This change allows for multiple clients to be instantiated with different API keys and for the library to be used in a
-multi-threaded environment.
+This change allows for multiple clients to be instantiated with different API keys which allows this library to be safely used in a multi-threaded environment.
 
 ```java
 // Old
@@ -54,35 +58,35 @@ Shipment shipment = client.shipment.create(shipmentMap);
 
 Error handling has been overhauled and a number of specific exception types have been introduced.
 
-All exceptions inherit from `EasyPost.Exception.EasyPostException` (which extends `System.Exception`). Users can catch this exception type to handle all errors thrown by the library.
+All exceptions inherit from `EasyPost.Exception.EasyPostException` (which extends `Java Exception` class). Users can catch this exception type to handle all errors thrown by the library.
 
 Subclasses of `EasyPostException` are grouped into two categories:
 
 - `EasyPost.Exception.API` for errors returned by the API. Subclasses of this exception type are:
-  - `EasyPost.Exception.ExternalApiError` - thrown when an issue occurs with an external API (e.g. Stripe)
-  - `EasyPost.Exception.ForbiddenError` - thrown when you don't have permission to access this API resource
-  - `EasyPost.Exception.GatewayTimeoutError` - thrown when the API gateway times out (504 status code)
-  - `EasyPost.Exception.InternalServerError` - thrown when an internal server error occurs (500 status code)
-  - `EasyPost.Exception.InvalidRequestError` - thrown when the API received an invalid request (422 status code)
-  - `EasyPost.Exception.MethodNotAllowedError` - thrown when the API receives a request with an invalid HTTP method (
+  - `ExternalApiError` - thrown when an issue occurs with an external API (e.g. Stripe)
+  - `ForbiddenError` - thrown when you don't have permission to access this API resource
+  - `GatewayTimeoutError` - thrown when the API gateway times out (504 status code)
+  - `InternalServerError` - thrown when an internal server error occurs (500 status code)
+  - `InvalidRequestError` - thrown when the API received an invalid request (422 status code)
+  - `MethodNotAllowedError` - thrown when the API receives a request with an invalid HTTP method (
         405 status code)
-  - `EasyPost.Exception.NotFoundError` - thrown when the API receives a request for a resource that does not exist (
+  - `NotFoundError` - thrown when the API receives a request for a resource that does not exist (
         404 status code)
-  - `EasyPost.Exception.PaymentError` - thrown when a payment error occurs (402 status code)
-  - `EasyPost.Exception.ProxyError` - thrown when the library is unable to connect to the API via a proxy
-  - `EasyPost.Exception.RateLimitError` - thrown when the API rate limit is exceeded (429 status code)
-  - `EasyPost.Exception.RedirectError` - thrown when the http status is between 300 and 308.
-  - `EasyPost.Exception.ServiceUnavailableError` - thrown when the API is unavailable (503 status code)
-  - `EasyPost.Exception.TimeoutError` - thrown when the API request times out (408 status code)
-  - `EasyPost.Exception.UnauthorizedError` - thrown when the API receives an unauthorized request (401 or 403 status
+  - `PaymentError` - thrown when a payment error occurs (402 status code)
+  - `ProxyError` - thrown when the library is unable to connect to the API via a proxy
+  - `RateLimitError` - thrown when the API rate limit is exceeded (429 status code)
+  - `RedirectError` - thrown when the http status is between 300 and 308.
+  - `ServiceUnavailableError` - thrown when the API is unavailable (503 status code)
+  - `TimeoutError` - thrown when the API request times out (408 status code)
+  - `UnauthorizedError` - thrown when the API receives an unauthorized request (401 or 403 status
         code)
-  - `EasyPost.Exception.UnknownApiError` - thrown when an unknown API error occurs (unexpected 4xx status code)
+  - `UnknownApiError` - thrown when an unknown API error occurs (unexpected 4xx status code)
 - `EasyPost.Exception.General` for Generic error returned by the client library. Subclasses of this exception type are:
-  - `EasyPost.Exceptions.FilteringError` - thrown when an error occurs during filtering (e.g. calculating lowest rate)
-  - `EasyPost.Exceptions.InvalidObjectError` - thrown when an invalid object is being used
-  - `EasyPost.Exceptions.InvalidParameterError` - thrown when an invalid parameter is being used
-  - `EasyPost.Exceptions.MissingPropertyError` - thrown when a required property is missing (e.g. `Id` for most objects)
-  - `EasyPost.Exceptions.SignatureVerificationError` - thrown when the signature for a webhook is invalid
+  - `FilteringError` - thrown when an error occurs during filtering (e.g. calculating lowest rate)
+  - `InvalidObjectError` - thrown when an invalid object is being used
+  - `InvalidParameterError` - thrown when an invalid parameter is being used
+  - `MissingPropertyError` - thrown when a required property is missing (e.g. `Id` for most objects)
+  - `SignatureVerificationError` - thrown when the signature for a webhook is invalid
 
 Any exception thrown by the EasyPost library will be one of the above types.
 
@@ -94,11 +98,11 @@ Any `EasyPost.Exception.API` exception will have the following properties:
 
 Users can better anticipate exception information through utilities in the `EasyPost.Exception.Constants` file.
 
-## 6.0 Uniform empty response
+## 6.0 Empty Response Function Return Types
 
 *Likelihood of Impact: **High***
 
-Below functions return empty bodies or boolean have been changed to void.
+The following functions return an empty body from the API have been changed to return void.
 
 - `fundWallet()` and `deletePaymentMethod()` in Billing class
 - `createList()` in Tracker class
@@ -106,11 +110,42 @@ Below functions return empty bodies or boolean have been changed to void.
 
 ## 6.0 Services and Resources
 
+*Likelihood of Impact: **High***
+
+Static and instance-based methods have been divided into separate services and resources, methods that have API interactions are in services now.
+
+For example:
+
+- The static method `Shipment.buy()` is now accessible in the Shipment service via `client.shipment.buy("shp_...")`. 
+- The instance method `myShipment.lowestRate()` is still accessible only via a Shipment instance because there is no API interaction.
+- The instance method of `refresh()` has been removed becasue you can no longer use object to make a HTTP request.
+
+Instances of an object cannot be initialized directly. Instead, use the service to create the instance via a `create`, `retrieve`, or `all` API call.
+
+## 6.0 Removal of Setters
+
+*Likelihood of Impact: **Medium***
+
+Each object no longer has setters. The use case of the setter is extremely low, but if you need to use the setter for a specific reason, try to use `reflection` in Java.
+
+## 6.0 Rename Some Getters
+
+*Likelihood of Impact: **Medium***
+
+Below getters have been renamed:
+
+- Pickup class: `getPickoutRates()` -> `getPickupRates()`
+- PaymentMethod class: `getPrimaryPaymentMethodObject()` -> `getPrimaryPaymentMethod()`
+- PaymentMethod class: `getSecondaryPaymentMethodObject()` -> `getSecondaryPaymentMethod()`
+
+## 6.0 Type Changes
+
 *Likelihood of Impact: **Low***
 
-Static and instance-based methods have been divided into separate services and resources, methods that have API interactions are in services now. For example, the static method `Shipment.Create` is now accessible in the Shipment service via `client.Shipment.Create`. The instance method `myShipment.lowestRate` is still accessible only via a Shipment instance.
+Change the below type of objects:
 
-Instances of an object cannot be initialized directly. Instead, use the service to create the instance via a `Create`, `Retrieve`, or `All` API call.
+- `result` of Event from `EasyPostResource` to `Map<String, object>`
+- `amount` of Insurance from `Float` to `String`
 
 ## Upgrading from 4.x to 5.0
 
