@@ -427,7 +427,6 @@ public final class ShipmentTest {
             vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartrateAccuracy.Percentile90);
         });
 
-        // Test deprecated smart rate filter function
         Smartrate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
                 "percentile_90");
 
@@ -451,7 +450,6 @@ public final class ShipmentTest {
     @Test
     public void testGetSmartRate() throws EasyPostException {
         vcr.setUpTest("get_smartrate_list");
-        // Test deprecated getSmartrates() function
 
         Shipment shipment = createBasicShipment();
 
@@ -472,7 +470,6 @@ public final class ShipmentTest {
     @Test
     public void testGetLowestSmartRate() throws EasyPostException {
         vcr.setUpTest("get_lowest_smartrate");
-        // Test deprecated getLowestSmartRate() function
 
         Shipment shipment = createBasicShipment();
 

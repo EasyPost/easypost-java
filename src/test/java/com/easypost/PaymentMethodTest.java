@@ -30,7 +30,6 @@ public class PaymentMethodTest {
     @Test
     public void testAll() throws EasyPostException {
         vcr.setUpTest("all");
-        // Test deprecated function all() in PaymentMethodService
 
         PaymentMethod paymentMethod = vcr.client.paymentMethod.all();
 
