@@ -2,7 +2,7 @@ package com.easypost.service;
 
 import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
-import com.easypost.exception.General.ExternalApiError;
+import com.easypost.exception.API.ExternalApiError;
 import com.easypost.http.Constant;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;

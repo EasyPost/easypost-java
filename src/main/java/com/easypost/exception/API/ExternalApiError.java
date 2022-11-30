@@ -1,4 +1,4 @@
-package com.easypost.exception.General;
+package com.easypost.exception.API;
 
 import com.easypost.exception.EasyPostException;
 
