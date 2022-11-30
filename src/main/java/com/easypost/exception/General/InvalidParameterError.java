@@ -9,7 +9,7 @@ public class InvalidParameterError extends EasyPostException{
      * @param message the exception message
      */
     public InvalidParameterError(final String message) {
-        super(message);
+        this(message, null);
     }
 
     /**

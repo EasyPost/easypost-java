@@ -61,29 +61,4 @@ public class InsuranceService {
         return Requestor.request(RequestMethod.GET, Utilities.classURL(Insurance.class),
                 params, InsuranceCollection.class, client);
     }
-
-    /**
-     * Refresh this Insurance.
-     *
-     * @param id The ID of insurance.
-     * @return Insurance object
-     * @throws EasyPostException when the request fails.
-     */
-    public Insurance refresh(final String id) throws EasyPostException {
-        return this.refresh(id, null);
-    }
-
-    /**
-     * Refresh this Insurance.
-     *
-     * @param params Map of parameters.
-     * @param id The ID of insurance.
-     * @return Insurance object
-     * @throws EasyPostException when the request fails.
-     */
-    public Insurance refresh(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET,
-                String.format("%s", Utilities.instanceURL(Insurance.class, id)), params, Insurance.class,
-                client);
-    }
 }

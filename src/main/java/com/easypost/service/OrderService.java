@@ -8,7 +8,6 @@ import com.easypost.model.Rate;
 import com.easypost.utils.Utilities;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class OrderService {
@@ -47,31 +46,6 @@ public class OrderService {
      */
     public Order retrieve(final String id) throws EasyPostException {
         return Requestor.request(RequestMethod.GET, Utilities.instanceURL(Order.class, id), null, Order.class, client);
-    }
-
-    /**
-     * Refresh this Order object.
-     *
-     * @param id The ID of order.
-     * @return Order object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Order refresh(final String id) throws EasyPostException {
-        return this.refresh(id, null);
-    }
-
-    /**
-     * Refresh this Order object.
-     *
-     * @param id     The ID of order.
-     * @param params Map of parameters.
-     * @return Order object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Order refresh(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET,
-                String.format("%s", Utilities.instanceURL(Order.class, id)), params,
-                Order.class, client);
     }
 
     /**
@@ -125,42 +99,5 @@ public class OrderService {
         params.put("service", rate.getService());
 
         return this.buy(id, params);
-    }
-
-    /**
-     * Get the lowest rate for this Order.
-     *
-     * @param order The order object.
-     * @return Lowest Rate object
-     * @throws EasyPostException when the request fails.
-     */
-    public Rate lowestRate(final Order order) throws EasyPostException {
-        return this.lowestRate(null, null, order);
-    }
-
-    /**
-     * Get the lowest rate for this Order.
-     *
-     * @param carriers The carriers to use in the filter.
-     * @param services The services to use in the filter.
-     * @param order    The order object.
-     * @return Lowest Rate object
-     * @throws EasyPostException when the request fails.
-     */
-    public Rate lowestRate(final List<String> carriers, final List<String> services, final Order order)
-            throws EasyPostException {
-        return Utilities.getLowestObjectRate(order.getRates(), carriers, services);
-    }
-
-    /**
-     * Get the lowest rate for this order.
-     *
-     * @param carriers The carriers to use in the query.
-     * @param order    The order object.
-     * @return Rate object
-     * @throws EasyPostException when the request fails.
-     */
-    public Rate lowestRate(final List<String> carriers, final Order order) throws EasyPostException {
-        return this.lowestRate(carriers, null, order);
     }
 }

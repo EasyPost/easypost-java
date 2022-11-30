@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -174,13 +175,13 @@ public final class BatchTest {
     }
 
     /**
-     * Test adding and removing a shipment from a batch.
+     * Test adding and removing a shipment from a batch with map.
      *
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testAddRemoveShipment() throws EasyPostException {
-        vcr.setUpTest("add_remove_shipment");
+    public void testAddRemoveShipmentWithMap() throws EasyPostException {
+        vcr.setUpTest("add_remove_shipment_with_map");
 
         Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
 
@@ -197,6 +198,28 @@ public final class BatchTest {
         assertEquals(1, batchWithAddedShipment.getNumShipments().intValue());
 
         Batch batchWithoutShipment = vcr.client.batch.removeShipments(batch.getId(), params);
+
+        assertEquals(0, batchWithoutShipment.getNumShipments().intValue());
+    }
+
+    /**
+     * Test adding and removing a shipment from a batch with list.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testAddRemoveShipentWithList() throws EasyPostException {
+        vcr.setUpTest("add_remove_shipment_with_list");
+
+        Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
+        Batch batch = vcr.client.batch.create();
+        List<Shipment> shipmentData = Arrays.asList(shipment);
+
+        Batch batchWithAddedShipment = vcr.client.batch.addShipments(batch.getId(), shipmentData);
+
+        assertEquals(1, batchWithAddedShipment.getNumShipments().intValue());
+
+        Batch batchWithoutShipment = vcr.client.batch.removeShipments(batch.getId(), shipmentData);
 
         assertEquals(0, batchWithoutShipment.getNumShipments().intValue());
     }

@@ -1,16 +1,30 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.http.Constant;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.PaymentMethod;
+import com.easypost.model.PaymentMethodObject;
+
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public final class BillingTest {
     private static TestUtils.VCR vcr;
+    private String jsonResponse = "{\"id\":\"cust_...\",\"object\":\"PaymentMethods\",\"primary_" +
+            "payment_method\":{\"id\":\"card_...\",\"disabled_at\":null,\"object\":\"CreditCard\",\"na" +
+            "me\":null,\"last4\":\"4242\",\"exp_month\":1,\"exp_year\":2025,\"brand\":\"Visa\"},\"secondar" +
+            "y_payment_method\":{\"id\":\"card_...\",\"disabled_at\":null,\"object\":\"CreditCard\",\"name\":nu" +
+            "ll,\"last4\":\"4444\",\"exp_month\":1,\"exp_year\":2025,\"brand\":\"Mastercard\"}}";
+    private PaymentMethod paymentMethod = Constant.GSON.fromJson(jsonResponse, PaymentMethod.class);
+    private static MockedStatic<Requestor> requestMock = Mockito.mockStatic(Requestor.class);
 
     /**
      * Setup the testing environment for this file.
@@ -23,16 +37,37 @@ public final class BillingTest {
     }
 
     /**
+     * Release the static mock once it has been used.
+     */
+    @AfterAll
+    public static void cleanup() {
+        requestMock.close();
+    }
+
+    /**
      * Test deleting a payment method.
      *
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // Skipping due to the lack of an available real payment method in tests.
     public void testDeletePaymentMethod() throws EasyPostException {
-        vcr.setUpTest("delete_payment_method");
+        String retrieveUrl = String.format("%s/%s/%s", vcr.client.getApiBase(), vcr.client.getApiVersion(),
+                "payment_methods");
+        requestMock.when(
+                () -> Requestor.request(RequestMethod.GET, retrieveUrl, null, PaymentMethod.class, vcr.client))
+                .thenReturn(paymentMethod);
 
-        assertDoesNotThrow(() -> vcr.client.billing.deletePaymentMethod(PaymentMethod.Priority.PRIMARY));
+        PaymentMethodObject paymentMethodObject = vcr.client.billing.retrievePaymentMethods()
+                .getSecondaryPaymentMethod();
+
+        String deletePaymentUrl = String.format("%s/%s/%s/%s", vcr.client.getApiBase(), vcr.client.getApiVersion(),
+                paymentMethodObject.getEndpoint(), paymentMethodObject.getId());
+
+        requestMock.when(
+                () -> Requestor.request(RequestMethod.GET, deletePaymentUrl, null, PaymentMethod.class, vcr.client))
+                .thenReturn(null);
+
+        assertDoesNotThrow(() -> vcr.client.billing.deletePaymentMethod(PaymentMethod.Priority.SECONDARY));
     }
 
     /**
@@ -41,11 +76,24 @@ public final class BillingTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // Skipping due to the lack of an available real payment method in tests.
     public void testFundWallet() throws EasyPostException {
-        vcr.setUpTest("fund_wallet");
+        String retrieveUrl = String.format("%s/%s/%s", vcr.client.getApiBase(), vcr.client.getApiVersion(),
+                "payment_methods");
+        requestMock.when(
+                () -> Requestor.request(RequestMethod.GET, retrieveUrl, null, PaymentMethod.class, vcr.client))
+                .thenReturn(paymentMethod);
 
-        assertDoesNotThrow(() -> vcr.client.billing.fundWallet("2000", PaymentMethod.Priority.PRIMARY));
+        PaymentMethodObject paymentMethodObject = vcr.client.billing.retrievePaymentMethods()
+                .getPrimaryPaymentMethod();
+
+        String fundWalletUrl = String.format("%s/%s/%s/%s/%s", vcr.client.getApiBase(), vcr.client.getApiVersion(),
+                paymentMethodObject.getEndpoint(), paymentMethodObject.getId(), "charges");
+
+        requestMock.when(
+                () -> Requestor.request(RequestMethod.GET, fundWalletUrl, null, PaymentMethod.class, vcr.client))
+                .thenReturn(paymentMethod);
+
+        assertDoesNotThrow(() -> vcr.client.billing.fundWallet("2000"));
     }
 
     /**
@@ -54,9 +102,11 @@ public final class BillingTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // Skipping due to having to manually add and remove a payment method from the account.
     public void testRetrievePaymentMethods() throws EasyPostException {
-        vcr.setUpTest("retrieve_payment_methods");
+        String url = String.format("%s/%s/%s", vcr.client.getApiBase(), vcr.client.getApiVersion(), "payment_methods");
+
+        requestMock.when(() -> Requestor.request(RequestMethod.GET, url, null, PaymentMethod.class, vcr.client))
+                .thenReturn(paymentMethod);
 
         PaymentMethod paymentMethods = vcr.client.billing.retrievePaymentMethods();
 

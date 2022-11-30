@@ -85,31 +85,6 @@ public class ShipmentService {
     }
 
     /**
-     * Refresh this Shipment.
-     *
-     * @param id The ID of shipment.
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment refresh(String id) throws EasyPostException {
-        return this.refresh(id, null);
-    }
-
-    /**
-     * Refresh this Shipment.
-     *
-     * @param id     The ID of shipment.
-     * @param params The options for the query.
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment refresh(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s", Utilities.instanceURL(Shipment.class, id));
-
-        return Requestor.request(RequestMethod.GET, url, params, Shipment.class, client);
-    }
-
-    /**
      * Get new rates for this Shipment.
      *
      * @param id The ID of shipment.
@@ -117,7 +92,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment newRates(final String id) throws EasyPostException {
-        return this.newRates(id, new HashMap<String, Object>(), false);
+        return this.newRates(id, new HashMap<String, Object>());
     }
 
     /**
@@ -176,7 +151,7 @@ public class ShipmentService {
      *             Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public List<Smartrate> getSmartrates(final Map<String, Object> params, final String id)
+    public List<Smartrate> getSmartrates(final String id, final Map<String, Object> params)
             throws EasyPostException {
         return this.smartrates(id, params);
     }
@@ -218,7 +193,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final String id, final Map<String, Object> params) throws EasyPostException {
-        return this.buy(id, params, false, null);
+        return this.buy(id, params, false);
     }
 
     /**
@@ -351,23 +326,12 @@ public class ShipmentService {
     /**
      * Label this Shipment.
      *
-     * @param id The ID of shipment.
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment label(final String id) throws EasyPostException {
-        return this.label(null, id);
-    }
-
-    /**
-     * Label this Shipment.
-     *
      * @param params The options for the query.
      * @param id     The ID of shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment label(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Shipment label(final String id, final Map<String, Object> params) throws EasyPostException {
         String url = String.format("%s/label", Utilities.instanceURL(Shipment.class, id));
 
         return Requestor.request(RequestMethod.GET, url, params, Shipment.class, client);
@@ -376,23 +340,12 @@ public class ShipmentService {
     /**
      * Insure this Shipment.
      *
-     * @param id The ID of shipment.
-     * @return Shipment object
-     * @throws EasyPostException when the request fails.
-     */
-    public Shipment insure(final String id) throws EasyPostException {
-        return this.insure(null, id);
-    }
-
-    /**
-     * Insure this Shipment.
-     *
      * @param params The options for the query.
      * @param id     The ID of shipment.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment insure(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Shipment insure(final String id, final Map<String, Object> params) throws EasyPostException {
         String url = String.format("%s/insure", Utilities.instanceURL(Shipment.class, id));
 
         return Requestor.request(RequestMethod.POST, url, params, Shipment.class, client);
@@ -447,7 +400,7 @@ public class ShipmentService {
      */
     @Deprecated
     public List<Smartrate> getSmartrates(final String id) throws EasyPostException {
-        return this.smartrates(id, null);
+        return this.getSmartrates(id, null);
     }
 
     /**
@@ -509,7 +462,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment generateForm(final String formType, final String id) throws EasyPostException {
-        return this.generateForm(formType, null, id);
+        return this.generateForm(formType, new HashMap<>(), id);
     }
 
     /**

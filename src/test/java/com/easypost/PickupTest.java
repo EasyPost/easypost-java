@@ -91,11 +91,26 @@ public final class PickupTest {
 
         Pickup pickup = createBasicPickup();
 
-        Map<String, Object> params = new HashMap<>();
-        params.put("carrier", Fixtures.usps());
-        params.put("service", Fixtures.pickupService());
+        Pickup boughtPickup = vcr.client.pickup.buy(pickup.getId());
 
-        Pickup boughtPickup = vcr.client.pickup.buy(pickup.getId(), params);
+        assertInstanceOf(Pickup.class, boughtPickup);
+        assertTrue(boughtPickup.getId().startsWith("pickup_"));
+        assertNotNull(boughtPickup.getConfirmation());
+        assertEquals("scheduled", boughtPickup.getStatus());
+    }
+
+    /**
+     * Test buying a pickup with lowest rate.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testBuyWithRate() throws EasyPostException {
+        vcr.setUpTest("buy_with_rate");
+
+        Pickup pickup = createBasicPickup();
+
+        Pickup boughtPickup = vcr.client.pickup.buy(pickup.getId(), pickup.lowestRate());
 
         assertInstanceOf(Pickup.class, boughtPickup);
         assertTrue(boughtPickup.getId().startsWith("pickup_"));
@@ -138,7 +153,7 @@ public final class PickupTest {
         Pickup pickup = createBasicPickup();
 
         // Test lowest rate with no filters
-        PickupRate lowestRate = vcr.client.pickup.lowestRate(pickup);
+        PickupRate lowestRate = pickup.lowestRate();
         assertEquals("NextDay", lowestRate.getService());
         assertEquals(0.00, lowestRate.getRate(), 0.01);
         assertEquals("USPS", lowestRate.getCarrier());
@@ -146,13 +161,13 @@ public final class PickupTest {
         // Test lowest rate with service filter (should error due to bad service)
         List<String> services = new ArrayList<>(Arrays.asList("BAD SERVICE"));
         assertThrows(EasyPostException.class, () -> {
-            vcr.client.pickup.lowestRate(null, services, pickup);
+            pickup.lowestRate(null, services);
         });
 
         // Test lowest rate with carrier filter (should error due to bad carrier)
         List<String> carriers = new ArrayList<>(Arrays.asList("BAD CARRIER"));
         assertThrows(EasyPostException.class, () -> {
-            vcr.client.pickup.lowestRate(carriers, null, pickup);
+            pickup.lowestRate(carriers, null);
         });
     }
 }

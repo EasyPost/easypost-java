@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.model.Report;
 import com.easypost.model.ReportCollection;
 import org.junit.jupiter.api.BeforeAll;
@@ -208,5 +209,20 @@ public final class ReportTest {
         // response content,
         // so we'll just check fo a generic exception
         assertThrows(Exception.class, () -> vcr.client.report.all(params));
+    }
+
+    /**
+     * Test creating a report without type.
+     * 
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateReportWithoutType() throws EasyPostException {
+        Map<String, Object> reportParams = new HashMap<>();
+
+        reportParams.put("start_date", Fixtures.reportDate());
+        reportParams.put("end_date", Fixtures.reportDate());
+
+        assertThrows(InvalidObjectError.class, () -> vcr.client.report.create(reportParams));
     }
 }

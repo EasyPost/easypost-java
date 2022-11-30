@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.FilteringError;
 import com.easypost.model.ApiKey;
 import com.easypost.model.ApiKeys;
 import com.easypost.model.Brand;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class UserTest {
@@ -171,6 +173,10 @@ public final class UserTest {
         ApiKeys apikeys = vcr.client.apikeys.all();
 
         assertInstanceOf(ApiKeys.class, apikeys);
+        
+        List<ApiKey> apiKeys = vcr.client.user.apiKeys(apikeys.getId());
+
+        assertNotNull(apiKeys);
     }
 
     /**
@@ -185,7 +191,10 @@ public final class UserTest {
         User user = createUser();
 
         List<ApiKey> apiKeys = vcr.client.user.apiKeys(user.getId());
+
         assertNotNull(apiKeys);
+
+        assertThrows(FilteringError.class, () -> vcr.client.user.apiKeys("invlaid_id"));
     }
 
     /**

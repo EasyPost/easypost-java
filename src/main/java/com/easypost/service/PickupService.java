@@ -5,12 +5,9 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Pickup;
 import com.easypost.model.PickupRate;
-import com.easypost.model.Rate;
 import com.easypost.utils.Utilities;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PickupService {
@@ -50,31 +47,6 @@ public class PickupService {
     public Pickup retrieve(final String id) throws EasyPostException {
         return Requestor.request(RequestMethod.GET, Utilities.instanceURL(Pickup.class, id), null, Pickup.class,
                 client);
-    }
-
-    /**
-     * Refresh this Pickup.
-     *
-     * @param id The ID of pickup.
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Pickup refresh(final String id) throws EasyPostException {
-        return this.refresh(id, null);
-    }
-
-    /**
-     * Refresh this Pickup.
-     *
-     * @param params Map of parameters.
-     * @param id The ID of pickup.
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Pickup refresh(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s", Utilities.instanceURL(Pickup.class, id));
-
-        return Requestor.request(RequestMethod.GET, url, params, Pickup.class, client);
     }
 
     /**
@@ -141,48 +113,5 @@ public class PickupService {
         String url = String.format("%s/cancel", Utilities.instanceURL(Pickup.class, id));
 
         return Requestor.request(RequestMethod.POST, url, params, Pickup.class, client);
-    }
-
-    /**
-     * Get the lowest rate for this Pickup.
-     *
-     * @param pickup The pickup object.
-     * @return lowest PickupRate object
-     * @throws EasyPostException when the request fails.
-     */
-    public PickupRate lowestRate(final Pickup pickup) throws EasyPostException {
-        return this.lowestRate(null, null, pickup);
-    }
-
-    /**
-     * Get the lowest rate for this Pickup.
-     *
-     * @param carriers The carriers to use in the filter.
-     * @param services The services to use in the filter.
-     * @param pickup   The pickup object.
-     * @return lowest PickupRate object
-     * @throws EasyPostException when the request fails.
-     */
-    public PickupRate lowestRate(final List<String> carriers, final List<String> services, final Pickup pickup)
-            throws EasyPostException {
-        List<Rate> rates = new ArrayList<Rate>();
-
-        for (PickupRate rate : pickup.getPickupRates()) {
-            rates.add((Rate) rate);
-        }
-
-        return (PickupRate) Utilities.getLowestObjectRate(rates, carriers, services);
-    }
-
-    /**
-     * Get the lowest rate for this pickup.
-     *
-     * @param carriers The carriers to use in the query.
-     * @param pickup   The pickup object.
-     * @return PickupRate object
-     * @throws EasyPostException when the request fails.
-     */
-    public PickupRate lowestRate(final List<String> carriers, final Pickup pickup) throws EasyPostException {
-        return this.lowestRate(carriers, null, pickup);
     }
 }
