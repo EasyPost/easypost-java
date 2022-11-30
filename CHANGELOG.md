@@ -1,12 +1,14 @@
 # CHANGELOG
 
-## V6 (Next release)
+## v6.0.0-rc1 (2022-11-30)
+
+### Breaking Changes
 
 - Library is now thread-safe
-  - Initialize a `EasyPostClient` object with an API key, connection and readtime milliseconds are optional, otherwise it will be set to default.
-  - All methods (i.e. `create`, `retrieve`, retrieve `all` of a resource) exist in services, accessed via property of the client
+  - Initialize an `EasyPostClient` object with an API key. Optionally set connection and readtime params
+  - All methods (i.e. `create`, `retrieve`, `all`) exist in services, accessed via property of the client (eg: `client.shipment.create()`)
     - E.g. Static method -> `Shipment shipment = client.address.create(params)`
-    - E.g. Instance method -> `Shipment boughtShipment = client.shipment.buy(shipmentID, lowestRate)`
+    - E.g. Instance methods are now static -> `Shipment boughtShipment = client.shipment.buy(shipmentID, lowestRate)`
   - All functions are now taking object ID instead of an object, which means the functions are returning the response value directly instead of updating the current object
     - E.g. `Shipment boughtShipment = client.shipment.buy(shipmentID, lowestRate)`
 - Improves error exception handling
@@ -14,28 +16,30 @@
   - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
 - Removes `createAndVerifyWithCarrier` function
 - Removes `verifyWithCarrier` function
-- Changes the type of Insurance `Amount` from Float to String
 - Removes `getUpdate` and `setUpdate` from Tracker class
 - Removes all beta features and corrsponding unit tests
 - Removes `serviceCode` from `Rate` class since this value is internal use only
-- Converts return type from boolean to void in empty response body functions
-  - `fundWallet()` and `deletePaymentMethod()` in Billing class
-  - `createList()` in Tracker class
-  - `updateEmail()` in ReferralCustomer class
-- Adds two missing attributes in the Event class: `pendingUrls` and `completedUrls`
-- Changes the type `result` of Event from `EasyPostResource` to `Map<String, Object>`
-- AppEngine default timeout is now the same as connection timeout
 - Removes invalid function `User.create()` since creating a child-user requires a name
 - Removes deprecated class `CreditCard` and its associated classes `PrimaryPaymentMethod`, `SecondaryPaymentMethod`, and `BaseCreditCard`, please use alternative `Billing` class
 - Removes all the setters of each object
-- Setters are now available via lombok and aren't explicitly in the code anymore
+- Removes the `refresh()` function in all classes, please use `retrieve()` function instead
+- Removes invalid functions that allow users to make an API request without providing required parameters
+- Changes the type of Insurance `Amount` from Float to String
 - Changes the type `hasMore` in ReferralCustomerCollection from `boolean` to `Boolean`
 - Renames some getters
   - Pickup class: `getPickoutRates()` -> `getPickupRates()`
   - PaymentMethod class: `getPrimaryPaymentMethodObject()` -> `getPrimaryPaymentMethod()`
   - PaymentMethod class: `getSecondaryPaymentMethodObject()` -> `getSecondaryPaymentMethod()`
-- Removes the `refresh()` function in all classes, please use `retrieve()` function instead
-- Removes invalid functions that allow users to make an API request without providing required parameters
+- Converts return type from a boolean to void when we receive an empty response body from the API
+  - `fundWallet()` and `deletePaymentMethod()` in Billing class
+  - `createList()` in Tracker class
+  - `updateEmail()` in ReferralCustomer class
+- Changes the type `result` of Event from `EasyPostResource` to `Map<String, Object>`
+
+### Bug Fixes
+
+- Adds two missing attributes in the Event class: `pendingUrls` and `completedUrls`
+- AppEngine default timeout is now the same as connection timeout
 
 ## v5.10.0 (2022-09-21)
 
