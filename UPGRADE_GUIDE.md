@@ -116,9 +116,9 @@ Static and instance-based methods have been divided into separate services and r
 
 For example:
 
-- The static method `Shipment.buy()` is now accessible in the Shipment service via `client.shipment.buy("shp_...")`. 
+- The static method `Shipment.buy()` is now accessible in the Shipment service via `client.shipment.buy("shp_...")`.
 - The instance method `myShipment.lowestRate()` is still accessible only via a Shipment instance because there is no API interaction.
-- The instance method of `refresh()` has been removed becasue you can no longer use object to make a HTTP request.
+- The instance method of `refresh()` has been removed because you can no longer use an object to make a HTTP request.
 
 Instances of an object cannot be initialized directly. Instead, use the service to create the instance via a `create`, `retrieve`, or `all` API call.
 
@@ -126,13 +126,13 @@ Instances of an object cannot be initialized directly. Instead, use the service 
 
 *Likelihood of Impact: **Medium***
 
-Each object no longer has setters. The use case of the setter is extremely low, but if you need to use the setter for a specific reason, try to use `reflection` in Java.
+Objects no longer have setters. The use case of the setter is extremely low, but if you need to use the setter for a specific reason, try to use `reflection` in Java.
 
 ## 6.0 Rename Some Getters
 
 *Likelihood of Impact: **Medium***
 
-Below getters have been renamed:
+The following getters have been renamed:
 
 - Pickup class: `getPickoutRates()` -> `getPickupRates()`
 - PaymentMethod class: `getPrimaryPaymentMethodObject()` -> `getPrimaryPaymentMethod()`
@@ -142,7 +142,7 @@ Below getters have been renamed:
 
 *Likelihood of Impact: **Low***
 
-Change the below type of objects:
+The following properties have changed types:
 
 - `result` of Event from `EasyPostResource` to `Map<String, object>`
 - `amount` of Insurance from `Float` to `String`
