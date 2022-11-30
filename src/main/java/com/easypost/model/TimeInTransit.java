@@ -1,6 +1,6 @@
 package com.easypost.model;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidParameterError;
 import com.google.gson.annotations.SerializedName;
@@ -52,7 +52,7 @@ public final class TimeInTransit {
             case "percentile_99":
                 return this.percentile99;
             default:
-                throw new InvalidParameterError(String.format(Constants.INVALID_PARAMETER, "percentile"));
+                throw new InvalidParameterError(String.format(Constants.ErrorMessages.INVALID_PARAMETER, "percentile"));
         }
     }
 

@@ -9,7 +9,7 @@
 package com.easypost.http;
 
 import com.easypost.EasyPost;
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ForbiddenError;
 import com.easypost.exception.API.GatewayTimeoutError;
@@ -532,32 +532,32 @@ public abstract class Requestor {
         String errorCode = error.getCode();
         List<Error> errors = error.getErrors();
 
-        if (rCode >= Constants.ErrorCode.REDIRECT_CODE_BEGIN && rCode <= Constants.ErrorCode.REDIRECT_CODE_END) {
+        if (rCode >= Constants.ErrorCodes.REDIRECT_CODE_BEGIN && rCode <= Constants.ErrorCodes.REDIRECT_CODE_END) {
             throw new RedirectError(errorMessage, errorCode, rCode, errors);
         }
 
         switch (rCode) {
-            case Constants.ErrorCode.UNAUTHORIZED_ERROR:
+            case Constants.ErrorCodes.UNAUTHORIZED_ERROR:
                 throw new UnauthorizedError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.FORBIDDEN_ERROR:
+            case Constants.ErrorCodes.FORBIDDEN_ERROR:
                 throw new ForbiddenError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.PAYMENT_ERROR:
+            case Constants.ErrorCodes.PAYMENT_ERROR:
                 throw new PaymentError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.NOT_FOUND_ERROR:
+            case Constants.ErrorCodes.NOT_FOUND_ERROR:
                 throw new NotFoundError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.METHOD_NOT_ALLOWED_ERROR:
+            case Constants.ErrorCodes.METHOD_NOT_ALLOWED_ERROR:
                 throw new MethodNotAllowedError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.TIMEOUT_ERROR:
+            case Constants.ErrorCodes.TIMEOUT_ERROR:
                 throw new TimeoutError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.INVALID_REQUEST_ERROR:
+            case Constants.ErrorCodes.INVALID_REQUEST_ERROR:
                 throw new InvalidRequestError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.RATE_LIMIT_ERROR:
+            case Constants.ErrorCodes.RATE_LIMIT_ERROR:
                 throw new RateLimitError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.INTERNAL_SERVER_ERROR:
+            case Constants.ErrorCodes.INTERNAL_SERVER_ERROR:
                 throw new InternalServerError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.SERVICE_UNAVAILABLE_ERROR:
+            case Constants.ErrorCodes.SERVICE_UNAVAILABLE_ERROR:
                 throw new ServiceUnavailablError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.GATEWAY_TIMEOUT_ERROR:
+            case Constants.ErrorCodes.GATEWAY_TIMEOUT_ERROR:
                 throw new GatewayTimeoutError(errorMessage, errorCode, rCode, errors);
             default:
                 throw new UnknownApiError(errorMessage, errorCode, rCode, errors);

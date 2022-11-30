@@ -1,6 +1,6 @@
 package com.easypost.service;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Constant;
 
@@ -105,7 +105,7 @@ public class EasyPostClient {
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, int readTimeoutMilliseconds, String apiBase)
             throws MissingParameterError {
         if (apiKey == null || apiKey.isEmpty()) {
-            throw new MissingParameterError(Constants.INVALID_API_KEY_TYPE);
+            throw new MissingParameterError(Constants.ErrorMessages.INVALID_API_KEY_TYPE);
         }
 
         this.apiBase = apiBase;

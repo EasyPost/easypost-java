@@ -1,6 +1,6 @@
 package com.easypost.service;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ExternalApiError;
 import com.easypost.http.Constant;
@@ -126,7 +126,7 @@ public class ReferralCustomerService {
         try {
             stripeToken = createStripeToken(number, expirationMonth, expirationYear, cvc, easypostStripeApiKey);
         } catch (Exception e) {
-            throw new ExternalApiError(String.format(Constants.EXTERNAL_API_CALL_FAILED, "Stripe"));
+            throw new ExternalApiError(String.format(Constants.ErrorMessages.EXTERNAL_API_CALL_FAILED, "Stripe"));
         }
 
         return createEasypostCreditCard(referralApiKey, stripeToken, priority.toString().toLowerCase());

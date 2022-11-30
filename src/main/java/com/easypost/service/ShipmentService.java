@@ -1,6 +1,6 @@
 package com.easypost.service;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
 import com.easypost.http.Requestor;
@@ -147,7 +147,7 @@ public class ShipmentService {
      * @param id     The ID of shipment.
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates(Map, Shipment)} instead.
+     * @deprecated Use {@link #smartrates(String, Map)} instead.
      *             Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
@@ -360,7 +360,7 @@ public class ShipmentService {
      *                         filtering.
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
-     * @deprecated use {@link #lowestSmartRate(int, SmartrateAccuracy, Shipment)}
+     * @deprecated use {@link #lowestSmartRate(String, int, SmartrateAccuracy)}
      *             instead.
      *             Deprecated: v5.5.0 - v7.0.0
      */
@@ -395,7 +395,7 @@ public class ShipmentService {
      * @param id The ID of shipment.
      * @return List of Smartrate objects
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #smartrates(Shipment)} instead.
+     * @deprecated Use {@link #smartrates(String, Map)} instead.
      *             Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
@@ -447,7 +447,7 @@ public class ShipmentService {
         }
 
         if (lowestSmartrate == null) {
-            throw new FilteringError(String.format(Constants.NO_OBJECT_FOUND, "rate"));
+            throw new FilteringError(String.format(Constants.ErrorMessages.NO_OBJECT_FOUND, "rate"));
         }
 
         return lowestSmartrate;
