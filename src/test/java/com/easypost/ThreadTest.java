@@ -1,7 +1,6 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.http.Constant;
 import com.easypost.model.Order;
 import com.easypost.service.EasyPostClient;
 
@@ -144,6 +143,6 @@ public final class ThreadTest {
 
         assertEquals("fake_api_key_2", clientTwo.getApiKey());
         assertEquals(55555, clientTwo.getConnectionTimeoutMilliseconds());
-        assertEquals(Constant.DEFAULT_READ_TIMEOUT_MILLISECONDS, clientTwo.getReadTimeoutMilliseconds());
+        assertEquals(Constants.Http.DEFAULT_READ_TIMEOUT_MILLISECONDS, clientTwo.getReadTimeoutMilliseconds());
     }
 }

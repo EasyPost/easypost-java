@@ -3,7 +3,6 @@ package com.easypost.service;
 import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ExternalApiError;
-import com.easypost.http.Constant;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.PaymentMethod;
@@ -202,7 +201,7 @@ public class ReferralCustomerService {
         String responseBody = response.toString();
 
         @SuppressWarnings("unchecked")
-        Map<String, Object> responseMap = Constant.GSON.fromJson(responseBody, Map.class);
+        Map<String, Object> responseMap = Constants.Http.GSON.fromJson(responseBody, Map.class);
 
         return responseMap.get("id").toString();
     }

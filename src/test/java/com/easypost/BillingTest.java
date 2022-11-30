@@ -1,7 +1,6 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.http.Constant;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.PaymentMethod;
@@ -23,7 +22,7 @@ public final class BillingTest {
             "me\":null,\"last4\":\"4242\",\"exp_month\":1,\"exp_year\":2025,\"brand\":\"Visa\"},\"secondar" +
             "y_payment_method\":{\"id\":\"card_...\",\"disabled_at\":null,\"object\":\"CreditCard\",\"name\":nu" +
             "ll,\"last4\":\"4444\",\"exp_month\":1,\"exp_year\":2025,\"brand\":\"Mastercard\"}}";
-    private PaymentMethod paymentMethod = Constant.GSON.fromJson(jsonResponse, PaymentMethod.class);
+    private PaymentMethod paymentMethod = Constants.Http.GSON.fromJson(jsonResponse, PaymentMethod.class);
     private static MockedStatic<Requestor> requestMock = Mockito.mockStatic(Requestor.class);
 
     /**
