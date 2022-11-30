@@ -72,9 +72,9 @@ public final class CarrierAccountTest {
     public void testCreateWithCustomWorkflow() throws EasyPostException {
         vcr.setUpTest("create_with_custom_workflow");
 
-        Map<String, Object> data =  Fixtures.basicCarrierAccount();
+        Map<String, Object> data = Fixtures.basicCarrierAccount();
         data.put("type", "FedexAccount");
-        data.put("registration_data", new HashMap<String, Object>(){{
+        data.put("registration_data", new HashMap<String, Object>() {{
             put("some", "data");
         }});
 
@@ -86,7 +86,8 @@ public final class CarrierAccountTest {
             assertEquals(422, e.getStatusCode());
             assertTrue(e.getErrors().size() > 0);
             // We expect one of the sub-errors to be regarding a missing field
-            assertTrue(e.getErrors().stream().anyMatch(error -> error.getField().equals("account_number") && error.getMessage().equals("must be present and a string")));
+            assertTrue(e.getErrors().stream().anyMatch(error -> error.getField().equals("account_number") &&
+                    error.getMessage().equals("must be present and a string")));
         }
     }
 
