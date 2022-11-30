@@ -1,7 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.exception.General.ExternalApiError;
+import com.easypost.exception.API.ExternalApiError;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.ReferralCustomer;
