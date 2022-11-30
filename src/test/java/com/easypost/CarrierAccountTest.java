@@ -63,6 +63,33 @@ public final class CarrierAccountTest {
         assertEquals("DhlEcsAccount", carrierAccount.getType());
     }
 
+    /**
+     * Test creating a carrier account with a custom workflow.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateWithCustomWorkflow() throws EasyPostException {
+        vcr.setUpTest("create_with_custom_workflow");
+
+        Map<String, Object> data =  Fixtures.basicCarrierAccount();
+        data.put("type", "FedexAccount");
+        data.put("registration_data", new HashMap<String, Object>(){{
+            put("some", "data");
+        }});
+
+        try {
+            CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);
+            testCarrierAccountId = carrierAccount.getId();  // clean up after test, should never get here
+        } catch (EasyPostException e) {
+            // We're sending bad data to the API, so we expect an error
+            assertEquals(422, e.getStatusCode());
+            assertTrue(e.getErrors().size() > 0);
+            // We expect one of the sub-errors to be regarding a missing field
+            assertTrue(e.getErrors().stream().anyMatch(error -> error.getField().equals("account_number") && error.getMessage().equals("must be present and a string")));
+        }
+    }
+
     private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
         CarrierAccount carrierAccount = vcr.client.carrierAccount.create(Fixtures.basicCarrierAccount());
         testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
