@@ -68,12 +68,12 @@ public class EndShipperService {
     /**
      * Update an EndShipper object.
      *
-     * @param params Map of parameters.
      * @param id     The ID of endshipper.
+     * @param params Map of parameters.
      * @return EndShipper object.
      * @throws EasyPostException when the request fails.
      */
-    public EndShipper update(final Map<String, Object> params, final String id) throws EasyPostException {
+    public EndShipper update(final String id, final Map<String, Object> params) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
 
         wrappedParams.put("address", params);

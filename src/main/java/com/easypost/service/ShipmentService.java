@@ -456,25 +456,25 @@ public class ShipmentService {
     /**
      * Generate a form for this shipment.
      *
-     * @param formType The form type for this shipment.
      * @param id       The ID of shipment.
+     * @param formType The form type for this shipment.
      * @return Return a shipment object.
      * @throws EasyPostException when the request fails.
      */
-    public Shipment generateForm(final String formType, final String id) throws EasyPostException {
-        return this.generateForm(formType, new HashMap<>(), id);
+    public Shipment generateForm(final String id, final String formType) throws EasyPostException {
+        return this.generateForm(id, formType, new HashMap<>());
     }
 
     /**
      * Generate a form for this shipment.
      *
+     * @param id          The ID of shipment.
      * @param formType    The form type for this shipment.
      * @param formOptions The form options for this shipment.
-     * @param id          The ID of shipment.
      * @return Return a shipment object.
      * @throws EasyPostException when the request fails.
      */
-    public Shipment generateForm(final String formType, final Map<String, Object> formOptions, final String id)
+    public Shipment generateForm(final String id, final String formType, final Map<String, Object> formOptions)
             throws EasyPostException {
         HashMap<String, Object> params = new HashMap<>();
         HashMap<String, Object> wrappedParams = new HashMap<>();

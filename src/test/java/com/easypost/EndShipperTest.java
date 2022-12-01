@@ -115,7 +115,7 @@ public final class EndShipperTest {
         updateParams.put("phone", "9999999999");
         updateParams.put("email", "test@example.com");
 
-        EndShipper updatedEndShipper = vcr.client.endShipper.update(updateParams, endShipper.getId());
+        EndShipper updatedEndShipper = vcr.client.endShipper.update(endShipper.getId(), updateParams);
 
         assertInstanceOf(EndShipper.class, updatedEndShipper);
         assertTrue(updatedEndShipper.getId().startsWith("es_"));

@@ -457,7 +457,7 @@ public final class ShipmentTest {
 
         assertInstanceOf(List.class, rates);
 
-        for (Smartrate rate: rates) {
+        for (Smartrate rate : rates) {
             assertInstanceOf(Smartrate.class, rate);
         }
     }
@@ -519,7 +519,7 @@ public final class ShipmentTest {
         Shipment shipment = createOneCallBuyShipment();
         String formType = "return_packing_slip";
 
-        Shipment shipmentWithForm = vcr.client.shipment.generateForm(formType, shipment.getId());
+        Shipment shipmentWithForm = vcr.client.shipment.generateForm(shipment.getId(), formType);
 
         assertTrue(shipmentWithForm.getForms().size() > 0);
 
@@ -541,8 +541,8 @@ public final class ShipmentTest {
         Shipment shipment = createOneCallBuyShipment();
         String formType = "return_packing_slip";
 
-        Shipment shipmentWithForm = vcr.client.shipment.generateForm(formType, Fixtures.rmaFormOptions(),
-                shipment.getId());
+        Shipment shipmentWithForm = vcr.client.shipment.generateForm(shipment.getId(), formType,
+                Fixtures.rmaFormOptions());
 
         assertTrue(shipmentWithForm.getForms().size() > 0);
 
