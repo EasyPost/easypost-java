@@ -1,6 +1,6 @@
 package com.easypost.service;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.http.Requestor;
@@ -35,7 +35,7 @@ public class PaymentMethodService {
             Requestor.request(RequestMethod.GET, url, null, PaymentMethod.class, client);
 
         if (response.getId() == null) {
-            throw new InvalidObjectError(Constants.NO_PAYMENT_METHODS);
+            throw new InvalidObjectError(Constants.ErrorMessages.NO_PAYMENT_METHODS);
         }
 
         return response;

@@ -1,6 +1,6 @@
 package com.easypost.model;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
@@ -32,7 +32,7 @@ public final class ErrorDeserializer implements JsonDeserializer<Error> {
 
         if (results == null) {
             Error error = new Error();
-            error.setMessage(Constants.API_DID_NOT_RETURN_ERROR_DETAILS);
+            error.setMessage(Constants.ErrorMessages.API_DID_NOT_RETURN_ERROR_DETAILS);
             error.setCode("NO RESPONSE CODE");
             return error;
         }

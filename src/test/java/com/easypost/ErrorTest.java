@@ -1,6 +1,5 @@
 package com.easypost;
 
-import com.easypost.exception.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.RedirectError;
 import com.easypost.exception.API.ServiceUnavailablError;
@@ -94,7 +93,7 @@ public final class ErrorTest extends Requestor {
             EasyPostException exception = assertThrows(EasyPostException.class,
                 () -> handleAPIError("{}", entry.getKey()));
 
-            assertEquals(Constants.API_DID_NOT_RETURN_ERROR_DETAILS, exception.getMessage());
+            assertEquals(Constants.ErrorMessages.API_DID_NOT_RETURN_ERROR_DETAILS, exception.getMessage());
             assertEquals("NO RESPONSE CODE", exception.getCode());
             assertEquals(entry.getKey(), exception.getStatusCode());
             assertInstanceOf(entry.getValue(), exception);

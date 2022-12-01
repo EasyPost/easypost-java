@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
 import com.easypost.http.Requestor;
@@ -110,7 +110,7 @@ public class UserService {
             }
         }
 
-        throw new FilteringError(String.format(Constants.NO_OBJECT_FOUND, "API keys"));
+        throw new FilteringError(String.format(Constants.ErrorMessages.NO_OBJECT_FOUND, "API keys"));
     }
 
     /**

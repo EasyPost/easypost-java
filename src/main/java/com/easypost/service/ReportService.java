@@ -1,6 +1,6 @@
 package com.easypost.service;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.exception.General.InvalidParameterError;
@@ -40,7 +40,7 @@ public class ReportService {
             return Requestor.request(RequestMethod.POST,
                     reportURL((String) params.get("type")), paramsWithoutType, Report.class, client);
         } else {
-            throw new InvalidObjectError(String.format(Constants.MISSING_REQUIRED_PARAMETER, "type"));
+            throw new InvalidObjectError(String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "type"));
         }
     }
 
@@ -56,7 +56,7 @@ public class ReportService {
             String urlType = URLEncoder.encode(type, "UTF-8").toLowerCase();
             return String.format("%s/%s/reports/%s/", client.getApiBase(), client.getApiVersion(), urlType);
         } catch (java.io.UnsupportedEncodingException e) {
-            throw new InvalidParameterError(String.format(Constants.ENCODED_ERROR, "report type"), e);
+            throw new InvalidParameterError(String.format(Constants.ErrorMessages.ENCODED_ERROR, "report type"), e);
         }
     }
 

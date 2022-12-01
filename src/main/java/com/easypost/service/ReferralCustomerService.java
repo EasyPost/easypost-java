@@ -1,9 +1,8 @@
 package com.easypost.service;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ExternalApiError;
-import com.easypost.http.Constant;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.PaymentMethod;
@@ -126,7 +125,7 @@ public class ReferralCustomerService {
         try {
             stripeToken = createStripeToken(number, expirationMonth, expirationYear, cvc, easypostStripeApiKey);
         } catch (Exception e) {
-            throw new ExternalApiError(String.format(Constants.EXTERNAL_API_CALL_FAILED, "Stripe"));
+            throw new ExternalApiError(String.format(Constants.ErrorMessages.EXTERNAL_API_CALL_FAILED, "Stripe"));
         }
 
         return createEasypostCreditCard(referralApiKey, stripeToken, priority.toString().toLowerCase());
@@ -202,7 +201,7 @@ public class ReferralCustomerService {
         String responseBody = response.toString();
 
         @SuppressWarnings("unchecked")
-        Map<String, Object> responseMap = Constant.GSON.fromJson(responseBody, Map.class);
+        Map<String, Object> responseMap = Constants.Http.GSON.fromJson(responseBody, Map.class);
 
         return responseMap.get("id").toString();
     }

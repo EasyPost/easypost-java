@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 
 import java.util.Date;
 
-import com.easypost.http.Constant;
+import com.easypost.Constants;
 import lombok.Getter;
 
 @Getter
@@ -59,7 +59,7 @@ public abstract class EasyPostResource {
      */
     public String prettyPrint() {
         return String.format("<%s@%s id=%s> JSON: %s", this.getClass().getName(), System.identityHashCode(this),
-                this.getIdString(), Constant.PRETTY_PRINT_GSON.toJson(this));
+                this.getIdString(), Constants.Http.PRETTY_PRINT_GSON.toJson(this));
     }
 
     /**
@@ -69,19 +69,19 @@ public abstract class EasyPostResource {
      */
     @Override
     public int hashCode() {
-        return Constant.GSON.toJson(this).hashCode();
+        return Constants.Http.GSON.toJson(this).hashCode();
     }
 
     /**
-     * Override the equals method, convert objects to Json strings for comparsion.
+     * Override the Equals method, convert objects to Json strings for comparison.
      *
      * @param object Object of any class.
      * @return If two objects have the same properties.
      */
     @Override
     public boolean equals(Object object) {
-        String currentObject = Constant.GSON.toJson(this);
-        String newObject = Constant.GSON.toJson(object);
+        String currentObject = Constants.Http.GSON.toJson(this);
+        String newObject = Constants.Http.GSON.toJson(object);
 
         return currentObject.equals(newObject);
     }

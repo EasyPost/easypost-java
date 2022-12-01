@@ -1,9 +1,8 @@
 package com.easypost.service;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.SignatureVerificationError;
-import com.easypost.http.Constant;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Event;
@@ -150,12 +149,12 @@ public class WebhookService {
             if (Cryptography.signaturesMatch(providedSignature, calculatedSignature)) {
                 // Serialize data into a JSON string, then into an Event object
                 String json = new String(eventBody, StandardCharsets.UTF_8);
-                return Constant.GSON.fromJson(json, Event.class);
+                return Constants.Http.GSON.fromJson(json, Event.class);
             } else {
-                throw new SignatureVerificationError(Constants.WEBHOOK_DOES_NOT_MATCH);
+                throw new SignatureVerificationError(Constants.ErrorMessages.WEBHOOK_DOES_NOT_MATCH);
             }
         } else {
-            throw new SignatureVerificationError(Constants.INVALID_WEBHOOK_SIGNATURE);
+            throw new SignatureVerificationError(Constants.ErrorMessages.INVALID_WEBHOOK_SIGNATURE);
         }
     }
 }

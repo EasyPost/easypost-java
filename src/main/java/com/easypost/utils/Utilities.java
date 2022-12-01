@@ -1,6 +1,6 @@
 package com.easypost.utils;
 
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
 import com.easypost.model.Rate;
@@ -49,7 +49,7 @@ public abstract class Utilities {
 
         if (lowestRate == null) {
             throw new FilteringError(String.format(
-                    Constants.NO_OBJECT_FOUND, "lowest rate matching required criteria"));
+                    Constants.ErrorMessages.NO_OBJECT_FOUND, "lowest rate matching required criteria"));
         }
 
         return lowestRate;

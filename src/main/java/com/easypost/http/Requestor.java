@@ -9,7 +9,7 @@
 package com.easypost.http;
 
 import com.easypost.EasyPost;
-import com.easypost.exception.Constants;
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ForbiddenError;
 import com.easypost.exception.API.GatewayTimeoutError;
@@ -63,25 +63,26 @@ public abstract class Requestor {
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
 
     private static String urlEncodePair(final String key, final String value) throws UnsupportedEncodingException {
-        return String.format("%s=%s",
-                URLEncoder.encode(key, Constant.CHARSET), URLEncoder.encode(value, Constant.CHARSET));
+        return String.format("%s=%s", URLEncoder.encode(key, Constants.Http.CHARSET),
+                URLEncoder.encode(value, Constants.Http.CHARSET));
     }
 
     /**
      * Set the header of the HTTP request.
-     * 
+     *
      * @param apiKey API of this HTTP request.
      * @return HTTP header
      * @throws MissingParameterError
      */
     static Map<String, String> generateHeaders(String apiKey) throws MissingParameterError {
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Accept-Charset", Constant.CHARSET);
-        headers.put("User-Agent", String.format("EasyPost/v2 JavaClient/%s Java/%s OS/%s OSVersion/%s OSArch/%s " +
-                "Implementation/%s", EasyPost.VERSION, System.getProperty("java.version"),
-                convertSpaceToHyphen(System.getProperty("os.name")), System.getProperty("os.version"),
-                convertSpaceToHyphen(System.getProperty("os.arch")),
-                convertSpaceToHyphen(System.getProperties().getProperty("java.vm.name"))));
+        headers.put("Accept-Charset", Constants.Http.CHARSET);
+        headers.put("User-Agent",
+                String.format("EasyPost/v2 JavaClient/%s Java/%s OS/%s OSVersion/%s OSArch/%s " + "Implementation/%s",
+                        EasyPost.VERSION, System.getProperty("java.version"),
+                        convertSpaceToHyphen(System.getProperty("os.name")), System.getProperty("os.version"),
+                        convertSpaceToHyphen(System.getProperty("os.arch")),
+                        convertSpaceToHyphen(System.getProperties().getProperty("java.vm.name"))));
 
         headers.put("Authorization", String.format("Bearer %s", apiKey));
 
@@ -109,16 +110,16 @@ public abstract class Requestor {
      * @throws MissingParameterError
      */
     private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(final String url,
-            final EasyPostClient client,
-            final String method) throws IOException, MissingParameterError {
+                                                                             final EasyPostClient client,
+                                                                             final String method)
+            throws IOException, MissingParameterError {
         HttpsURLConnection conn = null;
         String customURLStreamHandlerClassName = System.getProperty(CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
         if (customURLStreamHandlerClassName != null) {
             // instantiate the custom handler provided
             try {
-                @SuppressWarnings("unchecked")
-                Class<URLStreamHandler> clazz = (Class<URLStreamHandler>) Class
-                        .forName(customURLStreamHandlerClassName);
+                @SuppressWarnings ("unchecked") Class<URLStreamHandler> clazz =
+                        (Class<URLStreamHandler>) Class.forName(customURLStreamHandlerClassName);
                 Constructor<URLStreamHandler> constructor = clazz.getConstructor();
                 URLStreamHandler customHandler = constructor.newInstance();
                 URL urlObj = new URL(null, url, customHandler);
@@ -169,7 +170,7 @@ public abstract class Requestor {
      * @throws IOException
      */
     private static javax.net.ssl.HttpsURLConnection writeBody(final javax.net.ssl.HttpsURLConnection conn,
-            final JsonObject body) throws IOException {
+                                                              final JsonObject body) throws IOException {
         if (body != null) {
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/json");
@@ -177,7 +178,7 @@ public abstract class Requestor {
             try {
                 output = conn.getOutputStream();
                 String jsonString = body.toString();
-                output.write(jsonString.getBytes(Constant.CHARSET));
+                output.write(jsonString.getBytes(Constants.Http.CHARSET));
             } finally {
                 if (output != null) {
                     output.close();
@@ -198,7 +199,8 @@ public abstract class Requestor {
      * @throws MissingParameterError
      */
     private static javax.net.ssl.HttpsURLConnection createGetConnection(final String url, final String query,
-            final EasyPostClient client) throws IOException, MissingParameterError {
+                                                                        final EasyPostClient client)
+            throws IOException, MissingParameterError {
         String getURL = url;
         if (query != null) {
             getURL = String.format("%s?%s", url, query);
@@ -218,7 +220,8 @@ public abstract class Requestor {
      * @throws MissingParameterError
      */
     private static javax.net.ssl.HttpsURLConnection createPostConnection(final String url, final JsonObject body,
-            final EasyPostClient client) throws IOException, MissingParameterError {
+                                                                         final EasyPostClient client)
+            throws IOException, MissingParameterError {
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, client, "POST");
         conn = writeBody(conn, body);
         return conn;
@@ -235,7 +238,8 @@ public abstract class Requestor {
      * @throws MissingParameterError
      */
     private static javax.net.ssl.HttpsURLConnection createDeleteConnection(final String url, final String query,
-            final EasyPostClient client) throws IOException, MissingParameterError {
+                                                                           final EasyPostClient client)
+            throws IOException, MissingParameterError {
         String deleteUrl = url;
         if (query != null) {
             deleteUrl = String.format("%s?%s", url, query);
@@ -255,7 +259,8 @@ public abstract class Requestor {
      * @throws MissingParameterError
      */
     private static javax.net.ssl.HttpsURLConnection createPutConnection(final String url, final JsonObject body,
-            final EasyPostClient client) throws IOException, MissingParameterError {
+                                                                        final EasyPostClient client)
+            throws IOException, MissingParameterError {
         javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(url, client, "PUT");
         conn = writeBody(conn, body);
         return conn;
@@ -271,7 +276,7 @@ public abstract class Requestor {
         // this is a hack to fix a broken concept:
         // https://github.com/google/gson/issues/1080
         // noinspection rawtypes,unchecked
-        JsonElement jsonElement = Constant.GSON.toJsonTree(new HashMap<>(params));
+        JsonElement jsonElement = Constants.Http.GSON.toJsonTree(new HashMap<>(params));
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         return jsonObject;
     }
@@ -342,8 +347,8 @@ public abstract class Requestor {
             return "";
         }
 
-        @SuppressWarnings("resource")
-        String rBody = new Scanner(responseStream, Constant.CHARSET).useDelimiter("\\A").next();
+        @SuppressWarnings ("resource") String rBody =
+                new Scanner(responseStream, Constants.Http.CHARSET).useDelimiter("\\A").next();
         responseStream.close();
         return rBody;
     }
@@ -359,10 +364,9 @@ public abstract class Requestor {
      * @return EasyPostResponse object.
      * @throws EasyPostException
      */
-    private static EasyPostResponse makeURLConnectionRequest(final RequestMethod method,
-            final String url, final String query,
-            final JsonObject body, final EasyPostClient client)
-            throws EasyPostException {
+    private static EasyPostResponse makeURLConnectionRequest(final RequestMethod method, final String url,
+                                                             final String query, final JsonObject body,
+                                                             final EasyPostClient client) throws EasyPostException {
         javax.net.ssl.HttpsURLConnection conn = null;
         try {
             switch (method) {
@@ -381,7 +385,7 @@ public abstract class Requestor {
                 default:
                     throw new EasyPostException(
                             String.format("Unrecognized HTTP method %s. Please contact EasyPost at %s.", method,
-                                    Constant.EASYPOST_SUPPORT_EMAIL));
+                                    Constants.EASYPOST_SUPPORT_EMAIL));
             }
             conn.connect(); // This line is crucial for getting VCR to work
             // (triggers internal pre-request processing needed for VCR)
@@ -398,7 +402,7 @@ public abstract class Requestor {
         } catch (IOException e) {
             throw new EasyPostException(String.format("Could not connect to EasyPost (%s). " +
                     "Please check your internet connection and try again. If this problem persists," +
-                    "please contact us at %s.", client.getApiBase(), Constant.EASYPOST_SUPPORT_EMAIL), e);
+                    "please contact us at %s.", client.getApiBase(), Constants.EASYPOST_SUPPORT_EMAIL), e);
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -415,13 +419,11 @@ public abstract class Requestor {
      * @param params The params of the API request.
      * @param clazz  The class of the object for deserialization
      * @param client The EasyPostClient object.
-     *
      * @return A class object.
      * @throws EasyPostException when the request fails.
      */
-    public static <T> T request(final RequestMethod method, String url,
-            final Map<String, Object> params, final Class<T> clazz, final EasyPostClient client)
-            throws EasyPostException {
+    public static <T> T request(final RequestMethod method, String url, final Map<String, Object> params,
+                                final Class<T> clazz, final EasyPostClient client) throws EasyPostException {
         String originalDNSCacheTTL = null;
         boolean allowedToSetTTL = true;
         url = String.format(url, client.getApiBase(), client.getApiVersion());
@@ -457,14 +459,12 @@ public abstract class Requestor {
      * @param params The params of the API request.
      * @param clazz  The class of the object for deserialization
      * @param client The EasyPostClient object.
-     *
      * @return A class object.
      * @throws EasyPostException when the request fails.
      */
-    @SuppressWarnings("checkstyle:methodname")
-    protected static <T> T httpRequest(final RequestMethod method, final String url,
-            final Map<String, Object> params, final Class<T> clazz, final EasyPostClient client)
-            throws EasyPostException {
+    @SuppressWarnings ("checkstyle:methodname")
+    protected static <T> T httpRequest(final RequestMethod method, final String url, final Map<String, Object> params,
+                                       final Class<T> clazz, final EasyPostClient client) throws EasyPostException {
         String query = null;
         JsonObject body = null;
         if (params != null) {
@@ -476,8 +476,7 @@ public abstract class Requestor {
                     } catch (UnsupportedEncodingException e) {
                         throw new EasyPostException(
                                 String.format("Unable to encode parameters to %s. Please email %s for assistance.",
-                                        Constant.CHARSET, Constant.EASYPOST_SUPPORT_EMAIL),
-                                e);
+                                        Constants.Http.CHARSET, Constants.EASYPOST_SUPPORT_EMAIL), e);
                     }
                     break;
                 case POST:
@@ -487,7 +486,7 @@ public abstract class Requestor {
                     } catch (Exception e) {
                         throw new EasyPostException(String.format(
                                 "Unable to create JSON body from parameters. Please email %s for assistance.",
-                                Constant.EASYPOST_SUPPORT_EMAIL), e);
+                                Constants.EASYPOST_SUPPORT_EMAIL), e);
                     }
                     break;
                 default:
@@ -514,7 +513,7 @@ public abstract class Requestor {
             handleAPIError(rBody, rCode);
         }
 
-        return Constant.GSON.fromJson(rBody, clazz);
+        return Constants.Http.GSON.fromJson(rBody, clazz);
     }
 
     /**
@@ -527,37 +526,37 @@ public abstract class Requestor {
         if (rBody == null || rBody.length() == 0) {
             rBody = "{}";
         }
-        Error error = Constant.GSON.fromJson(rBody, Error.class);
+        Error error = Constants.Http.GSON.fromJson(rBody, Error.class);
         String errorMessage = error.getMessage();
         String errorCode = error.getCode();
         List<Error> errors = error.getErrors();
 
-        if (rCode >= Constants.ErrorCode.REDIRECT_CODE_BEGIN && rCode <= Constants.ErrorCode.REDIRECT_CODE_END) {
+        if (rCode >= Constants.ErrorCodes.REDIRECT_CODE_BEGIN && rCode <= Constants.ErrorCodes.REDIRECT_CODE_END) {
             throw new RedirectError(errorMessage, errorCode, rCode, errors);
         }
 
         switch (rCode) {
-            case Constants.ErrorCode.UNAUTHORIZED_ERROR:
+            case Constants.ErrorCodes.UNAUTHORIZED_ERROR:
                 throw new UnauthorizedError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.FORBIDDEN_ERROR:
+            case Constants.ErrorCodes.FORBIDDEN_ERROR:
                 throw new ForbiddenError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.PAYMENT_ERROR:
+            case Constants.ErrorCodes.PAYMENT_ERROR:
                 throw new PaymentError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.NOT_FOUND_ERROR:
+            case Constants.ErrorCodes.NOT_FOUND_ERROR:
                 throw new NotFoundError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.METHOD_NOT_ALLOWED_ERROR:
+            case Constants.ErrorCodes.METHOD_NOT_ALLOWED_ERROR:
                 throw new MethodNotAllowedError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.TIMEOUT_ERROR:
+            case Constants.ErrorCodes.TIMEOUT_ERROR:
                 throw new TimeoutError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.INVALID_REQUEST_ERROR:
+            case Constants.ErrorCodes.INVALID_REQUEST_ERROR:
                 throw new InvalidRequestError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.RATE_LIMIT_ERROR:
+            case Constants.ErrorCodes.RATE_LIMIT_ERROR:
                 throw new RateLimitError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.INTERNAL_SERVER_ERROR:
+            case Constants.ErrorCodes.INTERNAL_SERVER_ERROR:
                 throw new InternalServerError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.SERVICE_UNAVAILABLE_ERROR:
+            case Constants.ErrorCodes.SERVICE_UNAVAILABLE_ERROR:
                 throw new ServiceUnavailablError(errorMessage, errorCode, rCode, errors);
-            case Constants.ErrorCode.GATEWAY_TIMEOUT_ERROR:
+            case Constants.ErrorCodes.GATEWAY_TIMEOUT_ERROR:
                 throw new GatewayTimeoutError(errorMessage, errorCode, rCode, errors);
             default:
                 throw new UnknownApiError(errorMessage, errorCode, rCode, errors);
@@ -566,12 +565,11 @@ public abstract class Requestor {
 
     @Generated // Exclude from the jacoco test coverage
     private static EasyPostResponse makeAppEngineRequest(final RequestMethod method, String url, final String query,
-            final JsonObject body, final EasyPostClient client)
+                                                         final JsonObject body, final EasyPostClient client)
             throws EasyPostException {
         String unknownErrorMessage = String.format(
                 "Sorry, an unknown error occurred while trying to use the Google App Engine runtime." +
-                        "Please email %s for assistance.",
-                Constant.EASYPOST_SUPPORT_EMAIL);
+                        "Please email %s for assistance.", Constants.EASYPOST_SUPPORT_EMAIL);
         try {
             if ((method == RequestMethod.GET || method == RequestMethod.DELETE) && query != null) {
                 url = String.format("%s?%s", url, query);
@@ -589,8 +587,7 @@ public abstract class Requestor {
                 System.err.printf(
                         "Warning: this App Engine SDK version does not allow verification of SSL certificates;" +
                                 "this exposes you to a MITM attack. Please upgrade your App Engine SDK to >=1.5.0. " +
-                                "If you have questions, email %s.%n",
-                        Constant.EASYPOST_SUPPORT_EMAIL);
+                                "If you have questions, email %s.%n", Constants.EASYPOST_SUPPORT_EMAIL);
                 fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("withDefaults").invoke(null);
             }
 
@@ -626,8 +623,9 @@ public abstract class Requestor {
             Object response = fetchMethod.invoke(urlFetchService, request);
 
             int responseCode = (Integer) response.getClass().getDeclaredMethod("getResponseCode").invoke(response);
-            String responseBody = new String(
-                    (byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response), Constant.CHARSET);
+            String responseBody =
+                    new String((byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response),
+                            Constants.Http.CHARSET);
 
             return new EasyPostResponse(responseCode, responseBody);
 
