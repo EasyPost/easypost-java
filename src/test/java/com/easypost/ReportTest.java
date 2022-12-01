@@ -2,6 +2,7 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
+import com.easypost.exception.General.MissingParameterError;
 import com.easypost.model.Report;
 import com.easypost.model.ReportCollection;
 import org.junit.jupiter.api.BeforeAll;
@@ -223,6 +224,6 @@ public final class ReportTest {
         reportParams.put("start_date", Fixtures.reportDate());
         reportParams.put("end_date", Fixtures.reportDate());
 
-        assertThrows(InvalidObjectError.class, () -> vcr.client.report.create(reportParams));
+        assertThrows(MissingParameterError.class, () -> vcr.client.report.create(reportParams));
     }
 }

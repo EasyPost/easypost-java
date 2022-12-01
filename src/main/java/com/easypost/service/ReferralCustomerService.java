@@ -1,6 +1,7 @@
 package com.easypost.service;
 
 import com.easypost.Constants;
+import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ExternalApiError;
 import com.easypost.http.Requestor;
@@ -13,8 +14,10 @@ import com.easypost.utils.Utilities;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -93,11 +96,11 @@ public class ReferralCustomerService {
      * @param expirationYear  Expiration year of the credit card.
      * @param cvc             CVC of the credit card.
      * @return PaymentMethodObject object.
-     * @throws Exception when the request fails.
+     * @throws EasyPostException when the request fails.
      */
     public PaymentMethodObject addCreditCardToUser(final String referralApiKey, final String number,
             final int expirationMonth,
-            final int expirationYear, final String cvc) throws Exception {
+            final int expirationYear, final String cvc) throws EasyPostException {
         return addCreditCardToUser(referralApiKey, number, expirationMonth, expirationYear, cvc,
                 PaymentMethod.Priority.PRIMARY);
     }
@@ -113,12 +116,12 @@ public class ReferralCustomerService {
      * @param cvc             CVC of the credit card.
      * @param priority        Priority of this credit card.
      * @return PaymentMethodObject object.
-     * @throws Exception when the request fails.
+     * @throws EasyPostException when the request fails.
      */
     public PaymentMethodObject addCreditCardToUser(final String referralApiKey, final String number,
             final int expirationMonth,
             final int expirationYear, final String cvc,
-            final PaymentMethod.Priority priority) throws Exception {
+            final PaymentMethod.Priority priority) throws EasyPostException {
         String easypostStripeApiKey = retrieveEasypostStripeApiKey();
         String stripeToken;
 
@@ -155,11 +158,13 @@ public class ReferralCustomerService {
      * @param cvc                  CVC of the credit card.
      * @param easypostStripeApiKey EasyPost Stripe API key.
      * @return Stripe token.
-     * @throws Exception when the request fails.
+     * @throws EncodingError when the request details could not be encoded.
+     * @throws MalformedURLException when the request URL is malformed.
+     * @throws IOException when the request fails.
      */
     private static String createStripeToken(final String number, final int expirationMonth, final int expirationYear,
             final String cvc,
-            final String easypostStripeApiKey) throws Exception {
+            final String easypostStripeApiKey) throws EncodingError, IOException {
         Map<String, String> params = new HashMap<>();
         params.put("number", number);
         params.put("exp_month", String.valueOf(expirationMonth));

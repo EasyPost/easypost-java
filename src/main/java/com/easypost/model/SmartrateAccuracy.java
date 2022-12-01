@@ -40,6 +40,6 @@ public enum SmartrateAccuracy {
                 return smartrateAccuracy;
             }
         }
-        throw new InvalidParameterError(String.format(Constants.ErrorMessages.INVALID_PARAMETER, "smartrateAccuracy"));
+        throw new InvalidParameterError("smartrateAccuracy");
     }
 }

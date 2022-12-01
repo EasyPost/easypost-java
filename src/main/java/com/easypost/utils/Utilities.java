@@ -1,6 +1,7 @@
 package com.easypost.utils;
 
 import com.easypost.Constants;
+import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
 import com.easypost.model.Rate;
@@ -18,22 +19,18 @@ public abstract class Utilities {
      * @param carriers the carriers to use in the filter.
      * @param services the services to use in the filter.
      * @return lowest Rate object
-     * @throws EasyPostException when the request fails.
+     * @throws FilteringError when the filters could not be applied.
      */
     public static Rate getLowestObjectRate(List<Rate> rates, List<String> carriers, List<String> services)
-            throws EasyPostException {
+            throws FilteringError {
         Rate lowestRate = null;
 
         if (carriers != null) {
-            for (int i = 0; i < carriers.size(); i++) {
-                carriers.set(i, carriers.get(i).toLowerCase());
-            }
+            carriers.replaceAll(String::toLowerCase);
         }
 
         if (services != null) {
-            for (int i = 0; i < services.size(); i++) {
-                services.set(i, services.get(i).toLowerCase());
-            }
+            services.replaceAll(String::toLowerCase);
         }
 
         for (Rate rate : rates) {
@@ -61,9 +58,9 @@ public abstract class Utilities {
      * @param params    Map of parameters to be encoded.
      * @param parentKey Parent key in the encoded URL.
      * @return Encoded URL for Stripe API call.
-     * @throws Exception
+     * @throws EncodingError when the URL encoding fails.
      */
-    public static String getEncodedURL(Map<String, String> params, String parentKey) throws Exception {
+    public static String getEncodedURL(Map<String, String> params, String parentKey) throws EncodingError {
         StringBuilder result = new StringBuilder();
         boolean first = true;
 
@@ -80,7 +77,7 @@ public abstract class Utilities {
                 result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
             }
         } catch (Exception e) {
-            throw new Exception("Something went wrong during the URL encoding.");
+            throw new EncodingError("Something went wrong during the URL encoding.");
         }
 
         return result.toString();

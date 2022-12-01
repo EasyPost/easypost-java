@@ -1,9 +1,11 @@
 package com.easypost.service;
 
 import com.easypost.Constants;
+import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.exception.General.InvalidParameterError;
+import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Report;
@@ -31,6 +33,8 @@ public class ReportService {
      *
      * @param params a map of parameters.
      * @return Report object.
+     * @throws EncodingError if the parameters cannot be encoded.
+     * @throws InvalidObjectError if required parameters are missing.
      * @throws EasyPostException when the request fails.
      */
     public Report create(final Map<String, Object> params) throws EasyPostException {
@@ -40,7 +44,7 @@ public class ReportService {
             return Requestor.request(RequestMethod.POST,
                     reportURL((String) params.get("type")), paramsWithoutType, Report.class, client);
         } else {
-            throw new InvalidObjectError(String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "type"));
+            throw new MissingParameterError("type");
         }
     }
 
@@ -49,14 +53,14 @@ public class ReportService {
      *
      * @param type the type of report to generate.
      * @return the URL to generate the report.
-     * @throws EasyPostException when the request fails.
+     * @throws EncodingError when the request cannot be encoded properly.
      */
     protected String reportURL(final String type) throws EasyPostException {
         try {
             String urlType = URLEncoder.encode(type, "UTF-8").toLowerCase();
             return String.format("%s/%s/reports/%s/", client.getApiBase(), client.getApiVersion(), urlType);
         } catch (java.io.UnsupportedEncodingException e) {
-            throw new InvalidParameterError(String.format(Constants.ErrorMessages.ENCODED_ERROR, "report type"), e);
+            throw new EncodingError(String.format(Constants.ErrorMessages.ENCODED_ERROR, "report type"), e);
         }
     }
 

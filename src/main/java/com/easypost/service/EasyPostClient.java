@@ -104,7 +104,7 @@ public class EasyPostClient {
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, int readTimeoutMilliseconds, String apiBase)
             throws MissingParameterError {
         if (apiKey == null || apiKey.isEmpty()) {
-            throw new MissingParameterError(Constants.ErrorMessages.INVALID_API_KEY_TYPE);
+            throw new MissingParameterError("apiKey");
         }
 
         this.apiBase = apiBase;

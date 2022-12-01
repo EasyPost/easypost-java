@@ -52,7 +52,7 @@ public final class TimeInTransit {
             case "percentile_99":
                 return this.percentile99;
             default:
-                throw new InvalidParameterError(String.format(Constants.ErrorMessages.INVALID_PARAMETER, "percentile"));
+                throw new InvalidParameterError("percentile");
         }
     }
 
@@ -80,7 +80,7 @@ public final class TimeInTransit {
             case Percentile99:
                 return this.percentile99;
             default:
-                throw new EasyPostException("Invalid SmartrateAccuracy enum value.");
+                throw new InvalidParameterError("accuracy");
         }
     }
 
