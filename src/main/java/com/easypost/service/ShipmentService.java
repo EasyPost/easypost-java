@@ -306,18 +306,18 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final String id) throws EasyPostException {
-        return this.refund(null, id);
+        return this.refund(id, null);
     }
 
     /**
      * Refund this Shipment.
      *
-     * @param params The options for the query.
      * @param id     The ID of shipment.
+     * @param params The options for the query.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment refund(final Map<String, Object> params, final String id) throws EasyPostException {
+    public Shipment refund(final String id, final Map<String, Object> params) throws EasyPostException {
         String url = String.format("%s/refund", Utilities.instanceURL(Shipment.class, id));
 
         return Requestor.request(RequestMethod.POST, url, params, Shipment.class, client);
