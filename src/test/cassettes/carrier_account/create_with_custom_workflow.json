@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1669854247,
+    "request": {
+      "body": "{\n  \"carrier_account\": {\n    \"registration_data\": {\n      \"some\": \"data\"\n    },\n    \"type\": \"FedexAccount\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/register"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"UNPROCESSABLE_ENTITY\",\n    \"message\": \"The request was understood, but cannot be processed.\",\n    \"errors\": [\n      {\n        \"field\": \"shipping_streets\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"shipping_city\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"shipping_state\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"shipping_postal_code\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"shipping_country_code\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_first_name\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_last_name\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_job_title\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_company_name\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_phone_number\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_email_address\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_streets\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_city\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_state\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_postal_code\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"corporate_country_code\",\n        \"message\": \"must be present and a string\"\n      },\n      {\n        \"field\": \"account_number\",\n        \"message\": \"must be present and a string\"\n      }\n    ]\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 422 Unprocessable Entity"
+        ],
+        "content-length": [
+          "1347"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb12nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "35b090b46387f427e9b8e441008ba656"
+        ],
+        "x-proxied": [
+          "extlb2nuq 29913d444b",
+          "intlb1nuq 29913d444b"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.030703"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202211251832-642412d65d-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 422,
+        "message": "Unprocessable Entity"
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/register"
+    },
+    "duration": 264
+  }
+]
