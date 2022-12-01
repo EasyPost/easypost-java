@@ -1,6 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidParameterError;
 

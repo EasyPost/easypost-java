@@ -1,7 +1,6 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.model.Report;
 import com.easypost.model.ReportCollection;

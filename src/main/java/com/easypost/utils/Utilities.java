@@ -2,7 +2,6 @@ package com.easypost.utils;
 
 import com.easypost.Constants;
 import com.easypost.exception.API.EncodingError;
-import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
 import com.easypost.model.Rate;
 

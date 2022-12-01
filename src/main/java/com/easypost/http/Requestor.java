@@ -14,7 +14,6 @@ import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.API.HttpError;
 import com.easypost.exception.API.JsonError;
 import com.easypost.exception.API.ServiceUnavailableError;
-import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ForbiddenError;
 import com.easypost.exception.API.GatewayTimeoutError;
 import com.easypost.exception.API.InternalServerError;
@@ -413,7 +412,7 @@ public abstract class Requestor {
      * @param params The params of the API request.
      * @param clazz  The class of the object for deserialization
      * @param client The EasyPostClient object.
-     * @return A <c>clazz</c>-type object.
+     * @return A clazz-type object.
      * @throws HttpError               when the HTTP connection cannot be made.
      * @throws EncodingError           when the request query cannot be encoded.
      * @throws JsonError               when the request body cannot be encoded.
@@ -471,7 +470,7 @@ public abstract class Requestor {
      * @param params The params of the API request.
      * @param clazz  The class of the object for deserialization
      * @param client The EasyPostClient object.
-     * @return A <c>clazz</c>-type object.
+     * @return A clazz-type object.
      * @throws EncodingError           when the request query cannot be encoded.
      * @throws JsonError               when the request body cannot be encoded.
      * @throws RedirectError           when the request is redirected.

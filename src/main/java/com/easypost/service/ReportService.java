@@ -3,8 +3,6 @@ package com.easypost.service;
 import com.easypost.Constants;
 import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.EasyPostException;
-import com.easypost.exception.General.InvalidObjectError;
-import com.easypost.exception.General.InvalidParameterError;
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
@@ -21,7 +19,7 @@ public class ReportService {
 
     /**
      * ReportService constructor.
-     * 
+     *
      * @param client The client object.
      */
     ReportService(EasyPostClient client) {
@@ -33,16 +31,16 @@ public class ReportService {
      *
      * @param params a map of parameters.
      * @return Report object.
-     * @throws EncodingError if the parameters cannot be encoded.
-     * @throws InvalidObjectError if required parameters are missing.
-     * @throws EasyPostException when the request fails.
+     * @throws EncodingError      if the parameters cannot be encoded.
+     * @throws MissingParameterError if required parameters are missing.
+     * @throws EasyPostException  when the request fails.
      */
     public Report create(final Map<String, Object> params) throws EasyPostException {
         if (params.containsKey("type")) {
             HashMap<String, Object> paramsWithoutType = new HashMap<>(params);
             paramsWithoutType.remove("type");
-            return Requestor.request(RequestMethod.POST,
-                    reportURL((String) params.get("type")), paramsWithoutType, Report.class, client);
+            return Requestor.request(RequestMethod.POST, reportURL((String) params.get("type")), paramsWithoutType,
+                    Report.class, client);
         } else {
             throw new MissingParameterError("type");
         }
