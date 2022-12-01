@@ -1,8 +1,8 @@
 [
   {
-    "recordedAt": 1669829055,
+    "recordedAt": 1669854247,
     "request": {
-      "body": "{\n  \"carrier_account\": {\n    \"test_credentials\": {},\n    \"credentials\": {},\n    \"registration_data\": {\n      \"some\": \"data\"\n    },\n    \"type\": \"FedexAccount\"\n  }\n}",
+      "body": "{\n  \"carrier_account\": {\n    \"registration_data\": {\n      \"some\": \"data\"\n    },\n    \"type\": \"FedexAccount\"\n  }\n}",
       "method": "POST",
       "headers": {
         "Accept-Charset": [
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb11nuq"
+          "bigweb12nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,18 +58,17 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "e0cc9f47638791bfe9b6c4aa00503833"
+          "35b090b46387f427e9b8e441008ba656"
         ],
         "x-proxied": [
-          "extlb3wdc 29913d444b",
-          "intlb1wdc 29913d444b",
+          "extlb2nuq 29913d444b",
           "intlb1nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.119667"
+          "0.030703"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
@@ -87,6 +86,6 @@
       },
       "uri": "https://api.easypost.com/v2/carrier_accounts/register"
     },
-    "duration": 366
+    "duration": 264
   }
 ]
