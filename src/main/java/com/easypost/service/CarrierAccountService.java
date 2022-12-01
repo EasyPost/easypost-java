@@ -1,6 +1,7 @@
 package com.easypost.service;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.CarrierAccount;
@@ -34,7 +35,8 @@ public class CarrierAccountService {
     public CarrierAccount create(final Map<String, Object> params) throws EasyPostException {
         String type = (String) params.get("type");
         if (type == null) {
-            throw new EasyPostException("Carrier account type is required");
+            throw new MissingParameterError(
+                    String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));
         }
 
         String endpoint = selectCarrierAccountCreationEndpoint(type);
