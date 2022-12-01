@@ -5,6 +5,10 @@
 - [CHANGED] All constants are now defined in the top-level `Constants` class (`com.easypost.Constants`).
   - Users who are utilizing the constants for exception message parsing should account for the new namespace.
 - [ADDED] Support for creating/registering carrier accounts that require custom workflows (e.g. FedEx, UPS)
+- [CHANGED] Swap the parameters for below functions, to make `id` in the first argument
+  - Shipment.generateForm()
+  - EndShipper.update()
+  - CarrierAccount.update()
 
 ## v6.0.0-rc1 (2022-11-30)
 

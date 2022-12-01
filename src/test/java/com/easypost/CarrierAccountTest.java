@@ -144,7 +144,7 @@ public final class CarrierAccountTest {
         Map<String, Object> updateParams = new HashMap<>();
         updateParams.put("description", testDescription);
 
-        CarrierAccount updatedCarrierAccount = vcr.client.carrierAccount.update(updateParams, carrierAccount.getId());
+        CarrierAccount updatedCarrierAccount = vcr.client.carrierAccount.update(carrierAccount.getId(), updateParams);
 
         assertInstanceOf(CarrierAccount.class, carrierAccount);
         assertTrue(updatedCarrierAccount.getId().startsWith("ca_"));

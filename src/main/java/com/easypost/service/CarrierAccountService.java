@@ -92,7 +92,8 @@ public class CarrierAccountService {
      * @return updated CarrierAccount object.
      * @throws EasyPostException when the request fails.
      */
-    public CarrierAccount update(final Map<String, Object> params, String id) throws EasyPostException {
+    public CarrierAccount update(String id, final Map<String, Object> params)
+            throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("carrier_account", params);
 
