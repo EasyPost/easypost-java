@@ -2,7 +2,7 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.RedirectError;
-import com.easypost.exception.API.ServiceUnavailablError;
+import com.easypost.exception.API.ServiceUnavailableError;
 import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.General.MissingParameterError;
@@ -85,7 +85,7 @@ public final class ErrorTest extends Requestor {
             put(429, RateLimitError.class);
             put(444, UnknownApiError.class);
             put(500, InternalServerError.class);
-            put(503, ServiceUnavailablError.class);
+            put(503, ServiceUnavailableError.class);
             put(504, GatewayTimeoutError.class);
         }};
 

@@ -5,7 +5,7 @@ import java.util.List;
 import com.easypost.model.Error;
 import com.easypost.exception.EasyPostException;
 
-public class ServiceUnavailablError extends EasyPostException {
+public class ServiceUnavailableError extends EasyPostException {
     /**
      * ServiceUnavailablError constructor.
      *
@@ -14,7 +14,7 @@ public class ServiceUnavailablError extends EasyPostException {
      * @param statusCode the exception status code
      * @param errors     the errors array
      */
-    public ServiceUnavailablError(final String message, final String code, final int statusCode, List<Error> errors) {
+    public ServiceUnavailableError(final String message, final String code, final int statusCode, List<Error> errors) {
         super(message, code, statusCode, errors);
     }
 }

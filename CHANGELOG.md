@@ -9,6 +9,7 @@
   - Shipment.generateForm()
   - EndShipper.update()
   - CarrierAccount.update()
+- [FIXED] Typo, `ServiceUnavailablError` is now `ServiceUnavailableError`
 
 ## v6.0.0-rc1 (2022-11-30)
 

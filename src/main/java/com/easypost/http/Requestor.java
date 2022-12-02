@@ -10,7 +10,10 @@ package com.easypost.http;
 
 import com.easypost.EasyPost;
 import com.easypost.Constants;
-import com.easypost.exception.EasyPostException;
+import com.easypost.exception.API.EncodingError;
+import com.easypost.exception.API.HttpError;
+import com.easypost.exception.API.JsonError;
+import com.easypost.exception.API.ServiceUnavailableError;
 import com.easypost.exception.API.ForbiddenError;
 import com.easypost.exception.API.GatewayTimeoutError;
 import com.easypost.exception.API.InternalServerError;
@@ -20,7 +23,6 @@ import com.easypost.exception.API.NotFoundError;
 import com.easypost.exception.API.PaymentError;
 import com.easypost.exception.API.RateLimitError;
 import com.easypost.exception.API.RedirectError;
-import com.easypost.exception.API.ServiceUnavailablError;
 import com.easypost.exception.API.TimeoutError;
 import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
@@ -106,8 +108,8 @@ public abstract class Requestor {
      * @param client EasyPostClient object.
      * @param method Method of the API request.
      * @return HttpsURLConnection
-     * @throws IOException
-     * @throws MissingParameterError
+     * @throws IOException           If the connection cannot be opened.
+     * @throws MissingParameterError If the connection headers cannot be generated.
      */
     private static javax.net.ssl.HttpsURLConnection createEasyPostConnection(final String url,
                                                                              final EasyPostClient client,
@@ -124,19 +126,8 @@ public abstract class Requestor {
                 URLStreamHandler customHandler = constructor.newInstance();
                 URL urlObj = new URL(null, url, customHandler);
                 conn = (javax.net.ssl.HttpsURLConnection) urlObj.openConnection();
-            } catch (ClassNotFoundException e) {
-                throw new IOException(e);
-            } catch (SecurityException e) {
-                throw new IOException(e);
-            } catch (NoSuchMethodException e) {
-                throw new IOException(e);
-            } catch (IllegalArgumentException e) {
-                throw new IOException(e);
-            } catch (InstantiationException e) {
-                throw new IOException(e);
-            } catch (IllegalAccessException e) {
-                throw new IOException(e);
-            } catch (InvocationTargetException e) {
+            } catch (ClassNotFoundException | SecurityException | NoSuchMethodException | IllegalArgumentException |
+                     InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 throw new IOException(e);
             }
         } else if (EasyPost._vcr != null) {
@@ -195,8 +186,8 @@ public abstract class Requestor {
      * @param query  Query of the HTTP request.
      * @param client EasyPostClient object.
      * @return HttpsURLConnection object.
-     * @throws IOException
-     * @throws MissingParameterError
+     * @throws IOException           If the connection cannot be opened.
+     * @throws MissingParameterError If the connection headers cannot be generated.
      */
     private static javax.net.ssl.HttpsURLConnection createGetConnection(final String url, final String query,
                                                                         final EasyPostClient client)
@@ -205,8 +196,7 @@ public abstract class Requestor {
         if (query != null) {
             getURL = String.format("%s?%s", url, query);
         }
-        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(getURL, client, "GET");
-        return conn;
+        return createEasyPostConnection(getURL, client, "GET");
     }
 
     /**
@@ -216,8 +206,8 @@ public abstract class Requestor {
      * @param body   Body of the HTTP request.
      * @param client EasyPostClient object.
      * @return HttpsURLConnection object.
-     * @throws IOException
-     * @throws MissingParameterError
+     * @throws IOException           If the connection cannot be opened.
+     * @throws MissingParameterError If the connection headers cannot be generated.
      */
     private static javax.net.ssl.HttpsURLConnection createPostConnection(final String url, final JsonObject body,
                                                                          final EasyPostClient client)
@@ -234,8 +224,8 @@ public abstract class Requestor {
      * @param query  Query of the HTTP request.
      * @param client EasyPostClient object.
      * @return HttpsURLConnection object.
-     * @throws IOException
-     * @throws MissingParameterError
+     * @throws IOException           If the connection cannot be opened.
+     * @throws MissingParameterError If the connection headers cannot be generated.
      */
     private static javax.net.ssl.HttpsURLConnection createDeleteConnection(final String url, final String query,
                                                                            final EasyPostClient client)
@@ -244,8 +234,7 @@ public abstract class Requestor {
         if (query != null) {
             deleteUrl = String.format("%s?%s", url, query);
         }
-        javax.net.ssl.HttpsURLConnection conn = createEasyPostConnection(deleteUrl, client, "DELETE");
-        return conn;
+        return createEasyPostConnection(deleteUrl, client, "DELETE");
     }
 
     /**
@@ -255,8 +244,8 @@ public abstract class Requestor {
      * @param body   Body of the HTTP request.
      * @param client EasyPostClient object.
      * @return HttpsURLConnection object.
-     * @throws IOException
-     * @throws MissingParameterError
+     * @throws IOException           If the connection cannot be opened.
+     * @throws MissingParameterError If the connection headers cannot be generated.
      */
     private static javax.net.ssl.HttpsURLConnection createPutConnection(final String url, final JsonObject body,
                                                                         final EasyPostClient client)
@@ -362,11 +351,11 @@ public abstract class Requestor {
      * @param body   Body of the HTTP request.
      * @param client EasyPostClient object
      * @return EasyPostResponse object.
-     * @throws EasyPostException
+     * @throws HttpError if the HTTP connection cannot be made.
      */
     private static EasyPostResponse makeURLConnectionRequest(final RequestMethod method, final String url,
                                                              final String query, final JsonObject body,
-                                                             final EasyPostClient client) throws EasyPostException {
+                                                             final EasyPostClient client) throws HttpError {
         javax.net.ssl.HttpsURLConnection conn = null;
         try {
             switch (method) {
@@ -383,7 +372,7 @@ public abstract class Requestor {
                     conn = createDeleteConnection(url, query, client);
                     break;
                 default:
-                    throw new EasyPostException(
+                    throw new HttpError(
                             String.format("Unrecognized HTTP method %s. Please contact EasyPost at %s.", method,
                                     Constants.EASYPOST_SUPPORT_EMAIL));
             }
@@ -399,8 +388,12 @@ public abstract class Requestor {
                 rBody = getResponseBody(conn.getErrorStream());
             }
             return new EasyPostResponse(rCode, rBody);
+        } catch (MissingParameterError e) {
+            throw new HttpError(String.format(
+                    "Could not build EasyPost API request. If this problem persists, please contact us at %s.",
+                    Constants.EASYPOST_SUPPORT_EMAIL));
         } catch (IOException e) {
-            throw new EasyPostException(String.format("Could not connect to EasyPost (%s). " +
+            throw new HttpError(String.format("Could not connect to EasyPost (%s). " +
                     "Please check your internet connection and try again. If this problem persists," +
                     "please contact us at %s.", client.getApiBase(), Constants.EASYPOST_SUPPORT_EMAIL), e);
         } finally {
@@ -419,11 +412,29 @@ public abstract class Requestor {
      * @param params The params of the API request.
      * @param clazz  The class of the object for deserialization
      * @param client The EasyPostClient object.
-     * @return A class object.
-     * @throws EasyPostException when the request fails.
+     * @return A clazz-type object.
+     * @throws HttpError               when the HTTP connection cannot be made.
+     * @throws EncodingError           when the request query cannot be encoded.
+     * @throws JsonError               when the request body cannot be encoded.
+     * @throws RedirectError           when the request is redirected.
+     * @throws UnauthorizedError       when the request is unauthorized.
+     * @throws ForbiddenError          when the request is forbidden.
+     * @throws PaymentError            when the request requires payment.
+     * @throws NotFoundError           when the request endpoint is not found.
+     * @throws MethodNotAllowedError   when the request method is not allowed.
+     * @throws TimeoutError            when the request times out.
+     * @throws InvalidRequestError     when the request is invalid.
+     * @throws RateLimitError          when the request exceeds the rate limit.
+     * @throws InternalServerError     when the request fails due to an internal server error.
+     * @throws ServiceUnavailableError when the request fails due to a service unavailability.
+     * @throws GatewayTimeoutError     when the request fails due to a gateway timeout.
+     * @throws UnknownApiError         when the request fails due to an unknown API error.
      */
     public static <T> T request(final RequestMethod method, String url, final Map<String, Object> params,
-                                final Class<T> clazz, final EasyPostClient client) throws EasyPostException {
+                                final Class<T> clazz, final EasyPostClient client)
+            throws EncodingError, JsonError, RedirectError, UnauthorizedError, ForbiddenError, PaymentError,
+            NotFoundError, MethodNotAllowedError, TimeoutError, InvalidRequestError, RateLimitError,
+            InternalServerError, ServiceUnavailableError, GatewayTimeoutError, UnknownApiError, HttpError {
         String originalDNSCacheTTL = null;
         boolean allowedToSetTTL = true;
         url = String.format(url, client.getApiBase(), client.getApiVersion());
@@ -459,12 +470,29 @@ public abstract class Requestor {
      * @param params The params of the API request.
      * @param clazz  The class of the object for deserialization
      * @param client The EasyPostClient object.
-     * @return A class object.
-     * @throws EasyPostException when the request fails.
+     * @return A clazz-type object.
+     * @throws EncodingError           when the request query cannot be encoded.
+     * @throws JsonError               when the request body cannot be encoded.
+     * @throws RedirectError           when the request is redirected.
+     * @throws UnauthorizedError       when the request is unauthorized.
+     * @throws ForbiddenError          when the request is forbidden.
+     * @throws PaymentError            when the request requires payment.
+     * @throws NotFoundError           when the request endpoint is not found.
+     * @throws MethodNotAllowedError   when the request method is not allowed.
+     * @throws TimeoutError            when the request times out.
+     * @throws InvalidRequestError     when the request is invalid.
+     * @throws RateLimitError          when the request exceeds the rate limit.
+     * @throws InternalServerError     when the request fails due to an internal server error.
+     * @throws ServiceUnavailableError when the request fails due to a service unavailability.
+     * @throws GatewayTimeoutError     when the request fails due to a gateway timeout.
+     * @throws UnknownApiError         when the request fails due to an unknown API error.
      */
     @SuppressWarnings ("checkstyle:methodname")
     protected static <T> T httpRequest(final RequestMethod method, final String url, final Map<String, Object> params,
-                                       final Class<T> clazz, final EasyPostClient client) throws EasyPostException {
+                                       final Class<T> clazz, final EasyPostClient client)
+            throws EncodingError, JsonError, RedirectError, UnauthorizedError, ForbiddenError, PaymentError,
+            NotFoundError, MethodNotAllowedError, TimeoutError, InvalidRequestError, RateLimitError,
+            InternalServerError, ServiceUnavailableError, GatewayTimeoutError, UnknownApiError, HttpError {
         String query = null;
         JsonObject body = null;
         if (params != null) {
@@ -474,7 +502,7 @@ public abstract class Requestor {
                     try {
                         query = createQuery(params);
                     } catch (UnsupportedEncodingException e) {
-                        throw new EasyPostException(
+                        throw new EncodingError(
                                 String.format("Unable to encode parameters to %s. Please email %s for assistance.",
                                         Constants.Http.CHARSET, Constants.EASYPOST_SUPPORT_EMAIL), e);
                     }
@@ -484,7 +512,7 @@ public abstract class Requestor {
                     try {
                         body = createBody(params);
                     } catch (Exception e) {
-                        throw new EasyPostException(String.format(
+                        throw new JsonError(String.format(
                                 "Unable to create JSON body from parameters. Please email %s for assistance.",
                                 Constants.EASYPOST_SUPPORT_EMAIL), e);
                     }
@@ -520,9 +548,25 @@ public abstract class Requestor {
      * Handles API error based on the error status code.
      *
      * @param rBody Body of the error message.
-     * @param rCode Status code of the error messsage.
+     * @param rCode Status code of the error message.
+     * @throws RedirectError           when the request is redirected.
+     * @throws UnauthorizedError       when the request is unauthorized.
+     * @throws ForbiddenError          when the request is forbidden.
+     * @throws PaymentError            when the request requires payment.
+     * @throws NotFoundError           when the request endpoint is not found.
+     * @throws MethodNotAllowedError   when the request method is not allowed.
+     * @throws TimeoutError            when the request times out.
+     * @throws InvalidRequestError     when the request is invalid.
+     * @throws RateLimitError          when the request exceeds the rate limit.
+     * @throws InternalServerError     when the request fails due to an internal server error.
+     * @throws ServiceUnavailableError when the request fails due to a service unavailability.
+     * @throws GatewayTimeoutError     when the request fails due to a gateway timeout.
+     * @throws UnknownApiError         when the request fails due to an unknown API error.
      */
-    protected static void handleAPIError(String rBody, final int rCode) throws EasyPostException {
+    protected static void handleAPIError(String rBody, final int rCode)
+            throws RedirectError, UnauthorizedError, ForbiddenError, PaymentError, NotFoundError, MethodNotAllowedError,
+            TimeoutError, InvalidRequestError, RateLimitError, InternalServerError, ServiceUnavailableError,
+            GatewayTimeoutError, UnknownApiError {
         if (rBody == null || rBody.length() == 0) {
             rBody = "{}";
         }
@@ -555,7 +599,7 @@ public abstract class Requestor {
             case Constants.ErrorCodes.INTERNAL_SERVER_ERROR:
                 throw new InternalServerError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCodes.SERVICE_UNAVAILABLE_ERROR:
-                throw new ServiceUnavailablError(errorMessage, errorCode, rCode, errors);
+                throw new ServiceUnavailableError(errorMessage, errorCode, rCode, errors);
             case Constants.ErrorCodes.GATEWAY_TIMEOUT_ERROR:
                 throw new GatewayTimeoutError(errorMessage, errorCode, rCode, errors);
             default:
@@ -563,10 +607,21 @@ public abstract class Requestor {
         }
     }
 
+    /**
+     * Make a request using Google's App Engine library.
+     *
+     * @param method The HTTP method.
+     * @param url    The URL to make the request to.
+     * @param query  The query string.
+     * @param body   The request body.
+     * @param client The EasyPost client.
+     * @return The response from the API.
+     * @throws HttpError when the request process fails.
+     */
     @Generated // Exclude from the jacoco test coverage
     private static EasyPostResponse makeAppEngineRequest(final RequestMethod method, String url, final String query,
                                                          final JsonObject body, final EasyPostClient client)
-            throws EasyPostException {
+            throws HttpError {
         String unknownErrorMessage = String.format(
                 "Sorry, an unknown error occurred while trying to use the Google App Engine runtime." +
                         "Please email %s for assistance.", Constants.EASYPOST_SUPPORT_EMAIL);
@@ -629,26 +684,11 @@ public abstract class Requestor {
 
             return new EasyPostResponse(responseCode, responseBody);
 
-        } catch (InvocationTargetException e) {
-            throw new EasyPostException(unknownErrorMessage, e);
-        } catch (MalformedURLException e) {
-            throw new EasyPostException(unknownErrorMessage, e);
-        } catch (NoSuchFieldException e) {
-            throw new EasyPostException(unknownErrorMessage, e);
-        } catch (SecurityException e) {
-            throw new EasyPostException(unknownErrorMessage, e);
-        } catch (NoSuchMethodException e) {
-            throw new EasyPostException(unknownErrorMessage, e);
-        } catch (ClassNotFoundException e) {
-            throw new EasyPostException(unknownErrorMessage, e);
-        } catch (IllegalArgumentException e) {
-            throw new EasyPostException(unknownErrorMessage, e);
-        } catch (IllegalAccessException e) {
-            throw new EasyPostException(unknownErrorMessage, e);
-        } catch (InstantiationException e) {
-            throw new EasyPostException(unknownErrorMessage, e);
-        } catch (UnsupportedEncodingException e) {
-            throw new EasyPostException(unknownErrorMessage, e);
+            // TODO: This suppression makes it a bit confusing what the root cause of the error is downstream.
+        } catch (InvocationTargetException | MalformedURLException | SecurityException | NoSuchFieldException |
+                 NoSuchMethodException | ClassNotFoundException | IllegalArgumentException | IllegalAccessException |
+                 InstantiationException | MissingParameterError | UnsupportedEncodingException e) {
+            throw new HttpError(unknownErrorMessage, e);
         }
     }
 }

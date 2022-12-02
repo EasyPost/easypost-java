@@ -11,4 +11,14 @@ public class FilteringError extends EasyPostException {
     public FilteringError(final String message) {
         super(message);
     }
+
+    /**
+     * FilteringError constructor with nested exception.
+     *
+     * @param message the exception message
+     * @param e the nested exception
+     */
+    public FilteringError(final String message, Throwable e) {
+        super(message, e);
+    }
 }

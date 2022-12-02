@@ -1,6 +1,5 @@
 package com.easypost.model;
 
-import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.InvalidParameterError;
 
@@ -40,6 +39,6 @@ public enum SmartrateAccuracy {
                 return smartrateAccuracy;
             }
         }
-        throw new InvalidParameterError(String.format(Constants.ErrorMessages.INVALID_PARAMETER, "smartrateAccuracy"));
+        throw new InvalidParameterError("smartrateAccuracy");
     }
 }
