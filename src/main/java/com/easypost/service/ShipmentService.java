@@ -8,7 +8,7 @@ import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
-import com.easypost.model.Smartrate;
+import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import com.easypost.model.SmartrateCollection;
 import com.easypost.utils.Utilities;
@@ -141,41 +141,41 @@ public class ShipmentService {
     }
 
     /**
-     * Get Smartrates for this Shipment.
+     * Get SmartRates for this Shipment.
      *
      * @param params The options for the query.
      * @param id     The ID of shipment.
-     * @return List of Smartrate objects
+     * @return List of SmartRate objects
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link #smartrates(String, Map)} instead.
      *             Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public List<Smartrate> getSmartrates(final String id, final Map<String, Object> params)
+    public List<SmartRate> getSmartrates(final String id, final Map<String, Object> params)
             throws EasyPostException {
         return this.smartrates(id, params);
     }
 
     /**
-     * Get Smartrates for this Shipment.
+     * Get SmartRate for this Shipment.
      *
      * @param id The ID of shipment.
-     * @return List of Smartrate objects
+     * @return List of SmartRate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<Smartrate> smartrates(final String id) throws EasyPostException {
+    public List<SmartRate> smartrates(final String id) throws EasyPostException {
         return this.smartrates(id, null);
     }
 
     /**
-     * Get Smartrates for this Shipment.
+     * Get SmartRates for this Shipment.
      *
      * @param id     The ID of shipment.
      * @param params The options for the query.
-     * @return List of Smartrate objects
+     * @return List of SmartRate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<Smartrate> smartrates(final String id, final Map<String, Object> params)
+    public List<SmartRate> smartrates(final String id, final Map<String, Object> params)
             throws EasyPostException {
         String url = String.format("%s/smartrate", Utilities.instanceURL(Shipment.class, id));
         SmartrateCollection smartrateCollection = Requestor.request(RequestMethod.GET, url, params,
@@ -352,91 +352,91 @@ public class ShipmentService {
     }
 
     /**
-     * Get the lowest smartrate for this Shipment.
+     * Get the lowest SmartRate for this Shipment.
      *
      * @param id               The ID of shipment.
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when
      *                         filtering.
-     * @return lowest Smartrate object
+     * @return lowest SmartRate object
      * @throws EasyPostException when the request fails.
      * @deprecated use {@link #lowestSmartRate(String, int, SmartrateAccuracy)}
      *             instead.
      *             Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public Smartrate lowestSmartRate(final String id, int deliveryDay, String deliveryAccuracy)
+    public SmartRate lowestSmartRate(final String id, int deliveryDay, String deliveryAccuracy)
             throws EasyPostException {
         return this.lowestSmartRate(id, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
     }
 
     /**
-     * Get the lowest smartrate for this Shipment.
+     * Get the lowest SmartRate for this Shipment.
      *
      * @param id               The ID of shipment.
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when
      *                         filtering.
-     * @return lowest Smartrate object
+     * @return lowest SmartRate object
      * @throws EasyPostException when the request fails.
      */
-    public Smartrate lowestSmartRate(final String id, final int deliveryDay, SmartrateAccuracy deliveryAccuracy)
+    public SmartRate lowestSmartRate(final String id, final int deliveryDay, SmartrateAccuracy deliveryAccuracy)
             throws EasyPostException {
-        List<Smartrate> smartrates = this.smartrates(id, null);
+        List<SmartRate> smartrates = this.smartrates(id, null);
 
-        Smartrate lowestSmartrate = findLowestSmartrate(smartrates, deliveryDay, deliveryAccuracy);
+        SmartRate lowestSmartrate = findLowestSmartrate(smartrates, deliveryDay, deliveryAccuracy);
 
         return lowestSmartrate;
     }
 
     /**
-     * Get Smartrates for this Shipment.
+     * Get SmartRates for this Shipment.
      *
      * @param id The ID of shipment.
-     * @return List of Smartrate objects
+     * @return List of SmartRate objects
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link #smartrates(String, Map)} instead.
      *             Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public List<Smartrate> getSmartrates(final String id) throws EasyPostException {
+    public List<SmartRate> getSmartrates(final String id) throws EasyPostException {
         return this.getSmartrates(id, null);
     }
 
     /**
-     * Get the lowest Smartrate from a list of Smartrates.
+     * Get the lowest SmartRate from a list of SmartRates.
      *
-     * @param smartrates       List of Smartrates to filter from.
+     * @param smartRates       List of SmartRates to filter from.
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when
      *                         filtering.
-     * @return lowest Smartrate object
+     * @return lowest SmartRate object
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)}
      *             instead.
      *             Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public Smartrate getLowestSmartRate(final List<Smartrate> smartrates, int deliveryDay,
+    public SmartRate getLowestSmartRate(final List<SmartRate> smartRates, int deliveryDay,
             String deliveryAccuracy) throws EasyPostException {
-        return findLowestSmartrate(smartrates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
+        return findLowestSmartrate(smartRates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
     }
 
     /**
-     * Find the lowest Smartrate from a list of Smartrates.
+     * Find the lowest SmartRate from a list of SmartRates.
      *
-     * @param smartrates       List of Smartrates to filter from.
+     * @param smartRates       List of SmartRates to filter from.
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when
      *                         filtering.
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      */
-    public Smartrate findLowestSmartrate(final List<Smartrate> smartrates, int deliveryDay,
+    public SmartRate findLowestSmartrate(final List<SmartRate> smartRates, int deliveryDay,
             SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
-        Smartrate lowestSmartrate = null;
+        SmartRate lowestSmartrate = null;
 
-        for (Smartrate rate : smartrates) {
+        for (SmartRate rate : smartRates) {
             int smartrateDeliveryDay = rate.getTimeInTransit().getBySmartrateAccuracy(deliveryAccuracy);
 
             if (smartrateDeliveryDay > deliveryDay) {

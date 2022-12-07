@@ -10,7 +10,7 @@ public class EasyPostClient {
     private final String apiVersion = "v2";
     private final String apiBase;
     public final AddressService address;
-    public final ApiKeyService apikeys;
+    public final ApiKeyService apiKeys;
     public final BatchService batch;
     public final BillingService billing;
     public final CarrierAccountService carrierAccount;
@@ -28,7 +28,7 @@ public class EasyPostClient {
     public final ReferralCustomerService referralCustomer;
     public final RefundService refund;
     public final ReportService report;
-    public final ScanformService scanform;
+    public final ScanformService scanForm;
     public final ShipmentService shipment;
     public final TrackerService tracker;
     public final UserService user;
@@ -112,7 +112,7 @@ public class EasyPostClient {
         this.connectTimeoutMilliseconds = connectTimeoutMilliseconds;
         this.readTimeoutMilliseconds = readTimeoutMilliseconds;
         this.address = new AddressService(this);
-        this.apikeys = new ApiKeyService(this);
+        this.apiKeys = new ApiKeyService(this);
         this.batch = new BatchService(this);
         this.billing = new BillingService(this);
         this.carrierAccount = new CarrierAccountService(this);
@@ -130,7 +130,7 @@ public class EasyPostClient {
         this.referralCustomer = new ReferralCustomerService(this);
         this.refund = new RefundService(this);
         this.report = new ReportService(this);
-        this.scanform = new ScanformService(this);
+        this.scanForm = new ScanformService(this);
         this.shipment = new ShipmentService(this);
         this.tracker = new TrackerService(this);
         this.user = new UserService(this);

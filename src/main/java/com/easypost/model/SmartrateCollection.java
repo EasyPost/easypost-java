@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class SmartrateCollection {
-    private List<Smartrate> smartrates;
+    private List<SmartRate> smartrates;
 
     /**
      * Get this SmartrateCollection's Smartrate objects.
      *
      * @return List of Smartrate objects.
      */
-    public List<Smartrate> getSmartrates() {
+    public List<SmartRate> getSmartrates() {
         return this.smartrates;
     }
 
@@ -20,7 +20,7 @@ public final class SmartrateCollection {
      *
      * @param smartrates List of Smartrate objects.
      */
-    public void setSmartrates(final List<Smartrate> smartrates) {
+    public void setSmartrates(final List<SmartRate> smartrates) {
         this.smartrates = smartrates;
     }
 
@@ -28,7 +28,7 @@ public final class SmartrateCollection {
      * Constructor.
      */
     public SmartrateCollection() {
-        this.smartrates = new ArrayList<Smartrate>();
+        this.smartrates = new ArrayList<SmartRate>();
     }
 
     /**
@@ -36,7 +36,7 @@ public final class SmartrateCollection {
      *
      * @param smartrates List of Smartrate objects
      */
-    public SmartrateCollection(final List<Smartrate> smartrates) {
+    public SmartrateCollection(final List<SmartRate> smartrates) {
         setSmartrates(smartrates);
     }
 
@@ -45,7 +45,7 @@ public final class SmartrateCollection {
      *
      * @param rate Rate object
      */
-    public void addRate(final Smartrate rate) {
+    public void addRate(final SmartRate rate) {
         smartrates.add(rate);
     }
 }

@@ -10,7 +10,7 @@ import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
-import com.easypost.model.Smartrate;
+import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -267,9 +267,9 @@ public final class ShipmentTest {
         assertNotNull(shipment.getRates());
         Rate rate = shipment.getRates().get(0);
 
-        List<Smartrate> smartRates = vcr.client.shipment.smartrates(shipment.getId());
+        List<SmartRate> smartRates = vcr.client.shipment.smartrates(shipment.getId());
         assertInstanceOf(List.class, smartRates);
-        Smartrate smartRate = smartRates.get(0);
+        SmartRate smartRate = smartRates.get(0);
 
         assertEquals(rate.getId(), smartRate.getId());
         assertNotNull(smartRate.getTimeInTransit().getPercentile50());
@@ -412,7 +412,7 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate");
 
         Shipment shipment = createBasicShipment();
-        Smartrate lowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
+        SmartRate lowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
                 SmartrateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
@@ -426,7 +426,7 @@ public final class ShipmentTest {
             vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartrateAccuracy.Percentile90);
         });
 
-        Smartrate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
+        SmartRate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
                 "percentile_90");
 
         // Test lowest smartrate with valid filters
@@ -452,12 +452,12 @@ public final class ShipmentTest {
 
         Shipment shipment = createBasicShipment();
 
-        List<Smartrate> rates = vcr.client.shipment.getSmartrates(shipment.getId());
+        List<SmartRate> rates = vcr.client.shipment.getSmartrates(shipment.getId());
 
         assertInstanceOf(List.class, rates);
 
-        for (Smartrate rate : rates) {
-            assertInstanceOf(Smartrate.class, rate);
+        for (SmartRate rate : rates) {
+            assertInstanceOf(SmartRate.class, rate);
         }
     }
 
@@ -472,8 +472,8 @@ public final class ShipmentTest {
 
         Shipment shipment = createBasicShipment();
 
-        List<Smartrate> rates = vcr.client.shipment.getSmartrates(shipment.getId());
-        Smartrate lowestSmartrate = vcr.client.shipment.getLowestSmartRate(rates, 3, "percentile_85");
+        List<SmartRate> rates = vcr.client.shipment.getSmartrates(shipment.getId());
+        SmartRate lowestSmartrate = vcr.client.shipment.getLowestSmartRate(rates, 3, "percentile_85");
 
         assertEquals("First", lowestSmartrate.getService());
         assertEquals(5.82, lowestSmartrate.getRate(), 0.01);
@@ -490,10 +490,10 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate_list");
 
         Shipment shipment = createBasicShipment();
-        List<Smartrate> smartrates = vcr.client.shipment.smartrates(shipment.getId());
+        List<SmartRate> smartRates = vcr.client.shipment.smartrates(shipment.getId());
 
         // Test lowest smartrate with valid filters
-        Smartrate lowestSmartRate = vcr.client.shipment.findLowestSmartrate(smartrates, 2,
+        SmartRate lowestSmartRate = vcr.client.shipment.findLowestSmartrate(smartRates, 2,
                 SmartrateAccuracy.Percentile90);
         assertEquals("Priority", lowestSmartRate.getService());
         assertEquals(8.15, lowestSmartRate.getRate(), 0.01);
@@ -502,7 +502,7 @@ public final class ShipmentTest {
         // Test lowest smartrate with invalid filters (should error due to strict
         // delivery days)
         assertThrows(EasyPostException.class, () -> {
-            vcr.client.shipment.findLowestSmartrate(smartrates, 0, SmartrateAccuracy.Percentile90);
+            vcr.client.shipment.findLowestSmartrate(smartRates, 0, SmartrateAccuracy.Percentile90);
         });
     }
 
