@@ -13,7 +13,6 @@ import com.easypost.model.ShipmentCollection;
 import com.easypost.model.Smartrate;
 import com.easypost.model.SmartrateAccuracy;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

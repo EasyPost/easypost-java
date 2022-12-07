@@ -8,7 +8,6 @@ import com.easypost.model.ReferralCustomer;
 import com.easypost.model.ReferralCustomerCollection;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
