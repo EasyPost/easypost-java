@@ -1,6 +1,7 @@
 package com.easypost.service;
 
 import com.easypost.Constants;
+import com.easypost.EasyPost;
 import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ExternalApiError;
@@ -16,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -162,27 +164,32 @@ public class ReferralCustomerService {
     private static String createStripeToken(final String number, final int expirationMonth, final int expirationYear,
                                             final String cvc, final String easypostStripeApiKey)
             throws EncodingError, IOException {
+        String apiToken = String.format("%s %s", "Bearer", easypostStripeApiKey);
+
         Map<String, String> params = new HashMap<>();
         params.put("number", number);
         params.put("exp_month", String.valueOf(expirationMonth));
         params.put("exp_year", String.valueOf(expirationYear));
         params.put("cvc", cvc);
 
-        URL stripeUrl = new URL("https://api.stripe.com/v1/tokens");
-        HttpURLConnection conn = (HttpURLConnection) stripeUrl.openConnection();
-        String apiToken = String.format("%s %s", "Bearer", easypostStripeApiKey);
+        String encodedURL = Utilities.getEncodedURL(params, "card");
+        URL stripeUrl = new URL("https://api.stripe.com/v1/tokens?" + encodedURL);
+
+        HttpURLConnection conn;
+        if (EasyPost._vcr != null) {
+            try {
+                conn = EasyPost._vcr.getHttpUrlConnection(stripeUrl).openConnectionSecure();
+            } catch (Exception vcrException) {
+                throw new IOException(vcrException);
+            }
+        } else {
+            conn = (HttpURLConnection) stripeUrl.openConnection();
+        }
 
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Authorization", apiToken);
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
-
-        String encodedURL = Utilities.getEncodedURL(params, "card");
-        byte[] postData = encodedURL.getBytes(StandardCharsets.UTF_8);
-
-        try (DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
-            wr.write(postData);
-        }
 
         StringBuilder response;
 

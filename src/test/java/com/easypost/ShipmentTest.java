@@ -344,14 +344,16 @@ public final class ShipmentTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled
-    // TODO: test is for some reason failing to pull a proper recording when playing
-    // back. Only test doing this
     public void testCreateWithIds() throws EasyPostException {
         vcr.setUpTest("create_with_ids");
 
-        Address fromAddress = vcr.client.address.create(Fixtures.caAddress1());
-        Address toAddress = vcr.client.address.create(Fixtures.caAddress1());
+        Map<String, Object> address1Data = Fixtures.caAddress1();
+        Map<String, Object> address2Data = Fixtures.caAddress2();
+        // VCR will overwrite the first address recording if the parameters are the exact same,
+        // which will cause us to lose the response from the first address creation and cause the replay to fail.
+        address2Data.put("name", "EasyPost");
+        Address fromAddress = vcr.client.address.create(address1Data);
+        Address toAddress = vcr.client.address.create(address2Data);
         Parcel parcel = vcr.client.parcel.create(Fixtures.basicParcel());
 
         Map<String, Object> shipmentData = Fixtures.basicShipment();

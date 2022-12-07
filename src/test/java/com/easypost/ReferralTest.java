@@ -110,7 +110,6 @@ public final class ReferralTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // failing on replay likely because of urlencoding
     public void testReferralAddCreditCard() throws Exception {
         vcr.setUpTest("referral_add_credit_card");
 
