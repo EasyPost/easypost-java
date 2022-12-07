@@ -170,7 +170,7 @@ public final class UserTest {
     public void testAllApiKeys() throws EasyPostException {
         vcr.setUpTest("all_api_keys");
 
-        ApiKeys apikeys = vcr.client.apiKeys.all();
+        ApiKeys apikeys = vcr.client.apiKey.all();
 
         assertInstanceOf(ApiKeys.class, apikeys);
         
