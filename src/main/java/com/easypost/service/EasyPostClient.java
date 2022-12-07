@@ -6,7 +6,7 @@ import com.easypost.exception.General.MissingParameterError;
 public class EasyPostClient {
     private final int connectTimeoutMilliseconds;
     private final int readTimeoutMilliseconds;
-    private final String inputApiKey; // API key all EasyPost API requests
+    private final String inputApiKey; // API key for all EasyPost API requests
     private final String apiVersion = "v2";
     private final String apiBase;
     public final AddressService address;
