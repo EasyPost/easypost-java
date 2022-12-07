@@ -1,14 +1,19 @@
 package com.easypost.utils;
 
 import com.easypost.Constants;
+import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.General.FilteringError;
+import com.easypost.exception.General.SignatureVerificationError;
+import com.easypost.model.Event;
 import com.easypost.model.Rate;
 
 import java.net.URLEncoder;
 
 import java.util.List;
 import java.util.Map;
+import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 
 public abstract class Utilities {
     /**
@@ -105,6 +110,47 @@ public abstract class Utilities {
             return String.format("%ses", singleClassURL(clazz));
         } else {
             return String.format("%ss", singleClassURL(clazz));
+        }
+    }
+
+    /**
+     * Validate a webhook by comparing the HMAC signature header sent from EasyPost
+     * to your shared secret.
+     * If the signatures do not match, an error will be raised signifying
+     * the webhook either did not originate from EasyPost or the secrets do not
+     * match.
+     * If the signatures do match, the `event_body` will be returned as JSON.
+     *
+     * @param eventBody     Data to validate
+     * @param headers       Headers received from the webhook
+     * @param webhookSecret Shared secret to use in validation
+     * @return JSON string of the event body if the signatures match, otherwise an
+     *         error will be raised.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Event validateWebhook(byte[] eventBody, Map<String, Object> headers, String webhookSecret)
+            throws EasyPostException {
+
+        String providedSignature = null;
+        try {
+            providedSignature = headers.get("X-Hmac-Signature").toString();
+        } catch (NullPointerException ignored) { // catch error raised if header key doesn't exist
+        }
+
+        if (providedSignature != null) {
+            String calculatedDigest = Cryptography.toHMACSHA256HexDigest(eventBody, webhookSecret,
+                    Normalizer.Form.NFKD);
+            String calculatedSignature = "hmac-sha256-hex=" + calculatedDigest;
+
+            if (Cryptography.signaturesMatch(providedSignature, calculatedSignature)) {
+                // Serialize data into a JSON string, then into an Event object
+                String json = new String(eventBody, StandardCharsets.UTF_8);
+                return Constants.Http.GSON.fromJson(json, Event.class);
+            } else {
+                throw new SignatureVerificationError(Constants.ErrorMessages.WEBHOOK_DOES_NOT_MATCH);
+            }
+        } else {
+            throw new SignatureVerificationError(Constants.ErrorMessages.INVALID_WEBHOOK_SIGNATURE);
         }
     }
 

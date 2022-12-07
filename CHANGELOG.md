@@ -11,6 +11,7 @@
   - CarrierAccount.update()
 - [FIXED] Typo, `ServiceUnavailablError` is now `ServiceUnavailableError`
 - [FIXED] Typo: `Smartrate` is now `SmartRate`, `apikeys` is now `apiKey`, `scanform` is now `scanForm`
+- [FIXED] Move `validateWebook` from WebhookService to Utilities since it does not required an EasyPost client object
 
 ## v6.0.0-rc1 (2022-11-30)
 

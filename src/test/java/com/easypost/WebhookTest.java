@@ -1,5 +1,6 @@
 package com.easypost;
 
+import com.easypost.utils.Utilities;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Event;
 import com.easypost.model.Webhook;
@@ -162,7 +163,7 @@ public final class WebhookTest {
             }
         };
 
-        Event event = vcr.client.webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
+        Event event = Utilities.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
 
         assertEquals("batch.created", event.getDescription());
         assertEquals("batch_123...", event.getResult().get("id"));
@@ -181,7 +182,7 @@ public final class WebhookTest {
         };
 
         assertThrows(EasyPostException.class, () -> {
-            vcr.client.webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
+            Utilities.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
         });
     }
 
@@ -198,7 +199,7 @@ public final class WebhookTest {
         };
 
         assertThrows(EasyPostException.class, () -> {
-            vcr.client.webhook.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
+            Utilities.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
         });
     }
 }
