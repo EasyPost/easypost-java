@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         javaversion: [ "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19" ]
@@ -46,7 +46,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: "./coverage.lcov"
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - name: Run CheckStyle checks
@@ -57,7 +57,7 @@ jobs:
           checkstyle_config: easypost_java_style.xml
           tool_name: "style_enforcer"
   security:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - name: Load Maven dependencies and CVE database cache

@@ -8,7 +8,6 @@ import com.easypost.model.ReferralCustomer;
 import com.easypost.model.ReferralCustomerCollection;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -110,7 +109,6 @@ public final class ReferralTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled // failing on replay likely because of urlencoding
     public void testReferralAddCreditCard() throws Exception {
         vcr.setUpTest("referral_add_credit_card");
 

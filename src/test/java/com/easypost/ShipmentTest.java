@@ -13,7 +13,6 @@ import com.easypost.model.ShipmentCollection;
 import com.easypost.model.Smartrate;
 import com.easypost.model.SmartrateAccuracy;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -344,14 +343,14 @@ public final class ShipmentTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    @Disabled
-    // TODO: test is for some reason failing to pull a proper recording when playing
-    // back. Only test doing this
     public void testCreateWithIds() throws EasyPostException {
         vcr.setUpTest("create_with_ids");
 
+        // VCR will overwrite the first address recording if the parameters are the exact same,
+        // which will cause us to lose the response from the first address creation and cause the replay to fail.
+        // So wee need to use two different addresses here.
         Address fromAddress = vcr.client.address.create(Fixtures.caAddress1());
-        Address toAddress = vcr.client.address.create(Fixtures.caAddress1());
+        Address toAddress = vcr.client.address.create(Fixtures.caAddress2());
         Parcel parcel = vcr.client.parcel.create(Fixtures.basicParcel());
 
         Map<String, Object> shipmentData = Fixtures.basicShipment();

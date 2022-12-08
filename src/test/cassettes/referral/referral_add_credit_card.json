@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1669142059,
+    "recordedAt": 1670453545,
     "request": {
       "body": "",
       "method": "GET",
@@ -28,7 +28,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb12nuq"
+          "bigweb3nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -55,17 +55,18 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "816b7d7e637d162be0ed0b67003d3f7b"
+          "99d32e0663911929ec9f76e0001e67ad"
         ],
         "x-proxied": [
-          "extlb1nuq 29913d444b",
-          "intlb1nuq 29913d444b"
+          "extlb3wdc 29913d444b",
+          "intlb1wdc 29913d444b",
+          "intlb2nuq 29913d444b"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.017105"
+          "0.016522"
         ],
         "etag": [
           "W/\"86cc970265a111486b443bf66ef85e91\""
@@ -74,7 +75,7 @@
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211211953-c7d3fecdcf-master"
+          "easypost-202212072114-cbd87d5dd7-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,12 +87,91 @@
       },
       "uri": "https://api.easypost.com/v2/partners/stripe_public_key"
     },
-    "duration": 400
+    "duration": 510
   },
   {
-    "recordedAt": 1669142064,
+    "recordedAt": 1670453546,
     "request": {
-      "body": "{\n  \"credit_card\": {\n    \"stripe_object_id\": \"tok_0M71IWDqT4huGUvdZspMYMfr\",\n    \"priority\": \"primary\"\n  }\n}",
+      "body": "",
+      "method": "POST",
+      "headers": {
+        "Content-Type": [
+          "application/x-www-form-urlencoded"
+        ]
+      },
+      "uri": "https://api.stripe.com/v1/tokens?card%5Bcvc%5D\u003dREDACTED\u0026card%5Bexp_year%5D\u003d2028\u0026card%5Bnumber%5D\u003dREDACTED\u0026card%5Bexp_month%5D\u003d5"
+    },
+    "response": {
+      "body": "{\n  \"livemode\": true,\n  \"created\": 1.670453546E9,\n  \"client_ip\": \"REDACTED\",\n  \"id\": \"tok_0MCWTWDqT4huGUvdRss7rShI\",\n  \"used\": false,\n  \"type\": \"card\",\n  \"card\": {\n    \"address_zip_check\": null,\n    \"country\": \"US\",\n    \"last4\": \"6170\",\n    \"funding\": \"credit\",\n    \"address_country\": null,\n    \"address_state\": null,\n    \"exp_month\": 5.0,\n    \"exp_year\": 2028.0,\n    \"address_city\": null,\n    \"tokenization_method\": null,\n    \"cvc_check\": \"unchecked\",\n    \"address_line2\": null,\n    \"address_line1\": null,\n    \"name\": null,\n    \"id\": \"card_0MCWTWDqT4huGUvdxJDpWTkZ\",\n    \"address_line1_check\": null,\n    \"address_zip\": null,\n    \"dynamic_last4\": null,\n    \"brand\": \"Visa\",\n    \"object\": \"card\"\n  },\n  \"object\": \"token\"\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "Server": [
+          "nginx"
+        ],
+        "Access-Control-Allow-Origin": [
+          "*"
+        ],
+        "Access-Control-Allow-Methods": [
+          "GET, POST, HEAD, OPTIONS, DELETE"
+        ],
+        "Idempotency-Key": [
+          "ceb6ba5b-6211-4bb5-8407-0a4112a6fd20"
+        ],
+        "Connection": [
+          "keep-alive"
+        ],
+        "Original-Request": [
+          "req_cvg4JaGUqXU2Re"
+        ],
+        "Stripe-Version": [
+          "2020-08-27"
+        ],
+        "Stripe-Should-Retry": [
+          "false"
+        ],
+        "Date": [
+          "Wed, 07 Dec 2022 22:52:26 GMT"
+        ],
+        "Strict-Transport-Security": [
+          "max-age\u003d63072000; includeSubDomains; preload"
+        ],
+        "Access-Control-Expose-Headers": [
+          "Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required"
+        ],
+        "Cache-Control": [
+          "no-cache, no-store"
+        ],
+        "Access-Control-Allow-Credentials": [
+          "true"
+        ],
+        "Access-Control-Max-Age": [
+          "300"
+        ],
+        "Content-Length": [
+          "720"
+        ],
+        "Request-Id": [
+          "req_cvg4JaGUqXU2Re"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.stripe.com/v1/tokens?card%5Bcvc%5D\u003dREDACTED\u0026card%5Bexp_year%5D\u003d2028\u0026card%5Bnumber%5D\u003dREDACTED\u0026card%5Bexp_month%5D\u003d5"
+    },
+    "duration": 644
+  },
+  {
+    "recordedAt": 1670453550,
+    "request": {
+      "body": "{\n  \"credit_card\": {\n    \"stripe_object_id\": \"tok_0MCWTWDqT4huGUvdRss7rShI\",\n    \"priority\": \"primary\"\n  }\n}",
       "method": "POST",
       "headers": {
         "Accept-Charset": [
@@ -107,7 +187,7 @@
       "uri": "https://api.easypost.com/v2/credit_cards"
     },
     "response": {
-      "body": "{\n  \"last4\": \"6170\",\n  \"disabled_at\": null,\n  \"name\": null,\n  \"exp_month\": 5.0,\n  \"id\": \"card_5eeca4edec3045c8ada6ccd52824d6c1\",\n  \"exp_year\": 2028.0,\n  \"brand\": \"Visa\",\n  \"object\": \"CreditCard\"\n}",
+      "body": "{\n  \"last4\": \"6170\",\n  \"disabled_at\": null,\n  \"name\": null,\n  \"exp_month\": 5.0,\n  \"id\": \"card_4ad89a83939644e382b3520f41d0e51c\",\n  \"exp_year\": 2028.0,\n  \"brand\": \"Visa\",\n  \"object\": \"CreditCard\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -120,7 +200,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb6nuq"
+          "bigweb4nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -147,7 +227,7 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "d96d15b1637d162ce0ed0b81003bbeb2"
+          "e26b982c6391192aec7a46e100202d39"
         ],
         "x-proxied": [
           "extlb2nuq 29913d444b",
@@ -157,16 +237,16 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "3.862250"
+          "4.135978"
         ],
         "etag": [
-          "W/\"195f283080f5458e3b2402386b36ff63\""
+          "W/\"1fdc43c736f661170d96af73b24c6201\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211211953-c7d3fecdcf-master"
+          "easypost-202212072114-cbd87d5dd7-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -178,6 +258,6 @@
       },
       "uri": "https://api.easypost.com/v2/credit_cards"
     },
-    "duration": 4116
+    "duration": 4364
   }
 ]
