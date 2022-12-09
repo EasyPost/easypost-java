@@ -55,8 +55,8 @@ public class ShipmentService {
         wrappedParams.put("shipment", params);
         wrappedParams.put("carbon_offset", withCarbonOffset);
 
-        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Shipment.class), wrappedParams, Shipment.class,
-                client);
+        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Shipment.class), wrappedParams,
+                Shipment.class, client);
     }
 
     /**
@@ -67,8 +67,8 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Shipment.class, id), null, Shipment.class,
-                client);
+        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Shipment.class, id), null,
+                Shipment.class, client);
     }
 
     /**
