@@ -6,7 +6,7 @@ import com.easypost.exception.General.MissingParameterError;
 public class EasyPostClient {
     private final int connectTimeoutMilliseconds;
     private final int readTimeoutMilliseconds;
-    private final String inputApiKey; // API key for all EasyPost API requests
+    private final String clientApiKey; // API key for all EasyPost API requests
     private final String apiVersion = "v2";
     private final String apiBase;
     public final AddressService address;
@@ -108,7 +108,7 @@ public class EasyPostClient {
         }
 
         this.apiBase = apiBase;
-        this.inputApiKey = apiKey;
+        this.clientApiKey = apiKey;
         this.connectTimeoutMilliseconds = connectTimeoutMilliseconds;
         this.readTimeoutMilliseconds = readTimeoutMilliseconds;
         this.address = new AddressService(this);
@@ -161,7 +161,7 @@ public class EasyPostClient {
      * @return the API key for this EasyPostClient object
      */
     public String getApiKey() {
-        return inputApiKey;
+        return clientApiKey;
     }
 
     /**
