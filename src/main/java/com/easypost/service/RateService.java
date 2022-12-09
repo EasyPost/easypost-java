@@ -4,7 +4,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Rate;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 public class RateService {
     private final EasyPostClient client;
@@ -27,7 +27,7 @@ public class RateService {
      */
     public Rate retrieve(final String id) throws EasyPostException {
         Rate response;
-        response = Requestor.request(RequestMethod.GET, Utilities.instanceURL(Rate.class, id), null, Rate.class,
+        response = Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Rate.class, id), null, Rate.class,
                 client);
 
         return response;

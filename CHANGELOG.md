@@ -10,8 +10,12 @@
   - EndShipper.update()
   - CarrierAccount.update()
 - [FIXED] Typo, `ServiceUnavailablError` is now `ServiceUnavailableError`
+<<<<<<< HEAD
 - [FIXED] Typo: `Smartrate` is now `SmartRate`, `apikeys` is now `apiKey`, `scanform` is now `scanForm`
 - [FIXED] Move `validateWebook` from WebhookService to Utilities since it does not required an EasyPost client object
+=======
+- [FIXED] Move `validateWebook`, `findLowestSmartrate`, and `getLowestSmartRate` from Services to Utilities since it does not required an EasyPost client object
+>>>>>>> b7e8303 (address feedback)
 
 ## v6.0.0-rc1 (2022-11-30)
 

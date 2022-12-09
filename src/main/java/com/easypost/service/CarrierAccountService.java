@@ -5,7 +5,7 @@ import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.CarrierAccount;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 import com.easypost.Constants;
 
 import java.util.Arrays;
@@ -55,7 +55,7 @@ public class CarrierAccountService {
      * @throws EasyPostException when the request fails.
      */
     public CarrierAccount retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.instanceURL(CarrierAccount.class, id), null,
+        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(CarrierAccount.class, id), null,
                 CarrierAccount.class, client);
     }
 
@@ -77,9 +77,9 @@ public class CarrierAccountService {
      * @throws EasyPostException when the request fails.
      */
     public List<CarrierAccount> all(final Map<String, Object> params) throws EasyPostException {
-        CarrierAccount[] response =
-                Requestor.request(RequestMethod.GET, Utilities.classURL(CarrierAccount.class), params,
-                        CarrierAccount[].class, client);
+        CarrierAccount[] response = Requestor.request(RequestMethod.GET,
+                InternalUtilities.classURL(CarrierAccount.class), params,
+                CarrierAccount[].class, client);
 
         return Arrays.asList(response);
     }
@@ -97,8 +97,8 @@ public class CarrierAccountService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("carrier_account", params);
 
-        return Requestor.request(RequestMethod.PUT, Utilities.instanceURL(CarrierAccount.class, id), wrappedParams,
-                CarrierAccount.class, client);
+        return Requestor.request(RequestMethod.PUT, InternalUtilities.instanceURL(CarrierAccount.class, id),
+                wrappedParams, CarrierAccount.class, client);
     }
 
     /**
@@ -108,12 +108,13 @@ public class CarrierAccountService {
      * @throws EasyPostException when the request fails.
      */
     public void delete(String id) throws EasyPostException {
-        Requestor.request(RequestMethod.DELETE, Utilities.instanceURL(CarrierAccount.class, id), null,
+        Requestor.request(RequestMethod.DELETE, InternalUtilities.instanceURL(CarrierAccount.class, id), null,
                 CarrierAccount.class, client);
     }
 
     /**
-     * Select the endpoint for the carrier account creation request based on the carrier type.
+     * Select the endpoint for the carrier account creation request based on the
+     * carrier type.
      *
      * @param carrierAccountType The type of carrier account to create.
      * @return The endpoint for the carrier account creation request.

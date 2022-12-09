@@ -6,7 +6,7 @@ import com.easypost.exception.General.InvalidObjectError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.PaymentMethod;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 public class PaymentMethodService {
     private final EasyPostClient client;
@@ -30,7 +30,7 @@ public class PaymentMethodService {
      */
     @Deprecated
     public PaymentMethod all() throws EasyPostException {
-        String url = Utilities.classURL(PaymentMethod.class);
+        String url = InternalUtilities.classURL(PaymentMethod.class);
         PaymentMethod response =
             Requestor.request(RequestMethod.GET, url, null, PaymentMethod.class, client);
 

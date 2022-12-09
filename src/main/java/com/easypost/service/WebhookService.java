@@ -5,7 +5,7 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Webhook;
 import com.easypost.model.WebhookCollection;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class WebhookService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("webhook", params);
 
-        return Requestor.request(RequestMethod.POST, Utilities.classURL(Webhook.class),
+        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Webhook.class),
                 wrappedParams, Webhook.class, client);
     }
 
@@ -45,7 +45,7 @@ public class WebhookService {
      * @throws EasyPostException when the request fails.
      */
     public Webhook retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.instanceURL(Webhook.class, id),
+        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Webhook.class, id),
                 null, Webhook.class, client);
     }
 
@@ -68,7 +68,7 @@ public class WebhookService {
      */
     public WebhookCollection all(final Map<String, Object> params)
             throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.classURL(Webhook.class),
+        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(Webhook.class),
                 params, WebhookCollection.class, client);
     }
 
@@ -79,7 +79,7 @@ public class WebhookService {
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String id) throws EasyPostException {
-        Requestor.request(RequestMethod.DELETE, Utilities.instanceURL(Webhook.class,
+        Requestor.request(RequestMethod.DELETE, InternalUtilities.instanceURL(Webhook.class,
                 id), null, Webhook.class, client);
     }
 
@@ -108,6 +108,6 @@ public class WebhookService {
         wrappedParams.put("webhook", params);
 
         return Requestor.request(RequestMethod.PUT,
-                Utilities.instanceURL(Webhook.class, id), wrappedParams, Webhook.class, client);
+                InternalUtilities.instanceURL(Webhook.class, id), wrappedParams, Webhook.class, client);
     }
 }

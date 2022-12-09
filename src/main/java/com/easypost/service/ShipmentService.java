@@ -11,7 +11,7 @@ import com.easypost.model.ShipmentCollection;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import com.easypost.model.SmartrateCollection;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +55,7 @@ public class ShipmentService {
         wrappedParams.put("shipment", params);
         wrappedParams.put("carbon_offset", withCarbonOffset);
 
-        return Requestor.request(RequestMethod.POST, Utilities.classURL(Shipment.class), wrappedParams, Shipment.class,
+        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Shipment.class), wrappedParams, Shipment.class,
                 client);
     }
 
@@ -67,7 +67,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.instanceURL(Shipment.class, id), null, Shipment.class,
+        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Shipment.class, id), null, Shipment.class,
                 client);
     }
 
@@ -80,7 +80,7 @@ public class ShipmentService {
      */
     public ShipmentCollection all(final Map<String, Object> params)
             throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.classURL(Shipment.class), params,
+        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(Shipment.class), params,
                 ShipmentCollection.class, client);
     }
 
@@ -135,7 +135,7 @@ public class ShipmentService {
             throws EasyPostException {
         params.put("carbon_offset", withCarbonOffset);
 
-        String url = String.format("%s/rerate", Utilities.instanceURL(Shipment.class, id));
+        String url = String.format("%s/rerate", InternalUtilities.instanceURL(Shipment.class, id));
 
         return Requestor.request(RequestMethod.POST, url, params, Shipment.class, client);
     }
@@ -177,7 +177,7 @@ public class ShipmentService {
      */
     public List<SmartRate> smartrates(final String id, final Map<String, Object> params)
             throws EasyPostException {
-        String url = String.format("%s/smartrate", Utilities.instanceURL(Shipment.class, id));
+        String url = String.format("%s/smartrate", InternalUtilities.instanceURL(Shipment.class, id));
         SmartrateCollection smartrateCollection = Requestor.request(RequestMethod.GET, url, params,
                 SmartrateCollection.class, client);
 
@@ -293,7 +293,7 @@ public class ShipmentService {
             params.put("end_shipper_id", endShipperId);
         }
 
-        String url = String.format("%s/buy", Utilities.instanceURL(Shipment.class, id));
+        String url = String.format("%s/buy", InternalUtilities.instanceURL(Shipment.class, id));
 
         return Requestor.request(RequestMethod.POST, url, params, Shipment.class, client);
     }
@@ -318,7 +318,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s/refund", Utilities.instanceURL(Shipment.class, id));
+        String url = String.format("%s/refund", InternalUtilities.instanceURL(Shipment.class, id));
 
         return Requestor.request(RequestMethod.POST, url, params, Shipment.class, client);
     }
@@ -332,7 +332,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment label(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s/label", Utilities.instanceURL(Shipment.class, id));
+        String url = String.format("%s/label", InternalUtilities.instanceURL(Shipment.class, id));
 
         return Requestor.request(RequestMethod.GET, url, params, Shipment.class, client);
     }
@@ -346,7 +346,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment insure(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s/insure", Utilities.instanceURL(Shipment.class, id));
+        String url = String.format("%s/insure", InternalUtilities.instanceURL(Shipment.class, id));
 
         return Requestor.request(RequestMethod.POST, url, params, Shipment.class, client);
     }
@@ -483,7 +483,7 @@ public class ShipmentService {
         params.putAll(formOptions);
         wrappedParams.put("form", params);
 
-        String url = String.format("%s/forms", Utilities.instanceURL(Shipment.class, id));
+        String url = String.format("%s/forms", InternalUtilities.instanceURL(Shipment.class, id));
 
         return Requestor.request(RequestMethod.POST, url, wrappedParams, Shipment.class, client);
     }

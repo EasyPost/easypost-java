@@ -12,6 +12,8 @@ import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
+import com.easypost.utils.Utilities;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -493,7 +495,7 @@ public final class ShipmentTest {
         List<SmartRate> smartRates = vcr.client.shipment.smartrates(shipment.getId());
 
         // Test lowest smartrate with valid filters
-        SmartRate lowestSmartRate = vcr.client.shipment.findLowestSmartrate(smartRates, 2,
+        SmartRate lowestSmartRate = Utilities.findLowestSmartrate(smartRates, 2,
                 SmartrateAccuracy.Percentile90);
         assertEquals("Priority", lowestSmartRate.getService());
         assertEquals(8.15, lowestSmartRate.getRate(), 0.01);
@@ -502,7 +504,7 @@ public final class ShipmentTest {
         // Test lowest smartrate with invalid filters (should error due to strict
         // delivery days)
         assertThrows(EasyPostException.class, () -> {
-            vcr.client.shipment.findLowestSmartrate(smartRates, 0, SmartrateAccuracy.Percentile90);
+            Utilities.findLowestSmartrate(smartRates, 0, SmartrateAccuracy.Percentile90);
         });
     }
 

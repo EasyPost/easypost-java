@@ -4,7 +4,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.CarrierType;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +28,7 @@ public class CarrierTypeService {
      * @throws EasyPostException when the request fails.
      */
     public List<CarrierType> all() throws EasyPostException {
-        CarrierType[] response = Requestor.request(RequestMethod.GET, Utilities.classURL(CarrierType.class),
+        CarrierType[] response = Requestor.request(RequestMethod.GET, InternalUtilities.classURL(CarrierType.class),
                 null, CarrierType[].class, client);
         return Arrays.asList(response);
     }

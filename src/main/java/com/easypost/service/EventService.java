@@ -7,7 +7,7 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Event;
 import com.easypost.model.EventCollection;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 public class EventService {
     private final EasyPostClient client;
@@ -29,7 +29,8 @@ public class EventService {
      * @throws EasyPostException when the request fails.
      */
     public Event retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.instanceURL(Event.class, id), null, Event.class, client);
+        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Event.class, id), null, Event.class,
+                client);
     }
 
     /**
@@ -40,7 +41,7 @@ public class EventService {
      * @throws EasyPostException when the request fails.
      */
     public EventCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.classURL(Event.class), params, EventCollection.class,
-                client);
+        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(Event.class), params,
+                EventCollection.class, client);
     }
 }
