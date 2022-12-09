@@ -3,6 +3,6 @@ package com.easypost.model;
 import lombok.Getter;
 
 @Getter
-public class Smartrate extends Rate {
+public class SmartRate extends Rate {
     private TimeInTransit timeInTransit;
 }

@@ -98,7 +98,7 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public List<ApiKey> apiKeys(final String id) throws EasyPostException {
-        ApiKeys parentKeys = client.apikeys.all();
+        ApiKeys parentKeys = client.apiKey.all();
 
         if (Objects.equals(id, parentKeys.getId())) {
             return parentKeys.getKeys();
