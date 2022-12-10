@@ -8,7 +8,7 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Report;
 import com.easypost.model.ReportCollection;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -70,7 +70,7 @@ public class ReportService {
      * @throws EasyPostException when the request fails.
      */
     public Report retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.instanceURL(Report.class, id), null, Report.class,
+        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Report.class, id), null, Report.class,
                 client);
     }
 

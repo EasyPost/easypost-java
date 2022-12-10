@@ -9,7 +9,7 @@ import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
 import com.easypost.model.AddressVerifyResponse;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 public class AddressService {
     private final EasyPostClient client;
@@ -43,8 +43,8 @@ public class AddressService {
 
         wrappedParams.put("address", params);
 
-        return Requestor.request(RequestMethod.POST, Utilities.classURL(Address.class), wrappedParams, Address.class,
-                client);
+        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Address.class), wrappedParams,
+                Address.class, client);
     }
 
     /**
@@ -55,8 +55,8 @@ public class AddressService {
      * @throws EasyPostException when the request fails.
      */
     public Address retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.instanceURL(Address.class, id), null, Address.class,
-                client);
+        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Address.class, id), null,
+                Address.class, client);
     }
 
     /**
@@ -68,8 +68,8 @@ public class AddressService {
      */
     public AddressCollection all(final Map<String, Object> params)
             throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.classURL(Address.class), params, AddressCollection.class,
-                client);
+        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(Address.class), params,
+                AddressCollection.class, client);
     }
 
     /**
@@ -84,7 +84,7 @@ public class AddressService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("address", params);
 
-        String url = String.format("%s/create_and_verify", Utilities.classURL(Address.class));
+        String url = String.format("%s/create_and_verify", InternalUtilities.classURL(Address.class));
         AddressVerifyResponse response = Requestor.request(RequestMethod.POST, url, wrappedParams,
                 AddressVerifyResponse.class, client);
 
@@ -99,7 +99,7 @@ public class AddressService {
      * @throws EasyPostException when the request fails.
      */
     public Address verify(String id) throws EasyPostException {
-        String url = String.format("%s/verify", Utilities.instanceURL(Address.class, id));
+        String url = String.format("%s/verify", InternalUtilities.instanceURL(Address.class, id));
         AddressVerifyResponse response = Requestor.request(RequestMethod.GET, url, null, AddressVerifyResponse.class,
                 client);
 

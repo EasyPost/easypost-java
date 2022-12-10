@@ -5,7 +5,7 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.EndShipper;
 import com.easypost.model.EndShipperCollection;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,7 +62,7 @@ public class EndShipperService {
     public EndShipperCollection all(final Map<String, Object> params)
             throws EasyPostException {
         return Requestor.request(RequestMethod.GET,
-                Utilities.classURL(EndShipper.class), params, EndShipperCollection.class, client);
+                InternalUtilities.classURL(EndShipper.class), params, EndShipperCollection.class, client);
     }
 
     /**

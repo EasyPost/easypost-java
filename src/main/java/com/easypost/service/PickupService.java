@@ -5,7 +5,7 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Pickup;
 import com.easypost.model.PickupRate;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,8 +33,8 @@ public class PickupService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("pickup", params);
 
-        return Requestor.request(RequestMethod.POST, Utilities.classURL(Pickup.class), wrappedParams, Pickup.class,
-                client);
+        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Pickup.class), wrappedParams,
+                Pickup.class, client);
     }
 
     /**
@@ -45,7 +45,7 @@ public class PickupService {
      * @throws EasyPostException when the request fails.
      */
     public Pickup retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.instanceURL(Pickup.class, id), null, Pickup.class,
+        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Pickup.class, id), null, Pickup.class,
                 client);
     }
 
@@ -64,13 +64,13 @@ public class PickupService {
     /**
      * Buy this Pickup.
      *
-     * @param id The ID of pickup.
+     * @param id     The ID of pickup.
      * @param params Map of parameters.
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
     public Pickup buy(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s/buy", Utilities.instanceURL(Pickup.class, id));
+        String url = String.format("%s/buy", InternalUtilities.instanceURL(Pickup.class, id));
 
         return Requestor.request(RequestMethod.POST, url, params, Pickup.class, client);
     }
@@ -78,7 +78,7 @@ public class PickupService {
     /**
      * Buy this Pickup.
      *
-     * @param id The ID of pickup.
+     * @param id         The ID of pickup.
      * @param pickupRate PickupRate to buy.
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
@@ -104,13 +104,13 @@ public class PickupService {
     /**
      * Cancel this Pickup.
      *
-     * @param id The ID of pickup.
+     * @param id     The ID of pickup.
      * @param params Map of parameters.
      * @return Pickup object.
      * @throws EasyPostException when the request fails.
      */
     public Pickup cancel(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s/cancel", Utilities.instanceURL(Pickup.class, id));
+        String url = String.format("%s/cancel", InternalUtilities.instanceURL(Pickup.class, id));
 
         return Requestor.request(RequestMethod.POST, url, params, Pickup.class, client);
     }

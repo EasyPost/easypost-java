@@ -5,7 +5,7 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Insurance;
 import com.easypost.model.InsuranceCollection;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class InsuranceService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("insurance", params);
 
-        return Requestor.request(RequestMethod.POST, Utilities.classURL(Insurance.class), wrappedParams,
+        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Insurance.class), wrappedParams,
                 Insurance.class, client);
     }
 
@@ -45,8 +45,8 @@ public class InsuranceService {
      * @throws EasyPostException when the request fails.
      */
     public Insurance retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.instanceURL(Insurance.class, id), null, Insurance.class,
-                client);
+        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Insurance.class, id), null,
+                Insurance.class, client);
     }
 
     /**
@@ -58,7 +58,7 @@ public class InsuranceService {
      */
     public InsuranceCollection all(final Map<String, Object> params)
             throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.classURL(Insurance.class),
+        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(Insurance.class),
                 params, InsuranceCollection.class, client);
     }
 }

@@ -7,7 +7,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.CustomsInfo;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 public class CustomsInfoService {
     private final EasyPostClient client;
@@ -32,7 +32,7 @@ public class CustomsInfoService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("customs_info", params);
 
-        return Requestor.request(RequestMethod.POST, Utilities.classURL(CustomsInfo.class),
+        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(CustomsInfo.class),
                 wrappedParams, CustomsInfo.class, client);
     }
 
@@ -45,6 +45,6 @@ public class CustomsInfoService {
      */
     public CustomsInfo retrieve(final String id) throws EasyPostException {
         return Requestor.request(RequestMethod.GET,
-                Utilities.instanceURL(CustomsInfo.class, id), null, CustomsInfo.class, client);
+                InternalUtilities.instanceURL(CustomsInfo.class, id), null, CustomsInfo.class, client);
     }
 }

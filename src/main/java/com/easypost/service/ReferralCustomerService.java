@@ -11,7 +11,7 @@ import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.ReferralCustomer;
 import com.easypost.model.ReferralCustomerCollection;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -169,7 +169,7 @@ public class ReferralCustomerService {
         params.put("exp_year", String.valueOf(expirationYear));
         params.put("cvc", cvc);
 
-        String encodedURL = Utilities.getEncodedURL(params, "card");
+        String encodedURL = InternalUtilities.getEncodedURL(params, "card");
         URL stripeUrl = new URL("https://api.stripe.com/v1/tokens?" + encodedURL);
 
         HttpURLConnection conn;

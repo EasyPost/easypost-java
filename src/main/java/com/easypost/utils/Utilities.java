@@ -1,14 +1,18 @@
 package com.easypost.utils;
 
 import com.easypost.Constants;
-import com.easypost.exception.API.EncodingError;
+import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
+import com.easypost.exception.General.SignatureVerificationError;
+import com.easypost.model.Event;
 import com.easypost.model.Rate;
-
-import java.net.URLEncoder;
+import com.easypost.model.SmartRate;
+import com.easypost.model.SmartrateAccuracy;
 
 import java.util.List;
 import java.util.Map;
+import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 
 public abstract class Utilities {
     /**
@@ -52,79 +56,93 @@ public abstract class Utilities {
     }
 
     /**
-     * Create Encoded URL from a Map.
+     * Validate a webhook by comparing the HMAC signature header sent from EasyPost
+     * to your shared secret.
+     * If the signatures do not match, an error will be raised signifying
+     * the webhook either did not originate from EasyPost or the secrets do not
+     * match.
+     * If the signatures do match, the `event_body` will be returned as JSON.
      *
-     * @param params    Map of parameters to be encoded.
-     * @param parentKey Parent key in the encoded URL.
-     * @return Encoded URL for Stripe API call.
-     * @throws EncodingError when the URL encoding fails.
+     * @param eventBody     Data to validate
+     * @param headers       Headers received from the webhook
+     * @param webhookSecret Shared secret to use in validation
+     * @return JSON string of the event body if the signatures match, otherwise an
+     *         error will be raised.
+     * @throws EasyPostException when the request fails.
      */
-    public static String getEncodedURL(Map<String, String> params, String parentKey) throws EncodingError {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
+    public static Event validateWebhook(byte[] eventBody, Map<String, Object> headers, String webhookSecret)
+            throws EasyPostException {
 
+        String providedSignature = null;
         try {
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                if (first) {
-                    first = false;
-                } else {
-                    result.append("&");
-                }
+            providedSignature = headers.get("X-Hmac-Signature").toString();
+        } catch (NullPointerException ignored) { // catch error raised if header key doesn't exist
+        }
 
-                result.append(URLEncoder.encode(parentKey + "[" + entry.getKey() + "]", "UTF-8"));
-                result.append("=");
-                result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        if (providedSignature != null) {
+            String calculatedDigest = Cryptography.toHMACSHA256HexDigest(eventBody, webhookSecret,
+                    Normalizer.Form.NFKD);
+            String calculatedSignature = "hmac-sha256-hex=" + calculatedDigest;
+
+            if (Cryptography.signaturesMatch(providedSignature, calculatedSignature)) {
+                // Serialize data into a JSON string, then into an Event object
+                String json = new String(eventBody, StandardCharsets.UTF_8);
+                return Constants.Http.GSON.fromJson(json, Event.class);
+            } else {
+                throw new SignatureVerificationError(Constants.ErrorMessages.WEBHOOK_DOES_NOT_MATCH);
             }
-        } catch (Exception e) {
-            throw new EncodingError("Something went wrong during the URL encoding.");
-        }
-
-        return result.toString();
-    }
-
-    /**
-     * Get the URL for the instance object.
-     * 
-     * @param clazz The class of the instance object.
-     * @param id    The id of the object.
-     * @return The string of instance object name and its id.
-     */
-    public static String instanceURL(final Class<?> clazz, final String id) {
-        return String.format("%s/%s", classURL(clazz), id);
-    }
-
-    /**
-     * Get the URL for the class.
-     *
-     * @param clazz The class of the URL.
-     * @return The string of the class name.
-     */
-    public static String classURL(final Class<?> clazz) {
-        String singleURL = singleClassURL(clazz);
-        if (singleURL.charAt(singleURL.length() - 1) == 's' || singleURL.charAt(singleURL.length() - 1) == 'h') {
-            return String.format("%ses", singleClassURL(clazz));
         } else {
-            return String.format("%ss", singleClassURL(clazz));
+            throw new SignatureVerificationError(Constants.ErrorMessages.INVALID_WEBHOOK_SIGNATURE);
         }
     }
 
     /**
-     * Get the URL for this class with the API base url.
+     * Get the lowest Smartrate from a list of Smartrates.
      *
-     * @param clazz The class name.
-     * @return String that has API base and class name.
+     * @param smartrates       List of Smartrates to filter from.
+     * @param deliveryDay      Delivery days restriction to use when filtering.
+     * @param deliveryAccuracy Delivery days accuracy restriction to use when
+     *                         filtering.
+     * @return lowest Smartrate object
+     * @throws EasyPostException when the request fails.
+     * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)}
+     *             instead.
+     *             Deprecated: v5.5.0 - v7.0.0
      */
-    private static String singleClassURL(final Class<?> clazz) {
-        return String.format("%s/%s", "%s/%s", className(clazz));
+    @Deprecated
+    public static SmartRate getLowestSmartRate(final List<SmartRate> smartrates, int deliveryDay,
+            String deliveryAccuracy) throws EasyPostException {
+        return findLowestSmartrate(smartrates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
     }
 
     /**
-     * Get the class name from the given parameter.
+     * Find the lowest Smartrate from a list of Smartrates.
      *
-     * @param clazz The class name.
-     * @return String of class name.
+     * @param smartrates       List of Smartrates to filter from.
+     * @param deliveryDay      Delivery days restriction to use when filtering.
+     * @param deliveryAccuracy Delivery days accuracy restriction to use when
+     *                         filtering.
+     * @return lowest Smartrate object
+     * @throws EasyPostException when the request fails.
      */
-    private static String className(final Class<?> clazz) {
-        return clazz.getSimpleName().replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase().replace("$", "");
+    public static SmartRate findLowestSmartrate(final List<SmartRate> smartrates, int deliveryDay,
+            SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
+        SmartRate lowestSmartrate = null;
+
+        for (SmartRate rate : smartrates) {
+            int smartrateDeliveryDay = rate.getTimeInTransit().getBySmartrateAccuracy(deliveryAccuracy);
+
+            if (smartrateDeliveryDay > deliveryDay) {
+                continue;
+            } else if (lowestSmartrate == null || rate.getRate() < lowestSmartrate.getRate()) {
+                lowestSmartrate = rate;
+            }
+        }
+
+        if (lowestSmartrate == null) {
+            throw new FilteringError(String.format(Constants.ErrorMessages.NO_OBJECT_FOUND, "rate"));
+        }
+
+        return lowestSmartrate;
     }
 }

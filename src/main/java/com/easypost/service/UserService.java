@@ -14,7 +14,7 @@ import com.easypost.model.ApiKey;
 import com.easypost.model.ApiKeys;
 import com.easypost.model.Brand;
 import com.easypost.model.User;
-import com.easypost.utils.Utilities;
+import com.easypost.utils.InternalUtilities;
 
 public class UserService {
     private final EasyPostClient client;
@@ -36,7 +36,8 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public User retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.instanceURL(User.class, id), null, User.class, client);
+        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(User.class, id), null, User.class,
+                client);
     }
 
     /**
@@ -46,7 +47,7 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public User retrieveMe() throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, Utilities.classURL(User.class), null, User.class, client);
+        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(User.class), null, User.class, client);
     }
 
     /**
@@ -60,7 +61,8 @@ public class UserService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
-        return Requestor.request(RequestMethod.POST, Utilities.classURL(User.class), wrappedParams, User.class, client);
+        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(User.class), wrappedParams, User.class,
+                client);
     }
 
     /**
@@ -76,7 +78,7 @@ public class UserService {
         wrappedParams.put("user", params);
 
         return Requestor.request(RequestMethod.PUT,
-                Utilities.instanceURL(User.class, id), wrappedParams, User.class, client);
+                InternalUtilities.instanceURL(User.class, id), wrappedParams, User.class, client);
     }
 
     /**
@@ -86,7 +88,7 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String id) throws EasyPostException {
-        Requestor.request(RequestMethod.DELETE, Utilities.instanceURL(User.class, id),
+        Requestor.request(RequestMethod.DELETE, InternalUtilities.instanceURL(User.class, id),
                 null, User.class, client);
     }
 
@@ -122,7 +124,7 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public Brand updateBrand(final String id, final Map<String, Object> params) throws EasyPostException {
-        String updateBrandUrl = String.format("%s/brand", Utilities.instanceURL(User.class, id));
+        String updateBrandUrl = String.format("%s/brand", InternalUtilities.instanceURL(User.class, id));
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("brand", params);
 
