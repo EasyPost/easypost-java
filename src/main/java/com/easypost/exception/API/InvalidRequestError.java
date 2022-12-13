@@ -3,9 +3,9 @@ package com.easypost.exception.API;
 import java.util.List;
 
 import com.easypost.model.Error;
-import com.easypost.exception.EasyPostException;
+import com.easypost.exception.APIException;
 
-public class InvalidRequestError extends EasyPostException {
+public class InvalidRequestError extends APIException {
     /**
      * InvalidRequestError constructor.
      *

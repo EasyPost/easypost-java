@@ -1,8 +1,8 @@
 package com.easypost.exception.API;
 
-import com.easypost.exception.EasyPostException;
+import com.easypost.exception.APIException;
 
-public class HttpError extends EasyPostException {
+public class HttpError extends APIException {
     /**
      * HttpError constructor.
      *

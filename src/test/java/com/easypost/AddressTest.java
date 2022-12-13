@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.API.InvalidRequestError;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
 
@@ -203,7 +204,7 @@ public final class AddressTest {
     @Test
     public void testInvalidAddressCreation() throws EasyPostException {
         vcr.setUpTest("error_address_creation");
-        EasyPostException exception = assertThrows(EasyPostException.class,
+        InvalidRequestError exception = assertThrows(InvalidRequestError.class,
                 () -> vcr.client.address.createAndVerify(null));
 
         assertEquals("PARAMETER.REQUIRED", exception.getCode());

@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.API.InvalidRequestError;
 import com.easypost.model.CarrierAccount;
 import com.easypost.model.CarrierType;
 import org.junit.jupiter.api.AfterEach;
@@ -81,7 +82,7 @@ public final class CarrierAccountTest {
         try {
             CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);
             testCarrierAccountId = carrierAccount.getId();  // clean up after test, should never get here
-        } catch (EasyPostException e) {
+        } catch (InvalidRequestError e) {
             // We're sending bad data to the API, so we expect an error
             assertEquals(422, e.getStatusCode());
             // We expect one of the sub-errors to be regarding a missing field

@@ -1,5 +1,6 @@
 package com.easypost;
 
+import com.easypost.exception.APIException;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.RedirectError;
 import com.easypost.exception.API.ServiceUnavailableError;
@@ -49,7 +50,7 @@ public final class ErrorTest extends Requestor {
     public void testError() throws EasyPostException {
         vcr.setUpTest("error");
         
-        EasyPostException exception = assertThrows(InvalidRequestError.class, () -> vcr.client.shipment.create(null));
+        APIException exception = assertThrows(InvalidRequestError.class, () -> vcr.client.shipment.create(null));
 
         assertEquals(422, exception.getStatusCode());
         assertEquals("PARAMETER.REQUIRED", exception.getCode());
@@ -90,7 +91,7 @@ public final class ErrorTest extends Requestor {
         }};
 
         for (Map.Entry<Integer, Class<?>> entry: apiErrorsMap.entrySet()) {
-            EasyPostException exception = assertThrows(EasyPostException.class,
+            APIException exception = assertThrows(APIException.class,
                 () -> handleAPIError("{}", entry.getKey()));
 
             assertEquals(Constants.ErrorMessages.API_DID_NOT_RETURN_ERROR_DETAILS, exception.getMessage());
