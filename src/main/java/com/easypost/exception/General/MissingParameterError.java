@@ -12,14 +12,4 @@ public class MissingParameterError extends EasyPostException {
     public MissingParameterError(final String parameterName) {
         super(String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, parameterName));
     }
-
-    /**
-     * MissingParameterError constructor with nested exception.
-     *
-     * @param parameterName the name of the invalid parameter
-     * @param e the nested exception
-     */
-    public MissingParameterError(final String parameterName, Throwable e) {
-        super(String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, parameterName), e);
-    }
 }

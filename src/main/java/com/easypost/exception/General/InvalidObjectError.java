@@ -11,14 +11,4 @@ public class InvalidObjectError extends EasyPostException {
     public InvalidObjectError(final String message) {
         super(message);
     }
-
-    /**
-     * InvalidObjectError constructor with nested exception.
-     *
-     * @param message the exception message
-     * @param e the nested exception
-     */
-    public InvalidObjectError(final String message, Throwable e) {
-        super(message, e);
-    }
 }

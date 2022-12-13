@@ -12,14 +12,4 @@ public class InvalidParameterError extends EasyPostException{
     public InvalidParameterError(final String parameterName) {
         super(String.format(Constants.ErrorMessages.INVALID_PARAMETER, parameterName));
     }
-
-    /**
-     * InvalidParameterError constructor with nested exception.
-     *
-     * @param parameterName the name of the invalid parameter
-     * @param e the nested exception
-     */
-    public InvalidParameterError(final String parameterName, Throwable e) {
-        super(String.format(Constants.ErrorMessages.INVALID_PARAMETER, parameterName), e);
-    }
 }

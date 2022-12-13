@@ -1,8 +1,8 @@
 package com.easypost.exception.API;
 
-import com.easypost.exception.EasyPostException;
+import com.easypost.exception.APIException;
 
-public class ExternalApiError extends EasyPostException {
+public class ExternalApiError extends APIException {
     /**
      * ExternalApiError constructor.
      *
