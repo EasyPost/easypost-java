@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1671127897,
+    "request": {
+      "body": "{\n  \"payment_method\": {\n    \"stripe_customer_id\": \"cus_123\",\n    \"payment_method_reference\": \"ba_123\",\n    \"priority\": \"PRIMARY\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/beta/referral_customers/payment_method"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"BILLING.INVALID_PAYMENT_GATEWAY_REFERENCE\",\n    \"message\": \"Invalid Payment Gateway Reference.\",\n    \"errors\": []\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 422 Unprocessable Entity"
+        ],
+        "content-length": [
+          "121"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb2nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "93788120639b6359e799dd8500277c57"
+        ],
+        "x-proxied": [
+          "extlb1nuq 29913d444b",
+          "intlb1nuq 29913d444b"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.067577"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202212141856-b2c38022ed-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 422,
+        "message": "Unprocessable Entity"
+      },
+      "uri": "https://api.easypost.com/beta/referral_customers/payment_method"
+    },
+    "duration": 472
+  }
+]

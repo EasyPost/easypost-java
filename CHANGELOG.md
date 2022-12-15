@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Next Release
+
+- [ADDED] Adds new beta billing functionality for ReferralCustomer users
+  - `addPaymentMethod` can add a pre-existing Stripe bank account or credit card to your EasyPost account
+  - `refundByAmount` refunds your wallet by a dollar amount
+  - `refundByPaymentLog` refunds you wallet by a PaymentLog ID
+
 ## v6.0.0 (2023-01-05)
 
 Includes all the changes from `v6.0.0-rc1` listed below in addition to the following:

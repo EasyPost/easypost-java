@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1672939233,
+    "request": {
+      "body": "{\n  \"refund_amount_subunits\": 2000.0\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/beta/referral_customers/refunds"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"TRANSACTION.AMOUNT_INVALID\",\n    \"message\": \"Invalid currency specified: .\",\n    \"errors\": []\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 422 Unprocessable Entity"
+        ],
+        "content-length": [
+          "101"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb12nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "1768feed63b706e1e7873020001825b0"
+        ],
+        "x-proxied": [
+          "extlb2nuq 29913d444b",
+          "intlb1nuq 29913d444b"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.033584"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202301050220-7bf729a59b-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 422,
+        "message": "Unprocessable Entity"
+      },
+      "uri": "https://api.easypost.com/beta/referral_customers/refunds"
+    },
+    "duration": 440
+  }
+]
