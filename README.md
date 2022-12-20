@@ -1,8 +1,8 @@
 # EasyPost Java Client Library
 
 [![CI](https://github.com/EasyPost/easypost-java/workflows/CI/badge.svg)](https://github.com/EasyPost/easypost-java/actions?query=workflow%3ACI)
-[![Maven Central](https://img.shields.io/maven-central/v/com.easypost/easypost-api-client?label=Maven%20Central)](https://search.maven.org/artifact/com.easypost/easypost-api-client)
 [![Coverage Status](https://coveralls.io/repos/github/EasyPost/easypost-java/badge.svg?branch=master)](https://coveralls.io/github/EasyPost/easypost-java?branch=master)
+[![Maven Central](https://img.shields.io/maven-central/v/com.easypost/easypost-api-client?label=Maven%20Central)](https://central.sonatype.dev/search?q=easypost-api-client)
 
 EasyPost, the simple shipping solution. You can sign up for an account at <https://easypost.com>.
 
