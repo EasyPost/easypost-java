@@ -10,12 +10,12 @@ import com.easypost.easyvcr.Mode;
 import com.easypost.easyvcr.TimeFrame;
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.service.EasyPostClient;
+import com.google.common.collect.ImmutableList;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class TestUtils {
@@ -28,37 +28,20 @@ public abstract class TestUtils {
 
     private static final String API_KEY_FAILED_TO_PULL = "couldNotPullApiKey";
     private static final String CASSETTES_PATH = "src/test/cassettes";
-    private static final java.util.List<String> HEADER_CENSORS = new ArrayList<String>() {
-        {
-            add("Authorization");
-            add("User-Agent");
-        }
-    };
-    private static final List<String> QUERY_CENSORS = new ArrayList<String>() {
-        {
-            add("card[cvc]");
-            add("card[number]");
-        }
-    };
-    private static final List<String> BODY_CENSORS = new ArrayList<String>() {
-        {
-            add("api_keys");
-            add("client_ip");
-            add("credentials");
-            add("key");
-            add("keys");
-            add("phone_number");
-            add("phone");
-            add("test_credentials");
-        }
-    };
-    private static final List<CensorElement> BODY_ELEMENTS_TO_IGNORE_ON_MATCH = new ArrayList<CensorElement>() {
-        {
-            // Timezone difference between machines causing failure on replay
-            add(new CensorElement("createdAt", false));
-            add(new CensorElement("updatedAt", false));
-        }
-    };
+    private static final List<String> HEADER_CENSORS = ImmutableList.of("Authorization", "User-Agent");
+    private static final List<String> QUERY_CENSORS = ImmutableList.of("card[cvc]", "card[number]");
+    private static final List<String> BODY_CENSORS = ImmutableList.of(
+            "api_keys",
+            "client_ip",
+            "credentials",
+            "key",
+            "keys",
+            "phone_number",
+            "phone",
+            "test_credentials");
+    private static final List<CensorElement> BODY_ELEMENTS_TO_IGNORE_ON_MATCH = ImmutableList.of(
+            new CensorElement("createdAt", false),
+            new CensorElement("updatedAt", false));
 
     /**
      * Get the directory where the program is currently executing.
@@ -144,9 +127,10 @@ public abstract class TestUtils {
         }
 
         /**
-        * Constructor.
+         * Constructor.
+         * 
          * @throws MissingParameterError
-        */
+         */
         public VCR() throws MissingParameterError {
             this(null, ApiKey.TEST);
         }
@@ -238,7 +222,7 @@ public abstract class TestUtils {
         public void setUpTest(String cassetteName, String overrideApiKey) throws MissingParameterError {
             // override api key if needed
             client = new EasyPostClient(overrideApiKey.isEmpty() ? this.apiKey : overrideApiKey);
-            
+
             // set up cassette
             Cassette cassette = new Cassette(testCassettesFolder, cassetteName);
 

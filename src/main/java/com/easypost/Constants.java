@@ -5,11 +5,11 @@ import com.easypost.model.Error;
 import com.easypost.model.ErrorDeserializer;
 import com.easypost.model.SmartrateCollection;
 import com.easypost.model.SmartrateCollectionDeserializer;
+import com.google.common.collect.ImmutableList;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,21 +18,21 @@ public abstract class Constants {
     public static final String EASYPOST_SUPPORT_EMAIL = "support@easypost.com";
 
     public abstract static class ErrorMessages {
-        public static final String EXTERNAL_API_CALL_FAILED =
-                "Could not send card details to %s, please try again later";
+        public static final String EXTERNAL_API_CALL_FAILED = "Could not send card details to %s,"
+                + " please try again later";
         public static final String ENCODED_ERROR = "Encode error for %s";
         public static final String INVALID_API_KEY_TYPE = "Invalid API key type.";
         public static final String INVALID_PARAMETER = "Invalid parameter: %s.";
-        public static final String INVALID_PAYMENT =
-                "The chosen payment method is not a credit card. Please try again.";
+        public static final String INVALID_PAYMENT = "The chosen payment method is not a credit card. "
+                + "Please try again.";
         public static final String INVALID_WEBHOOK_SIGNATURE = "Webhook does not contain a valid HMAC signature.";
         public static final String MISSING_REQUIRED_PARAMETER = "Missing required parameter: %s.";
         public static final String NO_OBJECT_FOUND = "No %s found.";
-        public static final String NO_PAYMENT_METHODS =
-                "No payment methods are set up. Please add a payment method and try again.";
+        public static final String NO_PAYMENT_METHODS = "No payment methods are set up. Please add a payment"
+                + " method and try again.";
         public static final String API_DID_NOT_RETURN_ERROR_DETAILS = "API did not return error details.";
-        public static final String WEBHOOK_DOES_NOT_MATCH =
-                "Webhook received did not originate from EasyPost or had a webhook secret mismatch.";
+        public static final String WEBHOOK_DOES_NOT_MATCH = "Webhook received did not originate from EasyPost or had a"
+                + " webhook secret mismatch.";
     }
 
     public abstract static class ErrorCodes {
@@ -52,10 +52,8 @@ public abstract class Constants {
     }
 
     public abstract static class CarrierAccountTypes {
-        public static final List<String> CARRIER_TYPES_WITH_CUSTOM_WORKFLOW = new ArrayList<String>() {{
-            add("FedexAccount");
-            add("UpsAccount");
-        }};
+        public static final List<String> CARRIER_TYPES_WITH_CUSTOM_WORKFLOW = ImmutableList.of("FedexAccount",
+                "UpsAccount");
     }
 
     public abstract static class Http {
@@ -64,11 +62,11 @@ public abstract class Constants {
         public static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
         public static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
 
-        public static final Gson GSON =
-                new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                        .registerTypeAdapter(HashMap.class, new HashMapSerializer())
-                        .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer())
-                        .registerTypeAdapter(Error.class, new ErrorDeserializer()).create();
+        public static final Gson GSON = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .registerTypeAdapter(HashMap.class, new HashMapSerializer())
+                .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer())
+                .registerTypeAdapter(Error.class, new ErrorDeserializer()).create();
         public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
     }

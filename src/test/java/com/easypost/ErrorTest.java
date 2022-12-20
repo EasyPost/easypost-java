@@ -66,29 +66,28 @@ public final class ErrorTest extends Requestor {
      */
     @Test
     public void testKnownApiException() throws EasyPostException {
-        HashMap<Integer, Class<?>> apiErrorsMap = new HashMap<Integer, Class<?>>() {{
-            put(300, RedirectError.class);
-            put(301, RedirectError.class);
-            put(302, RedirectError.class);
-            put(303, RedirectError.class);
-            put(304, RedirectError.class);
-            put(305, RedirectError.class);
-            put(306, RedirectError.class);
-            put(307, RedirectError.class);
-            put(308, RedirectError.class);
-            put(401, UnauthorizedError.class);
-            put(402, PaymentError.class);
-            put(403, ForbiddenError.class);
-            put(404, NotFoundError.class);
-            put(405, MethodNotAllowedError.class);
-            put(408, TimeoutError.class);
-            put(422, InvalidRequestError.class);
-            put(429, RateLimitError.class);
-            put(444, UnknownApiError.class);
-            put(500, InternalServerError.class);
-            put(503, ServiceUnavailableError.class);
-            put(504, GatewayTimeoutError.class);
-        }};
+        HashMap<Integer, Class<?>> apiErrorsMap = new HashMap<Integer, Class<?>>();
+            apiErrorsMap.put(300, RedirectError.class);
+            apiErrorsMap.put(301, RedirectError.class);
+            apiErrorsMap.put(302, RedirectError.class);
+            apiErrorsMap.put(303, RedirectError.class);
+            apiErrorsMap.put(304, RedirectError.class);
+            apiErrorsMap.put(305, RedirectError.class);
+            apiErrorsMap.put(306, RedirectError.class);
+            apiErrorsMap.put(307, RedirectError.class);
+            apiErrorsMap.put(308, RedirectError.class);
+            apiErrorsMap.put(401, UnauthorizedError.class);
+            apiErrorsMap.put(402, PaymentError.class);
+            apiErrorsMap.put(403, ForbiddenError.class);
+            apiErrorsMap.put(404, NotFoundError.class);
+            apiErrorsMap.put(405, MethodNotAllowedError.class);
+            apiErrorsMap.put(408, TimeoutError.class);
+            apiErrorsMap.put(422, InvalidRequestError.class);
+            apiErrorsMap.put(429, RateLimitError.class);
+            apiErrorsMap.put(444, UnknownApiError.class);
+            apiErrorsMap.put(500, InternalServerError.class);
+            apiErrorsMap.put(503, ServiceUnavailableError.class);
+            apiErrorsMap.put(504, GatewayTimeoutError.class);
 
         for (Map.Entry<Integer, Class<?>> entry: apiErrorsMap.entrySet()) {
             APIException exception = assertThrows(APIException.class,
