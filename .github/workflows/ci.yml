@@ -62,7 +62,7 @@ jobs:
           checkstyle_config: easypost_java_style.xml
           tool_name: "style_enforcer"
       - name: Run Error Prone
-        run: run-error-prone.sh
+        run: ./run-error-prone.sh
   security:
     runs-on: ubuntu-20.04
     steps:
