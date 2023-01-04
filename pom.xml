@@ -208,7 +208,7 @@
                 <configuration>
                     <!-- <source>11</source>
                     <target>11</target> -->
-                    <release>8</release>
+                    <release>9</release>
                     <encoding>UTF-8</encoding>
                     <fork>true</fork>
                     <compilerArgs>
