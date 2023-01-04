@@ -210,9 +210,6 @@
                     <compilerArgs>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-Xplugin:ErrorProne</arg>
-                      </compilerArgs>
-                    <fork>true</fork>
-                    <compilerArgs>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-Xplugin:ErrorProne</arg>
                         <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
@@ -226,6 +223,7 @@
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
                       </compilerArgs>
+                    <!-- <fork>true</fork> -->
                     <annotationProcessorPaths>
                         <path>
                             <groupId>com.google.errorprone</groupId>
