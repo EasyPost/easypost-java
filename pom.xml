@@ -208,6 +208,9 @@
                     <target>8</target>
                     <encoding>UTF-8</encoding>
                     <fork>true</fork>
+                    <compilerArgs combine.children="append">
+                        <arg>-J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${javac.version}/javac-${javac.version}.jar</arg>
+                    </compilerArgs>
                     <compilerArgs>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-Xplugin:ErrorProne</arg>

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        javaversion: [ "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19" ]
+        javaversion: [ "8", 9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19" ]
     steps:
       - uses: actions/checkout@v3
       - name: Load Maven dependencies cache
