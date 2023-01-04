@@ -202,11 +202,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.9.0</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
                     <encoding>UTF-8</encoding>
+                    <fork>true</fork>
                     <compilerArgs>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-Xplugin:ErrorProne</arg>
@@ -223,7 +224,6 @@
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
                       </compilerArgs>
-                    <!-- <fork>true</fork> -->
                     <annotationProcessorPaths>
                         <path>
                             <groupId>com.google.errorprone</groupId>
