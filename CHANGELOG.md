@@ -1,18 +1,20 @@
 # CHANGELOG
 
-## Next Release
+## v6.0.0 (2023-01-05)
 
-- [CHANGED] All constants are now defined in the top-level `Constants` class (`com.easypost.Constants`).
-  - Users who are utilizing the constants for exception message parsing should account for the new namespace.
-- [ADDED] Support for creating/registering carrier accounts that require custom workflows (e.g. FedEx, UPS)
-- [CHANGED] Swap the parameters for below functions, to make `id` in the first argument
-  - Shipment.generateForm()
-  - EndShipper.update()
-  - CarrierAccount.update()
-- [FIXED] Typo, `ServiceUnavailablError` is now `ServiceUnavailableError`
-- [FIXED] Typo: `Smartrate` is now `SmartRate`, `apikeys` is now `apiKey`, `scanform` is now `scanForm`
-- [FIXED] Move `validateWebook`, `findLowestSmartrate`, and `getLowestSmartRate` from Services to Utilities since it does not required an EasyPost client object
-- [ADDED] Add a root level `APIException` class for all HTTP exceptions
+Includes all the changes from `v6.0.0-rc1` listed below in addition to the following:
+
+- All constants are now defined in the top-level `Constants` class (`com.easypost.Constants`)
+  - Users who are utilizing the constants for exception message parsing should account for the new namespace
+- Added support for creating/registering carrier accounts that require custom workflows (e.g. FedEx, UPS)
+- Swapped the parameters for the following functions, making `id` the first argument
+  - `Shipment.generateForm()`
+  - `EndShipper.update()`
+  - `CarrierAccount.update()`
+- Fixed a typo, `ServiceUnavailablError` is now `ServiceUnavailableError`
+- Fixed a typo: `Smartrate` is now `SmartRate`, `apikeys` is now `apiKey`, `scanform` is now `scanForm`
+- Moved `validateWebook`, `findLowestSmartrate`, and `getLowestSmartRate` from Services to Utilities since it does not required an EasyPost client object
+- Added a root level `APIException` class for all HTTP exceptions
 
 ## v6.0.0-rc1 (2022-11-30)
 
