@@ -38,7 +38,8 @@ public abstract class TestUtils {
             "keys",
             "phone_number",
             "phone",
-            "test_credentials");
+            "test_credentials"
+            );
     private static final List<CensorElement> BODY_ELEMENTS_TO_IGNORE_ON_MATCH = ImmutableList.of(
             new CensorElement("createdAt", false),
             new CensorElement("updatedAt", false));
