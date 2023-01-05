@@ -51,7 +51,8 @@ public class BetaReferralCustomerTest {
 
         assertEquals("TRANSACTION.AMOUNT_INVALID", exception.getCode());
         assertEquals(422, exception.getStatusCode());
-        assertEquals("Invalid currency specified: .", exception.getMessage());
+        assertEquals("Refund amount is invalid. Please use a valid amount or escalate to finance.",
+                exception.getMessage());
     }
 
     /**

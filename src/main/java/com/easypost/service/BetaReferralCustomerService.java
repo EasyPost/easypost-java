@@ -66,7 +66,7 @@ public class BetaReferralCustomerService {
      */
     public BetaPaymentRefund refundByAmount(int refundAmount) throws EasyPostException {
         HashMap<String, Object> params = new HashMap<>();
-        params.put("refund_amount_subunits", refundAmount);
+        params.put("refund_amount", refundAmount);
 
         return Requestor.request(RequestMethod.POST, "%s/beta/referral_customers/refunds", params,
                 BetaPaymentRefund.class, client);
