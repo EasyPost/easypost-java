@@ -37,12 +37,6 @@ jobs:
           java-version: ${{ matrix.javaversion }}
       - name: Run test with Java ${{ matrix.javaversion }}
         run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test
-      - name: Load Rust cache
-        if: github.ref == 'refs/heads/master'
-        uses: Swatinem/rust-cache@v2
-      - name: Install grcov
-        if: github.ref == 'refs/heads/master'
-        run: cargo install grcov
   coverage:
     runs-on: ubuntu-20.04
     steps:
