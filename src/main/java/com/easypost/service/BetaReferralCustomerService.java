@@ -58,7 +58,7 @@ public class BetaReferralCustomerService {
     }
 
     /**
-     * Refund by amount for a most recent payment.
+     * Refund by amount for a recent payment.
      *
      * @param refundAmount Amount to be refunded by cents.
      * @return BetaPaymentRefund object.
@@ -73,7 +73,7 @@ public class BetaReferralCustomerService {
     }
 
     /**
-     * Refund a payment by a paymeng log ID.
+     * Refund a payment by a payment log ID.
      *
      * @param paymentLogId ID of the payment log.
      * @return BetaPaymentRefund object.
