@@ -4,6 +4,8 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.InvalidRequestError;
 import com.easypost.model.CarrierAccount;
 import com.easypost.model.CarrierType;
+import com.google.common.collect.ImmutableMap;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -75,9 +77,7 @@ public final class CarrierAccountTest {
 
         Map<String, Object> data = new HashMap<>();
         data.put("type", "FedexAccount");
-        data.put("registration_data", new HashMap<String, Object>() {{
-            put("some", "data");
-        }});
+        data.put("registration_data", ImmutableMap.of("some", "data"));
 
         try {
             CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);

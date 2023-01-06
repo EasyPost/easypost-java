@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.fixtures.FixtureStructure;
+import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -10,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -206,16 +206,15 @@ public abstract class Fixtures {
      * @return The default one-call-buy shipment
      */
     public static HashMap<String, Object> oneCallBuyShipment() {
-        return new HashMap<String, Object>() {{
-            put("to_address", caAddress1());
-            put("from_address", caAddress2());
-            put("parcel", basicParcel());
-            put("service", uspsService());
-            put("carrier_accounts", new ArrayList<String>() {{
-                add(uspsCarrierAccountID());
-            }});
-            put("carrier", usps());
-        }};
+        HashMap<String, Object> values = new HashMap<>();
+        values.put("to_address", caAddress1());
+        values.put("from_address", caAddress2());
+        values.put("parcel", basicParcel());
+        values.put("service", uspsService());
+        values.put("carrier_accounts", ImmutableList.of(uspsCarrierAccountID()));
+        values.put("carrier", usps());
+
+        return values;
     }
 
     /**

@@ -55,6 +55,6 @@ scan:
 
 ## test - Test the project
 test:
-	mvn --batch-mode install -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true
+	mvn surefire:test
 
 .PHONY: help build clean coverage docs install-checkstyle install lint publish publish-dry release scan scan-strict test

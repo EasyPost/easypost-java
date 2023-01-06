@@ -56,7 +56,7 @@ public abstract class Cryptography {
      * @return Hex digest of data.
      */
     public static String toHMACSHA256HexDigest(byte @NotNull [] data, @NotNull String key,
-                                               @Nullable Normalizer.Form normalizationForm) {
+                                                Normalizer.@Nullable Form normalizationForm) {
         if (normalizationForm != null) {
             key = Normalizer.normalize(key, normalizationForm);
         }

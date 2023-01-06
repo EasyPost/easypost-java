@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.utils.Utilities;
+import com.google.common.collect.ImmutableMap;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Event;
 import com.easypost.model.Webhook;
@@ -156,12 +157,8 @@ public final class WebhookTest {
     @Test
     public void testValidateWebhook() throws EasyPostException {
         String webhookSecret = "sécret";
-        Map<String, Object> headers = new HashMap<String, Object>() {
-            {
-                put("X-Hmac-Signature",
-                        "hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115a46b");
-            }
-        };
+        Map<String, Object> headers = ImmutableMap.of("X-Hmac-Signature",
+        "hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115a46b");
 
         Event event = Utilities.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
 
@@ -175,11 +172,7 @@ public final class WebhookTest {
     @Test
     public void testValidateWebhookInvalidSecret() {
         String webhookSecret = "invalid_secret";
-        Map<String, Object> headers = new HashMap<String, Object>() {
-            {
-                put("X-Hmac-Signature", "some-signature");
-            }
-        };
+        Map<String, Object> headers = ImmutableMap.of("X-Hmac-Signature", "some-signature");
 
         assertThrows(EasyPostException.class, () -> {
             Utilities.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
@@ -192,11 +185,9 @@ public final class WebhookTest {
     @Test
     public void testValidateWebhookMissingSecret() {
         String webhookSecret = "123";
-        Map<String, Object> headers = new HashMap<String, Object>() {
-            {
-                put("some-header", "some-value");
-            }
-        };
+        Map<String, Object> headers = ImmutableMap.of(
+            "some-header", "some-value"
+        );
 
         assertThrows(EasyPostException.class, () -> {
             Utilities.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
