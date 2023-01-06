@@ -39,16 +39,16 @@ public class BetaReferralCustomerService {
      *
      * @param stripeCustomerId       ID of the Stripe account.
      * @param paymentMethodReference Reference of Stripe payment method.
-     * @param priority               Priority of this payment method.
+     * @param primaryOrSecondary     Primary or secondary of this payment method.
      * @return PaymentMethodObject object.
      * @throws EasyPostException
      */
     public PaymentMethodObject addPaymentMethod(String stripeCustomerId, String paymentMethodReference,
-            PaymentMethod.Priority priority) throws EasyPostException {
+            PaymentMethod.Priority primaryOrSecondary) throws EasyPostException {
         HashMap<String, Object> params = new HashMap<>();
         params.put("stripe_customer_id", stripeCustomerId);
         params.put("payment_method_reference", paymentMethodReference);
-        params.put("priority", priority);
+        params.put("priority", primaryOrSecondary);
 
         HashMap<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("payment_method", params);
