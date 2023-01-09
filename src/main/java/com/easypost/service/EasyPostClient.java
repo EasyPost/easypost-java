@@ -12,6 +12,7 @@ public class EasyPostClient {
     public final AddressService address;
     public final ApiKeyService apiKey;
     public final BatchService batch;
+    public final BetaReferralCustomerService betaReferralCustomer;
     public final BillingService billing;
     public final CarrierAccountService carrierAccount;
     public final CarrierTypeService carrierType;
@@ -114,6 +115,7 @@ public class EasyPostClient {
         this.address = new AddressService(this);
         this.apiKey = new ApiKeyService(this);
         this.batch = new BatchService(this);
+        this.betaReferralCustomer = new BetaReferralCustomerService(this);
         this.billing = new BillingService(this);
         this.carrierAccount = new CarrierAccountService(this);
         this.carrierType = new CarrierTypeService(this);
