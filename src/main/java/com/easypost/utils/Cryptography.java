@@ -1,6 +1,6 @@
 package com.easypost.utils;
 
-import org.apache.commons.codec.binary.Hex;
+import com.easypost.utils.ApachePatch.Hex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
