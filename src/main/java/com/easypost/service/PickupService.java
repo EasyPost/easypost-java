@@ -4,6 +4,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Pickup;
+import com.easypost.model.PickupCollection;
 import com.easypost.model.PickupRate;
 import com.easypost.utils.InternalUtilities;
 
@@ -20,6 +21,19 @@ public class PickupService {
      */
     PickupService(EasyPostClient client) {
         this.client = client;
+    }
+
+    /**
+     * Get a list of all Pickup objects.
+     *
+     * @param params The options for the query.
+     * @return PickupCollection object
+     * @throws EasyPostException when the request fails.
+     */
+    public PickupCollection all(final Map<String, Object> params)
+            throws EasyPostException {
+        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(Pickup.class), params,
+            PickupCollection.class, client);
     }
 
     /**

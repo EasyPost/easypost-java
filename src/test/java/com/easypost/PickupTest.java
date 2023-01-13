@@ -2,6 +2,7 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Pickup;
+import com.easypost.model.PickupCollection;
 import com.easypost.model.PickupRate;
 import com.easypost.model.Shipment;
 import org.junit.jupiter.api.BeforeAll;
@@ -45,6 +46,27 @@ public final class PickupTest {
         pickupData.put("shipment", shipment);
 
         return vcr.client.pickup.create(pickupData);
+    }
+
+    /**
+     * Test retrieving all shipments.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testAll() throws EasyPostException {
+        vcr.setUpTest("all");
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("page_size", Fixtures.pageSize());
+
+        PickupCollection pickupCollection = vcr.client.pickup.all(params);
+
+        List<Pickup> pickups = pickupCollection.getPickups();
+
+        assertTrue(pickups.size() <= Fixtures.pageSize());
+        assertNotNull(pickupCollection.getHasMore());
+        assertTrue(pickups.stream().allMatch(shipment -> shipment instanceof Pickup));
     }
 
     /**
