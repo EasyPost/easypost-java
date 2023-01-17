@@ -95,12 +95,12 @@ public final class EventTest {
 
         Map<String, Object> params = new HashMap<>();
         params.put("url", Fixtures.webhookUrl());
-
         Webhook webhook = vcr.client.webhook.create(params);
-        Map<String, Object> batchParams = new HashMap<>();
 
         List<Object> shipments = new ArrayList<>();
         shipments.add(Fixtures.basicShipment());
+
+        Map<String, Object> batchParams = new HashMap<>();
         batchParams.put("shipments", shipments);
         vcr.client.batch.create(batchParams);
 
@@ -128,20 +128,20 @@ public final class EventTest {
 
         Map<String, Object> params = new HashMap<>();
         params.put("url", Fixtures.webhookUrl());
-
         Webhook webhook = vcr.client.webhook.create(params);
-        Map<String, Object> batchParams = new HashMap<>();
 
         List<Object> shipments = new ArrayList<>();
         shipments.add(Fixtures.basicShipment());
+
+        Map<String, Object> batchParams = new HashMap<>();
         batchParams.put("shipments", shipments);
         vcr.client.batch.create(batchParams);
-
-        EventCollection events = getBasicEventCollection();
 
         if (vcr.isRecording()) {
             Thread.sleep(5000); // Wait enough time for the batch to process before buying the shipment
         }
+
+        EventCollection events = getBasicEventCollection();
 
         APIException exception = assertThrows(APIException.class,
                 () -> vcr.client.event.retrievePayload(events.getEvents().get(0).getId(),
