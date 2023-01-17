@@ -1,5 +1,6 @@
 package com.easypost.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.easypost.exception.EasyPostException;
@@ -51,13 +52,15 @@ public class EventService {
      * Retrieve all payloads.
      *
      * @param eventId The ID of event.
-     * @return PayloadCollection object
+     * @return List of Payload objects.
      * @throws EasyPostException when the request fails.
      */
-    public PayloadCollection retrieveAllPayloads(final String eventId) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET,
+    public List<Payload> retrieveAllPayloads(final String eventId) throws EasyPostException {
+        PayloadCollection payloads = Requestor.request(RequestMethod.GET,
                 String.format("%s/%s", InternalUtilities.instanceURL(Event.class, eventId), "payloads"), null,
                 PayloadCollection.class, client);
+
+        return payloads.getPayloads();
     }
 
     /**

@@ -111,7 +111,7 @@ public final class EventTest {
         EventCollection events = getBasicEventCollection();
 
         List<Event> eventsList = events.getEvents();
-        List<Payload> payloads = vcr.client.event.retrieveAllPayloads(eventsList.get(0).getId()).getPayloads();
+        List<Payload> payloads = vcr.client.event.retrieveAllPayloads(eventsList.get(0).getId());
         assertTrue(payloads.stream().allMatch(payload -> payload instanceof Payload));
         vcr.client.webhook.delete(webhook.getId());
     }
