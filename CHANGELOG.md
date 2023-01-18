@@ -1,9 +1,9 @@
 # CHANGELOG
 
-## Next Release
+## v6.2.0 (2023-01-18)
 
 - Adds `all` function to `Pickup` to retrieve all pickups
-- Adds `retrieveAllPayloads` and `retrievePayload` to retrieve all payloads or just a payload
+- Adds `retrieveAllPayloads` and `retrievePayload` to retrieve all payloads or a single event payload
 
 ## v6.1.0 (2023-01-11)
 
