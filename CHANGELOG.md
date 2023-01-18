@@ -3,6 +3,7 @@
 ## Next Release
 
 - Adds `all` function to `Pickup` to retrieve all pickups
+- Adds `retrieveAllPayloads` and `retrievePayload` to retrieve all payloads or just a payload
 
 ## v6.1.0 (2023-01-11)
 
