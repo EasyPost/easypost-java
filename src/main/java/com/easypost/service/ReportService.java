@@ -8,7 +8,6 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Report;
 import com.easypost.model.ReportCollection;
-import com.easypost.utils.InternalUtilities;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -31,16 +30,16 @@ public class ReportService {
      *
      * @param params a map of parameters.
      * @return Report object.
-     * @throws EncodingError      if the parameters cannot be encoded.
+     * @throws EncodingError         if the parameters cannot be encoded.
      * @throws MissingParameterError if required parameters are missing.
-     * @throws EasyPostException  when the request fails.
+     * @throws EasyPostException     when the request fails.
      */
     public Report create(final Map<String, Object> params) throws EasyPostException {
         if (params.containsKey("type")) {
+            String type = (String) params.get("type");
             HashMap<String, Object> paramsWithoutType = new HashMap<>(params);
             paramsWithoutType.remove("type");
-            return Requestor.request(RequestMethod.POST, reportURL((String) params.get("type")), paramsWithoutType,
-                    Report.class, client);
+            return Requestor.request(RequestMethod.POST, reportURL(type), paramsWithoutType, Report.class, client);
         } else {
             throw new MissingParameterError("type");
         }
@@ -56,7 +55,7 @@ public class ReportService {
     protected String reportURL(final String type) throws EasyPostException {
         try {
             String urlType = URLEncoder.encode(type, "UTF-8").toLowerCase();
-            return String.format("%s/%s/reports/%s/", client.getApiBase(), client.getApiVersion(), urlType);
+            return "reports/" + urlType + "/";  // Yes, the trailing backslash matters.
         } catch (java.io.UnsupportedEncodingException e) {
             throw new EncodingError(String.format(Constants.ErrorMessages.ENCODED_ERROR, "report type"), e);
         }
@@ -70,8 +69,7 @@ public class ReportService {
      * @throws EasyPostException when the request fails.
      */
     public Report retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Report.class, id), null, Report.class,
-                client);
+        return Requestor.request(RequestMethod.GET, "reports/" + id, null, Report.class, client);
     }
 
     /**

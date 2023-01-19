@@ -1,10 +1,5 @@
 package com.easypost.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
 import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.FilteringError;
@@ -14,14 +9,18 @@ import com.easypost.model.ApiKey;
 import com.easypost.model.ApiKeys;
 import com.easypost.model.Brand;
 import com.easypost.model.User;
-import com.easypost.utils.InternalUtilities;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class UserService {
     private final EasyPostClient client;
 
     /**
      * UserService constructor.
-     * 
+     *
      * @param client The client object.
      */
     UserService(EasyPostClient client) {
@@ -36,8 +35,7 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public User retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(User.class, id), null, User.class,
-                client);
+        return Requestor.request(RequestMethod.GET, "users/" + id, null, User.class, client);
     }
 
     /**
@@ -47,7 +45,7 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public User retrieveMe() throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(User.class), null, User.class, client);
+        return Requestor.request(RequestMethod.GET, "users", null, User.class, client);
     }
 
     /**
@@ -61,8 +59,7 @@ public class UserService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
-        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(User.class), wrappedParams, User.class,
-                client);
+        return Requestor.request(RequestMethod.POST, "users", wrappedParams, User.class, client);
     }
 
     /**
@@ -77,8 +74,7 @@ public class UserService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
-        return Requestor.request(RequestMethod.PUT,
-                InternalUtilities.instanceURL(User.class, id), wrappedParams, User.class, client);
+        return Requestor.request(RequestMethod.PUT, "users/" + id, wrappedParams, User.class, client);
     }
 
     /**
@@ -88,8 +84,7 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String id) throws EasyPostException {
-        Requestor.request(RequestMethod.DELETE, InternalUtilities.instanceURL(User.class, id),
-                null, User.class, client);
+        Requestor.request(RequestMethod.DELETE, "users/" + id, null, User.class, client);
     }
 
     /**
@@ -124,10 +119,9 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public Brand updateBrand(final String id, final Map<String, Object> params) throws EasyPostException {
-        String updateBrandUrl = String.format("%s/brand", InternalUtilities.instanceURL(User.class, id));
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("brand", params);
 
-        return Requestor.request(RequestMethod.PUT, updateBrandUrl, wrappedParams, Brand.class, client);
+        return Requestor.request(RequestMethod.PUT, "users/" + id + "/brand", wrappedParams, Brand.class, client);
     }
 }

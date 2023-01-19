@@ -8,21 +8,21 @@
 
 package com.easypost.http;
 
-import com.easypost.EasyPost;
 import com.easypost.Constants;
+import com.easypost.EasyPost;
 import com.easypost.exception.API.EncodingError;
-import com.easypost.exception.API.HttpError;
-import com.easypost.exception.API.JsonError;
-import com.easypost.exception.API.ServiceUnavailableError;
 import com.easypost.exception.API.ForbiddenError;
 import com.easypost.exception.API.GatewayTimeoutError;
+import com.easypost.exception.API.HttpError;
 import com.easypost.exception.API.InternalServerError;
 import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.API.JsonError;
 import com.easypost.exception.API.MethodNotAllowedError;
 import com.easypost.exception.API.NotFoundError;
 import com.easypost.exception.API.PaymentError;
 import com.easypost.exception.API.RateLimitError;
 import com.easypost.exception.API.RedirectError;
+import com.easypost.exception.API.ServiceUnavailableError;
 import com.easypost.exception.API.TimeoutError;
 import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
@@ -32,7 +32,6 @@ import com.easypost.model.Error;
 import com.easypost.service.EasyPostClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import lombok.Generated;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -406,12 +405,12 @@ public abstract class Requestor {
     /**
      * Send an HTTP request to EasyPost.
      *
-     * @param <T>    Any class.
-     * @param method The method of the API request.
-     * @param url    The URL of the API request.
-     * @param params The params of the API request.
-     * @param clazz  The class of the object for deserialization
-     * @param client The EasyPostClient object.
+     * @param <T>        Any class.
+     * @param method     The method of the API request.
+     * @param endpoint   The endpoint of the API request.
+     * @param params     The params of the API request.
+     * @param clazz      The class of the object for deserialization
+     * @param client     The EasyPostClient object.
      * @return A clazz-type object.
      * @throws HttpError               when the HTTP connection cannot be made.
      * @throws EncodingError           when the request query cannot be encoded.
@@ -430,14 +429,51 @@ public abstract class Requestor {
      * @throws GatewayTimeoutError     when the request fails due to a gateway timeout.
      * @throws UnknownApiError         when the request fails due to an unknown API error.
      */
-    public static <T> T request(final RequestMethod method, String url, final Map<String, Object> params,
+    public static <T> T request(final RequestMethod method, final String endpoint, final Map<String, Object> params,
                                 final Class<T> clazz, final EasyPostClient client)
+            throws GatewayTimeoutError, RateLimitError, InvalidRequestError, NotFoundError, TimeoutError, EncodingError,
+            UnauthorizedError, MethodNotAllowedError, InternalServerError, UnknownApiError, ServiceUnavailableError,
+            ForbiddenError, JsonError, HttpError, RedirectError, PaymentError {
+        String apiVersion = client.getApiVersion();
+        return request(method, endpoint, params, clazz, client, apiVersion);
+    }
+
+    /**
+     * Send an HTTP request to EasyPost.
+     *
+     * @param <T>        Any class.
+     * @param method     The method of the API request.
+     * @param endpoint   The endpoint of the API request.
+     * @param params     The params of the API request.
+     * @param clazz      The class of the object for deserialization
+     * @param client     The EasyPostClient object.
+     * @param apiVersion The API version to use for this request.
+     * @return A clazz-type object.
+     * @throws HttpError               when the HTTP connection cannot be made.
+     * @throws EncodingError           when the request query cannot be encoded.
+     * @throws JsonError               when the request body cannot be encoded.
+     * @throws RedirectError           when the request is redirected.
+     * @throws UnauthorizedError       when the request is unauthorized.
+     * @throws ForbiddenError          when the request is forbidden.
+     * @throws PaymentError            when the request requires payment.
+     * @throws NotFoundError           when the request endpoint is not found.
+     * @throws MethodNotAllowedError   when the request method is not allowed.
+     * @throws TimeoutError            when the request times out.
+     * @throws InvalidRequestError     when the request is invalid.
+     * @throws RateLimitError          when the request exceeds the rate limit.
+     * @throws InternalServerError     when the request fails due to an internal server error.
+     * @throws ServiceUnavailableError when the request fails due to a service unavailability.
+     * @throws GatewayTimeoutError     when the request fails due to a gateway timeout.
+     * @throws UnknownApiError         when the request fails due to an unknown API error.
+     */
+    public static <T> T request(final RequestMethod method, final String endpoint, final Map<String, Object> params,
+                                final Class<T> clazz, final EasyPostClient client, final String apiVersion)
             throws EncodingError, JsonError, RedirectError, UnauthorizedError, ForbiddenError, PaymentError,
             NotFoundError, MethodNotAllowedError, TimeoutError, InvalidRequestError, RateLimitError,
             InternalServerError, ServiceUnavailableError, GatewayTimeoutError, UnknownApiError, HttpError {
         String originalDNSCacheTTL = null;
         boolean allowedToSetTTL = true;
-        url = String.format(url, client.getApiBase(), client.getApiVersion());
+        String url = client.getApiBase() + "/" + apiVersion + "/" + endpoint;
 
         try {
             originalDNSCacheTTL = java.security.Security.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);

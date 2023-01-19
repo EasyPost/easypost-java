@@ -5,7 +5,6 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.ScanForm;
 import com.easypost.model.ScanFormCollection;
-import com.easypost.utils.InternalUtilities;
 
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class ScanformService {
 
     /**
      * ScanformService constructor.
-     * 
+     *
      * @param client The client object.
      */
     ScanformService(EasyPostClient client) {
@@ -29,8 +28,7 @@ public class ScanformService {
      * @throws EasyPostException when the request fails. when the request fails.
      */
     public ScanForm create(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(ScanForm.class), params, ScanForm.class,
-                client);
+        return Requestor.request(RequestMethod.POST, "scan_forms", params, ScanForm.class, client);
     }
 
     /**
@@ -41,8 +39,7 @@ public class ScanformService {
      * @throws EasyPostException when the request fails. when the request fails.
      */
     public ScanForm retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(ScanForm.class, id), null,
-                ScanForm.class, client);
+        return Requestor.request(RequestMethod.GET, "scan_forms/" + id, null, ScanForm.class, client);
     }
 
     /**
@@ -52,9 +49,7 @@ public class ScanformService {
      * @return ScanFormCollection object.
      * @throws EasyPostException when the request fails. when the request fails.
      */
-    public ScanFormCollection all(final Map<String, Object> params)
-            throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(ScanForm.class), params,
-                ScanFormCollection.class, client);
+    public ScanFormCollection all(final Map<String, Object> params) throws EasyPostException {
+        return Requestor.request(RequestMethod.GET, "scan_forms", params, ScanFormCollection.class, client);
     }
 }

@@ -4,7 +4,6 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.CustomsItem;
-import com.easypost.utils.InternalUtilities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,7 @@ public class CustomsItemService {
 
     /**
      * CustomsItemService constructor.
-     * 
+     *
      * @param client The client object.
      */
     CustomsItemService(EasyPostClient client) {
@@ -32,8 +31,7 @@ public class CustomsItemService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("customs_item", params);
 
-        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(CustomsItem.class),
-                wrappedParams, CustomsItem.class, client);
+        return Requestor.request(RequestMethod.POST, "customs_items", wrappedParams, CustomsItem.class, client);
     }
 
     /**
@@ -44,7 +42,6 @@ public class CustomsItemService {
      * @throws EasyPostException when the request fails.
      */
     public CustomsItem retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(CustomsItem.class, id),
-                null, CustomsItem.class, client);
+        return Requestor.request(RequestMethod.GET, "customs_items/" + id, null, CustomsItem.class, client);
     }
 }

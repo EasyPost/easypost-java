@@ -5,7 +5,6 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Tracker;
 import com.easypost.model.TrackerCollection;
-import com.easypost.utils.InternalUtilities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,7 @@ public class TrackerService {
 
     /**
      * TrackerService constructor.
-     * 
+     *
      * @param client The client object.
      */
     TrackerService(EasyPostClient client) {
@@ -33,8 +32,7 @@ public class TrackerService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("tracker", params);
 
-        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Tracker.class),
-                wrappedParams, Tracker.class, client);
+        return Requestor.request(RequestMethod.POST, "trackers", wrappedParams, Tracker.class, client);
     }
 
     /**
@@ -45,8 +43,7 @@ public class TrackerService {
      * @throws EasyPostException when the request fails.
      */
     public Tracker retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Tracker.class, id),
-                null, Tracker.class, client);
+        return Requestor.request(RequestMethod.GET, "trackers/" + id, null, Tracker.class, client);
     }
 
     /**
@@ -56,10 +53,8 @@ public class TrackerService {
      * @return TrackerCollection object.
      * @throws EasyPostException when the request fails.
      */
-    public TrackerCollection all(final Map<String, Object> params)
-            throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(Tracker.class),
-                params, TrackerCollection.class, client);
+    public TrackerCollection all(final Map<String, Object> params) throws EasyPostException {
+        return Requestor.request(RequestMethod.GET, "trackers", params, TrackerCollection.class, client);
     }
 
     /**
@@ -69,11 +64,9 @@ public class TrackerService {
      * @throws EasyPostException when the request fails.
      */
     public void createList(final Map<String, Object> params) throws EasyPostException {
-        String createListUrl = String.format("%s/create_list", InternalUtilities.classURL(Tracker.class));
-
         Map<String, Object> newParams = new HashMap<String, Object>();
         newParams.put("trackers", params);
 
-        Requestor.request(RequestMethod.POST, createListUrl, newParams, Object.class, client);
+        Requestor.request(RequestMethod.POST, "trackers/create_list", newParams, Object.class, client);
     }
 }

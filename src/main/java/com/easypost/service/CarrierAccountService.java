@@ -5,7 +5,7 @@ import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.CarrierAccount;
-import com.easypost.utils.InternalUtilities;
+
 import com.easypost.Constants;
 
 import java.util.Arrays;
@@ -55,7 +55,7 @@ public class CarrierAccountService {
      * @throws EasyPostException when the request fails.
      */
     public CarrierAccount retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(CarrierAccount.class, id), null,
+        return Requestor.request(RequestMethod.GET, "carrier_accounts/" + id, null,
                 CarrierAccount.class, client);
     }
 
@@ -78,7 +78,7 @@ public class CarrierAccountService {
      */
     public List<CarrierAccount> all(final Map<String, Object> params) throws EasyPostException {
         CarrierAccount[] response = Requestor.request(RequestMethod.GET,
-                InternalUtilities.classURL(CarrierAccount.class), params,
+                "carrier_accounts", params,
                 CarrierAccount[].class, client);
 
         return Arrays.asList(response);
@@ -97,7 +97,7 @@ public class CarrierAccountService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("carrier_account", params);
 
-        return Requestor.request(RequestMethod.PUT, InternalUtilities.instanceURL(CarrierAccount.class, id),
+        return Requestor.request(RequestMethod.PUT, "carrier_accounts/" + id,
                 wrappedParams, CarrierAccount.class, client);
     }
 
@@ -108,7 +108,7 @@ public class CarrierAccountService {
      * @throws EasyPostException when the request fails.
      */
     public void delete(String id) throws EasyPostException {
-        Requestor.request(RequestMethod.DELETE, InternalUtilities.instanceURL(CarrierAccount.class, id), null,
+        Requestor.request(RequestMethod.DELETE, "carrier_accounts/" + id, null,
                 CarrierAccount.class, client);
     }
 
@@ -121,9 +121,9 @@ public class CarrierAccountService {
      */
     private static String selectCarrierAccountCreationEndpoint(final String carrierAccountType) {
         if (Constants.CarrierAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
-            return "%s/%s/carrier_accounts/register";
+            return "carrier_accounts/register";
         } else {
-            return "%s/%s/carrier_accounts";
+            return "carrier_accounts";
         }
     }
 }

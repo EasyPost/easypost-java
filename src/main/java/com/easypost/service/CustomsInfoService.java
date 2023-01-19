@@ -1,20 +1,19 @@
 package com.easypost.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.CustomsInfo;
-import com.easypost.utils.InternalUtilities;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CustomsInfoService {
     private final EasyPostClient client;
 
     /**
      * CustomsInfoService constructor.
-     * 
+     *
      * @param client The client object.
      */
     CustomsInfoService(EasyPostClient client) {
@@ -32,8 +31,7 @@ public class CustomsInfoService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("customs_info", params);
 
-        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(CustomsInfo.class),
-                wrappedParams, CustomsInfo.class, client);
+        return Requestor.request(RequestMethod.POST, "customs_infos", wrappedParams, CustomsInfo.class, client);
     }
 
     /**
@@ -44,7 +42,6 @@ public class CustomsInfoService {
      * @throws EasyPostException when the request fails.
      */
     public CustomsInfo retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET,
-                InternalUtilities.instanceURL(CustomsInfo.class, id), null, CustomsInfo.class, client);
+        return Requestor.request(RequestMethod.GET, "customs_infos/" + id, null, CustomsInfo.class, client);
     }
 }
