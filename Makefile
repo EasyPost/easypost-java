@@ -17,7 +17,7 @@ coverage:
 ## docs - Generates library documentation
 docs:
 	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true
-	cp -R target/apidocs docs
+	cp -R target/apidocs/ ./docs/
 
 ## install-checkstyle - Install CheckStyle
 install-checkstyle:

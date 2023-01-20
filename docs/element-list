@@ -4,4 +4,5 @@ com.easypost.exception.API
 com.easypost.exception.General
 com.easypost.http
 com.easypost.model
+com.easypost.service
 com.easypost.utils
