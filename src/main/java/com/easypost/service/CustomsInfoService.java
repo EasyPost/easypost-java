@@ -31,7 +31,9 @@ public class CustomsInfoService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("customs_info", params);
 
-        return Requestor.request(RequestMethod.POST, "customs_infos", wrappedParams, CustomsInfo.class, client);
+        String endpoint = "customs_infos";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, CustomsInfo.class, client);
     }
 
     /**
@@ -42,6 +44,8 @@ public class CustomsInfoService {
      * @throws EasyPostException when the request fails.
      */
     public CustomsInfo retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "customs_infos/" + id, null, CustomsInfo.class, client);
+        String endpoint = "customs_infos/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, CustomsInfo.class, client);
     }
 }

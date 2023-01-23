@@ -53,7 +53,9 @@ public class ShipmentService {
         wrappedParams.put("shipment", params);
         wrappedParams.put("carbon_offset", withCarbonOffset);
 
-        return Requestor.request(RequestMethod.POST, "shipments", wrappedParams, Shipment.class, client);
+        String endpoint = "shipments";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Shipment.class, client);
     }
 
     /**
@@ -64,7 +66,9 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "shipments/" + id, null, Shipment.class, client);
+        String endpoint = "shipments/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Shipment.class, client);
     }
 
     /**
@@ -75,7 +79,9 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public ShipmentCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "shipments", params, ShipmentCollection.class, client);
+        String endpoint = "shipments";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, ShipmentCollection.class, client);
     }
 
     /**
@@ -128,7 +134,9 @@ public class ShipmentService {
             throws EasyPostException {
         params.put("carbon_offset", withCarbonOffset);
 
-        return Requestor.request(RequestMethod.POST, "shipments/" + id + "/rerate", params, Shipment.class, client);
+        String endpoint = "shipments/" + id + "/rerate";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
     }
 
     /**
@@ -166,8 +174,10 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public List<SmartRate> smartrates(final String id, final Map<String, Object> params) throws EasyPostException {
+        String endpoint = "shipments/" + id + "/smartrate";
+
         SmartrateCollection smartrateCollection =
-                Requestor.request(RequestMethod.GET, "shipments/" + id + "/smartrate", params,
+                Requestor.request(RequestMethod.GET, endpoint, params,
                         SmartrateCollection.class, client);
 
         return smartrateCollection.getSmartrates();
@@ -281,7 +291,9 @@ public class ShipmentService {
             params.put("end_shipper_id", endShipperId);
         }
 
-        return Requestor.request(RequestMethod.POST, "shipments/" + id + "/buy", params, Shipment.class, client);
+        String endpoint = "shipments/" + id + "/buy";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
     }
 
     /**
@@ -304,7 +316,9 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, "shipments/" + id + "/refund", params, Shipment.class, client);
+        String endpoint = "shipments/" + id + "/refund";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
     }
 
     /**
@@ -316,7 +330,9 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment label(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "shipments/" + id + "/label", params, Shipment.class, client);
+        String endpoint = "shipments/" + id + "/label";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, Shipment.class, client);
     }
 
     /**
@@ -328,7 +344,9 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment insure(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, "shipments/" + id + "/insure", params, Shipment.class, client);
+        String endpoint = "shipments/" + id + "/insure";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
     }
 
     /**
@@ -463,7 +481,9 @@ public class ShipmentService {
         params.putAll(formOptions);
         wrappedParams.put("form", params);
 
-        return Requestor.request(RequestMethod.POST, "shipments/" + id + "/forms", wrappedParams, Shipment.class,
+        String endpoint = "shipments/" + id + "/forms";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Shipment.class,
                 client);
     }
 }

@@ -32,7 +32,9 @@ public class TrackerService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("tracker", params);
 
-        return Requestor.request(RequestMethod.POST, "trackers", wrappedParams, Tracker.class, client);
+        String endpoint = "trackers";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Tracker.class, client);
     }
 
     /**
@@ -43,7 +45,9 @@ public class TrackerService {
      * @throws EasyPostException when the request fails.
      */
     public Tracker retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "trackers/" + id, null, Tracker.class, client);
+        String endpoint = "trackers/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Tracker.class, client);
     }
 
     /**
@@ -54,7 +58,9 @@ public class TrackerService {
      * @throws EasyPostException when the request fails.
      */
     public TrackerCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "trackers", params, TrackerCollection.class, client);
+        String endpoint = "trackers";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, TrackerCollection.class, client);
     }
 
     /**
@@ -67,6 +73,8 @@ public class TrackerService {
         Map<String, Object> newParams = new HashMap<String, Object>();
         newParams.put("trackers", params);
 
-        Requestor.request(RequestMethod.POST, "trackers/create_list", newParams, Object.class, client);
+        String endpoint = "trackers/create_list";
+
+        Requestor.request(RequestMethod.POST, endpoint, newParams, Object.class, client);
     }
 }

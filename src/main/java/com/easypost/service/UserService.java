@@ -35,7 +35,9 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public User retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "users/" + id, null, User.class, client);
+        String endpoint = "users/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, User.class, client);
     }
 
     /**
@@ -45,7 +47,9 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public User retrieveMe() throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "users", null, User.class, client);
+        String endpoint = "users";
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, User.class, client);
     }
 
     /**
@@ -59,7 +63,9 @@ public class UserService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
-        return Requestor.request(RequestMethod.POST, "users", wrappedParams, User.class, client);
+        String endpoint = "users";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, User.class, client);
     }
 
     /**
@@ -74,7 +80,9 @@ public class UserService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("user", params);
 
-        return Requestor.request(RequestMethod.PUT, "users/" + id, wrappedParams, User.class, client);
+        String endpoint = "users/" + id;
+
+        return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, User.class, client);
     }
 
     /**
@@ -84,7 +92,9 @@ public class UserService {
      * @throws EasyPostException when the request fails.
      */
     public void delete(final String id) throws EasyPostException {
-        Requestor.request(RequestMethod.DELETE, "users/" + id, null, User.class, client);
+        String endpoint = "users/" + id;
+
+        Requestor.request(RequestMethod.DELETE, endpoint, null, User.class, client);
     }
 
     /**
@@ -122,6 +132,8 @@ public class UserService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("brand", params);
 
-        return Requestor.request(RequestMethod.PUT, "users/" + id + "/brand", wrappedParams, Brand.class, client);
+        String endpoint = "users/" + id + "/brand";
+
+        return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, Brand.class, client);
     }
 }

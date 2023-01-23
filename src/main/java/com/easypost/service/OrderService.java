@@ -22,7 +22,7 @@ public class OrderService {
     }
 
     /**
-     * Create an Order object from a map of paramters.
+     * Create an Order object from a map of parameters.
      *
      * @param params Map of parameters.
      * @return Order object.
@@ -32,7 +32,9 @@ public class OrderService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("order", params);
 
-        return Requestor.request(RequestMethod.POST, "orders", wrappedParams, Order.class, client);
+        String endpoint = "orders";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Order.class, client);
     }
 
     /**
@@ -43,7 +45,9 @@ public class OrderService {
      * @throws EasyPostException when the request fails.
      */
     public Order retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "orders/" + id, null, Order.class, client);
+        String endpoint = "orders/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Order.class, client);
     }
 
     /**
@@ -66,7 +70,9 @@ public class OrderService {
      * @throws EasyPostException when the request fails.
      */
     public Order newRates(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "orders/" + id + "/rates", params, Order.class, client);
+        String endpoint = "orders/" + id + "/rates";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, Order.class, client);
     }
 
     /**
@@ -78,7 +84,9 @@ public class OrderService {
      * @throws EasyPostException when the request fails.
      */
     public Order buy(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, "orders/" + id + "/buy", params, Order.class, client);
+        String endpoint = "orders/" + id + "/buy";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, Order.class, client);
     }
 
     /**

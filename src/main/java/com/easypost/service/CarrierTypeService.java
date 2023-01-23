@@ -27,8 +27,9 @@ public class CarrierTypeService {
      * @throws EasyPostException when the request fails.
      */
     public List<CarrierType> all() throws EasyPostException {
-        CarrierType[] response =
-                Requestor.request(RequestMethod.GET, "carrier_types", null, CarrierType[].class, client);
+        String endpoint = "carrier_types";
+
+        CarrierType[] response = Requestor.request(RequestMethod.GET, endpoint, null, CarrierType[].class, client);
         return Arrays.asList(response);
     }
 }

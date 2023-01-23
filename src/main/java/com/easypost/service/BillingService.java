@@ -32,9 +32,10 @@ public class BillingService {
     public void deletePaymentMethod(PaymentMethod.Priority priority) throws EasyPostException {
         PaymentMethodObject paymentMethodObject = getPaymentMethodByPriority(priority);
 
+        String endpoint = paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId();
+
         // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
-        Requestor.request(RequestMethod.DELETE, paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId(),
-                null, PaymentMethod.class, client);
+        Requestor.request(RequestMethod.DELETE, endpoint, null, PaymentMethod.class, client);
     }
 
     /**
@@ -60,10 +61,10 @@ public class BillingService {
         Map<String, Object> params = new HashMap<>();
         params.put("amount", amount);
 
+        String endpoint = paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId() + "/charges";
+
         // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
-        Requestor.request(RequestMethod.POST,
-                paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId() + "/charges", params,
-                PaymentMethod.class, client);
+        Requestor.request(RequestMethod.POST, endpoint, params, PaymentMethod.class, client);
     }
 
     /**
@@ -74,8 +75,9 @@ public class BillingService {
      *                           up.
      */
     public PaymentMethod retrievePaymentMethods() throws EasyPostException {
-        PaymentMethod response =
-                Requestor.request(RequestMethod.GET, "payment_methods", null, PaymentMethod.class, client);
+        String endpoint = "payment_methods";
+
+        PaymentMethod response = Requestor.request(RequestMethod.GET, endpoint, null, PaymentMethod.class, client);
 
         if (response.getId() == null) {
             throw new InvalidObjectError(Constants.ErrorMessages.NO_PAYMENT_METHODS);

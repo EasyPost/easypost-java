@@ -42,7 +42,9 @@ public class AddressService {
 
         wrappedParams.put("address", params);
 
-        return Requestor.request(RequestMethod.POST, "addresses", wrappedParams, Address.class, client);
+        String endpoint = "addresses";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Address.class, client);
     }
 
     /**
@@ -53,7 +55,9 @@ public class AddressService {
      * @throws EasyPostException when the request fails.
      */
     public Address retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "addresses/" + id, null, Address.class, client);
+        String endpoint = "addresses/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Address.class, client);
     }
 
     /**
@@ -64,7 +68,9 @@ public class AddressService {
      * @throws EasyPostException when the request fails.
      */
     public AddressCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "addresses", params, AddressCollection.class, client);
+        String endpoint = "addresses";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, AddressCollection.class, client);
     }
 
     /**
@@ -78,9 +84,10 @@ public class AddressService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("address", params);
 
+        String endpoint = "addresses/create_and_verify";
+
         AddressVerifyResponse response =
-                Requestor.request(RequestMethod.POST, "addresses/create_and_verify", wrappedParams,
-                        AddressVerifyResponse.class, client);
+                Requestor.request(RequestMethod.POST, endpoint, wrappedParams, AddressVerifyResponse.class, client);
 
         return response.getAddress();
     }
@@ -93,8 +100,10 @@ public class AddressService {
      * @throws EasyPostException when the request fails.
      */
     public Address verify(String id) throws EasyPostException {
+        String endpoint = "addresses/" + id + "/verify";
+
         AddressVerifyResponse response =
-                Requestor.request(RequestMethod.GET, "addresses/" + id + "/verify", null, AddressVerifyResponse.class,
+                Requestor.request(RequestMethod.GET, endpoint, null, AddressVerifyResponse.class,
                         client);
 
         return response.getAddress();

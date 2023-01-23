@@ -24,6 +24,8 @@ public class ApiKeyService {
      * @throws EasyPostException when the request fails.
      */
     public ApiKeys all() throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "api_keys", null, ApiKeys.class, client);
+        String endpoint = "api_keys";
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, ApiKeys.class, client);
     }
 }

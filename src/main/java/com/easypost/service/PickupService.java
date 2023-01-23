@@ -30,7 +30,9 @@ public class PickupService {
      * @throws EasyPostException when the request fails.
      */
     public PickupCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "pickups", params, PickupCollection.class, client);
+        String endpoint = "pickups";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, PickupCollection.class, client);
     }
 
     /**
@@ -44,7 +46,9 @@ public class PickupService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("pickup", params);
 
-        return Requestor.request(RequestMethod.POST, "pickups", wrappedParams, Pickup.class, client);
+        String endpoint = "pickups";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Pickup.class, client);
     }
 
     /**
@@ -55,7 +59,9 @@ public class PickupService {
      * @throws EasyPostException when the request fails.
      */
     public Pickup retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "pickups/" + id, null, Pickup.class, client);
+        String endpoint = "pickups/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Pickup.class, client);
     }
 
     /**
@@ -79,7 +85,9 @@ public class PickupService {
      * @throws EasyPostException when the request fails.
      */
     public Pickup buy(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, "pickups/" + id + "/buy", params, Pickup.class, client);
+        String endpoint = "pickups/" + id + "/buy";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, Pickup.class, client);
     }
 
     /**
@@ -117,6 +125,8 @@ public class PickupService {
      * @throws EasyPostException when the request fails.
      */
     public Pickup cancel(final String id, final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, "pickups/" + id + "/cancel", params, Pickup.class, client);
+        String endpoint = "pickups/" + id + "/cancel";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, Pickup.class, client);
     }
 }

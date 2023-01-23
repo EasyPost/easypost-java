@@ -31,7 +31,9 @@ public class ParcelService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("parcel", params);
 
-        return Requestor.request(RequestMethod.POST, "parcels", wrappedParams, Parcel.class, client);
+        String endpoint = "parcels";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Parcel.class, client);
     }
 
     /**
@@ -42,6 +44,8 @@ public class ParcelService {
      * @throws EasyPostException when the request fails.
      */
     public Parcel retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "parcels/" + id, null, Parcel.class, client);
+        String endpoint = "parcels/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Parcel.class, client);
     }
 }

@@ -28,7 +28,9 @@ public class ScanformService {
      * @throws EasyPostException when the request fails. when the request fails.
      */
     public ScanForm create(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.POST, "scan_forms", params, ScanForm.class, client);
+        String endpoint = "scan_forms";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, ScanForm.class, client);
     }
 
     /**
@@ -39,7 +41,9 @@ public class ScanformService {
      * @throws EasyPostException when the request fails. when the request fails.
      */
     public ScanForm retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "scan_forms/" + id, null, ScanForm.class, client);
+        String endpoint = "scan_forms/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, ScanForm.class, client);
     }
 
     /**
@@ -50,6 +54,8 @@ public class ScanformService {
      * @throws EasyPostException when the request fails. when the request fails.
      */
     public ScanFormCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "scan_forms", params, ScanFormCollection.class, client);
+        String endpoint = "scan_forms";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, ScanFormCollection.class, client);
     }
 }

@@ -25,9 +25,8 @@ public class RateService {
      * @throws EasyPostException when the request fails.
      */
     public Rate retrieve(final String id) throws EasyPostException {
-        Rate response;
-        response = Requestor.request(RequestMethod.GET, "rates/" + id, null, Rate.class, client);
+        String endpoint = "rates/" + id;
 
-        return response;
+        return Requestor.request(RequestMethod.GET, endpoint, null, Rate.class, client);
     }
 }

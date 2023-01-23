@@ -53,7 +53,9 @@ public class BetaReferralCustomerService {
         HashMap<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("payment_method", params);
 
-        return Requestor.request(RequestMethod.POST, "referral_customers/payment_method", wrappedParams,
+        String endpoint = "referral_customers/payment_method";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams,
                 PaymentMethodObject.class, client, "beta");
     }
 
@@ -68,7 +70,9 @@ public class BetaReferralCustomerService {
         HashMap<String, Object> params = new HashMap<>();
         params.put("refund_amount", refundAmount);
 
-        return Requestor.request(RequestMethod.POST, "referral_customers/refunds", params,
+        String endpoint = "referral_customers/refunds";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params,
                 BetaPaymentRefund.class, client, "beta");
     }
 
@@ -83,7 +87,9 @@ public class BetaReferralCustomerService {
         HashMap<String, Object> params = new HashMap<>();
         params.put("payment_log_id", paymentLogId);
 
-        return Requestor.request(RequestMethod.POST, "referral_customers/refunds", params,
+        String endpoint = "referral_customers/refunds";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params,
                 BetaPaymentRefund.class, client, "beta");
     }
 }

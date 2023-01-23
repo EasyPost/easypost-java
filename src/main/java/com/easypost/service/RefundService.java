@@ -34,7 +34,9 @@ public class RefundService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("refund", params);
 
-        Refund[] response = Requestor.request(RequestMethod.POST, "refunds", wrappedParams, Refund[].class, client);
+        String endpoint = "refunds";
+
+        Refund[] response = Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Refund[].class, client);
 
         return Arrays.asList(response);
     }
@@ -47,7 +49,9 @@ public class RefundService {
      * @throws EasyPostException when the request fails.
      */
     public Refund retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "refunds/" + id, null, Refund.class, client);
+        String endpoint = "refunds/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Refund.class, client);
     }
 
     /**
@@ -58,6 +62,8 @@ public class RefundService {
      * @throws EasyPostException when the request fails.
      */
     public RefundCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "refunds", params, RefundCollection.class, client);
+        String endpoint = "refunds";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, RefundCollection.class, client);
     }
 }

@@ -33,7 +33,9 @@ public class EndShipperService {
 
         wrappedParams.put("address", params);
 
-        return Requestor.request(RequestMethod.POST, "end_shippers", wrappedParams, EndShipper.class, client);
+        String endpoint = "end_shippers";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, EndShipper.class, client);
     }
 
     /**
@@ -44,7 +46,9 @@ public class EndShipperService {
      * @throws EasyPostException when the request fails.
      */
     public EndShipper retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "end_shippers/" + id, null, EndShipper.class, client);
+        String endpoint = "end_shippers/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, EndShipper.class, client);
     }
 
     /**
@@ -55,7 +59,9 @@ public class EndShipperService {
      * @throws EasyPostException when the request fails.
      */
     public EndShipperCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "end_shippers", params, EndShipperCollection.class, client);
+        String endpoint = "end_shippers";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, EndShipperCollection.class, client);
     }
 
     /**
@@ -71,6 +77,8 @@ public class EndShipperService {
 
         wrappedParams.put("address", params);
 
-        return Requestor.request(RequestMethod.PUT, "end_shippers/" + id, wrappedParams, EndShipper.class, client);
+        String endpoint = "end_shippers/" + id;
+
+        return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, EndShipper.class, client);
     }
 }

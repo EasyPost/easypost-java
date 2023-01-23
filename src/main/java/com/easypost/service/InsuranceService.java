@@ -32,7 +32,9 @@ public class InsuranceService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("insurance", params);
 
-        return Requestor.request(RequestMethod.POST, "insurances", wrappedParams, Insurance.class, client);
+        String endpoint = "insurances";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Insurance.class, client);
     }
 
     /**
@@ -43,7 +45,9 @@ public class InsuranceService {
      * @throws EasyPostException when the request fails.
      */
     public Insurance retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "insurances/" + id, null, Insurance.class, client);
+        String endpoint = "insurances/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Insurance.class, client);
     }
 
     /**
@@ -54,6 +58,8 @@ public class InsuranceService {
      * @throws EasyPostException when the request fails.
      */
     public InsuranceCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, "insurances", params, InsuranceCollection.class, client);
+        String endpoint = "insurances";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, InsuranceCollection.class, client);
     }
 }
