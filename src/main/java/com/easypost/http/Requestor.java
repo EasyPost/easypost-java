@@ -75,7 +75,7 @@ public abstract class Requestor {
      * @return HTTP header
      * @throws MissingParameterError
      */
-    static Map<String, String> generateHeaders(String apiKey) throws MissingParameterError {
+    private static Map<String, String> generateHeaders(String apiKey) throws MissingParameterError {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Accept-Charset", Constants.Http.CHARSET);
         headers.put("User-Agent",
@@ -524,7 +524,7 @@ public abstract class Requestor {
      * @throws UnknownApiError         when the request fails due to an unknown API error.
      */
     @SuppressWarnings ("checkstyle:methodname")
-    protected static <T> T httpRequest(final RequestMethod method, final String url, final Map<String, Object> params,
+    private static <T> T httpRequest(final RequestMethod method, final String url, final Map<String, Object> params,
                                        final Class<T> clazz, final EasyPostClient client)
             throws EncodingError, JsonError, RedirectError, UnauthorizedError, ForbiddenError, PaymentError,
             NotFoundError, MethodNotAllowedError, TimeoutError, InvalidRequestError, RateLimitError,
