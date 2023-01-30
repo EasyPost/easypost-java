@@ -32,8 +32,8 @@ public class BetaRateService {
         HashMap<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("shipment", params);
 
-        StatelessRate[] statelessRates = Requestor.request(RequestMethod.POST, "%s/beta/rates", wrappedParams,
-                StatelessRate[].class, client);
+        StatelessRate[] statelessRates = Requestor.request(RequestMethod.POST, "rates", wrappedParams,
+                StatelessRate[].class, client, "beta");
 
         return Arrays.asList(statelessRates);
     }
