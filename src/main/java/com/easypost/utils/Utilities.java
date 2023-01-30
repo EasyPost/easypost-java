@@ -51,7 +51,7 @@ public abstract class Utilities {
 
         if (lowestRate == null) {
             throw new FilteringError(String.format(
-                    Constants.ErrorMessages.NO_OBJECT_FOUND, "lowest rate matching required criteria"));
+                    Constants.ErrorMessages.NO_OBJECT_FOUND, "rates"));
         }
 
         return lowestRate;
@@ -91,7 +91,7 @@ public abstract class Utilities {
 
         if (lowestRate == null) {
             throw new FilteringError(String.format(
-                    Constants.ErrorMessages.NO_OBJECT_FOUND, "lowest rate matching required criteria"));
+                    Constants.ErrorMessages.NO_OBJECT_FOUND, "rates"));
         }
 
         return lowestRate;

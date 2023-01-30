@@ -1,8 +1,10 @@
 package com.easypost;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.model.StatelessRate;
 import com.easypost.utils.Utilities;
 
-public class BetaStatelessRateTest {
+public class BetaRateTest {
     private static TestUtils.VCR vcr;
 
     /**
@@ -57,5 +59,11 @@ public class BetaStatelessRateTest {
         StatelessRate lowestRate = Utilities.getLowestStatelessRate(rates, null, null);
 
         assertEquals("First", lowestRate.getService());
+
+        List<String> carriers = Arrays.asList("invalidCarrierName");
+        EasyPostException exception = assertThrows(EasyPostException.class,
+                () -> Utilities.getLowestStatelessRate(rates, carriers, null));
+        
+        assertEquals("No rates found.", exception.getMessage());
     }
 }
