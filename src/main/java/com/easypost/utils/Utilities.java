@@ -8,6 +8,7 @@ import com.easypost.model.Event;
 import com.easypost.model.Rate;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
+import com.easypost.model.StatelessRate;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,47 @@ import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 
 public abstract class Utilities {
+    /**
+     * Get the lowest stateless rate from a list of stateless rates.
+     *
+     * @param rates    the list of stateless rates.
+     * @param carriers the carriers to use in the filter.
+     * @param services the services to use in the filter.
+     * @return lowest StatelessRate object
+     * @throws FilteringError when the filters could not be applied.
+     */
+    public static StatelessRate getLowestStatelessRate(List<StatelessRate> rates, List<String> carriers,
+            List<String> services)
+            throws FilteringError, NumberFormatException {
+        StatelessRate lowestRate = null;
+
+        if (carriers != null) {
+            carriers.replaceAll(String::toLowerCase);
+        }
+
+        if (services != null) {
+            services.replaceAll(String::toLowerCase);
+        }
+
+        for (StatelessRate rate : rates) {
+            if ((carriers != null && !carriers.contains(rate.getCarrier().toLowerCase())) ||
+                    (services != null && !services.contains(rate.getService().toLowerCase()))) {
+                continue;
+            }
+
+            if (lowestRate == null || Float.parseFloat(rate.getRate()) < Float.parseFloat(lowestRate.getRate())) {
+                lowestRate = rate;
+            }
+        }
+
+        if (lowestRate == null) {
+            throw new FilteringError(String.format(
+                    Constants.ErrorMessages.NO_OBJECT_FOUND, "lowest rate matching required criteria"));
+        }
+
+        return lowestRate;
+    }
+
     /**
      * Get the lowest rate from a list of rates.
      *
