@@ -5,7 +5,6 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -50,21 +49,18 @@ public final class BillingTest {
      */
     @Test
     public void testDeletePaymentMethod() throws EasyPostException {
-        String retrieveUrl = String.format("%s/%s/%s", vcr.client.getApiBase(), vcr.client.getApiVersion(),
-                "payment_methods");
         requestMock.when(
-                () -> Requestor.request(RequestMethod.GET, retrieveUrl, null, PaymentMethod.class, vcr.client))
+                        () -> Requestor.request(
+                                RequestMethod.GET, "payment_methods",
+                                null, PaymentMethod.class, vcr.client))
                 .thenReturn(paymentMethod);
 
-        PaymentMethodObject paymentMethodObject = vcr.client.billing.retrievePaymentMethods()
-                .getSecondaryPaymentMethod();
+        PaymentMethodObject paymentMethodObject =
+                vcr.client.billing.retrievePaymentMethods().getSecondaryPaymentMethod();
 
-        String deletePaymentUrl = String.format("%s/%s/%s/%s", vcr.client.getApiBase(), vcr.client.getApiVersion(),
-                paymentMethodObject.getEndpoint(), paymentMethodObject.getId());
-
-        requestMock.when(
-                () -> Requestor.request(RequestMethod.GET, deletePaymentUrl, null, PaymentMethod.class, vcr.client))
-                .thenReturn(null);
+        requestMock.when(() -> Requestor.request(RequestMethod.GET,
+                paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId(), null, PaymentMethod.class,
+                vcr.client)).thenReturn(null);
 
         assertDoesNotThrow(() -> vcr.client.billing.deletePaymentMethod(PaymentMethod.Priority.SECONDARY));
     }
@@ -76,21 +72,17 @@ public final class BillingTest {
      */
     @Test
     public void testFundWallet() throws EasyPostException {
-        String retrieveUrl = String.format("%s/%s/%s", vcr.client.getApiBase(), vcr.client.getApiVersion(),
-                "payment_methods");
         requestMock.when(
-                () -> Requestor.request(RequestMethod.GET, retrieveUrl, null, PaymentMethod.class, vcr.client))
+                        () -> Requestor.request(
+                                RequestMethod.GET, "payment_methods",
+                                null, PaymentMethod.class, vcr.client))
                 .thenReturn(paymentMethod);
 
-        PaymentMethodObject paymentMethodObject = vcr.client.billing.retrievePaymentMethods()
-                .getPrimaryPaymentMethod();
+        PaymentMethodObject paymentMethodObject = vcr.client.billing.retrievePaymentMethods().getPrimaryPaymentMethod();
 
-        String fundWalletUrl = String.format("%s/%s/%s/%s/%s", vcr.client.getApiBase(), vcr.client.getApiVersion(),
-                paymentMethodObject.getEndpoint(), paymentMethodObject.getId(), "charges");
-
-        requestMock.when(
-                () -> Requestor.request(RequestMethod.GET, fundWalletUrl, null, PaymentMethod.class, vcr.client))
-                .thenReturn(paymentMethod);
+        requestMock.when(() -> Requestor.request(RequestMethod.GET,
+                paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId() + "/charges", null,
+                PaymentMethod.class, vcr.client)).thenReturn(paymentMethod);
 
         assertDoesNotThrow(() -> vcr.client.billing.fundWallet("2000"));
     }
@@ -102,9 +94,10 @@ public final class BillingTest {
      */
     @Test
     public void testRetrievePaymentMethods() throws EasyPostException {
-        String url = String.format("%s/%s/%s", vcr.client.getApiBase(), vcr.client.getApiVersion(), "payment_methods");
-
-        requestMock.when(() -> Requestor.request(RequestMethod.GET, url, null, PaymentMethod.class, vcr.client))
+        requestMock.when(
+                        () -> Requestor.request(
+                                RequestMethod.GET,
+                                "payment_methods", null, PaymentMethod.class, vcr.client))
                 .thenReturn(paymentMethod);
 
         PaymentMethod paymentMethods = vcr.client.billing.retrievePaymentMethods();

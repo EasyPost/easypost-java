@@ -11,7 +11,6 @@ import com.easypost.model.ShipmentCollection;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import com.easypost.model.SmartrateCollection;
-import com.easypost.utils.InternalUtilities;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +21,7 @@ public class ShipmentService {
 
     /**
      * ShipmentService constructor.
-     * 
+     *
      * @param client The client object.
      */
     ShipmentService(EasyPostClient client) {
@@ -49,14 +48,14 @@ public class ShipmentService {
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment create(final Map<String, Object> params, boolean withCarbonOffset)
-            throws EasyPostException {
+    public Shipment create(final Map<String, Object> params, boolean withCarbonOffset) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("shipment", params);
         wrappedParams.put("carbon_offset", withCarbonOffset);
 
-        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Shipment.class), wrappedParams,
-                Shipment.class, client);
+        String endpoint = "shipments";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Shipment.class, client);
     }
 
     /**
@@ -67,8 +66,9 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Shipment.class, id), null,
-                Shipment.class, client);
+        String endpoint = "shipments/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Shipment.class, client);
     }
 
     /**
@@ -78,10 +78,10 @@ public class ShipmentService {
      * @return ShipmentCollection object
      * @throws EasyPostException when the request fails.
      */
-    public ShipmentCollection all(final Map<String, Object> params)
-            throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(Shipment.class), params,
-                ShipmentCollection.class, client);
+    public ShipmentCollection all(final Map<String, Object> params) throws EasyPostException {
+        String endpoint = "shipments";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, ShipmentCollection.class, client);
     }
 
     /**
@@ -105,8 +105,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment newRates(final String id, final boolean withCarbonOffset) throws EasyPostException {
-        return this.newRates(id, new HashMap<String, Object>() {
-        }, withCarbonOffset);
+        return this.newRates(id, new HashMap<String, Object>() {}, withCarbonOffset);
     }
 
     /**
@@ -135,9 +134,9 @@ public class ShipmentService {
             throws EasyPostException {
         params.put("carbon_offset", withCarbonOffset);
 
-        String url = String.format("%s/rerate", InternalUtilities.instanceURL(Shipment.class, id));
+        String endpoint = "shipments/" + id + "/rerate";
 
-        return Requestor.request(RequestMethod.POST, url, params, Shipment.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
     }
 
     /**
@@ -148,11 +147,10 @@ public class ShipmentService {
      * @return List of SmartRate objects
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link #smartrates(String, Map)} instead.
-     *             Deprecated: v5.5.0 - v7.0.0
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public List<SmartRate> getSmartrates(final String id, final Map<String, Object> params)
-            throws EasyPostException {
+    public List<SmartRate> getSmartrates(final String id, final Map<String, Object> params) throws EasyPostException {
         return this.smartrates(id, params);
     }
 
@@ -175,11 +173,12 @@ public class ShipmentService {
      * @return List of SmartRate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<SmartRate> smartrates(final String id, final Map<String, Object> params)
-            throws EasyPostException {
-        String url = String.format("%s/smartrate", InternalUtilities.instanceURL(Shipment.class, id));
-        SmartrateCollection smartrateCollection = Requestor.request(RequestMethod.GET, url, params,
-                SmartrateCollection.class, client);
+    public List<SmartRate> smartrates(final String id, final Map<String, Object> params) throws EasyPostException {
+        String endpoint = "shipments/" + id + "/smartrate";
+
+        SmartrateCollection smartrateCollection =
+                Requestor.request(RequestMethod.GET, endpoint, params,
+                        SmartrateCollection.class, client);
 
         return smartrateCollection.getSmartrates();
     }
@@ -221,8 +220,7 @@ public class ShipmentService {
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
-    public Shipment buy(final String id, final Rate rate, final boolean withCarbonOffset)
-            throws EasyPostException {
+    public Shipment buy(final String id, final Rate rate, final boolean withCarbonOffset) throws EasyPostException {
         Map<String, Object> params = new HashMap<>();
         params.put("rate", rate);
 
@@ -286,16 +284,16 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final String id, final Map<String, Object> params, final boolean withCarbonOffset,
-            final String endShipperId) throws EasyPostException {
+                        final String endShipperId) throws EasyPostException {
         params.put("carbon_offset", withCarbonOffset);
 
         if (endShipperId != null && !endShipperId.isEmpty()) {
             params.put("end_shipper_id", endShipperId);
         }
 
-        String url = String.format("%s/buy", InternalUtilities.instanceURL(Shipment.class, id));
+        String endpoint = "shipments/" + id + "/buy";
 
-        return Requestor.request(RequestMethod.POST, url, params, Shipment.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
     }
 
     /**
@@ -318,9 +316,9 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment refund(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s/refund", InternalUtilities.instanceURL(Shipment.class, id));
+        String endpoint = "shipments/" + id + "/refund";
 
-        return Requestor.request(RequestMethod.POST, url, params, Shipment.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
     }
 
     /**
@@ -332,9 +330,9 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment label(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s/label", InternalUtilities.instanceURL(Shipment.class, id));
+        String endpoint = "shipments/" + id + "/label";
 
-        return Requestor.request(RequestMethod.GET, url, params, Shipment.class, client);
+        return Requestor.request(RequestMethod.GET, endpoint, params, Shipment.class, client);
     }
 
     /**
@@ -346,9 +344,9 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment insure(final String id, final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s/insure", InternalUtilities.instanceURL(Shipment.class, id));
+        String endpoint = "shipments/" + id + "/insure";
 
-        return Requestor.request(RequestMethod.POST, url, params, Shipment.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
     }
 
     /**
@@ -361,8 +359,8 @@ public class ShipmentService {
      * @return lowest SmartRate object
      * @throws EasyPostException when the request fails.
      * @deprecated use {@link #lowestSmartRate(String, int, SmartrateAccuracy)}
-     *             instead.
-     *             Deprecated: v5.5.0 - v7.0.0
+     * instead.
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public SmartRate lowestSmartRate(final String id, int deliveryDay, String deliveryAccuracy)
@@ -396,7 +394,7 @@ public class ShipmentService {
      * @return List of SmartRate objects
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link #smartrates(String, Map)} instead.
-     *             Deprecated: v5.5.0 - v7.0.0
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public List<SmartRate> getSmartrates(final String id) throws EasyPostException {
@@ -413,12 +411,12 @@ public class ShipmentService {
      * @return lowest SmartRate object
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)}
-     *             instead.
-     *             Deprecated: v5.5.0 - v7.0.0
+     * instead.
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public SmartRate getLowestSmartRate(final List<SmartRate> smartRates, int deliveryDay,
-            String deliveryAccuracy) throws EasyPostException {
+    public SmartRate getLowestSmartRate(final List<SmartRate> smartRates, int deliveryDay, String deliveryAccuracy)
+            throws EasyPostException {
         return findLowestSmartrate(smartRates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
     }
 
@@ -433,7 +431,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public SmartRate findLowestSmartrate(final List<SmartRate> smartRates, int deliveryDay,
-            SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
+                                         SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
         SmartRate lowestSmartrate = null;
 
         for (SmartRate rate : smartRates) {
@@ -483,8 +481,9 @@ public class ShipmentService {
         params.putAll(formOptions);
         wrappedParams.put("form", params);
 
-        String url = String.format("%s/forms", InternalUtilities.instanceURL(Shipment.class, id));
+        String endpoint = "shipments/" + id + "/forms";
 
-        return Requestor.request(RequestMethod.POST, url, wrappedParams, Shipment.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Shipment.class,
+                client);
     }
 }

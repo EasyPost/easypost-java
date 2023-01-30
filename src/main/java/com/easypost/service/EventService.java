@@ -1,8 +1,5 @@
 package com.easypost.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
@@ -10,14 +7,16 @@ import com.easypost.model.Event;
 import com.easypost.model.EventCollection;
 import com.easypost.model.Payload;
 import com.easypost.model.PayloadCollection;
-import com.easypost.utils.InternalUtilities;
+
+import java.util.List;
+import java.util.Map;
 
 public class EventService {
     private final EasyPostClient client;
 
     /**
      * EventService constructor.
-     * 
+     *
      * @param client The client object.
      */
     EventService(EasyPostClient client) {
@@ -32,8 +31,9 @@ public class EventService {
      * @throws EasyPostException when the request fails.
      */
     public Event retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Event.class, id), null, Event.class,
-                client);
+        String endpoint = "events/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Event.class, client);
     }
 
     /**
@@ -44,8 +44,9 @@ public class EventService {
      * @throws EasyPostException when the request fails.
      */
     public EventCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(Event.class), params,
-                EventCollection.class, client);
+        String endpoint = "events";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, EventCollection.class, client);
     }
 
     /**
@@ -56,9 +57,11 @@ public class EventService {
      * @throws EasyPostException when the request fails.
      */
     public List<Payload> retrieveAllPayloads(final String eventId) throws EasyPostException {
-        PayloadCollection payloads = Requestor.request(RequestMethod.GET,
-                String.format("%s/%s", InternalUtilities.instanceURL(Event.class, eventId), "payloads"), null,
-                PayloadCollection.class, client);
+        String endpoint = "events/" + eventId + "/payloads";
+
+        PayloadCollection payloads =
+                Requestor.request(RequestMethod.GET, endpoint, null, PayloadCollection.class,
+                        client);
 
         return payloads.getPayloads();
     }
@@ -72,9 +75,9 @@ public class EventService {
      * @throws EasyPostException when the request fails.
      */
     public Payload retrievePayload(final String eventId, final String payloadId) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET,
-                String.format("%s/%s/%s", InternalUtilities.instanceURL(Event.class, eventId), "payloads", payloadId),
-                null,
-                Payload.class, client);
+        String endpoint = "events/" + eventId + "/payloads/" + payloadId;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Payload.class,
+                client);
     }
 }

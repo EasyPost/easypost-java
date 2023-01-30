@@ -3,8 +3,8 @@ package com.easypost.service;
 import com.easypost.Constants;
 import com.easypost.EasyPost;
 import com.easypost.exception.API.EncodingError;
-import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ExternalApiError;
+import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.PaymentMethod;
@@ -45,9 +45,10 @@ public class ReferralCustomerService {
         Map<String, Object> wrappedParams = new HashMap<>();
         wrappedParams.put("user", params);
 
-        String url = String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "referral_customers");
+        String endpoint = "referral_customers";
 
-        return Requestor.request(RequestMethod.POST, url, wrappedParams, ReferralCustomer.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, ReferralCustomer.class,
+                client);
     }
 
     /**
@@ -64,10 +65,10 @@ public class ReferralCustomerService {
         params.put("email", email);
         wrappedParams.put("user", params);
 
-        String url =
-                String.format("%s/%s/%s/%s", client.getApiBase(), client.getApiVersion(), "referral_customers", userId);
+        String endpoint = "referral_customers/" + userId;
 
-        Requestor.request(RequestMethod.PUT, url, wrappedParams, ReferralCustomer.class, client);
+        Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, ReferralCustomer.class,
+                client);
     }
 
     /**
@@ -78,9 +79,10 @@ public class ReferralCustomerService {
      * @throws EasyPostException when the request fails.
      */
     public ReferralCustomerCollection all(final Map<String, Object> params) throws EasyPostException {
-        String url = String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "referral_customers");
+        String endpoint = "referral_customers";
 
-        return Requestor.request(RequestMethod.GET, url, params, ReferralCustomerCollection.class, client);
+        return Requestor.request(RequestMethod.GET, endpoint, params, ReferralCustomerCollection.class,
+                client);
     }
 
     /**
@@ -138,10 +140,10 @@ public class ReferralCustomerService {
      * @throws EasyPostException when the request fails.
      */
     private String retrieveEasypostStripeApiKey() throws EasyPostException {
-        String url =
-                String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "partners/stripe_public_key");
+        String endpoint = "partners/stripe_public_key";
+
         @SuppressWarnings ("unchecked") Map<String, String> response =
-                Requestor.request(RequestMethod.GET, url, null, Map.class, client);
+                Requestor.request(RequestMethod.GET, endpoint, null, Map.class, client);
 
         return response.getOrDefault("public_key", "");
     }
@@ -155,8 +157,8 @@ public class ReferralCustomerService {
      * @param cvc                  CVC of the credit card.
      * @param easypostStripeApiKey EasyPost Stripe API key.
      * @return Stripe token.
-     * @throws EncodingError         when the request details could not be encoded.
-     * @throws IOException           when the request fails.
+     * @throws EncodingError when the request details could not be encoded.
+     * @throws IOException   when the request fails.
      */
     private static String createStripeToken(final String number, final int expirationMonth, final int expirationYear,
                                             final String cvc, final String easypostStripeApiKey)
@@ -231,8 +233,10 @@ public class ReferralCustomerService {
         wrappedParams.put("credit_card", params);
 
         EasyPostClient referralClient = new EasyPostClient(referralApiKey);
-        String url = String.format("%s/%s/%s", client.getApiBase(), client.getApiVersion(), "credit_cards");
 
-        return Requestor.request(RequestMethod.POST, url, wrappedParams, PaymentMethodObject.class, referralClient);
+        String endpoint = "credit_cards";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, PaymentMethodObject.class,
+                referralClient);
     }
 }

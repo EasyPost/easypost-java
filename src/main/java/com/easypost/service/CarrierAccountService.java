@@ -1,12 +1,11 @@
 package com.easypost.service;
 
+import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.CarrierAccount;
-import com.easypost.utils.InternalUtilities;
-import com.easypost.Constants;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,10 +38,10 @@ public class CarrierAccountService {
                     String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));
         }
 
-        String endpoint = selectCarrierAccountCreationEndpoint(type);
-
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("carrier_account", params);
+
+        String endpoint = selectCarrierAccountCreationEndpoint(type);
 
         return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, CarrierAccount.class, client);
     }
@@ -55,8 +54,9 @@ public class CarrierAccountService {
      * @throws EasyPostException when the request fails.
      */
     public CarrierAccount retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(CarrierAccount.class, id), null,
-                CarrierAccount.class, client);
+        String endpoint = "carrier_accounts/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, CarrierAccount.class, client);
     }
 
     /**
@@ -77,9 +77,10 @@ public class CarrierAccountService {
      * @throws EasyPostException when the request fails.
      */
     public List<CarrierAccount> all(final Map<String, Object> params) throws EasyPostException {
-        CarrierAccount[] response = Requestor.request(RequestMethod.GET,
-                InternalUtilities.classURL(CarrierAccount.class), params,
-                CarrierAccount[].class, client);
+        String endpoint = "carrier_accounts";
+
+        CarrierAccount[] response =
+                Requestor.request(RequestMethod.GET, endpoint, params, CarrierAccount[].class, client);
 
         return Arrays.asList(response);
     }
@@ -92,13 +93,14 @@ public class CarrierAccountService {
      * @return updated CarrierAccount object.
      * @throws EasyPostException when the request fails.
      */
-    public CarrierAccount update(String id, final Map<String, Object> params)
-            throws EasyPostException {
+    public CarrierAccount update(String id, final Map<String, Object> params) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("carrier_account", params);
 
-        return Requestor.request(RequestMethod.PUT, InternalUtilities.instanceURL(CarrierAccount.class, id),
-                wrappedParams, CarrierAccount.class, client);
+        String endpoint = "carrier_accounts/" + id;
+
+        return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, CarrierAccount.class,
+                client);
     }
 
     /**
@@ -108,8 +110,9 @@ public class CarrierAccountService {
      * @throws EasyPostException when the request fails.
      */
     public void delete(String id) throws EasyPostException {
-        Requestor.request(RequestMethod.DELETE, InternalUtilities.instanceURL(CarrierAccount.class, id), null,
-                CarrierAccount.class, client);
+        String endpoint = "carrier_accounts/" + id;
+
+        Requestor.request(RequestMethod.DELETE, endpoint, null, CarrierAccount.class, client);
     }
 
     /**
@@ -121,9 +124,9 @@ public class CarrierAccountService {
      */
     private static String selectCarrierAccountCreationEndpoint(final String carrierAccountType) {
         if (Constants.CarrierAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
-            return "%s/%s/carrier_accounts/register";
+            return "carrier_accounts/register";
         } else {
-            return "%s/%s/carrier_accounts";
+            return "carrier_accounts";
         }
     }
 }

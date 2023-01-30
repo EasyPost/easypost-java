@@ -5,7 +5,6 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Refund;
 import com.easypost.model.RefundCollection;
-import com.easypost.utils.InternalUtilities;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,7 +16,7 @@ public class RefundService {
 
     /**
      * RefundService constructor.
-     * 
+     *
      * @param client The client object.
      */
     RefundService(EasyPostClient client) {
@@ -35,8 +34,9 @@ public class RefundService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("refund", params);
 
-        Refund[] response = Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Refund.class),
-                wrappedParams, Refund[].class, client);
+        String endpoint = "refunds";
+
+        Refund[] response = Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Refund[].class, client);
 
         return Arrays.asList(response);
     }
@@ -49,8 +49,9 @@ public class RefundService {
      * @throws EasyPostException when the request fails.
      */
     public Refund retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Refund.class, id), null, Refund.class,
-                client);
+        String endpoint = "refunds/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Refund.class, client);
     }
 
     /**
@@ -61,7 +62,8 @@ public class RefundService {
      * @throws EasyPostException when the request fails.
      */
     public RefundCollection all(final Map<String, Object> params) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.classURL(Refund.class), params,
-                RefundCollection.class, client);
+        String endpoint = "refunds";
+
+        return Requestor.request(RequestMethod.GET, endpoint, params, RefundCollection.class, client);
     }
 }

@@ -4,7 +4,6 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Parcel;
-import com.easypost.utils.InternalUtilities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,7 @@ public class ParcelService {
 
     /**
      * ParcelService constructor.
-     * 
+     *
      * @param client The client object.
      */
     ParcelService(EasyPostClient client) {
@@ -32,8 +31,9 @@ public class ParcelService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put("parcel", params);
 
-        return Requestor.request(RequestMethod.POST, InternalUtilities.classURL(Parcel.class), wrappedParams,
-                Parcel.class, client);
+        String endpoint = "parcels";
+
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Parcel.class, client);
     }
 
     /**
@@ -44,7 +44,8 @@ public class ParcelService {
      * @throws EasyPostException when the request fails.
      */
     public Parcel retrieve(final String id) throws EasyPostException {
-        return Requestor.request(RequestMethod.GET, InternalUtilities.instanceURL(Parcel.class, id), null, Parcel.class,
-                client);
+        String endpoint = "parcels/" + id;
+
+        return Requestor.request(RequestMethod.GET, endpoint, null, Parcel.class, client);
     }
 }
