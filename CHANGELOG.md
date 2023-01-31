@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds `retrieveStatelessRates` function to pull stateless rates when shipment data is provided
+- Adds `getLowestStatelessRate` function to filter the lowest stateless rate
+
 ## v6.2.0 (2023-01-18)
 
 - Adds `all` function to `Pickup` to retrieve all pickups

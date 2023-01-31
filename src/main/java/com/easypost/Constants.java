@@ -5,6 +5,8 @@ import com.easypost.model.Error;
 import com.easypost.model.ErrorDeserializer;
 import com.easypost.model.SmartrateCollection;
 import com.easypost.model.SmartrateCollectionDeserializer;
+import com.easypost.model.StatelessRate;
+import com.easypost.model.StatelessRateDeserializer;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -66,7 +68,8 @@ public abstract class Constants {
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .registerTypeAdapter(HashMap.class, new HashMapSerializer())
                 .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer())
-                .registerTypeAdapter(Error.class, new ErrorDeserializer()).create();
+                .registerTypeAdapter(Error.class, new ErrorDeserializer())
+                .registerTypeAdapter(StatelessRate[].class, new StatelessRateDeserializer()).create();
         public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
     }
