@@ -7,6 +7,7 @@ import com.easypost.model.Shipment;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,32 +39,22 @@ public final class RefundTest {
     public void testCreate() throws EasyPostException {
         vcr.setUpTest("create");
 
-        List<Refund> refunds = createBasicRefundList();
-
-        assertInstanceOf(List.class, refunds);
-        assertTrue(refunds.stream().allMatch(refund -> refund instanceof Refund));
-
-        Refund refund = refunds.get(0);
-        assertTrue(refund.getId().startsWith("rfnd_"));
-        assertEquals("submitted", refund.getStatus());
-    }
-
-    /**
-     * Create a list of refunds.
-     *
-     * @return List of Refund objects
-     */
-    private static List<Refund> createBasicRefundList() throws EasyPostException {
         Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
 
-        // We need to retrieve the shipment so that the tracking_code has time to populate
+        // We need to retrieve the shipment so that the tracking_code has time to
+        // populate
         Shipment retrievedShipment = vcr.client.shipment.retrieve(shipment.getId());
 
         Map<String, Object> params = new HashMap<>();
         params.put("carrier", Fixtures.usps());
-        params.put("tracking_codes", retrievedShipment.getTrackingCode());
+        List<String> trackingCodes = new ArrayList<>();
+        trackingCodes.add(retrievedShipment.getTrackingCode());
+        params.put("tracking_codes", trackingCodes);
 
-        return vcr.client.refund.create(params);
+        List<Refund> refunds = vcr.client.refund.create(params);
+
+        assertTrue(refunds.get(0).getId().startsWith("rfnd_"));
+        assertEquals("submitted", refunds.get(0).getStatus());
     }
 
     /**
@@ -88,7 +79,7 @@ public final class RefundTest {
     }
 
     /**
-     * Test retrieving a refunds.
+     * Test retrieving a refund.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -96,12 +87,15 @@ public final class RefundTest {
     public void testRetrieve() throws EasyPostException {
         vcr.setUpTest("retrieve");
 
-        List<Refund> refunds = createBasicRefundList();
-        Refund refund = refunds.get(0);
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixtures.pageSize());
 
-        Refund retrievedRefund = vcr.client.refund.retrieve(refund.getId());
+        RefundCollection refundCollection = vcr.client.refund.all(params);
+        List<Refund> refunds = refundCollection.getRefunds();
+
+        Refund retrievedRefund = vcr.client.refund.retrieve(refunds.get(0).getId());
 
         assertInstanceOf(Refund.class, retrievedRefund);
-        assertTrue(refund.equals(retrievedRefund));
+        assertTrue(refunds.get(0).equals(retrievedRefund));
     }
 }
