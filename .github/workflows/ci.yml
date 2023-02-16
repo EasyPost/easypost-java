@@ -55,8 +55,6 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Install dependencies
         run: make install
-      - name: Build Library
-        run: make build
       - name: Test coverage
         run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make coverage
       - name: Load Rust cache
