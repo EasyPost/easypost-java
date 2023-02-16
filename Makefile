@@ -10,9 +10,9 @@ build:
 clean:
 	mvn clean
 
-## coverage - Test the project and generate a coverage report
+## coverage - Test (and build) the project to generate a coverage report
 coverage:
-	mvn surefire:test jacoco:report
+	mvn install -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true jacoco:report
 
 ## docs - Generates library documentation
 docs:
