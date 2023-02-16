@@ -56,7 +56,7 @@ public class ReportService {
     protected String reportURL(final String type) throws EasyPostException {
         try {
             String urlType = URLEncoder.encode(type, "UTF-8").toLowerCase();
-            return "reports/" + urlType + "/";  // Yes, the trailing backslash matters, it doesn't work otherwise.
+            return "reports/" + urlType;
         } catch (java.io.UnsupportedEncodingException e) {
             throw new EncodingError(String.format(Constants.ErrorMessages.ENCODED_ERROR, "report type"), e);
         }
@@ -84,6 +84,7 @@ public class ReportService {
      */
     public ReportCollection all(final Map<String, Object> params) throws EasyPostException {
         String type = (String) params.get("type");
+        params.remove(type);
         String endpoint = reportURL(type);
 
         return Requestor.request(RequestMethod.GET, endpoint, params, ReportCollection.class, client);

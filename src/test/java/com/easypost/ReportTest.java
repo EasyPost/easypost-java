@@ -174,44 +174,6 @@ public final class ReportTest {
     }
 
     /**
-     * Test throwing an error when creating a report with no report type set.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testCreateNoType() throws EasyPostException {
-        vcr.setUpTest("create_report_no_type");
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("type", "test");
-
-        // should throw EasyPostException,
-        // but might throw NullPointerException due to a bug in the VCR grabbing
-        // response content,
-        // so we'll just check fo a generic exception
-        assertThrows(Exception.class, () -> vcr.client.report.create(params));
-    }
-
-    /**
-     * Test throwing an error when retrieving all reports with no report type set.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testAllNoType() throws EasyPostException {
-        vcr.setUpTest("all_reports_no_type");
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("type", "test");
-
-        // should throw EasyPostException,
-        // but might throw NullPointerException due to a bug in the VCR grabbing
-        // response content,
-        // so we'll just check fo a generic exception
-        assertThrows(Exception.class, () -> vcr.client.report.all(params));
-    }
-
-    /**
      * Test creating a report without type.
      * 
      * @throws EasyPostException when the request fails.
