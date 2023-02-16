@@ -102,6 +102,9 @@ Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_G
 ### Tests
 
 ```bash
+# Install dependencies
+make install
+
 # Build project
 make build
 
@@ -109,10 +112,10 @@ make build
 make lint
 
 # Run tests
-EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make test
+EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make build test
 
 # Run tests with coverage
-EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make coverage
+EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make build coverage
 
 # Run security analysis
 make scan

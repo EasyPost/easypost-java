@@ -120,8 +120,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <properties>
-                        <configurationParameters> junit.jupiter.execution.order.random.seed=99
-                        </configurationParameters>
+                        <configurationParameters>junit.jupiter.execution.order.random.seed=99</configurationParameters>
                     </properties>
                 </configuration>
             </plugin>

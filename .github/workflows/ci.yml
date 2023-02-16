@@ -14,6 +14,11 @@ jobs:
         javaversion: [ "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19" ]
     steps:
       - uses: actions/checkout@v3
+      - name: Set up JDK for compilation
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: "19" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
         with:
@@ -23,12 +28,7 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Install dependencies
         run: make install
-      - name: Set up JDK for compilation
-        uses: actions/setup-java@v3
-        with:
-          distribution: "zulu"
-          java-version: "19" # Always use the latest JDK for building
-      - name: Compile
+      - name: Build Library
         run: make build
       - name: Set up Java ${{ matrix.javaversion }}
         uses: actions/setup-java@v3
@@ -41,13 +41,22 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: Install dependencies
-        run: make install
       - name: Set up JDK for compilation
         uses: actions/setup-java@v3
         with:
           distribution: "zulu"
           java-version: "19" # Always use the latest JDK for building
+      - name: Load Maven dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-build-coverage-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Install dependencies
+        run: make install
+      - name: Build Library
+        run: make build
       - name: Test coverage
         run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make coverage
       - name: Load Rust cache

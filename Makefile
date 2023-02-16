@@ -4,7 +4,7 @@ help:
 
 ## build - Builds the project for development
 build:
-	mvn clean install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true
+	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true
 
 ## clean - Cleans the project
 clean:
@@ -32,13 +32,13 @@ install: | install-checkstyle
 lint:
 	java -jar checkstyle.jar src -c easypost_java_style.xml -d
 
-## publish - Publish a release of the project
+## publish - Publish a release of the project (will build the project via the `mvn deploy` command)
 # @parameters:
 # pass= - The GPG password to sign the release
 publish:
 	mvn clean deploy -Dgpg.passphrase=${pass}
 
-## publish-dry - Build the project as a dry run to publishing
+## publish-dry - Build the project as a dry run to publishing (will build the project via the `mvn install` command)
 # @parameters:
 # pass= - The GPG password to sign the release
 publish-dry:
