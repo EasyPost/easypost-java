@@ -12,7 +12,7 @@ clean:
 
 ## coverage - Test the project and generate a coverage report
 coverage:
-	mvn --batch-mode install -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report
+	mvn surefire:test jacoco:report
 
 ## docs - Generates library documentation
 docs:

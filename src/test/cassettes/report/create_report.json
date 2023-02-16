@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1668466080,
+    "recordedAt": 1676582026,
     "request": {
       "body": "{\n  \"end_date\": \"2022-05-04\",\n  \"start_date\": \"2022-05-04\"\n}",
       "method": "POST",
@@ -15,10 +15,10 @@
           "application/json"
         ]
       },
-      "uri": "https://api.easypost.com/v2/reports/shipment/"
+      "uri": "https://api.easypost.com/v2/reports/shipment"
     },
     "response": {
-      "body": "{\n  \"end_date\": \"2022-05-04\",\n  \"mode\": \"test\",\n  \"include_children\": false,\n  \"updated_at\": \"2022-11-14T22:48:00Z\",\n  \"created_at\": \"2022-11-14T22:48:00Z\",\n  \"id\": \"shprep_dfcc28ede23d4caaae3383e654ccb159\",\n  \"url_expires_at\": null,\n  \"url\": null,\n  \"object\": \"ShipmentReport\",\n  \"start_date\": \"2022-05-04\",\n  \"status\": \"new\"\n}",
+      "body": "{\n  \"end_date\": \"2022-05-04\",\n  \"mode\": \"test\",\n  \"include_children\": false,\n  \"updated_at\": \"2023-02-16T21:13:46Z\",\n  \"created_at\": \"2023-02-16T21:13:46Z\",\n  \"id\": \"shprep_702d4362696940168c97e6f4a86cb57c\",\n  \"url_expires_at\": null,\n  \"url\": null,\n  \"object\": \"ShipmentReport\",\n  \"start_date\": \"2022-05-04\",\n  \"status\": \"new\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb4nuq"
+          "bigweb9nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,27 +58,26 @@
           "1; mode\u003dblock"
         ],
         "x-ep-request-uuid": [
-          "3a8b2e0d6372c5a0e0d9eb040019cbcc"
+          "d6e2ffc863ee9c8ae7897645000d7408"
         ],
         "x-proxied": [
-          "extlb4wdc 29913d444b",
-          "intlb2wdc 29913d444b",
-          "intlb1nuq 29913d444b"
+          "extlb1nuq a40ea751fd",
+          "intlb1nuq a40ea751fd"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.041816"
+          "0.038287"
         ],
         "etag": [
-          "W/\"6ec9cb9c48df661c36ebf3670a52259e\""
+          "W/\"8b824b001da8cb3c721e168cdb1f6451\""
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211142148-00c0334849-master"
+          "easypost-202302161858-5b15c0a595-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -88,8 +87,8 @@
         "code": 201,
         "message": "Created"
       },
-      "uri": "https://api.easypost.com/v2/reports/shipment/"
+      "uri": "https://api.easypost.com/v2/reports/shipment"
     },
-    "duration": 267
+    "duration": 276
   }
 ]
