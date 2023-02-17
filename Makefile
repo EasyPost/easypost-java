@@ -12,11 +12,11 @@ clean:
 
 ## coverage - Test (and build) the project to generate a coverage report
 coverage:
-	mvn install -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true jacoco:report
+	mvn verify -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report
 
 ## docs - Generates library documentation
 docs:
-	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true
+	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true
 	cp -R target/apidocs/ ./docs/
 
 ## install-checkstyle - Install CheckStyle
