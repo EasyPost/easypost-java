@@ -6,7 +6,7 @@
     <groupId>com.easypost</groupId>
     <artifactId>easypost-api-client</artifactId>
 
-    <version>6.2.0</version>
+    <version>6.3.0</version>
     <packaging>jar</packaging>
 
     <name>com.easypost:easypost-api-client</name>
@@ -146,6 +146,26 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.90</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
