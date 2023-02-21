@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v6.3.0 (2023-02-17)
+## v6.3.0 (2023-02-21)
 
 - Adds beta `retrieveStatelessRates` function to get stateless rates
 - Adds `getLowestStatelessRate` function to filter the lowest stateless rate
