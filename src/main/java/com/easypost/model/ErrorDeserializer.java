@@ -36,10 +36,11 @@ public final class ErrorDeserializer implements JsonDeserializer<Error> {
             error.setCode("NO RESPONSE CODE");
             return error;
         }
-        
+
         JsonElement errorMessage = results.getAsJsonObject().get("message");
-        if (errorMessage.isJsonArray()) {
-            JsonArray jsonArray = errorMessage.getAsJsonArray();
+        if (errorMessage.isJsonArray() || errorMessage.isJsonObject()) {
+            JsonArray jsonArray = errorMessage.isJsonArray() ? errorMessage.getAsJsonArray() : errorMessage
+                    .getAsJsonObject().get("errors").getAsJsonArray();
             ArrayList<String> messages = new ArrayList<>();
 
             for (int i = 0; i < jsonArray.size(); i++) {
