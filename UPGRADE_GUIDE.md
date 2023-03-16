@@ -149,6 +149,10 @@ The following properties have changed types:
 
 ## Upgrading from 4.x to 5.0
 
+**NOTICE:** v5 is deprecated.
+
+[v5 Docs](https://github.com/EasyPost/examples/tree/master/official/docs/java/v5)
+
 ### 5.0 High Impact Changes
 
 - [Updating Dependencies](#50-updating-dependencies)
