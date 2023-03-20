@@ -12,8 +12,32 @@ import com.google.gson.JsonPrimitive;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 public final class ErrorDeserializer implements JsonDeserializer<Error> {
+    /**
+     * Recursively traverse an error JSON element and its sub-element(s), and extracts all
+     * error string values found into the specified string list.
+     *
+     * @param element the JSON element to traverse
+     * @param messagesList the list of strings to append found values to
+     */
+    private void traverseJsonElement(JsonElement element, ArrayList<String> messagesList) {
+        if (element.isJsonPrimitive()) {
+            messagesList.add(element.getAsString());
+        } else if (element.isJsonArray()) {
+            JsonArray array = element.getAsJsonArray();
+            for (JsonElement arrayElement : array) {
+                traverseJsonElement(arrayElement, messagesList);
+            }
+        } else if (element.isJsonObject()) {
+            JsonObject object = element.getAsJsonObject();
+            for (Entry<String, JsonElement> entry : object.entrySet()) {
+                traverseJsonElement(entry.getValue(), messagesList);
+            }
+        }
+    }
+
     /**
      * Deserialize an Error from a JSON object.
      *
@@ -25,7 +49,7 @@ public final class ErrorDeserializer implements JsonDeserializer<Error> {
      */
     @Override
     public Error deserialize(final JsonElement json, final Type typeOfT,
-    final JsonDeserializationContext context) throws JsonParseException{
+    final JsonDeserializationContext context) throws JsonParseException {
         JsonObject jo = json.getAsJsonObject();
         JsonElement results = jo.get("error");
         Gson gson = new Gson();
@@ -38,16 +62,31 @@ public final class ErrorDeserializer implements JsonDeserializer<Error> {
         }
         
         JsonElement errorMessage = results.getAsJsonObject().get("message");
-        if (errorMessage.isJsonArray()) {
-            JsonArray jsonArray = errorMessage.getAsJsonArray();
-            ArrayList<String> messages = new ArrayList<>();
+        ArrayList<String> messages = new ArrayList<>();
 
-            for (int i = 0; i < jsonArray.size(); i++) {
-                messages.add(jsonArray.get(i).getAsString());
+        try {
+            if (errorMessage.isJsonArray()) {
+                JsonArray jsonArray = errorMessage.getAsJsonArray();
+                for (JsonElement arrayElement : jsonArray) {
+                    traverseJsonElement(arrayElement, messages);
+                }
+
+                JsonPrimitive value = new JsonPrimitive(String.join(", ", messages));
+                results.getAsJsonObject().add("message", value);
+            } else if (errorMessage.isJsonObject()) {
+                JsonObject object = errorMessage.getAsJsonObject();
+                for (Entry<String, JsonElement> entry : object.entrySet()) {
+                    traverseJsonElement(entry.getValue(), messages);
+                }
+
+                JsonPrimitive value = new JsonPrimitive(String.join(", ", messages));
+                results.getAsJsonObject().add("message", value);
             }
-
-            JsonPrimitive value = new JsonPrimitive(String.join(", ", messages));
-            results.getAsJsonObject().add("message", value);
+        } catch (Exception e) {
+            Error error = new Error();
+            error.setMessage("Error deserializing JSON response");
+            error.setCode("ERROR_DESERIALIZATION_ERROR");
+            return error;
         }
 
         return gson.fromJson(results, Error.class);
