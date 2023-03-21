@@ -2,6 +2,8 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.General.EndOfPaginationError;
+import com.easypost.exception.General.MissingParameterError;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
 
@@ -15,6 +17,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -156,6 +159,29 @@ public final class AddressTest {
         assertTrue(addressesList.size() <= Fixtures.pageSize());
         assertNotNull(addresses.getHasMore());
         assertTrue(addressesList.stream().allMatch(address -> address instanceof Address));
+    }
+
+    /**
+     * Test retrieving the next page of addresses.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetNextPage() throws EasyPostException {
+        vcr.setUpTest("get_next_page");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixtures.pageSize());
+        AddressCollection addresses = vcr.client.address.all(params);
+
+        AddressCollection nextPage = vcr.client.address.getNextPage(addresses);
+
+        assertNotNull(nextPage);
+
+        String firstIdOfFirstPage = addresses.getAddresses().get(0).getId();
+        String firstIdOfSecondPage = nextPage.getAddresses().get(0).getId();
+
+        assertNotEquals(firstIdOfFirstPage, firstIdOfSecondPage);
     }
 
     /**

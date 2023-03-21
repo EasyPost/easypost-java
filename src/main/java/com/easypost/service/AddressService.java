@@ -1,14 +1,18 @@
 package com.easypost.service;
 
+import com.easypost.exception.APIException;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
 import com.easypost.model.AddressVerifyResponse;
+import lombok.SneakyThrows;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class AddressService {
     private final EasyPostClient client;
@@ -65,12 +69,32 @@ public class AddressService {
      *
      * @param params Map of parameters.
      * @return AddressCollection object.
-     * @throws EasyPostException when the request fails.
+     * @throws APIException when the request fails.
      */
-    public AddressCollection all(final Map<String, Object> params) throws EasyPostException {
+    public AddressCollection all(final Map<String, Object> params) throws APIException {
         String endpoint = "addresses";
 
         return Requestor.request(RequestMethod.GET, endpoint, params, AddressCollection.class, client);
+    }
+
+    public AddressCollection getNextPage(AddressCollection collection) throws EndOfPaginationError {
+        return collection.getNextPage(new Function<Map<String, Object>, AddressCollection>() {
+            @Override
+            @SneakyThrows(APIException.class)
+            public AddressCollection apply(Map<String, Object> parameters) {
+                return all(parameters);
+            }
+        }, collection.getAddresses());
+    }
+
+    public AddressCollection getNextPage(AddressCollection collection, int pageSize) throws EndOfPaginationError {
+        return collection.getNextPage(new Function<Map<String, Object>, AddressCollection>() {
+            @Override
+            @SneakyThrows(APIException.class)
+            public AddressCollection apply(Map<String, Object> parameters) {
+                return all(parameters);
+            }
+        }, collection.getAddresses(), pageSize);
     }
 
     /**
