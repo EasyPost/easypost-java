@@ -60,28 +60,13 @@ public final class ErrorDeserializer implements JsonDeserializer<Error> {
             error.setCode("NO RESPONSE CODE");
             return error;
         }
-        
-        JsonElement errorMessage = results.getAsJsonObject().get("message");
-        ArrayList<String> messages = new ArrayList<>();
 
         try {
-            if (errorMessage.isJsonArray()) {
-                JsonArray jsonArray = errorMessage.getAsJsonArray();
-                for (JsonElement arrayElement : jsonArray) {
-                    traverseJsonElement(arrayElement, messages);
-                }
-
-                JsonPrimitive value = new JsonPrimitive(String.join(", ", messages));
-                results.getAsJsonObject().add("message", value);
-            } else if (errorMessage.isJsonObject()) {
-                JsonObject object = errorMessage.getAsJsonObject();
-                for (Entry<String, JsonElement> entry : object.entrySet()) {
-                    traverseJsonElement(entry.getValue(), messages);
-                }
-
-                JsonPrimitive value = new JsonPrimitive(String.join(", ", messages));
-                results.getAsJsonObject().add("message", value);
-            }
+            ArrayList<String> messages = new ArrayList<>();
+            JsonElement errorMessageJson = results.getAsJsonObject().get("message");
+            traverseJsonElement(errorMessageJson, messages);
+            JsonPrimitive value = new JsonPrimitive(String.join(", ", messages));
+            results.getAsJsonObject().add("message", value);
         } catch (Exception e) {
             Error error = new Error();
             error.setMessage("Error deserializing JSON response");
