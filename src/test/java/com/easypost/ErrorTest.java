@@ -32,9 +32,10 @@ public final class ErrorTest extends Requestor {
 
     /**
      * Set up the testing environment for this file.
+     * 
      * @throws MissingParameterError
      *
-     * @throws EasyPostException when the request fails.
+     * @throws EasyPostException     when the request fails.
      */
     @BeforeAll
     public static void setup() throws MissingParameterError {
@@ -49,7 +50,7 @@ public final class ErrorTest extends Requestor {
     @Test
     public void testError() throws EasyPostException {
         vcr.setUpTest("error");
-        
+
         APIException exception = assertThrows(InvalidRequestError.class, () -> vcr.client.shipment.create(null));
 
         assertEquals(422, exception.getStatusCode());
@@ -67,31 +68,31 @@ public final class ErrorTest extends Requestor {
     @Test
     public void testKnownApiException() throws EasyPostException {
         HashMap<Integer, Class<?>> apiErrorsMap = new HashMap<Integer, Class<?>>();
-            apiErrorsMap.put(300, RedirectError.class);
-            apiErrorsMap.put(301, RedirectError.class);
-            apiErrorsMap.put(302, RedirectError.class);
-            apiErrorsMap.put(303, RedirectError.class);
-            apiErrorsMap.put(304, RedirectError.class);
-            apiErrorsMap.put(305, RedirectError.class);
-            apiErrorsMap.put(306, RedirectError.class);
-            apiErrorsMap.put(307, RedirectError.class);
-            apiErrorsMap.put(308, RedirectError.class);
-            apiErrorsMap.put(401, UnauthorizedError.class);
-            apiErrorsMap.put(402, PaymentError.class);
-            apiErrorsMap.put(403, ForbiddenError.class);
-            apiErrorsMap.put(404, NotFoundError.class);
-            apiErrorsMap.put(405, MethodNotAllowedError.class);
-            apiErrorsMap.put(408, TimeoutError.class);
-            apiErrorsMap.put(422, InvalidRequestError.class);
-            apiErrorsMap.put(429, RateLimitError.class);
-            apiErrorsMap.put(444, UnknownApiError.class);
-            apiErrorsMap.put(500, InternalServerError.class);
-            apiErrorsMap.put(503, ServiceUnavailableError.class);
-            apiErrorsMap.put(504, GatewayTimeoutError.class);
+        apiErrorsMap.put(300, RedirectError.class);
+        apiErrorsMap.put(301, RedirectError.class);
+        apiErrorsMap.put(302, RedirectError.class);
+        apiErrorsMap.put(303, RedirectError.class);
+        apiErrorsMap.put(304, RedirectError.class);
+        apiErrorsMap.put(305, RedirectError.class);
+        apiErrorsMap.put(306, RedirectError.class);
+        apiErrorsMap.put(307, RedirectError.class);
+        apiErrorsMap.put(308, RedirectError.class);
+        apiErrorsMap.put(401, UnauthorizedError.class);
+        apiErrorsMap.put(402, PaymentError.class);
+        apiErrorsMap.put(403, ForbiddenError.class);
+        apiErrorsMap.put(404, NotFoundError.class);
+        apiErrorsMap.put(405, MethodNotAllowedError.class);
+        apiErrorsMap.put(408, TimeoutError.class);
+        apiErrorsMap.put(422, InvalidRequestError.class);
+        apiErrorsMap.put(429, RateLimitError.class);
+        apiErrorsMap.put(444, UnknownApiError.class);
+        apiErrorsMap.put(500, InternalServerError.class);
+        apiErrorsMap.put(503, ServiceUnavailableError.class);
+        apiErrorsMap.put(504, GatewayTimeoutError.class);
 
-        for (Map.Entry<Integer, Class<?>> entry: apiErrorsMap.entrySet()) {
+        for (Map.Entry<Integer, Class<?>> entry : apiErrorsMap.entrySet()) {
             APIException exception = assertThrows(APIException.class,
-                () -> handleAPIError("{}", entry.getKey()));
+                    () -> handleAPIError("{}", entry.getKey()));
 
             assertEquals(Constants.ErrorMessages.API_DID_NOT_RETURN_ERROR_DETAILS, exception.getMessage());
             assertEquals("NO RESPONSE CODE", exception.getCode());
@@ -107,10 +108,15 @@ public final class ErrorTest extends Requestor {
      */
     @Test
     public void testExceptionErrorMessageParsing() throws EasyPostException {
-        String errorMessageStringJson =
-            "{\"error\": {\"code\": \"ERROR_CODE\", \"message\": \"ERROR_MESSAGE_1\", \"errors\": []}}";
+        String errorMessageStringJson = "{\n" +
+                "    \"error\": {\n" +
+                "        \"code\": \"ERROR_CODE\",\n" +
+                "        \"message\": \"ERROR_MESSAGE_1\",\n" +
+                "        \"errors\": []\n" +
+                "    }\n" +
+                "}";
         EasyPostException exception = assertThrows(EasyPostException.class,
-            () -> handleAPIError(errorMessageStringJson, 400));
+                () -> handleAPIError(errorMessageStringJson, 400));
 
         assertEquals("ERROR_MESSAGE_1", exception.getMessage());
     }
@@ -122,12 +128,79 @@ public final class ErrorTest extends Requestor {
      */
     @Test
     public void testExceptionErrorArrayParsing() throws EasyPostException {
-        String errorMessageArrayJson = "{\"error\": {\"code\": \"ERROR_CODE\", \"message\":" +
-            "[\"ERROR_MESSAGE_1\", \"ERROR_MESSAGE_2\"], \"errors\": []}}";
-
+        String errorMessageArrayJson = "{\n" +
+        "    \"error\": {\n" +
+        "        \"code\": \"ERROR_CODE\",\n" +
+        "        \"message\": [\n" +
+        "            \"ERROR_MESSAGE_1\",\n" +
+        "            \"ERROR_MESSAGE_2\"\n" +
+        "        ],\n" +
+        "        \"errors\": []\n" +
+        "    }\n" +
+        "}";
         EasyPostException exception = assertThrows(EasyPostException.class,
-            () -> handleAPIError(errorMessageArrayJson, 400));
+                () -> handleAPIError(errorMessageArrayJson, 400));
 
         assertEquals("ERROR_MESSAGE_1, ERROR_MESSAGE_2", exception.getMessage());
+    }
+
+    /**
+     * Test parsing error message that is an object.
+     *
+     * @throws EasyPostException
+     */
+    @Test
+    public void testExceptionErrorObjectParsing() throws EasyPostException {
+        String errorMessageObjectJson = "{\n" +
+                "    \"error\": {\n" +
+                "        \"code\": \"UNPROCESSABLE_ENTITY\",\n" +
+                "        \"message\": {\n" +
+                "            \"errors\": [\n" +
+                "                \"bad error.\",\n" +
+                "                \"second bad error.\"\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        \"errors\": []\n" +
+                "    }\n" +
+                "}";
+
+        EasyPostException exception = assertThrows(EasyPostException.class,
+                () -> handleAPIError(errorMessageObjectJson, 400));
+
+        assertEquals("bad error., second bad error.", exception.getMessage());
+    }
+
+    /**
+     * Test parsing error message that has really bad format.
+     *
+     * @throws EasyPostException
+     */
+    @Test
+    public void testExceptionErrorEdgeCaseParsing() throws EasyPostException {
+        String json = "{\n" +
+                "    \"error\": {\n" +
+                "        \"code\": \"UNPROCESSABLE_ENTITY\",\n" +
+                "        \"message\": {\n" +
+                "            \"errors\": [\n" +
+                "                \"Bad format 1\",\n" +
+                "                \"Bad format 2\"\n" +
+                "            ],\n" +
+                "            \"bad_data\": [\n" +
+                "                {\n" +
+                "                    \"first_message\": \"Bad format 3\",\n" +
+                "                    \"second_message\": \"Bad format 4\",\n" +
+                "                    \"thrid_message\": \"Bad format 5\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        \"errors\": []\n" +
+                "    }\n" +
+                "}";
+
+        EasyPostException exception = assertThrows(EasyPostException.class,
+                () -> handleAPIError(json, 400));
+
+        assertEquals("Bad format 1, Bad format 2, Bad format 3, Bad format 4, Bad format 5",
+                exception.getMessage());
     }
 }
