@@ -2,8 +2,6 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.InvalidRequestError;
-import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.exception.General.MissingParameterError;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
 

@@ -31,7 +31,8 @@ public final class PaginatedCollectionTest {
 
     /**
      * Test getting the next page of a paginated collection.
-     * This getNextPage method is implemented on a per-service, but rather than testing in each service, we'll test it once here.
+     * This getNextPage method is implemented on a per-service,
+     * but rather than testing in each service, we'll test it once here.
      *
      * @throws EasyPostException when the request fails.
      */

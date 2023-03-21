@@ -5,6 +5,8 @@
 <suppressions>
         <!-- Don't enforce MagicNumber checks on unit test files -->
         <suppress checks="MagicNumber" files="com[\\/]easypost[\\/].*Test.java" />
+        <!-- Don't enforce MagicNumber checks on com.easypost.model.PaginatedCollection -->
+        <suppress checks="MagicNumber" files="com.easypost.model.PaginatedCollection.java" />
         <!-- Don't enforce MagicNumber checks on ApachePatch.java -->
         <suppress checks="MagicNumber" files="com.easypost.utils.ApachePatch.java" />
         <!-- Don't do any CheckStyle checks on any com.easypost.app files. -->

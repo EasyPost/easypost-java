@@ -77,20 +77,35 @@ public class AddressService {
         return Requestor.request(RequestMethod.GET, endpoint, params, AddressCollection.class, client);
     }
 
+    /**
+     * Get the next page of an AddressCollection.
+     *
+     * @param collection AddressCollection to get next page of.
+     * @return AddressCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
     public AddressCollection getNextPage(AddressCollection collection) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, AddressCollection>() {
             @Override
-            @SneakyThrows(APIException.class)
+            @SneakyThrows (APIException.class)
             public AddressCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }
         }, collection.getAddresses());
     }
 
+    /**
+     * Get the next page of an AddressCollection.
+     *
+     * @param collection AddressCollection to get next page of.
+     * @param pageSize   The number of results to return on the next page.
+     * @return AddressCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
     public AddressCollection getNextPage(AddressCollection collection, int pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, AddressCollection>() {
             @Override
-            @SneakyThrows(APIException.class)
+            @SneakyThrows (APIException.class)
             public AddressCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }
@@ -127,8 +142,7 @@ public class AddressService {
         String endpoint = "addresses/" + id + "/verify";
 
         AddressVerifyResponse response =
-                Requestor.request(RequestMethod.GET, endpoint, null, AddressVerifyResponse.class,
-                        client);
+                Requestor.request(RequestMethod.GET, endpoint, null, AddressVerifyResponse.class, client);
 
         return response.getAddress();
     }
