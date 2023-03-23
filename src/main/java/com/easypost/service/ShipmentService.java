@@ -2,19 +2,22 @@ package com.easypost.service;
 
 import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.exception.General.FilteringError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
+import com.easypost.model.ShipmentCollection;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
-import com.easypost.model.ShipmentCollection;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import com.easypost.model.SmartrateCollection;
+import lombok.SneakyThrows;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class ShipmentService {
     private final EasyPostClient client;
@@ -82,6 +85,34 @@ public class ShipmentService {
         String endpoint = "shipments";
 
         return Requestor.request(RequestMethod.GET, endpoint, params, ShipmentCollection.class, client);
+    }
+
+    /**
+     * Get the next page of an ShipmentCollection.
+     *
+     * @param collection ShipmentCollection to get next page of.
+     * @return ShipmentCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public ShipmentCollection getNextPage(ShipmentCollection collection) throws EndOfPaginationError {
+        return getNextPage(collection, null);
+    }
+
+    /**
+     * Get the next page of an ShipmentCollection.
+     *
+     * @param collection ShipmentCollection to get next page of.
+     * @param pageSize   The number of results to return on the next page.
+     * @return ShipmentCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public ShipmentCollection getNextPage(ShipmentCollection collection, Integer pageSize) throws EndOfPaginationError {
+        return collection.getNextPage(new Function<Map<String, Object>, ShipmentCollection>() {
+            @SneakyThrows
+            public ShipmentCollection apply(Map<String, Object> parameters) {
+                return all(parameters);
+            }
+        }, collection.getShipments(), pageSize);
     }
 
     /**

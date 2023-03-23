@@ -2,8 +2,12 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ExternalApiError;
+import com.easypost.exception.General.EndOfPaginationError;
+import com.easypost.model.AddressCollection;
+import com.easypost.model.InsuranceCollection;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
+import com.easypost.model.Rate;
 import com.easypost.model.ReferralCustomer;
 import com.easypost.model.ReferralCustomerCollection;
 
@@ -17,9 +21,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public final class ReferralTest {
     private static TestUtils.VCR vcr;
@@ -101,6 +107,35 @@ public final class ReferralTest {
         assertTrue(referralUsers.size() <= Fixtures.pageSize());
         assertNotNull(referralCustomerCollection.getHasMore());
         assertTrue(referralUsers.stream().allMatch(referral -> referral instanceof ReferralCustomer));
+    }
+
+    /**
+     * Test retrieving the next page.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetNextPage() throws EasyPostException {
+        vcr.setUpTest("get_next_page");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixtures.pageSize());
+        ReferralCustomerCollection collection = vcr.client.referralCustomer.all(params);
+
+        try {
+            ReferralCustomerCollection nextPage = vcr.client.referralCustomer.getNextPage(collection);
+
+            assertNotNull(nextPage);
+
+            String firstIdOfFirstPage = collection.getReferralCustomers().get(0).getId();
+            String firstIdOfSecondPage = nextPage.getReferralCustomers().get(0).getId();
+
+            assertNotEquals(firstIdOfFirstPage, firstIdOfSecondPage);
+        } catch (EndOfPaginationError e) { // There's no next page, that's not a failure
+            assertTrue(true);
+        } catch (Exception e) { // Any other exception is a failure
+            fail();
+        }
     }
 
     /**

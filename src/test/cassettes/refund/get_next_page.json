@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1679612613,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/refunds?%70%61%67%65%5F%73%69%7A%65\u003d%35"
+    },
+    "response": {
+      "body": "{\n  \"has_more\": false,\n  \"refunds\": []\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "31"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb1nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "ebbc776f641cdac5e78b1f690014e8dd"
+        ],
+        "x-proxied": [
+          "intlb1nuq a40ea751fd",
+          "extlb1nuq a29e4ad05c"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.024539"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "etag": [
+          "W/\"b7f27d1ea29478c50d2e1a7ab8bcb58a\""
+        ],
+        "x-version-label": [
+          "easypost-202303231906-99995c7f02-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/refunds?%70%61%67%65%5F%73%69%7A%65\u003d%35"
+    },
+    "duration": 229
+  }
+]

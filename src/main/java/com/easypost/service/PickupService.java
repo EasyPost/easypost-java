@@ -1,14 +1,17 @@
 package com.easypost.service;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
-import com.easypost.model.Pickup;
 import com.easypost.model.PickupCollection;
+import com.easypost.model.Pickup;
 import com.easypost.model.PickupRate;
+import lombok.SneakyThrows;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class PickupService {
     private final EasyPostClient client;
@@ -33,6 +36,34 @@ public class PickupService {
         String endpoint = "pickups";
 
         return Requestor.request(RequestMethod.GET, endpoint, params, PickupCollection.class, client);
+    }
+
+    /**
+     * Get the next page of an PickupCollection.
+     *
+     * @param collection PickupCollection to get next page of.
+     * @return PickupCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public PickupCollection getNextPage(PickupCollection collection) throws EndOfPaginationError {
+        return getNextPage(collection, null);
+    }
+
+    /**
+     * Get the next page of an PickupCollection.
+     *
+     * @param collection PickupCollection to get next page of.
+     * @param pageSize   The number of results to return on the next page.
+     * @return PickupCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public PickupCollection getNextPage(PickupCollection collection, Integer pageSize) throws EndOfPaginationError {
+        return collection.getNextPage(new Function<Map<String, Object>, PickupCollection>() {
+            @SneakyThrows
+            public PickupCollection apply(Map<String, Object> parameters) {
+                return all(parameters);
+            }
+        }, collection.getPickups(), pageSize);
     }
 
     /**

@@ -64,6 +64,8 @@ public class EndShipperService {
         return Requestor.request(RequestMethod.GET, endpoint, params, EndShipperCollection.class, client);
     }
 
+    // TODO: Add getNextPage function when "before_id" is available for EndShipper All endpoint.
+
     /**
      * Update an EndShipper object.
      *

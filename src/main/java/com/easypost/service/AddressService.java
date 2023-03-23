@@ -85,13 +85,7 @@ public class AddressService {
      * @throws EndOfPaginationError when there are no more pages to retrieve.
      */
     public AddressCollection getNextPage(AddressCollection collection) throws EndOfPaginationError {
-        return collection.getNextPage(new Function<Map<String, Object>, AddressCollection>() {
-            @Override
-            @SneakyThrows (APIException.class)
-            public AddressCollection apply(Map<String, Object> parameters) {
-                return all(parameters);
-            }
-        }, collection.getAddresses());
+        return getNextPage(collection, null);
     }
 
     /**
@@ -102,10 +96,9 @@ public class AddressService {
      * @return AddressCollection object.
      * @throws EndOfPaginationError when there are no more pages to retrieve.
      */
-    public AddressCollection getNextPage(AddressCollection collection, int pageSize) throws EndOfPaginationError {
+    public AddressCollection getNextPage(AddressCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, AddressCollection>() {
-            @Override
-            @SneakyThrows (APIException.class)
+            @SneakyThrows
             public AddressCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }

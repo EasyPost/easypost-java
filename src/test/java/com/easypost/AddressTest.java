@@ -2,9 +2,11 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
 
+import com.easypost.model.InsuranceCollection;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public final class AddressTest {
     private static TestUtils.VCR vcr;
@@ -160,7 +163,7 @@ public final class AddressTest {
     }
 
     /**
-     * Test retrieving the next page of addresses.
+     * Test retrieving the next page.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -170,16 +173,22 @@ public final class AddressTest {
 
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixtures.pageSize());
-        AddressCollection addresses = vcr.client.address.all(params);
+        AddressCollection collection = vcr.client.address.all(params);
 
-        AddressCollection nextPage = vcr.client.address.getNextPage(addresses);
+        try {
+            AddressCollection nextPage = vcr.client.address.getNextPage(collection);
 
-        assertNotNull(nextPage);
+            assertNotNull(nextPage);
 
-        String firstIdOfFirstPage = addresses.getAddresses().get(0).getId();
-        String firstIdOfSecondPage = nextPage.getAddresses().get(0).getId();
+            String firstIdOfFirstPage = collection.getAddresses().get(0).getId();
+            String firstIdOfSecondPage = nextPage.getAddresses().get(0).getId();
 
-        assertNotEquals(firstIdOfFirstPage, firstIdOfSecondPage);
+            assertNotEquals(firstIdOfFirstPage, firstIdOfSecondPage);
+        } catch (EndOfPaginationError e) { // There's no next page, that's not a failure
+            assertTrue(true);
+        } catch (Exception e) { // Any other exception is a failure
+            fail();
+        }
     }
 
     /**

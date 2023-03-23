@@ -1,11 +1,14 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.exception.General.InvalidParameterError;
 import com.easypost.model.Address;
+import com.easypost.model.AddressCollection;
 import com.easypost.model.EndShipper;
 import com.easypost.model.Fee;
 import com.easypost.model.Form;
+import com.easypost.model.InsuranceCollection;
 import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
@@ -26,10 +29,12 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public final class ShipmentTest {
     private static TestUtils.VCR vcr;
@@ -117,6 +122,35 @@ public final class ShipmentTest {
         assertTrue(shipments.size() <= Fixtures.pageSize());
         assertNotNull(shipmentCollection.getHasMore());
         assertTrue(shipments.stream().allMatch(shipment -> shipment instanceof Shipment));
+    }
+
+    /**
+     * Test retrieving the next page.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetNextPage() throws EasyPostException {
+        vcr.setUpTest("get_next_page");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixtures.pageSize());
+        ShipmentCollection collection = vcr.client.shipment.all(params);
+
+        try {
+            ShipmentCollection nextPage = vcr.client.shipment.getNextPage(collection);
+
+            assertNotNull(nextPage);
+
+            String firstIdOfFirstPage = collection.getShipments().get(0).getId();
+            String firstIdOfSecondPage = nextPage.getShipments().get(0).getId();
+
+            assertNotEquals(firstIdOfFirstPage, firstIdOfSecondPage);
+        } catch (EndOfPaginationError e) { // There's no next page, that's not a failure
+            assertTrue(true);
+        } catch (Exception e) { // Any other exception is a failure
+            fail();
+        }
     }
 
     /**
