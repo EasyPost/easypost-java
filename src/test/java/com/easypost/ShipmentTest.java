@@ -4,11 +4,9 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.exception.General.InvalidParameterError;
 import com.easypost.model.Address;
-import com.easypost.model.AddressCollection;
 import com.easypost.model.EndShipper;
 import com.easypost.model.Fee;
 import com.easypost.model.Form;
-import com.easypost.model.InsuranceCollection;
 import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
@@ -16,7 +14,6 @@ import com.easypost.model.ShipmentCollection;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import com.easypost.utils.Utilities;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -390,10 +387,8 @@ public final class ShipmentTest {
         Parcel parcel = vcr.client.parcel.create(Fixtures.basicParcel());
 
         Map<String, Object> shipmentData = Fixtures.basicShipment();
-        shipmentData.put("from_address", Collections.singletonMap("id",
-                fromAddress.getId()));
-        shipmentData.put("to_address", Collections.singletonMap("id",
-                toAddress.getId()));
+        shipmentData.put("from_address", Collections.singletonMap("id", fromAddress.getId()));
+        shipmentData.put("to_address", Collections.singletonMap("id", toAddress.getId()));
         shipmentData.put("parcel", Collections.singletonMap("id", parcel.getId()));
 
         Shipment shipment = vcr.client.shipment.create(shipmentData);
@@ -448,8 +443,8 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate");
 
         Shipment shipment = createBasicShipment();
-        SmartRate lowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
-                SmartrateAccuracy.Percentile90);
+        SmartRate lowestSmartRateFilters =
+                vcr.client.shipment.lowestSmartRate(shipment.getId(), 2, SmartrateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
         assertEquals("Priority", lowestSmartRateFilters.getService());
@@ -462,8 +457,8 @@ public final class ShipmentTest {
             vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartrateAccuracy.Percentile90);
         });
 
-        SmartRate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
-                "percentile_90");
+        SmartRate deprecatedLowestSmartRateFilters =
+                vcr.client.shipment.lowestSmartRate(shipment.getId(), 2, "percentile_90");
 
         // Test lowest smartrate with valid filters
         assertEquals("Priority", deprecatedLowestSmartRateFilters.getService());
@@ -479,7 +474,7 @@ public final class ShipmentTest {
 
     /**
      * Test getting smart rates for a shipment.
-     * 
+     *
      * @throws EasyPostException
      */
     @Test
@@ -529,8 +524,7 @@ public final class ShipmentTest {
         List<SmartRate> smartRates = vcr.client.shipment.smartrates(shipment.getId());
 
         // Test lowest smartrate with valid filters
-        SmartRate lowestSmartRate = Utilities.findLowestSmartrate(smartRates, 2,
-                SmartrateAccuracy.Percentile90);
+        SmartRate lowestSmartRate = Utilities.findLowestSmartrate(smartRates, 2, SmartrateAccuracy.Percentile90);
         assertEquals("Priority", lowestSmartRate.getService());
         assertEquals(8.15, lowestSmartRate.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRate.getCarrier());
@@ -576,8 +570,8 @@ public final class ShipmentTest {
         Shipment shipment = createOneCallBuyShipment();
         String formType = "return_packing_slip";
 
-        Shipment shipmentWithForm = vcr.client.shipment.generateForm(shipment.getId(), formType,
-                Fixtures.rmaFormOptions());
+        Shipment shipmentWithForm =
+                vcr.client.shipment.generateForm(shipment.getId(), formType, Fixtures.rmaFormOptions());
 
         assertTrue(shipmentWithForm.getForms().size() > 0);
 

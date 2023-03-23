@@ -90,9 +90,10 @@ public class ReportService {
         params.remove(type);
         String endpoint = reportURL(type);
 
-        ReportCollection collection = Requestor.request(RequestMethod.GET, endpoint, params, ReportCollection.class, client);
+        ReportCollection collection =
+                Requestor.request(RequestMethod.GET, endpoint, params, ReportCollection.class, client);
         // we store the type of reports in this collection, for use in pagination
-        collection.type = type;
+        collection.setType(type);
         return collection;
 
     }

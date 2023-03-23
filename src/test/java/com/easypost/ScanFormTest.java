@@ -2,8 +2,6 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.model.AddressCollection;
-import com.easypost.model.InsuranceCollection;
 import com.easypost.model.ScanForm;
 import com.easypost.model.ScanFormCollection;
 import com.easypost.model.Shipment;

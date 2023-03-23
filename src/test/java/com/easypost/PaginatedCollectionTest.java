@@ -94,10 +94,8 @@ public final class PaginatedCollectionTest {
         params.put("page_size", Fixtures.pageSize());
 
         requestMock.when(
-                        () -> Requestor.request(
-                                Requestor.RequestMethod.GET, "addresses",
-                                params, AddressCollection.class, vcr.client))
-                .thenReturn(fakeCollection);
+                () -> Requestor.request(Requestor.RequestMethod.GET, "addresses", params, AddressCollection.class,
+                        vcr.client)).thenReturn(fakeCollection);
 
         AddressCollection collection = vcr.client.address.all(params);
 

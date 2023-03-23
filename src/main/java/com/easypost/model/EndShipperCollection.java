@@ -7,7 +7,7 @@ import com.easypost.exception.General.EndOfPaginationError;
 import lombok.Getter;
 
 @Getter
-public class EndShipperCollection extends PaginatedCollection<EndShipper>{
+public final class EndShipperCollection extends PaginatedCollection<EndShipper> {
     private List<EndShipper> endShippers;
 
     @Override

@@ -1,16 +1,12 @@
 package com.easypost;
 
-import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ExternalApiError;
+import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.model.AddressCollection;
-import com.easypost.model.InsuranceCollection;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
-import com.easypost.model.Rate;
 import com.easypost.model.ReferralCustomer;
 import com.easypost.model.ReferralCustomerCollection;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +38,7 @@ public final class ReferralTest {
 
     /**
      * Return the referral user key from the system environment.
-     * 
+     *
      * @return Referral user key.
      */
     private static String referralUserKey() {
@@ -168,7 +164,8 @@ public final class ReferralTest {
     public void testCreateBadStripeToken() throws Exception {
         vcr.setUpTest("create_bad_stripe_token");
 
-        assertThrows(ExternalApiError.class, () -> vcr.client.referralCustomer.addCreditCardToUser(referralUserKey(),
-                "1234", 1234, 1234, "1234", PaymentMethod.Priority.PRIMARY));
+        assertThrows(ExternalApiError.class,
+                () -> vcr.client.referralCustomer.addCreditCardToUser(referralUserKey(), "1234", 1234, 1234, "1234",
+                        PaymentMethod.Priority.PRIMARY));
     }
 }

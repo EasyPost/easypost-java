@@ -3,13 +3,10 @@ package com.easypost;
 import com.easypost.exception.APIException;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.model.AddressCollection;
 import com.easypost.model.Event;
 import com.easypost.model.EventCollection;
-import com.easypost.model.InsuranceCollection;
 import com.easypost.model.Payload;
 import com.easypost.model.Webhook;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -120,7 +117,7 @@ public final class EventTest {
     /**
      * Test retrieving all payloads.
      *
-     * @throws EasyPostException when the request fails.
+     * @throws EasyPostException    when the request fails.
      * @throws InterruptedException when vcr recording fails.
      */
     @Test
@@ -153,7 +150,7 @@ public final class EventTest {
     /**
      * Test retrieving a payload.
      *
-     * @throws EasyPostException when the request fails.
+     * @throws EasyPostException    when the request fails.
      * @throws InterruptedException when vcr recording fails.
      */
     @Test
@@ -180,7 +177,7 @@ public final class EventTest {
         APIException exception = assertThrows(APIException.class,
                 () -> vcr.client.event.retrievePayload(events.getEvents().get(0).getId(),
                         "payload_11111111111111111111111111111111")); // Need a valid-length, invalid payload ID here
-        
+
         assertEquals(404, exception.getStatusCode());
 
         vcr.client.webhook.delete(webhook.getId());

@@ -5,12 +5,14 @@ import java.util.Map;
 
 import com.easypost.exception.General.EndOfPaginationError;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public final class ReportCollection extends PaginatedCollection<Report> {
     private List<Report> reports;
 
-    public String type;
+    @Setter
+    private String type;
 
     @Override
     protected Map<String, Object> buildNextPageParameters(List<Report> reports, Integer pageSize)

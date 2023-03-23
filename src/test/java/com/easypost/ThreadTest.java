@@ -3,16 +3,15 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Order;
 import com.easypost.service.EasyPostClient;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public final class ThreadTest {
     private static Map<String, Object> defaultFromAddress = new HashMap<String, Object>();
@@ -130,6 +129,7 @@ public final class ThreadTest {
 
     /**
      * Test create multiple EasyPostClient with different API keys.
+     *
      * @throws EasyPostException
      */
     @Test

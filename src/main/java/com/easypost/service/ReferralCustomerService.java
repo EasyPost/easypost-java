@@ -107,7 +107,8 @@ public class ReferralCustomerService {
      * @return ReferralCustomerCollection object.
      * @throws EndOfPaginationError when there are no more pages to retrieve.
      */
-    public ReferralCustomerCollection getNextPage(ReferralCustomerCollection collection, Integer pageSize) throws EndOfPaginationError {
+    public ReferralCustomerCollection getNextPage(
+            ReferralCustomerCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, ReferralCustomerCollection>() {
             @SneakyThrows
             public ReferralCustomerCollection apply(Map<String, Object> parameters) {

@@ -1,11 +1,10 @@
 package com.easypost;
 
-import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.EasyPostException;
 import com.easypost.model.CarrierAccount;
 import com.easypost.model.CarrierType;
 import com.google.common.collect.ImmutableMap;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

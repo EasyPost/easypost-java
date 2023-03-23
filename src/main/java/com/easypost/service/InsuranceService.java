@@ -85,7 +85,8 @@ public class InsuranceService {
      * @return InsuranceCollection object.
      * @throws EndOfPaginationError when there are no more pages to retrieve.
      */
-    public InsuranceCollection getNextPage(InsuranceCollection collection, Integer pageSize) throws EndOfPaginationError {
+    public InsuranceCollection getNextPage(
+            InsuranceCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, InsuranceCollection>() {
             @SneakyThrows
             public InsuranceCollection apply(Map<String, Object> parameters) {

@@ -173,7 +173,7 @@ public final class UserTest {
         ApiKeys apikeys = vcr.client.apiKey.all();
 
         assertInstanceOf(ApiKeys.class, apikeys);
-        
+
         List<ApiKey> apiKeys = vcr.client.user.apiKeys(apikeys.getId());
 
         assertNotNull(apiKeys);

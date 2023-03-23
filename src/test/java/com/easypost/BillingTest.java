@@ -49,17 +49,16 @@ public final class BillingTest {
      */
     @Test
     public void testDeletePaymentMethod() throws EasyPostException {
-        requestMock.when(
-                        () -> Requestor.request(
-                                RequestMethod.GET, "payment_methods",
-                                null, PaymentMethod.class, vcr.client))
+        requestMock.when(() -> Requestor.request(
+                RequestMethod.GET, "payment_methods", null, PaymentMethod.class, vcr.client))
                 .thenReturn(paymentMethod);
 
         PaymentMethodObject paymentMethodObject =
                 vcr.client.billing.retrievePaymentMethods().getSecondaryPaymentMethod();
 
         requestMock.when(() -> Requestor.request(RequestMethod.GET,
-                paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId(), null, PaymentMethod.class,
+                paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId(),
+                null, PaymentMethod.class,
                 vcr.client)).thenReturn(null);
 
         assertDoesNotThrow(() -> vcr.client.billing.deletePaymentMethod(PaymentMethod.Priority.SECONDARY));
@@ -72,10 +71,8 @@ public final class BillingTest {
      */
     @Test
     public void testFundWallet() throws EasyPostException {
-        requestMock.when(
-                        () -> Requestor.request(
-                                RequestMethod.GET, "payment_methods",
-                                null, PaymentMethod.class, vcr.client))
+        requestMock.when(() -> Requestor.request(
+                RequestMethod.GET, "payment_methods", null, PaymentMethod.class, vcr.client))
                 .thenReturn(paymentMethod);
 
         PaymentMethodObject paymentMethodObject = vcr.client.billing.retrievePaymentMethods().getPrimaryPaymentMethod();
@@ -94,10 +91,8 @@ public final class BillingTest {
      */
     @Test
     public void testRetrievePaymentMethods() throws EasyPostException {
-        requestMock.when(
-                        () -> Requestor.request(
-                                RequestMethod.GET,
-                                "payment_methods", null, PaymentMethod.class, vcr.client))
+        requestMock.when(() -> Requestor.request(
+                RequestMethod.GET, "payment_methods", null, PaymentMethod.class, vcr.client))
                 .thenReturn(paymentMethod);
 
         PaymentMethod paymentMethods = vcr.client.billing.retrievePaymentMethods();

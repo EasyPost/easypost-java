@@ -1,12 +1,10 @@
 package com.easypost;
 
-import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
-
-import com.easypost.model.InsuranceCollection;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -237,8 +235,8 @@ public final class AddressTest {
     @Test
     public void testInvalidAddressCreation() throws EasyPostException {
         vcr.setUpTest("error_address_creation");
-        InvalidRequestError exception = assertThrows(InvalidRequestError.class,
-                () -> vcr.client.address.createAndVerify(null));
+        InvalidRequestError exception =
+                assertThrows(InvalidRequestError.class, () -> vcr.client.address.createAndVerify(null));
 
         assertEquals("PARAMETER.REQUIRED", exception.getCode());
         assertEquals(422, exception.getStatusCode());

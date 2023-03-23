@@ -2,8 +2,6 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.model.AddressCollection;
-import com.easypost.model.InsuranceCollection;
 import com.easypost.model.Tracker;
 import com.easypost.model.TrackerCollection;
 import org.junit.jupiter.api.BeforeAll;

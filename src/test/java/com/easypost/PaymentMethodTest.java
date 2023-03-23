@@ -1,13 +1,12 @@
 package com.easypost;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import com.easypost.exception.EasyPostException;
+import com.easypost.model.PaymentMethod;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.model.PaymentMethod;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PaymentMethodTest {
     private static TestUtils.VCR vcr;

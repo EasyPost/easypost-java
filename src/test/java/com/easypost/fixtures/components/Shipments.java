@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 
 public final class Shipments {
-    @SerializedName("basic_domestic")
+    @SerializedName ("basic_domestic")
     public HashMap<String, Object> basicDomestic;
 
-    @SerializedName("full")
+    @SerializedName ("full")
     public HashMap<String, Object> full;
 
 }

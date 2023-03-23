@@ -3,8 +3,6 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.exception.General.MissingParameterError;
-import com.easypost.model.AddressCollection;
-import com.easypost.model.InsuranceCollection;
 import com.easypost.model.Report;
 import com.easypost.model.ReportCollection;
 import org.junit.jupiter.api.BeforeAll;
@@ -210,7 +208,7 @@ public final class ReportTest {
 
     /**
      * Test creating a report without type.
-     * 
+     *
      * @throws EasyPostException when the request fails.
      */
     @Test

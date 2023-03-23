@@ -1,10 +1,9 @@
 package com.easypost;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.service.EasyPostClient;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,7 +13,7 @@ public final class EasyPostTest {
 
     /**
      * Set up the testing environment for this file.
-     * 
+     *
      * @throws MissingParameterError
      */
     @BeforeAll

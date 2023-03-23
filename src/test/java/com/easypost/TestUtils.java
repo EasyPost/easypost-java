@@ -30,19 +30,11 @@ public abstract class TestUtils {
     private static final String CASSETTES_PATH = "src/test/cassettes";
     private static final List<String> HEADER_CENSORS = ImmutableList.of("Authorization", "User-Agent");
     private static final List<String> QUERY_CENSORS = ImmutableList.of("card[cvc]", "card[number]");
-    private static final List<String> BODY_CENSORS = ImmutableList.of(
-            "api_keys",
-            "client_ip",
-            "credentials",
-            "key",
-            "keys",
-            "phone_number",
-            "phone",
-            "test_credentials"
-            );
-    private static final List<CensorElement> BODY_ELEMENTS_TO_IGNORE_ON_MATCH = ImmutableList.of(
-            new CensorElement("createdAt", false),
-            new CensorElement("updatedAt", false));
+    private static final List<String> BODY_CENSORS =
+            ImmutableList.of("api_keys", "client_ip", "credentials", "key", "keys", "phone_number", "phone",
+                    "test_credentials");
+    private static final List<CensorElement> BODY_ELEMENTS_TO_IGNORE_ON_MATCH =
+            ImmutableList.of(new CensorElement("createdAt", false), new CensorElement("updatedAt", false));
 
     /**
      * Get the directory where the program is currently executing.
@@ -107,8 +99,8 @@ public abstract class TestUtils {
 
         String value = System.getenv(keyName);
         value = (value != null && !value.isEmpty()) ? value : API_KEY_FAILED_TO_PULL; // if can't pull from environment,
-                                                                                      // will use a fake key. Won't
-                                                                                      // matter on replay.
+        // will use a fake key. Won't
+        // matter on replay.
         return value;
     }
 
@@ -129,7 +121,7 @@ public abstract class TestUtils {
 
         /**
          * Constructor.
-         * 
+         *
          * @throws MissingParameterError
          */
         public VCR() throws MissingParameterError {
@@ -176,8 +168,8 @@ public abstract class TestUtils {
          */
         public VCR(String testCassettesFolder, String apiKey) throws MissingParameterError {
             AdvancedSettings advancedSettings = new AdvancedSettings();
-            advancedSettings.matchRules = new MatchRules().byMethod().byFullUrl()
-                    .byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
+            advancedSettings.matchRules =
+                    new MatchRules().byMethod().byFullUrl().byBody(BODY_ELEMENTS_TO_IGNORE_ON_MATCH);
             advancedSettings.censors = new Censors("REDACTED").censorHeadersByKeys(HEADER_CENSORS)
                     .censorQueryParametersByKeys(QUERY_CENSORS).censorBodyElementsByKeys(BODY_CENSORS);
 
@@ -188,8 +180,8 @@ public abstract class TestUtils {
 
             this.apiKey = apiKey;
             this.client = new EasyPostClient(apiKey);
-            this.testCassettesFolder = Paths.get(getSourceFileDirectory(), CASSETTES_PATH)
-                    .toString(); // create the "cassettes" folder
+            this.testCassettesFolder =
+                    Paths.get(getSourceFileDirectory(), CASSETTES_PATH).toString(); // create the "cassettes" folder
 
             if (testCassettesFolder != null) {
                 this.testCassettesFolder = Paths.get(this.testCassettesFolder, testCassettesFolder)
