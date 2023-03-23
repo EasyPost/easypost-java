@@ -90,7 +90,8 @@ public final class ErrorTest extends Requestor {
         apiErrorsMap.put(504, GatewayTimeoutError.class);
 
         for (Map.Entry<Integer, Class<?>> entry : apiErrorsMap.entrySet()) {
-            APIException exception = assertThrows(APIException.class, () -> handleAPIError("{}", entry.getKey()));
+            APIException exception = assertThrows(APIException.class,
+                    () -> handleAPIError("{}", entry.getKey()));
 
             assertEquals(Constants.ErrorMessages.API_DID_NOT_RETURN_ERROR_DETAILS, exception.getMessage());
             assertEquals("NO RESPONSE CODE", exception.getCode());
@@ -106,10 +107,15 @@ public final class ErrorTest extends Requestor {
      */
     @Test
     public void testExceptionErrorMessageParsing() throws EasyPostException {
-        String errorMessageStringJson =
-                "{\"error\": {\"code\": \"ERROR_CODE\", \"message\": \"ERROR_MESSAGE_1\", \"errors\": []}}";
-        EasyPostException exception =
-                assertThrows(EasyPostException.class, () -> handleAPIError(errorMessageStringJson, 400));
+        String errorMessageStringJson = "{\n" +
+                "    \"error\": {\n" +
+                "        \"code\": \"ERROR_CODE\",\n" +
+                "        \"message\": \"ERROR_MESSAGE_1\",\n" +
+                "        \"errors\": []\n" +
+                "    }\n" +
+                "}";
+        EasyPostException exception = assertThrows(EasyPostException.class,
+                () -> handleAPIError(errorMessageStringJson, 400));
 
         assertEquals("ERROR_MESSAGE_1", exception.getMessage());
     }
@@ -121,12 +127,79 @@ public final class ErrorTest extends Requestor {
      */
     @Test
     public void testExceptionErrorArrayParsing() throws EasyPostException {
-        String errorMessageArrayJson = "{\"error\": {\"code\": \"ERROR_CODE\", \"message\":" +
-                "[\"ERROR_MESSAGE_1\", \"ERROR_MESSAGE_2\"], \"errors\": []}}";
-
-        EasyPostException exception =
-                assertThrows(EasyPostException.class, () -> handleAPIError(errorMessageArrayJson, 400));
+        String errorMessageArrayJson = "{\n" +
+        "    \"error\": {\n" +
+        "        \"code\": \"ERROR_CODE\",\n" +
+        "        \"message\": [\n" +
+        "            \"ERROR_MESSAGE_1\",\n" +
+        "            \"ERROR_MESSAGE_2\"\n" +
+        "        ],\n" +
+        "        \"errors\": []\n" +
+        "    }\n" +
+        "}";
+        EasyPostException exception = assertThrows(EasyPostException.class,
+                () -> handleAPIError(errorMessageArrayJson, 400));
 
         assertEquals("ERROR_MESSAGE_1, ERROR_MESSAGE_2", exception.getMessage());
+    }
+
+    /**
+     * Test parsing error message that is an object.
+     *
+     * @throws EasyPostException
+     */
+    @Test
+    public void testExceptionErrorObjectParsing() throws EasyPostException {
+        String errorMessageObjectJson = "{\n" +
+                "    \"error\": {\n" +
+                "        \"code\": \"UNPROCESSABLE_ENTITY\",\n" +
+                "        \"message\": {\n" +
+                "            \"errors\": [\n" +
+                "                \"bad error.\",\n" +
+                "                \"second bad error.\"\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        \"errors\": []\n" +
+                "    }\n" +
+                "}";
+
+        EasyPostException exception = assertThrows(EasyPostException.class,
+                () -> handleAPIError(errorMessageObjectJson, 400));
+
+        assertEquals("bad error., second bad error.", exception.getMessage());
+    }
+
+    /**
+     * Test parsing error message that has really bad format.
+     *
+     * @throws EasyPostException
+     */
+    @Test
+    public void testExceptionErrorEdgeCaseParsing() throws EasyPostException {
+        String json = "{\n" +
+                "    \"error\": {\n" +
+                "        \"code\": \"UNPROCESSABLE_ENTITY\",\n" +
+                "        \"message\": {\n" +
+                "            \"errors\": [\n" +
+                "                \"Bad format 1\",\n" +
+                "                \"Bad format 2\"\n" +
+                "            ],\n" +
+                "            \"bad_data\": [\n" +
+                "                {\n" +
+                "                    \"first_message\": \"Bad format 3\",\n" +
+                "                    \"second_message\": \"Bad format 4\",\n" +
+                "                    \"thrid_message\": \"Bad format 5\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        \"errors\": []\n" +
+                "    }\n" +
+                "}";
+
+        EasyPostException exception = assertThrows(EasyPostException.class,
+                () -> handleAPIError(json, 400));
+
+        assertEquals("Bad format 1, Bad format 2, Bad format 3, Bad format 4, Bad format 5",
+                exception.getMessage());
     }
 }

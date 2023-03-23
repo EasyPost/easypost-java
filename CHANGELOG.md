@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.3.1 (2023-03-22)
+
+- Handle edge cases when deseralizing error JSON, closes Github issue [#239](https://github.com/EasyPost/easypost-java/issues/239)
+
 ## v6.3.0 (2023-02-21)
 
 - Adds beta `retrieveStatelessRates` function to get stateless rates
