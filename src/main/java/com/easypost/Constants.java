@@ -35,6 +35,8 @@ public abstract class Constants {
         public static final String API_DID_NOT_RETURN_ERROR_DETAILS = "API did not return error details.";
         public static final String WEBHOOK_DOES_NOT_MATCH =
                 "Webhook received did not originate from EasyPost or had a webhook secret mismatch.";
+
+        public static final String NO_MORE_PAGES_TO_RETRIEVE = "There are no more pages to retrieve.";
     }
 
     public abstract static class ErrorCodes {
