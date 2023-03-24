@@ -1,15 +1,18 @@
 package com.easypost.service;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
-import com.easypost.model.Refund;
 import com.easypost.model.RefundCollection;
+import com.easypost.model.Refund;
+import lombok.SneakyThrows;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class RefundService {
     private final EasyPostClient client;
@@ -65,5 +68,33 @@ public class RefundService {
         String endpoint = "refunds";
 
         return Requestor.request(RequestMethod.GET, endpoint, params, RefundCollection.class, client);
+    }
+
+    /**
+     * Get the next page of an RefundCollection.
+     *
+     * @param collection RefundCollection to get next page of.
+     * @return RefundCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public RefundCollection getNextPage(RefundCollection collection) throws EndOfPaginationError {
+        return getNextPage(collection, null);
+    }
+
+    /**
+     * Get the next page of an RefundCollection.
+     *
+     * @param collection RefundCollection to get next page of.
+     * @param pageSize   The number of results to return on the next page.
+     * @return RefundCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public RefundCollection getNextPage(RefundCollection collection, Integer pageSize) throws EndOfPaginationError {
+        return collection.getNextPage(new Function<Map<String, Object>, RefundCollection>() {
+            @SneakyThrows
+            public RefundCollection apply(Map<String, Object> parameters) {
+                return all(parameters);
+            }
+        }, collection.getRefunds(), pageSize);
     }
 }

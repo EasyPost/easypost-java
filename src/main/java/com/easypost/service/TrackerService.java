@@ -1,13 +1,16 @@
 package com.easypost.service;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
-import com.easypost.model.Tracker;
 import com.easypost.model.TrackerCollection;
+import com.easypost.model.Tracker;
+import lombok.SneakyThrows;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class TrackerService {
     private final EasyPostClient client;
@@ -61,6 +64,34 @@ public class TrackerService {
         String endpoint = "trackers";
 
         return Requestor.request(RequestMethod.GET, endpoint, params, TrackerCollection.class, client);
+    }
+
+    /**
+     * Get the next page of an TrackerCollection.
+     *
+     * @param collection TrackerCollection to get next page of.
+     * @return TrackerCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public TrackerCollection getNextPage(TrackerCollection collection) throws EndOfPaginationError {
+        return getNextPage(collection, null);
+    }
+
+    /**
+     * Get the next page of an TrackerCollection.
+     *
+     * @param collection TrackerCollection to get next page of.
+     * @param pageSize   The number of results to return on the next page.
+     * @return TrackerCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public TrackerCollection getNextPage(TrackerCollection collection, Integer pageSize) throws EndOfPaginationError {
+        return collection.getNextPage(new Function<Map<String, Object>, TrackerCollection>() {
+            @SneakyThrows
+            public TrackerCollection apply(Map<String, Object> parameters) {
+                return all(parameters);
+            }
+        }, collection.getTrackers(), pageSize);
     }
 
     /**

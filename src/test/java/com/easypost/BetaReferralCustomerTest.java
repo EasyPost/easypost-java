@@ -1,13 +1,12 @@
 package com.easypost;
 
+import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.EasyPostException;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import org.junit.jupiter.api.BeforeAll;
-
-import com.easypost.exception.EasyPostException;
-import com.easypost.exception.API.InvalidRequestError;
-import org.junit.jupiter.api.Test;
 
 public class BetaReferralCustomerTest {
     private static TestUtils.VCR vcr;
@@ -24,7 +23,7 @@ public class BetaReferralCustomerTest {
 
     /**
      * Test add Stripe payment method for referral customer.
-     * 
+     *
      * @throws EasyPostException
      */
     @Test
@@ -46,8 +45,8 @@ public class BetaReferralCustomerTest {
     @Test
     public void testRefundByAmount() throws EasyPostException {
         vcr.setUpTest("refund_by_amount");
-        InvalidRequestError exception = assertThrows(InvalidRequestError.class,
-                () -> vcr.client.betaReferralCustomer.refundByAmount(2000));
+        InvalidRequestError exception =
+                assertThrows(InvalidRequestError.class, () -> vcr.client.betaReferralCustomer.refundByAmount(2000));
 
         assertEquals("TRANSACTION.AMOUNT_INVALID", exception.getCode());
         assertEquals(422, exception.getStatusCode());

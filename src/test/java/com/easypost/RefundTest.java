@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Refund;
 import com.easypost.model.RefundCollection;
 import com.easypost.model.Shipment;
@@ -14,8 +15,10 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public final class RefundTest {
     private static TestUtils.VCR vcr;
@@ -76,6 +79,35 @@ public final class RefundTest {
         assertTrue(refunds.size() <= Fixtures.pageSize());
         assertNotNull(refundCollection.getHasMore());
         assertTrue(refunds.stream().allMatch(refund -> refund instanceof Refund));
+    }
+
+    /**
+     * Test retrieving the next page.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetNextPage() throws EasyPostException {
+        vcr.setUpTest("get_next_page");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixtures.pageSize());
+        RefundCollection collection = vcr.client.refund.all(params);
+
+        try {
+            RefundCollection nextPage = vcr.client.refund.getNextPage(collection);
+
+            assertNotNull(nextPage);
+
+            String firstIdOfFirstPage = collection.getRefunds().get(0).getId();
+            String firstIdOfSecondPage = nextPage.getRefunds().get(0).getId();
+
+            assertNotEquals(firstIdOfFirstPage, firstIdOfSecondPage);
+        } catch (EndOfPaginationError e) { // There's no next page, that's not a failure
+            assertTrue(true);
+        } catch (Exception e) { // Any other exception is a failure
+            fail();
+        }
     }
 
     /**

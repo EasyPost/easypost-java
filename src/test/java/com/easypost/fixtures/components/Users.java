@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 
 public final class Users {
-    @SerializedName("referral")
+    @SerializedName ("referral")
     public HashMap<String, Object> referral;
 
 }

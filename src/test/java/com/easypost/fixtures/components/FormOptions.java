@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 
 public final class FormOptions {
-    @SerializedName("rma")
+    @SerializedName ("rma")
     public HashMap<String, Object> rma;
 
 }

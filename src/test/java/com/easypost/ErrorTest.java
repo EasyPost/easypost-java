@@ -1,40 +1,39 @@
 package com.easypost;
 
-import com.easypost.exception.APIException;
-import com.easypost.exception.EasyPostException;
-import com.easypost.exception.API.RedirectError;
-import com.easypost.exception.API.ServiceUnavailableError;
-import com.easypost.exception.API.UnauthorizedError;
-import com.easypost.exception.API.UnknownApiError;
-import com.easypost.exception.General.MissingParameterError;
-import com.easypost.http.Requestor;
-import com.easypost.exception.API.PaymentError;
-import com.easypost.exception.API.RateLimitError;
-import com.easypost.exception.API.NotFoundError;
-import com.easypost.exception.API.MethodNotAllowedError;
-import com.easypost.exception.API.TimeoutError;
 import com.easypost.exception.API.ForbiddenError;
 import com.easypost.exception.API.GatewayTimeoutError;
 import com.easypost.exception.API.InternalServerError;
 import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.API.MethodNotAllowedError;
+import com.easypost.exception.API.NotFoundError;
+import com.easypost.exception.API.PaymentError;
+import com.easypost.exception.API.RateLimitError;
+import com.easypost.exception.API.RedirectError;
+import com.easypost.exception.API.ServiceUnavailableError;
+import com.easypost.exception.API.TimeoutError;
+import com.easypost.exception.API.UnauthorizedError;
+import com.easypost.exception.API.UnknownApiError;
+import com.easypost.exception.APIException;
+import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.MissingParameterError;
+import com.easypost.http.Requestor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ErrorTest extends Requestor {
     private static TestUtils.VCR vcr;
 
     /**
      * Set up the testing environment for this file.
-     * 
-     * @throws MissingParameterError
      *
+     * @throws MissingParameterError
      * @throws EasyPostException     when the request fails.
      */
     @BeforeAll

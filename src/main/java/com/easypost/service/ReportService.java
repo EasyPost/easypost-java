@@ -3,15 +3,18 @@ package com.easypost.service;
 import com.easypost.Constants;
 import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
-import com.easypost.model.Report;
 import com.easypost.model.ReportCollection;
+import com.easypost.model.Report;
+import lombok.SneakyThrows;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class ReportService {
     private final EasyPostClient client;
@@ -87,6 +90,39 @@ public class ReportService {
         params.remove(type);
         String endpoint = reportURL(type);
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, ReportCollection.class, client);
+        ReportCollection collection =
+                Requestor.request(RequestMethod.GET, endpoint, params, ReportCollection.class, client);
+        // we store the type of reports in this collection, for use in pagination
+        collection.setType(type);
+        return collection;
+
+    }
+
+    /**
+     * Get the next page of an ReportCollection.
+     *
+     * @param collection ReportCollection to get next page of.
+     * @return ReportCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public ReportCollection getNextPage(ReportCollection collection) throws EndOfPaginationError {
+        return getNextPage(collection, null);
+    }
+
+    /**
+     * Get the next page of an ReportCollection.
+     *
+     * @param collection ReportCollection to get next page of.
+     * @param pageSize   The number of results to return on the next page.
+     * @return ReportCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public ReportCollection getNextPage(ReportCollection collection, Integer pageSize) throws EndOfPaginationError {
+        return collection.getNextPage(new Function<Map<String, Object>, ReportCollection>() {
+            @SneakyThrows
+            public ReportCollection apply(Map<String, Object> parameters) {
+                return all(parameters);
+            }
+        }, collection.getReports(), pageSize);
     }
 }

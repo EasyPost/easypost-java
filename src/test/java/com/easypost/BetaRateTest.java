@@ -1,19 +1,18 @@
 package com.easypost;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.easypost.exception.EasyPostException;
+import com.easypost.model.StatelessRate;
+import com.easypost.utils.Utilities;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import com.easypost.exception.EasyPostException;
-import com.easypost.model.StatelessRate;
-import com.easypost.utils.Utilities;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BetaRateTest {
     private static TestUtils.VCR vcr;
@@ -61,9 +60,9 @@ public class BetaRateTest {
         assertEquals("First", lowestRate.getService());
 
         List<String> carriers = Arrays.asList("invalidCarrierName");
-        EasyPostException exception = assertThrows(EasyPostException.class,
-                () -> Utilities.getLowestStatelessRate(rates, carriers, null));
-        
+        EasyPostException exception =
+                assertThrows(EasyPostException.class, () -> Utilities.getLowestStatelessRate(rates, carriers, null));
+
         assertEquals("No rates found.", exception.getMessage());
     }
 }

@@ -1,10 +1,10 @@
 package com.easypost;
 
-import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +15,11 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public final class AddressTest {
     private static TestUtils.VCR vcr;
@@ -159,6 +161,35 @@ public final class AddressTest {
     }
 
     /**
+     * Test retrieving the next page.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetNextPage() throws EasyPostException {
+        vcr.setUpTest("get_next_page");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixtures.pageSize());
+        AddressCollection collection = vcr.client.address.all(params);
+
+        try {
+            AddressCollection nextPage = vcr.client.address.getNextPage(collection);
+
+            assertNotNull(nextPage);
+
+            String firstIdOfFirstPage = collection.getAddresses().get(0).getId();
+            String firstIdOfSecondPage = nextPage.getAddresses().get(0).getId();
+
+            assertNotEquals(firstIdOfFirstPage, firstIdOfSecondPage);
+        } catch (EndOfPaginationError e) { // There's no next page, that's not a failure
+            assertTrue(true);
+        } catch (Exception e) { // Any other exception is a failure
+            fail();
+        }
+    }
+
+    /**
      * Test creating a verified address.
      * We purposefully pass in slightly incorrect data to get the corrected address
      * back once verified.
@@ -204,8 +235,8 @@ public final class AddressTest {
     @Test
     public void testInvalidAddressCreation() throws EasyPostException {
         vcr.setUpTest("error_address_creation");
-        InvalidRequestError exception = assertThrows(InvalidRequestError.class,
-                () -> vcr.client.address.createAndVerify(null));
+        InvalidRequestError exception =
+                assertThrows(InvalidRequestError.class, () -> vcr.client.address.createAndVerify(null));
 
         assertEquals("PARAMETER.REQUIRED", exception.getCode());
         assertEquals(422, exception.getStatusCode());

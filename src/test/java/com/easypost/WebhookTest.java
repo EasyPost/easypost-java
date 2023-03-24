@@ -1,11 +1,11 @@
 package com.easypost;
 
-import com.easypost.utils.Utilities;
-import com.google.common.collect.ImmutableMap;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Event;
 import com.easypost.model.Webhook;
 import com.easypost.model.WebhookCollection;
+import com.easypost.utils.Utilities;
+import com.google.common.collect.ImmutableMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder (MethodOrderer.OrderAnnotation.class)
 public final class WebhookTest {
     private static String testWebhookId = null;
     private static TestUtils.VCR vcr;
@@ -144,7 +144,7 @@ public final class WebhookTest {
         Webhook webhook = createBasicWebhook();
         Webhook retrievedWebhook = vcr.client.webhook.retrieve(webhook.getId());
 
-        assertDoesNotThrow(() -> vcr.client.webhook.delete(retrievedWebhook.getId())); 
+        assertDoesNotThrow(() -> vcr.client.webhook.delete(retrievedWebhook.getId()));
 
         testWebhookId = null; // need to disable post-test deletion for test to work
     }
@@ -152,13 +152,13 @@ public final class WebhookTest {
     /**
      * Test validating a webhook.
      *
-     * @throws EasyPostException        when the request fails.
+     * @throws EasyPostException when the request fails.
      */
     @Test
     public void testValidateWebhook() throws EasyPostException {
         String webhookSecret = "sécret";
         Map<String, Object> headers = ImmutableMap.of("X-Hmac-Signature",
-        "hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115a46b");
+                "hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115a46b");
 
         Event event = Utilities.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
 
@@ -185,9 +185,7 @@ public final class WebhookTest {
     @Test
     public void testValidateWebhookMissingSecret() {
         String webhookSecret = "123";
-        Map<String, Object> headers = ImmutableMap.of(
-            "some-header", "some-value"
-        );
+        Map<String, Object> headers = ImmutableMap.of("some-header", "some-value");
 
         assertThrows(EasyPostException.class, () -> {
             Utilities.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);

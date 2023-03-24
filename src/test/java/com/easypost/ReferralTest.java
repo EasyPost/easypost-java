@@ -1,12 +1,12 @@
 package com.easypost;
 
-import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.ExternalApiError;
+import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.ReferralCustomer;
 import com.easypost.model.ReferralCustomerCollection;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +17,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public final class ReferralTest {
     private static TestUtils.VCR vcr;
@@ -36,7 +38,7 @@ public final class ReferralTest {
 
     /**
      * Return the referral user key from the system environment.
-     * 
+     *
      * @return Referral user key.
      */
     private static String referralUserKey() {
@@ -104,6 +106,35 @@ public final class ReferralTest {
     }
 
     /**
+     * Test retrieving the next page.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetNextPage() throws EasyPostException {
+        vcr.setUpTest("get_next_page");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixtures.pageSize());
+        ReferralCustomerCollection collection = vcr.client.referralCustomer.all(params);
+
+        try {
+            ReferralCustomerCollection nextPage = vcr.client.referralCustomer.getNextPage(collection);
+
+            assertNotNull(nextPage);
+
+            String firstIdOfFirstPage = collection.getReferralCustomers().get(0).getId();
+            String firstIdOfSecondPage = nextPage.getReferralCustomers().get(0).getId();
+
+            assertNotEquals(firstIdOfFirstPage, firstIdOfSecondPage);
+        } catch (EndOfPaginationError e) { // There's no next page, that's not a failure
+            assertTrue(true);
+        } catch (Exception e) { // Any other exception is a failure
+            fail();
+        }
+    }
+
+    /**
      * Test adding a credit card to a Referral user.
      *
      * @throws EasyPostException when the request fails.
@@ -133,7 +164,8 @@ public final class ReferralTest {
     public void testCreateBadStripeToken() throws Exception {
         vcr.setUpTest("create_bad_stripe_token");
 
-        assertThrows(ExternalApiError.class, () -> vcr.client.referralCustomer.addCreditCardToUser(referralUserKey(),
-                "1234", 1234, 1234, "1234", PaymentMethod.Priority.PRIMARY));
+        assertThrows(ExternalApiError.class,
+                () -> vcr.client.referralCustomer.addCreditCardToUser(referralUserKey(), "1234", 1234, 1234, "1234",
+                        PaymentMethod.Priority.PRIMARY));
     }
 }

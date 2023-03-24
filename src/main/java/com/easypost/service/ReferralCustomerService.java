@@ -5,13 +5,15 @@ import com.easypost.EasyPost;
 import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.API.ExternalApiError;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
+import com.easypost.model.ReferralCustomerCollection;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.ReferralCustomer;
-import com.easypost.model.ReferralCustomerCollection;
 import com.easypost.utils.InternalUtilities;
+import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class ReferralCustomerService {
     private final EasyPostClient client;
@@ -83,6 +86,35 @@ public class ReferralCustomerService {
 
         return Requestor.request(RequestMethod.GET, endpoint, params, ReferralCustomerCollection.class,
                 client);
+    }
+
+    /**
+     * Get the next page of an ReferralCustomerCollection.
+     *
+     * @param collection ReferralCustomerCollection to get next page of.
+     * @return ReferralCustomerCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public ReferralCustomerCollection getNextPage(ReferralCustomerCollection collection) throws EndOfPaginationError {
+        return getNextPage(collection, null);
+    }
+
+    /**
+     * Get the next page of an ReferralCustomerCollection.
+     *
+     * @param collection ReferralCustomerCollection to get next page of.
+     * @param pageSize   The number of results to return on the next page.
+     * @return ReferralCustomerCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public ReferralCustomerCollection getNextPage(
+            ReferralCustomerCollection collection, Integer pageSize) throws EndOfPaginationError {
+        return collection.getNextPage(new Function<Map<String, Object>, ReferralCustomerCollection>() {
+            @SneakyThrows
+            public ReferralCustomerCollection apply(Map<String, Object> parameters) {
+                return all(parameters);
+            }
+        }, collection.getReferralCustomers(), pageSize);
     }
 
     /**

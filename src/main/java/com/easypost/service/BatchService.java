@@ -75,6 +75,8 @@ public class BatchService {
         return Requestor.request(RequestMethod.GET, endpoint, params, BatchCollection.class, client);
     }
 
+    // TODO: Add getNextPage function when Batches are sorted newest to oldest.
+
     /**
      * Create and buy a Batch object in one step.
      *

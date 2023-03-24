@@ -2,11 +2,11 @@ package com.easypost;
 
 import com.easypost.exception.APIException;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Event;
 import com.easypost.model.EventCollection;
 import com.easypost.model.Payload;
 import com.easypost.model.Webhook;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +17,11 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public final class EventTest {
     private static TestUtils.VCR vcr;
@@ -50,6 +52,35 @@ public final class EventTest {
         assertTrue(eventsList.size() <= Fixtures.pageSize());
         assertNotNull(events.getHasMore());
         assertTrue(eventsList.stream().allMatch(event -> event instanceof Event));
+    }
+
+    /**
+     * Test retrieving the next page.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetNextPage() throws EasyPostException {
+        vcr.setUpTest("get_next_page");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixtures.pageSize());
+        EventCollection collection = vcr.client.event.all(params);
+
+        try {
+            EventCollection nextPage = vcr.client.event.getNextPage(collection);
+
+            assertNotNull(nextPage);
+
+            String firstIdOfFirstPage = collection.getEvents().get(0).getId();
+            String firstIdOfSecondPage = nextPage.getEvents().get(0).getId();
+
+            assertNotEquals(firstIdOfFirstPage, firstIdOfSecondPage);
+        } catch (EndOfPaginationError e) { // There's no next page, that's not a failure
+            assertTrue(true);
+        } catch (Exception e) { // Any other exception is a failure
+            fail();
+        }
     }
 
     /**
@@ -86,7 +117,7 @@ public final class EventTest {
     /**
      * Test retrieving all payloads.
      *
-     * @throws EasyPostException when the request fails.
+     * @throws EasyPostException    when the request fails.
      * @throws InterruptedException when vcr recording fails.
      */
     @Test
@@ -119,7 +150,7 @@ public final class EventTest {
     /**
      * Test retrieving a payload.
      *
-     * @throws EasyPostException when the request fails.
+     * @throws EasyPostException    when the request fails.
      * @throws InterruptedException when vcr recording fails.
      */
     @Test
@@ -146,7 +177,7 @@ public final class EventTest {
         APIException exception = assertThrows(APIException.class,
                 () -> vcr.client.event.retrievePayload(events.getEvents().get(0).getId(),
                         "payload_11111111111111111111111111111111")); // Need a valid-length, invalid payload ID here
-        
+
         assertEquals(404, exception.getStatusCode());
 
         vcr.client.webhook.delete(webhook.getId());

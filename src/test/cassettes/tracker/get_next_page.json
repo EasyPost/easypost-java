@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1679612623,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/trackers?%70%61%67%65%5F%73%69%7A%65\u003d%35"
+    },
+    "response": {
+      "body": "{\n  \"trackers\": [\n    {\n      \"fees\": [],\n      \"carrier_detail\": null,\n      \"created_at\": \"2023-03-22T17:18:05Z\",\n      \"weight\": null,\n      \"tracking_details\": [\n        {\n          \"tracking_location\": {\n            \"zip\": null,\n            \"country\": null,\n            \"city\": null,\n            \"state\": null,\n            \"object\": \"TrackingLocation\"\n          },\n          \"datetime\": \"2023-03-22T17:18:05Z\",\n          \"description\": null,\n          \"source\": \"ProcessingError\",\n          \"message\": \"In test mode, only test tracking numbers are valid. Test tracking numbers are EZ1000000001, EZ2000000002, ... , EZ7000000007\",\n          \"object\": \"TrackingDetail\",\n          \"status\": \"error\",\n          \"status_detail\": null,\n          \"carrier_code\": null\n        }\n      ],\n      \"shipment_id\": null,\n      \"tracking_code\": \"9400110898825022579493\",\n      \"status_detail\": \"unknown\",\n      \"mode\": \"test\",\n      \"public_url\": \"https://track.easypost.com/djE6dHJrX2UxZTMzYTYxZjAyODQ2Y2I4MDkwNWIxYTUwZWE1YmEw\",\n      \"est_delivery_date\": null,\n      \"carrier\": \"USPS\",\n      \"updated_at\": \"2023-03-22T17:18:05Z\",\n      \"signed_by\": null,\n      \"id\": \"trk_e1e33a61f02846cb80905b1a50ea5ba0\",\n      \"object\": \"Tracker\",\n      \"status\": \"error\"\n    }\n  ],\n  \"has_more\": false\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "910"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb2nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "ebbc776d641cdacfe78b1fec0014eb02"
+        ],
+        "x-proxied": [
+          "intlb1nuq a40ea751fd",
+          "extlb1nuq a29e4ad05c"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.043208"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "etag": [
+          "W/\"78f0ff69612d63e807594ae5196cfe3d\""
+        ],
+        "x-version-label": [
+          "easypost-202303231906-99995c7f02-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/trackers?%70%61%67%65%5F%73%69%7A%65\u003d%35"
+    },
+    "duration": 275
+  }
+]
