@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1679612613,
+    "recordedAt": 1680027511,
     "request": {
       "body": "",
       "method": "GET",
@@ -28,7 +28,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb1nuq"
+          "bigweb5nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -55,17 +55,17 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "ebbc776f641cdac5e78b1f690014e8dd"
+          "23d77e0364232f77f48eab3b001e4d3f"
         ],
         "x-proxied": [
           "intlb1nuq a40ea751fd",
-          "extlb1nuq a29e4ad05c"
+          "extlb2nuq a29e4ad05c"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.024539"
+          "0.023334"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
@@ -74,7 +74,7 @@
           "W/\"b7f27d1ea29478c50d2e1a7ab8bcb58a\""
         ],
         "x-version-label": [
-          "easypost-202303231906-99995c7f02-master"
+          "easypost-202303271939-29966fef42-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,6 +86,6 @@
       },
       "uri": "https://api.easypost.com/v2/refunds?%70%61%67%65%5F%73%69%7A%65\u003d%35"
     },
-    "duration": 229
+    "duration": 148
   }
 ]

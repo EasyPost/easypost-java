@@ -114,7 +114,7 @@ public final class TrackerTest {
         TrackerCollection collection = vcr.client.tracker.all(params);
 
         try {
-            TrackerCollection nextPage = vcr.client.tracker.getNextPage(collection);
+            TrackerCollection nextPage = vcr.client.tracker.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 

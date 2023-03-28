@@ -119,7 +119,7 @@ public final class ReferralTest {
         ReferralCustomerCollection collection = vcr.client.referralCustomer.all(params);
 
         try {
-            ReferralCustomerCollection nextPage = vcr.client.referralCustomer.getNextPage(collection);
+            ReferralCustomerCollection nextPage = vcr.client.referralCustomer.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 

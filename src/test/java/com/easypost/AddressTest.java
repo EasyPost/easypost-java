@@ -174,7 +174,7 @@ public final class AddressTest {
         AddressCollection collection = vcr.client.address.all(params);
 
         try {
-            AddressCollection nextPage = vcr.client.address.getNextPage(collection);
+            AddressCollection nextPage = vcr.client.address.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 
