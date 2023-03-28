@@ -116,7 +116,7 @@ public final class ScanFormTest {
         ScanFormCollection collection = vcr.client.scanForm.all(params);
 
         try {
-            ScanFormCollection nextPage = vcr.client.scanForm.getNextPage(collection);
+            ScanFormCollection nextPage = vcr.client.scanForm.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 

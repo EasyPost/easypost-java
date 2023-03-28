@@ -135,7 +135,7 @@ public final class ShipmentTest {
         ShipmentCollection collection = vcr.client.shipment.all(params);
 
         try {
-            ShipmentCollection nextPage = vcr.client.shipment.getNextPage(collection);
+            ShipmentCollection nextPage = vcr.client.shipment.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 

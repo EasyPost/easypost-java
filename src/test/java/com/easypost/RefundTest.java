@@ -95,7 +95,7 @@ public final class RefundTest {
         RefundCollection collection = vcr.client.refund.all(params);
 
         try {
-            RefundCollection nextPage = vcr.client.refund.getNextPage(collection);
+            RefundCollection nextPage = vcr.client.refund.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 

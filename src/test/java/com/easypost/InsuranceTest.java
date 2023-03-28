@@ -115,7 +115,7 @@ public final class InsuranceTest {
         InsuranceCollection collection = vcr.client.insurance.all(params);
 
         try {
-            InsuranceCollection nextPage = vcr.client.insurance.getNextPage(collection);
+            InsuranceCollection nextPage = vcr.client.insurance.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 

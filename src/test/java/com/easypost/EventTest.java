@@ -68,7 +68,7 @@ public final class EventTest {
         EventCollection collection = vcr.client.event.all(params);
 
         try {
-            EventCollection nextPage = vcr.client.event.getNextPage(collection);
+            EventCollection nextPage = vcr.client.event.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 

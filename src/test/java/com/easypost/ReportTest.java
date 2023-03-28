@@ -191,7 +191,7 @@ public final class ReportTest {
         ReportCollection collection = vcr.client.report.all(params);
 
         try {
-            ReportCollection nextPage = vcr.client.report.getNextPage(collection);
+            ReportCollection nextPage = vcr.client.report.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 

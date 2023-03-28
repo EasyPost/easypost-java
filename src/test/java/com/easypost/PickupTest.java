@@ -86,7 +86,7 @@ public final class PickupTest {
         PickupCollection collection = vcr.client.pickup.all(params);
 
         try {
-            PickupCollection nextPage = vcr.client.pickup.getNextPage(collection);
+            PickupCollection nextPage = vcr.client.pickup.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 
