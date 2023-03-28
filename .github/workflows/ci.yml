@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        javaversion: [ "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19" ]
+        javaversion: [ "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ]
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK for compilation
         uses: actions/setup-java@v3
         with:
           distribution: "zulu"
-          java-version: "19" # Always use the latest JDK for building
+          java-version: "20" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
         with:
