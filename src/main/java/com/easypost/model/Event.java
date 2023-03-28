@@ -8,6 +8,7 @@ import lombok.Getter;
 public final class Event extends EasyPostResource {
     private String description;
     private Map<String, Object> result;
+    private String status;
     private Map<String, Object> previousAttributes;
     private List<String> pendingUrls;
     private List<String> completedUrls;

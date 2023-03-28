@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds missing Event `status` property
+
 ## v6.3.1 (2023-03-22)
 
 - Handle edge cases when deseralizing error JSON, closes Github issue [#239](https://github.com/EasyPost/easypost-java/issues/239)
