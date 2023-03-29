@@ -9,7 +9,7 @@ import com.easypost.utils.Utilities;
 import lombok.Getter;
 
 @Getter
-public final class Shipment extends EasyPostResource {
+public class Shipment extends EasyPostResource {
     private String reference;
     private Boolean isReturn;
     private Address toAddress;

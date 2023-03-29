@@ -12,6 +12,7 @@ import com.easypost.model.Shipment;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import com.easypost.model.SmartrateCollection;
+import com.easypost.utils.InternalUtilities;
 import lombok.SneakyThrows;
 
 import java.util.HashMap;
@@ -84,7 +85,13 @@ public class ShipmentService {
     public ShipmentCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "shipments";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, ShipmentCollection.class, client);
+        ShipmentCollection shipmentCollection =
+                Requestor.request(RequestMethod.GET, endpoint, params, ShipmentCollection.class, client);
+        // we store the params in the collection so that we can use them to get the next page
+        shipmentCollection.setPurchased(InternalUtilities.getOrDefault(params, "purchased", null));
+        shipmentCollection.setIncludeChildren(InternalUtilities.getOrDefault(params, "include_children", null));
+
+        return shipmentCollection;
     }
 
     /**

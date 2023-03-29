@@ -5,13 +5,20 @@ import java.util.Map;
 
 import com.easypost.exception.General.EndOfPaginationError;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-public final class TrackerCollection extends PaginatedCollection<Tracker> {
+public class TrackerCollection extends PaginatedCollection<Tracker> {
     private List<Tracker> trackers;
 
+    @Setter
+    private String trackingCode;
+
+    @Setter
+    private String carrier;
+
     @Override
-    protected Map<String, Object> buildNextPageParameters(List<Tracker> trackers, Integer pageSize)
+    protected final Map<String, Object> buildNextPageParameters(List<Tracker> trackers, Integer pageSize)
             throws EndOfPaginationError {
         String lastId = trackers.get(trackers.size() - 1).getId();
 
@@ -20,6 +27,14 @@ public final class TrackerCollection extends PaginatedCollection<Tracker> {
 
         if (pageSize != null) {
             parameters.put("page_size", pageSize);
+        }
+
+        // We only want to include these parameters if they are set (versus defaulting to false; anti-pattern)
+        if (trackingCode != null) {
+            parameters.put("tracking_code", trackingCode);
+        }
+        if (carrier != null) {
+            parameters.put("carrier", carrier);
         }
 
         return parameters;

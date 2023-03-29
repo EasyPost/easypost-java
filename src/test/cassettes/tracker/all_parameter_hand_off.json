@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1680116323,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/trackers?%70%61%67%65%5F%73%69%7A%65\u003d%35\u0026%74%72%61%63%6B%69%6E%67%5F%63%6F%64%65\u003d%73%6F%6D%65%74%68%69%6E%67\u0026%63%61%72%72%69%65%72\u003d%73%6F%6D%65%74%68%69%6E%67+%65%6C%73%65"
+    },
+    "response": {
+      "body": "{\n  \"trackers\": [],\n  \"has_more\": false\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "32"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb2nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "730d5dab64248a63e687aa4700037a99"
+        ],
+        "x-proxied": [
+          "intlb1nuq a29e4ad05c",
+          "extlb1nuq a29e4ad05c"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.032262"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "etag": [
+          "W/\"279365d332866943a8f7d4b39c51f40e\""
+        ],
+        "x-version-label": [
+          "easypost-202303291803-b399a149ad-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/trackers?%70%61%67%65%5F%73%69%7A%65\u003d%35\u0026%74%72%61%63%6B%69%6E%67%5F%63%6F%64%65\u003d%73%6F%6D%65%74%68%69%6E%67\u0026%63%61%72%72%69%65%72\u003d%73%6F%6D%65%74%68%69%6E%67+%65%6C%73%65"
+    },
+    "duration": 147
+  }
+]

@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public final class Tracker extends EasyPostResource {
+public class Tracker extends EasyPostResource {
     private String trackingCode;
     private String status;
     private String shipmentId;

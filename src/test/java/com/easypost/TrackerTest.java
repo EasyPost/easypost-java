@@ -4,9 +4,11 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Tracker;
 import com.easypost.model.TrackerCollection;
+import com.google.common.collect.ImmutableList;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,6 +103,30 @@ public final class TrackerTest {
     }
 
     /**
+     * Test the parameter handoff when retrieving all trackers.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testAllParameterHandOff() throws EasyPostException {
+        vcr.setUpTest("all_parameter_hand_off");
+
+        String trackingCode = "something";
+        String carrier = "something else";
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("page_size", Fixtures.pageSize());
+
+        params.put("tracking_code", trackingCode);
+        params.put("carrier", carrier);
+
+        TrackerCollection trackerCollection = vcr.client.tracker.all(params);
+
+        assertEquals(trackingCode, trackerCollection.getTrackingCode());
+        assertEquals(carrier, trackerCollection.getCarrier());
+    }
+
+    /**
      * Test retrieving the next page.
      *
      * @throws EasyPostException when the request fails.
@@ -127,6 +153,60 @@ public final class TrackerTest {
         } catch (Exception e) { // Any other exception is a failure
             fail();
         }
+    }
+
+    /**
+     * Test the parameter handoff when constructing the next page parameter map.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetNextPageParameterHandOff() throws EasyPostException {
+        vcr.setUpTest("get_next_page_parameter_hand_off");
+
+        String trackingCode = "something";
+        String carrier = "something else";
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("page_size", Fixtures.pageSize());
+
+        params.put("tracking_code", trackingCode);
+        params.put("carrier", carrier);
+
+        TrackerCollection trackerCollection = vcr.client.tracker.all(params);
+
+        // Can't access protected method directly, need to make a temporary extended class, yay
+        // Downside, TrackerCollection and Tracker are no longer final because they need to be extended
+        final class ExtendedTrackerCollection extends TrackerCollection {
+
+            ExtendedTrackerCollection(TrackerCollection trackerCollection) {
+                setTrackingCode(trackerCollection.getTrackingCode());
+                setCarrier(trackerCollection.getCarrier());
+            }
+
+            @Override
+            public List<Tracker> getTrackers() {
+
+                final class ExtendedTracker extends Tracker {
+                    @Override
+                    public String getId() {
+                        return "trk_123";
+                    }
+                }
+
+                return new ArrayList<Tracker>(ImmutableList.of(new ExtendedTracker()));
+            }
+
+            public Map<String, Object> getNextPageParams() throws EndOfPaginationError {
+                return super.buildNextPageParameters(getTrackers(), null);
+            }
+        }
+
+        ExtendedTrackerCollection extendedShipmentCollection = new ExtendedTrackerCollection(trackerCollection);
+        Map<String, Object> nextPageParams = extendedShipmentCollection.getNextPageParams();
+
+        assertEquals(trackingCode, nextPageParams.get("tracking_code"));
+        assertEquals(carrier, nextPageParams.get("carrier"));
     }
 
     /**
