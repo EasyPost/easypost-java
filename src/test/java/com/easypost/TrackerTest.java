@@ -2,8 +2,6 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.model.Shipment;
-import com.easypost.model.ShipmentCollection;
 import com.easypost.model.Tracker;
 import com.easypost.model.TrackerCollection;
 import com.google.common.collect.ImmutableList;
@@ -179,27 +177,31 @@ public final class TrackerTest {
 
         // Can't access protected method directly, need to make a temporary extended class, yay
         // Downside, TrackerCollection and Tracker are no longer final because they need to be extended
-        class ExtendedTrackerCollection extends TrackerCollection {
+        final class ExtendedTrackerCollection extends TrackerCollection {
 
-            public ExtendedTrackerCollection(TrackerCollection trackerCollection) {
+            ExtendedTrackerCollection(TrackerCollection trackerCollection) {
                 setTrackingCode(trackerCollection.getTrackingCode());
                 setCarrier(trackerCollection.getCarrier());
             }
+
             @Override
             public List<Tracker> getTrackers() {
 
-                class ExtendedTracker extends Tracker {
+                final class ExtendedTracker extends Tracker {
                     @Override
                     public String getId() {
                         return "trk_123";
                     }
                 }
+
                 return new ArrayList<Tracker>(ImmutableList.of(new ExtendedTracker()));
             }
+
             public Map<String, Object> getNextPageParams() throws EndOfPaginationError {
                 return super.buildNextPageParameters(getTrackers(), null);
             }
         }
+
         ExtendedTrackerCollection extendedShipmentCollection = new ExtendedTrackerCollection(trackerCollection);
         Map<String, Object> nextPageParams = extendedShipmentCollection.getNextPageParams();
 

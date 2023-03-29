@@ -18,7 +18,7 @@ public class ShipmentCollection extends PaginatedCollection<Shipment> {
     private Boolean includeChildren;
 
     @Override
-    protected Map<String, Object> buildNextPageParameters(List<Shipment> shipments, Integer pageSize)
+    protected final Map<String, Object> buildNextPageParameters(List<Shipment> shipments, Integer pageSize)
             throws EndOfPaginationError {
         String lastId = shipments.get(shipments.size() - 1).getId();
 

@@ -15,14 +15,12 @@ import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import com.easypost.utils.Utilities;
 import com.google.common.collect.ImmutableList;
-import com.google.errorprone.annotations.Immutable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -199,27 +197,31 @@ public final class ShipmentTest {
 
         // Can't access protected method directly, need to make a temporary extended class, yay
         // Downside, ShipmentCollection and Shipment are no longer final because they need to be extended
-        class ExtendedShipmentCollection extends ShipmentCollection {
+        final class ExtendedShipmentCollection extends ShipmentCollection {
 
-            public ExtendedShipmentCollection(ShipmentCollection shipmentCollection) {
+            ExtendedShipmentCollection(ShipmentCollection shipmentCollection) {
                 setPurchased(shipmentCollection.getPurchased());
                 setIncludeChildren(shipmentCollection.getIncludeChildren());
             }
+
             @Override
             public List<Shipment> getShipments() {
 
-                class ExtendedShipment extends Shipment {
+                final class ExtendedShipment extends Shipment {
                     @Override
                     public String getId() {
                         return "shp_123";
                     }
                 }
+
                 return new ArrayList<Shipment>(ImmutableList.of(new ExtendedShipment()));
             }
+
             public Map<String, Object> getNextPageParams() throws EndOfPaginationError {
                 return super.buildNextPageParameters(getShipments(), null);
             }
         }
+
         ExtendedShipmentCollection extendedShipmentCollection = new ExtendedShipmentCollection(shipmentCollection);
         Map<String, Object> nextPageParams = extendedShipmentCollection.getNextPageParams();
 

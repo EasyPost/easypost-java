@@ -1,7 +1,6 @@
 package com.easypost.utils;
 
 import com.easypost.exception.API.EncodingError;
-import com.easypost.model.PaginatedCollection;
 
 import java.net.URLEncoder;
 
@@ -48,7 +47,8 @@ public abstract class InternalUtilities {
      * @param <TElement> Type of the value to extract
      */
     public static <TElement> TElement getOrDefault(Map<String, Object> map, String key, TElement defaultValue) {
-        // The built-in Map<String, Object>.getOrDefault() method extracts a value of type Object, so this handles the cast.
+        // The built-in Map<String, Object>.getOrDefault() method extracts a value of type Object,
+        // so this handles the cast.
         return (TElement) map.getOrDefault(key, defaultValue);
     }
 }

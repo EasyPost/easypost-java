@@ -18,7 +18,7 @@ public class TrackerCollection extends PaginatedCollection<Tracker> {
     private String carrier;
 
     @Override
-    protected Map<String, Object> buildNextPageParameters(List<Tracker> trackers, Integer pageSize)
+    protected final Map<String, Object> buildNextPageParameters(List<Tracker> trackers, Integer pageSize)
             throws EndOfPaginationError {
         String lastId = trackers.get(trackers.size() - 1).getId();
 
