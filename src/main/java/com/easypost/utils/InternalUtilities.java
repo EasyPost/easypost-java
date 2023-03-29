@@ -1,6 +1,7 @@
 package com.easypost.utils;
 
 import com.easypost.exception.API.EncodingError;
+import com.easypost.model.PaginatedCollection;
 
 import java.net.URLEncoder;
 
@@ -36,5 +37,18 @@ public abstract class InternalUtilities {
         }
 
         return result.toString();
+    }
+
+    /**
+     * Extract a value from a Map, or return a default value if the key is not present.
+     * @param map Map to extract from
+     * @param key Key to extract
+     * @param defaultValue Default value to return if the key is not present
+     * @return Value from the map, or the default value if the key is not present
+     * @param <TElement> Type of the value to extract
+     */
+    public static <TElement> TElement getOrDefault(Map<String, Object> map, String key, TElement defaultValue) {
+        // The built-in Map<String, Object>.getOrDefault() method extracts a value of type Object, so this handles the cast.
+        return (TElement) map.getOrDefault(key, defaultValue);
     }
 }

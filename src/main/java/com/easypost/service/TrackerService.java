@@ -6,6 +6,7 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.TrackerCollection;
 import com.easypost.model.Tracker;
+import com.easypost.utils.InternalUtilities;
 import lombok.SneakyThrows;
 
 import java.util.HashMap;
@@ -63,7 +64,13 @@ public class TrackerService {
     public TrackerCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "trackers";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, TrackerCollection.class, client);
+        TrackerCollection trackerCollection =
+                Requestor.request(RequestMethod.GET, endpoint, params, TrackerCollection.class, client);
+        // we store the params in the collection so that we can use them to get the next page
+        trackerCollection.setTrackingCode(InternalUtilities.getOrDefault(params, "tracking_code", null));
+        trackerCollection.setCarrier(InternalUtilities.getOrDefault(params, "carrier", null));
+
+        return trackerCollection;
     }
 
     /**

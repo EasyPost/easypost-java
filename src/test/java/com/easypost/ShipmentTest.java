@@ -14,12 +14,15 @@ import com.easypost.model.ShipmentCollection;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import com.easypost.utils.Utilities;
+import com.google.common.collect.ImmutableList;
+import com.google.errorprone.annotations.Immutable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,6 +125,30 @@ public final class ShipmentTest {
     }
 
     /**
+     * Test the parameter handoff when retrieving all shipments.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testAllParameterHandOff() throws EasyPostException {
+        vcr.setUpTest("all_parameter_hand_off");
+
+        boolean includeChildren = true;
+        boolean purchased = false;
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("page_size", Fixtures.pageSize());
+
+        params.put("include_children", includeChildren);
+        params.put("purchased", purchased);
+
+        ShipmentCollection shipmentCollection = vcr.client.shipment.all(params);
+
+        assertEquals(includeChildren, shipmentCollection.getIncludeChildren());
+        assertEquals(purchased, shipmentCollection.getPurchased());
+    }
+
+    /**
      * Test retrieving the next page.
      *
      * @throws EasyPostException when the request fails.
@@ -148,6 +175,56 @@ public final class ShipmentTest {
         } catch (Exception e) { // Any other exception is a failure
             fail();
         }
+    }
+
+    /**
+     * Test the parameter handoff when constructing the next page parameter map.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetNextPageParameterHandOff() throws EasyPostException {
+        vcr.setUpTest("get_next_page_parameter_hand_off");
+
+        boolean includeChildren = true;
+        boolean purchased = false;
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("page_size", Fixtures.pageSize());
+
+        params.put("include_children", includeChildren);
+        params.put("purchased", purchased);
+
+        ShipmentCollection shipmentCollection = vcr.client.shipment.all(params);
+
+        // Can't access protected method directly, need to make a temporary extended class, yay
+        // Downside, ShipmentCollection and Shipment are no longer final because they need to be extended
+        class ExtendedShipmentCollection extends ShipmentCollection {
+
+            public ExtendedShipmentCollection(ShipmentCollection shipmentCollection) {
+                setPurchased(shipmentCollection.getPurchased());
+                setIncludeChildren(shipmentCollection.getIncludeChildren());
+            }
+            @Override
+            public List<Shipment> getShipments() {
+
+                class ExtendedShipment extends Shipment {
+                    @Override
+                    public String getId() {
+                        return "shp_123";
+                    }
+                }
+                return new ArrayList<Shipment>(ImmutableList.of(new ExtendedShipment()));
+            }
+            public Map<String, Object> getNextPageParams() throws EndOfPaginationError {
+                return super.buildNextPageParameters(getShipments(), null);
+            }
+        }
+        ExtendedShipmentCollection extendedShipmentCollection = new ExtendedShipmentCollection(shipmentCollection);
+        Map<String, Object> nextPageParams = extendedShipmentCollection.getNextPageParams();
+
+        assertEquals(includeChildren, nextPageParams.get("include_children"));
+        assertEquals(purchased, nextPageParams.get("purchased"));
     }
 
     /**

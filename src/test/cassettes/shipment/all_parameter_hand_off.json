@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1680116312,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/shipments?%70%75%72%63%68%61%73%65%64\u003d%66%61%6C%73%65\u0026%70%61%67%65%5F%73%69%7A%65\u003d%35\u0026%69%6E%63%6C%75%64%65%5F%63%68%69%6C%64%72%65%6E\u003d%74%72%75%65"
+    },
+    "response": {
+      "body": "{\n  \"has_more\": false,\n  \"shipments\": []\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "33"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb3nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "730d5da864248a58e64f26c100037756"
+        ],
+        "x-proxied": [
+          "intlb1nuq a29e4ad05c",
+          "extlb1nuq a29e4ad05c"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.032766"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "etag": [
+          "W/\"2f41284d43f60e5545923a32fd36976a\""
+        ],
+        "x-version-label": [
+          "easypost-202303291803-b399a149ad-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/shipments?%70%75%72%63%68%61%73%65%64\u003d%66%61%6C%73%65\u0026%70%61%67%65%5F%73%69%7A%65\u003d%35\u0026%69%6E%63%6C%75%64%65%5F%63%68%69%6C%64%72%65%6E\u003d%74%72%75%65"
+    },
+    "duration": 160
+  }
+]
