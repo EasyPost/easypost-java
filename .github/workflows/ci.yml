@@ -62,7 +62,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: Install grcov
         if: github.ref == 'refs/heads/master'
-        run: cargo install grcov
+        run: cargo install grcov --version 0.8.13
       - name: Convert coverage report
         if: github.ref == 'refs/heads/master'
         run: grcov target/site/jacoco/jacoco.xml --source-dir ./ --ignore "target/*" > coverage.lcov
