@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## Next Release
+## v6.4.0 (2023-04-04)
 
+- Adds `getNextPage` function to each service which retrieves the next page of a collection when the `has_more` key is present in the response (eg: `client.address.getNextPage(addressCollection)`)
 - Adds missing Event `status` property
 
 ## v6.3.1 (2023-03-22)
