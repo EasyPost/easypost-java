@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next release
+
+- Fixes the type for `requestBody` from Map to String for Payload class
+
 ## v6.4.0 (2023-04-04)
 
 - Adds `getNextPage` function to each service which retrieves the next page of a collection when the `has_more` key is present in the response (eg: `client.address.getNextPage(addressCollection)`)
