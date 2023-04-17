@@ -16,7 +16,7 @@ Add this to your project's POM:
 <dependency>
   <groupId>com.easypost</groupId>
   <artifactId>easypost-api-client</artifactId>
-  <version>6.4.0</version>
+  <version>6.4.1</version>
 </dependency>
 ```
 
@@ -25,7 +25,7 @@ Add this to your project's POM:
 Add this to your project's build file:
 
 ```groovy
-implementation "com.easypost:easypost-api-client:6.4.0"
+implementation "com.easypost:easypost-api-client:6.4.1"
 ```
 
 **NOTE:** [Google Gson](http://code.google.com/p/google-gson/) is required.

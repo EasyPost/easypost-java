@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next release
+## v6.4.1 (2023-04-17)
 
 - Fixes the type for `requestBody` from Map to String for Payload class
 
