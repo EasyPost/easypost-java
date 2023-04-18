@@ -1,0 +1,94 @@
+[
+  {
+    "recordedAt": 1681845959,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/beta/metadata?types\u003dservice_levels%2Cpredefined_packages\u0026carriers\u003dusps?%74%79%70%65%73\u003d%73%65%72%76%69%63%65%5F%6C%65%76%65%6C%73%2C%70%72%65%64%65%66%69%6E%65%64%5F%70%61%63%6B%61%67%65%73\u0026%63%61%72%72%69%65%72%73\u003d%75%73%70%73"
+    },
+    "response": {
+      "body": "{\n  \"carriers\": [\n    {\n      \"service_levels\": [\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": 15.99,\n          \"name\": \"First\",\n          \"description\": \"1-3 days\",\n          \"human_readable\": null,\n          \"dimensions\": [\n            \"22in x 18in x 15in\"\n          ]\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": 1120.0,\n          \"name\": \"Priority\",\n          \"description\": \"2-3 days\",\n          \"human_readable\": null,\n          \"dimensions\": [\n            \"Combined Length and Girth \\u003c 108in\"\n          ]\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": 1120.0,\n          \"name\": \"Express\",\n          \"description\": \"1-2 days\",\n          \"human_readable\": null,\n          \"dimensions\": [\n            \"Combined Length and Girth \\u003c 108in\"\n          ]\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": 1120.0,\n          \"name\": \"ParcelSelect\",\n          \"description\": \"2-8 business days\",\n          \"human_readable\": null,\n          \"dimensions\": [\n            \"Combined Length and Girth \\u003c 108in\"\n          ]\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": 1120.0,\n          \"name\": \"LibraryMail\",\n          \"description\": \"2-8 business days\",\n          \"human_readable\": null,\n          \"dimensions\": [\n            \"Combined Length and Girth \\u003c 108in\"\n          ]\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": 1120.0,\n          \"name\": \"MediaMail\",\n          \"description\": \"2-8 business days\",\n          \"human_readable\": null,\n          \"dimensions\": [\n            \"Combined Length and Girth \\u003c 108in\"\n          ]\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"FirstClassMailInternational\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": 64.0,\n          \"name\": \"FirstClassPackageInternationalService\",\n          \"description\": \"7-21 days\",\n          \"human_readable\": null,\n          \"dimensions\": [\n            \"Combined Length and Girth \\u003c 108in\"\n          ]\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": 1120.0,\n          \"name\": \"PriorityMailInternational\",\n          \"description\": \"6-10 business days\",\n          \"human_readable\": null,\n          \"dimensions\": [\n            \"Combined Length and Girth \\u003c 108in\"\n          ]\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": 1120.0,\n          \"name\": \"ExpressMailInternational\",\n          \"description\": \"3-5 business days\",\n          \"human_readable\": null,\n          \"dimensions\": [\n            \"Combined Length and Girth \\u003c 108in\"\n          ]\n        }\n      ],\n      \"predefined_packages\": [\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"Card\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"Letter\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"Flat\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"FlatRateEnvelope\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"FlatRateLegalEnvelope\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"FlatRatePaddedEnvelope\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"FlatRateGiftCardEnvelope\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"FlatRateWindowEnvelope\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"FlatRateCardboardEnvelope\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"SmallFlatRateEnvelope\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"Parcel\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"SoftPack\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"SmallFlatRateBox\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"MediumFlatRateBox\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"LargeFlatRateBox\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"LargeFlatRateBoxAPOFPO\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"FlatTubTrayBox\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"EMMTrayBox\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"FullTrayBox\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"HalfTrayBox\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        },\n        {\n          \"carrier\": \"usps\",\n          \"max_weight\": null,\n          \"name\": \"PMODSack\",\n          \"description\": null,\n          \"human_readable\": null,\n          \"dimensions\": []\n        }\n      ],\n      \"name\": \"usps\",\n      \"human_readable\": \"USPS\"\n    }\n  ]\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "4207"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb8nuq"
+        ],
+        "vary": [
+          "Origin"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "481ca080643eeec7e798de0a0005abc7"
+        ],
+        "x-proxied": [
+          "extlb1nuq a29e4ad05c",
+          "intlb1nuq a29e4ad05c"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.025119"
+        ],
+        "etag": [
+          "W/\"a842c1378a5f4d5f9ad9956312671ebe\""
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202304181829-245b135039-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/beta/metadata?types\u003dservice_levels%2Cpredefined_packages\u0026carriers\u003dusps?%74%79%70%65%73\u003d%73%65%72%76%69%63%65%5F%6C%65%76%65%6C%73%2C%70%72%65%64%65%66%69%6E%65%64%5F%70%61%63%6B%61%67%65%73\u0026%63%61%72%72%69%65%72%73\u003d%75%73%70%73"
+    },
+    "duration": 540
+  }
+]
