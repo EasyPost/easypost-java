@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## Next release
+## v6.5.0 (2023-04-18)
 
+- Adds beta `retrieveCarrierMetadata` function
 - Fixes the type for `requestBody` from Map to String for Payload class
 - Add `retrieveCarrierMetadata` method to retrieve carrier metadata for carriers
 
