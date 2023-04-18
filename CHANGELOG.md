@@ -3,6 +3,7 @@
 ## Next release
 
 - Fixes the type for `requestBody` from Map to String for Payload class
+- Add `retrieveCarrierMetadata` method to retrieve carrier metadata for carriers
 
 ## v6.4.0 (2023-04-04)
 
