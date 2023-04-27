@@ -5,6 +5,7 @@ import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.exception.General.InvalidParameterError;
 import com.easypost.model.Address;
 import com.easypost.model.EndShipper;
+import com.easypost.model.EstimatedDeliveryDate;
 import com.easypost.model.Fee;
 import com.easypost.model.Form;
 import com.easypost.model.Parcel;
@@ -522,8 +523,8 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate");
 
         Shipment shipment = createBasicShipment();
-        SmartRate lowestSmartRateFilters =
-                vcr.client.shipment.lowestSmartRate(shipment.getId(), 2, SmartrateAccuracy.Percentile90);
+        SmartRate lowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
+                SmartrateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
         assertEquals("Priority", lowestSmartRateFilters.getService());
@@ -536,8 +537,8 @@ public final class ShipmentTest {
             vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartrateAccuracy.Percentile90);
         });
 
-        SmartRate deprecatedLowestSmartRateFilters =
-                vcr.client.shipment.lowestSmartRate(shipment.getId(), 2, "percentile_90");
+        SmartRate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
+                "percentile_90");
 
         // Test lowest smartrate with valid filters
         assertEquals("Priority", deprecatedLowestSmartRateFilters.getService());
@@ -649,8 +650,8 @@ public final class ShipmentTest {
         Shipment shipment = createOneCallBuyShipment();
         String formType = "return_packing_slip";
 
-        Shipment shipmentWithForm =
-                vcr.client.shipment.generateForm(shipment.getId(), formType, Fixtures.rmaFormOptions());
+        Shipment shipmentWithForm = vcr.client.shipment.generateForm(shipment.getId(), formType,
+                Fixtures.rmaFormOptions());
 
         assertTrue(shipmentWithForm.getForms().size() > 0);
 
@@ -793,5 +794,23 @@ public final class ShipmentTest {
         Shipment boughtShipment = vcr.client.shipment.buy(shipment.getId(), buyMap, endShipper.getId());
 
         assertNotNull(boughtShipment.getPostageLabel());
+    }
+
+    /**
+     * Tests that we retrieve time-in-transit data for each of the Rates of a Shipment.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testRetrieveEstimatedDeliveryDate() throws EasyPostException {
+        vcr.setUpTest("retrieve_estimated_delivery_date");
+
+        Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
+
+        List<EstimatedDeliveryDate> estimatedDeliveryDates = vcr.client.shipment
+                .retrieveEstimatedDeliveryDate(shipment.getId(), "2023-04-28");
+        for (EstimatedDeliveryDate estimatedDeliveryDate : estimatedDeliveryDates) {
+            assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData());
+        }
     }
 }

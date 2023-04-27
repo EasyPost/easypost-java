@@ -7,6 +7,8 @@ import com.easypost.exception.General.FilteringError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.ShipmentCollection;
+import com.easypost.model.EstimatedDeliveryDate;
+import com.easypost.model.EstimatedDeliveryDateResponse;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
 import com.easypost.model.SmartRate;
@@ -85,8 +87,8 @@ public class ShipmentService {
     public ShipmentCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "shipments";
 
-        ShipmentCollection shipmentCollection =
-                Requestor.request(RequestMethod.GET, endpoint, params, ShipmentCollection.class, client);
+        ShipmentCollection shipmentCollection = Requestor.request(RequestMethod.GET, endpoint, params,
+                ShipmentCollection.class, client);
         // we store the params in the collection so that we can use them to get the next page
         shipmentCollection.setPurchased(InternalUtilities.getOrDefault(params, "purchased", null));
         shipmentCollection.setIncludeChildren(InternalUtilities.getOrDefault(params, "include_children", null));
@@ -214,9 +216,8 @@ public class ShipmentService {
     public List<SmartRate> smartrates(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "shipments/" + id + "/smartrate";
 
-        SmartrateCollection smartrateCollection =
-                Requestor.request(RequestMethod.GET, endpoint, params,
-                        SmartrateCollection.class, client);
+        SmartrateCollection smartrateCollection = Requestor.request(RequestMethod.GET, endpoint, params,
+                SmartrateCollection.class, client);
 
         return smartrateCollection.getSmartrates();
     }
@@ -322,7 +323,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public Shipment buy(final String id, final Map<String, Object> params, final boolean withCarbonOffset,
-                        final String endShipperId) throws EasyPostException {
+            final String endShipperId) throws EasyPostException {
         params.put("carbon_offset", withCarbonOffset);
 
         if (endShipperId != null && !endShipperId.isEmpty()) {
@@ -469,7 +470,7 @@ public class ShipmentService {
      * @throws EasyPostException when the request fails.
      */
     public SmartRate findLowestSmartrate(final List<SmartRate> smartRates, int deliveryDay,
-                                         SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
+            SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
         SmartRate lowestSmartrate = null;
 
         for (SmartRate rate : smartRates) {
@@ -523,5 +524,24 @@ public class ShipmentService {
 
         return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Shipment.class,
                 client);
+    }
+
+    /**
+     * Retrieves the estimated delivery date of each Rate via SmartRate.
+     * 
+     * @param id              The id of the shipment.
+     * @param plannedShipDate The planned shipment date.
+     * @return EstimatedDeliveryDate object.
+     * @throws EasyPostException
+     */
+    public List<EstimatedDeliveryDate> retrieveEstimatedDeliveryDate(final String id, final String plannedShipDate)
+            throws EasyPostException {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("planned_ship_date", plannedShipDate);
+        String endpoint = "shipments/" + id + "/smartrate/delivery_date";
+
+        EstimatedDeliveryDateResponse response = Requestor.request(RequestMethod.GET, endpoint, params,
+                EstimatedDeliveryDateResponse.class, client);
+        return response.getRates();
     }
 }
