@@ -808,7 +808,7 @@ public final class ShipmentTest {
         Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
 
         List<EstimatedDeliveryDate> estimatedDeliveryDates = vcr.client.shipment
-                .retrieveEstimatedDeliveryDate(shipment.getId(), "2023-04-28");
+                .retrieveEstimatedDeliveryDate(shipment.getId(), Fixtures.plannedShipDate());
         for (EstimatedDeliveryDate estimatedDeliveryDate : estimatedDeliveryDates) {
             assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData());
         }

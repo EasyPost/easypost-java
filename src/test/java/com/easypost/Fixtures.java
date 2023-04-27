@@ -318,4 +318,13 @@ public abstract class Fixtures {
     public static HashMap<String, Object> referralUser() {
         return Objects.requireNonNull(getFixtureData()).users.referral;
     }
+
+    /**
+     * Get the default planned ship date.
+     *
+     * @return The default planned ship date
+     */
+    public static String plannedShipDate() {
+        return "2023-04-28";
+    }
 }
