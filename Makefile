@@ -4,7 +4,7 @@ help:
 
 ## build - Builds the project for development
 build:
-	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true
+	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true
 
 ## clean - Cleans the project
 clean:
@@ -16,7 +16,7 @@ coverage:
 
 ## docs - Generates library documentation
 docs:
-	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true
+	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true
 	cp -R target/apidocs/ ./docs/
 
 ## install-checkstyle - Install CheckStyle
@@ -51,7 +51,7 @@ release:
 
 ## scan - Scan the project for serious security issues
 scan:
-	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true -Ddependency-check.failBuildOnCVSS=0 -Ddependency-check.junitFailOnCVSS=0
+	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true -Djacoco.skip=true -Ddependency-check.failBuildOnCVSS=0 -Ddependency-check.junitFailOnCVSS=0
 
 ## test - Test the project
 test:
