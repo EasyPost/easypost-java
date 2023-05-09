@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Test suite tweaked so EasyVCR is no longer a production dependency
+
 ## v6.6.0 (2023-05-02)
 
 - Adds `retrieveEstimatedDeliveryDate` function to the Shipment class
