@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v6.6.1 (2023-05-09)
 
 - Test suite tweaked so EasyVCR is no longer a production dependency
 
