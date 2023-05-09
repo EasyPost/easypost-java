@@ -129,12 +129,8 @@ public abstract class Requestor {
                      InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 throw new IOException(e);
             }
-        } else if (EasyPost._vcr != null) {
-            try {
-                conn = EasyPost._vcr.getHttpUrlConnection(url).openConnectionSecure();
-            } catch (Exception vcrException) {
-                throw new IOException(vcrException);
-            }
+        } else if (EasyPost._vcrUrlFunction != null) {
+            conn = EasyPost._vcrUrlFunction.apply(url);
         } else {
             URL urlObj = new URL(null, url);
             conn = (javax.net.ssl.HttpsURLConnection) urlObj.openConnection();

@@ -74,7 +74,7 @@
             <groupId>com.easypost</groupId>
             <artifactId>easyvcr</artifactId>
             <version>0.5.2</version>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

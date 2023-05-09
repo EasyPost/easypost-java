@@ -12,11 +12,13 @@ import com.easypost.exception.General.MissingParameterError;
 import com.easypost.service.EasyPostClient;
 import com.google.common.collect.ImmutableList;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.function.Function;
 
 public abstract class TestUtils {
     public enum ApiKey {
@@ -233,8 +235,16 @@ public abstract class TestUtils {
                 vcr.replay();
             }
 
+            Function<String, HttpsURLConnection> vcrUrlFunction = (url) -> {
+                try {
+                    return vcr.getHttpUrlConnection(url).openConnectionSecure();
+                } catch (Exception vcrException) {
+                    throw new RuntimeException(vcrException);
+                }
+            };
+
             // set VCR to be used during requests
-            EasyPost._vcr = vcr;
+            EasyPost._vcrUrlFunction = vcrUrlFunction;
         }
     }
 }

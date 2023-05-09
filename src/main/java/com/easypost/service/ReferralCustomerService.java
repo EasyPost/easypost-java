@@ -207,12 +207,8 @@ public class ReferralCustomerService {
         URL stripeUrl = new URL("https://api.stripe.com/v1/tokens?" + encodedURL);
 
         HttpURLConnection conn;
-        if (EasyPost._vcr != null) {
-            try {
-                conn = EasyPost._vcr.getHttpUrlConnection(stripeUrl).openConnectionSecure();
-            } catch (Exception vcrException) {
-                throw new IOException(vcrException);
-            }
+        if (EasyPost._vcrUrlFunction != null) {
+            conn = EasyPost._vcrUrlFunction.apply(stripeUrl.toString());
         } else {
             conn = (HttpURLConnection) stripeUrl.openConnection();
         }

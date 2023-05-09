@@ -1,6 +1,7 @@
 package com.easypost;
 
-import com.easypost.easyvcr.VCR;
+import javax.net.ssl.HttpsURLConnection;
+import java.util.function.Function;
 
 /**
  * Hello weary traveler, welcome to the EasyPost Java client library.
@@ -37,5 +38,5 @@ public abstract class EasyPost {
      * <p>
      * NOTE: This is meant for unit testing purposes only. Do not use in production.
      */
-    public static VCR _vcr = null;
+    public static Function<String, HttpsURLConnection> _vcrUrlFunction = null;
 }
