@@ -371,6 +371,7 @@ public abstract class Requestor {
                             String.format("Unrecognized HTTP method %s. Please contact EasyPost at %s.", method,
                                     Constants.EASYPOST_SUPPORT_EMAIL));
             }
+            conn.setRequestProperty("Accept", "*/*");
             conn.connect(); // This line is crucial for getting VCR to work
             // (triggers internal pre-request processing needed for VCR)
             int rCode = conn.getResponseCode(); // sends the request
