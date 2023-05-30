@@ -99,7 +99,7 @@ public final class TrackerTest {
 
         assertTrue(trackersList.size() <= Fixtures.pageSize());
         assertNotNull(trackers.getHasMore());
-        assertTrue(trackersList.stream().allMatch(tracker -> tracker instanceof Tracker));
+        assertTrue(trackersList.stream().allMatch(tracker -> tracker != null));
     }
 
     /**

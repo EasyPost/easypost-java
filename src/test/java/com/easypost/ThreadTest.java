@@ -100,8 +100,6 @@ public final class ThreadTest {
 
     /**
      * Test creating orders.
-     *
-     * @throws EasyPostException when the request fails.
      */
     private static class CreateOrders implements Runnable {
         private List<Map<String, Object>> orders;
@@ -110,6 +108,7 @@ public final class ThreadTest {
             this.orders = orders;
         }
 
+        @Override
         public void run() {
             try {
                 for (int i = 0; i < this.orders.size(); i++) {
@@ -130,7 +129,7 @@ public final class ThreadTest {
     /**
      * Test create multiple EasyPostClient with different API keys.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if an exception is thrown.
      */
     @Test
     public void testMultipleClients() throws EasyPostException {

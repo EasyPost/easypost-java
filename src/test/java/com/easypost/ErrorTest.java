@@ -15,7 +15,6 @@ import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.APIException;
 import com.easypost.exception.EasyPostException;
-import com.easypost.exception.General.MissingParameterError;
 import com.easypost.http.Requestor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -33,11 +32,10 @@ public final class ErrorTest extends Requestor {
     /**
      * Set up the testing environment for this file.
      *
-     * @throws MissingParameterError
-     * @throws EasyPostException     when the request fails.
+     * @throws EasyPostException if any exception is thrown.
      */
     @BeforeAll
-    public static void setup() throws MissingParameterError {
+    public static void setup() throws EasyPostException {
         vcr = new TestUtils.VCR("error", TestUtils.ApiKey.TEST);
     }
 
@@ -62,7 +60,7 @@ public final class ErrorTest extends Requestor {
     /**
      * Test every error type and make sure each error has the correct properties.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if any exception is thrown.
      */
     @Test
     public void testKnownApiException() throws EasyPostException {
@@ -103,7 +101,7 @@ public final class ErrorTest extends Requestor {
     /**
      * Test parsing error message.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if any exception is thrown.
      */
     @Test
     public void testExceptionErrorMessageParsing() throws EasyPostException {
@@ -123,7 +121,7 @@ public final class ErrorTest extends Requestor {
     /**
      * Test parsing error message that is an array.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if any exception is thrown.
      */
     @Test
     public void testExceptionErrorArrayParsing() throws EasyPostException {
@@ -146,7 +144,7 @@ public final class ErrorTest extends Requestor {
     /**
      * Test parsing error message that is an object.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException is any exception thrown.
      */
     @Test
     public void testExceptionErrorObjectParsing() throws EasyPostException {
@@ -172,7 +170,7 @@ public final class ErrorTest extends Requestor {
     /**
      * Test parsing error message that has really bad format.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if any exception is thrown.
      */
     @Test
     public void testExceptionErrorEdgeCaseParsing() throws EasyPostException {

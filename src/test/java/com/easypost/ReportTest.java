@@ -173,7 +173,7 @@ public final class ReportTest {
 
         assertTrue(reportsList.size() <= Fixtures.pageSize());
         assertNotNull(reports.getHasMore());
-        assertTrue(reportsList.stream().allMatch(report -> report instanceof Report));
+        assertTrue(reportsList.stream().allMatch(report -> report != null));
     }
 
     /**

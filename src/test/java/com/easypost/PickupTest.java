@@ -69,7 +69,7 @@ public final class PickupTest {
 
         assertTrue(pickups.size() <= Fixtures.pageSize());
         assertNotNull(pickupCollection.getHasMore());
-        assertTrue(pickups.stream().allMatch(pickup -> pickup instanceof Pickup));
+        assertTrue(pickups.stream().allMatch(pickup -> pickup != null));
     }
 
     /**

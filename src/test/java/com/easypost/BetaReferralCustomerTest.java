@@ -40,7 +40,7 @@ public class BetaReferralCustomerTest {
     /**
      * Test refund by amount for a previous payment.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if an exception is thrown.
      */
     @Test
     public void testRefundByAmount() throws EasyPostException {
@@ -57,13 +57,13 @@ public class BetaReferralCustomerTest {
     /**
      * Test refund by payment log for a previous payment.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if an exception is thrown.
      */
     @Test
     public void testRefundByPaymentLogId() throws EasyPostException {
         vcr.setUpTest("refund_by_payment_log_id");
         InvalidRequestError exception = assertThrows(InvalidRequestError.class,
-                () -> vcr.client.betaReferralCustomer.refundByPaymentLog(("paylog_123")));
+                () -> vcr.client.betaReferralCustomer.refundByPaymentLog("paylog_123"));
 
         assertEquals("TRANSACTION.DOES_NOT_EXIST", exception.getCode());
         assertEquals(422, exception.getStatusCode());

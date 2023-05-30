@@ -99,7 +99,7 @@ public final class ScanFormTest {
 
         assertTrue(scanFormsList.size() <= Fixtures.pageSize());
         assertNotNull(scanForms.getHasMore());
-        assertTrue(scanFormsList.stream().allMatch(scanForm -> scanForm instanceof ScanForm));
+        assertTrue(scanFormsList.stream().allMatch(scanForm -> scanForm != null));
     }
 
     /**

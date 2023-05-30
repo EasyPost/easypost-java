@@ -144,7 +144,7 @@ public final class OrderTest {
     /**
      * Test getting new rates of a order.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if an exception is thrown.
      */
     @Test
     public void testNewRate() throws EasyPostException {

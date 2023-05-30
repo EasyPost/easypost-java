@@ -98,7 +98,7 @@ public final class BatchTest {
 
         assertTrue(batchesList.size() <= Fixtures.pageSize());
         assertNotNull(batches.getHasMore());
-        assertTrue(batchesList.stream().allMatch(batch -> batch instanceof Batch));
+        assertTrue(batchesList.stream().allMatch(batch -> batch != null));
     }
 
     /**

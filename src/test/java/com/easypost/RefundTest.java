@@ -78,7 +78,7 @@ public final class RefundTest {
 
         assertTrue(refunds.size() <= Fixtures.pageSize());
         assertNotNull(refundCollection.getHasMore());
-        assertTrue(refunds.stream().allMatch(refund -> refund instanceof Refund));
+        assertTrue(refunds.stream().allMatch(refund -> refund != null));
     }
 
     /**

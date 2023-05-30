@@ -88,7 +88,7 @@ public final class EndShipperTest {
 
         assertTrue(endShippers.size() <= Fixtures.pageSize());
         assertNotNull(endShipperCollection.getHasMore());
-        assertTrue(endShippers.stream().allMatch(endShipper -> endShipper instanceof EndShipper));
+        assertTrue(endShippers.stream().allMatch(endShipper -> endShipper != null));
     }
 
     /**
