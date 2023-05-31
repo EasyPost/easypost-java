@@ -30,7 +30,7 @@ public class PaymentMethodTest {
     public void testAll() throws EasyPostException {
         vcr.setUpTest("all");
 
-        PaymentMethod paymentMethod = vcr.client.paymentMethod.all();
+        PaymentMethod paymentMethod = vcr.client.billing.retrievePaymentMethods();
 
         assertInstanceOf(PaymentMethod.class, paymentMethod);
         assertTrue(paymentMethod.getId().startsWith("cust_"));

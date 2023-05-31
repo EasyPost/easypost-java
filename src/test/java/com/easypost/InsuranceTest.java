@@ -98,7 +98,7 @@ public final class InsuranceTest {
 
         assertTrue(insurances.size() <= Fixtures.pageSize());
         assertNotNull(insuranceCollection.getHasMore());
-        assertTrue(insurances.stream().allMatch(insurance -> insurance instanceof Insurance));
+        assertTrue(insurances.stream().allMatch(insurance -> insurance != null));
     }
 
     /**

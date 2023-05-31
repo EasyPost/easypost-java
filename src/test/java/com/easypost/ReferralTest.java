@@ -102,7 +102,7 @@ public final class ReferralTest {
 
         assertTrue(referralUsers.size() <= Fixtures.pageSize());
         assertNotNull(referralCustomerCollection.getHasMore());
-        assertTrue(referralUsers.stream().allMatch(referral -> referral instanceof ReferralCustomer));
+        assertTrue(referralUsers.stream().allMatch(referral -> referral != null));
     }
 
     /**

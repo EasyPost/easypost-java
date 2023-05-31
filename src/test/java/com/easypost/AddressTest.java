@@ -38,7 +38,7 @@ public final class AddressTest {
      * Create a basic address.
      *
      * @return basic Address object
-     * @throws EasyPostException
+     * @throws EasyPostException if an exception is thrown.
      */
     public Address createBasicAddress() throws EasyPostException {
         return vcr.client.address.create(Fixtures.caAddress1());
@@ -157,7 +157,7 @@ public final class AddressTest {
 
         assertTrue(addressesList.size() <= Fixtures.pageSize());
         assertNotNull(addresses.getHasMore());
-        assertTrue(addressesList.stream().allMatch(address -> address instanceof Address));
+        assertTrue(addressesList.stream().allMatch(address -> address != null));
     }
 
     /**
@@ -230,7 +230,7 @@ public final class AddressTest {
     /**
      * Test creating invalid address creation to see if the error has correct properties.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if an exception is thrown.
      */
     @Test
     public void testInvalidAddressCreation() throws EasyPostException {

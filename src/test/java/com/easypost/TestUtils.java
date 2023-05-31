@@ -124,7 +124,7 @@ public abstract class TestUtils {
         /**
          * Constructor.
          *
-         * @throws MissingParameterError
+         * @throws MissingParameterError if a required parameter is missing.
          */
         public VCR() throws MissingParameterError {
             this(null, ApiKey.TEST);
@@ -134,7 +134,7 @@ public abstract class TestUtils {
          * Constructor.
          *
          * @param testCassettesFolder The folder where the cassettes will be stored.
-         * @throws MissingParameterError
+         * @throws MissingParameterError if a required parameter is missing.
          */
         public VCR(String testCassettesFolder) throws MissingParameterError {
             this(testCassettesFolder, ApiKey.TEST);
@@ -145,7 +145,7 @@ public abstract class TestUtils {
          *
          * @param testCassettesFolder The folder where the cassettes will be stored.
          * @param apiKey              The API key to use.
-         * @throws MissingParameterError
+         * @throws MissingParameterError if a required parameter is missing.
          */
         public VCR(String testCassettesFolder, ApiKey apiKey) throws MissingParameterError {
             this(testCassettesFolder, getApiKey(apiKey));
@@ -155,7 +155,7 @@ public abstract class TestUtils {
          * Constructor.
          *
          * @param apiKey The API key to use.
-         * @throws MissingParameterError
+         * @throws MissingParameterError if a required parameter is missing.
          */
         public VCR(ApiKey apiKey) throws MissingParameterError {
             this(null, apiKey);
@@ -166,7 +166,7 @@ public abstract class TestUtils {
          *
          * @param testCassettesFolder The folder where the cassettes will be stored.
          * @param apiKey              The API key to use.
-         * @throws MissingParameterError
+         * @throws MissingParameterError if a required parameter is missing.
          */
         public VCR(String testCassettesFolder, String apiKey) throws MissingParameterError {
             AdvancedSettings advancedSettings = new AdvancedSettings();
@@ -201,7 +201,7 @@ public abstract class TestUtils {
          * Set up the VCR for a unit test.
          *
          * @param cassetteName The name of the cassette to use.
-         * @throws MissingParameterError
+         * @throws MissingParameterError if a required parameter is missing.
          */
         public void setUpTest(String cassetteName) throws MissingParameterError {
             setUpTest(cassetteName, "");
@@ -212,7 +212,7 @@ public abstract class TestUtils {
          *
          * @param cassetteName   The name of the cassette to use.
          * @param overrideApiKey The API key to use.
-         * @throws MissingParameterError
+         * @throws MissingParameterError if a required parameter is missing.
          */
         public void setUpTest(String cassetteName, String overrideApiKey) throws MissingParameterError {
             // override api key if needed

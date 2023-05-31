@@ -120,7 +120,7 @@ public final class ShipmentTest {
 
         assertTrue(shipments.size() <= Fixtures.pageSize());
         assertNotNull(shipmentCollection.getHasMore());
-        assertTrue(shipments.stream().allMatch(shipment -> shipment instanceof Shipment));
+        assertTrue(shipments.stream().allMatch(shipment -> shipment != null));
     }
 
     /**
@@ -538,7 +538,7 @@ public final class ShipmentTest {
         });
 
         SmartRate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
-                "percentile_90");
+            SmartrateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
         assertEquals("Priority", deprecatedLowestSmartRateFilters.getService());
@@ -555,7 +555,7 @@ public final class ShipmentTest {
     /**
      * Test getting smart rates for a shipment.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if an exception is thrown.
      */
     @Test
     public void testGetSmartRate() throws EasyPostException {
@@ -563,7 +563,7 @@ public final class ShipmentTest {
 
         Shipment shipment = createBasicShipment();
 
-        List<SmartRate> rates = vcr.client.shipment.getSmartrates(shipment.getId());
+        List<SmartRate> rates = vcr.client.shipment.smartrates(shipment.getId());
 
         assertInstanceOf(List.class, rates);
 
@@ -575,7 +575,7 @@ public final class ShipmentTest {
     /**
      * Test retriving lowest smart rate.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException if an exception is thrown.
      */
     @Test
     public void testGetLowestSmartRate() throws EasyPostException {
@@ -583,8 +583,8 @@ public final class ShipmentTest {
 
         Shipment shipment = createBasicShipment();
 
-        List<SmartRate> rates = vcr.client.shipment.getSmartrates(shipment.getId());
-        SmartRate lowestSmartrate = vcr.client.shipment.getLowestSmartRate(rates, 3, "percentile_85");
+        List<SmartRate> rates = vcr.client.shipment.smartrates(shipment.getId());
+        SmartRate lowestSmartrate = vcr.client.shipment.findLowestSmartrate(rates, 3, SmartrateAccuracy.Percentile85);
 
         assertEquals("First", lowestSmartrate.getService());
         assertEquals(5.82, lowestSmartrate.getRate(), 0.01);

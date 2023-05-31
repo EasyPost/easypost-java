@@ -113,7 +113,7 @@ public final class WebhookTest {
 
         List<Webhook> webhooksList = webhooks.getWebhooks();
 
-        assertTrue(webhooksList.stream().allMatch(webhook -> webhook instanceof Webhook));
+        assertTrue(webhooksList.stream().allMatch(webhook -> webhook != null));
     }
 
     /**

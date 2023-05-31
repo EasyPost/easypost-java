@@ -125,7 +125,7 @@ public final class CarrierAccountTest {
 
         List<CarrierAccount> carrierAccounts = vcr.client.carrierAccount.all();
 
-        assertTrue(carrierAccounts.stream().allMatch(carrier -> carrier instanceof CarrierAccount));
+        assertTrue(carrierAccounts.stream().allMatch(carrier -> carrier != null));
     }
 
     /**
@@ -177,6 +177,6 @@ public final class CarrierAccountTest {
         List<CarrierType> types = vcr.client.carrierType.all();
 
         assertInstanceOf(List.class, types);
-        assertTrue(types.stream().allMatch(type -> type instanceof CarrierType));
+        assertTrue(types.stream().allMatch(type -> type != null));
     }
 }

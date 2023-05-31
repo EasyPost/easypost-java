@@ -51,7 +51,7 @@ public final class EventTest {
 
         assertTrue(eventsList.size() <= Fixtures.pageSize());
         assertNotNull(events.getHasMore());
-        assertTrue(eventsList.stream().allMatch(event -> event instanceof Event));
+        assertTrue(eventsList.stream().allMatch(event -> event != null));
     }
 
     /**
@@ -143,7 +143,7 @@ public final class EventTest {
 
         List<Event> eventsList = events.getEvents();
         List<Payload> payloads = vcr.client.event.retrieveAllPayloads(eventsList.get(0).getId());
-        assertTrue(payloads.stream().allMatch(payload -> payload instanceof Payload));
+        assertTrue(payloads.stream().allMatch(payload -> payload != null));
         vcr.client.webhook.delete(webhook.getId());
     }
 

@@ -46,6 +46,7 @@ public abstract class InternalUtilities {
      * @return Value from the map, or the default value if the key is not present
      * @param <TElement> Type of the value to extract
      */
+    @SuppressWarnings("unchecked")
     public static <TElement> TElement getOrDefault(Map<String, Object> map, String key, TElement defaultValue) {
         // The built-in Map<String, Object>.getOrDefault() method extracts a value of type Object,
         // so this handles the cast.

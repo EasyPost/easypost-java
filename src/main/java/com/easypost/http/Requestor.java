@@ -716,7 +716,6 @@ public abstract class Requestor {
 
             return new EasyPostResponse(responseCode, responseBody);
 
-            // TODO: This suppression makes it a bit confusing what the root cause of the error is downstream.
         } catch (InvocationTargetException | MalformedURLException | SecurityException | NoSuchFieldException |
                  NoSuchMethodException | ClassNotFoundException | IllegalArgumentException | IllegalAccessException |
                  InstantiationException | MissingParameterError | UnsupportedEncodingException e) {
