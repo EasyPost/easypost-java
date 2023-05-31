@@ -25,6 +25,7 @@ public class BetaCarrierMetadataService {
      *
      * @return CarrierMetadata object
      * @throws EasyPostException
+     * @deprecated Use carrierMetadata.retrieve instead
      */
     public CarrierMetadata retrieveCarrierMetadata() throws EasyPostException {
         return retrieveCarrierMetadata(null);
@@ -36,6 +37,7 @@ public class BetaCarrierMetadataService {
      * @param carriers The list of carriers in string.
      * @return CarrierMetadata object
      * @throws EasyPostException
+     * @deprecated Use carrierMetadata.retrieve instead
      */
     public CarrierMetadata retrieveCarrierMetadata(List<String> carriers) throws EasyPostException {
         return retrieveCarrierMetadata(carriers, null);
@@ -48,6 +50,7 @@ public class BetaCarrierMetadataService {
      * @param types    The list of types in string.
      * @return CarrierMetadata object
      * @throws EasyPostException
+     * @deprecated Use carrierMetadata.retrieve instead
      */
     public CarrierMetadata retrieveCarrierMetadata(List<String> carriers, List<String> types) throws EasyPostException {
         HashMap<String, Object> params = new HashMap<>();
