@@ -2,6 +2,7 @@
 
 ## Next Release
 
+- Retrieving carrier metadata is now generally available via `client.carrierMetadata.retrieve`
 - Bump all dependencies
 
 ## v6.6.1 (2023-05-09)

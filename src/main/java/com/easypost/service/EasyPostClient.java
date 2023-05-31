@@ -17,6 +17,7 @@ public class EasyPostClient {
     public final BetaRateService betaRate;
     public final BillingService billing;
     public final CarrierAccountService carrierAccount;
+    public final CarrierMetadataService carrierMetadata;
     public final CarrierTypeService carrierType;
     public final CustomsInfoService customsInfo;
     public final CustomsItemService customsItem;
@@ -122,6 +123,7 @@ public class EasyPostClient {
         this.betaRate = new BetaRateService(this);
         this.billing = new BillingService(this);
         this.carrierAccount = new CarrierAccountService(this);
+        this.carrierMetadata = new CarrierMetadataService(this);
         this.carrierType = new CarrierTypeService(this);
         this.customsInfo = new CustomsInfoService(this);
         this.customsItem = new CustomsItemService(this);
