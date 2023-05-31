@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BetaCarrierMetadataTest {
+public class CarrierMetadataTest {
     private static TestUtils.VCR vcr;
 
     /**
@@ -23,7 +23,7 @@ public class BetaCarrierMetadataTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        vcr = new TestUtils.VCR("beta_carrier_metadata", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("carrier_metadata", TestUtils.ApiKey.TEST);
     }
 
     /**
@@ -32,10 +32,10 @@ public class BetaCarrierMetadataTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testRetrieveBetaCarrierMetadata() throws EasyPostException {
+    public void testRetrieveCarrierMetadata() throws EasyPostException {
         vcr.setUpTest("retrieve_carrier_metadata");
 
-        CarrierMetadata carrierMetadata = vcr.client.betaCarrierMetadata.retrieveCarrierMetadata();
+        CarrierMetadata carrierMetadata = vcr.client.carrierMetadata.retrieve();
 
         assertTrue(carrierMetadata.getCarriers().stream().anyMatch(carrier -> carrier.getName().equals("usps")));
         assertTrue(carrierMetadata.getCarriers().stream().anyMatch(carrier -> carrier.getName().equals("fedex")));
@@ -47,11 +47,11 @@ public class BetaCarrierMetadataTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testRetrieveBetaCarrierMetadataWithFilter() throws EasyPostException {
+    public void testRetrieveCarrierMetadataWithFilter() throws EasyPostException {
         vcr.setUpTest("retrieve_carrier_metadata_with_filter");
         List<String> carriers = Arrays.asList("usps");
         List<String> types = Arrays.asList("service_levels", "predefined_packages");
-        CarrierMetadata carrierMetadata = vcr.client.betaCarrierMetadata.retrieveCarrierMetadata(carriers, types);
+        CarrierMetadata carrierMetadata = vcr.client.carrierMetadata.retrieve(carriers, types);
 
         assertTrue(carrierMetadata.getCarriers().stream()
                 .allMatch(carrier -> carrier.getName().equals("usps")));

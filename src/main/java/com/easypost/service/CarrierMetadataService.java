@@ -8,15 +8,15 @@ import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.CarrierMetadata;
 
-public class BetaCarrierMetadataService {
+public class CarrierMetadataService {
     private final EasyPostClient client;
 
     /**
-     * BetaCarrierMetadataService constructor.
+     * CarrierMetadataService constructor.
      *
      * @param client The client object.
      */
-    BetaCarrierMetadataService(EasyPostClient client) {
+    CarrierMetadataService(EasyPostClient client) {
         this.client = client;
     }
 
@@ -25,10 +25,9 @@ public class BetaCarrierMetadataService {
      *
      * @return CarrierMetadata object
      * @throws EasyPostException
-     * @deprecated Use carrierMetadata.retrieve instead
      */
-    public CarrierMetadata retrieveCarrierMetadata() throws EasyPostException {
-        return retrieveCarrierMetadata(null);
+    public CarrierMetadata retrieve() throws EasyPostException {
+        return retrieve(null);
     }
 
     /**
@@ -37,10 +36,9 @@ public class BetaCarrierMetadataService {
      * @param carriers The list of carriers in string.
      * @return CarrierMetadata object
      * @throws EasyPostException
-     * @deprecated Use carrierMetadata.retrieve instead
      */
-    public CarrierMetadata retrieveCarrierMetadata(List<String> carriers) throws EasyPostException {
-        return retrieveCarrierMetadata(carriers, null);
+    public CarrierMetadata retrieve(List<String> carriers) throws EasyPostException {
+        return retrieve(carriers, null);
     }
 
     /**
@@ -50,9 +48,8 @@ public class BetaCarrierMetadataService {
      * @param types    The list of types in string.
      * @return CarrierMetadata object
      * @throws EasyPostException
-     * @deprecated Use carrierMetadata.retrieve instead
      */
-    public CarrierMetadata retrieveCarrierMetadata(List<String> carriers, List<String> types) throws EasyPostException {
+    public CarrierMetadata retrieve(List<String> carriers, List<String> types) throws EasyPostException {
         HashMap<String, Object> params = new HashMap<>();
 
         if (carriers != null && !carriers.isEmpty()) {
@@ -63,7 +60,7 @@ public class BetaCarrierMetadataService {
             params.put("types", String.join(",", types));
         }
 
-        return Requestor.request(RequestMethod.GET, "metadata", params,
-                CarrierMetadata.class, client, "beta");
+        return Requestor.request(RequestMethod.GET, "metadata/carriers", params,
+                CarrierMetadata.class, client);
     }
 }
