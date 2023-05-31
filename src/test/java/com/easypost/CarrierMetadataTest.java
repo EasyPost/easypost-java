@@ -32,7 +32,7 @@ public class CarrierMetadataTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testRetrieveStatelessRates() throws EasyPostException {
+    public void testRetrieveCarrierMetadata() throws EasyPostException {
         vcr.setUpTest("retrieve_carrier_metadata");
 
         CarrierMetadata carrierMetadata = vcr.client.carrierMetadata.retrieve();
@@ -47,7 +47,7 @@ public class CarrierMetadataTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testRetrieveStatelessRatesWithFilter() throws EasyPostException {
+    public void testRetrieveCarrierMetadataWithFilter() throws EasyPostException {
         vcr.setUpTest("retrieve_carrier_metadata_with_filter");
         List<String> carriers = Arrays.asList("usps");
         List<String> types = Arrays.asList("service_levels", "predefined_packages");
