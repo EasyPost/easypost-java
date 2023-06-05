@@ -18,3 +18,5 @@ Icon
 settings.xml
 src/scratch
 target
+/easypost_java_style.xml
+/style_suppressions.xml

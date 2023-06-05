@@ -19,12 +19,15 @@ docs:
 	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true
 	cp -R target/apidocs/ ./docs/
 
-## install-checkstyle - Install CheckStyle
-install-checkstyle:
+# TODO: Change branch to master once examples are updated
+## install-style - Install style guides and CheckStyle utilities
+install-style:
+	curl -LJs https://raw.githubusercontent.com/EasyPost/examples/style_guides/easypost_java_style.xml -o easypost_java_style.xml
+	curl -LJs https://raw.githubusercontent.com/EasyPost/examples/style_guides/style_suppressions.xml -o style_suppressions.xml
 	curl -LJs https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.3.1/checkstyle-10.3.1-all.jar -o checkstyle.jar
 
 ## install - Install requirements
-install: | install-checkstyle
+install: | install-style
 	git submodule init
 	git submodule update
 
@@ -57,4 +60,4 @@ scan:
 test:
 	mvn surefire:test
 
-.PHONY: help build clean coverage docs install-checkstyle install lint publish publish-dry release scan scan-strict test
+.PHONY: help build clean coverage docs install-style install lint publish publish-dry release scan scan-strict test
