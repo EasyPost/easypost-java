@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1680027518,
+    "recordedAt": 1686160399,
     "request": {
       "body": "",
       "method": "GET",
@@ -15,14 +15,14 @@
       "uri": "https://api.easypost.com/v2/events?%70%61%67%65%5F%73%69%7A%65\u003d%35"
     },
     "response": {
-      "body": "{\n  \"has_more\": false,\n  \"events\": [\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"insurance.cancelled\",\n      \"created_at\": \"2023-03-22T17:19:46.015Z\",\n      \"id\": \"evt_be084980c8d511ed96575b1c5ecd0a2f\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.updated\",\n      \"created_at\": \"2023-03-22T17:19:05.742Z\",\n      \"id\": \"evt_a60704fcc8d511ed948b07c95113680f\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.created\",\n      \"created_at\": \"2023-03-22T17:18:35.743Z\",\n      \"id\": \"evt_942591c2c8d511eda8217991570cda15\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    }\n  ]\n}",
+      "body": "{\n  \"has_more\": true,\n  \"events\": [\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.created\",\n      \"created_at\": \"2023-06-07T17:53:18.535Z\",\n      \"id\": \"evt_2f65354e055c11eebe8627d9789f5496\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.created\",\n      \"created_at\": \"2023-06-07T17:53:16.736Z\",\n      \"id\": \"evt_2e52b19a055c11ee9bfb416e359f87fe\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.created\",\n      \"created_at\": \"2023-06-07T17:53:14.599Z\",\n      \"id\": \"evt_2d0c9daa055c11ee97837d7b01769b75\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.updated\",\n      \"created_at\": \"2023-06-07T17:53:14.049Z\",\n      \"id\": \"evt_2cb89f48055c11ee913853f98a139d0a\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"batch.updated\",\n      \"created_at\": \"2023-06-07T17:53:13.611Z\",\n      \"id\": \"evt_2c75cc4a055c11ee94a2414c4ddfe4f6\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    }\n  ]\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "687"
+          "1116"
         ],
         "expires": [
           "0"
@@ -55,26 +55,26 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "23d77e0364232f7df490d814001e4fc6"
+          "776d14386480c40ff42fca10002101f1"
         ],
         "x-proxied": [
-          "intlb1nuq a40ea751fd",
-          "extlb2nuq a29e4ad05c"
+          "intlb2nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.189031"
+          "0.222914"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "etag": [
-          "W/\"ce3c2fbcbcbf4cc5f1af6196adf42f75\""
+          "W/\"150f88b0c8df06744a16fcc396866dd9\""
         ],
         "x-version-label": [
-          "easypost-202303271939-29966fef42-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,6 +86,95 @@
       },
       "uri": "https://api.easypost.com/v2/events?%70%61%67%65%5F%73%69%7A%65\u003d%35"
     },
-    "duration": 326
+    "duration": 357
+  },
+  {
+    "recordedAt": 1686160400,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/events?%70%61%67%65%5F%73%69%7A%65\u003d%35\u0026%62%65%66%6F%72%65%5F%69%64\u003d%65%76%74%5F%32%63%37%35%63%63%34%61%30%35%35%63%31%31%65%65%39%34%61%32%34%31%34%63%34%64%64%66%65%34%66%36"
+    },
+    "response": {
+      "body": "{\n  \"has_more\": true,\n  \"events\": [\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"batch.created\",\n      \"created_at\": \"2023-06-07T17:53:13.527Z\",\n      \"id\": \"evt_2c68f542055c11ee8e1661f6089ecf8e\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.created\",\n      \"created_at\": \"2023-06-07T17:53:12.684Z\",\n      \"id\": \"evt_2be85b26055c11ee8e6e1fc84f5aa31d\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.updated\",\n      \"created_at\": \"2023-06-07T17:53:12.664Z\",\n      \"id\": \"evt_2be56178055c11ee82f81945a0d76afd\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.updated\",\n      \"created_at\": \"2023-06-07T17:53:10.427Z\",\n      \"id\": \"evt_2a900184055c11eea76a6591884496d6\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    },\n    {\n      \"mode\": \"test\",\n      \"user_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"description\": \"tracker.created\",\n      \"created_at\": \"2023-06-07T17:53:10.394Z\",\n      \"id\": \"evt_2a8afa04055c11ee8de139c0e0dc1dd4\",\n      \"status\": \"pending\",\n      \"object\": \"Event\"\n    }\n  ]\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "1116"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb3nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "776d14376480c410f409d7280021022e"
+        ],
+        "x-proxied": [
+          "intlb1nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.164856"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "etag": [
+          "W/\"795884a8d0938f12984dc8c86969b5e8\""
+        ],
+        "x-version-label": [
+          "easypost-202306062224-41e583302e-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/events?%70%61%67%65%5F%73%69%7A%65\u003d%35\u0026%62%65%66%6F%72%65%5F%69%64\u003d%65%76%74%5F%32%63%37%35%63%63%34%61%30%35%35%63%31%31%65%65%39%34%61%32%34%31%34%63%34%64%64%66%65%34%66%36"
+    },
+    "duration": 277
   }
 ]

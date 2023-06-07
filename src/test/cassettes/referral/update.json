@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1663367904,
+    "recordedAt": 1686160376,
     "request": {
       "body": "{\n  \"user\": {\n    \"phone\": \"REDACTED\",\n    \"name\": \"Test Referral\",\n    \"email\": \"test@example.com\"\n  }\n}",
       "method": "POST",
@@ -18,67 +18,66 @@
       "uri": "https://api.easypost.com/v2/referral_customers"
     },
     "response": {
-      "body": "{\n  \"recharge_amount\": null,\n  \"verified\": true,\n  \"created_at\": \"2022-09-16T22:38:23Z\",\n  \"secondary_recharge_amount\": null,\n  \"cc_fee_rate\": \"0.0375\",\n  \"recharge_threshold\": null,\n  \"balance\": \"0.00000\",\n  \"default_insurance_amount\": \"50.00\",\n  \"children\": [],\n  \"parent_id\": null,\n  \"has_billing_method\": null,\n  \"name\": \"Test Referral\",\n  \"insurance_fee_rate\": \"0.005\",\n  \"price_per_shipment\": \"0.00000\",\n  \"phone_number\": \"REDACTED\",\n  \"id\": \"user_3e9d9ac0f2354583a70f40055ac60645\",\n  \"api_keys\": [],\n  \"insurance_fee_minimum\": \"0.25\",\n  \"email\": \"referral_customer_2adf9f2eb9c74a8e91edc4692246cf9d@donotemail.easypost.com\",\n  \"object\": \"User\"\n}",
+      "body": "{\n  \"recharge_amount\": null,\n  \"verified\": true,\n  \"created_at\": \"2023-06-07T17:52:55Z\",\n  \"default_carbon_offset\": false,\n  \"secondary_recharge_amount\": null,\n  \"cc_fee_rate\": \"0.0375\",\n  \"has_elevate_access\": false,\n  \"recharge_threshold\": null,\n  \"balance\": \"0.00000\",\n  \"default_insurance_amount\": \"50.00\",\n  \"children\": [],\n  \"parent_id\": null,\n  \"has_billing_method\": null,\n  \"name\": \"Test Referral\",\n  \"insurance_fee_rate\": \"0.005\",\n  \"price_per_shipment\": \"0.00000\",\n  \"phone_number\": \"REDACTED\",\n  \"id\": \"user_1f03bbdc23f44f9baaef1087b3047b58\",\n  \"api_keys\": [],\n  \"insurance_fee_minimum\": \"0.25\",\n  \"email\": \"referral_customer_3e6bd872543f4f8a8842f8f988ee4168@donotemail.easypost.com\",\n  \"object\": \"User\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 201 Created"
         ],
         "content-length": [
-          "965"
+          "1022"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb2nuq"
+          "bigweb1nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "ebabba4a6324fadfecc702c4000ad7c5"
+          "776d14326480c3f7f3f8f4f00020f775"
         ],
         "x-proxied": [
-          "extlb4wdc 9ce216bfac",
-          "intlb2wdc 6aa9972c1e",
-          "intlb2nuq 6aa9972c1e"
+          "intlb2nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "1.027511"
-        ],
-        "etag": [
-          "W/\"6f2fa97dae9c69b4419cb842498a8411\""
+          "0.851353"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
+        "etag": [
+          "W/\"7658def6b0d908b3df87b88b7e313825\""
+        ],
         "x-version-label": [
-          "easypost-202209152244-6075a793a4-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -88,13 +87,12 @@
         "code": 201,
         "message": "Created"
       },
-      "errors": null,
       "uri": "https://api.easypost.com/v2/referral_customers"
     },
-    "duration": 1361
+    "duration": 979
   },
   {
-    "recordedAt": 1663367905,
+    "recordedAt": 1686160377,
     "request": {
       "body": "{\n  \"user\": {\n    \"email\": \"email@example.com\"\n  }\n}",
       "method": "PUT",
@@ -109,7 +107,7 @@
           "application/json"
         ]
       },
-      "uri": "https://api.easypost.com/v2/referral_customers/user_3e9d9ac0f2354583a70f40055ac60645"
+      "uri": "https://api.easypost.com/v2/referral_customers/user_1f03bbdc23f44f9baaef1087b3047b58"
     },
     "response": {
       "body": "{\n  \"message\": \"Referral Customer email updated successfully\"\n}",
@@ -125,54 +123,53 @@
           "0"
         ],
         "x-node": [
-          "bigweb6nuq"
+          "bigweb1nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "07d247fe6324fae1ec7cfc270012f056"
+          "776d14366480c3f8f419428a0020f825"
         ],
         "x-proxied": [
-          "extlb3wdc 9ce216bfac",
-          "intlb2wdc 6aa9972c1e",
-          "intlb2nuq 6aa9972c1e"
+          "intlb1nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.128444"
-        ],
-        "etag": [
-          "W/\"7b30d603e3257aee787616dc99d6d4af\""
+          "0.105063"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
+        "etag": [
+          "W/\"7b30d603e3257aee787616dc99d6d4af\""
+        ],
         "x-version-label": [
-          "easypost-202209152244-6075a793a4-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -182,9 +179,8 @@
         "code": 200,
         "message": "OK"
       },
-      "errors": null,
-      "uri": "https://api.easypost.com/v2/referral_customers/user_3e9d9ac0f2354583a70f40055ac60645"
+      "uri": "https://api.easypost.com/v2/referral_customers/user_1f03bbdc23f44f9baaef1087b3047b58"
     },
-    "duration": 466
+    "duration": 237
   }
 ]
