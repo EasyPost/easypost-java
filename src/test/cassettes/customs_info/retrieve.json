@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1668466043,
+    "recordedAt": 1686160350,
     "request": {
       "body": "{\n  \"customs_info\": {\n    \"restriction_type\": \"none\",\n    \"customs_items\": [\n      {\n        \"quantity\": 2.0,\n        \"description\": \"Sweet shirts\",\n        \"weight\": 11.0,\n        \"hs_tariff_number\": \"654321\",\n        \"value\": 23.25,\n        \"origin_country\": \"US\"\n      }\n    ],\n    \"customs_certify\": true,\n    \"eel_pfc\": \"NOEEI 30.37(a)\",\n    \"customs_signer\": \"Steve Brule\",\n    \"contents_explanation\": \"\",\n    \"non_delivery_option\": \"return\",\n    \"contents_type\": \"merchandise\"\n  }\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/customs_infos"
     },
     "response": {
-      "body": "{\n  \"restriction_type\": \"none\",\n  \"created_at\": \"2022-11-14T22:47:23Z\",\n  \"declaration\": null,\n  \"mode\": \"test\",\n  \"customs_items\": [\n    {\n      \"quantity\": 2.0,\n      \"code\": null,\n      \"eccn\": null,\n      \"created_at\": \"2022-11-14T22:47:23Z\",\n      \"description\": \"Sweet shirts\",\n      \"weight\": 11.0,\n      \"printed_commodity_identifier\": null,\n      \"origin_country\": \"US\",\n      \"manufacturer\": null,\n      \"mode\": \"test\",\n      \"updated_at\": \"2022-11-14T22:47:23Z\",\n      \"currency\": null,\n      \"id\": \"cstitem_41e2dc611b524175835aabc0647780c3\",\n      \"hs_tariff_number\": \"654321\",\n      \"value\": \"23.25\",\n      \"object\": \"CustomsItem\"\n    }\n  ],\n  \"restriction_comments\": null,\n  \"updated_at\": \"2022-11-14T22:47:23Z\",\n  \"customs_certify\": true,\n  \"eel_pfc\": \"NOEEI 30.37(a)\",\n  \"customs_signer\": \"Steve Brule\",\n  \"id\": \"cstinfo_c894e123ed59428b8903c96a2c31c9cb\",\n  \"contents_explanation\": \"\",\n  \"non_delivery_option\": \"return\",\n  \"object\": \"CustomsInfo\",\n  \"contents_type\": \"merchandise\"\n}",
+      "body": "{\n  \"restriction_type\": \"none\",\n  \"created_at\": \"2023-06-07T17:52:30Z\",\n  \"declaration\": null,\n  \"mode\": \"test\",\n  \"customs_items\": [\n    {\n      \"quantity\": 2.0,\n      \"code\": null,\n      \"eccn\": null,\n      \"created_at\": \"2023-06-07T17:52:30Z\",\n      \"description\": \"Sweet shirts\",\n      \"weight\": 11.0,\n      \"printed_commodity_identifier\": null,\n      \"origin_country\": \"US\",\n      \"manufacturer\": null,\n      \"mode\": \"test\",\n      \"updated_at\": \"2023-06-07T17:52:30Z\",\n      \"currency\": null,\n      \"id\": \"cstitem_1bd16beb08f34a5da937ab135ef1dd3b\",\n      \"hs_tariff_number\": \"654321\",\n      \"value\": \"23.25\",\n      \"object\": \"CustomsItem\"\n    }\n  ],\n  \"restriction_comments\": null,\n  \"updated_at\": \"2023-06-07T17:52:30Z\",\n  \"customs_certify\": true,\n  \"eel_pfc\": \"NOEEI 30.37(a)\",\n  \"customs_signer\": \"Steve Brule\",\n  \"id\": \"cstinfo_941a2fd51f884a948cc6cf88769f42c7\",\n  \"contents_explanation\": \"\",\n  \"non_delivery_option\": \"return\",\n  \"object\": \"CustomsInfo\",\n  \"contents_type\": \"merchandise\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -31,57 +31,56 @@
           "0"
         ],
         "x-node": [
-          "bigweb2nuq"
+          "bigweb3nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "3a8b2e0e6372c57be0d9e7010019b97a"
+          "776d14356480c3def41ae6e90020edc9"
         ],
         "x-proxied": [
-          "extlb4wdc 29913d444b",
-          "intlb2wdc 29913d444b",
-          "intlb2nuq 29913d444b"
+          "intlb2nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.031981"
+          "0.034454"
         ],
-        "etag": [
-          "W/\"ee64cce48110cc1bf7ee9b12a4eae9b9\""
+        "location": [
+          "/api/v2/customs_infos/cstinfo_941a2fd51f884a948cc6cf88769f42c7"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
-        "location": [
-          "/api/v2/customs_infos/cstinfo_c894e123ed59428b8903c96a2c31c9cb"
+        "etag": [
+          "W/\"377725d15f3aa66ab6c582c540144dd4\""
         ],
         "x-version-label": [
-          "easypost-202211142148-00c0334849-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -93,10 +92,10 @@
       },
       "uri": "https://api.easypost.com/v2/customs_infos"
     },
-    "duration": 243
+    "duration": 167
   },
   {
-    "recordedAt": 1668466043,
+    "recordedAt": 1686160350,
     "request": {
       "body": "",
       "method": "GET",
@@ -108,10 +107,10 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/customs_infos/cstinfo_c894e123ed59428b8903c96a2c31c9cb"
+      "uri": "https://api.easypost.com/v2/customs_infos/cstinfo_941a2fd51f884a948cc6cf88769f42c7"
     },
     "response": {
-      "body": "{\n  \"restriction_type\": \"none\",\n  \"created_at\": \"2022-11-14T22:47:23Z\",\n  \"declaration\": null,\n  \"mode\": \"test\",\n  \"customs_items\": [\n    {\n      \"quantity\": 2.0,\n      \"code\": null,\n      \"eccn\": null,\n      \"created_at\": \"2022-11-14T22:47:23Z\",\n      \"description\": \"Sweet shirts\",\n      \"weight\": 11.0,\n      \"printed_commodity_identifier\": null,\n      \"origin_country\": \"US\",\n      \"manufacturer\": null,\n      \"mode\": \"test\",\n      \"updated_at\": \"2022-11-14T22:47:23Z\",\n      \"currency\": null,\n      \"id\": \"cstitem_41e2dc611b524175835aabc0647780c3\",\n      \"hs_tariff_number\": \"654321\",\n      \"value\": \"23.25\",\n      \"object\": \"CustomsItem\"\n    }\n  ],\n  \"restriction_comments\": null,\n  \"updated_at\": \"2022-11-14T22:47:23Z\",\n  \"customs_certify\": true,\n  \"eel_pfc\": \"NOEEI 30.37(a)\",\n  \"customs_signer\": \"Steve Brule\",\n  \"id\": \"cstinfo_c894e123ed59428b8903c96a2c31c9cb\",\n  \"contents_explanation\": \"\",\n  \"non_delivery_option\": \"return\",\n  \"object\": \"CustomsInfo\",\n  \"contents_type\": \"merchandise\"\n}",
+      "body": "{\n  \"restriction_type\": \"none\",\n  \"created_at\": \"2023-06-07T17:52:30Z\",\n  \"declaration\": null,\n  \"mode\": \"test\",\n  \"customs_items\": [\n    {\n      \"quantity\": 2.0,\n      \"code\": null,\n      \"eccn\": null,\n      \"created_at\": \"2023-06-07T17:52:30Z\",\n      \"description\": \"Sweet shirts\",\n      \"weight\": 11.0,\n      \"printed_commodity_identifier\": null,\n      \"origin_country\": \"US\",\n      \"manufacturer\": null,\n      \"mode\": \"test\",\n      \"updated_at\": \"2023-06-07T17:52:30Z\",\n      \"currency\": null,\n      \"id\": \"cstitem_1bd16beb08f34a5da937ab135ef1dd3b\",\n      \"hs_tariff_number\": \"654321\",\n      \"value\": \"23.25\",\n      \"object\": \"CustomsItem\"\n    }\n  ],\n  \"restriction_comments\": null,\n  \"updated_at\": \"2023-06-07T17:52:30Z\",\n  \"customs_certify\": true,\n  \"eel_pfc\": \"NOEEI 30.37(a)\",\n  \"customs_signer\": \"Steve Brule\",\n  \"id\": \"cstinfo_941a2fd51f884a948cc6cf88769f42c7\",\n  \"contents_explanation\": \"\",\n  \"non_delivery_option\": \"return\",\n  \"object\": \"CustomsInfo\",\n  \"contents_type\": \"merchandise\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -124,54 +123,53 @@
           "0"
         ],
         "x-node": [
-          "bigweb2nuq"
+          "bigweb6nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "3a8b2e0f6372c57be0d9e7020019b99a"
+          "776d14396480c3def01ed0550020edd8"
         ],
         "x-proxied": [
-          "extlb4wdc 29913d444b",
-          "intlb1wdc 29913d444b",
-          "intlb2nuq 29913d444b"
+          "intlb1nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.023052"
-        ],
-        "etag": [
-          "W/\"ee64cce48110cc1bf7ee9b12a4eae9b9\""
+          "0.020779"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
+        "etag": [
+          "W/\"377725d15f3aa66ab6c582c540144dd4\""
+        ],
         "x-version-label": [
-          "easypost-202211142148-00c0334849-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -181,8 +179,8 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/customs_infos/cstinfo_c894e123ed59428b8903c96a2c31c9cb"
+      "uri": "https://api.easypost.com/v2/customs_infos/cstinfo_941a2fd51f884a948cc6cf88769f42c7"
     },
-    "duration": 252
+    "duration": 152
   }
 ]

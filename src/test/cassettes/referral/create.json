@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1663367903,
+    "recordedAt": 1686160375,
     "request": {
       "body": "{\n  \"user\": {\n    \"phone\": \"REDACTED\",\n    \"name\": \"Test Referral\",\n    \"email\": \"test@example.com\"\n  }\n}",
       "method": "POST",
@@ -18,66 +18,66 @@
       "uri": "https://api.easypost.com/v2/referral_customers"
     },
     "response": {
-      "body": "{\n  \"recharge_amount\": null,\n  \"verified\": true,\n  \"created_at\": \"2022-09-16T22:38:22Z\",\n  \"secondary_recharge_amount\": null,\n  \"cc_fee_rate\": \"0.0375\",\n  \"recharge_threshold\": null,\n  \"balance\": \"0.00000\",\n  \"default_insurance_amount\": \"50.00\",\n  \"children\": [],\n  \"parent_id\": null,\n  \"has_billing_method\": null,\n  \"name\": \"Test Referral\",\n  \"insurance_fee_rate\": \"0.005\",\n  \"price_per_shipment\": \"0.00000\",\n  \"phone_number\": \"REDACTED\",\n  \"id\": \"user_0678ed60f6ef4444ad6d6afa5cbc36bc\",\n  \"api_keys\": [],\n  \"insurance_fee_minimum\": \"0.25\",\n  \"email\": \"referral_customer_7a898c2a6f4449329430d51fd6d8d631@donotemail.easypost.com\",\n  \"object\": \"User\"\n}",
+      "body": "{\n  \"recharge_amount\": null,\n  \"verified\": true,\n  \"created_at\": \"2023-06-07T17:52:54Z\",\n  \"default_carbon_offset\": false,\n  \"secondary_recharge_amount\": null,\n  \"cc_fee_rate\": \"0.0375\",\n  \"has_elevate_access\": false,\n  \"recharge_threshold\": null,\n  \"balance\": \"0.00000\",\n  \"default_insurance_amount\": \"50.00\",\n  \"children\": [],\n  \"parent_id\": null,\n  \"has_billing_method\": null,\n  \"name\": \"Test Referral\",\n  \"insurance_fee_rate\": \"0.005\",\n  \"price_per_shipment\": \"0.00000\",\n  \"phone_number\": \"REDACTED\",\n  \"id\": \"user_6e04939383a44e788c52d7d5aedfbe33\",\n  \"api_keys\": [],\n  \"insurance_fee_minimum\": \"0.25\",\n  \"email\": \"referral_customer_a3115055281141ae97d80e7515996cb0@donotemail.easypost.com\",\n  \"object\": \"User\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 201 Created"
         ],
         "content-length": [
-          "965"
+          "1022"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb3nuq"
+          "bigweb2nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "fcf3b5806324fadef3c5cb39000ac746"
+          "776d14356480c3f6f42b52ac0020f6e6"
         ],
         "x-proxied": [
-          "extlb1nuq 9ce216bfac",
-          "intlb2nuq 6aa9972c1e"
+          "intlb1nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "1.124291"
-        ],
-        "etag": [
-          "W/\"d41defb1790cddd44b9a534bb3d676f0\""
+          "0.968602"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
+        "etag": [
+          "W/\"fae001e11fbfc06ff208c0fce7e0f8b6\""
+        ],
         "x-version-label": [
-          "easypost-202209152244-6075a793a4-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -87,9 +87,8 @@
         "code": 201,
         "message": "Created"
       },
-      "errors": null,
       "uri": "https://api.easypost.com/v2/referral_customers"
     },
-    "duration": 1279
+    "duration": 1101
   }
 ]

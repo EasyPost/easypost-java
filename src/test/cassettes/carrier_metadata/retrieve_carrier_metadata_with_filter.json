@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1685562462,
+    "recordedAt": 1686160263,
     "request": {
       "body": "",
       "method": "GET",
@@ -28,56 +28,53 @@
           "0"
         ],
         "x-node": [
-          "bigweb7nuq"
+          "bigweb3nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-canary": [
-          "direct"
-        ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "6b111ae26477a45ee789f5c2002a12ae"
+          "776d14326480c387f3fa01360020d0b6"
         ],
         "x-proxied": [
-          "extlb2nuq 5ab12a3ed2",
-          "intlb1nuq a29e4ad05c"
+          "intlb2nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.029034"
-        ],
-        "etag": [
-          "W/\"80e36a02624b6fff828d65a412ac9604\""
+          "0.025305"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
+        "etag": [
+          "W/\"80e36a02624b6fff828d65a412ac9604\""
+        ],
         "x-version-label": [
-          "easypost-202305311819-b471f0312d-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -89,6 +86,6 @@
       },
       "uri": "https://api.easypost.com/v2/metadata/carriers?types\u003dservice_levels%2Cpredefined_packages\u0026carriers\u003dusps?%74%79%70%65%73\u003d%73%65%72%76%69%63%65%5F%6C%65%76%65%6C%73%2C%70%72%65%64%65%66%69%6E%65%64%5F%70%61%63%6B%61%67%65%73\u0026%63%61%72%72%69%65%72%73\u003d%75%73%70%73"
     },
-    "duration": 291
+    "duration": 153
   }
 ]

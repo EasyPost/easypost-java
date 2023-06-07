@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1671127897,
+    "recordedAt": 1686160355,
     "request": {
       "body": "{\n  \"payment_method\": {\n    \"stripe_customer_id\": \"cus_123\",\n    \"payment_method_reference\": \"ba_123\",\n    \"priority\": \"PRIMARY\"\n  }\n}",
       "method": "POST",
@@ -31,50 +31,53 @@
           "0"
         ],
         "x-node": [
-          "bigweb2nuq"
+          "bigweb3nuq"
+        ],
+        "vary": [
+          "Origin"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "93788120639b6359e799dd8500277c57"
+          "776d14396480c3e3f4072e6c0020ef8a"
         ],
         "x-proxied": [
-          "extlb1nuq 29913d444b",
-          "intlb1nuq 29913d444b"
+          "intlb1nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.067577"
+          "0.048730"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202212141856-b2c38022ed-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,6 +89,6 @@
       },
       "uri": "https://api.easypost.com/beta/referral_customers/payment_method"
     },
-    "duration": 472
+    "duration": 180
   }
 ]

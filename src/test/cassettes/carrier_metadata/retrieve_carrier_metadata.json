@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1685562463,
+    "recordedAt": 1686160263,
     "request": {
       "body": "",
       "method": "GET",
@@ -28,53 +28,56 @@
           "0"
         ],
         "x-node": [
-          "bigweb11nuq"
+          "bigweb7nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-canary": [
+          "direct"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "6b111ae06477a45fe789f5c3002a12db"
+          "776d14356480c387f41c98ae0020d096"
         ],
         "x-proxied": [
-          "extlb2nuq 5ab12a3ed2",
-          "intlb1nuq a29e4ad05c"
+          "intlb2nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.178036"
-        ],
-        "etag": [
-          "W/\"c2966a8b0aa68f29f2cfb0f6930cbabf\""
+          "0.175924"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
+        "etag": [
+          "W/\"c2966a8b0aa68f29f2cfb0f6930cbabf\""
+        ],
         "x-version-label": [
-          "easypost-202305311819-b471f0312d-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,6 +89,6 @@
       },
       "uri": "https://api.easypost.com/v2/metadata/carriers"
     },
-    "duration": 444
+    "duration": 314
   }
 ]

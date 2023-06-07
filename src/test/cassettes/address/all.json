@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1668466133,
+    "recordedAt": 1686160409,
     "request": {
       "body": "",
       "method": "GET",
@@ -12,70 +12,69 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/addresses?page_size\u003d5"
+      "uri": "https://api.easypost.com/v2/addresses?%70%61%67%65%5F%73%69%7A%65\u003d%35"
     },
     "response": {
-      "body": "{\n  \"addresses\": [\n    {\n      \"zip\": \"94104-1129\",\n      \"country\": \"US\",\n      \"city\": \"SAN FRANCISCO\",\n      \"created_at\": \"2022-11-14T22:48:52+00:00\",\n      \"verifications\": {\n        \"delivery\": {\n          \"success\": true,\n          \"details\": {\n            \"latitude\": 37.79342,\n            \"time_zone\": \"America/Los_Angeles\",\n            \"longitude\": -122.40288\n          },\n          \"errors\": [\n            {\n              \"code\": \"E.SECONDARY_INFORMATION.INVALID\",\n              \"field\": \"street2\",\n              \"suggestion\": null,\n              \"message\": \"Invalid secondary information(Apt/Suite#)\"\n            }\n          ]\n        },\n        \"zip4\": {\n          \"success\": true,\n          \"details\": null,\n          \"errors\": [\n            {\n              \"code\": \"E.SECONDARY_INFORMATION.INVALID\",\n              \"field\": \"street2\",\n              \"suggestion\": null,\n              \"message\": \"Invalid secondary information(Apt/Suite#)\"\n            }\n          ]\n        }\n      },\n      \"mode\": \"test\",\n      \"federal_tax_id\": null,\n      \"state_tax_id\": null,\n      \"carrier_facility\": null,\n      \"residential\": false,\n      \"updated_at\": \"2022-11-14T22:48:52+00:00\",\n      \"phone\": \"REDACTED\",\n      \"name\": null,\n      \"company\": \"EASYPOST\",\n      \"street1\": \"417 MONTGOMERY ST FL 5\",\n      \"id\": \"adr_831c9e2e646e11ed8728ac1f6bc7b362\",\n      \"street2\": null,\n      \"state\": \"CA\",\n      \"email\": \"TEST@EXAMPLE.COM\",\n      \"object\": \"Address\"\n    },\n    {\n      \"zip\": \"94107\",\n      \"country\": \"US\",\n      \"city\": \"San Francisco\",\n      \"created_at\": \"2022-11-14T22:48:42+00:00\",\n      \"verifications\": {},\n      \"mode\": \"test\",\n      \"federal_tax_id\": null,\n      \"state_tax_id\": null,\n      \"carrier_facility\": null,\n      \"residential\": null,\n      \"updated_at\": \"2022-11-14T22:48:42+00:00\",\n      \"phone\": \"REDACTED\",\n      \"name\": \"Jack Sparrow\",\n      \"company\": null,\n      \"street1\": \"388 Townsend St\",\n      \"id\": \"adr_7cd15cb2646e11edae0aac1f6b0a0d1e\",\n      \"street2\": \"Apt 20\",\n      \"state\": \"CA\",\n      \"email\": \"test@example.com\",\n      \"object\": \"Address\"\n    },\n    {\n      \"zip\": \"90277\",\n      \"country\": \"US\",\n      \"city\": \"Redondo Beach\",\n      \"created_at\": \"2022-11-14T22:48:42+00:00\",\n      \"verifications\": {},\n      \"mode\": \"test\",\n      \"federal_tax_id\": null,\n      \"state_tax_id\": null,\n      \"carrier_facility\": null,\n      \"residential\": null,\n      \"updated_at\": \"2022-11-14T22:48:42+00:00\",\n      \"phone\": \"REDACTED\",\n      \"name\": \"Elizabeth Swan\",\n      \"company\": null,\n      \"street1\": \"179 N Harbor Dr\",\n      \"id\": \"adr_7ccf2b14646e11edae09ac1f6b0a0d1e\",\n      \"street2\": null,\n      \"state\": \"CA\",\n      \"email\": \"test@example.com\",\n      \"object\": \"Address\"\n    },\n    {\n      \"zip\": \"90277\",\n      \"country\": \"US\",\n      \"city\": \"Redondo Beach\",\n      \"created_at\": \"2022-11-14T22:48:38+00:00\",\n      \"verifications\": {},\n      \"mode\": \"test\",\n      \"federal_tax_id\": null,\n      \"state_tax_id\": null,\n      \"carrier_facility\": null,\n      \"residential\": null,\n      \"updated_at\": \"2022-11-14T22:48:38+00:00\",\n      \"phone\": \"REDACTED\",\n      \"name\": \"Elizabeth Swan\",\n      \"company\": null,\n      \"street1\": \"179 N Harbor Dr\",\n      \"id\": \"adr_7ad2f838646e11edad4bac1f6b0a0d1e\",\n      \"street2\": null,\n      \"state\": \"CA\",\n      \"email\": \"test@example.com\",\n      \"object\": \"Address\"\n    },\n    {\n      \"zip\": \"94107-1670\",\n      \"country\": \"US\",\n      \"city\": \"SAN FRANCISCO\",\n      \"created_at\": \"2022-11-14T22:48:38+00:00\",\n      \"verifications\": {\n        \"delivery\": {\n          \"success\": true,\n          \"details\": {\n            \"latitude\": 37.77551,\n            \"time_zone\": \"America/Los_Angeles\",\n            \"longitude\": -122.39697\n          },\n          \"errors\": []\n        },\n        \"zip4\": {\n          \"success\": true,\n          \"details\": null,\n          \"errors\": []\n        }\n      },\n      \"mode\": \"test\",\n      \"federal_tax_id\": null,\n      \"state_tax_id\": null,\n      \"carrier_facility\": null,\n      \"residential\": true,\n      \"updated_at\": \"2022-11-14T22:48:39+00:00\",\n      \"phone\": \"REDACTED\",\n      \"name\": \"JACK SPARROW\",\n      \"company\": null,\n      \"street1\": \"388 TOWNSEND ST APT 20\",\n      \"id\": \"adr_7ad0a681646e11ed830aac1f6bc72124\",\n      \"street2\": null,\n      \"state\": \"CA\",\n      \"email\": \"TEST@EXAMPLE.COM\",\n      \"object\": \"Address\"\n    }\n  ],\n  \"has_more\": true\n}",
+      "body": "{\n  \"addresses\": [\n    {\n      \"zip\": \"94104-1129\",\n      \"country\": \"US\",\n      \"city\": \"SAN FRANCISCO\",\n      \"created_at\": \"2023-06-07T17:53:28+00:00\",\n      \"verifications\": {\n        \"delivery\": {\n          \"success\": true,\n          \"details\": {\n            \"latitude\": 37.79342,\n            \"time_zone\": \"America/Los_Angeles\",\n            \"longitude\": -122.40288\n          },\n          \"errors\": [\n            {\n              \"code\": \"E.SECONDARY_INFORMATION.INVALID\",\n              \"field\": \"street2\",\n              \"suggestion\": null,\n              \"message\": \"Invalid secondary information(Apt/Suite#)\"\n            }\n          ]\n        },\n        \"zip4\": {\n          \"success\": true,\n          \"details\": null,\n          \"errors\": [\n            {\n              \"code\": \"E.SECONDARY_INFORMATION.INVALID\",\n              \"field\": \"street2\",\n              \"suggestion\": null,\n              \"message\": \"Invalid secondary information(Apt/Suite#)\"\n            }\n          ]\n        }\n      },\n      \"mode\": \"test\",\n      \"federal_tax_id\": null,\n      \"state_tax_id\": null,\n      \"carrier_facility\": null,\n      \"residential\": false,\n      \"updated_at\": \"2023-06-07T17:53:28+00:00\",\n      \"phone\": \"REDACTED\",\n      \"name\": null,\n      \"company\": \"EASYPOST\",\n      \"street1\": \"417 MONTGOMERY ST FL 5\",\n      \"id\": \"adr_358a8a5e055c11eeaf24ac1f6bc539aa\",\n      \"street2\": null,\n      \"state\": \"CA\",\n      \"email\": \"TEST@EXAMPLE.COM\",\n      \"object\": \"Address\"\n    },\n    {\n      \"zip\": \"94107\",\n      \"country\": \"US\",\n      \"city\": \"San Francisco\",\n      \"created_at\": \"2023-06-07T17:53:22+00:00\",\n      \"verifications\": {},\n      \"mode\": \"test\",\n      \"federal_tax_id\": null,\n      \"state_tax_id\": null,\n      \"carrier_facility\": null,\n      \"residential\": null,\n      \"updated_at\": \"2023-06-07T17:53:22+00:00\",\n      \"phone\": \"REDACTED\",\n      \"name\": \"Jack Sparrow\",\n      \"company\": null,\n      \"street1\": \"388 Townsend St\",\n      \"id\": \"adr_31880994055c11eebe9eac1f6bc539ae\",\n      \"street2\": \"Apt 20\",\n      \"state\": \"CA\",\n      \"email\": \"test@example.com\",\n      \"object\": \"Address\"\n    },\n    {\n      \"zip\": \"90277\",\n      \"country\": \"US\",\n      \"city\": \"Redondo Beach\",\n      \"created_at\": \"2023-06-07T17:53:22+00:00\",\n      \"verifications\": {},\n      \"mode\": \"test\",\n      \"federal_tax_id\": null,\n      \"state_tax_id\": null,\n      \"carrier_facility\": null,\n      \"residential\": null,\n      \"updated_at\": \"2023-06-07T17:53:22+00:00\",\n      \"phone\": \"REDACTED\",\n      \"name\": \"Elizabeth Swan\",\n      \"company\": null,\n      \"street1\": \"179 N Harbor Dr\",\n      \"id\": \"adr_318651b9055c11eeba6f3cecef1b359e\",\n      \"street2\": null,\n      \"state\": \"CA\",\n      \"email\": \"test@example.com\",\n      \"object\": \"Address\"\n    },\n    {\n      \"zip\": \"94107\",\n      \"country\": \"US\",\n      \"city\": \"San Francisco\",\n      \"created_at\": \"2023-06-07T17:53:13+00:00\",\n      \"verifications\": {},\n      \"mode\": \"test\",\n      \"federal_tax_id\": null,\n      \"state_tax_id\": null,\n      \"carrier_facility\": null,\n      \"residential\": null,\n      \"updated_at\": \"2023-06-07T17:53:13+00:00\",\n      \"phone\": \"REDACTED\",\n      \"name\": \"Jack Sparrow\",\n      \"company\": null,\n      \"street1\": \"388 Townsend St\",\n      \"id\": \"adr_2c69a3f5055c11eeb279ac1f6bc53342\",\n      \"street2\": \"Apt 20\",\n      \"state\": \"CA\",\n      \"email\": \"test@example.com\",\n      \"object\": \"Address\"\n    },\n    {\n      \"zip\": \"90277\",\n      \"country\": \"US\",\n      \"city\": \"Redondo Beach\",\n      \"created_at\": \"2023-06-07T17:53:13+00:00\",\n      \"verifications\": {},\n      \"mode\": \"test\",\n      \"federal_tax_id\": null,\n      \"state_tax_id\": null,\n      \"carrier_facility\": null,\n      \"residential\": null,\n      \"updated_at\": \"2023-06-07T17:53:13+00:00\",\n      \"phone\": \"REDACTED\",\n      \"name\": \"Elizabeth Swan\",\n      \"company\": null,\n      \"street1\": \"179 N Harbor Dr\",\n      \"id\": \"adr_2c680eb0055c11eeb7f93cecef1b359e\",\n      \"street2\": null,\n      \"state\": \"CA\",\n      \"email\": \"test@example.com\",\n      \"object\": \"Address\"\n    }\n  ],\n  \"has_more\": true\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "2972"
+          "2785"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb1nuq"
+          "bigweb12nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "3a8b2e0e6372c5d4e0da51840019e38f"
+          "776d14386480c419f4072e6b002105f3"
         ],
         "x-proxied": [
-          "extlb4wdc 29913d444b",
-          "intlb1wdc 29913d444b",
-          "intlb2nuq 29913d444b"
+          "intlb1nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.034304"
-        ],
-        "etag": [
-          "W/\"ab53aa3b46d65e80bee141bae7c9421b\""
+          "0.036085"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
+        "etag": [
+          "W/\"23d1be9b0db9cf7dc5de6a7fbe2dc931\""
+        ],
         "x-version-label": [
-          "easypost-202211142148-00c0334849-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -85,8 +84,8 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/addresses?page_size\u003d5"
+      "uri": "https://api.easypost.com/v2/addresses?%70%61%67%65%5F%73%69%7A%65\u003d%35"
     },
-    "duration": 254
+    "duration": 169
   }
 ]

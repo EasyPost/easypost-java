@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1671138963,
+    "recordedAt": 1686160355,
     "request": {
       "body": "{\n  \"payment_log_id\": \"paylog_123\"\n}",
       "method": "POST",
@@ -31,50 +31,53 @@
           "0"
         ],
         "x-node": [
-          "bigweb2nuq"
+          "bigweb5nuq"
+        ],
+        "vary": [
+          "Origin"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "3ad0bde4639b8e93e79b01e20016db1a"
+          "776d14396480c3e3f42e142b0020ef70"
         ],
         "x-proxied": [
-          "extlb1nuq 29913d444b",
-          "intlb1nuq 29913d444b"
+          "intlb1nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.046951"
+          "0.034691"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202212141856-b2c38022ed-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,6 +89,6 @@
       },
       "uri": "https://api.easypost.com/beta/referral_customers/refunds"
     },
-    "duration": 435
+    "duration": 175
   }
 ]

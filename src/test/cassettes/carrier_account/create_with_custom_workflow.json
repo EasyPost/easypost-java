@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1669854247,
+    "recordedAt": 1686160327,
     "request": {
       "body": "{\n  \"carrier_account\": {\n    \"registration_data\": {\n      \"some\": \"data\"\n    },\n    \"type\": \"FedexAccount\"\n  }\n}",
       "method": "POST",
@@ -31,50 +31,50 @@
           "0"
         ],
         "x-node": [
-          "bigweb12nuq"
+          "bigweb5nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "35b090b46387f427e9b8e441008ba656"
+          "776d14396480c3c7f41a49e50020e5ae"
         ],
         "x-proxied": [
-          "extlb2nuq 29913d444b",
-          "intlb1nuq 29913d444b"
+          "intlb1nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.030703"
+          "0.035763"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202211251832-642412d65d-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,6 +86,6 @@
       },
       "uri": "https://api.easypost.com/v2/carrier_accounts/register"
     },
-    "duration": 264
+    "duration": 177
   }
 ]

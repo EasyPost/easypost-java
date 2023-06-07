@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1668466135,
+    "recordedAt": 1686160411,
     "request": {
       "body": "{\n  \"address\": {\n    \"zip\": \"94107\",\n    \"country\": \"US\",\n    \"city\": \"San Francisco\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Jack Sparrow\",\n    \"street1\": \"388 Townsend St\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\",\n    \"email\": \"test@example.com\"\n  }\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/addresses"
     },
     "response": {
-      "body": "{\n  \"zip\": \"94107\",\n  \"country\": \"US\",\n  \"city\": \"San Francisco\",\n  \"created_at\": \"2022-11-14T22:48:55+00:00\",\n  \"verifications\": {},\n  \"mode\": \"test\",\n  \"federal_tax_id\": null,\n  \"state_tax_id\": null,\n  \"carrier_facility\": null,\n  \"residential\": null,\n  \"updated_at\": \"2022-11-14T22:48:55+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"Jack Sparrow\",\n  \"company\": null,\n  \"street1\": \"388 Townsend St\",\n  \"id\": \"adr_8482b8f9646e11ed87b5ac1f6bc7b362\",\n  \"street2\": \"Apt 20\",\n  \"state\": \"CA\",\n  \"email\": \"test@example.com\",\n  \"object\": \"Address\"\n}",
+      "body": "{\n  \"zip\": \"94107\",\n  \"country\": \"US\",\n  \"city\": \"San Francisco\",\n  \"created_at\": \"2023-06-07T17:53:31+00:00\",\n  \"verifications\": {},\n  \"mode\": \"test\",\n  \"federal_tax_id\": null,\n  \"state_tax_id\": null,\n  \"carrier_facility\": null,\n  \"residential\": null,\n  \"updated_at\": \"2023-06-07T17:53:31+00:00\",\n  \"phone\": \"REDACTED\",\n  \"name\": \"Jack Sparrow\",\n  \"company\": null,\n  \"street1\": \"388 Townsend St\",\n  \"id\": \"adr_37155668055c11eeb583ac1f6bc53342\",\n  \"street2\": \"Apt 20\",\n  \"state\": \"CA\",\n  \"email\": \"test@example.com\",\n  \"object\": \"Address\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -31,57 +31,56 @@
           "0"
         ],
         "x-node": [
-          "bigweb1nuq"
+          "bigweb3nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "3a8b2e0d6372c5d6e0da54b40019e46e"
+          "776d14326480c41bf408530a0021068f"
         ],
         "x-proxied": [
-          "extlb4wdc 29913d444b",
-          "intlb1wdc 29913d444b",
-          "intlb2nuq 29913d444b"
+          "intlb1nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.037641"
+          "0.057541"
         ],
-        "etag": [
-          "W/\"1fddbb1654517398a3de7ccb8a360138\""
+        "location": [
+          "/api/v2/addresses/adr_37155668055c11eeb583ac1f6bc53342"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
-        "location": [
-          "/api/v2/addresses/adr_8482b8f9646e11ed87b5ac1f6bc7b362"
+        "etag": [
+          "W/\"b3440ae549f6c29727fb871dd462bab8\""
         ],
         "x-version-label": [
-          "easypost-202211142148-00c0334849-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -93,6 +92,6 @@
       },
       "uri": "https://api.easypost.com/v2/addresses"
     },
-    "duration": 248
+    "duration": 181
   }
 ]

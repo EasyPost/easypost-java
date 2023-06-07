@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1668793890,
+    "recordedAt": 1686160369,
     "request": {
       "body": "",
       "method": "GET",
@@ -28,53 +28,53 @@
           "0"
         ],
         "x-node": [
-          "bigweb8nuq"
+          "bigweb5nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "4a2c60ed6377c622e0ed8b240009b6c7"
+          "776d14346480c3f1f3f96b4a0020f4e5"
         ],
         "x-proxied": [
-          "extlb1nuq 29913d444b",
-          "intlb2nuq 29913d444b"
+          "intlb1nuq 255dce5529",
+          "extlb1nuq 5ab12a3ed2"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.102064"
-        ],
-        "etag": [
-          "W/\"86cc970265a111486b443bf66ef85e91\""
+          "0.092517"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
+        "etag": [
+          "W/\"86cc970265a111486b443bf66ef85e91\""
+        ],
         "x-version-label": [
-          "easypost-202211172230-f1ea11b421-master"
+          "easypost-202306062224-41e583302e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,6 +86,88 @@
       },
       "uri": "https://api.easypost.com/v2/partners/stripe_public_key"
     },
-    "duration": 453
+    "duration": 225
+  },
+  {
+    "recordedAt": 1686160369,
+    "request": {
+      "body": "",
+      "method": "POST",
+      "headers": {
+        "Content-Type": [
+          "application/x-www-form-urlencoded"
+        ]
+      },
+      "uri": "https://api.stripe.com/v1/tokens?card%5Bnumber%5D\u003d1234\u0026card%5Bcvc%5D\u003d1234\u0026card%5Bexp_month%5D\u003d1234\u0026card%5Bexp_year%5D\u003d1234?%63%61%72%64%5B%63%76%63%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%79%65%61%72%5D\u003d%31%32%33%34\u0026%63%61%72%64%5B%6E%75%6D%62%65%72%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%6D%6F%6E%74%68%5D\u003d%31%32%33%34"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"doc_url\": \"https://stripe.com/docs/error-codes/invalid-number\",\n    \"code\": \"invalid_number\",\n    \"param\": \"number\",\n    \"message\": \"The card number is not a valid credit card number.\",\n    \"type\": \"card_error\",\n    \"request_log_url\": \"https://dashboard.stripe.com/logs/req_sMiW3ke9aS85BD?t\\u003d1686160369\"\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 402 Payment Required"
+        ],
+        "Server": [
+          "nginx"
+        ],
+        "Access-Control-Allow-Origin": [
+          "*"
+        ],
+        "Access-Control-Allow-Methods": [
+          "GET, POST, HEAD, OPTIONS, DELETE"
+        ],
+        "Idempotency-Key": [
+          "bf75e7a5-677e-4afe-b562-65570b85e82e"
+        ],
+        "Connection": [
+          "keep-alive"
+        ],
+        "Original-Request": [
+          "req_sMiW3ke9aS85BD"
+        ],
+        "Stripe-Version": [
+          "2020-08-27"
+        ],
+        "Stripe-Should-Retry": [
+          "false"
+        ],
+        "Date": [
+          "Wed, 07 Jun 2023 17:52:49 GMT"
+        ],
+        "Access-Control-Expose-Headers": [
+          "Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required"
+        ],
+        "Strict-Transport-Security": [
+          "max-age\u003d63072000; includeSubDomains; preload"
+        ],
+        "Cache-Control": [
+          "no-cache, no-store"
+        ],
+        "Access-Control-Allow-Credentials": [
+          "true"
+        ],
+        "Content-Length": [
+          "329"
+        ],
+        "Access-Control-Max-Age": [
+          "300"
+        ],
+        "Request-Id": [
+          "req_sMiW3ke9aS85BD"
+        ],
+        "Content-Type": [
+          "application/json"
+        ],
+        "X-Stripe-Routing-Context-Priority-Tier": [
+          "livemode-critical"
+        ]
+      },
+      "status": {
+        "code": 402,
+        "message": "Payment Required"
+      },
+      "uri": "https://api.stripe.com/v1/tokens?card%5Bnumber%5D\u003d1234\u0026card%5Bcvc%5D\u003d1234\u0026card%5Bexp_month%5D\u003d1234\u0026card%5Bexp_year%5D\u003d1234?%63%61%72%64%5B%63%76%63%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%79%65%61%72%5D\u003d%31%32%33%34\u0026%63%61%72%64%5B%6E%75%6D%62%65%72%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%6D%6F%6E%74%68%5D\u003d%31%32%33%34"
+    },
+    "duration": 318
   }
 ]
