@@ -76,13 +76,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+      - name: Install style guide
+        run: make install-styleguide
       - name: Run CheckStyle checks
-        uses: nikitasavinov/checkstyle-action@0.5.1
-        with:
-          level: error
-          fail_on_error: true
-          checkstyle_config: easypost_java_style.xml
-          tool_name: "style_enforcer"
+        run: make lint
   security:
     runs-on: ubuntu-20.04
     steps:

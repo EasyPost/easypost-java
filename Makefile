@@ -19,18 +19,22 @@ docs:
 	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true
 	cp -R target/apidocs/ ./docs/
 
-## install-checkstyle - Install CheckStyle
-install-checkstyle:
+## install-styleguide - Install style guides and CheckStyle utilities (Unix only)
+install-styleguide: | update-examples-submodule
 	curl -LJs https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.3.1/checkstyle-10.3.1-all.jar -o checkstyle.jar
+	sh examples/symlink_directory_files.sh examples/style_guides/java .
 
 ## install - Install requirements
-install: | install-checkstyle
+install: | update-examples-submodule
+
+## update-examples-submodule - Update the examples submodule
+update-examples-submodule:
 	git submodule init
 	git submodule update
 
 ## lint - Check if project follows CheckStyle rules (must run install-checkstyle first)
 lint:
-	java -jar checkstyle.jar src -c easypost_java_style.xml -d
+	java -jar checkstyle.jar src -c examples/style_guides/java/easypost_java_style.xml -d
 
 ## publish - Publish a release of the project (will build the project via the `mvn deploy` command)
 # @parameters:
@@ -57,4 +61,4 @@ scan:
 test:
 	mvn surefire:test
 
-.PHONY: help build clean coverage docs install-checkstyle install lint publish publish-dry release scan scan-strict test
+.PHONY: help build clean coverage docs install-styleguide install lint publish publish-dry release scan scan-strict test update-examples-submodule
