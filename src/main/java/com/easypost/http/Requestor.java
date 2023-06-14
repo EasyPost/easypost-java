@@ -595,7 +595,7 @@ public abstract class Requestor {
      * @throws GatewayTimeoutError     when the request fails due to a gateway timeout.
      * @throws UnknownApiError         when the request fails due to an unknown API error.
      */
-    protected static void handleAPIError(String rBody, final int rCode)
+    public static void handleAPIError(String rBody, final int rCode)
             throws RedirectError, UnauthorizedError, ForbiddenError, PaymentError, NotFoundError, MethodNotAllowedError,
             TimeoutError, InvalidRequestError, RateLimitError, InternalServerError, ServiceUnavailableError,
             GatewayTimeoutError, UnknownApiError {

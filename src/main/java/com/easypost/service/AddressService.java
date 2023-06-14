@@ -48,7 +48,7 @@ public class AddressService {
 
         String endpoint = "addresses";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Address.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Address.class);
     }
 
     /**
@@ -61,7 +61,7 @@ public class AddressService {
     public Address retrieve(final String id) throws EasyPostException {
         String endpoint = "addresses/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Address.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Address.class);
     }
 
     /**
@@ -74,7 +74,7 @@ public class AddressService {
     public AddressCollection all(final Map<String, Object> params) throws APIException {
         String endpoint = "addresses";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, AddressCollection.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, AddressCollection.class);
     }
 
     /**
@@ -119,7 +119,7 @@ public class AddressService {
         String endpoint = "addresses/create_and_verify";
 
         AddressVerifyResponse response =
-                Requestor.request(RequestMethod.POST, endpoint, wrappedParams, AddressVerifyResponse.class, client);
+                this.client.request(RequestMethod.POST, endpoint, wrappedParams, AddressVerifyResponse.class);
 
         return response.getAddress();
     }
@@ -135,7 +135,7 @@ public class AddressService {
         String endpoint = "addresses/" + id + "/verify";
 
         AddressVerifyResponse response =
-                Requestor.request(RequestMethod.GET, endpoint, null, AddressVerifyResponse.class, client);
+                this.client.request(RequestMethod.GET, endpoint, null, AddressVerifyResponse.class);
 
         return response.getAddress();
     }

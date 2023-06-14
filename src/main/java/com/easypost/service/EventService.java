@@ -36,7 +36,7 @@ public class EventService {
     public Event retrieve(final String id) throws EasyPostException {
         String endpoint = "events/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Event.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Event.class);
     }
 
     /**
@@ -49,7 +49,7 @@ public class EventService {
     public EventCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "events";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, EventCollection.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, EventCollection.class);
     }
 
     /**
@@ -91,8 +91,7 @@ public class EventService {
         String endpoint = "events/" + eventId + "/payloads";
 
         PayloadCollection payloads =
-                Requestor.request(RequestMethod.GET, endpoint, null, PayloadCollection.class,
-                        client);
+                this.client.request(RequestMethod.GET, endpoint, null, PayloadCollection.class);
 
         return payloads.getPayloads();
     }
@@ -108,7 +107,6 @@ public class EventService {
     public Payload retrievePayload(final String eventId, final String payloadId) throws EasyPostException {
         String endpoint = "events/" + eventId + "/payloads/" + payloadId;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Payload.class,
-                client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Payload.class);
     }
 }

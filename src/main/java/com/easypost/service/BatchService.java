@@ -46,7 +46,7 @@ public class BatchService {
 
         String endpoint = "batches";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Batch.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Batch.class);
     }
 
     /**
@@ -59,7 +59,7 @@ public class BatchService {
     public Batch retrieve(final String id) throws EasyPostException {
         String endpoint = "batches/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Batch.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Batch.class);
     }
 
     /**
@@ -72,7 +72,7 @@ public class BatchService {
     public BatchCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "batches";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, BatchCollection.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, BatchCollection.class);
     }
 
     // TODO: Add getNextPage function when Batches are sorted newest to oldest.
@@ -90,7 +90,7 @@ public class BatchService {
 
         String endpoint = "batches";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Batch.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Batch.class);
     }
 
     /**
@@ -104,7 +104,7 @@ public class BatchService {
     public Batch label(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "batches/" + id + "/label";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Batch.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Batch.class);
     }
 
     /**
@@ -118,7 +118,7 @@ public class BatchService {
     public Batch addShipments(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "batches/" + id + "/add_shipments";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Batch.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Batch.class);
     }
 
     /**
@@ -147,8 +147,7 @@ public class BatchService {
     public Batch removeShipments(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "batches/" + id + "/remove_shipments";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Batch.class,
-                client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Batch.class);
     }
 
     /**
@@ -188,7 +187,7 @@ public class BatchService {
     public Batch buy(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "batches/" + id + "/buy";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Batch.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Batch.class);
     }
 
     /**
@@ -213,6 +212,6 @@ public class BatchService {
     public Batch createScanForm(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "batches/" + id + "/scan_form";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Batch.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Batch.class);
     }
 }

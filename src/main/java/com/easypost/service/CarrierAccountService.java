@@ -43,7 +43,7 @@ public class CarrierAccountService {
 
         String endpoint = selectCarrierAccountCreationEndpoint(type);
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, CarrierAccount.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, CarrierAccount.class);
     }
 
     /**
@@ -56,7 +56,7 @@ public class CarrierAccountService {
     public CarrierAccount retrieve(final String id) throws EasyPostException {
         String endpoint = "carrier_accounts/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, CarrierAccount.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, CarrierAccount.class);
     }
 
     /**
@@ -80,7 +80,7 @@ public class CarrierAccountService {
         String endpoint = "carrier_accounts";
 
         CarrierAccount[] response =
-                Requestor.request(RequestMethod.GET, endpoint, params, CarrierAccount[].class, client);
+                this.client.request(RequestMethod.GET, endpoint, params, CarrierAccount[].class);
 
         return Arrays.asList(response);
     }
@@ -99,8 +99,7 @@ public class CarrierAccountService {
 
         String endpoint = "carrier_accounts/" + id;
 
-        return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, CarrierAccount.class,
-                client);
+        return this.client.request(RequestMethod.PUT, endpoint, wrappedParams, CarrierAccount.class);
     }
 
     /**
@@ -112,7 +111,7 @@ public class CarrierAccountService {
     public void delete(String id) throws EasyPostException {
         String endpoint = "carrier_accounts/" + id;
 
-        Requestor.request(RequestMethod.DELETE, endpoint, null, CarrierAccount.class, client);
+        this.client.request(RequestMethod.DELETE, endpoint, null, CarrierAccount.class);
     }
 
     /**

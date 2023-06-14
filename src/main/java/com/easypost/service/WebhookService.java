@@ -34,7 +34,7 @@ public class WebhookService {
 
         String endpoint = "webhooks";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Webhook.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Webhook.class);
     }
 
     /**
@@ -47,7 +47,7 @@ public class WebhookService {
     public Webhook retrieve(final String id) throws EasyPostException {
         String endpoint = "webhooks/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Webhook.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Webhook.class);
     }
 
     /**
@@ -70,7 +70,7 @@ public class WebhookService {
     public WebhookCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "webhooks";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, WebhookCollection.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, WebhookCollection.class);
     }
 
     /**
@@ -82,7 +82,7 @@ public class WebhookService {
     public void delete(final String id) throws EasyPostException {
         String endpoint = "webhooks/" + id;
 
-        Requestor.request(RequestMethod.DELETE, endpoint, null, Webhook.class, client);
+        this.client.request(RequestMethod.DELETE, endpoint, null, Webhook.class);
     }
 
     /**
@@ -111,6 +111,6 @@ public class WebhookService {
 
         String endpoint = "webhooks/" + id;
 
-        return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, Webhook.class, client);
+        return this.client.request(RequestMethod.PUT, endpoint, wrappedParams, Webhook.class);
     }
 }

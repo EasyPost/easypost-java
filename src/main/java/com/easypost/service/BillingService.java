@@ -35,7 +35,7 @@ public class BillingService {
         String endpoint = paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId();
 
         // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
-        Requestor.request(RequestMethod.DELETE, endpoint, null, PaymentMethod.class, client);
+        this.client.request(RequestMethod.DELETE, endpoint, null, PaymentMethod.class);
     }
 
     /**
@@ -64,7 +64,7 @@ public class BillingService {
         String endpoint = paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId() + "/charges";
 
         // will attempt to serialize empty JSON to a PaymentMethod.class, that's fine
-        Requestor.request(RequestMethod.POST, endpoint, params, PaymentMethod.class, client);
+        this.client.request(RequestMethod.POST, endpoint, params, PaymentMethod.class);
     }
 
     /**
@@ -77,7 +77,7 @@ public class BillingService {
     public PaymentMethod retrievePaymentMethods() throws EasyPostException {
         String endpoint = "payment_methods";
 
-        PaymentMethod response = Requestor.request(RequestMethod.GET, endpoint, null, PaymentMethod.class, client);
+        PaymentMethod response = this.client.request(RequestMethod.GET, endpoint, null, PaymentMethod.class);
 
         if (response.getId() == null) {
             throw new InvalidObjectError(Constants.ErrorMessages.NO_PAYMENT_METHODS);

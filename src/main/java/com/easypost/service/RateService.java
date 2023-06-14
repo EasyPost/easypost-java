@@ -27,6 +27,6 @@ public class RateService {
     public Rate retrieve(final String id) throws EasyPostException {
         String endpoint = "rates/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Rate.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Rate.class);
     }
 }

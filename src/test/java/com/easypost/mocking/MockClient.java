@@ -1,0 +1,124 @@
+package com.easypost.mocking;
+
+import com.easypost.Constants;
+import com.easypost.easyvcr.MatchRules;
+import com.easypost.exception.API.EncodingError;
+import com.easypost.exception.API.ForbiddenError;
+import com.easypost.exception.API.GatewayTimeoutError;
+import com.easypost.exception.API.HttpError;
+import com.easypost.exception.API.InternalServerError;
+import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.API.JsonError;
+import com.easypost.exception.API.MethodNotAllowedError;
+import com.easypost.exception.API.NotFoundError;
+import com.easypost.exception.API.PaymentError;
+import com.easypost.exception.API.RateLimitError;
+import com.easypost.exception.API.RedirectError;
+import com.easypost.exception.API.ServiceUnavailableError;
+import com.easypost.exception.API.TimeoutError;
+import com.easypost.exception.API.UnauthorizedError;
+import com.easypost.exception.API.UnknownApiError;
+import com.easypost.exception.APIException;
+import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.MissingParameterError;
+import com.easypost.http.Requestor;
+import com.easypost.service.EasyPostClient;
+import lombok.Getter;
+import lombok.Setter;
+import org.jetbrains.annotations.Nullable;
+
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+import static com.easypost.http.Requestor.handleAPIError;
+
+@Getter
+@Setter
+public class MockClient extends EasyPostClient {
+    private List<MockRequest> requests = new ArrayList<>();
+
+    public MockClient() throws MissingParameterError {
+        super("not_a_real_key");
+    }
+
+    public MockClient(List<MockRequest> requests) throws MissingParameterError {
+        super("not_a_real_key");
+        this.requests = requests;
+    }
+
+    public void addRequest(MockRequest request) {
+        this.requests.add(request);
+    }
+
+    public void addRequests(List<MockRequest> requests) {
+        this.requests.addAll(requests);
+    }
+
+    public void clearRequests() {
+        this.requests.clear();
+    }
+
+    private boolean endpointMatches(String endpoint, String regExPattern) {
+        Pattern pattern = Pattern.compile(regExPattern);
+        return pattern.matcher(endpoint).matches();
+    }
+
+    private MockRequest findMatchingRequest(Requestor.RequestMethod method, String endpoint, @Nullable String apiVersion) {
+        if (apiVersion == null) {
+            apiVersion = this.getApiVersion();
+        }
+        String fullEndpoint = apiVersion + "/" + endpoint;
+
+        for (MockRequest request : this.requests) {
+            MockRequestMatchRules rules = request.matchRules;
+            if (method == rules.method && endpointMatches(fullEndpoint, rules.regex)) {
+                return request;
+            }
+        }
+
+        return null;
+    }
+
+    private <T> T processMockRequest(Requestor.RequestMethod method, String endpoint, Class<T> clazz,
+                          @Nullable String apiVersion)
+            throws InvalidRequestError, UnknownApiError, ServiceUnavailableError, GatewayTimeoutError, ForbiddenError,
+            RateLimitError, NotFoundError, TimeoutError, RedirectError, UnauthorizedError, MethodNotAllowedError,
+            InternalServerError, PaymentError {
+        MockRequest matchingRequest = findMatchingRequest(method, endpoint, apiVersion);
+
+        if (matchingRequest == null) {
+            throw new InvalidRequestError("No matching mock request found.", null, 0, null);
+        }
+
+        MockResponse response = matchingRequest.getResponse();
+        String content = response.content;
+        int statusCode = response.statusCode;
+
+        if (statusCode < HttpURLConnection.HTTP_OK || statusCode >= HttpURLConnection.HTTP_MULT_CHOICE) {
+            handleAPIError(content, statusCode);
+        }
+
+        return Constants.Http.GSON.fromJson(content, clazz);
+
+    }
+
+    @Override
+    public <T> T request(Requestor.RequestMethod method, String endpoint, Map<String, Object> params, Class<T> clazz)
+            throws GatewayTimeoutError, RateLimitError, InvalidRequestError, NotFoundError, TimeoutError, EncodingError,
+            UnauthorizedError, MethodNotAllowedError, InternalServerError, UnknownApiError, ServiceUnavailableError,
+            ForbiddenError, JsonError, HttpError, RedirectError, PaymentError {
+        return processMockRequest(method, endpoint, clazz, null);
+    }
+
+    @Override
+    public <T> T request(Requestor.RequestMethod method, String endpoint, Map<String, Object> params, Class<T> clazz,
+                         String apiVersion)
+            throws GatewayTimeoutError, RateLimitError, InvalidRequestError, NotFoundError, TimeoutError, EncodingError,
+            UnauthorizedError, MethodNotAllowedError, InternalServerError, UnknownApiError, ServiceUnavailableError,
+            ForbiddenError, JsonError, HttpError, RedirectError, PaymentError {
+        return processMockRequest(method, endpoint, clazz, apiVersion);
+    }
+}

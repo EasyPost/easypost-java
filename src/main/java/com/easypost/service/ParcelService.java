@@ -33,7 +33,7 @@ public class ParcelService {
 
         String endpoint = "parcels";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Parcel.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Parcel.class);
     }
 
     /**
@@ -46,6 +46,6 @@ public class ParcelService {
     public Parcel retrieve(final String id) throws EasyPostException {
         String endpoint = "parcels/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Parcel.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Parcel.class);
     }
 }

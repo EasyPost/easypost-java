@@ -39,7 +39,7 @@ public class RefundService {
 
         String endpoint = "refunds";
 
-        Refund[] response = Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Refund[].class, client);
+        Refund[] response = this.client.request(RequestMethod.POST, endpoint, wrappedParams, Refund[].class);
 
         return Arrays.asList(response);
     }
@@ -54,7 +54,7 @@ public class RefundService {
     public Refund retrieve(final String id) throws EasyPostException {
         String endpoint = "refunds/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Refund.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Refund.class);
     }
 
     /**
@@ -67,7 +67,7 @@ public class RefundService {
     public RefundCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "refunds";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, RefundCollection.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, RefundCollection.class);
     }
 
     /**

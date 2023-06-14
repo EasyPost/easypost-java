@@ -1,7 +1,26 @@
 package com.easypost.service;
 
 import com.easypost.Constants;
+import com.easypost.exception.API.EncodingError;
+import com.easypost.exception.API.ForbiddenError;
+import com.easypost.exception.API.GatewayTimeoutError;
+import com.easypost.exception.API.HttpError;
+import com.easypost.exception.API.InternalServerError;
+import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.API.JsonError;
+import com.easypost.exception.API.MethodNotAllowedError;
+import com.easypost.exception.API.NotFoundError;
+import com.easypost.exception.API.PaymentError;
+import com.easypost.exception.API.RateLimitError;
+import com.easypost.exception.API.RedirectError;
+import com.easypost.exception.API.ServiceUnavailableError;
+import com.easypost.exception.API.TimeoutError;
+import com.easypost.exception.API.UnauthorizedError;
+import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.General.MissingParameterError;
+import com.easypost.http.Requestor;
+
+import java.util.Map;
 
 public class EasyPostClient {
     private final int connectTimeoutMilliseconds;
@@ -188,5 +207,31 @@ public class EasyPostClient {
      */
     public String getApiBase() {
         return apiBase;
+    }
+
+    /**
+     * Execute an HTTP request for a given method and URL with this EasyPostClient object.
+     *
+     * @param method   the HTTP method to use
+     * @param endpoint the API endpoint to use
+     * @param params   the parameters to use
+     * @param clazz    the class to use for deserializing the response
+     * @param <T>      the type of object to return
+     * @return the deserialized response
+     */
+    public <T> T request(final Requestor.RequestMethod method, final String endpoint, final Map<String, Object> params,
+                         final Class<T> clazz)
+            throws GatewayTimeoutError, RateLimitError, InvalidRequestError, NotFoundError, TimeoutError, EncodingError,
+            UnauthorizedError, MethodNotAllowedError, InternalServerError, UnknownApiError, ServiceUnavailableError,
+            ForbiddenError, JsonError, HttpError, RedirectError, PaymentError {
+        return Requestor.request(method, endpoint, params, clazz, this);
+    }
+
+    public <T> T request(final Requestor.RequestMethod method, final String endpoint, final Map<String, Object> params,
+                         final Class<T> clazz, final String apiVersion)
+            throws GatewayTimeoutError, RateLimitError, InvalidRequestError, NotFoundError, TimeoutError, EncodingError,
+            UnauthorizedError, MethodNotAllowedError, InternalServerError, UnknownApiError, ServiceUnavailableError,
+            ForbiddenError, JsonError, HttpError, RedirectError, PaymentError {
+        return Requestor.request(method, endpoint, params, clazz, this, apiVersion);
     }
 }

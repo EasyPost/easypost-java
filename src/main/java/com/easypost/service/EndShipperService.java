@@ -35,7 +35,7 @@ public class EndShipperService {
 
         String endpoint = "end_shippers";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, EndShipper.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, EndShipper.class);
     }
 
     /**
@@ -48,7 +48,7 @@ public class EndShipperService {
     public EndShipper retrieve(final String id) throws EasyPostException {
         String endpoint = "end_shippers/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, EndShipper.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, EndShipper.class);
     }
 
     /**
@@ -61,7 +61,7 @@ public class EndShipperService {
     public EndShipperCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "end_shippers";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, EndShipperCollection.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, EndShipperCollection.class);
     }
 
     // TODO: Add getNextPage function when "before_id" is available for EndShipper All endpoint.
@@ -81,6 +81,6 @@ public class EndShipperService {
 
         String endpoint = "end_shippers/" + id;
 
-        return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, EndShipper.class, client);
+        return this.client.request(RequestMethod.PUT, endpoint, wrappedParams, EndShipper.class);
     }
 }

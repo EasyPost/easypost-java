@@ -50,8 +50,7 @@ public class ReferralCustomerService {
 
         String endpoint = "referral_customers";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, ReferralCustomer.class,
-                client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, ReferralCustomer.class);
     }
 
     /**
@@ -70,8 +69,7 @@ public class ReferralCustomerService {
 
         String endpoint = "referral_customers/" + userId;
 
-        Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, ReferralCustomer.class,
-                client);
+        this.client.request(RequestMethod.PUT, endpoint, wrappedParams, ReferralCustomer.class);
     }
 
     /**
@@ -84,8 +82,7 @@ public class ReferralCustomerService {
     public ReferralCustomerCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "referral_customers";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, ReferralCustomerCollection.class,
-                client);
+        return this.client.request(RequestMethod.GET, endpoint, params, ReferralCustomerCollection.class);
     }
 
     /**
@@ -175,7 +172,7 @@ public class ReferralCustomerService {
         String endpoint = "partners/stripe_public_key";
 
         @SuppressWarnings ("unchecked") Map<String, String> response =
-                Requestor.request(RequestMethod.GET, endpoint, null, Map.class, client);
+                this.client.request(RequestMethod.GET, endpoint, null, Map.class);
 
         return response.getOrDefault("public_key", "");
     }
@@ -264,7 +261,6 @@ public class ReferralCustomerService {
 
         String endpoint = "credit_cards";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, PaymentMethodObject.class,
-                referralClient);
+        return referralClient.request(RequestMethod.POST, endpoint, wrappedParams, PaymentMethodObject.class);
     }
 }

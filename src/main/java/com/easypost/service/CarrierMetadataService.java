@@ -60,7 +60,7 @@ public class CarrierMetadataService {
             params.put("types", String.join(",", types));
         }
 
-        return Requestor.request(RequestMethod.GET, "metadata/carriers", params,
-                CarrierMetadata.class, client);
+        return this.client.request(RequestMethod.GET, "metadata/carriers", params,
+                CarrierMetadata.class);
     }
 }

@@ -63,7 +63,7 @@ public class BetaCarrierMetadataService {
             params.put("types", String.join(",", types));
         }
 
-        return Requestor.request(RequestMethod.GET, "metadata", params,
-                CarrierMetadata.class, client, "beta");
+        return this.client.request(RequestMethod.GET, "metadata", params,
+                CarrierMetadata.class, "beta");
     }
 }

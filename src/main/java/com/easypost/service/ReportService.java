@@ -43,7 +43,7 @@ public class ReportService {
             HashMap<String, Object> paramsWithoutType = new HashMap<>(params);
             paramsWithoutType.remove("type");
             String endpoint = reportURL(type);
-            return Requestor.request(RequestMethod.POST, endpoint, paramsWithoutType, Report.class, client);
+            return this.client.request(RequestMethod.POST, endpoint, paramsWithoutType, Report.class);
         } else {
             throw new MissingParameterError("type");
         }
@@ -75,7 +75,7 @@ public class ReportService {
     public Report retrieve(final String id) throws EasyPostException {
         String endpoint = "reports/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Report.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Report.class);
     }
 
     /**
@@ -91,7 +91,7 @@ public class ReportService {
         String endpoint = reportURL(type);
 
         ReportCollection collection =
-                Requestor.request(RequestMethod.GET, endpoint, params, ReportCollection.class, client);
+                this.client.request(RequestMethod.GET, endpoint, params, ReportCollection.class);
         // we store the type of reports in this collection, for use in pagination
         collection.setType(type);
         return collection;

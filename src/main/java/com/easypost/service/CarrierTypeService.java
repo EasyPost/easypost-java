@@ -29,7 +29,7 @@ public class CarrierTypeService {
     public List<CarrierType> all() throws EasyPostException {
         String endpoint = "carrier_types";
 
-        CarrierType[] response = Requestor.request(RequestMethod.GET, endpoint, null, CarrierType[].class, client);
+        CarrierType[] response = this.client.request(RequestMethod.GET, endpoint, null, CarrierType[].class);
         return Arrays.asList(response);
     }
 }

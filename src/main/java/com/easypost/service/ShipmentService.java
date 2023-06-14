@@ -61,7 +61,7 @@ public class ShipmentService {
 
         String endpoint = "shipments";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Shipment.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Shipment.class);
     }
 
     /**
@@ -74,7 +74,7 @@ public class ShipmentService {
     public Shipment retrieve(final String id) throws EasyPostException {
         String endpoint = "shipments/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Shipment.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Shipment.class);
     }
 
     /**
@@ -87,8 +87,8 @@ public class ShipmentService {
     public ShipmentCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "shipments";
 
-        ShipmentCollection shipmentCollection = Requestor.request(RequestMethod.GET, endpoint, params,
-                ShipmentCollection.class, client);
+        ShipmentCollection shipmentCollection = this.client.request(RequestMethod.GET, endpoint, params,
+                ShipmentCollection.class);
         // we store the params in the collection so that we can use them to get the next page
         shipmentCollection.setPurchased(InternalUtilities.getOrDefault(params, "purchased", null));
         shipmentCollection.setIncludeChildren(InternalUtilities.getOrDefault(params, "include_children", null));
@@ -176,7 +176,7 @@ public class ShipmentService {
 
         String endpoint = "shipments/" + id + "/rerate";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Shipment.class);
     }
 
     /**
@@ -216,8 +216,8 @@ public class ShipmentService {
     public List<SmartRate> smartrates(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "shipments/" + id + "/smartrate";
 
-        SmartrateCollection smartrateCollection = Requestor.request(RequestMethod.GET, endpoint, params,
-                SmartrateCollection.class, client);
+        SmartrateCollection smartrateCollection = this.client.request(RequestMethod.GET, endpoint, params,
+                SmartrateCollection.class);
 
         return smartrateCollection.getSmartrates();
     }
@@ -332,7 +332,7 @@ public class ShipmentService {
 
         String endpoint = "shipments/" + id + "/buy";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Shipment.class);
     }
 
     /**
@@ -357,7 +357,7 @@ public class ShipmentService {
     public Shipment refund(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "shipments/" + id + "/refund";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Shipment.class);
     }
 
     /**
@@ -371,7 +371,7 @@ public class ShipmentService {
     public Shipment label(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "shipments/" + id + "/label";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, Shipment.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, Shipment.class);
     }
 
     /**
@@ -385,7 +385,7 @@ public class ShipmentService {
     public Shipment insure(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "shipments/" + id + "/insure";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Shipment.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Shipment.class);
     }
 
     /**
@@ -522,8 +522,7 @@ public class ShipmentService {
 
         String endpoint = "shipments/" + id + "/forms";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Shipment.class,
-                client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Shipment.class);
     }
 
     /**
@@ -540,8 +539,8 @@ public class ShipmentService {
         params.put("planned_ship_date", plannedShipDate);
         String endpoint = "shipments/" + id + "/smartrate/delivery_date";
 
-        EstimatedDeliveryDateResponse response = Requestor.request(RequestMethod.GET, endpoint, params,
-                EstimatedDeliveryDateResponse.class, client);
+        EstimatedDeliveryDateResponse response = this.client.request(RequestMethod.GET, endpoint, params,
+                EstimatedDeliveryDateResponse.class);
         return response.getRates();
     }
 }

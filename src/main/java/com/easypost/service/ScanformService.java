@@ -33,7 +33,7 @@ public class ScanformService {
     public ScanForm create(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "scan_forms";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, ScanForm.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, ScanForm.class);
     }
 
     /**
@@ -46,7 +46,7 @@ public class ScanformService {
     public ScanForm retrieve(final String id) throws EasyPostException {
         String endpoint = "scan_forms/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, ScanForm.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, ScanForm.class);
     }
 
     /**
@@ -59,7 +59,7 @@ public class ScanformService {
     public ScanFormCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "scan_forms";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, ScanFormCollection.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, ScanFormCollection.class);
     }
 
     /**

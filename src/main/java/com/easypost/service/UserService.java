@@ -37,7 +37,7 @@ public class UserService {
     public User retrieve(final String id) throws EasyPostException {
         String endpoint = "users/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, User.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, User.class);
     }
 
     /**
@@ -49,7 +49,7 @@ public class UserService {
     public User retrieveMe() throws EasyPostException {
         String endpoint = "users";
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, User.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, User.class);
     }
 
     /**
@@ -65,7 +65,7 @@ public class UserService {
 
         String endpoint = "users";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, User.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, User.class);
     }
 
     /**
@@ -82,7 +82,7 @@ public class UserService {
 
         String endpoint = "users/" + id;
 
-        return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, User.class, client);
+        return this.client.request(RequestMethod.PUT, endpoint, wrappedParams, User.class);
     }
 
     /**
@@ -94,7 +94,7 @@ public class UserService {
     public void delete(final String id) throws EasyPostException {
         String endpoint = "users/" + id;
 
-        Requestor.request(RequestMethod.DELETE, endpoint, null, User.class, client);
+        this.client.request(RequestMethod.DELETE, endpoint, null, User.class);
     }
 
     /**
@@ -134,6 +134,6 @@ public class UserService {
 
         String endpoint = "users/" + id + "/brand";
 
-        return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, Brand.class, client);
+        return this.client.request(RequestMethod.PUT, endpoint, wrappedParams, Brand.class);
     }
 }

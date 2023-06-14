@@ -37,7 +37,7 @@ public class InsuranceService {
 
         String endpoint = "insurances";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Insurance.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Insurance.class);
     }
 
     /**
@@ -50,7 +50,7 @@ public class InsuranceService {
     public Insurance retrieve(final String id) throws EasyPostException {
         String endpoint = "insurances/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Insurance.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Insurance.class);
     }
 
     /**
@@ -63,7 +63,7 @@ public class InsuranceService {
     public InsuranceCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "insurances";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, InsuranceCollection.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, InsuranceCollection.class);
     }
 
     /**

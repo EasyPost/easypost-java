@@ -35,7 +35,7 @@ public class PickupService {
     public PickupCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "pickups";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, PickupCollection.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, PickupCollection.class);
     }
 
     /**
@@ -79,7 +79,7 @@ public class PickupService {
 
         String endpoint = "pickups";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Pickup.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Pickup.class);
     }
 
     /**
@@ -92,7 +92,7 @@ public class PickupService {
     public Pickup retrieve(final String id) throws EasyPostException {
         String endpoint = "pickups/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Pickup.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Pickup.class);
     }
 
     /**
@@ -118,7 +118,7 @@ public class PickupService {
     public Pickup buy(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "pickups/" + id + "/buy";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Pickup.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Pickup.class);
     }
 
     /**
@@ -158,6 +158,6 @@ public class PickupService {
     public Pickup cancel(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "pickups/" + id + "/cancel";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Pickup.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Pickup.class);
     }
 }

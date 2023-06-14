@@ -34,7 +34,7 @@ public class OrderService {
 
         String endpoint = "orders";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Order.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Order.class);
     }
 
     /**
@@ -47,7 +47,7 @@ public class OrderService {
     public Order retrieve(final String id) throws EasyPostException {
         String endpoint = "orders/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Order.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Order.class);
     }
 
     /**
@@ -72,7 +72,7 @@ public class OrderService {
     public Order newRates(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "orders/" + id + "/rates";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, Order.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, params, Order.class);
     }
 
     /**
@@ -86,7 +86,7 @@ public class OrderService {
     public Order buy(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "orders/" + id + "/buy";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, Order.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, params, Order.class);
     }
 
     /**

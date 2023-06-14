@@ -38,7 +38,7 @@ public class TrackerService {
 
         String endpoint = "trackers";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Tracker.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, Tracker.class);
     }
 
     /**
@@ -51,7 +51,7 @@ public class TrackerService {
     public Tracker retrieve(final String id) throws EasyPostException {
         String endpoint = "trackers/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, Tracker.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, Tracker.class);
     }
 
     /**
@@ -65,7 +65,7 @@ public class TrackerService {
         String endpoint = "trackers";
 
         TrackerCollection trackerCollection =
-                Requestor.request(RequestMethod.GET, endpoint, params, TrackerCollection.class, client);
+                this.client.request(RequestMethod.GET, endpoint, params, TrackerCollection.class);
         // we store the params in the collection so that we can use them to get the next page
         trackerCollection.setTrackingCode(InternalUtilities.getOrDefault(params, "tracking_code", null));
         trackerCollection.setCarrier(InternalUtilities.getOrDefault(params, "carrier", null));
@@ -113,6 +113,6 @@ public class TrackerService {
 
         String endpoint = "trackers/create_list";
 
-        Requestor.request(RequestMethod.POST, endpoint, newParams, Object.class, client);
+        this.client.request(RequestMethod.POST, endpoint, newParams, Object.class);
     }
 }

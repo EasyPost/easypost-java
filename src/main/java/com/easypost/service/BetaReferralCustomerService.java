@@ -55,8 +55,8 @@ public class BetaReferralCustomerService {
 
         String endpoint = "referral_customers/payment_method";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams,
-                PaymentMethodObject.class, client, "beta");
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams,
+                PaymentMethodObject.class, "beta");
     }
 
     /**
@@ -72,8 +72,8 @@ public class BetaReferralCustomerService {
 
         String endpoint = "referral_customers/refunds";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params,
-                BetaPaymentRefund.class, client, "beta");
+        return this.client.request(RequestMethod.POST, endpoint, params,
+                BetaPaymentRefund.class, "beta");
     }
 
     /**
@@ -89,7 +89,7 @@ public class BetaReferralCustomerService {
 
         String endpoint = "referral_customers/refunds";
 
-        return Requestor.request(RequestMethod.POST, endpoint, params,
-                BetaPaymentRefund.class, client, "beta");
+        return this.client.request(RequestMethod.POST, endpoint, params,
+                BetaPaymentRefund.class, "beta");
     }
 }

@@ -33,7 +33,7 @@ public class CustomsItemService {
 
         String endpoint = "customs_items";
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, CustomsItem.class, client);
+        return this.client.request(RequestMethod.POST, endpoint, wrappedParams, CustomsItem.class);
     }
 
     /**
@@ -46,6 +46,6 @@ public class CustomsItemService {
     public CustomsItem retrieve(final String id) throws EasyPostException {
         String endpoint = "customs_items/" + id;
 
-        return Requestor.request(RequestMethod.GET, endpoint, null, CustomsItem.class, client);
+        return this.client.request(RequestMethod.GET, endpoint, null, CustomsItem.class);
     }
 }
