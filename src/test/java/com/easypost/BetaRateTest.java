@@ -24,14 +24,6 @@ public class BetaRateTest {
 
     private final String retrieveRatesResponseJson = "{\n" + "  \"rates\": [\n" + "    {\n" +
             "      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n" +
-            "      \"list_rate\": \"7.75\",\n" + "      \"delivery_days\": 5.0,\n" +
-            "      \"list_currency\": \"USD\",\n" + "      \"mode\": \"test\",\n" + "      \"carrier\": \"USPS\",\n" +
-            "      \"delivery_date\": null,\n" + "      \"delivery_date_guaranteed\": false,\n" +
-            "      \"retail_rate\": \"7.75\",\n" + "      \"retail_currency\": \"USD\",\n" +
-            "      \"rate\": \"6.76\",\n" + "      \"service\": \"ParcelSelect\",\n" +
-            "      \"billing_type\": \"easypost\",\n" + "      \"est_delivery_days\": 5.0,\n" +
-            "      \"currency\": \"USD\",\n" + "      \"object\": \"Rate\"\n" + "    },\n" + "    {\n" +
-            "      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n" +
             "      \"list_rate\": \"6.07\",\n" + "      \"delivery_days\": 3.0,\n" +
             "      \"list_currency\": \"USD\",\n" + "      \"mode\": \"test\",\n" + "      \"carrier\": \"USPS\",\n" +
             "      \"delivery_date\": null,\n" + "      \"delivery_date_guaranteed\": false,\n" +
@@ -48,13 +40,21 @@ public class BetaRateTest {
             "      \"billing_type\": \"easypost\",\n" + "      \"est_delivery_days\": null,\n" +
             "      \"currency\": \"USD\",\n" + "      \"object\": \"Rate\"\n" + "    },\n" + "    {\n" +
             "      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n" +
+            "      \"list_rate\": \"7.75\",\n" + "      \"delivery_days\": 5.0,\n" +
+            "      \"list_currency\": \"USD\",\n" + "      \"mode\": \"test\",\n" + "      \"carrier\": \"USPS\",\n" +
+            "      \"delivery_date\": null,\n" + "      \"delivery_date_guaranteed\": false,\n" +
+            "      \"retail_rate\": \"7.75\",\n" + "      \"retail_currency\": \"USD\",\n" +
+            "      \"rate\": \"6.76\",\n" + "      \"service\": \"ParcelSelect\",\n" +
+            "      \"billing_type\": \"easypost\",\n" + "      \"est_delivery_days\": 5.0,\n" +
+            "      \"currency\": \"USD\",\n" + "      \"object\": \"Rate\"\n" + "    },\n" + "    {\n" +
+            "      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n" +
             "      \"list_rate\": \"8.24\",\n" + "      \"delivery_days\": 2.0,\n" +
             "      \"list_currency\": \"USD\",\n" + "      \"mode\": \"test\",\n" + "      \"carrier\": \"USPS\",\n" +
             "      \"delivery_date\": null,\n" + "      \"delivery_date_guaranteed\": false,\n" +
             "      \"retail_rate\": \"10.20\",\n" + "      \"retail_currency\": \"USD\",\n" +
             "      \"rate\": \"7.15\",\n" + "      \"service\": \"Priority\",\n" +
             "      \"billing_type\": \"easypost\",\n" + "      \"est_delivery_days\": 2.0,\n" +
-            "      \"currency\": \"USD\",\n" + "      \"object\": \"Rate\"\n" + "    }\n" + "  ],\n" + "}";
+            "      \"currency\": \"USD\",\n" + "      \"object\": \"Rate\"\n" + "    }\n" + "  ]\n" + "}";
 
     /**
      * Set up the testing environment for this file.
