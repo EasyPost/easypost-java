@@ -227,6 +227,17 @@ public class EasyPostClient {
         return Requestor.request(method, endpoint, params, clazz, this);
     }
 
+    /**
+     * Execute an HTTP request for a given method and URL with this EasyPostClient object.
+     *
+     * @param method the HTTP method to use
+     * @param endpoint the API endpoint to use
+     * @param params the parameters to use
+     * @param clazz the class to use for deserializing the response
+     * @param apiVersion the API version to use
+     * @return the deserialized response
+     * @param <T> the type of object to return
+     */
     public <T> T request(final Requestor.RequestMethod method, final String endpoint, final Map<String, Object> params,
                          final Class<T> clazz, final String apiVersion)
             throws GatewayTimeoutError, RateLimitError, InvalidRequestError, NotFoundError, TimeoutError, EncodingError,

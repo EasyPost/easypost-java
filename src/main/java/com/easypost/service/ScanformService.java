@@ -2,7 +2,6 @@ package com.easypost.service;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.ScanFormCollection;
 import com.easypost.model.ScanForm;

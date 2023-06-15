@@ -5,7 +5,6 @@ import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.exception.General.MissingParameterError;
-import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.ReportCollection;
 import com.easypost.model.Report;

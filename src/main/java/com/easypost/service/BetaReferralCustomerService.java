@@ -3,7 +3,6 @@ package com.easypost.service;
 import java.util.HashMap;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.BetaPaymentRefund;
 import com.easypost.model.PaymentMethod;

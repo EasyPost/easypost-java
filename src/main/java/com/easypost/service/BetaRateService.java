@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.StatelessRate;
 

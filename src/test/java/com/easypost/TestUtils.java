@@ -217,7 +217,7 @@ public abstract class TestUtils {
          * Set up the VCR for a unit test.
          *
          * @param cassetteName The name of the cassette to use.
-         * @param mockRequests The mock requests to use. Will attempt to mock requests first, before falling back to VCR.
+         * @param mockRequests The mock requests to use. Will attempt to mock requests first, then fall back to VCR.
          * @throws MissingParameterError if a required parameter is missing.
          */
         public void setUpTest(String cassetteName, List<MockRequest> mockRequests) throws MissingParameterError {
@@ -240,11 +240,11 @@ public abstract class TestUtils {
          *
          * @param cassetteName   The name of the cassette to use.
          * @param overrideApiKey The API key to use.
-         * @param mockRequests   The mock requests to use. Will attempt to mock requests first, before falling back to VCR.
+         * @param mockRequests   The mock requests to use. Will attempt to mock requests first, then fall back to VCR.
          * @throws MissingParameterError if a required parameter is missing.
          */
-        public void setUpTest(String cassetteName, @Nullable String overrideApiKey, @Nullable List<MockRequest> mockRequests)
-                throws MissingParameterError {
+        public void setUpTest(String cassetteName, @Nullable String overrideApiKey,
+                              @Nullable List<MockRequest> mockRequests) throws MissingParameterError {
             // override api key if needed
             client = new EasyPostClient(overrideApiKey != null ? overrideApiKey : apiKey);
 
@@ -286,6 +286,7 @@ public abstract class TestUtils {
         /**
          * Add a mock request to the VCR.
          * Will utilize any matching mock requests before falling back to the VCR.
+         *
          * @param mockRequest The mock request to add.
          */
         public void addMockRequest(MockRequest mockRequest) {
@@ -295,6 +296,7 @@ public abstract class TestUtils {
         /**
          * Add a list of mock requests to the VCR.
          * Will utilize any matching mock requests before falling back to the VCR.
+         *
          * @param mockRequests The mock requests to add.
          */
         public void addMockRequests(List<MockRequest> mockRequests) {

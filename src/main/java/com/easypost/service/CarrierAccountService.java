@@ -3,7 +3,6 @@ package com.easypost.service;
 import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.MissingParameterError;
-import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.CarrierAccount;
 

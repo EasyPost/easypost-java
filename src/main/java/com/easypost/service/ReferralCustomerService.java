@@ -6,7 +6,6 @@ import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.API.ExternalApiError;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.ReferralCustomerCollection;
 import com.easypost.model.PaymentMethod;

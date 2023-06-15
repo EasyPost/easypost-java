@@ -4,7 +4,6 @@ import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.exception.General.FilteringError;
-import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.ShipmentCollection;
 import com.easypost.model.EstimatedDeliveryDate;

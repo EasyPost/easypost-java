@@ -3,7 +3,6 @@ package com.easypost.service;
 import com.easypost.exception.APIException;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
