@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public final class BillingTest {
-    private final String jsonResponse = "{\"id\":\"cust_...\",\"object\":\"PaymentMethods\",\"primary_" +
+    private final String retrievePaymentMethodResponseJson = "{\"id\":\"cust_...\",\"object\":\"PaymentMethods\",\"primary_" +
             "payment_method\":{\"id\":\"card_...\",\"disabled_at\":null,\"object\":\"CreditCard\",\"na" +
             "me\":null,\"last4\":\"4242\",\"exp_month\":1,\"exp_year\":2025,\"brand\":\"Visa\"},\"secondary_" +
             "payment_method\":{\"id\":\"card_...\",\"disabled_at\":null,\"object\":\"CreditCard\",\"name\":nu" +
@@ -35,7 +35,7 @@ public final class BillingTest {
                                 RequestMethod.GET, ".*payment_methods$"
                         ),
                         new MockResponse(
-                                200, jsonResponse
+                                200, retrievePaymentMethodResponseJson
                         )
                 )
         );
@@ -73,7 +73,7 @@ public final class BillingTest {
                                 RequestMethod.GET, ".*payment_methods$"
                         ),
                         new MockResponse(
-                                200, jsonResponse
+                                200, retrievePaymentMethodResponseJson
                         )
                 )
         );
@@ -87,7 +87,7 @@ public final class BillingTest {
                                 paymentMethodObject.getEndpoint() + "/" + paymentMethodObject.getId() + "/charges$"
                         ),
                         new MockResponse(
-                                200, jsonResponse
+                                200, retrievePaymentMethodResponseJson
                         )
                 )
         );
@@ -110,7 +110,7 @@ public final class BillingTest {
                                 RequestMethod.GET, ".*payment_methods$"
                         ),
                         new MockResponse(
-                                200, jsonResponse
+                                200, retrievePaymentMethodResponseJson
                         )
                 )
         );
