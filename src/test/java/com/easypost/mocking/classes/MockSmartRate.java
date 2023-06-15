@@ -12,6 +12,13 @@ public class MockSmartRate {
     @SerializedName("time_in_transit")
     private MockTimeInTransit timeInTransit;
 
+    /**
+     * Construct a new MockSmartRate to serialize into JSON.
+     * @param price The price to use.
+     * @param carrier The carrier to use.
+     * @param service The service to use.
+     * @param timeInTransit The MockTimeInTransit to use.
+     */
     public MockSmartRate(String price, String carrier, String service, MockTimeInTransit timeInTransit) {
         this.rate = price;
         this.carrier = carrier;

@@ -8,6 +8,10 @@ public class MockShipmentWithRatesResponse {
     @SerializedName ("rates")
     private List<MockRate> rates;
 
+    /**
+     * Construct a new MockShipmentWithRatesResponse to serialize into JSON.
+     * @param rates The MockRates to use.
+     */
     public MockShipmentWithRatesResponse(List<MockRate> rates) {
         this.rates = rates;
     }

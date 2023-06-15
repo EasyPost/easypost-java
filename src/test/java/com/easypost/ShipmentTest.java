@@ -47,31 +47,16 @@ import static org.junit.jupiter.api.Assertions.fail;
 public final class ShipmentTest {
     private static TestUtils.VCR vcr;
 
-    private static final MockShipmentWithRatesResponse mockShipmentWithRatesResponse = new MockShipmentWithRatesResponse(
-            ImmutableList.of(
-                    new MockRate("6.07", "USPS", "First"),
-                    new MockRate("31.25", "USPS", "Express"),
-                    new MockRate("7.75", "USPS", "ParcelSelect"),
-                    new MockRate("7.15", "USPS", "Priority")
-            )
-    );
+    private static final MockShipmentWithRatesResponse MOCK_SHIPMENT_WITH_RATES_RESPONSE =
+            new MockShipmentWithRatesResponse(
+                    ImmutableList.of(new MockRate("6.07", "USPS", "First"), new MockRate("31.25", "USPS", "Express"),
+                            new MockRate("7.75", "USPS", "ParcelSelect"), new MockRate("7.15", "USPS", "Priority")));
 
-    private static final MockSmartRateResponse mockSmartRateResponse = new MockSmartRateResponse(
-            ImmutableList.of(
-                    new MockSmartRate("31.25", "USPS", "Express", new MockTimeInTransit(
-                            1, 2, 2, 2, 3, 3, 5
-                    )),
-                    new MockSmartRate("8.24", "USPS", "Priority",new MockTimeInTransit(
-                            1, 2, 2, 2, 3, 3, 3
-                    )),
-                    new MockSmartRate("6.07", "USPS", "First",new MockTimeInTransit(
-                            1, 2, 2, 2, 2, 3, 4
-                    )),
-                    new MockSmartRate("7.75", "USPS", "ParcelSelect",new MockTimeInTransit(
-                            1, 2, 2, 2, 2, 2, 3
-                    ))
-            )
-    );
+    private static final MockSmartRateResponse MOCK_SMART_RATE_RESPONSE = new MockSmartRateResponse(
+            ImmutableList.of(new MockSmartRate("31.25", "USPS", "Express", new MockTimeInTransit(1, 2, 2, 2, 3, 3, 5)),
+                    new MockSmartRate("8.24", "USPS", "Priority", new MockTimeInTransit(1, 2, 2, 2, 3, 3, 3)),
+                    new MockSmartRate("6.07", "USPS", "First", new MockTimeInTransit(1, 2, 2, 2, 2, 3, 4)),
+                    new MockSmartRate("7.75", "USPS", "ParcelSelect", new MockTimeInTransit(1, 2, 2, 2, 2, 2, 3))));
 
     /**
      * Set up the testing environment for this file.
@@ -525,7 +510,7 @@ public final class ShipmentTest {
     public void testLowestRate() throws EasyPostException {
         List<MockRequest> mockRequests = new ArrayList<>();
         mockRequests.add(new MockRequest(new MockRequestMatchRules(Requestor.RequestMethod.POST, ".*shipments$"),
-                new MockResponse(200, mockShipmentWithRatesResponse)));
+                new MockResponse(200, MOCK_SHIPMENT_WITH_RATES_RESPONSE)));
 
         vcr.setUpTest("lowest_rate", mockRequests);
 
@@ -561,7 +546,7 @@ public final class ShipmentTest {
     public void testInstanceLowestSmartRate() throws EasyPostException {
         List<MockRequest> mockRequests = new ArrayList<>();
         mockRequests.add(new MockRequest(new MockRequestMatchRules(Requestor.RequestMethod.GET, ".*smartrate$"),
-                new MockResponse(200, mockSmartRateResponse)));
+                new MockResponse(200, MOCK_SMART_RATE_RESPONSE)));
 
         vcr.setUpTest("lowest_smartrate", mockRequests);
 
@@ -624,7 +609,7 @@ public final class ShipmentTest {
     public void testGetLowestSmartRate() throws EasyPostException {
         List<MockRequest> mockRequests = new ArrayList<>();
         mockRequests.add(new MockRequest(new MockRequestMatchRules(Requestor.RequestMethod.GET, ".*smartrate$"),
-                new MockResponse(200, mockSmartRateResponse)));
+                new MockResponse(200, MOCK_SMART_RATE_RESPONSE)));
 
         vcr.setUpTest("get_lowest_smartrate", mockRequests);
 
@@ -647,7 +632,7 @@ public final class ShipmentTest {
     public void testStaticLowestSmartRates() throws EasyPostException {
         List<MockRequest> mockRequests = new ArrayList<>();
         mockRequests.add(new MockRequest(new MockRequestMatchRules(Requestor.RequestMethod.GET, ".*smartrate$"),
-                new MockResponse(200, mockSmartRateResponse)));
+                new MockResponse(200, MOCK_SMART_RATE_RESPONSE)));
 
         vcr.setUpTest("lowest_smartrate_list", mockRequests);
 

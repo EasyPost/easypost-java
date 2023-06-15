@@ -10,7 +10,6 @@ import com.easypost.mocking.classes.MockStatelessRateResponse;
 import com.easypost.model.StatelessRate;
 import com.easypost.utils.Utilities;
 import com.google.common.collect.ImmutableList;
-import com.google.gson.annotations.SerializedName;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BetaRateTest {
     private static TestUtils.VCR vcr;
 
-    private static final MockStatelessRateResponse mockStatelessRateResponse = new MockStatelessRateResponse(
+    private static final MockStatelessRateResponse MOCK_STATELESS_RATE_RESPONSE = new MockStatelessRateResponse(
             ImmutableList.of(
                     new MockRate("6.07", "USPS", "First"),
                     new MockRate("31.25", "USPS", "Express"),
@@ -54,7 +53,7 @@ public class BetaRateTest {
     public void testRetrieveStatelessRates() throws EasyPostException {
         List<MockRequest> mockRequests = new ArrayList<>();
         mockRequests.add(new MockRequest(new MockRequestMatchRules(Requestor.RequestMethod.POST, ".*\\/rates.*"),
-                new MockResponse(200, mockStatelessRateResponse)));
+                new MockResponse(200, MOCK_STATELESS_RATE_RESPONSE)));
 
         vcr.setUpTest("retrieve_stateless_rates", mockRequests);
 
@@ -74,7 +73,7 @@ public class BetaRateTest {
     public void testRetrieveLowestStatelessRate() throws EasyPostException {
         List<MockRequest> mockRequests = new ArrayList<>();
         mockRequests.add(new MockRequest(new MockRequestMatchRules(Requestor.RequestMethod.POST, ".*\\/rates.*"),
-                new MockResponse(200, mockStatelessRateResponse)));
+                new MockResponse(200, MOCK_STATELESS_RATE_RESPONSE)));
 
         vcr.setUpTest("retrieve_lowest_stateless_rate", mockRequests);
 

@@ -10,6 +10,12 @@ public class MockRate {
     @SerializedName("service")
     private String service;
 
+    /**
+     * Construct a new MockRate to serialize into JSON.
+     * @param price The price to use.
+     * @param carrier The carrier to use.
+     * @param service The service to use.
+     */
     public MockRate(String price, String carrier, String service) {
         this.rate = price;
         this.carrier = carrier;

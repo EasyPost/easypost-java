@@ -7,7 +7,6 @@ import com.easypost.mocking.MockRequestMatchRules;
 import com.easypost.mocking.MockResponse;
 import com.easypost.mocking.classes.MockOrderResponse;
 import com.easypost.mocking.classes.MockRate;
-import com.easypost.mocking.classes.MockStatelessRateResponse;
 import com.easypost.model.Order;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
