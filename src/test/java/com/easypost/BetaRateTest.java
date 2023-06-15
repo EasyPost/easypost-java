@@ -1,11 +1,16 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.http.Requestor;
+import com.easypost.mocking.MockRequest;
+import com.easypost.mocking.MockRequestMatchRules;
+import com.easypost.mocking.MockResponse;
 import com.easypost.model.StatelessRate;
 import com.easypost.utils.Utilities;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BetaRateTest {
     private static TestUtils.VCR vcr;
+
+    private final String retrieveRatesResponseJson = "{\n  \"parcel\": {\n    \"length\": 10.0,\n    \"width\": 8.0,\n    \"weight\": 15.4,\n    \"object\": \"Parcel\",\n    \"height\": 4.0\n  },\n  \"rates\": [\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"7.75\",\n      \"delivery_days\": 5.0,\n      \"list_currency\": \"USD\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date\": null,\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"7.75\",\n      \"retail_currency\": \"USD\",\n      \"rate\": \"6.76\",\n      \"service\": \"ParcelSelect\",\n      \"billing_type\": \"easypost\",\n      \"est_delivery_days\": 5.0,\n      \"currency\": \"USD\",\n      \"object\": \"Rate\"\n    },\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"6.07\",\n      \"delivery_days\": 3.0,\n      \"list_currency\": \"USD\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date\": null,\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"6.07\",\n      \"retail_currency\": \"USD\",\n      \"rate\": \"6.07\",\n      \"service\": \"First\",\n      \"billing_type\": \"easypost\",\n      \"est_delivery_days\": 3.0,\n      \"currency\": \"USD\",\n      \"object\": \"Rate\"\n    },\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"31.25\",\n      \"delivery_days\": null,\n      \"list_currency\": \"USD\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date\": null,\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"35.80\",\n      \"retail_currency\": \"USD\",\n      \"rate\": \"31.25\",\n      \"service\": \"Express\",\n      \"billing_type\": \"easypost\",\n      \"est_delivery_days\": null,\n      \"currency\": \"USD\",\n      \"object\": \"Rate\"\n    },\n    {\n      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n      \"list_rate\": \"8.24\",\n      \"delivery_days\": 2.0,\n      \"list_currency\": \"USD\",\n      \"mode\": \"test\",\n      \"carrier\": \"USPS\",\n      \"delivery_date\": null,\n      \"delivery_date_guaranteed\": false,\n      \"retail_rate\": \"10.20\",\n      \"retail_currency\": \"USD\",\n      \"rate\": \"7.15\",\n      \"service\": \"Priority\",\n      \"billing_type\": \"easypost\",\n      \"est_delivery_days\": 2.0,\n      \"currency\": \"USD\",\n      \"object\": \"Rate\"\n    }\n  ],\n  \"options\": {\n    \"date_advance\": 0.0,\n    \"currency\": \"USD\",\n    \"payment\": {\n      \"type\": \"SENDER\"\n    }\n  },\n  \"messages\": [\n    {\n      \"carrier\": \"UPS\",\n      \"carrier_account_id\": \"ca_8031f3014d2b49dba089e5c14da57413\",\n      \"type\": \"rate_error\",\n      \"message\": \"Too Many Requests\"\n    },\n    {\n      \"carrier\": \"UPS\",\n      \"carrier_account_id\": \"ca_6924408886ad49ac9a8468804f2b52b7\",\n      \"type\": \"rate_error\",\n      \"message\": \"Too Many Requests\"\n    },\n    {\n      \"carrier\": \"UPS\",\n      \"carrier_account_id\": \"ca_3e92a82adac444a58f032ebcd8eb9028\",\n      \"type\": \"rate_error\",\n      \"message\": \"Too Many Requests\"\n    },\n    {\n      \"carrier\": \"UPS\",\n      \"carrier_account_id\": \"ca_2cdc6fb96d99484e8631d7c9620dec24\",\n      \"type\": \"rate_error\",\n      \"message\": \"Too Many Requests\"\n    },\n    {\n      \"carrier\": \"UPS\",\n      \"carrier_account_id\": \"ca_1c4eecb124f841d7a51e7e53cdda6cd8\",\n      \"type\": \"rate_error\",\n      \"message\": \"Too Many Requests\"\n    },\n    {\n      \"carrier\": \"UPS\",\n      \"carrier_account_id\": \"ca_e6db2c19d54c4025b852d0ad81ee7f4e\",\n      \"type\": \"rate_error\",\n      \"message\": \"Too Many Requests\"\n    },\n    {\n      \"carrier\": \"UPS\",\n      \"carrier_account_id\": \"ca_f363eb4e1b194798b015a07598be6ed4\",\n      \"type\": \"rate_error\",\n      \"message\": \"Too Many Requests\"\n    },\n    {\n      \"carrier\": \"UPS\",\n      \"carrier_account_id\": \"ca_687017c7f80044ab942b697a9607c439\",\n      \"type\": \"rate_error\",\n      \"message\": \"Too Many Requests\"\n    }\n  ],\n  \"to_address\": {\n    \"zip\": \"90277\",\n    \"country\": \"US\",\n    \"city\": \"Redondo Beach\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Elizabeth Swan\",\n    \"street1\": \"179 N Harbor Dr\",\n    \"state\": \"CA\",\n    \"email\": \"test@example.com\",\n    \"object\": \"Address\"\n  },\n  \"from_address\": {\n    \"zip\": \"94107\",\n    \"country\": \"US\",\n    \"city\": \"San Francisco\",\n    \"phone\": \"REDACTED\",\n    \"name\": \"Jack Sparrow\",\n    \"street1\": \"388 Townsend St\",\n    \"street2\": \"Apt 20\",\n    \"state\": \"CA\",\n    \"email\": \"test@example.com\",\n    \"object\": \"Address\"\n  }\n}";
 
     /**
      * Set up the testing environment for this file.
@@ -34,7 +41,15 @@ public class BetaRateTest {
      */
     @Test
     public void testRetrieveStatelessRates() throws EasyPostException {
-        vcr.setUpTest("retrieve_stateless_rates");
+        List<MockRequest> mockRequests = new ArrayList<>();
+        mockRequests.add(
+                new MockRequest(
+                        new MockRequestMatchRules(Requestor.RequestMethod.POST, ".*\\/rates.*"),
+                        new MockResponse(200, retrieveRatesResponseJson)
+                )
+        );
+
+        vcr.setUpTest("retrieve_stateless_rates", mockRequests);
 
         HashMap<String, Object> shipment = Fixtures.basicShipment();
 
@@ -50,7 +65,15 @@ public class BetaRateTest {
      */
     @Test
     public void testRetrieveLowestStatelessRate() throws EasyPostException {
-        vcr.setUpTest("retrieve_lowest_stateless_rate");
+        List<MockRequest> mockRequests = new ArrayList<>();
+        mockRequests.add(
+                new MockRequest(
+                        new MockRequestMatchRules(Requestor.RequestMethod.POST, ".*\\/rates.*"),
+                        new MockResponse(200, retrieveRatesResponseJson)
+                )
+        );
+
+        vcr.setUpTest("retrieve_lowest_stateless_rate", mockRequests);
 
         HashMap<String, Object> shipment = Fixtures.basicShipment();
 
