@@ -5,9 +5,13 @@ import com.easypost.http.Requestor;
 import com.easypost.mocking.MockRequest;
 import com.easypost.mocking.MockRequestMatchRules;
 import com.easypost.mocking.MockResponse;
+import com.easypost.mocking.classes.MockOrderResponse;
+import com.easypost.mocking.classes.MockRate;
+import com.easypost.mocking.classes.MockStatelessRateResponse;
 import com.easypost.model.Order;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
+import com.google.common.collect.ImmutableList;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -173,55 +177,19 @@ public final class OrderTest {
      */
     @Test
     public void testLowestRate() throws EasyPostException {
-        final String orderResponseJson = "{\n" + "  \"rates\": [\n" + "    {\n" +
-                "      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n" +
-                "      \"list_rate\": \"31.25\",\n" + "      \"created_at\": null,\n" +
-                "      \"delivery_days\": null,\n" + "      \"list_currency\": \"USD\",\n" +
-                "      \"shipment_id\": \"shp_176e257b4911400f845e3dd0c06a164f\",\n" + "      \"mode\": \"test\",\n" +
-                "      \"carrier\": \"USPS\",\n" + "      \"delivery_date\": null,\n" +
-                "      \"delivery_date_guaranteed\": false,\n" + "      \"retail_rate\": \"35.80\",\n" +
-                "      \"retail_currency\": \"USD\",\n" + "      \"updated_at\": null,\n" +
-                "      \"rate\": \"31.25\",\n" + "      \"service\": \"Express\",\n" +
-                "      \"billing_type\": \"easypost\",\n" + "      \"est_delivery_days\": null,\n" +
-                "      \"currency\": \"USD\",\n" + "      \"id\": \"rate_4e59b737f35f459b834c5bfdb21fef8f\",\n" +
-                "      \"object\": \"Rate\"\n" + "    },\n" + "    {\n" +
-                "      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n" +
-                "      \"list_rate\": \"7.75\",\n" + "      \"created_at\": null,\n" +
-                "      \"delivery_days\": 5.0,\n" + "      \"list_currency\": \"USD\",\n" +
-                "      \"shipment_id\": \"shp_176e257b4911400f845e3dd0c06a164f\",\n" + "      \"mode\": \"test\",\n" +
-                "      \"carrier\": \"USPS\",\n" + "      \"delivery_date\": null,\n" +
-                "      \"delivery_date_guaranteed\": false,\n" + "      \"retail_rate\": \"7.75\",\n" +
-                "      \"retail_currency\": \"USD\",\n" + "      \"updated_at\": null,\n" +
-                "      \"rate\": \"6.76\",\n" + "      \"service\": \"ParcelSelect\",\n" +
-                "      \"billing_type\": \"easypost\",\n" + "      \"est_delivery_days\": 5.0,\n" +
-                "      \"currency\": \"USD\",\n" + "      \"id\": \"rate_32e1150b797341098762501bb9928d7c\",\n" +
-                "      \"object\": \"Rate\"\n" + "    },\n" + "    {\n" +
-                "      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n" +
-                "      \"list_rate\": \"8.24\",\n" + "      \"created_at\": null,\n" +
-                "      \"delivery_days\": 2.0,\n" + "      \"list_currency\": \"USD\",\n" +
-                "      \"shipment_id\": \"shp_176e257b4911400f845e3dd0c06a164f\",\n" + "      \"mode\": \"test\",\n" +
-                "      \"carrier\": \"USPS\",\n" + "      \"delivery_date\": null,\n" +
-                "      \"delivery_date_guaranteed\": false,\n" + "      \"retail_rate\": \"10.20\",\n" +
-                "      \"retail_currency\": \"USD\",\n" + "      \"updated_at\": null,\n" +
-                "      \"rate\": \"7.15\",\n" + "      \"service\": \"Priority\",\n" +
-                "      \"billing_type\": \"easypost\",\n" + "      \"est_delivery_days\": 2.0,\n" +
-                "      \"currency\": \"USD\",\n" + "      \"id\": \"rate_8ff0a6a26e0e4d9e8faedd60c789efdb\",\n" +
-                "      \"object\": \"Rate\"\n" + "    },\n" + "    {\n" +
-                "      \"carrier_account_id\": \"ca_f09befdb2e9c410e95c7622ea912c18c\",\n" +
-                "      \"list_rate\": \"6.07\",\n" + "      \"created_at\": null,\n" +
-                "      \"delivery_days\": 3.0,\n" + "      \"list_currency\": \"USD\",\n" +
-                "      \"shipment_id\": \"shp_176e257b4911400f845e3dd0c06a164f\",\n" + "      \"mode\": \"test\",\n" +
-                "      \"carrier\": \"USPS\",\n" + "      \"delivery_date\": null,\n" +
-                "      \"delivery_date_guaranteed\": false,\n" + "      \"retail_rate\": \"6.07\",\n" +
-                "      \"retail_currency\": \"USD\",\n" + "      \"updated_at\": null,\n" +
-                "      \"rate\": \"6.07\",\n" + "      \"service\": \"First\",\n" +
-                "      \"billing_type\": \"easypost\",\n" + "      \"est_delivery_days\": 3.0,\n" +
-                "      \"currency\": \"USD\",\n" + "      \"id\": \"rate_7417dedb413d4c44be93fe9d04a7e941\",\n" +
-                "      \"object\": \"Rate\"\n" + "    }\n" + "  ],\n" + "  \"object\": \"Order\"\n" + "}";
+
+        final MockOrderResponse mockOrderResponse = new MockOrderResponse(
+                ImmutableList.of(
+                        new MockRate("6.07", "USPS", "First"),
+                        new MockRate("31.25", "USPS", "Express"),
+                        new MockRate("6.76", "USPS", "ParcelSelect"),
+                        new MockRate("7.15", "USPS", "Priority")
+                )
+        );
 
         List<MockRequest> mockRequests = new ArrayList<>();
         mockRequests.add(new MockRequest(new MockRequestMatchRules(Requestor.RequestMethod.POST, ".*orders$"),
-                new MockResponse(200, orderResponseJson)));
+                new MockResponse(200, mockOrderResponse)));
 
         vcr.setUpTest("lowest_rate", mockRequests);
 

@@ -218,6 +218,7 @@ public abstract class TestUtils {
          *
          * @param cassetteName The name of the cassette to use.
          * @param mockRequests The mock requests to use. Will attempt to mock requests first, then fall back to VCR.
+         *                     These cannot be altered outside the setUpTest method.
          * @throws MissingParameterError if a required parameter is missing.
          */
         public void setUpTest(String cassetteName, List<MockRequest> mockRequests) throws MissingParameterError {
@@ -241,6 +242,7 @@ public abstract class TestUtils {
          * @param cassetteName   The name of the cassette to use.
          * @param overrideApiKey The API key to use.
          * @param mockRequests   The mock requests to use. Will attempt to mock requests first, then fall back to VCR.
+         *                       These cannot be altered outside the setUpTest method.
          * @throws MissingParameterError if a required parameter is missing.
          */
         public void setUpTest(String cassetteName, @Nullable String overrideApiKey,
@@ -281,33 +283,6 @@ public abstract class TestUtils {
 
             // set VCR to be used during requests
             EasyPost._vcrUrlFunction = vcrUrlFunction;
-        }
-
-        /**
-         * Add a mock request to the VCR.
-         * Will utilize any matching mock requests before falling back to the VCR.
-         *
-         * @param mockRequest The mock request to add.
-         */
-        public void addMockRequest(MockRequest mockRequest) {
-            mockRequests.add(mockRequest);
-        }
-
-        /**
-         * Add a list of mock requests to the VCR.
-         * Will utilize any matching mock requests before falling back to the VCR.
-         *
-         * @param mockRequests The mock requests to add.
-         */
-        public void addMockRequests(List<MockRequest> mockRequests) {
-            this.mockRequests.addAll(mockRequests);
-        }
-
-        /**
-         * Clear all mock requests from the VCR.
-         */
-        public void clearMockRequests() {
-            mockRequests.clear();
         }
     }
 }

@@ -146,6 +146,8 @@ This project uses [EasyVCR](https://github.com/EasyPost/easyvcr-java) to record 
 
 **Test Data:** The test suite has been populated with various helpful fixtures that are available for use, each completely independent from a particular user **with the exception of the USPS carrier account ID** (see [Unit Test API Keys](#unit-test-api-keys) for more information) which has a fallback value of our internal testing user's ID. Some fixtures use hard-coded dates that may need to be incremented if cassettes get re-recorded (such as reports or pickups).
 
+For some unit tests, you may need to mock certain API calls. The VCR utility in the test suite accepts an option list of `MockRequest` objects via the `setUpTest` function. When mock requests are provided, any API call matching a mock request (by HTTP method and URL regex pattern) will return the associated mock response; any request that does not match will be passed along to the VCR where it will either be replayed or recorded depending on the VCR mode.
+
 #### Unit Test API Keys
 
 The following are required on every test run:
