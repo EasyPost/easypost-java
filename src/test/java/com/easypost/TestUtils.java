@@ -9,14 +9,18 @@ import com.easypost.easyvcr.MatchRules;
 import com.easypost.easyvcr.Mode;
 import com.easypost.easyvcr.TimeFrame;
 import com.easypost.exception.General.MissingParameterError;
+import com.easypost.mocking.MockClient;
+import com.easypost.mocking.MockRequest;
 import com.easypost.service.EasyPostClient;
 import com.google.common.collect.ImmutableList;
+import org.jetbrains.annotations.Nullable;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -112,6 +116,8 @@ public abstract class TestUtils {
         private String apiKey;
         EasyPostClient client;
 
+        private List<MockRequest> mockRequests = new ArrayList<>();
+
         /**
          * Get whether the VCR is recording.
          *
@@ -204,7 +210,18 @@ public abstract class TestUtils {
          * @throws MissingParameterError if a required parameter is missing.
          */
         public void setUpTest(String cassetteName) throws MissingParameterError {
-            setUpTest(cassetteName, "");
+            setUpTest(cassetteName, null, null);
+        }
+
+        /**
+         * Set up the VCR for a unit test.
+         *
+         * @param cassetteName The name of the cassette to use.
+         * @param mockRequests The mock requests to use.
+         * @throws MissingParameterError if a required parameter is missing.
+         */
+        public void setUpTest(String cassetteName, List<MockRequest> mockRequests) throws MissingParameterError {
+            setUpTest(cassetteName, null, mockRequests);
         }
 
         /**
@@ -215,8 +232,26 @@ public abstract class TestUtils {
          * @throws MissingParameterError if a required parameter is missing.
          */
         public void setUpTest(String cassetteName, String overrideApiKey) throws MissingParameterError {
+            setUpTest(cassetteName, overrideApiKey, null);
+        }
+
+        /**
+         * Set up the VCR for a unit test.
+         *
+         * @param cassetteName   The name of the cassette to use.
+         * @param overrideApiKey The API key to use.
+         * @throws MissingParameterError if a required parameter is missing.
+         */
+        public void setUpTest(String cassetteName, @Nullable String overrideApiKey, @Nullable List<MockRequest> mockRequests)
+                throws MissingParameterError {
             // override api key if needed
-            client = new EasyPostClient(overrideApiKey.isEmpty() ? this.apiKey : overrideApiKey);
+            client = new EasyPostClient(overrideApiKey != null ? overrideApiKey : apiKey);
+
+            // if mock requests are enabled, wrap the VCR client in a mock client with passthrough enabled
+            // requests that match a mock will be handled by the mock, otherwise they will be handled by the VCR
+            if (mockRequests != null) {
+                client = new MockClient(client, mockRequests, true);
+            }
 
             // set up cassette
             Cassette cassette = new Cassette(testCassettesFolder, cassetteName);
@@ -245,6 +280,18 @@ public abstract class TestUtils {
 
             // set VCR to be used during requests
             EasyPost._vcrUrlFunction = vcrUrlFunction;
+        }
+
+        public void addMockRequest(MockRequest mockRequest) {
+            mockRequests.add(mockRequest);
+        }
+
+        public void addMockRequests(List<MockRequest> mockRequests) {
+            this.mockRequests.addAll(mockRequests);
+        }
+
+        public void clearMockRequests() {
+            mockRequests.clear();
         }
     }
 }

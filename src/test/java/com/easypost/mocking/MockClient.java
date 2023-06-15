@@ -36,17 +36,33 @@ import java.util.regex.Pattern;
 import static com.easypost.http.Requestor.handleAPIError;
 
 @Getter
-@Setter
 public class MockClient extends EasyPostClient {
+    private EasyPostClient client;
     private List<MockRequest> requests = new ArrayList<>();
+    private boolean passThrough = false;
 
     public MockClient() throws MissingParameterError {
-        super("not_a_real_key");
+        // If no real client provided for wrapper, passthrough mode is automatically disabled to avoid failing with a fake API key
+        this(new EasyPostClient("not_needed"), new ArrayList<>(), false);
     }
 
-    public MockClient(List<MockRequest> requests) throws MissingParameterError {
-        super("not_a_real_key");
+    public MockClient(EasyPostClient client) throws MissingParameterError {
+        this(client, new ArrayList<>(), false);
+    }
+
+    public MockClient(EasyPostClient client, List<MockRequest> requests) throws MissingParameterError {
+        this(client, requests, false);
+    }
+
+    public MockClient(EasyPostClient client, boolean passThrough) throws MissingParameterError {
+        this(client, new ArrayList<>(), passThrough);
+    }
+
+    public MockClient(EasyPostClient client, List<MockRequest> requests, boolean passThrough) throws MissingParameterError {
+        super("not_needed");
+        this.client = client;
         this.requests = requests;
+        this.passThrough = passThrough;
     }
 
     public void addRequest(MockRequest request) {
@@ -82,14 +98,20 @@ public class MockClient extends EasyPostClient {
         return null;
     }
 
-    private <T> T processMockRequest(Requestor.RequestMethod method, String endpoint, Class<T> clazz,
+    private <T> T processMockRequest(Requestor.RequestMethod method, String endpoint, Map<String, Object> params, Class<T> clazz,
                           @Nullable String apiVersion)
             throws InvalidRequestError, UnknownApiError, ServiceUnavailableError, GatewayTimeoutError, ForbiddenError,
             RateLimitError, NotFoundError, TimeoutError, RedirectError, UnauthorizedError, MethodNotAllowedError,
-            InternalServerError, PaymentError {
+            InternalServerError, PaymentError, JsonError, HttpError, EncodingError {
         MockRequest matchingRequest = findMatchingRequest(method, endpoint, apiVersion);
 
         if (matchingRequest == null) {
+            if (this.passThrough) { // if passThrough is true, then we want to make the actual API call if no mock request is found
+                if (apiVersion == null) {
+                    return this.client.request(method, endpoint, params, clazz);
+                }
+                return this.client.request(method, endpoint, params, clazz, apiVersion);
+            }
             throw new InvalidRequestError("No matching mock request found.", null, 0, null);
         }
 
@@ -110,7 +132,7 @@ public class MockClient extends EasyPostClient {
             throws GatewayTimeoutError, RateLimitError, InvalidRequestError, NotFoundError, TimeoutError, EncodingError,
             UnauthorizedError, MethodNotAllowedError, InternalServerError, UnknownApiError, ServiceUnavailableError,
             ForbiddenError, JsonError, HttpError, RedirectError, PaymentError {
-        return processMockRequest(method, endpoint, clazz, null);
+        return processMockRequest(method, endpoint, params, clazz, null);
     }
 
     @Override
@@ -119,6 +141,6 @@ public class MockClient extends EasyPostClient {
             throws GatewayTimeoutError, RateLimitError, InvalidRequestError, NotFoundError, TimeoutError, EncodingError,
             UnauthorizedError, MethodNotAllowedError, InternalServerError, UnknownApiError, ServiceUnavailableError,
             ForbiddenError, JsonError, HttpError, RedirectError, PaymentError {
-        return processMockRequest(method, endpoint, clazz, apiVersion);
+        return processMockRequest(method, endpoint, params, clazz, apiVersion);
     }
 }
