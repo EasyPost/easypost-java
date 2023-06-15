@@ -146,7 +146,28 @@ This project uses [EasyVCR](https://github.com/EasyPost/easyvcr-java) to record 
 
 **Test Data:** The test suite has been populated with various helpful fixtures that are available for use, each completely independent from a particular user **with the exception of the USPS carrier account ID** (see [Unit Test API Keys](#unit-test-api-keys) for more information) which has a fallback value of our internal testing user's ID. Some fixtures use hard-coded dates that may need to be incremented if cassettes get re-recorded (such as reports or pickups).
 
-For some unit tests, you may need to mock certain API calls. The VCR utility in the test suite accepts an option list of `MockRequest` objects via the `setUpTest` function. When mock requests are provided, any API call matching a mock request (by HTTP method and URL regex pattern) will return the associated mock response; any request that does not match will be passed along to the VCR where it will either be replayed or recorded depending on the VCR mode.
+For some unit tests, you may need to mock certain API calls. The VCR utility in the test suite accepts an option list of `MockRequest` objects via the `setUpTest` function (see [Mocking](#mocking) below).
+```java
+// Construct a new VCR
+TestUtils.VCR vcr = new TestUtils.VCR("cassette_folder", TestUtils.ApiKey.TEST);
+
+// Construct a list of mock requests
+List<MockRequest> mockRequests = new ArrayList<>();
+mockRequests.add(
+        new MockRequest(
+                new MockRequestMatchRules(Requestor.RequestMethod.POST, ".*\\/rates.*"),
+                new MockResponse(200, "data-to-return")
+        )
+);
+
+// Set up the test with the VCR and mock requests
+vcr.setUpTest("cassette_name", mockRequests);
+
+// Use the VCR's client as you would a normal client
+vcr.client.carrierAccount....
+```
+
+When mock requests are provided, any API call matching a mock request (by HTTP method and URL regex pattern) will return the associated mock response; any request that does not match will be passed along to the VCR where it will either be replayed or recorded depending on the VCR mode.
 
 #### Unit Test API Keys
 
@@ -160,3 +181,31 @@ Some tests may require an EasyPost user with a particular set of enabled feature
 - `USPS_CARRIER_ACCOUNT_ID` (eg: one-call buying a shipment for non-EasyPost employees)
 - `PARTNER_USER_PROD_API_KEY` (eg: creating a referral user)
 - `REFERRAL_CUSTOMER_PROD_API_KEY` (eg: adding a credit card to a referral user)
+
+#### Mocking
+
+We have implemented a custom, lightweight HTTP mocking functionality in this library that allows us to mock HTTP calls and responses.
+
+A mock client is the same as a normal client, with a set of mock request-response pairs stored as a property.
+
+At the time of making a real HTTP request, a mock client will instead check which mock request entry matches the queued request (matching by HTTP method and a regex pattern for the URL), and will return the corresponding mock response (HTTP status code and body).
+
+NOTE: If a client is configured with a mocking utility, it will ONLY make mock requests. If it attempts to make a request that does not match any of the configured mock requests, the request will fail and trigger an exception.
+
+To use the mocking utility:
+
+```java
+// Create a mock client
+MockClient mockClient = new MockClient();
+
+// Add a mock request-response pair
+mockClient.addRequest(
+        new MockRequest(
+                new MockRequestMatchRules(RequestMethod.GET, ".*payment_methods$"), // if any request uses GET and matches the regex pattern, it will return the mock response
+                new MockResponse(200, "data-to-return")
+        )
+);
+
+// use the mock client as you would a normal client
+mockClient.billing... // will return "data-to-return" if the request matches the mock request
+```
