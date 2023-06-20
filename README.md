@@ -119,8 +119,6 @@ make lint
 
 # Run tests
 EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make build test
-
-# Run tests with coverage
 EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make coverage
 
 # Run security analysis
@@ -130,8 +128,7 @@ make scan
 make docs
 
 # Update submodules
-git submodule init
-git submodule update --remote
+make update-examples-submodule
 ```
 
 ### Testing

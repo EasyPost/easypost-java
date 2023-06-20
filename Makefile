@@ -14,6 +14,10 @@ clean:
 coverage:
 	mvn verify -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report
 
+## checkstyle - Check if project follows CheckStyle rules (must run install-checkstyle first)
+checkstyle:
+	java -jar checkstyle.jar src -c examples/style_guides/java/easypost_java_style.xml -d
+
 ## docs - Generates library documentation
 docs:
 	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true
@@ -27,14 +31,8 @@ install-styleguide: | update-examples-submodule
 ## install - Install requirements
 install: | update-examples-submodule
 
-## update-examples-submodule - Update the examples submodule
-update-examples-submodule:
-	git submodule init
-	git submodule update
-
-## lint - Check if project follows CheckStyle rules (must run install-checkstyle first)
-lint:
-	java -jar checkstyle.jar src -c examples/style_guides/java/easypost_java_style.xml -d
+## lint - Lints the project
+lint: checkstyle scan
 
 ## publish - Publish a release of the project (will build the project via the `mvn deploy` command)
 # @parameters:
@@ -60,5 +58,10 @@ scan:
 ## test - Test the project
 test:
 	mvn surefire:test
+
+## update-examples-submodule - Update the examples submodule
+update-examples-submodule:
+	git submodule init
+	git submodule update
 
 .PHONY: help build clean coverage docs install-styleguide install lint publish publish-dry release scan scan-strict test update-examples-submodule
