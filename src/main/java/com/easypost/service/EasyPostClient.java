@@ -1,7 +1,14 @@
 package com.easypost.service;
 
+import lombok.Getter;
+
 import com.easypost.Constants;
 import com.easypost.exception.General.MissingParameterError;
+import com.easypost.hooks.ResponseHook;
+import com.easypost.hooks.RequestHook;
+
+import java.util.HashMap;
+import java.util.function.Function;
 
 public class EasyPostClient {
     private final int connectTimeoutMilliseconds;
@@ -37,6 +44,10 @@ public class EasyPostClient {
     public final TrackerService tracker;
     public final UserService user;
     public final WebhookService webhook;
+    @Getter
+    private RequestHook requestHooks = new RequestHook();
+    @Getter
+    private ResponseHook responseHooks = new ResponseHook();
 
     /**
      * EasyPostClient constructor.
@@ -143,6 +154,38 @@ public class EasyPostClient {
         this.tracker = new TrackerService(this);
         this.user = new UserService(this);
         this.webhook = new WebhookService(this);
+    }
+
+    /**
+     * Subscribes to a request hook from the given function.
+     * @param function
+     */
+    public void subscribeToRequestHook(Function<HashMap<String, Object>, Object> function) {
+        this.requestHooks.addEventHandler(function);
+    }
+
+    /**
+     * Unsubscribes to a request hook from the given function.
+     * @param function
+     */
+    public void unsubscribeFromRequestHook(Function<HashMap<String, Object>, Object> function) {
+        this.requestHooks.removeEventHandler(function);
+    }
+
+    /**
+     * Subscribes to a response hook from the given function.
+     * @param function
+     */
+    public void subscribeToResponseHook(Function<HashMap<String, Object>, Object> function) {
+        this.responseHooks.addEventHandler(function);
+    }
+
+    /**
+     * Unubscribes to a response hook from the given function.
+     * @param function
+     */
+    public void unsubscribeFromResponseHook(Function<HashMap<String, Object>, Object> function) {
+        this.responseHooks.removeEventHandler(function);
     }
 
     /**

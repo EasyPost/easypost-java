@@ -1,6 +1,5 @@
 package com.easypost.service;
 
-import com.easypost.exception.APIException;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.http.Requestor;
@@ -71,7 +70,7 @@ public class AddressService {
      * @return AddressCollection object.
      * @throws APIException when the request fails.
      */
-    public AddressCollection all(final Map<String, Object> params) throws APIException {
+    public AddressCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "addresses";
 
         return Requestor.request(RequestMethod.GET, endpoint, params, AddressCollection.class, client);
