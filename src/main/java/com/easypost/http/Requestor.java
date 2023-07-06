@@ -591,16 +591,6 @@ public abstract class Requestor {
             handleAPIError(rBody, rCode);
         }
 
-        HashMap<String, Object> responseBodyForHook = new HashMap<String, Object>();
-        responseBodyForHook.put("http_status", rCode);
-        responseBodyForHook.put("headers", headers);
-        responseBodyForHook.put("method", method.toString());
-        responseBodyForHook.put("path", url);
-        responseBodyForHook.put("response_body", rBody);
-        responseBodyForHook.put("response_timestamp", Instant.now());
-        responseBodyForHook.put("request_timestamp", requestTimestamp);
-        responseBodyForHook.put("request_uuid", requestUuid);
-
         ResponseHookResponses responseHookResponses = new ResponseHookResponses(rCode, headers, method.toString(), url,
             rBody, Instant.now().toString(), requestTimestamp.toString(), requestUuid.toString());
 
