@@ -94,22 +94,27 @@ public class CreateShipment {
 Users can subscribe to HTTP requests and responses via the `RequestHook` and `ResponseHook` objects. To do so, pass a function to the `subscribeToRequestHook` or `subscribeToResponseHook` methods of an `EasyPostClient` object:
 
 ```java
-    public static Object customFunction(HashMap<String, Object> datas) {
-      // Pass your code here, the information about the request/response is available within the datas parameter.
-        for (Map.Entry<String, Object> entry : datas.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            System.out.println("Key: " + key + ", Value: " + value);
-        }
+    EasyPostClient client = new EasyPostClient(System.getenv("EASYPOST_API_KEY"));
 
+    // For request hook custom function, make sure you have RequestHookResponses in the parameter
+    public static Object requestHookFunction(RequestHookResponses datas) {
+        // Pass your code here, the information about the request/response is available within the datas parameter.
         return true;
     }
 
-    EasyPostClient client = new EasyPostClient(System.getenv("EASYPOST_API_KEY"));
+    client.subscribeToRequestHook(requestHookFunction); // subscribe to request hook by passing your custom function
+    client.unsubscribeToRequestHook(requestHookFunction); // unsubscribe from request hook
 
-    client.subscribeToRequestHook(customFunction); // subscribe to request hook by passing your custom function
-    client.unsubscribeToRequestHook(customFunction); // unsubscribe from request hook
+    // For response hook custom function, make sure you have ResponseHookResponses in the parameter
+    public static Object responseHookFunction(ResponseHookResponses datas) {
+        // Pass your code here, the information about the request/response is available within the datas parameter.
+        return true;
+    }
+
+    client.subscribeToRequestHook(responseHookFunction); // subscribe to response hook by passing your custom function
+    client.unsubscribeToRequestHook(responseHookFunction); // unsubscribe from response hook
 ```
+
 ## Documentation
 
 API documentation can be found at: <https://easypost.com/docs/api>.

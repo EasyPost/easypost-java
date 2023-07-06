@@ -27,6 +27,8 @@ import com.easypost.exception.API.TimeoutError;
 import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.General.MissingParameterError;
+import com.easypost.hooks.RequestHookResponses;
+import com.easypost.hooks.ResponseHookResponses;
 import com.easypost.model.EasyPostResource;
 import com.easypost.model.Error;
 import com.easypost.service.EasyPostClient;
@@ -565,14 +567,10 @@ public abstract class Requestor {
         Map<String, String> headers = new HashMap<String, String>();
         headers = generateHeaders(client.getApiKey());
 
-        HashMap<String, Object> requestBodyForHook = new HashMap<String, Object>();
-        requestBodyForHook.put("headers", headers);
-        requestBodyForHook.put("method", method.toString());
-        requestBodyForHook.put("path", url);
-        requestBodyForHook.put("request_body", body);
-        requestBodyForHook.put("request_timestamp", requestTimestamp);
-        requestBodyForHook.put("request_uuid", requestUuid);
-        client.getRequestHooks().executeEventHandler(requestBodyForHook);
+        RequestHookResponses requestResponse = new RequestHookResponses(headers, method.toString(), url, body,
+                        requestTimestamp.toString(), requestUuid.toString());
+
+        client.getRequestHooks().executeEventHandler(requestResponse);
         
         EasyPostResponse response;
         try {
@@ -602,7 +600,11 @@ public abstract class Requestor {
         responseBodyForHook.put("response_timestamp", Instant.now());
         responseBodyForHook.put("request_timestamp", requestTimestamp);
         responseBodyForHook.put("request_uuid", requestUuid);
-        client.getResponseHooks().executeEventHandler(responseBodyForHook);
+
+        ResponseHookResponses responseHookResponses = new ResponseHookResponses(rCode, headers, method.toString(), url,
+            rBody, Instant.now().toString(), requestTimestamp.toString(), requestUuid.toString());
+
+        client.getResponseHooks().executeEventHandler(responseHookResponses);
 
         return Constants.Http.GSON.fromJson(rBody, clazz);
     }

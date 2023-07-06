@@ -1,14 +1,16 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.hooks.RequestHookResponses;
+import com.easypost.hooks.ResponseHookResponses;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.HashMap;
 import java.util.function.Function;
 
 public class HookTest {
@@ -25,13 +27,26 @@ public class HookTest {
     }
 
     /**
-     * Test failing a hook if we subscribed.
+     * Test failing a hook if we subscribed to a request hook.
      *
-     * @param input The input HashMap representing the hook data.
+     * @param datas The RequestHookResponses object representing the hook data.
      * @return The result of the test.
      * @throws EasyPostException when the request fails.
      */
-    public static Object failIfSubscribed(HashMap<String, Object> input) {
+    public static Object failIfSubscribedToRequest(RequestHookResponses datas) {
+        fail("Test failed");
+
+        return false;
+    }
+
+    /**
+     * Test failing a hook if we subscribed to a response hook.
+     *
+     * @param datas The ResponseHookResponses object representing the hook data.
+     * @return The result of the test.
+     * @throws EasyPostException when the request fails.
+     */
+    public static Object failIfSubscribedToResponse(ResponseHookResponses datas) {
         fail("Test failed");
 
         return false;
@@ -40,17 +55,17 @@ public class HookTest {
     /**
      * Test subscribing a request hook.
      *
-     * @param datas The input HashMap representing the hook data.
+     * @param datas The RequestHookResponses object representing the hook data.
      * @return The result of the test.
      * @throws EasyPostException when the request fails.
      */
-    public static Object testRequestHooks(HashMap<String, Object> datas) {
-        assertEquals("https://api.easypost.com/v2/parcels", datas.get("path"));
-        assertEquals("POST", datas.get("method"));
-        assertTrue(datas.containsKey("headers"));
-        assertTrue(datas.containsKey("request_body"));
-        assertTrue(datas.containsKey("request_timestamp"));
-        assertTrue(datas.containsKey("request_uuid"));
+    public static Object testRequestHooks(RequestHookResponses datas) {
+        assertEquals("https://api.easypost.com/v2/parcels", datas.getPath());
+        assertEquals("POST", datas.getMethod());
+        assertNotNull(datas.getHeaders());
+        assertNotNull(datas.getRequestBody());
+        assertNotNull(datas.getRequestTimestamp());
+        assertNotNull(datas.getRequestUuid());
 
         return true;
     }
@@ -58,19 +73,19 @@ public class HookTest {
     /**
      * Test subscribing a response hook.
      *
-     * @param datas The input HashMap representing the hook data.
+     * @param datas The ResponseHookResponses object representing the hook data.
      * @return The result of the test.
      * @throws EasyPostException when the request fails.
      */
-    public static Object testResponseHooks(HashMap<String, Object> datas) {
-        assertEquals("https://api.easypost.com/v2/parcels", datas.get("path"));
-        assertEquals("POST", datas.get("method"));
-        assertEquals(201, datas.get("http_status"));
-        assertTrue(datas.containsKey("headers"));
-        assertTrue(datas.containsKey("response_body"));
-        assertTrue(datas.containsKey("response_timestamp"));
-        assertTrue(datas.containsKey("request_timestamp"));
-        assertTrue(datas.containsKey("request_uuid"));
+    public static Object testResponseHooks(ResponseHookResponses datas) {
+        assertEquals("https://api.easypost.com/v2/parcels", datas.getPath());
+        assertEquals("POST", datas.getMethod());
+        assertEquals(201, datas.getHttpStatus());
+        assertNotNull(datas.getHeaders());
+        assertNotNull(datas.getResponseBody());
+        assertNotNull(datas.getRequestTimestamp());
+        assertNotNull(datas.getRequestTimestamp());
+        assertNotNull(datas.getRequestUuid());
 
         return true;
     }
@@ -83,7 +98,7 @@ public class HookTest {
     @Test
     public void testCreateParcelWithRequestHook() throws EasyPostException {
         vcr.setUpTest("create");
-        Function<HashMap<String, Object>, Object> requestHook = HookTest::testRequestHooks;
+        Function<RequestHookResponses, Object> requestHook = HookTest::testRequestHooks;
         vcr.client.subscribeToRequestHook(requestHook);
         vcr.client.parcel.create(Fixtures.basicParcel());
     }
@@ -96,7 +111,7 @@ public class HookTest {
     @Test
     public void testCreateParcelWithResponseHook() throws EasyPostException {
         vcr.setUpTest("create");
-        Function<HashMap<String, Object>, Object> requestHook = HookTest::testResponseHooks;
+        Function<ResponseHookResponses, Object> requestHook = HookTest::testResponseHooks;
         vcr.client.subscribeToResponseHook(requestHook);
         vcr.client.parcel.create(Fixtures.basicParcel());
     }
@@ -110,13 +125,15 @@ public class HookTest {
     public void testUnsubscribeHooks() throws EasyPostException {
         vcr.setUpTest("create");
 
-        Function<HashMap<String, Object>, Object> failedHook = HookTest::failIfSubscribed;
+        Function<RequestHookResponses, Object> failedRequestHook = HookTest::failIfSubscribedToRequest;
 
-        vcr.client.subscribeToRequestHook(failedHook);
-        vcr.client.unsubscribeFromRequestHook(failedHook);
+        vcr.client.subscribeToRequestHook(failedRequestHook);
+        vcr.client.unsubscribeFromRequestHook(failedRequestHook);
     
-        vcr.client.subscribeToResponseHook(failedHook);
-        vcr.client.unsubscribeFromResponseHook(failedHook);
+        Function<ResponseHookResponses, Object> failedResponseHook = HookTest::failIfSubscribedToResponse;
+
+        vcr.client.subscribeToResponseHook(failedResponseHook);
+        vcr.client.unsubscribeFromResponseHook(failedResponseHook);
 
         vcr.client.parcel.create(Fixtures.basicParcel());
 

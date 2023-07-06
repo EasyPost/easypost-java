@@ -5,9 +5,10 @@ import lombok.Getter;
 import com.easypost.Constants;
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.hooks.ResponseHook;
+import com.easypost.hooks.ResponseHookResponses;
 import com.easypost.hooks.RequestHook;
+import com.easypost.hooks.RequestHookResponses;
 
-import java.util.HashMap;
 import java.util.function.Function;
 
 public class EasyPostClient {
@@ -160,7 +161,7 @@ public class EasyPostClient {
      * Subscribes to a request hook from the given function.
      * @param function
      */
-    public void subscribeToRequestHook(Function<HashMap<String, Object>, Object> function) {
+    public void subscribeToRequestHook(Function<RequestHookResponses, Object> function) {
         this.requestHooks.addEventHandler(function);
     }
 
@@ -168,7 +169,7 @@ public class EasyPostClient {
      * Unsubscribes to a request hook from the given function.
      * @param function
      */
-    public void unsubscribeFromRequestHook(Function<HashMap<String, Object>, Object> function) {
+    public void unsubscribeFromRequestHook(Function<RequestHookResponses, Object> function) {
         this.requestHooks.removeEventHandler(function);
     }
 
@@ -176,7 +177,7 @@ public class EasyPostClient {
      * Subscribes to a response hook from the given function.
      * @param function
      */
-    public void subscribeToResponseHook(Function<HashMap<String, Object>, Object> function) {
+    public void subscribeToResponseHook(Function<ResponseHookResponses, Object> function) {
         this.responseHooks.addEventHandler(function);
     }
 
@@ -184,7 +185,7 @@ public class EasyPostClient {
      * Unubscribes to a response hook from the given function.
      * @param function
      */
-    public void unsubscribeFromResponseHook(Function<HashMap<String, Object>, Object> function) {
+    public void unsubscribeFromResponseHook(Function<ResponseHookResponses, Object> function) {
         this.responseHooks.removeEventHandler(function);
     }
 
