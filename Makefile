@@ -62,6 +62,6 @@ test:
 ## update-examples-submodule - Update the examples submodule
 update-examples-submodule:
 	git submodule init
-	git submodule update
+	git submodule update --remote
 
 .PHONY: help build clean coverage docs install-styleguide install lint publish publish-dry release scan scan-strict test update-examples-submodule
