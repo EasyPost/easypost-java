@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next release
+
+- Adds new `RequestHook` and `ResponseHook` classes. (un)subscribe to them with the new `subscribeToRequestHook`, `subscribeToResponseHook`, `unsubscribeFromRequestHook`, or `unsubscribeFromResponseHook` methods of an `EasyPostClient`
+
 ## v6.7.0 (2023-06-06)
 
 - Retrieving carrier metadata is now generally available via `client.carrierMetadata.retrieve`

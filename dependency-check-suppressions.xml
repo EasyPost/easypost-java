@@ -8,5 +8,6 @@
         <vulnerabilityName>CVE-2022-3171</vulnerabilityName>
         <vulnerabilityName>CVE-2022-3509</vulnerabilityName>
         <vulnerabilityName>CVE-2022-3510</vulnerabilityName>
+        <vulnerabilityName>CVE-2023-2976</vulnerabilityName>
     </suppress>
 </suppressions>

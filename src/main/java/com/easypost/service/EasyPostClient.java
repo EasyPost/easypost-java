@@ -1,7 +1,15 @@
 package com.easypost.service;
 
+import lombok.Getter;
+
 import com.easypost.Constants;
 import com.easypost.exception.General.MissingParameterError;
+import com.easypost.hooks.ResponseHook;
+import com.easypost.hooks.ResponseHookResponses;
+import com.easypost.hooks.RequestHook;
+import com.easypost.hooks.RequestHookResponses;
+
+import java.util.function.Function;
 
 public class EasyPostClient {
     private final int connectTimeoutMilliseconds;
@@ -37,6 +45,10 @@ public class EasyPostClient {
     public final TrackerService tracker;
     public final UserService user;
     public final WebhookService webhook;
+    @Getter
+    private RequestHook requestHooks = new RequestHook();
+    @Getter
+    private ResponseHook responseHooks = new ResponseHook();
 
     /**
      * EasyPostClient constructor.
@@ -143,6 +155,38 @@ public class EasyPostClient {
         this.tracker = new TrackerService(this);
         this.user = new UserService(this);
         this.webhook = new WebhookService(this);
+    }
+
+    /**
+     * Subscribes to a request hook from the given function.
+     * @param function
+     */
+    public void subscribeToRequestHook(Function<RequestHookResponses, Object> function) {
+        this.requestHooks.addEventHandler(function);
+    }
+
+    /**
+     * Unsubscribes to a request hook from the given function.
+     * @param function
+     */
+    public void unsubscribeFromRequestHook(Function<RequestHookResponses, Object> function) {
+        this.requestHooks.removeEventHandler(function);
+    }
+
+    /**
+     * Subscribes to a response hook from the given function.
+     * @param function
+     */
+    public void subscribeToResponseHook(Function<ResponseHookResponses, Object> function) {
+        this.responseHooks.addEventHandler(function);
+    }
+
+    /**
+     * Unubscribes to a response hook from the given function.
+     * @param function
+     */
+    public void unsubscribeFromResponseHook(Function<ResponseHookResponses, Object> function) {
+        this.responseHooks.removeEventHandler(function);
     }
 
     /**

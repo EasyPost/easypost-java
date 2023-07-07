@@ -27,6 +27,8 @@ import com.easypost.exception.API.TimeoutError;
 import com.easypost.exception.API.UnauthorizedError;
 import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.General.MissingParameterError;
+import com.easypost.hooks.RequestHookResponses;
+import com.easypost.hooks.ResponseHookResponses;
 import com.easypost.model.EasyPostResource;
 import com.easypost.model.Error;
 import com.easypost.service.EasyPostClient;
@@ -47,10 +49,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.URLStreamHandler;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.UUID;
 
 public abstract class Requestor {
     public enum RequestMethod {
@@ -417,6 +421,7 @@ public abstract class Requestor {
      * @throws PaymentError            when the request requires payment.
      * @throws NotFoundError           when the request endpoint is not found.
      * @throws MethodNotAllowedError   when the request method is not allowed.
+     * @throws MissingParameterError   when the request client doesn't have API key.
      * @throws TimeoutError            when the request times out.
      * @throws InvalidRequestError     when the request is invalid.
      * @throws RateLimitError          when the request exceeds the rate limit.
@@ -429,7 +434,7 @@ public abstract class Requestor {
                                 final Class<T> clazz, final EasyPostClient client)
             throws GatewayTimeoutError, RateLimitError, InvalidRequestError, NotFoundError, TimeoutError, EncodingError,
             UnauthorizedError, MethodNotAllowedError, InternalServerError, UnknownApiError, ServiceUnavailableError,
-            ForbiddenError, JsonError, HttpError, RedirectError, PaymentError {
+            ForbiddenError, JsonError, HttpError, RedirectError, PaymentError, MissingParameterError {
         String apiVersion = client.getApiVersion();
         return request(method, endpoint, params, clazz, client, apiVersion);
     }
@@ -454,6 +459,7 @@ public abstract class Requestor {
      * @throws PaymentError            when the request requires payment.
      * @throws NotFoundError           when the request endpoint is not found.
      * @throws MethodNotAllowedError   when the request method is not allowed.
+     * @throws MissingParameterError   when the request client doesn't have API key.
      * @throws TimeoutError            when the request times out.
      * @throws InvalidRequestError     when the request is invalid.
      * @throws RateLimitError          when the request exceeds the rate limit.
@@ -466,7 +472,8 @@ public abstract class Requestor {
                                 final Class<T> clazz, final EasyPostClient client, final String apiVersion)
             throws EncodingError, JsonError, RedirectError, UnauthorizedError, ForbiddenError, PaymentError,
             NotFoundError, MethodNotAllowedError, TimeoutError, InvalidRequestError, RateLimitError,
-            InternalServerError, ServiceUnavailableError, GatewayTimeoutError, UnknownApiError, HttpError {
+            InternalServerError, ServiceUnavailableError, GatewayTimeoutError, UnknownApiError, HttpError,
+            MissingParameterError {
         String originalDNSCacheTTL = null;
         boolean allowedToSetTTL = true;
         String url = client.getApiBase() + "/" + apiVersion + "/" + endpoint;
@@ -511,6 +518,7 @@ public abstract class Requestor {
      * @throws PaymentError            when the request requires payment.
      * @throws NotFoundError           when the request endpoint is not found.
      * @throws MethodNotAllowedError   when the request method is not allowed.
+     * @throws MissingParameterError   when the request client doesn't have API key.
      * @throws TimeoutError            when the request times out.
      * @throws InvalidRequestError     when the request is invalid.
      * @throws RateLimitError          when the request exceeds the rate limit.
@@ -524,7 +532,8 @@ public abstract class Requestor {
                                        final Class<T> clazz, final EasyPostClient client)
             throws EncodingError, JsonError, RedirectError, UnauthorizedError, ForbiddenError, PaymentError,
             NotFoundError, MethodNotAllowedError, TimeoutError, InvalidRequestError, RateLimitError,
-            InternalServerError, ServiceUnavailableError, GatewayTimeoutError, UnknownApiError, HttpError {
+            InternalServerError, ServiceUnavailableError, GatewayTimeoutError, UnknownApiError, HttpError,
+            MissingParameterError {
         String query = null;
         JsonObject body = null;
         if (params != null) {
@@ -553,7 +562,16 @@ public abstract class Requestor {
                     break;
             }
         }
+        Instant requestTimestamp = Instant.now();
+        UUID requestUuid = UUID.randomUUID();
+        Map<String, String> headers = new HashMap<String, String>();
+        headers = generateHeaders(client.getApiKey());
 
+        RequestHookResponses requestResponse = new RequestHookResponses(headers, method.toString(), url, body,
+                        requestTimestamp.toString(), requestUuid.toString());
+
+        client.getRequestHooks().executeEventHandler(requestResponse);
+        
         EasyPostResponse response;
         try {
             // HTTPSURLConnection verifies SSL cert by default
@@ -572,6 +590,11 @@ public abstract class Requestor {
         if (rCode < HttpURLConnection.HTTP_OK || rCode >= HttpURLConnection.HTTP_MULT_CHOICE) {
             handleAPIError(rBody, rCode);
         }
+
+        ResponseHookResponses responseHookResponses = new ResponseHookResponses(rCode, headers, method.toString(), url,
+            rBody, Instant.now().toString(), requestTimestamp.toString(), requestUuid.toString());
+
+        client.getResponseHooks().executeEventHandler(responseHookResponses);
 
         return Constants.Http.GSON.fromJson(rBody, clazz);
     }
