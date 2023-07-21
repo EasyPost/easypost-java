@@ -42,6 +42,7 @@ public abstract class Constants {
     public abstract static class ErrorCodes {
         public static final int REDIRECT_CODE_BEGIN = 300;
         public static final int REDIRECT_CODE_END = 308;
+        public static final int BAD_REQUEST_ERROR = 400;
         public static final int UNAUTHORIZED_ERROR = 401;
         public static final int PAYMENT_ERROR = 402;
         public static final int FORBIDDEN_ERROR = 403;
