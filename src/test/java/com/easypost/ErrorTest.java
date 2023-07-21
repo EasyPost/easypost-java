@@ -1,5 +1,6 @@
 package com.easypost;
 
+import com.easypost.exception.API.BadRequestError;
 import com.easypost.exception.API.ForbiddenError;
 import com.easypost.exception.API.GatewayTimeoutError;
 import com.easypost.exception.API.InternalServerError;
@@ -74,6 +75,7 @@ public final class ErrorTest extends Requestor {
         apiErrorsMap.put(306, RedirectError.class);
         apiErrorsMap.put(307, RedirectError.class);
         apiErrorsMap.put(308, RedirectError.class);
+        apiErrorsMap.put(400, BadRequestError.class);
         apiErrorsMap.put(401, UnauthorizedError.class);
         apiErrorsMap.put(402, PaymentError.class);
         apiErrorsMap.put(403, ForbiddenError.class);
@@ -126,15 +128,15 @@ public final class ErrorTest extends Requestor {
     @Test
     public void testExceptionErrorArrayParsing() throws EasyPostException {
         String errorMessageArrayJson = "{\n" +
-        "    \"error\": {\n" +
-        "        \"code\": \"ERROR_CODE\",\n" +
-        "        \"message\": [\n" +
-        "            \"ERROR_MESSAGE_1\",\n" +
-        "            \"ERROR_MESSAGE_2\"\n" +
-        "        ],\n" +
-        "        \"errors\": []\n" +
-        "    }\n" +
-        "}";
+                "    \"error\": {\n" +
+                "        \"code\": \"ERROR_CODE\",\n" +
+                "        \"message\": [\n" +
+                "            \"ERROR_MESSAGE_1\",\n" +
+                "            \"ERROR_MESSAGE_2\"\n" +
+                "        ],\n" +
+                "        \"errors\": []\n" +
+                "    }\n" +
+                "}";
         EasyPostException exception = assertThrows(EasyPostException.class,
                 () -> handleAPIError(errorMessageArrayJson, 400));
 
