@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next release
+## v6.8.0 (2023-07-28)
 
 - Adds new `RequestHook` and `ResponseHook` classes. (un)subscribe to them with the new `subscribeToRequestHook`, `subscribeToResponseHook`, `unsubscribeFromRequestHook`, or `unsubscribeFromResponseHook` methods of an `EasyPostClient`
 - Maps 400 status codes to the new `BadRequestError` class
