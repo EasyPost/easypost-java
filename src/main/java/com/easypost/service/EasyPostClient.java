@@ -54,7 +54,7 @@ public class EasyPostClient {
      * EasyPostClient constructor.
      *
      * @param apiKey API key for API calls.
-     * @throws MissingParameterError
+     * @throws MissingParameterError When the request fails.
      */
     public EasyPostClient(String apiKey) throws MissingParameterError {
         this(apiKey, Constants.Http.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS);
@@ -65,7 +65,7 @@ public class EasyPostClient {
      *
      * @param apiKey  API key for API calls.
      * @param apiBase API base for API calls.
-     * @throws MissingParameterError
+     * @throws MissingParameterError When the request fails.
      */
     public EasyPostClient(String apiKey, String apiBase) throws MissingParameterError {
         this(apiKey, Constants.Http.DEFAULT_CONNECT_TIMEOUT_MILLISECONDS,
@@ -77,7 +77,7 @@ public class EasyPostClient {
      *
      * @param apiKey                     API key for API calls.
      * @param connectTimeoutMilliseconds Timeout for connection.
-     * @throws MissingParameterError
+     * @throws MissingParameterError     When the request fails.
      */
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds) throws MissingParameterError {
         this(apiKey, connectTimeoutMilliseconds, Constants.Http.API_BASE);
@@ -89,7 +89,7 @@ public class EasyPostClient {
      * @param apiKey                     API key for API calls.
      * @param connectTimeoutMilliseconds Timeout for connection.
      * @param apiBase                    API base for API calls.
-     * @throws MissingParameterError
+     * @throws MissingParameterError     When the request fails.
      */
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, String apiBase) throws MissingParameterError {
         this(apiKey, connectTimeoutMilliseconds, Constants.Http.DEFAULT_READ_TIMEOUT_MILLISECONDS, apiBase);
@@ -101,7 +101,7 @@ public class EasyPostClient {
      * @param apiKey                     API key for API calls.
      * @param connectTimeoutMilliseconds Timeout for connection.
      * @param readTimeoutMilliseconds    Timeout for read.
-     * @throws MissingParameterError
+     * @throws MissingParameterError     When the request fails.
      */
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, int readTimeoutMilliseconds)
             throws MissingParameterError {
@@ -115,7 +115,7 @@ public class EasyPostClient {
      * @param connectTimeoutMilliseconds Timeout for connection.
      * @param readTimeoutMilliseconds    Timeout for read.
      * @param apiBase                    API base for API calls.
-     * @throws MissingParameterError
+     * @throws MissingParameterError     When the request fails.
      */
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, int readTimeoutMilliseconds, String apiBase)
             throws MissingParameterError {
@@ -159,7 +159,7 @@ public class EasyPostClient {
 
     /**
      * Subscribes to a request hook from the given function.
-     * @param function
+     * @param function The function to be subscribed to the request hook
      */
     public void subscribeToRequestHook(Function<RequestHookResponses, Object> function) {
         this.requestHooks.addEventHandler(function);
@@ -167,7 +167,7 @@ public class EasyPostClient {
 
     /**
      * Unsubscribes to a request hook from the given function.
-     * @param function
+     * @param function The function to be unsubscribed from the request hook
      */
     public void unsubscribeFromRequestHook(Function<RequestHookResponses, Object> function) {
         this.requestHooks.removeEventHandler(function);
@@ -175,7 +175,7 @@ public class EasyPostClient {
 
     /**
      * Subscribes to a response hook from the given function.
-     * @param function
+     * @param function The function to be subscribed to the response hook
      */
     public void subscribeToResponseHook(Function<ResponseHookResponses, Object> function) {
         this.responseHooks.addEventHandler(function);
@@ -183,7 +183,7 @@ public class EasyPostClient {
 
     /**
      * Unubscribes to a response hook from the given function.
-     * @param function
+     * @param function The function to be unsubscribed from the response hook
      */
     public void unsubscribeFromResponseHook(Function<ResponseHookResponses, Object> function) {
         this.responseHooks.removeEventHandler(function);

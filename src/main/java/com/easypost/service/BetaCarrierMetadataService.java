@@ -24,7 +24,7 @@ public class BetaCarrierMetadataService {
      * Retrieves all carrier metadata.
      *
      * @return CarrierMetadata object
-     * @throws EasyPostException
+     * @throws EasyPostException When the request fails.
      * @deprecated Use carrierMetadata.retrieve instead
      */
     public CarrierMetadata retrieveCarrierMetadata() throws EasyPostException {
@@ -36,7 +36,7 @@ public class BetaCarrierMetadataService {
      *
      * @param carriers The list of carriers in string.
      * @return CarrierMetadata object
-     * @throws EasyPostException
+     * @throws EasyPostException When the request fails.
      * @deprecated Use carrierMetadata.retrieve instead
      */
     public CarrierMetadata retrieveCarrierMetadata(List<String> carriers) throws EasyPostException {
@@ -49,7 +49,7 @@ public class BetaCarrierMetadataService {
      * @param carriers The list of carriers in string.
      * @param types    The list of types in string.
      * @return CarrierMetadata object
-     * @throws EasyPostException
+     * @throws EasyPostException When the request fails.
      * @deprecated Use carrierMetadata.retrieve instead
      */
     public CarrierMetadata retrieveCarrierMetadata(List<String> carriers, List<String> types) throws EasyPostException {

@@ -83,7 +83,7 @@ public class ScanformService {
      */
     public ScanFormCollection getNextPage(ScanFormCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, ScanFormCollection>() {
-            @SneakyThrows
+            @Override @SneakyThrows
             public ScanFormCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }

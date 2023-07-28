@@ -97,8 +97,8 @@ Users can subscribe to HTTP requests and responses via the `RequestHook` and `Re
     EasyPostClient client = new EasyPostClient(System.getenv("EASYPOST_API_KEY"));
 
     // For request hook custom function, make sure you have RequestHookResponses in the parameter
-    public static Object requestHookFunction(RequestHookResponses datas) {
-        // Pass your code here, the information about the request/response is available within the datas parameter.
+    public static Object requestHookFunction(RequestHookResponses data) {
+        // Pass your code here, the information about the request/response is available within the data parameter.
         return true;
     }
 
@@ -106,13 +106,13 @@ Users can subscribe to HTTP requests and responses via the `RequestHook` and `Re
     client.unsubscribeToRequestHook(requestHookFunction); // unsubscribe from request hook
 
     // For response hook custom function, make sure you have ResponseHookResponses in the parameter
-    public static Object responseHookFunction(ResponseHookResponses datas) {
-        // Pass your code here, the information about the request/response is available within the datas parameter.
+    public static Object responseHookFunction(ResponseHookResponses data) {
+        // Pass your code here, the information about the request/response is available within the data parameter.
         return true;
     }
 
-    client.subscribeToRequestHook(responseHookFunction); // subscribe to response hook by passing your custom function
-    client.unsubscribeToRequestHook(responseHookFunction); // unsubscribe from response hook
+    client.subscribeToResponseHook(responseHookFunction); // subscribe to response hook by passing your custom function
+    client.unsubscribeToResponseHook(responseHookFunction); // unsubscribe from response hook
 ```
 
 ## Documentation

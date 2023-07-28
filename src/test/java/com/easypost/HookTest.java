@@ -29,11 +29,10 @@ public class HookTest {
     /**
      * Test failing a hook if we subscribed to a request hook.
      *
-     * @param datas The RequestHookResponses object representing the hook data.
+     * @param data The RequestHookResponses object representing the hook data.
      * @return The result of the test.
-     * @throws EasyPostException when the request fails.
      */
-    public static Object failIfSubscribedToRequest(RequestHookResponses datas) {
+    public static Object failIfSubscribedToRequest(RequestHookResponses data) {
         fail("Test failed");
 
         return false;
@@ -42,11 +41,10 @@ public class HookTest {
     /**
      * Test failing a hook if we subscribed to a response hook.
      *
-     * @param datas The ResponseHookResponses object representing the hook data.
+     * @param data The ResponseHookResponses object representing the hook data.
      * @return The result of the test.
-     * @throws EasyPostException when the request fails.
      */
-    public static Object failIfSubscribedToResponse(ResponseHookResponses datas) {
+    public static Object failIfSubscribedToResponse(ResponseHookResponses data) {
         fail("Test failed");
 
         return false;
@@ -55,17 +53,16 @@ public class HookTest {
     /**
      * Test subscribing a request hook.
      *
-     * @param datas The RequestHookResponses object representing the hook data.
+     * @param data The RequestHookResponses object representing the hook data.
      * @return The result of the test.
-     * @throws EasyPostException when the request fails.
      */
-    public static Object testRequestHooks(RequestHookResponses datas) {
-        assertEquals("https://api.easypost.com/v2/parcels", datas.getPath());
-        assertEquals("POST", datas.getMethod());
-        assertNotNull(datas.getHeaders());
-        assertNotNull(datas.getRequestBody());
-        assertNotNull(datas.getRequestTimestamp());
-        assertNotNull(datas.getRequestUuid());
+    public static Object testRequestHooks(RequestHookResponses data) {
+        assertEquals("https://api.easypost.com/v2/parcels", data.getPath());
+        assertEquals("POST", data.getMethod());
+        assertNotNull(data.getHeaders());
+        assertNotNull(data.getRequestBody());
+        assertNotNull(data.getRequestTimestamp());
+        assertNotNull(data.getRequestUuid());
 
         return true;
     }
@@ -73,19 +70,18 @@ public class HookTest {
     /**
      * Test subscribing a response hook.
      *
-     * @param datas The ResponseHookResponses object representing the hook data.
+     * @param data The ResponseHookResponses object representing the hook data.
      * @return The result of the test.
-     * @throws EasyPostException when the request fails.
      */
-    public static Object testResponseHooks(ResponseHookResponses datas) {
-        assertEquals("https://api.easypost.com/v2/parcels", datas.getPath());
-        assertEquals("POST", datas.getMethod());
-        assertEquals(201, datas.getHttpStatus());
-        assertNotNull(datas.getHeaders());
-        assertNotNull(datas.getResponseBody());
-        assertNotNull(datas.getRequestTimestamp());
-        assertNotNull(datas.getRequestTimestamp());
-        assertNotNull(datas.getRequestUuid());
+    public static Object testResponseHooks(ResponseHookResponses data) {
+        assertEquals("https://api.easypost.com/v2/parcels", data.getPath());
+        assertEquals("POST", data.getMethod());
+        assertEquals(201, data.getHttpStatus());
+        assertNotNull(data.getHeaders());
+        assertNotNull(data.getResponseBody());
+        assertNotNull(data.getRequestTimestamp());
+        assertNotNull(data.getRequestTimestamp());
+        assertNotNull(data.getRequestUuid());
 
         return true;
     }

@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -279,7 +280,8 @@ public abstract class Fixtures {
         byte[] data = null;
 
         try {
-            data = Files.readAllLines(Paths.get(fullFilePath), StandardCharsets.UTF_8).get(0).getBytes();
+            data = Files.readAllLines(Paths.get(fullFilePath), StandardCharsets.UTF_8)
+                .get(0).getBytes(Charset.defaultCharset());
         } catch (IOException error) {
             error.printStackTrace();
         }

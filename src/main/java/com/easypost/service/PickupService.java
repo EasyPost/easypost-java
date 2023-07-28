@@ -59,7 +59,7 @@ public class PickupService {
      */
     public PickupCollection getNextPage(PickupCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, PickupCollection>() {
-            @SneakyThrows
+            @Override @SneakyThrows
             public PickupCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }

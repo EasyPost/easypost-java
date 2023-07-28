@@ -119,7 +119,7 @@ public class ReportService {
      */
     public ReportCollection getNextPage(ReportCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, ReportCollection>() {
-            @SneakyThrows
+            @Override @SneakyThrows
             public ReportCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }

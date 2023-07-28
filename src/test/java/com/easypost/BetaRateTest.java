@@ -40,7 +40,7 @@ public class BetaRateTest {
 
         List<StatelessRate> rates = vcr.client.betaRate.retrieveStatelessRates(shipment);
 
-        assertTrue(rates.stream().allMatch(rate -> rate instanceof StatelessRate));
+        assertTrue(rates.stream().allMatch(rate -> rate != null));
     }
 
     /**

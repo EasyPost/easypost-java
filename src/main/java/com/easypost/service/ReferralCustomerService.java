@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -110,7 +111,7 @@ public class ReferralCustomerService {
     public ReferralCustomerCollection getNextPage(
             ReferralCustomerCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, ReferralCustomerCollection>() {
-            @SneakyThrows
+            @Override @SneakyThrows
             public ReferralCustomerCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }
@@ -220,8 +221,8 @@ public class ReferralCustomerService {
 
         StringBuilder response;
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
             String line;
             response = new StringBuilder();
 

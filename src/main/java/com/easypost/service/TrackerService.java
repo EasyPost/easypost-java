@@ -94,7 +94,7 @@ public class TrackerService {
      */
     public TrackerCollection getNextPage(TrackerCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, TrackerCollection>() {
-            @SneakyThrows
+            @Override @SneakyThrows
             public TrackerCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }

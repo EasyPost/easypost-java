@@ -91,6 +91,7 @@ public class APIException extends EasyPostException {
      *
      * @return message the message of the error object
      */
+    @Override
     public String getMessage() {
         return message;
     }

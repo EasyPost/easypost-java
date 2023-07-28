@@ -97,7 +97,7 @@ public class AddressService {
      */
     public AddressCollection getNextPage(AddressCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, AddressCollection>() {
-            @SneakyThrows
+            @Override @SneakyThrows
             public AddressCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }

@@ -27,7 +27,7 @@ public class BetaReferralCustomerService {
      * @param stripeCustomerId       ID of the Stripe account.
      * @param paymentMethodReference Reference of Stripe payment method.
      * @return PaymentMethodObject object.
-     * @throws EasyPostException
+     * @throws EasyPostException     When the request fails.
      */
     public PaymentMethodObject addPaymentMethod(String stripeCustomerId, String paymentMethodReference)
             throws EasyPostException {
@@ -41,7 +41,7 @@ public class BetaReferralCustomerService {
      * @param paymentMethodReference Reference of Stripe payment method.
      * @param primaryOrSecondary     Primary or secondary of this payment method.
      * @return PaymentMethodObject object.
-     * @throws EasyPostException
+     * @throws EasyPostException     When the request fails.
      */
     public PaymentMethodObject addPaymentMethod(String stripeCustomerId, String paymentMethodReference,
             PaymentMethod.Priority primaryOrSecondary) throws EasyPostException {
@@ -64,7 +64,7 @@ public class BetaReferralCustomerService {
      *
      * @param refundAmount Amount to be refunded by cents.
      * @return BetaPaymentRefund object.
-     * @throws EasyPostException
+     * @throws EasyPostException When the request fails.
      */
     public BetaPaymentRefund refundByAmount(int refundAmount) throws EasyPostException {
         HashMap<String, Object> params = new HashMap<>();
@@ -81,7 +81,7 @@ public class BetaReferralCustomerService {
      *
      * @param paymentLogId ID of the payment log.
      * @return BetaPaymentRefund object.
-     * @throws EasyPostException
+     * @throws EasyPostException When the request fails.
      */
     public BetaPaymentRefund refundByPaymentLog(String paymentLogId) throws EasyPostException {
         HashMap<String, Object> params = new HashMap<>();
