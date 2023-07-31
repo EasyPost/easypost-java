@@ -29,6 +29,7 @@ public class ResponseHook {
      */
     public void executeEventHandler(ResponseHookResponses datas) {
         for (Function<ResponseHookResponses, Object> eventHandler : eventHandlers) {
+            @SuppressWarnings("unused")
             Object result = eventHandler.apply(datas);
         }
     }

@@ -73,7 +73,7 @@ public class EventService {
      */
     public EventCollection getNextPage(EventCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, EventCollection>() {
-            @SneakyThrows
+            @Override @SneakyThrows
             public EventCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }

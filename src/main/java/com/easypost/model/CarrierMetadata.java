@@ -9,7 +9,7 @@ public class CarrierMetadata extends EasyPostResource {
     private List<Carrier> carriers;
     
     @Getter
-    public class Carrier {
+    public static class Carrier {
         private String name;
         private String humanReadable;
         private List<PredefinedPackage> predefinedPackages;
@@ -19,7 +19,7 @@ public class CarrierMetadata extends EasyPostResource {
     }
 
     @Getter
-    public class PredefinedPackage {
+    public static class PredefinedPackage {
         private String carrier;
         private String description;
         private List<String> dimensions;
@@ -29,7 +29,7 @@ public class CarrierMetadata extends EasyPostResource {
     }
 
     @Getter
-    public class ServiceLevels {
+    public static class ServiceLevels {
         private String carrier;
         private String description;
         private List<String> dimensions;
@@ -39,7 +39,7 @@ public class CarrierMetadata extends EasyPostResource {
     }
 
     @Getter
-    public class ShipmentOption {
+    public static class ShipmentOption {
         private String carrier;
         private boolean deprecated;
         private String description;
@@ -49,7 +49,7 @@ public class CarrierMetadata extends EasyPostResource {
     }
 
     @Getter
-    public class SupportedFeatures {
+    public static class SupportedFeatures {
         private String carrier;
         private String description;
         private String name;

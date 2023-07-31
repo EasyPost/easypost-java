@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
+@SuppressWarnings("JavaLangClash")
 public final class Error {
     private String message;
     private String code;

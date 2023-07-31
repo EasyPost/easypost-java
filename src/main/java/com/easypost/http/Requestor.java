@@ -50,6 +50,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.URLStreamHandler;
+import java.nio.charset.Charset;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
@@ -78,7 +79,7 @@ public abstract class Requestor {
      *
      * @param apiKey API of this HTTP request.
      * @return HTTP header
-     * @throws MissingParameterError
+     * @throws MissingParameterError When the request fails.
      */
     private static Map<String, String> generateHeaders(String apiKey) throws MissingParameterError {
         Map<String, String> headers = new HashMap<String, String>();
@@ -159,7 +160,7 @@ public abstract class Requestor {
      * @param conn EasyPost HttpsURLConnection
      * @param body Input body
      * @return HttpsURLConnection
-     * @throws IOException
+     * @throws IOException When the request fails.
      */
     private static javax.net.ssl.HttpsURLConnection writeBody(final javax.net.ssl.HttpsURLConnection conn,
             final JsonObject body) throws IOException {
@@ -276,7 +277,7 @@ public abstract class Requestor {
      *
      * @param params Map of parameter for the HTTP request body.
      * @return Query string of the Map object.
-     * @throws UnsupportedEncodingException
+     * @throws UnsupportedEncodingException When the request fails.
      */
     private static String createQuery(final Map<String, Object> params) throws UnsupportedEncodingException {
         Map<String, String> flatParams = flattenParams(params);
@@ -329,7 +330,7 @@ public abstract class Requestor {
      *
      * @param responseStream The InputStream from the response body.
      * @return InputStream in string value.
-     * @throws IOException
+     * @throws IOException When the request fails.
      */
     private static String getResponseBody(final InputStream responseStream) throws IOException {
         if (responseStream.available() == 0) {
@@ -583,8 +584,7 @@ public abstract class Requestor {
         }
         Instant requestTimestamp = Instant.now();
         UUID requestUuid = UUID.randomUUID();
-        Map<String, String> headers = new HashMap<String, String>();
-        headers = generateHeaders(client.getApiKey());
+        Map<String, String> headers = generateHeaders(client.getApiKey());
 
         RequestHookResponses requestResponse = new RequestHookResponses(headers, method.toString(), url, body,
                 requestTimestamp.toString(), requestUuid.toString());
@@ -744,7 +744,8 @@ public abstract class Requestor {
 
             if ((method == RequestMethod.POST || method == RequestMethod.PUT) && body != null) {
                 String bodyString = body.toString();
-                requestClass.getDeclaredMethod("setPayload", byte[].class).invoke(request, bodyString.getBytes());
+                requestClass.getDeclaredMethod("setPayload", byte[].class)
+                    .invoke(request, bodyString.getBytes(Charset.defaultCharset()));
             }
 
             for (Map.Entry<String, String> header : generateHeaders(client.getApiKey()).entrySet()) {

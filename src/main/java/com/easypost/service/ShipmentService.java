@@ -90,6 +90,7 @@ public class ShipmentService {
         ShipmentCollection shipmentCollection = Requestor.request(RequestMethod.GET, endpoint, params,
                 ShipmentCollection.class, client);
         // we store the params in the collection so that we can use them to get the next page
+
         shipmentCollection.setPurchased(InternalUtilities.getOrDefault(params, "purchased", null));
         shipmentCollection.setIncludeChildren(InternalUtilities.getOrDefault(params, "include_children", null));
 
@@ -117,7 +118,7 @@ public class ShipmentService {
      */
     public ShipmentCollection getNextPage(ShipmentCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, ShipmentCollection>() {
-            @SneakyThrows
+            @Override @SneakyThrows
             public ShipmentCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }
@@ -397,8 +398,7 @@ public class ShipmentService {
      *                         filtering.
      * @return lowest SmartRate object
      * @throws EasyPostException when the request fails.
-     * @deprecated use {@link #lowestSmartRate(String, int, SmartrateAccuracy)}
-     * instead.
+     * @deprecated use {@link #lowestSmartRate(String, int, SmartrateAccuracy)} instead.
      * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
@@ -449,8 +449,7 @@ public class ShipmentService {
      *                         filtering.
      * @return lowest SmartRate object
      * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)}
-     * instead.
+     * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)} instead.
      * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
@@ -532,7 +531,7 @@ public class ShipmentService {
      * @param id              The id of the shipment.
      * @param plannedShipDate The planned shipment date.
      * @return EstimatedDeliveryDate object.
-     * @throws EasyPostException
+     * @throws EasyPostException When the request fails.
      */
     public List<EstimatedDeliveryDate> retrieveEstimatedDeliveryDate(final String id, final String plannedShipDate)
             throws EasyPostException {

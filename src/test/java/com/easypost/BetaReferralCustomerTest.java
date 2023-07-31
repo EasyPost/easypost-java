@@ -24,7 +24,7 @@ public class BetaReferralCustomerTest {
     /**
      * Test add Stripe payment method for referral customer.
      *
-     * @throws EasyPostException
+     * @throws EasyPostException When the request fails.
      */
     @Test
     public void testAddPaymentMethod() throws EasyPostException {

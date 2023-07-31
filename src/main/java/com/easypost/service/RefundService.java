@@ -91,7 +91,7 @@ public class RefundService {
      */
     public RefundCollection getNextPage(RefundCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, RefundCollection>() {
-            @SneakyThrows
+            @Override @SneakyThrows
             public RefundCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }
