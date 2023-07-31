@@ -531,7 +531,7 @@ public class ShipmentService {
      * @param id              The id of the shipment.
      * @param plannedShipDate The planned shipment date.
      * @return EstimatedDeliveryDate object.
-     * @throws EasyPostException When the request fails;
+     * @throws EasyPostException When the request fails.
      */
     public List<EstimatedDeliveryDate> retrieveEstimatedDeliveryDate(final String id, final String plannedShipDate)
             throws EasyPostException {
