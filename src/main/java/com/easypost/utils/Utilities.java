@@ -148,7 +148,7 @@ public abstract class Utilities {
      * @return lowest Smartrate object
      * @throws EasyPostException when the request fails.
      * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)} instead.
-     * @InlineMe Deprecated: v5.5.0 - v7.0.0
+     * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
     public static SmartRate getLowestSmartRate(final List<SmartRate> smartrates, int deliveryDay,
