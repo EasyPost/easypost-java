@@ -58,7 +58,7 @@ public abstract class Constants {
 
     public abstract static class CarrierAccountTypes {
         public static final List<String> CARRIER_TYPES_WITH_CUSTOM_WORKFLOW = ImmutableList.of("FedexAccount",
-                "UpsAccount");
+                "UpsAccount", "FedexSmartpostAccount");
     }
 
     public abstract static class Http {
