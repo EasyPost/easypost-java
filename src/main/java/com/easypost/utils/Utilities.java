@@ -9,6 +9,7 @@ import com.easypost.model.Rate;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import com.easypost.model.StatelessRate;
+import com.google.errorprone.annotations.InlineMe;
 
 import java.util.List;
 import java.util.Map;
@@ -151,6 +152,9 @@ public abstract class Utilities {
      * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
+    @InlineMe(replacement =
+        "Utilities.findLowestSmartrate(smartrates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy))",
+        imports = {"com.easypost.model.SmartrateAccuracy", "com.easypost.utils.Utilities"})
     public static SmartRate getLowestSmartRate(final List<SmartRate> smartrates, int deliveryDay,
             String deliveryAccuracy) throws EasyPostException {
         return findLowestSmartrate(smartrates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
