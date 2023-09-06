@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import com.google.errorprone.annotations.InlineMe;
 
 public class ShipmentService {
     private final EasyPostClient client;
@@ -191,7 +192,9 @@ public class ShipmentService {
      * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public List<SmartRate> getSmartrates(final String id, final Map<String, Object> params) throws EasyPostException {
+    @InlineMe(replacement = "this.smartrates(id, params)")
+    public final List<SmartRate> getSmartrates(final String id, final Map<String, Object> params)
+        throws EasyPostException {
         return this.smartrates(id, params);
     }
 
@@ -402,7 +405,11 @@ public class ShipmentService {
      * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public SmartRate lowestSmartRate(final String id, int deliveryDay, String deliveryAccuracy)
+    @InlineMe(
+        replacement = "this.lowestSmartRate(id, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy))",
+        imports = "com.easypost.model.SmartrateAccuracy"
+    )
+    public final SmartRate lowestSmartRate(final String id, int deliveryDay, String deliveryAccuracy)
             throws EasyPostException {
         return this.lowestSmartRate(id, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
     }
@@ -436,8 +443,9 @@ public class ShipmentService {
      * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public List<SmartRate> getSmartrates(final String id) throws EasyPostException {
-        return this.getSmartrates(id, null);
+    @InlineMe(replacement = "this.smartrates(id, null)")
+    public final List<SmartRate> getSmartrates(final String id) throws EasyPostException {
+        return this.smartrates(id, null);
     }
 
     /**
@@ -453,8 +461,12 @@ public class ShipmentService {
      * Deprecated: v5.5.0 - v7.0.0
      */
     @Deprecated
-    public SmartRate getLowestSmartRate(final List<SmartRate> smartRates, int deliveryDay, String deliveryAccuracy)
-            throws EasyPostException {
+    @InlineMe(replacement =
+        "this.findLowestSmartrate(smartRates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy))",
+        imports = "com.easypost.model.SmartrateAccuracy"
+    )
+    public final SmartRate getLowestSmartRate(final List<SmartRate> smartRates,
+            int deliveryDay, String deliveryAccuracy) throws EasyPostException {
         return findLowestSmartrate(smartRates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
     }
 
