@@ -100,6 +100,7 @@ public class UserService {
     /**
      * Get this User's API keys.
      *
+     * @deprecated Use {@link ApiKeyService#retrieveApiKeysForUser(String)} instead.
      * @param id The ID of the user.
      * @return List of ApiKey objects.
      * @throws EasyPostException when the request fails.
