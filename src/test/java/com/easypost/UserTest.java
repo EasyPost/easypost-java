@@ -1,9 +1,6 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
-import com.easypost.exception.General.FilteringError;
-import com.easypost.model.ApiKey;
-import com.easypost.model.ApiKeys;
 import com.easypost.model.Brand;
 import com.easypost.model.User;
 import org.junit.jupiter.api.AfterEach;
@@ -11,14 +8,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class UserTest {
@@ -159,42 +153,6 @@ public final class UserTest {
         User user = createUser();
 
         assertDoesNotThrow(() -> vcr.client.user.delete(user.getId()));
-    }
-
-    /**
-     * Test retrieving all API keys.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testAllApiKeys() throws EasyPostException {
-        vcr.setUpTest("all_api_keys");
-
-        ApiKeys apikeys = vcr.client.apiKey.all();
-
-        assertInstanceOf(ApiKeys.class, apikeys);
-
-        List<ApiKey> apiKeys = vcr.client.user.apiKeys(apikeys.getId());
-
-        assertNotNull(apiKeys);
-    }
-
-    /**
-     * Test retrieving all API keys for a user.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testApiKeys() throws EasyPostException {
-        vcr.setUpTest("api_keys");
-
-        User user = createUser();
-
-        List<ApiKey> apiKeys = vcr.client.user.apiKeys(user.getId());
-
-        assertNotNull(apiKeys);
-
-        assertThrows(FilteringError.class, () -> vcr.client.user.apiKeys("invlaid_id"));
     }
 
     /**
