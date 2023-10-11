@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v6.9.0 (2023-10-11)
+
+- Deprecates `user.apiKeys` which will be removed in a future release, please use the new `apiKey.all` and `apiKey.retrieveApiKeysForUser` functions instead instead
+- Fixes various build warnings
+
 ## v6.8.1 (2023-09-05)
 
 - Fix endpoint for creating a FedEx Smartpost carrier account
