@@ -1,6 +1,8 @@
 package com.easypost;
 
 import com.easypost.http.HashMapSerializer;
+import com.easypost.model.AddressVerification;
+import com.easypost.model.AddressVerificationDeserializer;
 import com.easypost.model.Error;
 import com.easypost.model.ErrorDeserializer;
 import com.easypost.model.SmartrateCollection;
@@ -72,6 +74,7 @@ public abstract class Constants {
                 .registerTypeAdapter(HashMap.class, new HashMapSerializer())
                 .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer())
                 .registerTypeAdapter(Error.class, new ErrorDeserializer())
+                .registerTypeAdapter(AddressVerification.class, new AddressVerificationDeserializer())
                 .registerTypeAdapter(StatelessRate[].class, new StatelessRateDeserializer()).create();
         public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();

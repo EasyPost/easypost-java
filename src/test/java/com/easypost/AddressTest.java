@@ -79,6 +79,10 @@ public final class AddressTest {
         assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
         assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
+
+        assertNotNull(address.getVerifications());
+        assertNotNull(address.getVerifications().getZip4().getErrors()); // Should have a error due to second line
+        assertNotNull(address.getVerifications().getDelivery().getErrors());
     }
 
     /**
@@ -222,7 +226,7 @@ public final class AddressTest {
 
         Address verifiedAddress = vcr.client.address.verify(address.getId());
 
-        assertInstanceOf(Address.class, address);
+        assertInstanceOf(Address.class, verifiedAddress);
         assertTrue(verifiedAddress.getId().startsWith("adr_"));
         assertEquals("388 TOWNSEND ST APT 20", verifiedAddress.getStreet1());
     }
