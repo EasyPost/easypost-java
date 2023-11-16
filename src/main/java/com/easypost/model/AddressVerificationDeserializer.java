@@ -1,6 +1,5 @@
 package com.easypost.model;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -35,7 +34,6 @@ public final class AddressVerificationDeserializer implements JsonDeserializer<A
         addressVerification.setDetails(details);
 
         JsonElement errorsAsJson = jo.get("errors");
-        Gson gson = new Gson();
 
         if (errorsAsJson != null) {
             JsonArray errorsAsArray = errorsAsJson.getAsJsonArray();
