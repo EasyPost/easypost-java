@@ -5,6 +5,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
+import com.easypost.model.Error;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -79,6 +81,16 @@ public final class AddressTest {
         assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
         assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
+
+        assertNotNull(address.getVerifications());
+
+        assertFalse(address.getVerifications().getDelivery().getErrors().isEmpty()); // should have at least one error
+        Error error = address.getVerifications().getDelivery().getErrors().get(0);
+        assertEquals("E.SECONDARY_INFORMATION.INVALID", error.getCode());
+
+        assertFalse(address.getVerifications().getZip4().getErrors().isEmpty()); // should have at least one error
+        error = address.getVerifications().getZip4().getErrors().get(0);
+        assertEquals("E.SECONDARY_INFORMATION.INVALID", error.getCode());
     }
 
     /**
@@ -222,7 +234,7 @@ public final class AddressTest {
 
         Address verifiedAddress = vcr.client.address.verify(address.getId());
 
-        assertInstanceOf(Address.class, address);
+        assertInstanceOf(Address.class, verifiedAddress);
         assertTrue(verifiedAddress.getId().startsWith("adr_"));
         assertEquals("388 TOWNSEND ST APT 20", verifiedAddress.getStreet1());
     }

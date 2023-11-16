@@ -29,4 +29,31 @@ public final class Error {
     void setCode(final String code) {
         this.code = code;
     }
+
+    /**
+     * Set the errors of this error object.
+     *
+     * @param errors The errors.
+     */
+    void setErrors(final List<Error> errors) {
+        this.errors = errors;
+    }
+
+    /**
+     * Set the suggestion of this error object.
+     *
+     * @param suggestion The suggestion.
+     */
+    void setSuggestion(final String suggestion) {
+        this.suggestion = suggestion;
+    }
+
+    /**
+     * Set the field of this error object.
+     *
+     * @param field The field.
+     */
+    void setField(final String field) {
+        this.field = field;
+    }
 }
