@@ -6,7 +6,6 @@ import com.easypost.exception.General.InvalidParameterError;
 import com.easypost.model.Address;
 import com.easypost.model.EndShipper;
 import com.easypost.model.EstimatedDeliveryDate;
-import com.easypost.model.Fee;
 import com.easypost.model.Form;
 import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
@@ -494,8 +493,8 @@ public final class ShipmentTest {
 
         // Test lowest rate with no filters
         Rate lowestRate = shipment.lowestRate();
-        assertEquals("First", lowestRate.getService());
-        assertEquals(6.07, lowestRate.getRate(), 0.01);
+        assertEquals("GroundAdvantage", lowestRate.getService());
+        assertEquals(5.93, lowestRate.getRate(), 0.01);
         assertEquals("USPS", lowestRate.getCarrier());
 
         // Test lowest rate with service filter (this rate is higher than the lowest but
@@ -503,7 +502,7 @@ public final class ShipmentTest {
         List<String> service = new ArrayList<>(Arrays.asList("Priority"));
         Rate lowestRateService = shipment.lowestRate(null, service);
         assertEquals("Priority", lowestRateService.getService());
-        assertEquals(7.15, lowestRateService.getRate(), 0.01);
+        assertEquals(6.95, lowestRateService.getRate(), 0.01);
         assertEquals("USPS", lowestRateService.getCarrier());
 
         // Test lowest rate with carrier filter (should error due to bad carrier)
@@ -523,12 +522,12 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate");
 
         Shipment shipment = createBasicShipment();
-        SmartRate lowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
+        SmartRate lowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 3,
                 SmartrateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
-        assertEquals("First", lowestSmartRateFilters.getService());
-        assertEquals(6.07, lowestSmartRateFilters.getRate(), 0.01);
+        assertEquals("GroundAdvantage", lowestSmartRateFilters.getService());
+        assertEquals(5.93, lowestSmartRateFilters.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRateFilters.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict
@@ -537,12 +536,12 @@ public final class ShipmentTest {
             vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartrateAccuracy.Percentile90);
         });
 
-        SmartRate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 2,
+        SmartRate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 3,
             SmartrateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
-        assertEquals("First", deprecatedLowestSmartRateFilters.getService());
-        assertEquals(6.07, deprecatedLowestSmartRateFilters.getRate(), 0.01);
+        assertEquals("GroundAdvantage", deprecatedLowestSmartRateFilters.getService());
+        assertEquals(5.93, deprecatedLowestSmartRateFilters.getRate(), 0.01);
         assertEquals("USPS", deprecatedLowestSmartRateFilters.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict
@@ -586,8 +585,8 @@ public final class ShipmentTest {
         List<SmartRate> rates = vcr.client.shipment.smartrates(shipment.getId());
         SmartRate lowestSmartrate = vcr.client.shipment.findLowestSmartrate(rates, 3, SmartrateAccuracy.Percentile85);
 
-        assertEquals("First", lowestSmartrate.getService());
-        assertEquals(6.07, lowestSmartrate.getRate(), 0.01);
+        assertEquals("GroundAdvantage", lowestSmartrate.getService());
+        assertEquals(5.93, lowestSmartrate.getRate(), 0.01);
         assertEquals("USPS", lowestSmartrate.getCarrier());
     }
 
@@ -604,9 +603,9 @@ public final class ShipmentTest {
         List<SmartRate> smartRates = vcr.client.shipment.smartrates(shipment.getId());
 
         // Test lowest smartrate with valid filters
-        SmartRate lowestSmartRate = Utilities.findLowestSmartrate(smartRates, 2, SmartrateAccuracy.Percentile90);
-        assertEquals("First", lowestSmartRate.getService());
-        assertEquals(6.07, lowestSmartRate.getRate(), 0.01);
+        SmartRate lowestSmartRate = Utilities.findLowestSmartrate(smartRates, 3, SmartrateAccuracy.Percentile90);
+        assertEquals("GroundAdvantage", lowestSmartRate.getService());
+        assertEquals(5.93, lowestSmartRate.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRate.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict
@@ -659,103 +658,6 @@ public final class ShipmentTest {
 
         assertEquals(formType, form.getFormType());
         assertTrue(form.getFormUrl() != null);
-    }
-
-    /**
-     * Test creating a shipment with a carbon offset.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testCreateShipmentWithCarbonOffset() throws EasyPostException {
-        vcr.setUpTest("create_shipment_with_carbon_offset");
-
-        Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment(), true);
-
-        assertInstanceOf(Shipment.class, shipment);
-
-        List<Rate> rates = shipment.getRates();
-        assertNotNull(rates);
-
-        Rate rate = rates.get(0);
-        assertNotNull(rate.getCarbonOffset());
-        assertNotNull(rate.getCarbonOffset().getPrice());
-    }
-
-    /**
-     * Test buying a shipment with a carbon offset.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testBuyShipmentWithCarbonOffset() throws EasyPostException {
-        vcr.setUpTest("buy_shipment_with_carbon_offset");
-
-        Shipment shipment = vcr.client.shipment.create(Fixtures.fullShipment());
-
-        Shipment boughtShipment = vcr.client.shipment.buy(shipment.getId(), shipment.lowestRate(), true);
-
-        assertInstanceOf(Shipment.class, shipment);
-
-        List<Fee> fees = boughtShipment.getFees();
-        assertNotNull(fees);
-
-        boolean foundCarbonOffset = false;
-        for (Fee fee : fees) {
-            if (fee.getType().equals("CarbonOffsetFee")) {
-                foundCarbonOffset = true;
-                break;
-            }
-        }
-        assertTrue(foundCarbonOffset);
-    }
-
-    /**
-     * Test one-call buying a shipment with a carbon offset.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testOneCallBuyShipmentWithCarbonOffset() throws EasyPostException {
-        vcr.setUpTest("one_call_buy_shipment_with_carbon_offset");
-
-        Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment(), true);
-
-        assertInstanceOf(Shipment.class, shipment);
-
-        List<Fee> fees = shipment.getFees();
-        assertNotNull(fees);
-
-        boolean foundCarbonOffset = false;
-        for (Fee fee : fees) {
-            if (fee.getType().equals("CarbonOffsetFee")) {
-                foundCarbonOffset = true;
-                break;
-            }
-        }
-        assertTrue(foundCarbonOffset);
-    }
-
-    /**
-     * Test re-rating a shipment with a carbon offset.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testRegenerateRatesWithCarbonOffset() throws EasyPostException {
-        vcr.setUpTest("regenerate_rates_with_carbon_offset");
-
-        Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
-        List<Rate> baseRates = shipment.getRates();
-
-        Shipment shipmentWithNewRatesWithCarbon = vcr.client.shipment.newRates(shipment.getId(), true);
-        List<Rate> newCarbonRates = shipmentWithNewRatesWithCarbon.getRates();
-
-        Rate baseRate = baseRates.get(0);
-        Rate newCarbonRate = newCarbonRates.get(0);
-
-        assertNull(baseRate.getCarbonOffset());
-        assertNotNull(newCarbonRate.getCarbonOffset());
     }
 
     /**

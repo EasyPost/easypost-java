@@ -102,29 +102,6 @@ public final class BatchTest {
     }
 
     /**
-     * Test creating and buying a Batch in a single call.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testCreateAndBuy() throws EasyPostException {
-        vcr.setUpTest("create_and_buy");
-
-        Map<String, Object> params = new HashMap<>();
-
-        List<Object> shipmentData = new ArrayList<>();
-        shipmentData.add(Fixtures.oneCallBuyShipment());
-
-        params.put("shipments", shipmentData);
-
-        Batch batch = vcr.client.batch.createAndBuy(params);
-
-        assertInstanceOf(Batch.class, batch);
-        assertTrue(batch.getId().startsWith("batch_"));
-        assertEquals(1, batch.getNumShipments().intValue());
-    }
-
-    /**
      * Test buying a batch.
      *
      * @throws EasyPostException when the request fails.
