@@ -78,22 +78,6 @@ public class BatchService {
     // TODO: Add getNextPage function when Batches are sorted newest to oldest.
 
     /**
-     * Create and buy a Batch object in one step.
-     *
-     * @param params Map of parameters.
-     * @return Batch object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Batch createAndBuy(final Map<String, Object> params) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("batch", params);
-
-        String endpoint = "batches";
-
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, Batch.class, client);
-    }
-
-    /**
      * Label this Batch object.
      *
      * @param id     The ID of batch.
