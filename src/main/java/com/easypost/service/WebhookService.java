@@ -4,10 +4,11 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.Webhook;
-import com.easypost.model.WebhookCollection;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 public class WebhookService {
     private final EasyPostClient client;
@@ -53,10 +54,10 @@ public class WebhookService {
     /**
      * Get a list of all Webhook objects.
      *
-     * @return WebhookCollection object
+     * @return List of Webhook objects.
      * @throws EasyPostException when the request fails.
      */
-    public WebhookCollection all() throws EasyPostException {
+    public List<Webhook> all() throws EasyPostException {
         return all(null);
     }
 
@@ -64,13 +65,14 @@ public class WebhookService {
      * Get a list of all Webhook objects.
      *
      * @param params params for request
-     * @return WebhookCollection object
+     * @return List of Webhook objects.
      * @throws EasyPostException when the request fails.
      */
-    public WebhookCollection all(final Map<String, Object> params) throws EasyPostException {
+    public List<Webhook> all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "webhooks";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, WebhookCollection.class, client);
+        Webhook[] response = Requestor.request(RequestMethod.GET, endpoint, params, Webhook[].class, client);
+        return Arrays.asList(response); 
     }
 
     /**

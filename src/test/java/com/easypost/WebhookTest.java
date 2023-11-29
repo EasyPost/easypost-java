@@ -3,7 +3,6 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Event;
 import com.easypost.model.Webhook;
-import com.easypost.model.WebhookCollection;
 import com.easypost.utils.Utilities;
 import com.google.common.collect.ImmutableMap;
 import org.junit.jupiter.api.AfterEach;
@@ -108,12 +107,15 @@ public final class WebhookTest {
     @Test
     public void testAll() throws EasyPostException {
         vcr.setUpTest("all");
+        Map<String, Object> params = new HashMap<>();
+        params.put("url", Fixtures.webhookUrl());
 
-        WebhookCollection webhooks = vcr.client.webhook.all();
+        vcr.client.webhook.create(params);
 
-        List<Webhook> webhooksList = webhooks.getWebhooks();
+        List<Webhook> webhooks = vcr.client.webhook.all();
 
-        assertTrue(webhooksList.stream().allMatch(webhook -> webhook != null));
+        assertTrue(webhooks.size() > 0);
+        assertTrue(webhooks.stream().allMatch(webhook -> webhook != null));
     }
 
     /**
