@@ -9,6 +9,8 @@ import com.easypost.model.SmartrateCollection;
 import com.easypost.model.SmartrateCollectionDeserializer;
 import com.easypost.model.StatelessRate;
 import com.easypost.model.StatelessRateDeserializer;
+import com.easypost.model.Webhook;
+import com.easypost.model.WebhookDeserializer;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -75,7 +77,8 @@ public abstract class Constants {
                 .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer())
                 .registerTypeAdapter(Error.class, new ErrorDeserializer())
                 .registerTypeAdapter(AddressVerification.class, new AddressVerificationDeserializer())
-                .registerTypeAdapter(StatelessRate[].class, new StatelessRateDeserializer()).create();
+                .registerTypeAdapter(StatelessRate[].class, new StatelessRateDeserializer())
+                .registerTypeAdapter(Webhook[].class, new WebhookDeserializer()).create();
         public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
     }

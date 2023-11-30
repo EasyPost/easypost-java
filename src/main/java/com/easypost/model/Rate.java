@@ -19,5 +19,4 @@ public class Rate extends EasyPostResource {
     private String shipmentId;
     private String carrierAccountId;
     private String billingType;
-    private CarbonOffset carbonOffset;
 }
