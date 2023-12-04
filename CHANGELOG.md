@@ -5,6 +5,7 @@
 - Removes `withCarbonOffset` parameter from `create`, `buy`, and `regenerateRates` functions of the Shipment service as EasyPost now offers Carbon Neutral shipments by default for free
 - Removes the undocumented `createAndBuy` function from the Batch service. The proper usage is to create a batch first and buy it separately
 - Changes return type of `all()` in webhook service from `WebhookCollection` to `a list of webhooks`
+- `BetaCarrierMetadata` service has been removed. Please use `CarrierMetadata` instead.
 
 ## v6.9.1 (2023-11-16)
 
