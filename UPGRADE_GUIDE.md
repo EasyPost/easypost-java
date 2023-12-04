@@ -2,10 +2,36 @@
 
 Use the following guide to assist in the upgrade process of the `easypost-java` library between major versions.
 
+- [Upgrading from 6.x to 7.x](#upgrading-from-6x-to-70)
 - [Upgrading from 5.x to 6.0](#upgrading-from-5x-to-60)
 - [Upgrading from 4.x to 5.0](#upgrading-from-4x-to-50)
 
+## Upgrading from 6.x to 7.0
+
+### 7.0 High Impact Changes
+
+- [Carbon Offset Removed](#70-carbon-offset-removed)
+
+### 7.0 Low Impact Changes
+
+- [createAndBuy() Batch Function Removed](#70-createandbuy-batch-function-removed)
+- [Change return type of all() function in webhook service](#70-change-return-type-of-all-function-in-webhook-service)
+
+### 7.0 Carbon Offset Removed
+
+EasyPost now offers Carbon Neutral shipments by default for free! Because of this, there is no longer a need to specify if you want to offset the carbon footprint of a shipment. The `withCarbonOffset` parameter of the `create`, `buy`, and `regenerateRates` shipment functions have been removed as a result, as well as the overload functions that have `withCarbonOffset` parameter. This is a high-impact change for those using `EndShippers` as the function interfaces have changed. You will need to inspect the callsites to create and buy shipments to ensure that the EndShipper parameter is being passed in the correct place now that the `withCarbonOffset` parameter has been removed.
+
+### 7.0 createAndBuy Batch Function Removed
+
+The `createAndBuy` Batch endpoint has been deprecated and removed from the library. The correct procedure is to first create a batch and then purchase it with two separate API calls.
+
+### 7.0 Change return type of all function in webhook service
+
+The return type of `all` function in webhook service has been changed from `WebhookCollection` to `a list of webhooks`, the reason of this change is this endpoint returns a unpaginated list of webhooks. Therefore, there is no need to have `WebhookCollection` class which wraps the list of webhooks.
+
 ## Upgrading from 5.x to 6.0
+
+**NOTICE:** v6 is deprecated.
 
 ### 6.0 High Impact Changes
 
