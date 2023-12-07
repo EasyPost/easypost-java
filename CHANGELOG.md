@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next release
+## v7.0.1 (2023-12-08)
 
 - Adds the `object` field to all models; previously, most models were missing this field.
 
