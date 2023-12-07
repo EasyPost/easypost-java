@@ -59,6 +59,7 @@ public final class AddressTest {
 
         assertInstanceOf(Address.class, address);
         assertTrue(address.getId().startsWith("adr_"));
+        assertEquals("Address", address.getObject());
         assertEquals("388 Townsend St", address.getStreet1());
     }
 

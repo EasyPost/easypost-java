@@ -19,6 +19,7 @@ import lombok.Getter;
 public abstract class EasyPostResource {
     private String id;
     private String mode;
+    private String object;
     private Date createdAt;
     private Date updatedAt;
 

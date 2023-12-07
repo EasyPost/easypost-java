@@ -46,8 +46,6 @@ public class PaymentMethodObject extends EasyPostResource {
     private String last4;
     // credit_card
     private String name;
-    // both
-    private String object;
     // bank_account
     private boolean verified;
 

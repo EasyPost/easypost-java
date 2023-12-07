@@ -10,7 +10,6 @@ public class PaymentMethod extends EasyPostResource {
         SECONDARY
     }
 
-    private String object;
     private PaymentMethodObject primaryPaymentMethod;
     private PaymentMethodObject secondaryPaymentMethod;
 }
