@@ -12,7 +12,6 @@ public class BaseUser extends EasyPostResource {
     private String rechargeAmount;
     private String secondaryRechargeAmount;
     private String rechargeThreshold;
-    private String object;
     private String parentId;
     private boolean verified;
     private String pricePerShipment;

@@ -5,7 +5,6 @@ import lombok.Getter;
 
 @Getter
 public final class CarrierAccount extends EasyPostResource {
-    private String object;
     private String type;
     private Fields fields;
     private boolean clone;

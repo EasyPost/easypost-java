@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next release
+
+- Adds the `object` field to all models; previously, most models were missing this field.
+
 ## v7.0.0 (2023-12-06)
 
 - Removes `withCarbonOffset` parameter from `create`, `buy`, and `regenerateRates` functions of the Shipment service as EasyPost now offers Carbon Neutral shipments by default for free

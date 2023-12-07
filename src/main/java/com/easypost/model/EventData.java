@@ -6,5 +6,4 @@ import lombok.Getter;
 @Getter
 public final class EventData extends EasyPostResource {
     private Map<String, Object> previousAttributes;
-    private EasyPostResource object;
 }
