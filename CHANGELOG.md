@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Next release
+
+- Adds `allChildren` function in User service to get a paginated list of children
+- Adds `getNextPage` function in User service to get next paginated list of children
+
 ## v7.0.1 (2023-12-08)
 
 - Adds the `object` field to all models; previously, most models were missing this field.
