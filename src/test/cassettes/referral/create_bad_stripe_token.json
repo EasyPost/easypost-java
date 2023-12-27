@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1686160369,
+    "recordedAt": 1703706057,
     "request": {
       "body": "",
       "method": "GET",
@@ -28,7 +28,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb5nuq"
+          "bigweb31nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -55,26 +55,23 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "776d14346480c3f1f3f96b4a0020f4e5"
+          "05b5dcb3658c7dc9f40b94af001296bc"
         ],
         "x-proxied": [
-          "intlb1nuq 255dce5529",
-          "extlb1nuq 5ab12a3ed2"
+          "intlb1nuq b3de2c47ef",
+          "extlb1nuq 003ad9bca0"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.092517"
+          "0.023990"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
-        "etag": [
-          "W/\"86cc970265a111486b443bf66ef85e91\""
-        ],
         "x-version-label": [
-          "easypost-202306062224-41e583302e-master"
+          "easypost-202312202038-ae3ff8e94e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,10 +83,10 @@
       },
       "uri": "https://api.easypost.com/v2/partners/stripe_public_key"
     },
-    "duration": 225
+    "duration": 533
   },
   {
-    "recordedAt": 1686160369,
+    "recordedAt": 1703706058,
     "request": {
       "body": "",
       "method": "POST",
@@ -101,7 +98,7 @@
       "uri": "https://api.stripe.com/v1/tokens?card%5Bnumber%5D\u003d1234\u0026card%5Bcvc%5D\u003d1234\u0026card%5Bexp_month%5D\u003d1234\u0026card%5Bexp_year%5D\u003d1234?%63%61%72%64%5B%63%76%63%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%79%65%61%72%5D\u003d%31%32%33%34\u0026%63%61%72%64%5B%6E%75%6D%62%65%72%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%6D%6F%6E%74%68%5D\u003d%31%32%33%34"
     },
     "response": {
-      "body": "{\n  \"error\": {\n    \"doc_url\": \"https://stripe.com/docs/error-codes/invalid-number\",\n    \"code\": \"invalid_number\",\n    \"param\": \"number\",\n    \"message\": \"The card number is not a valid credit card number.\",\n    \"type\": \"card_error\",\n    \"request_log_url\": \"https://dashboard.stripe.com/logs/req_sMiW3ke9aS85BD?t\\u003d1686160369\"\n  }\n}",
+      "body": "{\n  \"error\": {\n    \"doc_url\": \"https://stripe.com/docs/error-codes/invalid-number\",\n    \"code\": \"invalid_number\",\n    \"param\": \"number\",\n    \"message\": \"The card number is not a valid credit card number.\",\n    \"type\": \"card_error\",\n    \"request_log_url\": \"https://dashboard.stripe.com/logs/req_x5JzIPxrPVAv5a?t\\u003d1703706058\"\n  }\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -114,16 +111,16 @@
           "*"
         ],
         "Access-Control-Allow-Methods": [
-          "GET, POST, HEAD, OPTIONS, DELETE"
+          "GET,HEAD,PUT,PATCH,POST,DELETE"
         ],
         "Idempotency-Key": [
-          "bf75e7a5-677e-4afe-b562-65570b85e82e"
+          "7204d7e6-bd34-4069-becd-42b395dec43e"
         ],
         "Connection": [
           "keep-alive"
         ],
         "Original-Request": [
-          "req_sMiW3ke9aS85BD"
+          "req_x5JzIPxrPVAv5a"
         ],
         "Stripe-Version": [
           "2020-08-27"
@@ -132,10 +129,10 @@
           "false"
         ],
         "Date": [
-          "Wed, 07 Jun 2023 17:52:49 GMT"
+          "Wed, 27 Dec 2023 19:40:58 GMT"
         ],
         "Access-Control-Expose-Headers": [
-          "Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required"
+          "Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required"
         ],
         "Strict-Transport-Security": [
           "max-age\u003d63072000; includeSubDomains; preload"
@@ -146,6 +143,12 @@
         "Access-Control-Allow-Credentials": [
           "true"
         ],
+        "Content-Security-Policy": [
+          "report-uri https://q.stripe.com/csp-report?p\u003dv1%2Ftokens; block-all-mixed-content; default-src \u0027none\u0027; base-uri \u0027none\u0027; form-action \u0027none\u0027; frame-ancestors \u0027none\u0027; img-src \u0027self\u0027; script-src \u0027self\u0027 \u0027report-sample\u0027; style-src \u0027self\u0027"
+        ],
+        "Vary": [
+          "Origin"
+        ],
         "Content-Length": [
           "329"
         ],
@@ -153,7 +156,7 @@
           "300"
         ],
         "Request-Id": [
-          "req_sMiW3ke9aS85BD"
+          "req_x5JzIPxrPVAv5a"
         ],
         "Content-Type": [
           "application/json"
@@ -168,6 +171,6 @@
       },
       "uri": "https://api.stripe.com/v1/tokens?card%5Bnumber%5D\u003d1234\u0026card%5Bcvc%5D\u003d1234\u0026card%5Bexp_month%5D\u003d1234\u0026card%5Bexp_year%5D\u003d1234?%63%61%72%64%5B%63%76%63%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%79%65%61%72%5D\u003d%31%32%33%34\u0026%63%61%72%64%5B%6E%75%6D%62%65%72%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%6D%6F%6E%74%68%5D\u003d%31%32%33%34"
     },
-    "duration": 318
+    "duration": 474
   }
 ]
