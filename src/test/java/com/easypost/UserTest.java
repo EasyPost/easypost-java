@@ -3,7 +3,6 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Brand;
-import com.easypost.model.ChildUser;
 import com.easypost.model.ChildUserCollection;
 import com.easypost.model.User;
 import org.junit.jupiter.api.AfterEach;
