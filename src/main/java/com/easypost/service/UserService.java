@@ -164,7 +164,8 @@ public class UserService {
      * @return ChildUserCollection object.
      * @throws EndOfPaginationError when there are no more pages to retrieve.
      */
-    public ChildUserCollection getNextPage(ChildUserCollection collection, Integer pageSize) throws EndOfPaginationError {
+    public ChildUserCollection getNextPage(ChildUserCollection collection, Integer pageSize)
+        throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, ChildUserCollection>() {
             @Override @SneakyThrows
             public ChildUserCollection apply(Map<String, Object> parameters) {
