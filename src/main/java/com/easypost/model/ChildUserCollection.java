@@ -6,11 +6,11 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public final class ChildCollection extends PaginatedCollection<Child> {
-    private List<Child> children;
+public final class ChildUserCollection extends PaginatedCollection<ChildUser> {
+    private List<ChildUser> children;
 
     @Override
-    protected Map<String, Object> buildNextPageParameters(List<Child> children, Integer pageSize) {
+    protected Map<String, Object> buildNextPageParameters(List<ChildUser> children, Integer pageSize) {
         String lastId = children.get(children.size() - 1).getId();
 
         Map<String, Object> parameters = new java.util.HashMap<>();
