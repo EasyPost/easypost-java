@@ -144,7 +144,7 @@ public class UserService {
     }
 
     /**
-     * Retrieve the paginated list of children of a user.
+     * Retrieve the paginated list of children for the authenticated user.
      *
      * @param params Map of parameters.
      * @return ChildCollection object.
@@ -157,7 +157,7 @@ public class UserService {
     }
 
     /**
-     * Get the next page of an ChildrenCollection.
+     * Get the next page of a ChildrenCollection.
      *
      * @param collection ChildrenCollection to get next page of.
      * @param pageSize   The number of results to return on the next page.
