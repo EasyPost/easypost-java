@@ -4,7 +4,7 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public class Children extends EasyPostResource {
+public class Child extends EasyPostResource {
     private String parentId;
     private String name;
     private String phoneNumber;

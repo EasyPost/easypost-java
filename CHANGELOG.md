@@ -2,8 +2,8 @@
 
 ## Next release
 
-- Adds `allChildren` function in User service to get a paginated list of children
-- Adds `getNextPage` function in User service to get next paginated list of children
+- Adds `allChildren` function in User service to get a paginated list of child users
+- Adds `getNextPage` function in User service to get next paginated list of child users
 
 ## v7.0.1 (2023-12-08)
 

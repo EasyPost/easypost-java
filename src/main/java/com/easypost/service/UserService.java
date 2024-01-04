@@ -9,7 +9,7 @@ import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.ApiKey;
 import com.easypost.model.ApiKeys;
 import com.easypost.model.Brand;
-import com.easypost.model.ChildrenCollection;
+import com.easypost.model.ChildCollection;
 import com.easypost.model.User;
 
 import lombok.SneakyThrows;
@@ -144,30 +144,30 @@ public class UserService {
     }
 
     /**
-     * Retrieve the paginated list of children for the authenticated user.
+     * Retrieve the paginated list of child users for the authenticated user.
      *
      * @param params Map of parameters.
      * @return ChildCollection object.
      * @throws EasyPostException when the request fails.
      */
-    public ChildrenCollection allChildren(final Map<String, Object> params) throws EasyPostException {
+    public ChildCollection allChildren(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "users/children";
         
-        return Requestor.request(RequestMethod.GET, endpoint, params, ChildrenCollection.class, client);
+        return Requestor.request(RequestMethod.GET, endpoint, params, ChildCollection.class, client);
     }
 
     /**
-     * Get the next page of a ChildrenCollection.
+     * Get the next page of a ChildCollection.
      *
-     * @param collection ChildrenCollection to get next page of.
+     * @param collection ChildCollection to get next page of.
      * @param pageSize   The number of results to return on the next page.
-     * @return ChildrenCollection object.
+     * @return ChildCollection object.
      * @throws EndOfPaginationError when there are no more pages to retrieve.
      */
-    public ChildrenCollection getNextPage(ChildrenCollection collection, Integer pageSize) throws EndOfPaginationError {
-        return collection.getNextPage(new Function<Map<String, Object>, ChildrenCollection>() {
+    public ChildCollection getNextPage(ChildCollection collection, Integer pageSize) throws EndOfPaginationError {
+        return collection.getNextPage(new Function<Map<String, Object>, ChildCollection>() {
             @Override @SneakyThrows
-            public ChildrenCollection apply(Map<String, Object> parameters) {
+            public ChildCollection apply(Map<String, Object> parameters) {
                 return allChildren(parameters);
             }
         }, collection.getChildren(), pageSize);

@@ -3,8 +3,8 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Brand;
-import com.easypost.model.Children;
-import com.easypost.model.ChildrenCollection;
+import com.easypost.model.Child;
+import com.easypost.model.ChildCollection;
 import com.easypost.model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -197,9 +197,9 @@ public final class UserTest {
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixtures.pageSize());
 
-        ChildrenCollection children = vcr.client.user.allChildren(params);
+        ChildCollection children = vcr.client.user.allChildren(params);
 
-        List<Children> childrenList = children.getChildren();
+        List<Child> childrenList = children.getChildren();
 
         assertTrue(childrenList.size() <= Fixtures.pageSize());
         assertNotNull(children.getHasMore());
@@ -217,10 +217,10 @@ public final class UserTest {
 
         Map<String, Object> params = new HashMap<>();
         params.put("page_size", Fixtures.pageSize());
-        ChildrenCollection collection = vcr.client.user.allChildren(params);
+        ChildCollection collection = vcr.client.user.allChildren(params);
 
         try {
-            ChildrenCollection nextPage = vcr.client.user.getNextPage(collection, Fixtures.pageSize());
+            ChildCollection nextPage = vcr.client.user.getNextPage(collection, Fixtures.pageSize());
 
             assertNotNull(nextPage);
 
