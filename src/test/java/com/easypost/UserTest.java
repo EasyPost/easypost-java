@@ -199,7 +199,7 @@ public final class UserTest {
 
         ChildUserCollection children = vcr.client.user.allChildren(params);
 
-        List<ChildUser> childrenList = children.getChildren();
+        List<User> childrenList = children.getChildren();
 
         assertTrue(childrenList.size() <= Fixtures.pageSize());
         assertNotNull(children.getHasMore());
