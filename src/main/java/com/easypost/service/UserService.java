@@ -153,7 +153,7 @@ public class UserService {
     public ChildrenCollection allChildren(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "users/children";
         
-        return Requestor.request(RequestMethod.GET, endpoint, params, ChildrenCollection.class, client, "beta");
+        return Requestor.request(RequestMethod.GET, endpoint, params, ChildrenCollection.class, client);
     }
 
     /**
