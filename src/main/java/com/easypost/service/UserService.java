@@ -2,18 +2,23 @@ package com.easypost.service;
 
 import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.exception.General.FilteringError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.ApiKey;
 import com.easypost.model.ApiKeys;
 import com.easypost.model.Brand;
+import com.easypost.model.ChildUserCollection;
 import com.easypost.model.User;
+
+import lombok.SneakyThrows;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 
 public class UserService {
     private final EasyPostClient client;
@@ -136,5 +141,36 @@ public class UserService {
         String endpoint = "users/" + id + "/brand";
 
         return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, Brand.class, client);
+    }
+
+    /**
+     * Retrieve the paginated list of child users for the authenticated user.
+     *
+     * @param params Map of parameters.
+     * @return ChildUserCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public ChildUserCollection allChildren(final Map<String, Object> params) throws EasyPostException {
+        String endpoint = "users/children";
+        
+        return Requestor.request(RequestMethod.GET, endpoint, params, ChildUserCollection.class, client);
+    }
+
+    /**
+     * Get the next page of a ChildUserCollection.
+     *
+     * @param collection ChildUserCollection to get next page of.
+     * @param pageSize   The number of results to return on the next page.
+     * @return ChildUserCollection object.
+     * @throws EndOfPaginationError when there are no more pages to retrieve.
+     */
+    public ChildUserCollection getNextPage(ChildUserCollection collection, Integer pageSize)
+        throws EndOfPaginationError {
+        return collection.getNextPage(new Function<Map<String, Object>, ChildUserCollection>() {
+            @Override @SneakyThrows
+            public ChildUserCollection apply(Map<String, Object> parameters) {
+                return allChildren(parameters);
+            }
+        }, collection.getChildren(), pageSize);
     }
 }

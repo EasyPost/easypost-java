@@ -1,19 +1,25 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Brand;
+import com.easypost.model.ChildUserCollection;
 import com.easypost.model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public final class UserTest {
     private static String testUserId = null;
@@ -176,5 +182,55 @@ public final class UserTest {
         assertInstanceOf(Brand.class, brand);
         assertTrue(brand.getId().startsWith("brd_"));
         assertEquals(color, brand.getColor());
+    }
+
+    /**
+     * Test retrieving a paginated list of children.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testAllChildren() throws EasyPostException {
+        vcr.setUpTest("all_children");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixtures.pageSize());
+
+        ChildUserCollection children = vcr.client.user.allChildren(params);
+
+        List<User> childrenList = children.getChildren();
+
+        assertTrue(childrenList.size() <= Fixtures.pageSize());
+        assertNotNull(children.getHasMore());
+        assertTrue(childrenList.stream().allMatch(children_user -> children_user != null));
+    }
+
+    /**
+     * Test retrieving the next page of child users.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testGetNextPage() throws EasyPostException {
+        vcr.setUpTest("get_next_page");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", Fixtures.pageSize());
+        ChildUserCollection collection = vcr.client.user.allChildren(params);
+
+        try {
+            ChildUserCollection nextPage = vcr.client.user.getNextPage(collection, Fixtures.pageSize());
+
+            assertNotNull(nextPage);
+
+            String firstIdOfFirstPage = collection.getChildren().get(0).getId();
+            String firstIdOfSecondPage = nextPage.getChildren().get(0).getId();
+
+            assertNotEquals(firstIdOfFirstPage, firstIdOfSecondPage);
+        } catch (EndOfPaginationError e) { // There's no next page, that's not a failure
+            assertTrue(true);
+        } catch (Exception e) { // Any other exception is a failure
+            fail();
+        }
     }
 }
