@@ -57,7 +57,7 @@ public class BetaRateTest {
         List<StatelessRate> rates = vcr.client.betaRate.retrieveStatelessRates(shipment);
         StatelessRate lowestRate = Utilities.getLowestStatelessRate(rates, null, null);
 
-        assertEquals("First", lowestRate.getService());
+        assertEquals("GroundAdvantage", lowestRate.getService());
 
         List<String> carriers = Arrays.asList("invalidCarrierName");
         EasyPostException exception =

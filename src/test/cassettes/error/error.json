@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1701291448,
+    "recordedAt": 1703706019,
     "request": {
       "body": "{}",
       "method": "POST",
@@ -31,50 +31,50 @@
           "0"
         ],
         "x-node": [
-          "bigweb40nuq"
+          "bigweb39nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
         ],
-        "x-backend": [
-          "easypost"
+        "x-download-options": [
+          "noopen"
         ],
         "x-permitted-cross-domain-policies": [
           "none"
         ],
-        "x-download-options": [
-          "noopen"
-        ],
-        "strict-transport-security": [
-          "max-age\u003d31536000; includeSubDomains; preload"
+        "x-backend": [
+          "easypost"
         ],
         "pragma": [
           "no-cache"
         ],
-        "x-content-type-options": [
-          "nosniff"
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
         ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
         "x-ep-request-uuid": [
-          "76e1c95a6567a5b8e79b0a5f0084c3b2"
+          "05b5dcb9658c7da3f3f8528100127288"
         ],
         "x-proxied": [
-          "extlb1nuq 003ad9bca0",
-          "intlb1nuq b3de2c47ef"
+          "intlb1nuq b3de2c47ef",
+          "extlb1nuq 003ad9bca0"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.035230"
+          "0.035964"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202311250013-a0f06fbc2c-master"
+          "easypost-202312202038-ae3ff8e94e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,6 +86,6 @@
       },
       "uri": "https://api.easypost.com/v2/shipments"
     },
-    "duration": 450
+    "duration": 183
   }
 ]

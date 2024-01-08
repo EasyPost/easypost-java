@@ -5,7 +5,6 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
-import com.easypost.model.Error;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -75,23 +74,22 @@ public final class AddressTest {
         vcr.setUpTest("create_verify");
 
         Map<String, Object> addressData = Fixtures.incorrectAddress();
-        addressData.put("verify", true);
 
+        // Creating normally (without specifying "verify") will make the address, perform no verifications
         Address address = vcr.client.address.create(addressData);
 
         assertInstanceOf(Address.class, address);
-        assertTrue(address.getId().startsWith("adr_"));
-        assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
+        assertNull(address.getVerifications().getDelivery());
+        assertNull(address.getVerifications().getZip4());
 
-        assertNotNull(address.getVerifications());
+        // Creating with verify would make the address and perform verifications
+        // internally, we're just checking for the presence of "verify" in the dictionary, so the value doesn't matter
+        addressData.put("verify", true);
+        address = vcr.client.address.create(addressData);
 
-        assertFalse(address.getVerifications().getDelivery().getErrors().isEmpty()); // should have at least one error
-        Error error = address.getVerifications().getDelivery().getErrors().get(0);
-        assertEquals("E.SECONDARY_INFORMATION.INVALID", error.getCode());
-
-        assertFalse(address.getVerifications().getZip4().getErrors().isEmpty()); // should have at least one error
-        error = address.getVerifications().getZip4().getErrors().get(0);
-        assertEquals("E.SECONDARY_INFORMATION.INVALID", error.getCode());
+        assertInstanceOf(Address.class, address);
+        assertNotNull(address.getVerifications().getDelivery());
+        assertNotNull(address.getVerifications().getZip4());
     }
 
     /**
@@ -125,15 +123,25 @@ public final class AddressTest {
         vcr.setUpTest("create_verify_array");
 
         Map<String, Object> addressData = Fixtures.incorrectAddress();
+
+        // Creating normally (without specifying "verify") will make the address, perform no verifications
+        Address address = vcr.client.address.create(addressData);
+
+        assertInstanceOf(Address.class, address);
+        assertNull(address.getVerifications().getDelivery());
+        assertNull(address.getVerifications().getZip4());
+
+        // Creating with verify would make the address and perform verifications
+        // internally, we're just checking for the presence of "verify" in the dictionary, so the value doesn't matter
         List<Boolean> verificationList = new ArrayList<>();
         verificationList.add(true);
         addressData.put("verify", verificationList);
 
-        Address address = vcr.client.address.create(addressData);
+        address = vcr.client.address.create(addressData);
 
         assertInstanceOf(Address.class, address);
-        assertTrue(address.getId().startsWith("adr_"));
-        assertEquals("417 MONTGOMERY ST FL 5", address.getStreet1());
+        assertNotNull(address.getVerifications().getDelivery());
+        assertNotNull(address.getVerifications().getZip4());
     }
 
     /**

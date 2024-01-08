@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1686160355,
+    "recordedAt": 1703706033,
     "request": {
       "body": "{\n  \"payment_method\": {\n    \"stripe_customer_id\": \"cus_123\",\n    \"payment_method_reference\": \"ba_123\",\n    \"priority\": \"PRIMARY\"\n  }\n}",
       "method": "POST",
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb3nuq"
+          "bigweb32nuq"
         ],
         "vary": [
           "Origin"
@@ -54,6 +54,9 @@
         "strict-transport-security": [
           "max-age\u003d31536000; includeSubDomains; preload"
         ],
+        "x-canary": [
+          "direct"
+        ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
@@ -61,23 +64,23 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "776d14396480c3e3f4072e6c0020ef8a"
+          "05b5dcb5658c7db1f42c67490012825f"
         ],
         "x-proxied": [
-          "intlb1nuq 255dce5529",
-          "extlb1nuq 5ab12a3ed2"
+          "intlb2nuq b3de2c47ef",
+          "extlb1nuq 003ad9bca0"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.048730"
+          "0.085945"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202306062224-41e583302e-master"
+          "easypost-202312202038-ae3ff8e94e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -89,6 +92,6 @@
       },
       "uri": "https://api.easypost.com/beta/referral_customers/payment_method"
     },
-    "duration": 180
+    "duration": 253
   }
 ]

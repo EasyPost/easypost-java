@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1686160342,
+    "recordedAt": 1703706016,
     "request": {
       "body": "",
       "method": "GET",
@@ -15,20 +15,20 @@
       "uri": "https://api.easypost.com/v2/users"
     },
     "response": {
-      "body": "{\n  \"recharge_amount\": \"100.00\",\n  \"verified\": true,\n  \"created_at\": \"2022-02-02T20:31:53Z\",\n  \"default_carbon_offset\": false,\n  \"secondary_recharge_amount\": \"100.00\",\n  \"cc_fee_rate\": \"0.0325\",\n  \"has_elevate_access\": false,\n  \"recharge_threshold\": \"0.00\",\n  \"balance\": \"0.00000\",\n  \"default_insurance_amount\": \"50.00\",\n  \"children\": [],\n  \"parent_id\": null,\n  \"has_billing_method\": false,\n  \"name\": \"EasyPost Java Client Library Tests\",\n  \"insurance_fee_rate\": \"0.005\",\n  \"price_per_shipment\": \"0.00000\",\n  \"phone_number\": \"REDACTED\",\n  \"id\": \"user_04ad194774a54f6c97d1385715721091\",\n  \"insurance_fee_minimum\": \"0.25\",\n  \"email\": \"dev+easypost-java@easypost.com\",\n  \"object\": \"User\"\n}",
+      "body": "{\n  \"recharge_amount\": \"100.00\",\n  \"verified\": true,\n  \"created_at\": \"2022-02-02T20:31:53Z\",\n  \"default_carbon_offset\": false,\n  \"secondary_recharge_amount\": \"100.00\",\n  \"cc_fee_rate\": \"0.0325\",\n  \"has_elevate_access\": false,\n  \"recharge_threshold\": \"0.00\",\n  \"balance\": \"0.00000\",\n  \"default_insurance_amount\": \"50.00\",\n  \"children\": [\n    {\n      \"children\": [],\n      \"parent_id\": \"user_04ad194774a54f6c97d1385715721091\",\n      \"name\": \"test user\",\n      \"verified\": true,\n      \"created_at\": \"2023-12-07T17:46:08Z\",\n      \"default_carbon_offset\": false,\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_af930e9bd27a4445bc2741fac37850cc\",\n      \"has_elevate_access\": false,\n      \"object\": \"User\"\n    }\n  ],\n  \"parent_id\": null,\n  \"has_billing_method\": false,\n  \"name\": \"EasyPost Java Client Library Tests\",\n  \"insurance_fee_rate\": \"0.005\",\n  \"price_per_shipment\": \"0.00000\",\n  \"phone_number\": \"REDACTED\",\n  \"id\": \"user_04ad194774a54f6c97d1385715721091\",\n  \"insurance_fee_minimum\": \"0.25\",\n  \"email\": \"dev+easypost-java@easypost.com\",\n  \"object\": \"User\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "603"
+          "887"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb9nuq"
+          "bigweb40nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -55,26 +55,23 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "776d14396480c3d6f3f8708d0020eb03"
+          "05b5dcb3658c7da0f42e0c5000126e93"
         ],
         "x-proxied": [
-          "intlb1nuq 255dce5529",
-          "extlb1nuq 5ab12a3ed2"
+          "intlb1nuq b3de2c47ef",
+          "extlb1nuq 003ad9bca0"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.030934"
+          "0.055724"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
-        "etag": [
-          "W/\"e03e6fec0309b6fad34f57773780bd27\""
-        ],
         "x-version-label": [
-          "easypost-202306062224-41e583302e-master"
+          "easypost-202312202038-ae3ff8e94e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,6 +83,6 @@
       },
       "uri": "https://api.easypost.com/v2/users"
     },
-    "duration": 70
+    "duration": 101
   }
 ]
