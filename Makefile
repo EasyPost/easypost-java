@@ -48,8 +48,9 @@ publish-dry:
 
 ## release - Cuts a release for the project on GitHub (requires GitHub CLI)
 # tag = The associated tag title of the release
+# target = Target branch or full commit SHA
 release:
-	gh release create ${tag} target/*.jar target/*.asc target/*.pom
+	gh release create ${tag} target/*.jar target/*.asc target/*.pom --target ${target}
 
 ## scan - Scan the project for serious security issues
 scan:
