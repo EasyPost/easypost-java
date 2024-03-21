@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Releease
+## v7.1.1 (2024-03-21)
 
 - Fix `EasyPostTimeInTransitData` class and `easypostTimeInTransitData` property of `EstimatedDeliveryDate` class being publicly inaccessible
 
