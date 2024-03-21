@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CreateShipment {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws EasyPostException {
     EasyPostClient client = new EasyPostClient(System.getenv("EASYPOST_API_KEY"));
 
     Map<String, Object> fromAddressMap = new HashMap<String, Object>();
@@ -82,7 +82,7 @@ public class CreateShipment {
 
     Shipment shipment = client.shipment.create(shipmentMap);
 
-    Shipment boughtShipment = client.shipment.buy(shipment.lowestRate(), shipment.getId());
+    Shipment boughtShipment = client.shipment.buy(shipment.getId(), shipment.lowestRate());
 
     System.out.println(boughtShipment.prettyPrint());
   }
