@@ -8,9 +8,3 @@ public class EstimatedDeliveryDate {
     private Rate rate;
 }
 
-@Getter
-class EasyPostTimeInTransitData {
-    private TimeInTransit daysInTransit;
-    private String easypostEstimatedDeliveryDate;
-    private String plannedShipDate;
-}

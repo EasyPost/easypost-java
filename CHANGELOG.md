@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Releease
+
+- Fix `EasyPostTimeInTransitData` class and `easypostTimeInTransitData` property of `EstimatedDeliveryDate` class being publicly inaccessible
+
 ## v7.1.0 (2024-01-08)
 
 - Adds `allChildren` function in User service to get a paginated list of child users

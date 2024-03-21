@@ -713,6 +713,9 @@ public final class ShipmentTest {
                 .retrieveEstimatedDeliveryDate(shipment.getId(), Fixtures.plannedShipDate());
         for (EstimatedDeliveryDate estimatedDeliveryDate : estimatedDeliveryDates) {
             assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData());
+            assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData().getEasypostEstimatedDeliveryDate());
+            assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData().getDaysInTransit());
+            assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData().getDaysInTransit().getPercentile99());
         }
     }
 }
