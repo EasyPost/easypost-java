@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next release
+
+- Adds `refund` function in Insurance service for requesting a refund for a standalone insurance
+
 ## v7.1.1 (2024-03-21)
 
 - Fix `EasyPostTimeInTransitData` class and `easypostTimeInTransitData` property of `EstimatedDeliveryDate` class being publicly inaccessible
