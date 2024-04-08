@@ -12,16 +12,28 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class BillingTest {
     private static TestUtils.VCR vcr;
     private String jsonResponse = "{\"id\":\"cust_...\",\"object\":\"PaymentMethods\",\"primary_" +
-            "payment_method\":{\"id\":\"card_...\",\"disabled_at\":null,\"object\":\"CreditCard\",\"na" +
+            "payment_method\":{\"id\":\"pm_...\",\"disabled_at\":null,\"object\":\"CreditCard\",\"na" +
             "me\":null,\"last4\":\"4242\",\"exp_month\":1,\"exp_year\":2025,\"brand\":\"Visa\"},\"secondar" +
-            "y_payment_method\":{\"id\":\"card_...\",\"disabled_at\":null,\"object\":\"CreditCard\",\"name\":nu" +
+            "y_payment_method\":{\"id\":\"pm_...\",\"disabled_at\":null,\"object\":\"BankAccount\",\"name\":nu" +
             "ll,\"last4\":\"4444\",\"exp_month\":1,\"exp_year\":2025,\"brand\":\"Mastercard\"}}";
     private PaymentMethod paymentMethod = Constants.Http.GSON.fromJson(jsonResponse, PaymentMethod.class);
+
+    private String jsonResponseLegacyPrefixes = "{\"id\":\"cust_...\",\"object\":\"PaymentMethods\",\"primary_" +
+            "payment_method\":{\"id\":\"card_...\",\"disabled_at\":null,\"object\":null,\"na" +
+            "me\":null,\"last4\":\"4242\",\"exp_month\":1,\"exp_year\":2025,\"brand\":\"Visa\"},\"secondar" +
+            "y_payment_method\":{\"id\":\"bank_...\",\"disabled_at\":null,\"object\":null,\"name\":nu" +
+            "ll,\"last4\":\"4444\",\"exp_month\":1,\"exp_year\":2025,\"brand\":\"Mastercard\"}}";
+
+    private PaymentMethod paymentMethodLegacyPrefixes = Constants.Http.GSON.fromJson(jsonResponseLegacyPrefixes, PaymentMethod.class);
+
     private static MockedStatic<Requestor> requestMock = Mockito.mockStatic(Requestor.class);
 
     /**
@@ -99,5 +111,57 @@ public final class BillingTest {
 
         assertNotNull(paymentMethods.getPrimaryPaymentMethod());
         assertNotNull(paymentMethods.getSecondaryPaymentMethod());
+    }
+
+    /**
+     * Test determining a payment method type by its object type.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testDeterminePaymentMethodTypeByObjectType() throws EasyPostException {
+        requestMock.when(() -> Requestor.request(
+                RequestMethod.GET, "payment_methods", null, PaymentMethod.class, vcr.client))
+                .thenReturn(paymentMethod);
+
+        // Should be a credit card with "CreditCard" object type and "pm_" prefix
+        PaymentMethodObject creditCard =
+                vcr.client.billing.retrievePaymentMethods().getPrimaryPaymentMethod();
+        assertTrue(creditCard.getId().startsWith("pm_"));
+        assertEquals("CreditCard", creditCard.getObject());
+        assertEquals(PaymentMethodObject.PaymentMethodType.CREDIT_CARD, creditCard.getType());
+
+        // Should be a bank account with "BankAccount" object type and "pm_" prefix
+        PaymentMethodObject bankAccount =
+                vcr.client.billing.retrievePaymentMethods().getSecondaryPaymentMethod();
+        assertTrue(bankAccount.getId().startsWith("pm_"));
+        assertEquals("BankAccount", bankAccount.getObject());
+        assertEquals(PaymentMethodObject.PaymentMethodType.BANK_ACCOUNT, bankAccount.getType());
+    }
+
+    /**
+     * Test determining a payment method type by its legacy prefix.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testDeterminePaymentMethodTypeByLegacyPrefix() throws EasyPostException {
+        requestMock.when(() -> Requestor.request(
+                RequestMethod.GET, "payment_methods", null, PaymentMethod.class, vcr.client))
+                .thenReturn(paymentMethodLegacyPrefixes);
+
+        // Should be a credit card with null object type and "card_" prefix
+        PaymentMethodObject creditCard =
+                vcr.client.billing.retrievePaymentMethods().getPrimaryPaymentMethod();
+        assertTrue(creditCard.getId().startsWith("card_"));
+        assertNull(creditCard.getObject());
+        assertEquals(PaymentMethodObject.PaymentMethodType.CREDIT_CARD, creditCard.getType());
+
+        // Should be a bank account with null object type and "bank_" prefix
+        PaymentMethodObject bankAccount =
+                vcr.client.billing.retrievePaymentMethods().getSecondaryPaymentMethod();
+        assertTrue(bankAccount.getId().startsWith("bank_"));
+        assertNull(bankAccount.getObject());
+        assertEquals(PaymentMethodObject.PaymentMethodType.BANK_ACCOUNT, bankAccount.getType());
     }
 }
