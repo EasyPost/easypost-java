@@ -32,7 +32,8 @@ public final class BillingTest {
             "y_payment_method\":{\"id\":\"bank_...\",\"disabled_at\":null,\"object\":null,\"name\":nu" +
             "ll,\"last4\":\"4444\",\"exp_month\":1,\"exp_year\":2025,\"brand\":\"Mastercard\"}}";
 
-    private PaymentMethod paymentMethodLegacyPrefixes = Constants.Http.GSON.fromJson(jsonResponseLegacyPrefixes, PaymentMethod.class);
+    private PaymentMethod paymentMethodLegacyPrefixes =
+            Constants.Http.GSON.fromJson(jsonResponseLegacyPrefixes, PaymentMethod.class);
 
     private static MockedStatic<Requestor> requestMock = Mockito.mockStatic(Requestor.class);
 
