@@ -67,6 +67,19 @@ public class InsuranceService {
     }
 
     /**
+     * Refund an Insurance from the API.
+     *
+     * @param id The ID of the Insurance to refund.
+     * @return Insurance object
+     * @throws EasyPostException when the request fails.
+     */
+    public Insurance refund(final String id) throws EasyPostException {
+        String endpoint = String.format("insurances/%s/refund", id);
+        
+        return Requestor.request(RequestMethod.POST, endpoint, null, Insurance.class, client);
+    }
+
+    /**
      * Get the next page of an InsuranceCollection.
      *
      * @param collection InsuranceCollection to get next page of.

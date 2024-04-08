@@ -129,4 +129,24 @@ public final class InsuranceTest {
             fail();
         }
     }
+
+    /**
+     * Test refunding an insurance.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testRefundInsurance() throws EasyPostException {
+        vcr.setUpTest("refund");
+
+        HashMap<String, Object> params = Fixtures.basicInsurance();
+        params.put("tracking_code", "EZ1000000001");
+        Insurance insurance = vcr.client.insurance.create(params);
+        Insurance cancelledInsurance = vcr.client.insurance.refund(insurance.getId());
+
+        assertInstanceOf(Insurance.class, cancelledInsurance);
+        assertTrue(insurance.getId().startsWith("ins_"));
+        assertEquals("cancelled", cancelledInsurance.getStatus());
+        assertEquals("Insurance was cancelled by the user.", cancelledInsurance.getMessages().get(0));
+    }
 }
