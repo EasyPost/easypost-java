@@ -147,5 +147,6 @@ public final class InsuranceTest {
         assertInstanceOf(Insurance.class, cancelledInsurance);
         assertTrue(insurance.getId().startsWith("ins_"));
         assertEquals("cancelled", cancelledInsurance.getStatus());
+        assertEquals("Insurance was cancelled by the user.", cancelledInsurance.getMessages().get(0));
     }
 }
