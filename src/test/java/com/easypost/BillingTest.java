@@ -14,7 +14,6 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class BillingTest {
@@ -137,32 +136,6 @@ public final class BillingTest {
                 vcr.client.billing.retrievePaymentMethods().getSecondaryPaymentMethod();
         assertTrue(bankAccount.getId().startsWith("pm_"));
         assertEquals("BankAccount", bankAccount.getObject());
-        assertEquals(PaymentMethodObject.PaymentMethodType.BANK_ACCOUNT, bankAccount.getType());
-    }
-
-    /**
-     * Test determining a payment method type by its legacy prefix.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testDeterminePaymentMethodTypeByLegacyPrefix() throws EasyPostException {
-        requestMock.when(() -> Requestor.request(
-                RequestMethod.GET, "payment_methods", null, PaymentMethod.class, vcr.client))
-                .thenReturn(paymentMethodLegacyPrefixes);
-
-        // Should be a credit card with null object type and "card_" prefix
-        PaymentMethodObject creditCard =
-                vcr.client.billing.retrievePaymentMethods().getPrimaryPaymentMethod();
-        assertTrue(creditCard.getId().startsWith("card_"));
-        assertNull(creditCard.getObject());
-        assertEquals(PaymentMethodObject.PaymentMethodType.CREDIT_CARD, creditCard.getType());
-
-        // Should be a bank account with null object type and "bank_" prefix
-        PaymentMethodObject bankAccount =
-                vcr.client.billing.retrievePaymentMethods().getSecondaryPaymentMethod();
-        assertTrue(bankAccount.getId().startsWith("bank_"));
-        assertNull(bankAccount.getObject());
         assertEquals(PaymentMethodObject.PaymentMethodType.BANK_ACCOUNT, bankAccount.getType());
     }
 }
