@@ -2,8 +2,12 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Address;
+import com.google.common.collect.ImmutableList;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -32,11 +36,27 @@ public final class EasyPostResourceTest {
         Address address = vcr.client.address.create(Fixtures.caAddress1());
 
         String stringRepresentation = address.toString();
-        String stringRepresentationRegex = "^<com\\.easypost\\.model\\.Address@\\d{10} id=adr_[a-f0-9]{32}>$";
+        List<String> substringsToContain = new ArrayList<String>(ImmutableList.of(
+                "<",
+                address.getClass().getName(),
+                "@",
+                "" + System.identityHashCode(address), // cast to string
+                " id=",
+                address.getId(),
+                ">"
+        ));
 
-        boolean stringRepresentationMatches = stringRepresentation.matches(stringRepresentationRegex);
+        // Regex matching doesn't work in run mode, only in debug mode (timing issue?)
+        boolean matches = false;
 
-        assertTrue(stringRepresentationMatches);
+        for (String substring : substringsToContain) {
+            matches = stringRepresentation.contains(substring);
+            if (!matches) {
+                break;
+            }
+        }
+
+        assertTrue(matches);
     }
 
     /**
@@ -51,12 +71,29 @@ public final class EasyPostResourceTest {
         Address address = vcr.client.address.create(Fixtures.caAddress1());
 
         String prettyPrint = address.prettyPrint();
-        String prettyPrintRegex = "> JSON: {";
 
-        // Partial regex matching is terrible in Java. Works in debug mode, not in run mode, possibly due to timing
+        List<String> substringsToContain = new ArrayList<String>(ImmutableList.of(
+            "<",
+            address.getClass().getName(),
+            "@",
+            "" + System.identityHashCode(address), // cast to string
+            " id=",
+            address.getId(),
+            ">",
+            " JSON: {",
+            "}"
+        ));
 
-        boolean prettyPrintMatches = prettyPrint.contains(prettyPrintRegex);
+        // Regex matching doesn't work in run mode, only in debug mode (timing issue?)
+        boolean matches = false;
 
-        assertTrue(prettyPrintMatches);
+        for (String substring : substringsToContain) {
+            matches = prettyPrint.contains(substring);
+            if (!matches) {
+                break;
+            }
+        }
+
+        assertTrue(matches);
     }
 }
