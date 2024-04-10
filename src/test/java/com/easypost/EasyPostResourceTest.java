@@ -2,16 +2,9 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Address;
-import com.easypost.model.CustomsItem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class EasyPostResourceTest {
