@@ -8,8 +8,6 @@
 
 package com.easypost.model;
 
-import java.lang.reflect.Field;
-
 import java.util.Date;
 
 import com.easypost.Constants;
@@ -30,27 +28,10 @@ public abstract class EasyPostResource {
      */
     @Override
     public String toString() {
-        return (String) this.getIdString();
-    }
-
-    /**
-     * Get the ID of the object.
-     *
-     * @return ID of the object.
-     */
-    private Object getIdString() {
-        try {
-            Field idField = this.getClass().getDeclaredField("id");
-            return idField.get(this);
-        } catch (SecurityException e) {
-            return "";
-        } catch (NoSuchFieldException e) {
-            return "";
-        } catch (IllegalArgumentException e) {
-            return "";
-        } catch (IllegalAccessException e) {
-            return "";
+        if (this.id == null) {
+            return String.format("<%s@%s>", this.getClass().getName(), System.identityHashCode(this));
         }
+        return String.format("<%s@%s id=%s>", this.getClass().getName(), System.identityHashCode(this), this.id);
     }
 
     /**
@@ -59,8 +40,9 @@ public abstract class EasyPostResource {
      * @return the JSON representation of the object.
      */
     public String prettyPrint() {
-        return String.format("<%s@%s id=%s> JSON: %s", this.getClass().getName(), System.identityHashCode(this),
-                this.getIdString(), Constants.Http.PRETTY_PRINT_GSON.toJson(this));
+        String identifier = this.toString();
+        String json = Constants.Http.PRETTY_PRINT_GSON.toJson(this);
+        return String.format("%s JSON: %s", identifier, json);
     }
 
     /**
