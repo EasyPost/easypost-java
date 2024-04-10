@@ -60,9 +60,9 @@ public class PaymentMethodObject extends EasyPostResource {
             return null;
         }
         String objectType = getObject();
-        if (getId().startsWith("card_") || (objectType != null && objectType.equals("CreditCard"))) {
+        if (objectType != null && objectType.equals("CreditCard")) {
             type = PaymentMethodType.CREDIT_CARD;
-        } else if (getId().startsWith("bank_") || (objectType != null && objectType.equals("BankAccount"))) {
+        } else if (objectType != null && objectType.equals("BankAccount")) {
             type = PaymentMethodType.BANK_ACCOUNT;
         }
         return type;
