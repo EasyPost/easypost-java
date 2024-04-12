@@ -45,7 +45,6 @@ public final class CarrierAccountTest {
      */
     @AfterEach
     public void cleanup() {
-        requestMock.close();
         if (testCarrierAccountId != null) {
             try {
                 CarrierAccount carrierAccount = vcr.client.carrierAccount.retrieve(testCarrierAccountId);
@@ -215,7 +214,7 @@ public final class CarrierAccountTest {
      * Test that the CarrierAccount fields are correctly serialized to the API request.
      */
     @Test
-    public void testCarrierFieldsJsonSerialization() throws EasyPostException {
+    public void testCarrierFieldsJsonSerialization() {
         String carrierAccountJson = "[{\"id\":\"ca_123\",\"object\":\"CarrierAccount\",\"fields\":{\"credentials\":" +
                 "{\"account_number\":{\"visibility\":\"visible\",\"label\":\"DHL Account Number\"," +
                 "\"value\":\"123456\"},\"country\":{\"visibility\":\"visible\",\"label\":" +
@@ -227,17 +226,18 @@ public final class CarrierAccountTest {
         CarrierAccount carrierAccount = carrierAccounts[0];
 
         // Prepare a parameter set for creating a pickup, using the carrier account object
-        Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
         Map<String, Object> pickupData = Fixtures.basicPickup();
-        pickupData.put("shipment", shipment);
+        pickupData.put("shipment", new Shipment());
         pickupData.put("carrier_accounts", new CarrierAccount[] { carrierAccount });
 
         // Avoid making a real request to the API, interested in pre-request serialization, not interested in response
-        requestMock.when(() -> Requestor.request(Requestor.RequestMethod.POST, "pickups",
-                pickupData, Shipment.class,
+        requestMock.when(() -> Requestor.request(Requestor.RequestMethod.POST, "pickups", pickupData, Shipment.class,
                 vcr.client)).thenReturn(new Pickup());
 
         // This will throw an exception if the carrier account fields could not be serialized properly
         assertDoesNotThrow(() -> vcr.client.pickup.create(pickupData));
+
+        // Close mock
+        requestMock.close();
     }
 }
