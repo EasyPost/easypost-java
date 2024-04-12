@@ -5,7 +5,6 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.model.CarrierAccount;
 import com.easypost.model.CarrierType;
-import com.easypost.model.PaymentMethod;
 import com.easypost.model.Pickup;
 import com.easypost.model.Shipment;
 import com.google.common.collect.ImmutableMap;
@@ -191,17 +190,25 @@ public final class CarrierAccountTest {
 
     /**
      * Test that the CarrierAccount fields are correctly deserialized from the API response.
-     * None of the demo carrier accounts used in the above tests have credentials or test credentials fields, so we need to use some mock data.
+     * None of the demo carrier accounts used in the above tests have credentials or test credentials fields,
+     * so we need to use some mock data.
      */
     @Test
     public void testCarrierFieldsJsonDeserialization() {
-        String carrierAccountJson = "[{\"id\":\"ca_123\",\"object\":\"CarrierAccount\",\"fields\":{\"credentials\":{\"account_number\":{\"visibility\":\"visible\",\"label\":\"DHL Account Number\",\"value\":\"123456\"},\"country\":{\"visibility\":\"visible\",\"label\":\"Account Country Code (2 Letter)\",\"value\":\"US\"},\"site_id\":{\"visibility\":\"visible\",\"label\":\"Site ID (Optional)\",\"value\": null },\"password\":{\"visibility\":\"password\",\"label\":\"Password (Optional)\",\"value\":\"\"},\"is_reseller\":{\"visibility\":\"checkbox\",\"label\":\"Reseller Account? (check if yes)\",\"value\":null}}}}]";
+        String carrierAccountJson = "[{\"id\":\"ca_123\",\"object\":\"CarrierAccount\"," +
+                "\"fields\":{\"credentials\":{\"account_number\":{\"visibility\":\"visible\"," +
+                "\"label\":\"DHL Account Number\",\"value\":\"123456\"},\"country\":{\"visibility\":\"visible\"," +
+                "\"label\":\"Account Country Code (2 Letter)\",\"value\":\"US\"},\"site_id\":{\"visibility\":" +
+                "\"visible\",\"label\":\"Site ID (Optional)\",\"value\": null },\"password\":{\"visibility\":" +
+                "\"password\",\"label\":\"Password (Optional)\",\"value\":\"\"},\"is_reseller\":{\"visibility\":" +
+                "\"checkbox\",\"label\":\"Reseller Account? (check if yes)\",\"value\":null}}}}]";
         CarrierAccount[] carrierAccounts = Constants.Http.GSON.fromJson(carrierAccountJson, CarrierAccount[].class);
 
         CarrierAccount carrierAccount = carrierAccounts[0];
         assertEquals("ca_123", carrierAccount.getId());
         assertEquals("CarrierAccount", carrierAccount.getObject());
-        assertEquals("DHL Account Number", carrierAccount.getFields().getCredentials().get("account_number").getLabel());
+        assertEquals("DHL Account Number",
+                carrierAccount.getFields().getCredentials().get("account_number").getLabel());
     }
 
     /**
@@ -209,7 +216,13 @@ public final class CarrierAccountTest {
      */
     @Test
     public void testCarrierFieldsJsonSerialization() throws EasyPostException {
-        String carrierAccountJson = "[{\"id\":\"ca_123\",\"object\":\"CarrierAccount\",\"fields\":{\"credentials\":{\"account_number\":{\"visibility\":\"visible\",\"label\":\"DHL Account Number\",\"value\":\"123456\"},\"country\":{\"visibility\":\"visible\",\"label\":\"Account Country Code (2 Letter)\",\"value\":\"US\"},\"site_id\":{\"visibility\":\"visible\",\"label\":\"Site ID (Optional)\",\"value\": null },\"password\":{\"visibility\":\"password\",\"label\":\"Password (Optional)\",\"value\":\"\"},\"is_reseller\":{\"visibility\":\"checkbox\",\"label\":\"Reseller Account? (check if yes)\",\"value\":null}}}}]";
+        String carrierAccountJson = "[{\"id\":\"ca_123\",\"object\":\"CarrierAccount\",\"fields\":{\"credentials\":" +
+                "{\"account_number\":{\"visibility\":\"visible\",\"label\":\"DHL Account Number\"," +
+                "\"value\":\"123456\"},\"country\":{\"visibility\":\"visible\",\"label\":" +
+                "\"Account Country Code (2 Letter)\",\"value\":\"US\"},\"site_id\":{\"visibility\":\"visible\"," +
+                "\"label\":\"Site ID (Optional)\",\"value\": null },\"password\":{\"visibility\":\"password\"," +
+                "\"label\":\"Password (Optional)\",\"value\":\"\"},\"is_reseller\":{\"visibility\":\"checkbox\"," +
+                "\"label\":\"Reseller Account? (check if yes)\",\"value\":null}}}}]";
         CarrierAccount[] carrierAccounts = Constants.Http.GSON.fromJson(carrierAccountJson, CarrierAccount[].class);
         CarrierAccount carrierAccount = carrierAccounts[0];
 
@@ -217,11 +230,12 @@ public final class CarrierAccountTest {
         Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());
         Map<String, Object> pickupData = Fixtures.basicPickup();
         pickupData.put("shipment", shipment);
-        pickupData.put("carrier_accounts", new CarrierAccount[]{carrierAccount});
+        pickupData.put("carrier_accounts", new CarrierAccount[] { carrierAccount });
 
         // Avoid making a real request to the API, interested in pre-request serialization, not interested in response
-        requestMock.when(() -> Requestor.request(
-                Requestor.RequestMethod.POST, "pickups", pickupData, Shipment.class, vcr.client)).thenReturn(new Pickup());
+        requestMock.when(() -> Requestor.request(Requestor.RequestMethod.POST, "pickups",
+                pickupData, Shipment.class,
+                vcr.client)).thenReturn(new Pickup());
 
         // This will throw an exception if the carrier account fields could not be serialized properly
         assertDoesNotThrow(() -> vcr.client.pickup.create(pickupData));
