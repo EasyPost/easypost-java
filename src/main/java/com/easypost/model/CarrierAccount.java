@@ -8,6 +8,7 @@ public final class CarrierAccount extends EasyPostResource {
     private String type;
     private Fields fields;
     private boolean clone;
+    private String logo;
     private String readable;
     private String description;
     private String reference;
