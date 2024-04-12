@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v7.2.1 (2024-04-12)
 
 - Fix `Fields` serialization bug causing carrier account operations to fail
 
