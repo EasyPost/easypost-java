@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Fix `Fields` serialization bug causing carrier account operations to fail
+
 ## v7.2.0 (2024-04-10)
 
 - Adds `refund` function in Insurance service for requesting a refund for a standalone insurance
