@@ -106,8 +106,9 @@ public class TrackerService {
      *
      * @param params Map of parameters used to create the Trackers.
      * @throws EasyPostException when the request fails.
+     * @deprecated Use the create function instead. createList will be removed in a future release.
      */
-    public void createList(final Map<String, Object> params) throws EasyPostException {
+    @Deprecated public void createList(final Map<String, Object> params) throws EasyPostException {
         Map<String, Object> newParams = new HashMap<String, Object>();
         newParams.put("trackers", params);
 
