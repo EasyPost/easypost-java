@@ -3,7 +3,7 @@
  *
  * @author EasyPost developers
  * @version 1.0
- * @see <a href="https://www.easypost.com/docs/api.html">EasyPost API</a>
+ * @see <a href="https://docs.easypost.com">EasyPost API</a>
  * @since 1.0
  */
 package com.easypost.utils;
