@@ -91,8 +91,8 @@ public class CarrierAccountService {
     /**
      * Update this carrier account.
      *
-     * @param params parameters to update.
      * @param id     The ID of carrier account
+     * @param params parameters to update.
      * @return updated CarrierAccount object.
      * @throws EasyPostException when the request fails.
      */
@@ -109,8 +109,8 @@ public class CarrierAccountService {
     /**
      * Update UPS carrier account.
      *
+     * @param id     The ID of UPS account
      * @param params parameters to update.
-     * @param id     The ID of carrier account
      * @return updated CarrierAccount object.
      * @throws EasyPostException when the request fails.
      */
