@@ -33,13 +33,16 @@ public class CarrierAccountService {
      */
     public CarrierAccount create(final Map<String, Object> params) throws EasyPostException {
         String type = (String) params.get("type");
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+
         if (type == null) {
             throw new MissingParameterError(
                     String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));
+        } else if (type.equals("UpsAccount")) {
+            wrappedParams.put("ups_oauth_registrations", params);
+        } else {
+            wrappedParams.put("carrier_account", params);
         }
-
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("carrier_account", params);
 
         String endpoint = selectCarrierAccountCreationEndpoint(type);
 
@@ -104,6 +107,20 @@ public class CarrierAccountService {
     }
 
     /**
+     * Update UPS carrier account.
+     *
+     * @param params parameters to update.
+     * @param id     The ID of carrier account
+     * @return updated CarrierAccount object.
+     * @throws EasyPostException when the request fails.
+     */
+    public CarrierAccount updateUps(String id, final Map<String, Object> params) throws EasyPostException {
+        String endpoint = "ups_oauth_registrations/" + id;
+
+        return Requestor.request(RequestMethod.PUT, endpoint, params, CarrierAccount.class, client);
+    }
+
+    /**
      * Delete this carrier account.
      *
      * @param id The ID of carrier account.
@@ -125,6 +142,8 @@ public class CarrierAccountService {
     private static String selectCarrierAccountCreationEndpoint(final String carrierAccountType) {
         if (Constants.CarrierAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
             return "carrier_accounts/register";
+        } else if (carrierAccountType.equals("UpsAccount")) {
+            return "ups_oauth_registrations";
         } else {
             return "carrier_accounts";
         }

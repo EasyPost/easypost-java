@@ -30,6 +30,12 @@ public final class CarrierAccountTest {
 
     private static MockedStatic<Requestor> requestMock = Mockito.mockStatic(Requestor.class);
 
+    private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
+        CarrierAccount carrierAccount = vcr.client.carrierAccount.create(Fixtures.basicCarrierAccount());
+        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
+        return carrierAccount;
+    }
+
     /**
      * Set up the testing environment for this file.
      *
@@ -97,10 +103,27 @@ public final class CarrierAccountTest {
         }
     }
 
-    private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
-        CarrierAccount carrierAccount = vcr.client.carrierAccount.create(Fixtures.basicCarrierAccount());
-        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
-        return carrierAccount;
+
+    /**
+     * Test creating a carrier account with a custom workflow.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateWithUPS() throws EasyPostException {
+        vcr.setUpTest("create_with_ups");
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("type", "UpsAccount");
+        data.put("registration_data", ImmutableMap.of("some", "data"));
+
+        try {
+            vcr.client.carrierAccount.create(data);
+        } catch (InvalidRequestError e) {
+            // We're sending bad data to the API, so we expect an error
+            assertEquals(422, e.getStatusCode());
+            assertTrue(e.getMessage().equals("Missing required parameter."));
+        }
     }
 
     /**
@@ -156,6 +179,31 @@ public final class CarrierAccountTest {
         assertInstanceOf(CarrierAccount.class, carrierAccount);
         assertTrue(updatedCarrierAccount.getId().startsWith("ca_"));
         assertEquals(testDescription, updatedCarrierAccount.getDescription());
+    }
+
+    /**
+     * Test updating an UPS account.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testUpdateUpsAccount() throws EasyPostException {
+        vcr.setUpTest("update_ups");
+
+        CarrierAccount carrierAccount = createBasicCarrierAccount();
+
+        String testDescription = "My custom description";
+
+        Map<String, Object> updateParams = new HashMap<>();
+        updateParams.put("description", testDescription);
+
+        try {
+            vcr.client.carrierAccount.updateUps(carrierAccount.getId(), updateParams);
+        } catch (InvalidRequestError e) {
+            // We're sending bad data to the API, so we expect an error
+            assertEquals(422, e.getStatusCode());
+            assertTrue(e.getMessage().equals("The request was understood, but cannot be processed."));
+        }
     }
 
     /**

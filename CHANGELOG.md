@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds new `updateUps` function under `CarrierAccountService`
+  - Starting `2024-08-05`, UPS accounts can no longer be updated through the normal update function and must use the UPS specific `updateUps` function
+
 ## v7.2.1 (2024-04-12)
 
 - Fix `Fields` serialization bug causing carrier account operations to fail
