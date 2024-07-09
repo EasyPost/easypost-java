@@ -101,7 +101,6 @@ public class CarrierAccountService {
                 client);
     }
 
-
     /**
      * Delete this carrier account.
      *
