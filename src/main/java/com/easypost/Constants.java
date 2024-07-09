@@ -65,6 +65,11 @@ public abstract class Constants {
                 "FedexSmartpostAccount");
     }
 
+    public abstract static class UpsAccountTypes {
+        public static final List<String> CARRIER_TYPES_WITH_CUSTOM_WORKFLOW = ImmutableList.of("UpsAccount",
+                "UpsMailInnovationsAccount", "UpsSurepostAccount");
+    }
+
     public abstract static class Http {
         public static final String API_BASE = "https://api.easypost.com";
         public static final String CHARSET = "UTF-8";

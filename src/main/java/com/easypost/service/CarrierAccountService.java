@@ -34,16 +34,7 @@ public class CarrierAccountService {
     public CarrierAccount create(final Map<String, Object> params) throws EasyPostException {
         String type = (String) params.get("type");
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
-
-        if (type == null) {
-            throw new MissingParameterError(
-                    String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));
-        } else if (type.equals("UpsAccount")) {
-            wrappedParams.put("ups_oauth_registrations", params);
-        } else {
-            wrappedParams.put("carrier_account", params);
-        }
-
+        wrappedParams.put(selectTopLayerKey(type), params);
         String endpoint = selectCarrierAccountCreationEndpoint(type);
 
         return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, CarrierAccount.class, client);
@@ -97,28 +88,19 @@ public class CarrierAccountService {
      * @throws EasyPostException when the request fails.
      */
     public CarrierAccount update(String id, final Map<String, Object> params) throws EasyPostException {
+        CarrierAccount carrierAccount = this.retrieve(id);
+        String type = (String) carrierAccount.getType();
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("carrier_account", params);
+        wrappedParams.put(selectTopLayerKey(type), params);
 
-        String endpoint = "carrier_accounts/" + id;
+        String endpoint = (Constants.UpsAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(type) 
+                  ? "ups_oauth_registrations/"
+                  : "carrier_accounts/") + id;
 
         return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, CarrierAccount.class,
                 client);
     }
 
-    /**
-     * Update UPS carrier account.
-     *
-     * @param id     The ID of UPS account
-     * @param params parameters to update.
-     * @return updated CarrierAccount object.
-     * @throws EasyPostException when the request fails.
-     */
-    public CarrierAccount updateUps(String id, final Map<String, Object> params) throws EasyPostException {
-        String endpoint = "ups_oauth_registrations/" + id;
-
-        return Requestor.request(RequestMethod.PUT, endpoint, params, CarrierAccount.class, client);
-    }
 
     /**
      * Delete this carrier account.
@@ -147,5 +129,23 @@ public class CarrierAccountService {
         } else {
             return "carrier_accounts";
         }
+    }
+
+    /**
+     * Select the top-layer key for the carrier account creation/update request based on the
+     * carrier type.
+     *
+     * @param carrierAccountType The type of carrier account to create.
+     * @return The top-layer key for the carrier account creation/update request.
+     */
+    private static String selectTopLayerKey(final String carrierAccountType) throws EasyPostException {
+        if (carrierAccountType == null) {
+            throw new MissingParameterError(
+                    String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));
+        }
+
+        return Constants.UpsAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)
+            ? "ups_oauth_registrations"
+            : "carrier_account";
     }
 }
