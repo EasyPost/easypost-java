@@ -123,7 +123,7 @@ public class CarrierAccountService {
     private static String selectCarrierAccountCreationEndpoint(final String carrierAccountType) {
         if (Constants.CarrierAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
             return "carrier_accounts/register";
-        } else if (carrierAccountType.equals("UpsAccount")) {
+        } else if (Constants.UpsAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
             return "ups_oauth_registrations";
         } else {
             return "carrier_accounts";
