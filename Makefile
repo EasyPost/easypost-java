@@ -28,8 +28,13 @@ install-styleguide: | update-examples-submodule
 	curl -LJs https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.3.1/checkstyle-10.3.1-all.jar -o checkstyle.jar
 	sh examples/symlink_directory_files.sh examples/style_guides/java .
 
+## init-examples-submodule - Initialize the examples submodule
+init-examples-submodule:
+	git submodule init
+	git submodule update
+
 ## install - Install requirements
-install: | update-examples-submodule
+install: | init-examples-submodule
 
 ## lint - Lints the project
 lint: checkstyle scan
