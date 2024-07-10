@@ -66,7 +66,7 @@ public abstract class Constants {
     }
 
     public abstract static class UpsAccountTypes {
-        public static final List<String> CARRIER_TYPES_WITH_CUSTOM_WORKFLOW = ImmutableList.of("UpsAccount",
+        public static final List<String> UPS_OAUTH_CARRIER_ACCOUNT_TYPES = ImmutableList.of("UpsAccount",
                 "UpsMailInnovationsAccount", "UpsSurepostAccount");
     }
 

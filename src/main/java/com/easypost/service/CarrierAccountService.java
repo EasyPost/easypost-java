@@ -93,7 +93,7 @@ public class CarrierAccountService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put(selectTopLayerKey(type), params);
 
-        String endpoint = (Constants.UpsAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(type) 
+        String endpoint = (Constants.UpsAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(type) 
                   ? "ups_oauth_registrations/"
                   : "carrier_accounts/") + id;
 
@@ -123,7 +123,7 @@ public class CarrierAccountService {
     private static String selectCarrierAccountCreationEndpoint(final String carrierAccountType) {
         if (Constants.CarrierAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
             return "carrier_accounts/register";
-        } else if (Constants.UpsAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
+        } else if (Constants.UpsAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(carrierAccountType)) {
             return "ups_oauth_registrations";
         } else {
             return "carrier_accounts";
@@ -143,7 +143,7 @@ public class CarrierAccountService {
                     String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));
         }
 
-        return Constants.UpsAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)
+        return Constants.UpsAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(carrierAccountType)
             ? "ups_oauth_registrations"
             : "carrier_account";
     }
