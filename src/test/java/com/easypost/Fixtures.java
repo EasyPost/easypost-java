@@ -328,6 +328,15 @@ public abstract class Fixtures {
      * @return The default planned ship date
      */
     public static String plannedShipDate() {
-        return "2023-12-28";
+        return "2024-07-16";
+    }
+
+    /**
+     * Get the default desired delivery date.
+     *
+     * @return The default desired delivery date
+     */
+    public static String desiredDeliveryDate() {
+        return "2024-07-16";
     }
 }
