@@ -6,5 +6,5 @@ import lombok.Getter;
 public class ShipDateForZipPairRecommendation {
     private String carrier;
     private String service;
-    private TimeInTransitDetailsForDeliveryDate easypostTimeInTransitData;
+    private TimeInTransitDetailsForShipDate easypostTimeInTransitData;
 }

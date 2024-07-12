@@ -9,6 +9,7 @@ import com.easypost.model.EstimatedDeliveryDate;
 import com.easypost.model.Form;
 import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
+import com.easypost.model.RecommendShipDateForShipmentResult;
 import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
 import com.easypost.model.SmartRate;
@@ -730,9 +731,9 @@ public final class ShipmentTest {
 
         Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
 
-        List<EstimatedDeliveryDate> estimatedDeliveryDates = vcr.client.shipment
+        List<RecommendShipDateForShipmentResult> estimatedDeliveryDates = vcr.client.shipment
                 .recommendShipDate(shipment.getId(), Fixtures.desiredDeliveryDate());
-        for (EstimatedDeliveryDate estimatedDeliveryDate : estimatedDeliveryDates) {
+        for (RecommendShipDateForShipmentResult estimatedDeliveryDate : estimatedDeliveryDates) {
             assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData());
         }
     }
