@@ -10,6 +10,8 @@ import com.easypost.model.ShipmentCollection;
 import com.easypost.model.EstimatedDeliveryDate;
 import com.easypost.model.EstimatedDeliveryDateResponse;
 import com.easypost.model.Rate;
+import com.easypost.model.RecommendShipDateForShipmentResult;
+import com.easypost.model.RecommendShipDateResponse;
 import com.easypost.model.Shipment;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
@@ -459,6 +461,26 @@ public class ShipmentService {
 
         EstimatedDeliveryDateResponse response = Requestor.request(RequestMethod.GET, endpoint, params,
                 EstimatedDeliveryDateResponse.class, client);
+        return response.getRates();
+    }
+
+    /**
+     * Retrieve a recommended ship date for an existing Shipment via the Precision Shipping API,
+     * based on a specific desired delivery date.
+     *
+     * @param id              The id of the shipment.
+     * @param desiredDeliveryDate The desired delivery date.
+     * @return EstimatedDeliveryDate object.
+     * @throws EasyPostException When the request fails.
+     */
+    public List<RecommendShipDateForShipmentResult> recommendShipDate(final String id, final String desiredDeliveryDate)
+            throws EasyPostException {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("desired_delivery_date", desiredDeliveryDate);
+        String endpoint = "shipments/" + id + "/smartrate/precision_shipping";
+
+        RecommendShipDateResponse response = Requestor.request(RequestMethod.GET, endpoint, params,
+                RecommendShipDateResponse.class, client);
         return response.getRates();
     }
 }

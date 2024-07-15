@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1720803740,
+    "request": {
+      "body": "{\n  \"to_zip\": \"90277\",\n  \"from_zip\": \"94107\",\n  \"carriers\": [\n    \"USPS\"\n  ],\n  \"desired_delivery_date\": \"2024-07-16\"\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/smartrate/deliver_on"
+    },
+    "response": {
+      "body": "{\n  \"to_zip\": \"90277\",\n  \"carriers_without_tint_estimates\": null,\n  \"from_zip\": \"94107\",\n  \"saturday_delivery\": null,\n  \"desired_delivery_date\": \"2024-07-16\",\n  \"results\": [\n    {\n      \"carrier\": \"USPS\",\n      \"service\": \"express\",\n      \"easypost_time_in_transit_data\": {\n        \"days_in_transit\": {\n          \"percentile_90\": 3.0,\n          \"percentile_50\": 2.0,\n          \"percentile_85\": 2.0,\n          \"percentile_95\": 3.0,\n          \"percentile_75\": 2.0,\n          \"percentile_97\": 4.0,\n          \"percentile_99\": 7.0\n        },\n        \"delivery_date_confidence\": 0.47,\n        \"ship_on_date\": \"2024-07-15\",\n        \"estimated_transit_days\": 1.0\n      }\n    },\n    {\n      \"carrier\": \"USPS\",\n      \"service\": \"groundadvantage\",\n      \"easypost_time_in_transit_data\": {\n        \"days_in_transit\": {\n          \"percentile_90\": 4.0,\n          \"percentile_50\": 2.0,\n          \"percentile_85\": 4.0,\n          \"percentile_95\": 5.0,\n          \"percentile_75\": 3.0,\n          \"percentile_97\": 5.0,\n          \"percentile_99\": 9.0\n        },\n        \"delivery_date_confidence\": 0.21,\n        \"ship_on_date\": \"2024-07-13\",\n        \"estimated_transit_days\": 3.0\n      }\n    },\n    {\n      \"carrier\": \"USPS\",\n      \"service\": \"librarymail\",\n      \"easypost_time_in_transit_data\": {\n        \"days_in_transit\": {\n          \"percentile_90\": 4.0,\n          \"percentile_50\": 2.0,\n          \"percentile_85\": 4.0,\n          \"percentile_95\": 5.0,\n          \"percentile_75\": 3.0,\n          \"percentile_97\": 6.0,\n          \"percentile_99\": 9.0\n        },\n        \"delivery_date_confidence\": 0.25,\n        \"ship_on_date\": \"2024-07-13\",\n        \"estimated_transit_days\": 3.0\n      }\n    },\n    {\n      \"carrier\": \"USPS\",\n      \"service\": \"mediamail\",\n      \"easypost_time_in_transit_data\": {\n        \"days_in_transit\": {\n          \"percentile_90\": 4.0,\n          \"percentile_50\": 2.0,\n          \"percentile_85\": 3.0,\n          \"percentile_95\": 5.0,\n          \"percentile_75\": 3.0,\n          \"percentile_97\": 5.0,\n          \"percentile_99\": 7.0\n        },\n        \"delivery_date_confidence\": 0.24,\n        \"ship_on_date\": \"2024-07-13\",\n        \"estimated_transit_days\": 3.0\n      }\n    },\n    {\n      \"carrier\": \"USPS\",\n      \"service\": \"priority\",\n      \"easypost_time_in_transit_data\": {\n        \"days_in_transit\": {\n          \"percentile_90\": 4.0,\n          \"percentile_50\": 2.0,\n          \"percentile_85\": 4.0,\n          \"percentile_95\": 5.0,\n          \"percentile_75\": 3.0,\n          \"percentile_97\": 5.0,\n          \"percentile_99\": 7.0\n        },\n        \"delivery_date_confidence\": 0.19,\n        \"ship_on_date\": \"2024-07-13\",\n        \"estimated_transit_days\": 3.0\n      }\n    }\n  ]\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "1695"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb40nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-ep-request-uuid": [
+          "efcdd3866691619ce7873c8300434549"
+        ],
+        "x-proxied": [
+          "extlb2nuq fa152d4755",
+          "intlb4nuq fa152d4755"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.081346"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202407112200-905bf72bcb-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/smartrate/deliver_on"
+    },
+    "duration": 499
+  }
+]

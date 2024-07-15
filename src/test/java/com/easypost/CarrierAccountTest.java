@@ -116,7 +116,7 @@ public final class CarrierAccountTest {
 
 
     /**
-     * Test creating a carrier account with a custom workflow.
+     * Test creating a UPS carrier account.
      *
      * @throws EasyPostException when the request fails.
      */

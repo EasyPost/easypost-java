@@ -41,6 +41,7 @@ public class EasyPostClient {
     public final ReportService report;
     public final ScanformService scanForm;
     public final ShipmentService shipment;
+    public final SmartRateService smartRate;
     public final TrackerService tracker;
     public final UserService user;
     public final WebhookService webhook;
@@ -150,6 +151,7 @@ public class EasyPostClient {
         this.report = new ReportService(this);
         this.scanForm = new ScanformService(this);
         this.shipment = new ShipmentService(this);
+        this.smartRate = new SmartRateService(this);
         this.tracker = new TrackerService(this);
         this.user = new UserService(this);
         this.webhook = new WebhookService(this);

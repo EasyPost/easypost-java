@@ -9,6 +9,7 @@ import com.easypost.model.EstimatedDeliveryDate;
 import com.easypost.model.Form;
 import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
+import com.easypost.model.RecommendShipDateForShipmentResult;
 import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
 import com.easypost.model.SmartRate;
@@ -716,6 +717,24 @@ public final class ShipmentTest {
             assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData().getEasypostEstimatedDeliveryDate());
             assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData().getDaysInTransit());
             assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData().getDaysInTransit().getPercentile99());
+        }
+    }
+
+    /**
+     * Test that we retrieve SmartRates when providing a shipment and desired delivery date.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testRetrieveRecommendDate() throws EasyPostException {
+        vcr.setUpTest("retrieve_recommend_date");
+
+        Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
+
+        List<RecommendShipDateForShipmentResult> estimatedDeliveryDates = vcr.client.shipment
+                .recommendShipDate(shipment.getId(), Fixtures.desiredDeliveryDate());
+        for (RecommendShipDateForShipmentResult estimatedDeliveryDate : estimatedDeliveryDates) {
+            assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData());
         }
     }
 }
