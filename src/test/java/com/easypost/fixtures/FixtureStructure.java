@@ -3,6 +3,7 @@ package com.easypost.fixtures;
 import com.easypost.fixtures.components.Addresses;
 import com.easypost.fixtures.components.CarrierAccounts;
 import com.easypost.fixtures.components.CarrierStrings;
+import com.easypost.fixtures.components.Claims;
 import com.easypost.fixtures.components.CreditCards;
 import com.easypost.fixtures.components.CustomsInfos;
 import com.easypost.fixtures.components.CustomsItems;
@@ -29,6 +30,9 @@ public final class FixtureStructure {
 
     @SerializedName ("carrier_strings")
     public CarrierStrings carrierStrings;
+
+    @SerializedName ("claims")
+    public Claims claims;
 
     @SerializedName ("credit_cards")
     public CreditCards creditCards;
