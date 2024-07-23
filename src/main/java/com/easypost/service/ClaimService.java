@@ -58,9 +58,18 @@ public class ClaimService {
      * @throws EasyPostException when the request fails.
      */
     public ClaimCollection all(final Map<String, Object> params) throws EasyPostException {
+        String type = (String) params.get("type");
+        String status = (String) params.get("status");
+        params.remove(type);
+        params.remove(status);
         String endpoint = "claims";
 
-        return Requestor.request(RequestMethod.GET, endpoint, params, ClaimCollection.class, client);
+        ClaimCollection claimCollection = 
+            Requestor.request(RequestMethod.GET, endpoint, params, ClaimCollection.class, client);
+        claimCollection.setType(type);
+        claimCollection.setType(status);
+
+        return claimCollection;
     }
 
     /**
@@ -72,7 +81,7 @@ public class ClaimService {
      */
     public Claim cancel(final String id) throws EasyPostException {
         String endpoint = String.format("claims/%s/cancel", id);
-        
+
         return Requestor.request(RequestMethod.POST, endpoint, null, Claim.class, client);
     }
 
