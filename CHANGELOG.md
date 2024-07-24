@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v7.4.1 (2024-07-24)
 
 - Fix bug where response hooks were not being called if an API request failed
 
