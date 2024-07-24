@@ -250,6 +250,18 @@ public abstract class Fixtures {
     }
 
     /**
+     * Get the default claim.
+     *
+     * @return The default claim
+     */
+    public static HashMap<String, Object> basicClaim() {
+        /*
+        This fixture will require you to append a `tracking_code` and `amount`.
+         */
+        return Objects.requireNonNull(getFixtureData()).claims.basic;
+    }
+
+    /**
      * Get the default insurance.
      *
      * @return The default insurance

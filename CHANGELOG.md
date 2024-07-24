@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## v7.3.0 (2024-07-15)
+## Next Release
+
+- Add new `Claim` service for filing claims on EasyPost shipments and insurances
+
+## v7.3.0 (2024-07-16)
 
 - Adds new `shipment.recommendShipDate`, `smartrate.recommendShipDate`, and `smartrate.estimateDeliveryDate` functions
 - Routes `UpsAccount`, `UpsMailInnovationsAccount`, and `UpsSurepostAccount` create/update requests to the new `/ups_oauth_registrations` endpoint

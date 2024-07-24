@@ -3,6 +3,7 @@ package com.easypost;
 import com.easypost.http.HashMapSerializer;
 import com.easypost.model.AddressVerification;
 import com.easypost.model.AddressVerificationDeserializer;
+import com.easypost.model.DateDeserializer;
 import com.easypost.model.Error;
 import com.easypost.model.ErrorDeserializer;
 import com.easypost.model.SmartrateCollection;
@@ -16,6 +17,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,7 +85,8 @@ public abstract class Constants {
                 .registerTypeAdapter(Error.class, new ErrorDeserializer())
                 .registerTypeAdapter(AddressVerification.class, new AddressVerificationDeserializer())
                 .registerTypeAdapter(StatelessRate[].class, new StatelessRateDeserializer())
-                .registerTypeAdapter(Webhook[].class, new WebhookDeserializer()).create();
+                .registerTypeAdapter(Webhook[].class, new WebhookDeserializer())
+                .registerTypeAdapter(Date.class, new DateDeserializer()).create();
         public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
     }
