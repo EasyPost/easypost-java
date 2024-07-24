@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Fix bug where response hooks were not being called if an API request failed
+
 ## v7.4.0 (2024-07-24)
 
 - Add new `Claim` service for filing claims on EasyPost shipments and insurances
