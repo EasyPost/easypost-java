@@ -606,14 +606,14 @@ public abstract class Requestor {
         }
         int rCode = response.getResponseCode();
         String rBody = response.getResponseBody();
-        if (rCode < HttpURLConnection.HTTP_OK || rCode >= HttpURLConnection.HTTP_MULT_CHOICE) {
-            handleAPIError(rBody, rCode);
-        }
 
         ResponseHookResponses responseHookResponses = new ResponseHookResponses(rCode, headers, method.toString(), url,
                 rBody, Instant.now().toString(), requestTimestamp.toString(), requestUuid.toString());
-
         client.getResponseHooks().executeEventHandler(responseHookResponses);
+
+        if (rCode < HttpURLConnection.HTTP_OK || rCode >= HttpURLConnection.HTTP_MULT_CHOICE) {
+            handleAPIError(rBody, rCode);
+        }
 
         return Constants.Http.GSON.fromJson(rBody, clazz);
     }

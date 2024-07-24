@@ -1,5 +1,6 @@
 package com.easypost;
 
+import com.easypost.exception.API.NotFoundError;
 import com.easypost.exception.EasyPostException;
 import com.easypost.hooks.RequestHookResponses;
 import com.easypost.hooks.ResponseHookResponses;
@@ -9,12 +10,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.function.Function;
 
 public class HookTest {
     private static TestUtils.VCR vcr;
+
+    private static boolean hookHit = false;
 
     /**
      * Set up the testing environment for this file.
@@ -63,6 +67,27 @@ public class HookTest {
         assertNotNull(data.getRequestBody());
         assertNotNull(data.getRequestTimestamp());
         assertNotNull(data.getRequestUuid());
+
+        return true;
+    }
+
+    /**
+     * Test subscribing a response hook when an HTTP error occurs.
+     *
+     * @param data The ResponseHookResponses object representing the hook data.
+     * @return The result of the test.
+     */
+    public static Object testResponseHookOnHttpError(ResponseHookResponses data) {
+        assertEquals("https://api.easypost.com/v2/parcels/par_123", data.getPath());
+        assertEquals("GET", data.getMethod());
+        assertEquals(404, data.getHttpStatus());
+        assertNotNull(data.getHeaders());
+        assertNotNull(data.getResponseBody());
+        assertNotNull(data.getRequestTimestamp());
+        assertNotNull(data.getRequestTimestamp());
+        assertNotNull(data.getRequestUuid());
+
+        hookHit = true;
 
         return true;
     }
@@ -132,6 +157,29 @@ public class HookTest {
         vcr.client.unsubscribeFromResponseHook(failedResponseHook);
 
         vcr.client.parcel.create(Fixtures.basicParcel());
+    }
 
+    /**
+     * Test that response hooks are still fired even if the HTTP call fails.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testResponseHookFiredOnHTTPError() throws EasyPostException {
+        vcr.setUpTest("http_error");
+
+        hookHit = false;
+
+        Function<ResponseHookResponses, Object> requestHook = HookTest::testResponseHookOnHttpError;
+
+        vcr.client.subscribeToResponseHook(requestHook);
+
+        try {
+            vcr.client.parcel.retrieve("par_123");
+        } catch (NotFoundError e) {
+            assertEquals(404, e.getStatusCode());
+        }
+
+        assertTrue(hookHit);
     }
 }

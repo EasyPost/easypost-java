@@ -124,10 +124,6 @@ public final class CarrierAccountTest {
     public void testCreateWithUPS() throws EasyPostException {
         vcr.setUpTest("create_with_ups");
 
-        Map<String, Object> data = new HashMap<>();
-        data.put("type", "UpsAccount");
-        data.put("account_number", "123456789");
-
         CarrierAccount upsAccount = createUpsCarrierAccount();
 
         assertInstanceOf(CarrierAccount.class, upsAccount);
