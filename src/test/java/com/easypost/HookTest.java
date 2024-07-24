@@ -71,6 +71,12 @@ public class HookTest {
         return true;
     }
 
+    /**
+     * Test subscribing a response hook when an HTTP error occurs.
+     *
+     * @param data The ResponseHookResponses object representing the hook data.
+     * @return The result of the test.
+     */
     public static Object testResponseHookOnHttpError(ResponseHookResponses data) {
         assertEquals("https://api.easypost.com/v2/parcels/par_123", data.getPath());
         assertEquals("GET", data.getMethod());
