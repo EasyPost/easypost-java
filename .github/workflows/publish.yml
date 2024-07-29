@@ -1,0 +1,63 @@
+# This workflow will build a Java project with Maven and publish it to Maven Central Repository
+# ref: https://github.com/actions/setup-java/blob/v3.11.0/docs/advanced-usage.md#Publishing-using-Apache-Maven
+
+# Secrets required:
+# - MAVEN_USERNAME: Username for Maven Central Repository
+# - MAVEN_CENTRAL_TOKEN: Token/password for Maven Central Repository
+# - MAVEN_GPG_PRIVATE_KEY: GPG private key to sign the artifacts
+# - MAVEN_GPG_PASSPHRASE: Passphrase for the GPG private key
+
+name: Publish library to Maven Central Repository
+
+on:
+  release:
+    types: [ created ]
+    secrets:
+      MAVEN_USERNAME:
+        required: true
+      MAVEN_CENTRAL_TOKEN:
+        required: true
+      MAVEN_GPG_PRIVATE_KEY:
+        required: true
+      MAVEN_GPG_PASSPHRASE:
+        required: true
+  workflow_dispatch: ~
+
+jobs:
+  release:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: "22" # Always use the latest JDK
+          server-id: "ossrh"
+          server-username: MAVEN_USERNAME # env variable for username in deploy
+          server-password: MAVEN_CENTRAL_TOKEN # env variable for token in deploy
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }} # Value of the GPG private key to import
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      - name: Publish to Apache Maven Central
+        run: mvn deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Upload output files to release
+        uses: AButler/upload-release-assets@v3.0
+        with:
+          files: "target/*.jar;target/*.pom;target/*.asc"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
