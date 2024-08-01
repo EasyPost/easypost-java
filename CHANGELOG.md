@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Fix pagination parameters for `getNextPage` in `User` service
+
 ## v7.4.1 (2024-07-24)
 
 - Fix bug where response hooks were not being called if an API request failed

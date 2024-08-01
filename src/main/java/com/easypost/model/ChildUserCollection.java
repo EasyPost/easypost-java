@@ -14,7 +14,7 @@ public final class ChildUserCollection extends PaginatedCollection<User> {
         String lastId = children.get(children.size() - 1).getId();
 
         Map<String, Object> parameters = new java.util.HashMap<>();
-        parameters.put("before_id", lastId);
+        parameters.put("after_id", lastId);
 
         if (pageSize != null) {
             parameters.put("page_size", pageSize);
