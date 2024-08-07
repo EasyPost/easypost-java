@@ -3,7 +3,7 @@ package com.easypost.model;
 import lombok.Getter;
 
 @Getter
-public final class Surcharge extends EasyPostResource {
+public final class Surcharge {
     private String object;
     private String type;
     private String amount;
