@@ -1,5 +1,6 @@
 package com.easypost.model;
 
+import java.util.List;
 import java.util.Map;
 
 import lombok.Getter;
@@ -22,4 +23,5 @@ public class Rate extends EasyPostResource {
     private String carrierAccountId;
     private String billingType;
     private Map<String, String> details;
+    private List<Surcharge> surcharges;
 }
