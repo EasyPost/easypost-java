@@ -2,6 +2,7 @@
 
 ## Next Release
 
+- Adds `surcharges` property and model to `Rate` object
 - Fix pagination parameters for `getNextPage` in `User` service
 
 ## v7.4.1 (2024-07-24)
