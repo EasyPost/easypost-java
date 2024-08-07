@@ -7,7 +7,7 @@ public final class Surcharge {
     private String object;
     private String type;
     private String amount;
-    private String list_amount;
-    private String retail_amount;
+    private String listAmount;
+    private String retailAmount;
     private String currency;
 }
