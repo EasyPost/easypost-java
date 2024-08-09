@@ -76,8 +76,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: Install style guide
-        run: make install-styleguide
+      - name: Install checkstyle and style guide
+        run: make install-checkstyle
       - name: Load Maven dependencies and CVE database cache
         uses: actions/cache@v3
         with:
