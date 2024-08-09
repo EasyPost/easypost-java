@@ -11,7 +11,7 @@ name: Publish library to Maven Central Repository
 
 on:
   release:
-    types: [ created ]
+    types: [created]
     secrets:
       MAVEN_USERNAME:
         required: true
@@ -44,8 +44,8 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
 
-      - name: Clean, build and publish to Apache Maven Central
-        run: make publish pass=${{ secrets.MAVEN_GPG_PASSPHRASE }}
+      - name: Publish to Apache Maven Central
+        run: mvn deploy
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
