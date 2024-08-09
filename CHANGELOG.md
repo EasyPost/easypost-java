@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v7.4.2 (2024-08-09)
 
 - Fix pagination parameters for `getNextPage` in `User` service
 
