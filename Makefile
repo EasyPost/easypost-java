@@ -23,9 +23,12 @@ docs:
 	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true
 	cp -R target/apidocs/ ./docs/
 
-## install-styleguide - Install style guides and CheckStyle utilities (Unix only)
-install-styleguide: | update-examples-submodule
+## install-checkstyle - Install the Checkstyle tool (Unix only)
+install-checkstyle: | install-styleguide
 	curl -LJs https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.3.1/checkstyle-10.3.1-all.jar -o checkstyle.jar
+
+## install-styleguide - Install style guides
+install-styleguide: | init-examples-submodule
 	sh examples/symlink_directory_files.sh examples/style_guides/java .
 
 ## init-examples-submodule - Initialize the examples submodule
@@ -34,7 +37,7 @@ init-examples-submodule:
 	git submodule update
 
 ## install - Install requirements
-install: | init-examples-submodule
+install: | install-checkstyle
 
 ## lint - Lints the project
 lint: checkstyle scan
@@ -70,4 +73,4 @@ update-examples-submodule:
 	git submodule init
 	git submodule update --remote
 
-.PHONY: help build clean coverage docs install-styleguide install lint publish publish-dry release scan scan-strict test update-examples-submodule
+.PHONY: help build clean coverage docs install-checkstyle install-styleguide install lint publish publish-dry release scan scan-strict test update-examples-submodule
