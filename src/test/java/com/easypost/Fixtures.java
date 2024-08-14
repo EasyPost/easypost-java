@@ -113,15 +113,6 @@ public abstract class Fixtures {
     }
 
     /**
-     * Get the default webhook URL.
-     *
-     * @return The default webhook URL
-     */
-    public static String webhookUrl() {
-        return Objects.requireNonNull(getFixtureData()).webhookUrl;
-    }
-
-    /**
      * Get the first default address.
      *
      * @return The first default address
@@ -300,6 +291,33 @@ public abstract class Fixtures {
         }
 
         return data;
+    }
+
+    /**
+     * Get the default webhook URL.
+     *
+     * @return The default webhook URL
+     */
+    public static String webhookHmacSignature() {
+        return Objects.requireNonNull(getFixtureData()).webhookHmacSignature;
+    }
+
+    /**
+     * Get the default webhook URL.
+     *
+     * @return The default webhook URL
+     */
+    public static String webhookSecret() {
+        return Objects.requireNonNull(getFixtureData()).webhookSecret;
+    }
+
+    /**
+     * Get the default webhook URL.
+     *
+     * @return The default webhook URL
+     */
+    public static String webhookUrl() {
+        return Objects.requireNonNull(getFixtureData()).webhookUrl;
     }
 
     /**
