@@ -185,7 +185,7 @@ public final class BatchTest {
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testAddRemoveShipentWithList() throws EasyPostException {
+    public void testAddRemoveShipmentWithList() throws EasyPostException {
         vcr.setUpTest("add_remove_shipment_with_list");
 
         Shipment shipment = vcr.client.shipment.create(Fixtures.oneCallBuyShipment());

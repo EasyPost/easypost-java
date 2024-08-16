@@ -43,8 +43,7 @@ public final class WebhookTest {
     public void cleanup() {
         if (testWebhookId != null) {
             try {
-                Webhook webhook = vcr.client.webhook.retrieve(testWebhookId);
-                vcr.client.webhook.delete(webhook.getId());
+                vcr.client.webhook.delete(testWebhookId);
                 testWebhookId = null;
             } catch (Exception e) {
                 // in case we try to delete something that's already been deleted

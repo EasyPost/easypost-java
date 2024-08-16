@@ -21,8 +21,8 @@ import static com.easypost.TestUtils.readFile;
 
 public abstract class Fixtures {
     private static String readFixtureData() {
-        Path fixtureDataPath =
-                Paths.get(getSourceFileDirectory(), "examples/official/fixtures/client-library-fixtures.json");
+        Path fixtureDataPath = Paths.get(getSourceFileDirectory(),
+                "examples/official/fixtures/client-library-fixtures.json");
         return readFile(fixtureDataPath);
     }
 
@@ -54,8 +54,8 @@ public abstract class Fixtures {
      */
     public static String uspsCarrierAccountID() {
         // Fallback to the EasyPost Java Client Library Test User USPS carrier account
-        return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID") :
-                "ca_f09befdb2e9c410e95c7622ea912c18c";
+        return System.getenv("USPS_CARRIER_ACCOUNT_ID") != null ? System.getenv("USPS_CARRIER_ACCOUNT_ID")
+                : "ca_f09befdb2e9c410e95c7622ea912c18c";
     }
 
     /**
@@ -220,10 +220,12 @@ public abstract class Fixtures {
         HashMap<String, Object> fixture = Objects.requireNonNull(getFixtureData()).pickups.basic;
 
         /*
-        If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
-        USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
+         * If you need to re-record cassettes, increment the date below and ensure it is
+         * one day in the future,
+         * USPS only does "next-day" pickups including Saturday but not Sunday or
+         * Holidays.
          */
-        String pickupDate = "2023-12-28";
+        String pickupDate = "2024-08-18";
 
         fixture.put("min_datetime", pickupDate);
         fixture.put("max_datetime", pickupDate);
@@ -247,7 +249,7 @@ public abstract class Fixtures {
      */
     public static HashMap<String, Object> basicClaim() {
         /*
-        This fixture will require you to append a `tracking_code` and `amount`.
+         * This fixture will require you to append a `tracking_code` and `amount`.
          */
         return Objects.requireNonNull(getFixtureData()).claims.basic;
     }
@@ -259,7 +261,8 @@ public abstract class Fixtures {
      */
     public static HashMap<String, Object> basicInsurance() {
         /*
-        This fixture will require you to append a `tracking_code` key with the shipment's tracking code.
+         * This fixture will require you to append a `tracking_code` key with the
+         * shipment's tracking code.
          */
         return Objects.requireNonNull(getFixtureData()).insurances.basic;
     }
@@ -285,7 +288,7 @@ public abstract class Fixtures {
 
         try {
             data = Files.readAllLines(Paths.get(fullFilePath), StandardCharsets.UTF_8)
-                .get(0).getBytes(Charset.defaultCharset());
+                    .get(0).getBytes(Charset.defaultCharset());
         } catch (IOException error) {
             throw new UncheckedIOException(error);
         }
@@ -327,9 +330,10 @@ public abstract class Fixtures {
      */
     public static HashMap<String, Object> creditCardDetails() {
         /*
-        The credit card details below are for a valid proxy card usable for tests only
-        and cannot be used for real transactions.
-        DO NOT alter these details with real credit card information.
+         * The credit card details below are for a valid proxy card usable for tests
+         * only
+         * and cannot be used for real transactions.
+         * DO NOT alter these details with real credit card information.
          */
         return Objects.requireNonNull(getFixtureData()).creditCards.test;
     }
@@ -358,7 +362,7 @@ public abstract class Fixtures {
      * @return The default planned ship date
      */
     public static String plannedShipDate() {
-        return "2024-07-16";
+        return "2024-08-18";
     }
 
     /**
@@ -367,6 +371,6 @@ public abstract class Fixtures {
      * @return The default desired delivery date
      */
     public static String desiredDeliveryDate() {
-        return "2024-07-16";
+        return "2024-08-21";
     }
 }

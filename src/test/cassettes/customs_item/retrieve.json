@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1703706008,
+    "recordedAt": 1723823857,
     "request": {
       "body": "{\n  \"customs_item\": {\n    \"quantity\": 2.0,\n    \"description\": \"Sweet shirts\",\n    \"weight\": 11.0,\n    \"hs_tariff_number\": \"654321\",\n    \"value\": 23.25,\n    \"origin_country\": \"US\"\n  }\n}",
       "method": "POST",
@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/customs_items"
     },
     "response": {
-      "body": "{\n  \"quantity\": 2.0,\n  \"code\": null,\n  \"eccn\": null,\n  \"created_at\": \"2023-12-27T19:40:08Z\",\n  \"description\": \"Sweet shirts\",\n  \"weight\": 11.0,\n  \"printed_commodity_identifier\": null,\n  \"origin_country\": \"US\",\n  \"manufacturer\": null,\n  \"mode\": \"test\",\n  \"updated_at\": \"2023-12-27T19:40:08Z\",\n  \"currency\": null,\n  \"id\": \"cstitem_7825080a199c4b5697b818408878891f\",\n  \"hs_tariff_number\": \"654321\",\n  \"value\": \"23.25\",\n  \"object\": \"CustomsItem\"\n}",
+      "body": "{\n  \"quantity\": 2.0,\n  \"code\": null,\n  \"eccn\": null,\n  \"created_at\": \"2024-08-16T15:57:37Z\",\n  \"description\": \"Sweet shirts\",\n  \"weight\": 11.0,\n  \"printed_commodity_identifier\": null,\n  \"origin_country\": \"US\",\n  \"manufacturer\": null,\n  \"mode\": \"test\",\n  \"updated_at\": \"2024-08-16T15:57:37Z\",\n  \"currency\": null,\n  \"id\": \"cstitem_16ac6b56315c4f2f8fb5c1d9e619ac30\",\n  \"hs_tariff_number\": \"654321\",\n  \"value\": \"23.25\",\n  \"object\": \"CustomsItem\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb35nuq"
+          "bigweb36nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,26 +58,26 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "05b5dcb9658c7d98f3fa0931001264cd"
+          "8a4bf43e66bf76f1e786bcc30035c341"
         ],
         "x-proxied": [
-          "intlb1nuq b3de2c47ef",
-          "extlb1nuq 003ad9bca0"
+          "intlb4nuq c0f5e722d1",
+          "extlb1nuq b6e1b5034c"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.035497"
+          "0.033638"
         ],
         "location": [
-          "/api/v2/customs_items/cstitem_7825080a199c4b5697b818408878891f"
+          "/api/v2/customs_items/cstitem_16ac6b56315c4f2f8fb5c1d9e619ac30"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202312202038-ae3ff8e94e-master"
+          "easypost-202408152333-48cda4a73e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -89,10 +89,10 @@
       },
       "uri": "https://api.easypost.com/v2/customs_items"
     },
-    "duration": 167
+    "duration": 235
   },
   {
-    "recordedAt": 1703706008,
+    "recordedAt": 1723823857,
     "request": {
       "body": "",
       "method": "GET",
@@ -104,10 +104,10 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/customs_items/cstitem_7825080a199c4b5697b818408878891f"
+      "uri": "https://api.easypost.com/v2/customs_items/cstitem_16ac6b56315c4f2f8fb5c1d9e619ac30"
     },
     "response": {
-      "body": "{\n  \"quantity\": 2.0,\n  \"code\": null,\n  \"eccn\": null,\n  \"created_at\": \"2023-12-27T19:40:08Z\",\n  \"description\": \"Sweet shirts\",\n  \"weight\": 11.0,\n  \"printed_commodity_identifier\": null,\n  \"origin_country\": \"US\",\n  \"manufacturer\": null,\n  \"mode\": \"test\",\n  \"updated_at\": \"2023-12-27T19:40:08Z\",\n  \"currency\": null,\n  \"id\": \"cstitem_7825080a199c4b5697b818408878891f\",\n  \"hs_tariff_number\": \"654321\",\n  \"value\": \"23.25\",\n  \"object\": \"CustomsItem\"\n}",
+      "body": "{\n  \"quantity\": 2.0,\n  \"code\": null,\n  \"eccn\": null,\n  \"created_at\": \"2024-08-16T15:57:37Z\",\n  \"description\": \"Sweet shirts\",\n  \"weight\": 11.0,\n  \"printed_commodity_identifier\": null,\n  \"origin_country\": \"US\",\n  \"manufacturer\": null,\n  \"mode\": \"test\",\n  \"updated_at\": \"2024-08-16T15:57:37Z\",\n  \"currency\": null,\n  \"id\": \"cstitem_16ac6b56315c4f2f8fb5c1d9e619ac30\",\n  \"hs_tariff_number\": \"654321\",\n  \"value\": \"23.25\",\n  \"object\": \"CustomsItem\"\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -120,7 +120,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb35nuq"
+          "bigweb36nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -147,23 +147,23 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "05b5dcb4658c7d98f41a561f001264ff"
+          "8a4bf43c66bf76f1e786bcc40035c372"
         ],
         "x-proxied": [
-          "intlb2nuq b3de2c47ef",
-          "extlb1nuq 003ad9bca0"
+          "intlb3nuq c0f5e722d1",
+          "extlb1nuq b6e1b5034c"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.023927"
+          "0.027447"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202312202038-ae3ff8e94e-master"
+          "easypost-202408152333-48cda4a73e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -173,8 +173,8 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/customs_items/cstitem_7825080a199c4b5697b818408878891f"
+      "uri": "https://api.easypost.com/v2/customs_items/cstitem_16ac6b56315c4f2f8fb5c1d9e619ac30"
     },
-    "duration": 151
+    "duration": 225
   }
 ]

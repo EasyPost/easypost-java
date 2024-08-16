@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1703706020,
+    "recordedAt": 1723824000,
     "request": {
       "body": "",
       "method": "GET",
@@ -15,20 +15,20 @@
       "uri": "https://api.easypost.com/v2/scan_forms?%70%61%67%65%5F%73%69%7A%65\u003d%35"
     },
     "response": {
-      "body": "{\n  \"has_more\": false,\n  \"scan_forms\": [\n    {\n      \"address\": {\n        \"zip\": \"90277\",\n        \"country\": \"US\",\n        \"city\": \"Redondo Beach\",\n        \"created_at\": \"2023-11-29T20:43:17+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"federal_tax_id\": null,\n        \"state_tax_id\": null,\n        \"carrier_facility\": null,\n        \"residential\": null,\n        \"updated_at\": \"2023-11-29T20:43:17+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Elizabeth Swan\",\n        \"company\": null,\n        \"street1\": \"179 N Harbor Dr\",\n        \"id\": \"adr_ecc5a29c8ef711eea0e9ac1f6bc539ae\",\n        \"street2\": null,\n        \"state\": \"CA\",\n        \"email\": \"test@example.com\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2023-11-29T20:43:19Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20231129/e83ea7762b97454abdae1ad327b79d95cf.pdf\",\n      \"form_file_type\": null,\n      \"batch_id\": \"batch_1c9bd3ea0e4d46178cd8c09317d17a15\",\n      \"created_at\": \"2023-11-29T20:43:19Z\",\n      \"id\": \"sf_914aabb062974d748493698a2c710b1e\",\n      \"confirmation\": null,\n      \"message\": null,\n      \"tracking_codes\": [\n        \"9400100105442286639633\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"90277\",\n        \"country\": \"US\",\n        \"city\": \"Redondo Beach\",\n        \"created_at\": \"2023-11-29T20:43:21+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"federal_tax_id\": null,\n        \"state_tax_id\": null,\n        \"carrier_facility\": null,\n        \"residential\": null,\n        \"updated_at\": \"2023-11-29T20:43:21+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Elizabeth Swan\",\n        \"company\": null,\n        \"street1\": \"179 N Harbor Dr\",\n        \"id\": \"adr_ef04bf768ef711ee8b92ac1f6bc53342\",\n        \"street2\": null,\n        \"state\": \"CA\",\n        \"email\": \"test@example.com\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2023-11-29T20:43:23Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20231129/e8ec9859931d8c4dee8bb227dba2d0a586.pdf\",\n      \"form_file_type\": null,\n      \"batch_id\": \"batch_7abe2b60816d4960b3de71509432e164\",\n      \"created_at\": \"2023-11-29T20:43:23Z\",\n      \"id\": \"sf_75deee50253641c6bf983981cdfad021\",\n      \"confirmation\": null,\n      \"message\": null,\n      \"tracking_codes\": [\n        \"9400100105442286639657\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"90277\",\n        \"country\": \"US\",\n        \"city\": \"Redondo Beach\",\n        \"created_at\": \"2023-12-07T19:09:50+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"federal_tax_id\": null,\n        \"state_tax_id\": null,\n        \"carrier_facility\": null,\n        \"residential\": null,\n        \"updated_at\": \"2023-12-07T19:09:50+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Elizabeth Swan\",\n        \"company\": null,\n        \"street1\": \"179 N Harbor Dr\",\n        \"id\": \"adr_322d2576953411ee9e1dac1f6bc53342\",\n        \"street2\": null,\n        \"state\": \"CA\",\n        \"email\": \"test@example.com\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2023-12-07T19:09:52Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20231207/e8a9f06ea5f8724d7aacb2997cb6413ef1.pdf\",\n      \"form_file_type\": null,\n      \"batch_id\": \"batch_ce3e184a0223463caa2fd7c3ca70bc7e\",\n      \"created_at\": \"2023-12-07T19:09:52Z\",\n      \"id\": \"sf_62afafd795d643f5a3eeaa98effeb497\",\n      \"confirmation\": null,\n      \"message\": null,\n      \"tracking_codes\": [\n        \"9400100105442292770399\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"90277\",\n        \"country\": \"US\",\n        \"city\": \"Redondo Beach\",\n        \"created_at\": \"2023-12-07T19:09:55+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"federal_tax_id\": null,\n        \"state_tax_id\": null,\n        \"carrier_facility\": null,\n        \"residential\": null,\n        \"updated_at\": \"2023-12-07T19:09:55+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Elizabeth Swan\",\n        \"company\": null,\n        \"street1\": \"179 N Harbor Dr\",\n        \"id\": \"adr_34bcc146953411ee915c3cecef1b359e\",\n        \"street2\": null,\n        \"state\": \"CA\",\n        \"email\": \"test@example.com\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2023-12-07T19:09:57Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20231207/e8ac31ee91b25d431d8142e92a948459c5.pdf\",\n      \"form_file_type\": null,\n      \"batch_id\": \"batch_148e6904b3fe401ea96cbc9b69d8b086\",\n      \"created_at\": \"2023-12-07T19:09:57Z\",\n      \"id\": \"sf_0dd9f099d06947039569d250c3e1b0e5\",\n      \"confirmation\": null,\n      \"message\": null,\n      \"tracking_codes\": [\n        \"9400100105442292770429\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    },\n    {\n      \"address\": {\n        \"zip\": \"90277\",\n        \"country\": \"US\",\n        \"city\": \"Redondo Beach\",\n        \"created_at\": \"2023-12-27T19:38:31+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"federal_tax_id\": null,\n        \"state_tax_id\": null,\n        \"carrier_facility\": null,\n        \"residential\": null,\n        \"updated_at\": \"2023-12-27T19:38:31+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Elizabeth Swan\",\n        \"company\": null,\n        \"street1\": \"179 N Harbor Dr\",\n        \"id\": \"adr_842f4be3a4ef11ee8dcfac1f6bc53342\",\n        \"street2\": null,\n        \"state\": \"CA\",\n        \"email\": \"test@example.com\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2023-12-27T19:38:42Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20231227/e8c1019afb68164622951fcc1c9fa9ebe6.pdf\",\n      \"form_file_type\": null,\n      \"batch_id\": \"batch_b6dd2fa2ad19432c9755ebd1761f0388\",\n      \"created_at\": \"2023-12-27T19:38:42Z\",\n      \"id\": \"sf_7593e990a4fc43b7b11f205e824219fe\",\n      \"confirmation\": null,\n      \"message\": null,\n      \"tracking_codes\": [\n        \"9400100207552002561357\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    }\n  ]\n}",
+      "body": "{\n  \"has_more\": false,\n  \"scan_forms\": [\n    {\n      \"address\": {\n        \"zip\": \"90277\",\n        \"country\": \"US\",\n        \"city\": \"Redondo Beach\",\n        \"created_at\": \"2024-08-16T15:59:34+00:00\",\n        \"verifications\": {},\n        \"mode\": \"test\",\n        \"federal_tax_id\": null,\n        \"state_tax_id\": null,\n        \"carrier_facility\": null,\n        \"residential\": null,\n        \"updated_at\": \"2024-08-16T15:59:34+00:00\",\n        \"phone\": \"REDACTED\",\n        \"name\": \"Elizabeth Swan\",\n        \"company\": null,\n        \"street1\": \"179 N Harbor Dr\",\n        \"id\": \"adr_883351f35be811ef8262ac1f6bc53342\",\n        \"street2\": null,\n        \"state\": \"CA\",\n        \"email\": \"test@example.com\",\n        \"object\": \"Address\"\n      },\n      \"updated_at\": \"2024-08-16T15:59:45Z\",\n      \"form_url\": \"https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/20240816/e85d9894fd73604ad8af0dccd779dd1aa7.pdf\",\n      \"form_file_type\": null,\n      \"batch_id\": \"batch_5e771df3d7cd47d2a9710fa069146f28\",\n      \"created_at\": \"2024-08-16T15:59:45Z\",\n      \"id\": \"sf_6eaa7fc503d54c268f98f9bfc867c05d\",\n      \"confirmation\": null,\n      \"message\": null,\n      \"tracking_codes\": [\n        \"9400100105807076063331\"\n      ],\n      \"object\": \"ScanForm\",\n      \"status\": \"created\"\n    }\n  ]\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "4563"
+          "939"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb38nuq"
+          "bigweb32nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -48,6 +48,9 @@
         "strict-transport-security": [
           "max-age\u003d31536000; includeSubDomains; preload"
         ],
+        "x-canary": [
+          "direct"
+        ],
         "x-xss-protection": [
           "1; mode\u003dblock"
         ],
@@ -55,23 +58,23 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "05b5dcb7658c7da4f43f9c89001273aa"
+          "8a4bf43a66bf7780e786ca0900365987"
         ],
         "x-proxied": [
-          "intlb1nuq b3de2c47ef",
-          "extlb1nuq 003ad9bca0"
+          "intlb3nuq c0f5e722d1",
+          "extlb1nuq b6e1b5034c"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.088238"
+          "0.271186"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202312202038-ae3ff8e94e-master"
+          "easypost-202408152333-48cda4a73e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -83,6 +86,6 @@
       },
       "uri": "https://api.easypost.com/v2/scan_forms?%70%61%67%65%5F%73%69%7A%65\u003d%35"
     },
-    "duration": 231
+    "duration": 469
   }
 ]

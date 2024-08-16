@@ -34,7 +34,7 @@ public class BetaReferralCustomerTest {
 
         assertEquals("BILLING.INVALID_PAYMENT_GATEWAY_REFERENCE", exception.getCode());
         assertEquals(422, exception.getStatusCode());
-        assertEquals("Invalid Payment Gateway Reference.", exception.getMessage());
+        assertEquals("Invalid connect integration.", exception.getMessage());
     }
 
     /**

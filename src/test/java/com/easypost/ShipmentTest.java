@@ -503,7 +503,7 @@ public final class ShipmentTest {
         List<String> service = new ArrayList<>(Arrays.asList("Priority"));
         Rate lowestRateService = shipment.lowestRate(null, service);
         assertEquals("Priority", lowestRateService.getService());
-        assertEquals(6.95, lowestRateService.getRate(), 0.01);
+        assertEquals(6.90, lowestRateService.getRate(), 0.01);
         assertEquals("USPS", lowestRateService.getCarrier());
 
         // Test lowest rate with carrier filter (should error due to bad carrier)
@@ -538,7 +538,7 @@ public final class ShipmentTest {
         });
 
         SmartRate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 3,
-            SmartrateAccuracy.Percentile90);
+                SmartrateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
         assertEquals("GroundAdvantage", deprecatedLowestSmartRateFilters.getService());

@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1703706059,
+    "recordedAt": 1723823879,
     "request": {
       "body": "",
       "method": "GET",
@@ -15,20 +15,20 @@
       "uri": "https://api.easypost.com/v2/referral_customers?%70%61%67%65%5F%73%69%7A%65\u003d%35"
     },
     "response": {
-      "body": "{\n  \"referral_customers\": [\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-26T15:50:28Z\",\n      \"default_carbon_offset\": false,\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"has_elevate_access\": false,\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"Firstname Lastname\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_634b6daa05744bfaa205058f06864363\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"email2@example.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": \"100.00\",\n      \"verified\": true,\n      \"created_at\": \"2022-04-27T20:20:52Z\",\n      \"default_carbon_offset\": false,\n      \"secondary_recharge_amount\": \"100.00\",\n      \"cc_fee_rate\": \"0.0325\",\n      \"has_elevate_access\": false,\n      \"recharge_threshold\": \"0.00\",\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": true,\n      \"name\": \"Firstname Lastname\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_35cb81fb8af1454dabf1f6afa7330634\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"email@example.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-28T22:34:38Z\",\n      \"default_carbon_offset\": false,\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"has_elevate_access\": false,\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"test test\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_fa93cc16bcc24c078ee057ce82f38eed\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"email@example.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-29T19:35:33Z\",\n      \"default_carbon_offset\": false,\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"has_elevate_access\": false,\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"test test\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_4a22730cdc844ce1bc2efbed999c869f\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"test@test.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": \"100.00\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-02T18:48:22Z\",\n      \"default_carbon_offset\": false,\n      \"secondary_recharge_amount\": \"100.00\",\n      \"cc_fee_rate\": \"0.0325\",\n      \"has_elevate_access\": false,\n      \"recharge_threshold\": \"0.00\",\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": true,\n      \"name\": \"Firstname Lastname\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_488e391395f4416196a31965fecac409\",\n      \"insurance_fee_minimum\": \"0.25\",\n      \"email\": \"email@example.com\",\n      \"object\": \"User\"\n    }\n  ],\n  \"has_more\": true\n}",
+      "body": "{\n  \"referral_customers\": [\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-26T15:50:28Z\",\n      \"default_carbon_offset\": false,\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"has_elevate_access\": false,\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"Firstname Lastname\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_634b6daa05744bfaa205058f06864363\",\n      \"insurance_fee_minimum\": \"0.50\",\n      \"email\": \"email@example.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": \"100.00\",\n      \"verified\": true,\n      \"created_at\": \"2022-04-27T20:20:52Z\",\n      \"default_carbon_offset\": false,\n      \"secondary_recharge_amount\": \"100.00\",\n      \"cc_fee_rate\": \"0.0325\",\n      \"has_elevate_access\": false,\n      \"recharge_threshold\": \"0.00\",\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": true,\n      \"name\": \"Firstname Lastname\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_35cb81fb8af1454dabf1f6afa7330634\",\n      \"insurance_fee_minimum\": \"0.50\",\n      \"email\": \"email@example.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-28T22:34:38Z\",\n      \"default_carbon_offset\": false,\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"has_elevate_access\": false,\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"test test\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_fa93cc16bcc24c078ee057ce82f38eed\",\n      \"insurance_fee_minimum\": \"0.50\",\n      \"email\": \"email@example.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": null,\n      \"verified\": true,\n      \"created_at\": \"2022-04-29T19:35:33Z\",\n      \"default_carbon_offset\": false,\n      \"secondary_recharge_amount\": null,\n      \"cc_fee_rate\": \"0.0325\",\n      \"has_elevate_access\": false,\n      \"recharge_threshold\": null,\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": null,\n      \"name\": \"test test\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_4a22730cdc844ce1bc2efbed999c869f\",\n      \"insurance_fee_minimum\": \"0.50\",\n      \"email\": \"test@test.com\",\n      \"object\": \"User\"\n    },\n    {\n      \"recharge_amount\": \"100.00\",\n      \"verified\": true,\n      \"created_at\": \"2022-05-02T18:48:22Z\",\n      \"default_carbon_offset\": false,\n      \"secondary_recharge_amount\": \"100.00\",\n      \"cc_fee_rate\": \"0.0325\",\n      \"has_elevate_access\": false,\n      \"recharge_threshold\": \"0.00\",\n      \"balance\": \"0.00000\",\n      \"default_insurance_amount\": \"50.00\",\n      \"children\": [],\n      \"parent_id\": null,\n      \"has_billing_method\": true,\n      \"name\": \"Firstname Lastname\",\n      \"insurance_fee_rate\": \"0.005\",\n      \"price_per_shipment\": \"0.00000\",\n      \"phone_number\": \"REDACTED\",\n      \"id\": \"user_488e391395f4416196a31965fecac409\",\n      \"insurance_fee_minimum\": \"0.50\",\n      \"email\": \"email@example.com\",\n      \"object\": \"User\"\n    }\n  ],\n  \"has_more\": true\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "2859"
+          "2858"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb39nuq"
+          "bigweb34nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -55,23 +55,23 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "05b5dcb8658c7dcbf0232f7f00129811"
+          "8a4bf44166bf7706e786c0c10035d908"
         ],
         "x-proxied": [
-          "intlb2nuq b3de2c47ef",
-          "extlb1nuq 003ad9bca0"
+          "intlb3nuq c0f5e722d1",
+          "extlb1nuq b6e1b5034c"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.218475"
+          "0.237363"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202312202038-ae3ff8e94e-master"
+          "easypost-202408152333-48cda4a73e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -83,6 +83,6 @@
       },
       "uri": "https://api.easypost.com/v2/referral_customers?%70%61%67%65%5F%73%69%7A%65\u003d%35"
     },
-    "duration": 412
+    "duration": 434
   }
 ]

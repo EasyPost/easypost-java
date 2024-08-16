@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1703706032,
+    "recordedAt": 1723823829,
     "request": {
       "body": "{\n  \"refund_amount\": 2000.0\n}",
       "method": "POST",
@@ -31,7 +31,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb33nuq"
+          "bigweb39nuq"
         ],
         "vary": [
           "Origin"
@@ -61,23 +61,23 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "05b5dcb9658c7db0f40c2a9300128135"
+          "8a4bf43b66bf76d4e786bc1d0035a64a"
         ],
         "x-proxied": [
-          "intlb2nuq b3de2c47ef",
-          "extlb1nuq 003ad9bca0"
+          "intlb4nuq c0f5e722d1",
+          "extlb1nuq b6e1b5034c"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.390679"
+          "0.457739"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202312202038-ae3ff8e94e-master"
+          "easypost-202408152333-48cda4a73e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -89,6 +89,6 @@
       },
       "uri": "https://api.easypost.com/beta/referral_customers/refunds"
     },
-    "duration": 523
+    "duration": 662
   }
 ]
