@@ -220,10 +220,8 @@ public abstract class Fixtures {
         HashMap<String, Object> fixture = Objects.requireNonNull(getFixtureData()).pickups.basic;
 
         /*
-         * If you need to re-record cassettes, increment the date below and ensure it is
-         * one day in the future,
-         * USPS only does "next-day" pickups including Saturday but not Sunday or
-         * Holidays.
+         * If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
+         * USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
          */
         String pickupDate = "2024-08-18";
 
@@ -331,8 +329,7 @@ public abstract class Fixtures {
     public static HashMap<String, Object> creditCardDetails() {
         /*
          * The credit card details below are for a valid proxy card usable for tests
-         * only
-         * and cannot be used for real transactions.
+         * only and cannot be used for real transactions.
          * DO NOT alter these details with real credit card information.
          */
         return Objects.requireNonNull(getFixtureData()).creditCards.test;
