@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@TestMethodOrder (MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public final class WebhookTest {
     private static String testWebhookId = null;
     private static TestUtils.VCR vcr;
@@ -43,8 +43,7 @@ public final class WebhookTest {
     public void cleanup() {
         if (testWebhookId != null) {
             try {
-                Webhook webhook = vcr.client.webhook.retrieve(testWebhookId);
-                vcr.client.webhook.delete(webhook.getId());
+                vcr.client.webhook.delete(testWebhookId);
                 testWebhookId = null;
             } catch (Exception e) {
                 // in case we try to delete something that's already been deleted
@@ -158,14 +157,13 @@ public final class WebhookTest {
      */
     @Test
     public void testValidateWebhook() throws EasyPostException {
-        String webhookSecret = "sécret";
         Map<String, Object> headers = ImmutableMap.of("X-Hmac-Signature",
-                "hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115a46b");
+                Fixtures.webhookHmacSignature());
 
-        Event event = Utilities.validateWebhook(Fixtures.eventBytes(), headers, webhookSecret);
+        Event event = Utilities.validateWebhook(Fixtures.eventBytes(), headers, Fixtures.webhookSecret());
 
-        assertEquals("batch.created", event.getDescription());
-        assertEquals("batch_123...", event.getResult().get("id"));
+        assertEquals("tracker.updated", event.getDescription());
+        assertEquals(614.4, event.getResult().get("weight")); // Ensure we convert floats properly
     }
 
     /**

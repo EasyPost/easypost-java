@@ -176,7 +176,7 @@ public final class OrderTest {
         // Test lowest rate with no filters
         Rate lowestRate = order.lowestRate();
         assertEquals("GroundAdvantage", lowestRate.getService());
-        assertEquals(11.33, lowestRate.getRate(), 0.01);
+        assertEquals(11.40, lowestRate.getRate(), 0.01);
         assertEquals("USPS", lowestRate.getCarrier());
 
         // Test lowest rate with service filter (this rate is higher than the lowest but
@@ -184,7 +184,7 @@ public final class OrderTest {
         List<String> services = new ArrayList<>(Arrays.asList("Priority"));
         Rate lowestRateService = order.lowestRate(null, services);
         assertEquals("Priority", lowestRateService.getService());
-        assertEquals(13.79, lowestRateService.getRate(), 0.01);
+        assertEquals(14.48, lowestRateService.getRate(), 0.01);
         assertEquals("USPS", lowestRateService.getCarrier());
 
         // Test lowest rate with carrier filter (should error due to bad carrier)

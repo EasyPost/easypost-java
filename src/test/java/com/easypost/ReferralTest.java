@@ -152,7 +152,7 @@ public final class ReferralTest {
                 (String) creditCardDetails.get("cvc"), PaymentMethod.Priority.PRIMARY);
 
         assertInstanceOf(PaymentMethodObject.class, creditCard);
-        assertTrue(creditCard.getId().startsWith("card_"));
+        assertTrue(creditCard.getId().startsWith("pm_"));
         assertEquals(((String) Fixtures.creditCardDetails().get("number")).substring(12), creditCard.getLast4());
     }
 

@@ -1,6 +1,6 @@
 [
   {
-    "recordedAt": 1703706057,
+    "recordedAt": 1723823877,
     "request": {
       "body": "",
       "method": "GET",
@@ -28,7 +28,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb31nuq"
+          "bigweb41nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -55,23 +55,23 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "05b5dcb3658c7dc9f40b94af001296bc"
+          "8a4bf44166bf7705e786c0bd0035d721"
         ],
         "x-proxied": [
-          "intlb1nuq b3de2c47ef",
-          "extlb1nuq 003ad9bca0"
+          "intlb4nuq c0f5e722d1",
+          "extlb1nuq b6e1b5034c"
         ],
         "referrer-policy": [
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.023990"
+          "0.027043"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202312202038-ae3ff8e94e-master"
+          "easypost-202408152333-48cda4a73e-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -83,10 +83,10 @@
       },
       "uri": "https://api.easypost.com/v2/partners/stripe_public_key"
     },
-    "duration": 533
+    "duration": 234
   },
   {
-    "recordedAt": 1703706058,
+    "recordedAt": 1723823877,
     "request": {
       "body": "",
       "method": "POST",
@@ -98,7 +98,7 @@
       "uri": "https://api.stripe.com/v1/tokens?card%5Bnumber%5D\u003d1234\u0026card%5Bcvc%5D\u003d1234\u0026card%5Bexp_month%5D\u003d1234\u0026card%5Bexp_year%5D\u003d1234?%63%61%72%64%5B%63%76%63%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%79%65%61%72%5D\u003d%31%32%33%34\u0026%63%61%72%64%5B%6E%75%6D%62%65%72%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%6D%6F%6E%74%68%5D\u003d%31%32%33%34"
     },
     "response": {
-      "body": "{\n  \"error\": {\n    \"doc_url\": \"https://stripe.com/docs/error-codes/invalid-number\",\n    \"code\": \"invalid_number\",\n    \"param\": \"number\",\n    \"message\": \"The card number is not a valid credit card number.\",\n    \"type\": \"card_error\",\n    \"request_log_url\": \"https://dashboard.stripe.com/logs/req_x5JzIPxrPVAv5a?t\\u003d1703706058\"\n  }\n}",
+      "body": "{\n  \"error\": {\n    \"doc_url\": \"https://stripe.com/docs/error-codes/invalid-number\",\n    \"code\": \"invalid_number\",\n    \"param\": \"number\",\n    \"message\": \"The card number is not a valid credit card number.\",\n    \"type\": \"card_error\",\n    \"request_log_url\": \"https://dashboard.stripe.com/logs/req_UJTBvZhpAxDxco?t\\u003d1723823877\"\n  }\n}",
       "httpVersion": null,
       "headers": {
         "null": [
@@ -114,13 +114,10 @@
           "GET,HEAD,PUT,PATCH,POST,DELETE"
         ],
         "Idempotency-Key": [
-          "7204d7e6-bd34-4069-becd-42b395dec43e"
-        ],
-        "Connection": [
-          "keep-alive"
+          "8528839b-26b7-4e9b-9716-28d8d71d4bfd"
         ],
         "Original-Request": [
-          "req_x5JzIPxrPVAv5a"
+          "req_UJTBvZhpAxDxco"
         ],
         "Stripe-Version": [
           "2020-08-27"
@@ -128,26 +125,23 @@
         "Stripe-Should-Retry": [
           "false"
         ],
-        "Date": [
-          "Wed, 27 Dec 2023 19:40:58 GMT"
-        ],
         "Access-Control-Expose-Headers": [
           "Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required"
         ],
         "Strict-Transport-Security": [
           "max-age\u003d63072000; includeSubDomains; preload"
         ],
-        "Cache-Control": [
-          "no-cache, no-store"
-        ],
         "Access-Control-Allow-Credentials": [
           "true"
+        ],
+        "Report-To": [
+          "{\"group\":\"coop\",\"max_age\":8640,\"endpoints\":[{\"url\":\"https://q.stripe.com/coop-report?s\u003dpayins-bapi-srv\"}],\"include_subdomains\":true}"
         ],
         "Content-Security-Policy": [
           "report-uri https://q.stripe.com/csp-report?p\u003dv1%2Ftokens; block-all-mixed-content; default-src \u0027none\u0027; base-uri \u0027none\u0027; form-action \u0027none\u0027; frame-ancestors \u0027none\u0027; img-src \u0027self\u0027; script-src \u0027self\u0027 \u0027report-sample\u0027; style-src \u0027self\u0027"
         ],
-        "Vary": [
-          "Origin"
+        "Cross-Origin-Opener-Policy-Report-Only": [
+          "same-origin; report-to\u003d\"coop\""
         ],
         "Content-Length": [
           "329"
@@ -156,10 +150,31 @@
           "300"
         ],
         "Request-Id": [
-          "req_x5JzIPxrPVAv5a"
+          "req_UJTBvZhpAxDxco"
         ],
         "Content-Type": [
           "application/json"
+        ],
+        "X-Content-Type-Options": [
+          "nosniff"
+        ],
+        "Connection": [
+          "keep-alive"
+        ],
+        "Reporting-Endpoints": [
+          "coop\u003d\"https://q.stripe.com/coop-report?s\u003dpayins-bapi-srv\""
+        ],
+        "Date": [
+          "Fri, 16 Aug 2024 15:57:57 GMT"
+        ],
+        "X-Stripe-Priority-Routing-Enabled": [
+          "true"
+        ],
+        "Cache-Control": [
+          "no-cache, no-store"
+        ],
+        "Vary": [
+          "Origin"
         ],
         "X-Stripe-Routing-Context-Priority-Tier": [
           "livemode-critical"
@@ -171,6 +186,6 @@
       },
       "uri": "https://api.stripe.com/v1/tokens?card%5Bnumber%5D\u003d1234\u0026card%5Bcvc%5D\u003d1234\u0026card%5Bexp_month%5D\u003d1234\u0026card%5Bexp_year%5D\u003d1234?%63%61%72%64%5B%63%76%63%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%79%65%61%72%5D\u003d%31%32%33%34\u0026%63%61%72%64%5B%6E%75%6D%62%65%72%5D\u003d%52%45%44%41%43%54%45%44\u0026%63%61%72%64%5B%65%78%70%5F%6D%6F%6E%74%68%5D\u003d%31%32%33%34"
     },
-    "duration": 474
+    "duration": 318
   }
 ]

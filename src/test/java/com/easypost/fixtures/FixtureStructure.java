@@ -76,6 +76,12 @@ public final class FixtureStructure {
     @SerializedName ("users")
     public Users users;
 
+    @SerializedName ("webhook_hmac_signature")
+    public String webhookHmacSignature;
+
+    @SerializedName ("webhook_secret")
+    public String webhookSecret;
+
     @SerializedName ("webhook_url")
     public String webhookUrl;
 
