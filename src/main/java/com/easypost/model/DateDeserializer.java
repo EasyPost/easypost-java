@@ -13,43 +13,10 @@ import java.util.TimeZone;
 
 public class DateDeserializer implements JsonDeserializer<Date> {
     private static final String[] DATE_FORMATS = new String[]{
-        // Basic formats
-        "yyyy-MM-dd",
+        // EasyPost API returns below date formats
+        "yyyy-MM-dd'T'HH:mm:ssX",
         "yyyy-MM-dd'T'HH:mm:ss",
-        "yyyy-MM-dd'T'HH:mm:ss'Z'",
-
-        // With milliseconds
-        "yyyy-MM-dd'T'HH:mm:ss.SSS",
-        "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-
-        // With time zone offset
-        "yyyy-MM-dd'T'HH:mm:ssZ",
-        "yyyy-MM-dd'T'HH:mm:ssXXX",
-
-        // Alternative time formats
-        "yyyy-MM-dd HH:mm:ss",
-        "yyyy-MM-dd HH:mm:ss.SSS",
-
-        // Month and day only
         "yyyy-MM-dd",
-        "MM/dd/yyyy",
-        "MM-dd-yyyy",
-
-        // Year and week
-        "yyyy-'W'ww",
-        "yyyy-'W'ww-u",
-
-        // Full date and time
-        "EEE, d MMM yyyy HH:mm:ss Z",
-        "EEE, d MMM yyyy HH:mm:ss z",
-        "EEEE, MMMM d, yyyy h:mm:ss a",
-
-        // Short formats
-        "M/d/yy",
-        "M-d-yy",
-        "M.d.yy",
-        "MM/dd/yyyy",
-        "MM-dd-yyyy"
     };
     
     /**
@@ -70,9 +37,11 @@ public class DateDeserializer implements JsonDeserializer<Date> {
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
                 return sdf.parse(json.getAsString());
             } catch (ParseException e) {
-                throw new JsonParseException("Unable to parse this date format");
+                // Continue to try the next format
             }
         }
+
+        // Throw an exception if no formats matched from the DATE_FORMATS
         throw new JsonParseException("Unparseable date: \"" + json.getAsString() + "\"");
     }
 }
