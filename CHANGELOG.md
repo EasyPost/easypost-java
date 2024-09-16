@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v7.4.3 (2024-09-16)
 
 - Remove the custom DateDeserializer that contained a parsing issue. This change closes the related GitHub issue [#333](https://github.com/EasyPost/easypost-java/issues/333)
 
