@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Remove the custom DateDeserializer that contained a parsing issue. This change closes the related GitHub issue [#333](https://github.com/EasyPost/easypost-java/issues/333)
+
 ## v7.4.2 (2024-08-09)
 
 - Fix pagination parameters for `getNextPage` in `User` service
