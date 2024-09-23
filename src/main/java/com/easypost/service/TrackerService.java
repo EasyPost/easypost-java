@@ -100,20 +100,4 @@ public class TrackerService {
             }
         }, collection.getTrackers(), pageSize);
     }
-
-    /**
-     * Create a list of Trackers.
-     *
-     * @param params Map of parameters used to create the Trackers.
-     * @throws EasyPostException when the request fails.
-     * @deprecated Use the create function instead. createList will be removed in a future release.
-     */
-    @Deprecated public void createList(final Map<String, Object> params) throws EasyPostException {
-        Map<String, Object> newParams = new HashMap<String, Object>();
-        newParams.put("trackers", params);
-
-        String endpoint = "trackers/create_list";
-
-        Requestor.request(RequestMethod.POST, endpoint, newParams, Object.class, client);
-    }
 }

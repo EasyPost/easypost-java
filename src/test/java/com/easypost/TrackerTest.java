@@ -208,30 +208,4 @@ public final class TrackerTest {
         assertEquals(trackingCode, nextPageParams.get("tracking_code"));
         assertEquals(carrier, nextPageParams.get("carrier"));
     }
-
-    /**
-     * Test creating a list of trackers.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testCreateList() throws EasyPostException {
-        vcr.setUpTest("create_list");
-
-        Map<String, Object> params = new HashMap<>();
-        String[] trackingCodes = new String[] {
-                "EZ1000000001",
-                "EZ1000000002",
-                "EZ1000000003"
-        };
-
-        for (int i = 0; i < trackingCodes.length; i++) {
-            Map<String, Object> tracker = new HashMap<>();
-
-            tracker.put("tracking_code", trackingCodes[i]);
-            params.put(String.valueOf(i), tracker);
-        }
-
-        assertDoesNotThrow(() -> vcr.client.tracker.createList(params));
-    }
 }
