@@ -8,14 +8,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"]
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK for compilation
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
           java-version: "22" # Always use the latest JDK for building
@@ -31,18 +30,17 @@ jobs:
       - name: Build Library
         run: make build
       - name: Set up Java ${{ matrix.javaversion }}
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: "zulu"
           java-version: ${{ matrix.javaversion }}
       - name: Run test with Java ${{ matrix.javaversion }}
         run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test
   coverage:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK for compilation
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
           java-version: "22" # Always use the latest JDK for building
@@ -73,9 +71,13 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: "./coverage.lcov"
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: "22" # Always use the latest JDK for building
       - name: Install checkstyle and style guide
         run: make install-checkstyle
       - name: Load Maven dependencies and CVE database cache
@@ -94,11 +96,10 @@ jobs:
           path: ${{github.workspace}}/target/dependency-check-report.html
   docs:
     if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK for compilation
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
           java-version: "22" # Always use the latest JDK for building
