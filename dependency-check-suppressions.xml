@@ -5,14 +5,7 @@
         Below vulnerabilities are from outdated Protocol Buffers which is the dependency of Error Prone.
         This will not affect our code.
         -->
-        <vulnerabilityName>CVE-2022-3171</vulnerabilityName>
-        <vulnerabilityName>CVE-2022-3509</vulnerabilityName>
-        <vulnerabilityName>CVE-2022-3510</vulnerabilityName>
         <vulnerabilityName>CVE-2023-2976</vulnerabilityName>
-        <!--
-        Vulnerability in the Dependency Check itself, used during testing.
-        Will not affect end-users.
-        Ref: https://github.com/jeremylong/DependencyCheck/issues/5943 -->
-        <vulnerabilityName>CVE-2023-4759</vulnerabilityName>
+        <vulnerabilityName>CVE-2024-7254</vulnerabilityName>
     </suppress>
 </suppressions>

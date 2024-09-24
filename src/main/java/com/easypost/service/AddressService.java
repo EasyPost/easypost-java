@@ -68,7 +68,7 @@ public class AddressService {
      *
      * @param params Map of parameters.
      * @return AddressCollection object.
-     * @throws APIException when the request fails.
+     * @throws EasyPostException when the request fails.
      */
     public AddressCollection all(final Map<String, Object> params) throws EasyPostException {
         String endpoint = "addresses";
