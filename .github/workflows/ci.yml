@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"]
+        javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "22" # Always use the latest JDK for building
+          java-version: "23" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
         with:
@@ -43,7 +43,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "22" # Always use the latest JDK for building
+          java-version: "23" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
         with:
@@ -77,7 +77,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "22" # Always use the latest JDK for building
+          java-version: "23" # Always use the latest JDK for building
       - name: Install checkstyle and style guide
         run: make install-checkstyle
       - name: Load Maven dependencies and CVE database cache
@@ -102,7 +102,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "22" # Always use the latest JDK for building
+          java-version: "23" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
         with:
