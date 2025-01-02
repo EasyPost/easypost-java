@@ -98,18 +98,6 @@ public class PickupService {
     /**
      * Buy this Pickup.
      *
-     * @param id The ID of pickup.
-     * @return Pickup object.
-     * @throws EasyPostException when the request fails.
-     */
-    public Pickup buy(final String id) throws EasyPostException {
-        // Pass in empty map to avoid method ambiguous.
-        return this.buy(id, new HashMap<String, Object>());
-    }
-
-    /**
-     * Buy this Pickup.
-     *
      * @param id     The ID of pickup.
      * @param params Map of parameters.
      * @return Pickup object.
@@ -131,7 +119,8 @@ public class PickupService {
      */
     public Pickup buy(final String id, final PickupRate pickupRate) throws EasyPostException {
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("rate", pickupRate);
+        params.put("carrier", pickupRate.getCarrier());
+        params.put("service", pickupRate.getService());
 
         return this.buy(id, params);
     }

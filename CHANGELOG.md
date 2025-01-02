@@ -2,6 +2,8 @@
 
 ## Next Release
 
+- Fixes how params are passed to the API when buying a pickup and providing a pickup rate (closes #340)
+  - Removes the unusable buy a pickup overload where no params are specified as `carrier` and `service` are required paramaters when buying a pickup
 - Removes the deprecated `create_list` tracker endpoint function as it is no longer available via API
 
 ## v7.4.3 (2024-09-16)
