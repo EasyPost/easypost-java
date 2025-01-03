@@ -145,7 +145,11 @@ public final class PickupTest {
 
         Pickup pickup = createBasicPickup();
 
-        Pickup boughtPickup = vcr.client.pickup.buy(pickup.getId());
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("carrier", Fixtures.usps());
+        params.put("service", Fixtures.pickupService());
+
+        Pickup boughtPickup = vcr.client.pickup.buy(pickup.getId(), params);
 
         assertInstanceOf(Pickup.class, boughtPickup);
         assertTrue(boughtPickup.getId().startsWith("pickup_"));
@@ -154,7 +158,7 @@ public final class PickupTest {
     }
 
     /**
-     * Test buying a pickup with lowest rate.
+     * Test buying a pickup by specifying a pickup rate.
      *
      * @throws EasyPostException when the request fails.
      */
