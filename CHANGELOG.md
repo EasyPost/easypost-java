@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v7.4.4 (2025-01-03)
 
 - Fixes how params are passed to the API when buying a pickup and providing a pickup rate (closes #340)
   - Removes the unusable buy a pickup overload where no params are specified as `carrier` and `service` are required paramaters when buying a pickup
