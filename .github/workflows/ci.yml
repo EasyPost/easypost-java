@@ -27,14 +27,13 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Install dependencies
         run: make install
-      - name: Build Library
-        run: make build
       - name: Set up Java ${{ matrix.javaversion }}
         uses: actions/setup-java@v4
         with:
           distribution: "zulu"
           java-version: ${{ matrix.javaversion }}
       - name: Run test with Java ${{ matrix.javaversion }}
+        # `make test` will also build the project
         run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test
   coverage:
     runs-on: ubuntu-latest

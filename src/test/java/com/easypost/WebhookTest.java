@@ -52,6 +52,21 @@ public final class WebhookTest {
     }
 
     /**
+     * Create a webhook.
+     *
+     * @return Webhook object
+     */
+    private static Webhook createBasicWebhook() throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("url", Fixtures.webhookUrl());
+        params.put("webhook_secret", Fixtures.webhookSecret());
+
+        Webhook webhook = vcr.client.webhook.create(params);
+        testWebhookId = webhook.getId(); // trigger deletion after test
+        return webhook;
+    }
+
+    /**
      * Test creating a webhook.
      *
      * @throws EasyPostException when the request fails.
@@ -65,20 +80,6 @@ public final class WebhookTest {
         assertInstanceOf(Webhook.class, webhook);
         assertTrue(webhook.getId().startsWith("hook_"));
         assertEquals(Fixtures.webhookUrl(), webhook.getUrl());
-    }
-
-    /**
-     * Create a webhook.
-     *
-     * @return Webhook object
-     */
-    private static Webhook createBasicWebhook() throws EasyPostException {
-        Map<String, Object> params = new HashMap<>();
-        params.put("url", Fixtures.webhookUrl());
-
-        Webhook webhook = vcr.client.webhook.create(params);
-        testWebhookId = webhook.getId(); // trigger deletion after test
-        return webhook;
     }
 
     /**
@@ -106,10 +107,8 @@ public final class WebhookTest {
     @Test
     public void testAll() throws EasyPostException {
         vcr.setUpTest("all");
-        Map<String, Object> params = new HashMap<>();
-        params.put("url", Fixtures.webhookUrl());
 
-        vcr.client.webhook.create(params);
+        createBasicWebhook();
 
         List<Webhook> webhooks = vcr.client.webhook.all();
 
@@ -127,8 +126,10 @@ public final class WebhookTest {
         vcr.setUpTest("update");
 
         Webhook webhook = createBasicWebhook();
+        Map<String, Object> params = new HashMap<>();
+        params.put("webhook_secret", Fixtures.webhookSecret());
 
-        vcr.client.webhook.update(webhook.getId());
+        vcr.client.webhook.update(webhook.getId(), params);
 
         assertInstanceOf(Webhook.class, webhook);
     }

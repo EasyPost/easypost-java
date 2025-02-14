@@ -66,7 +66,7 @@ scan:
 
 ## test - Test the project
 test:
-	mvn surefire:test
+	mvn test -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true
 
 ## update-examples-submodule - Update the examples submodule
 update-examples-submodule:

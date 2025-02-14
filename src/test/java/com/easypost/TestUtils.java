@@ -175,7 +175,7 @@ public abstract class TestUtils {
             advancedSettings.censors = new Censors("REDACTED").censorHeadersByKeys(HEADER_CENSORS)
                     .censorQueryParametersByKeys(QUERY_CENSORS).censorBodyElementsByKeys(BODY_CENSORS);
 
-            advancedSettings.timeFrame = TimeFrame.months6();
+            advancedSettings.timeFrame = TimeFrame.months12();
             advancedSettings.whenExpired = ExpirationActions.Warn;
 
             vcr = new com.easypost.easyvcr.VCR(advancedSettings);
