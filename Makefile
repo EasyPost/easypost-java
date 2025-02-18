@@ -4,7 +4,7 @@ help:
 
 ## build - Builds the project for development
 build:
-	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true
+	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true -X
 
 ## clean - Cleans the project
 clean:
@@ -12,7 +12,7 @@ clean:
 
 ## coverage - Test (and build) the project to generate a coverage report
 coverage:
-	mvn verify -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report
+	mvn verify -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report -X
 
 ## checkstyle - Check if project follows CheckStyle rules (must run install-checkstyle first)
 checkstyle:
@@ -62,11 +62,11 @@ release:
 
 ## scan - Scan the project for serious security issues
 scan:
-	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true -Djacoco.skip=true -Ddependency-check.failBuildOnCVSS=0 -Ddependency-check.junitFailOnCVSS=0
+	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true -Djacoco.skip=true -Ddependency-check.failBuildOnCVSS=0 -Ddependency-check.junitFailOnCVSS=0 -X
 
 ## test - Test the project
 test:
-	mvn test -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true
+	mvn test -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true -X
 
 ## update-examples-submodule - Update the examples submodule
 update-examples-submodule:
