@@ -38,7 +38,7 @@
     <dependencies>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
+            <artifactId>mockito-inline</artifactId>
             <!-- Cannot update to v5 due to requiring Java 11+ -->
             <version>4.11.0</version>
             <scope>test</scope>
