@@ -4,7 +4,7 @@ help:
 
 ## build - Builds the project for development
 build:
-	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true -X -e
+	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true
 
 ## clean - Cleans the project
 clean:
@@ -12,7 +12,7 @@ clean:
 
 ## coverage - Test (and build) the project to generate a coverage report
 coverage:
-	mvn verify -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report -X -e
+	mvn verify -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report
 
 ## checkstyle - Check if project follows CheckStyle rules (must run install-checkstyle first)
 checkstyle:
@@ -20,7 +20,7 @@ checkstyle:
 
 ## docs - Generates library documentation
 docs:
-	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -X -e
+	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true
 	cp -R target/apidocs/ ./docs/
 
 ## install-checkstyle - Install the Checkstyle tool (Unix only)
@@ -39,9 +39,8 @@ init-examples-submodule:
 ## install - Install requirements
 install: | install-checkstyle
 
-# TODO: Add back in the scan target to lint
 ## lint - Lints the project
-lint: checkstyle
+lint: checkstyle scan
 
 ## publish - Publish a release of the project (will build the project via the `mvn deploy` command)
 # @parameters:
@@ -63,11 +62,11 @@ release:
 
 ## scan - Scan the project for serious security issues
 scan:
-	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true -Djacoco.skip=true -Ddependency-check.failBuildOnCVSS=0 -Ddependency-check.junitFailOnCVSS=0 -X -e
+	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true -Djacoco.skip=true -Ddependency-check.failBuildOnCVSS=0 -Ddependency-check.junitFailOnCVSS=0
 
 ## test - Test the project
 test:
-	mvn test -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true -X -e
+	mvn test -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true
 
 ## test-ci - Test the project on CI (does not rebuild the project)
 test-ci:

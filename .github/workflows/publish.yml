@@ -36,7 +36,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "23" # Always use the latest JDK
+          java-version: "21" # Always use the latest stable JDK for building
           server-id: "ossrh"
           # define environmental variable names
           server-username: MAVEN_USERNAME

@@ -127,13 +127,13 @@
                     </properties>
                 </configuration>
             </plugin>
-            <!-- <plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
                 <configuration>
                     <excludes>
-                        <!- Exclude all the getters in model for code coverage ->
+                        <!-- Exclude all the getters in model for code coverage -->
                         <exclude>**/model/**</exclude>
                     </excludes>
                 </configuration>
@@ -171,8 +171,8 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin> -->
-            <!-- <plugin>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.3.1</version>
@@ -180,12 +180,12 @@
                     <execution>
                         <id>attach-sources</id>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin> -->
-            <!-- <plugin>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
@@ -202,13 +202,13 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin> -->
-            <!-- <plugin>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>3.2.7</version>
                 <configuration>
-                    <!- Needed to read passphrase from settings.xml ->
+                    <!-- Needed to read passphrase from settings.xml -->
                     <gpgArguments>
                         <arg>-pinentry-mode</arg>
                         <arg>loopback</arg>
@@ -223,7 +223,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin> -->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -232,8 +232,6 @@
                     <release>8</release>
                     <encoding>UTF-8</encoding>
                     <fork>true</fork>
-                    <meminitial>256m</meminitial>
-                    <maxmem>1024m</maxmem>
                     <compilerArgs>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-Xplugin:ErrorProne</arg>
@@ -264,7 +262,7 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            <!-- <plugin>
+            <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
                 <version>1.7.0</version>
@@ -274,7 +272,7 @@
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
-            </plugin> -->
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>templating-maven-plugin</artifactId>
@@ -288,7 +286,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.6.0</version>
@@ -302,7 +300,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <!- Cannot update to v10 due to requiring Java 11+ ->
+                        <!-- Cannot update to v10 due to requiring Java 11+ -->
                         <version>9.3</version>
                     </dependency>
                 </dependencies>
@@ -316,8 +314,8 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin> -->
-            <!-- <plugin>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>3.5.0</version>
@@ -336,26 +334,26 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin> -->
-            <!-- <plugin>
+            </plugin>
+            <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <!- Can't upgrade to newer versions as it requires Java 11 -->
-            <!-- TODO: API key now recommended to avoid rate limiting: https://github.com/dependency-check/DependencyCheck?tab=readme-ov-file#nvd-api-key-highly-recommended ->
-            <version>10.0.2</version>
-            <configuration>
-                <suppressionFile>dependency-check-suppressions.xml</suppressionFile>
-                <failBuildOnCVSS>7</failBuildOnCVSS>
-                <junitFailOnCVSS>7</junitFailOnCVSS>
-            </configuration>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>check</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin> -->
+                <!-- Can't upgrade to `v11` or newer versions as it requires Java 11 -->
+                <!-- TODO: API key now recommended to avoid rate limiting: https://github.com/dependency-check/DependencyCheck?tab=readme-ov-file#nvd-api-key-highly-recommended -->
+                <version>9.2.0</version>
+                <configuration>
+                    <suppressionFile>dependency-check-suppressions.xml</suppressionFile>
+                    <failBuildOnCVSS>7</failBuildOnCVSS>
+                    <junitFailOnCVSS>7</junitFailOnCVSS>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>

@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "21" # Always use the latest JDK for building
+          java-version: "21" # Always use the latest stable JDK for building
           cache: "maven"
       - name: Install dependencies
         run: make install
@@ -30,34 +30,34 @@ jobs:
           java-version: ${{ matrix.javaversion }}
       - name: Run test with Java ${{ matrix.javaversion }}
         run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test-ci
-  # coverage:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-java@v4
-  #       with:
-  #         distribution: "zulu"
-  #         java-version: "23" # Always use the latest JDK for building
-  #         cache: "maven"
-  #     - name: Install dependencies
-  #       run: make install
-  #     - name: Test coverage
-  #       run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make coverage
-  #     - name: Load Rust cache
-  #       if: github.ref == 'refs/heads/master'
-  #       uses: Swatinem/rust-cache@v2
-  #     - name: Install grcov
-  #       if: github.ref == 'refs/heads/master'
-  #       run: cargo install grcov --version 0.8.13
-  #     - name: Convert coverage report
-  #       if: github.ref == 'refs/heads/master'
-  #       run: grcov target/site/jacoco/jacoco.xml --source-dir ./ --ignore "target/*" > coverage.lcov
-  #     - name: Coveralls
-  #       if: github.ref == 'refs/heads/master'
-  #       uses: coverallsapp/github-action@master
-  #       with:
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         path-to-lcov: "./coverage.lcov"
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: "21" # Always use the latest stable JDK for building
+          cache: "maven"
+      - name: Install dependencies
+        run: make install
+      - name: Test coverage
+        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make coverage
+      - name: Load Rust cache
+        if: github.ref == 'refs/heads/master'
+        uses: Swatinem/rust-cache@v2
+      - name: Install grcov
+        if: github.ref == 'refs/heads/master'
+        run: cargo install grcov --version 0.8.13
+      - name: Convert coverage report
+        if: github.ref == 'refs/heads/master'
+        run: grcov target/site/jacoco/jacoco.xml --source-dir ./ --ignore "target/*" > coverage.lcov
+      - name: Coveralls
+        if: github.ref == 'refs/heads/master'
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: "./coverage.lcov"
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -65,7 +65,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "21" # Always use the latest JDK for building
+          java-version: "21" # Always use the latest stable JDK for building
           cache: "maven"
       - name: Install checkstyle and style guide
         run: make install-checkstyle
@@ -84,7 +84,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "21" # Always use the latest JDK for building
+          java-version: "21" # Always use the latest stable JDK for building
           cache: "maven"
       - name: Install Dependencies
         run: make install
