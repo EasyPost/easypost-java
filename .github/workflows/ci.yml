@@ -18,13 +18,7 @@ jobs:
         with:
           distribution: "zulu"
           java-version: "23" # Always use the latest JDK for building
-      - name: Load Maven dependencies cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-build${{ matrix.javaversion }}-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          cache: "maven"
       - name: Install dependencies
         run: make install
       - name: Build Library
@@ -44,13 +38,7 @@ jobs:
         with:
           distribution: "zulu"
           java-version: "23" # Always use the latest JDK for building
-      - name: Load Maven dependencies cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-build-coverage-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          cache: "maven"
       - name: Install dependencies
         run: make install
       - name: Test coverage
@@ -78,15 +66,9 @@ jobs:
         with:
           distribution: "zulu"
           java-version: "23" # Always use the latest JDK for building
+          cache: "maven"
       - name: Install checkstyle and style guide
         run: make install-checkstyle
-      - name: Load Maven dependencies and CVE database cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository # The CVE database is included in the Maven repository folder
-          key: ${{ runner.os }}-maven-security-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
       - name: Lint
         run: make lint
       - name: Upload Test results
@@ -103,13 +85,7 @@ jobs:
         with:
           distribution: "zulu"
           java-version: "23" # Always use the latest JDK for building
-      - name: Load Maven dependencies cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-build-coverage-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          cache: "maven"
       - name: Install Dependencies
         run: make install
       - name: Generate Docs
