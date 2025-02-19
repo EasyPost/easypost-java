@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        javaversion: ["8", "11", "16", "17", "18", "19", "20", "21", "22", "23"]
+        javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
+          distribution: "zulu"
           java-version: "23" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
@@ -30,7 +30,7 @@ jobs:
       - name: Set up Java ${{ matrix.javaversion }}
         uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
+          distribution: "zulu"
           java-version: ${{ matrix.javaversion }}
       - name: Run test with Java ${{ matrix.javaversion }}
         # `make test` will also build the project
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
+          distribution: "zulu"
           java-version: "23" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
@@ -75,7 +75,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
+          distribution: "zulu"
           java-version: "23" # Always use the latest JDK for building
       - name: Install checkstyle and style guide
         run: make install-checkstyle
@@ -100,7 +100,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
+          distribution: "zulu"
           java-version: "23" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
