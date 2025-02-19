@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "23" # Always use the latest JDK for building
+          java-version: "21" # Always use the latest JDK for building
           cache: "maven"
       - name: Install dependencies
         run: make install
@@ -65,7 +65,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "23" # Always use the latest JDK for building
+          java-version: "21" # Always use the latest JDK for building
           cache: "maven"
       - name: Install checkstyle and style guide
         run: make install-checkstyle
@@ -84,7 +84,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "23" # Always use the latest JDK for building
+          java-version: "21" # Always use the latest JDK for building
           cache: "maven"
       - name: Install Dependencies
         run: make install
