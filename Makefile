@@ -39,8 +39,9 @@ init-examples-submodule:
 ## install - Install requirements
 install: | install-checkstyle
 
+# TODO: Add back in the scan target to lint
 ## lint - Lints the project
-lint: checkstyle scan
+lint: checkstyle
 
 ## publish - Publish a release of the project (will build the project via the `mvn deploy` command)
 # @parameters:

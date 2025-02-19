@@ -128,7 +128,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
+                <version>0.8.12</version>
                 <configuration>
                     <excludes>
                         <!-- Exclude all the getters in model for code coverage -->
@@ -173,12 +173,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
                         <goals>
-                            <goal>jar-no-fork</goal>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -191,7 +191,7 @@
                     <doclint>-html</doclint>
                     <quiet>true</quiet>
                 </configuration>
-                <version>3.5.0</version>
+                <version>3.11.2</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -204,7 +204,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.7</version>
                 <configuration>
                     <!-- Needed to read passphrase from settings.xml -->
                     <gpgArguments>
@@ -230,6 +230,8 @@
                     <release>8</release>
                     <encoding>UTF-8</encoding>
                     <fork>true</fork>
+                    <meminitial>256m</meminitial>
+                    <maxmem>1024m</maxmem>
                     <compilerArgs>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-Xplugin:ErrorProne</arg>
@@ -262,7 +264,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.13</version>
+                <version>1.7.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
@@ -273,6 +275,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>templating-maven-plugin</artifactId>
+                <!-- TODO: Upgrade from v1 to v3 -->
                 <version>1.0.0</version>
                 <executions>
                     <execution>
@@ -286,7 +289,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.6.0</version>
                 <configuration>
                     <configLocation>${basedir}/easypost_java_style.xml</configLocation>
                     <inputEncoding>UTF-8</inputEncoding>
@@ -315,7 +318,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
                         <id>enforce-java</id>
@@ -332,23 +335,25 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!-- <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>8.4.0</version>
-                <configuration>
-                    <suppressionFile>dependency-check-suppressions.xml</suppressionFile>
-                    <failBuildOnCVSS>7</failBuildOnCVSS>
-                    <junitFailOnCVSS>7</junitFailOnCVSS>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+                <!- Can't upgrade to newer versions as it requires Java 11 -->
+            <!-- TODO: API key now recommended to avoid rate limiting: https://github.com/dependency-check/DependencyCheck?tab=readme-ov-file#nvd-api-key-highly-recommended ->
+            <version>10.0.2</version>
+            <configuration>
+                <suppressionFile>dependency-check-suppressions.xml</suppressionFile>
+                <failBuildOnCVSS>7</failBuildOnCVSS>
+                <junitFailOnCVSS>7</junitFailOnCVSS>
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin> -->
         </plugins>
     </build>
 </project>
