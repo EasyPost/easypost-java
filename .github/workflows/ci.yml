@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          distribution: "zulu"
+          distribution: "temurin"
           java-version: "23" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
@@ -30,7 +30,7 @@ jobs:
       - name: Set up Java ${{ matrix.javaversion }}
         uses: actions/setup-java@v4
         with:
-          distribution: "zulu"
+          distribution: "temurin"
           java-version: ${{ matrix.javaversion }}
       - name: Run test with Java ${{ matrix.javaversion }}
         # `make test` will also build the project
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          distribution: "zulu"
+          distribution: "temurin"
           java-version: "23" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
@@ -75,7 +75,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          distribution: "zulu"
+          distribution: "temurin"
           java-version: "23" # Always use the latest JDK for building
       - name: Install checkstyle and style guide
         run: make install-checkstyle
@@ -100,7 +100,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          distribution: "zulu"
+          distribution: "temurin"
           java-version: "23" # Always use the latest JDK for building
       - name: Load Maven dependencies cache
         uses: actions/cache@v3
