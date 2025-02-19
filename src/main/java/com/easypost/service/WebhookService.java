@@ -108,11 +108,8 @@ public class WebhookService {
      * @throws EasyPostException when the request fails.
      */
     public Webhook update(final String id, final Map<String, Object> params) throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put("webhook", params);
-
         String endpoint = "webhooks/" + id;
 
-        return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, Webhook.class, client);
+        return Requestor.request(RequestMethod.PUT, endpoint, params, Webhook.class, client);
     }
 }
