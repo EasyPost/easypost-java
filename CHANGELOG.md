@@ -2,6 +2,8 @@
 
 ## Next Release
 
+- Adds `WebhookCustomHeader` model, allowing `custom_headers` to be passed when creating/updating a webhook
+- Corrects payload wrapping for updating a webhook
 - Bumps dependencies
 
 ## v7.4.4 (2025-01-03)
