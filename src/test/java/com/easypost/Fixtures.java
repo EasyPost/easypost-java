@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import static com.easypost.TestUtils.getSourceFileDirectory;
@@ -295,21 +296,21 @@ public abstract class Fixtures {
     }
 
     /**
-     * Get the default webhook URL.
+     * Get the default webhook HMAC signature.
      *
-     * @return The default webhook URL
+     * @return The default webhook HMAC signature
      */
     public static String webhookHmacSignature() {
-        return Objects.requireNonNull(getFixtureData()).webhookHmacSignature;
+        return Objects.requireNonNull(getFixtureData()).webhooks.hmacSignature;
     }
 
     /**
-     * Get the default webhook URL.
+     * Get the default webhook secret.
      *
-     * @return The default webhook URL
+     * @return The default webhook secret
      */
     public static String webhookSecret() {
-        return Objects.requireNonNull(getFixtureData()).webhookSecret;
+        return Objects.requireNonNull(getFixtureData()).webhooks.secret;
     }
 
     /**
@@ -318,7 +319,16 @@ public abstract class Fixtures {
      * @return The default webhook URL
      */
     public static String webhookUrl() {
-        return Objects.requireNonNull(getFixtureData()).webhookUrl;
+        return Objects.requireNonNull(getFixtureData()).webhooks.url;
+    }
+
+    /**
+     * Get the default webhook custom headers.
+     *
+     * @return The default webhook custom headers
+     */
+    public static List<Object> webhookCustomHeaders() {
+        return Objects.requireNonNull(getFixtureData()).webhooks.customHeaders;
     }
 
     /**

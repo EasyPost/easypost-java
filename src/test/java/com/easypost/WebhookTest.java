@@ -3,6 +3,7 @@ package com.easypost;
 import com.easypost.exception.EasyPostException;
 import com.easypost.model.Event;
 import com.easypost.model.Webhook;
+import com.easypost.model.WebhookCustomHeader;
 import com.easypost.utils.Utilities;
 import com.google.common.collect.ImmutableMap;
 import org.junit.jupiter.api.AfterEach;
@@ -60,6 +61,7 @@ public final class WebhookTest {
         Map<String, Object> params = new HashMap<>();
         params.put("url", Fixtures.webhookUrl());
         params.put("webhook_secret", Fixtures.webhookSecret());
+        params.put("custom_headers", Fixtures.webhookCustomHeaders());
 
         Webhook webhook = vcr.client.webhook.create(params);
         testWebhookId = webhook.getId(); // trigger deletion after test
@@ -80,6 +82,9 @@ public final class WebhookTest {
         assertInstanceOf(Webhook.class, webhook);
         assertTrue(webhook.getId().startsWith("hook_"));
         assertEquals(Fixtures.webhookUrl(), webhook.getUrl());
+        WebhookCustomHeader customHeader = webhook.getCustomHeaders().get(0);
+        assertEquals("test", customHeader.getName());
+        assertEquals("header", customHeader.getValue());
     }
 
     /**
@@ -128,10 +133,14 @@ public final class WebhookTest {
         Webhook webhook = createBasicWebhook();
         Map<String, Object> params = new HashMap<>();
         params.put("webhook_secret", Fixtures.webhookSecret());
+        params.put("custom_headers", Fixtures.webhookCustomHeaders());
 
-        vcr.client.webhook.update(webhook.getId(), params);
+        Webhook updatedWebhook = vcr.client.webhook.update(webhook.getId(), params);
 
-        assertInstanceOf(Webhook.class, webhook);
+        assertInstanceOf(Webhook.class, updatedWebhook);
+        WebhookCustomHeader customHeader = updatedWebhook.getCustomHeaders().get(0);
+        assertEquals("test", customHeader.getName());
+        assertEquals("header", customHeader.getValue());
     }
 
     /**

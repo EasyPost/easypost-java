@@ -1,8 +1,8 @@
 [
   {
-    "recordedAt": 1739570761,
+    "recordedAt": 1740070379,
     "request": {
-      "body": "{\n  \"webhook\": {\n    \"webhook_secret\": \"sécret\",\n    \"url\": \"http://example.com\"\n  }\n}",
+      "body": "{\n  \"webhook\": {\n    \"webhook_secret\": \"sécret\",\n    \"url\": \"http://example.com\",\n    \"custom_headers\": [\n      {\n        \"name\": \"test\",\n        \"value\": \"header\"\n      }\n    ]\n  }\n}",
       "method": "POST",
       "headers": {
         "Accept-Charset": [
@@ -18,20 +18,20 @@
       "uri": "https://api.easypost.com/v2/webhooks"
     },
     "response": {
-      "body": "{\n  \"mode\": \"test\",\n  \"disabled_at\": null,\n  \"created_at\": \"2025-02-14T22:06:01Z\",\n  \"id\": \"hook_e0759b80eb1f11ef8362773f978eb468\",\n  \"url\": \"http://example.com\",\n  \"object\": \"Webhook\"\n}",
+      "body": "{\n  \"mode\": \"test\",\n  \"disabled_at\": null,\n  \"created_at\": \"2025-02-20T16:52:59Z\",\n  \"id\": \"hook_23c7531cefab11efbe44197603026978\",\n  \"url\": \"http://example.com\",\n  \"object\": \"Webhook\",\n  \"custom_headers\": [\n    {\n      \"name\": \"test\",\n      \"value\": \"header\"\n    }\n  ]\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 201 Created"
         ],
         "content-length": [
-          "161"
+          "213"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb59nuq"
+          "bigweb34nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -58,7 +58,7 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "7b4ee13967afbe49e78b0625003c2afe"
+          "c6a31f9267b75debe2b7eff800435dd3"
         ],
         "x-proxied": [
           "intlb3nuq 51d74985a2",
@@ -68,13 +68,13 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.264324"
+          "0.402787"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202502141809-12aa7d06fd-master"
+          "easypost-202502192243-499e5bdec0-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -86,10 +86,10 @@
       },
       "uri": "https://api.easypost.com/v2/webhooks"
     },
-    "duration": 478
+    "duration": 516
   },
   {
-    "recordedAt": 1739570761,
+    "recordedAt": 1740070379,
     "request": {
       "body": "",
       "method": "GET",
@@ -101,23 +101,23 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/webhooks/hook_e0759b80eb1f11ef8362773f978eb468"
+      "uri": "https://api.easypost.com/v2/webhooks/hook_23c7531cefab11efbe44197603026978"
     },
     "response": {
-      "body": "{\n  \"mode\": \"test\",\n  \"disabled_at\": null,\n  \"created_at\": \"2025-02-14T22:06:01Z\",\n  \"id\": \"hook_e0759b80eb1f11ef8362773f978eb468\",\n  \"url\": \"http://example.com\",\n  \"object\": \"Webhook\"\n}",
+      "body": "{\n  \"mode\": \"test\",\n  \"disabled_at\": null,\n  \"created_at\": \"2025-02-20T16:52:59Z\",\n  \"id\": \"hook_23c7531cefab11efbe44197603026978\",\n  \"url\": \"http://example.com\",\n  \"object\": \"Webhook\",\n  \"custom_headers\": [\n    {\n      \"name\": \"test\",\n      \"value\": \"header\"\n    }\n  ]\n}",
       "httpVersion": null,
       "headers": {
         "null": [
           "HTTP/1.1 200 OK"
         ],
         "content-length": [
-          "161"
+          "213"
         ],
         "expires": [
           "0"
         ],
         "x-node": [
-          "bigweb35nuq"
+          "bigweb54nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -144,7 +144,7 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "7b4ee13767afbe49e78b0626003c2b9e"
+          "c6a31f8c67b75debe2b7eff900435e6e"
         ],
         "x-proxied": [
           "intlb3nuq 51d74985a2",
@@ -154,13 +154,13 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.027960"
+          "0.034835"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202502141809-12aa7d06fd-master"
+          "easypost-202502192243-499e5bdec0-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -170,12 +170,12 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/webhooks/hook_e0759b80eb1f11ef8362773f978eb468"
+      "uri": "https://api.easypost.com/v2/webhooks/hook_23c7531cefab11efbe44197603026978"
     },
-    "duration": 241
+    "duration": 153
   },
   {
-    "recordedAt": 1739570762,
+    "recordedAt": 1740070380,
     "request": {
       "body": "",
       "method": "DELETE",
@@ -187,7 +187,7 @@
           "REDACTED"
         ]
       },
-      "uri": "https://api.easypost.com/v2/webhooks/hook_e0759b80eb1f11ef8362773f978eb468"
+      "uri": "https://api.easypost.com/v2/webhooks/hook_23c7531cefab11efbe44197603026978"
     },
     "response": {
       "body": "{}",
@@ -203,7 +203,7 @@
           "0"
         ],
         "x-node": [
-          "bigweb35nuq"
+          "bigweb54nuq"
         ],
         "x-frame-options": [
           "SAMEORIGIN"
@@ -230,7 +230,7 @@
           "nosniff"
         ],
         "x-ep-request-uuid": [
-          "7b4ee13967afbe4ae78b0627003c2bd7"
+          "c6a31f8f67b75debe2b7effa00435ea0"
         ],
         "x-proxied": [
           "intlb3nuq 51d74985a2",
@@ -240,13 +240,13 @@
           "strict-origin-when-cross-origin"
         ],
         "x-runtime": [
-          "0.315824"
+          "0.337242"
         ],
         "content-type": [
           "application/json; charset\u003dutf-8"
         ],
         "x-version-label": [
-          "easypost-202502141809-12aa7d06fd-master"
+          "easypost-202502192243-499e5bdec0-master"
         ],
         "cache-control": [
           "private, no-cache, no-store"
@@ -256,8 +256,8 @@
         "code": 200,
         "message": "OK"
       },
-      "uri": "https://api.easypost.com/v2/webhooks/hook_e0759b80eb1f11ef8362773f978eb468"
+      "uri": "https://api.easypost.com/v2/webhooks/hook_23c7531cefab11efbe44197603026978"
     },
-    "duration": 531
+    "duration": 438
   }
 ]
