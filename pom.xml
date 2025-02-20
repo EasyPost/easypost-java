@@ -210,7 +210,7 @@
                 <configuration>
                     <!-- Needed to read passphrase from settings.xml -->
                     <gpgArguments>
-                        <arg>-pinentry-mode</arg>
+                        <arg>--pinentry-mode</arg>
                         <arg>loopback</arg>
                     </gpgArguments>
                 </configuration>
