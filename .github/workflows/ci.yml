@@ -17,14 +17,8 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "23" # Always use the latest JDK for building
-      - name: Load Maven dependencies cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-build${{ matrix.javaversion }}-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          java-version: "21" # Always use the latest stable JDK for building
+          cache: "maven"
       - name: Install dependencies
         run: make install
       - name: Build Library
@@ -35,7 +29,7 @@ jobs:
           distribution: "zulu"
           java-version: ${{ matrix.javaversion }}
       - name: Run test with Java ${{ matrix.javaversion }}
-        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test
+        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test-ci
   coverage:
     runs-on: ubuntu-latest
     steps:
@@ -43,14 +37,8 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "23" # Always use the latest JDK for building
-      - name: Load Maven dependencies cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-build-coverage-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          java-version: "21" # Always use the latest stable JDK for building
+          cache: "maven"
       - name: Install dependencies
         run: make install
       - name: Test coverage
@@ -77,16 +65,10 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "23" # Always use the latest JDK for building
+          java-version: "21" # Always use the latest stable JDK for building
+          cache: "maven"
       - name: Install checkstyle and style guide
         run: make install-checkstyle
-      - name: Load Maven dependencies and CVE database cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository # The CVE database is included in the Maven repository folder
-          key: ${{ runner.os }}-maven-security-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
       - name: Lint
         run: make lint
       - name: Upload Test results
@@ -102,14 +84,8 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: "23" # Always use the latest JDK for building
-      - name: Load Maven dependencies cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-build-coverage-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          java-version: "21" # Always use the latest stable JDK for building
+          cache: "maven"
       - name: Install Dependencies
         run: make install
       - name: Generate Docs

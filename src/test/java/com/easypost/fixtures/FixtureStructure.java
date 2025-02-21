@@ -18,6 +18,7 @@ import com.easypost.fixtures.components.ServiceNames;
 import com.easypost.fixtures.components.Shipments;
 import com.easypost.fixtures.components.TaxIdentifiers;
 import com.easypost.fixtures.components.Users;
+import com.easypost.fixtures.components.Webhooks;
 import com.google.gson.annotations.SerializedName;
 
 public final class FixtureStructure {
@@ -76,13 +77,7 @@ public final class FixtureStructure {
     @SerializedName ("users")
     public Users users;
 
-    @SerializedName ("webhook_hmac_signature")
-    public String webhookHmacSignature;
-
-    @SerializedName ("webhook_secret")
-    public String webhookSecret;
-
-    @SerializedName ("webhook_url")
-    public String webhookUrl;
+    @SerializedName ("webhooks")
+    public Webhooks webhooks;
 
 }

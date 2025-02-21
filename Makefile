@@ -66,6 +66,10 @@ scan:
 
 ## test - Test the project
 test:
+	mvn test -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true
+
+## test-ci - Test the project on CI (does not rebuild the project)
+test-ci:
 	mvn surefire:test
 
 ## update-examples-submodule - Update the examples submodule
@@ -73,4 +77,4 @@ update-examples-submodule:
 	git submodule init
 	git submodule update --remote
 
-.PHONY: help build clean coverage docs install-checkstyle install-styleguide install lint publish publish-dry release scan scan-strict test update-examples-submodule
+.PHONY: help build clean coverage docs install-checkstyle install-styleguide install lint publish publish-dry release scan scan-strict test test-ci update-examples-submodule
