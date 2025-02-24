@@ -21,7 +21,7 @@ checkstyle:
 ## docs - Generates library documentation
 docs:
 	mvn install -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true
-	cp -R target/apidocs/ ./docs/
+	cp -R target/reports/apidocs/ ./docs/
 
 ## install-checkstyle - Install the Checkstyle tool (Unix only)
 install-checkstyle: | install-styleguide
