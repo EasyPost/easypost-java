@@ -53,15 +53,15 @@ public final class AddressVerificationDeserializer implements JsonDeserializer<A
                     error.setMessage(message.getAsString());
                 }
 
-                JsonElement field = errorAsJsonObject.get("field");
-                if (field != null) {
-                    error.setField(field.getAsString());
-                }
+                // JsonElement field = errorAsJsonObject.get("field");
+                // if (field != null) {
+                //     error.setField(field.getAsString());
+                // }
 
-                JsonElement suggestion = errorAsJsonObject.get("suggestion");
-                if (suggestion != null && !suggestion.isJsonNull()) {
-                    error.setSuggestion(suggestion.getAsString());
-                }
+                // JsonElement suggestion = errorAsJsonObject.get("suggestion");
+                // if (suggestion != null && !suggestion.isJsonNull()) {
+                //     error.setSuggestion(suggestion.getAsString());
+                // }
 
                 errors.add(error);
             }

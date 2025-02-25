@@ -13,6 +13,7 @@ import com.google.gson.JsonPrimitive;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Map.Entry;
+import java.util.List;
 
 public final class ErrorDeserializer implements JsonDeserializer<Error> {
     /**
@@ -49,31 +50,74 @@ public final class ErrorDeserializer implements JsonDeserializer<Error> {
      */
     @Override
     public Error deserialize(final JsonElement json, final Type typeOfT,
-    final JsonDeserializationContext context) throws JsonParseException {
+                             final JsonDeserializationContext context) throws JsonParseException {
         JsonObject jo = json.getAsJsonObject();
-        JsonElement results = jo.get("error");
-        Gson gson = new Gson();
 
-        if (results == null) {
-            Error error = new Error();
+        Error error = new Error();
+
+        JsonElement errorResponse = jo.get("error");
+        if (errorResponse == null) {
             error.setMessage(Constants.ErrorMessages.API_DID_NOT_RETURN_ERROR_DETAILS);
             error.setCode("NO RESPONSE CODE");
             return error;
         }
+        JsonObject errorData = errorResponse.getAsJsonObject();
 
-        try {
-            ArrayList<String> messages = new ArrayList<>();
-            JsonElement errorMessageJson = results.getAsJsonObject().get("message");
-            traverseJsonElement(errorMessageJson, messages);
-            JsonPrimitive value = new JsonPrimitive(String.join(", ", messages));
-            results.getAsJsonObject().add("message", value);
-        } catch (Exception e) {
-            Error error = new Error();
-            error.setMessage("Error deserializing JSON response");
-            error.setCode("ERROR_DESERIALIZATION_ERROR");
-            return error;
+        JsonElement code = errorData.get("code");
+        if (code != null) {
+            error.setCode(code.getAsString());
         }
 
-        return gson.fromJson(results, Error.class);
+        JsonElement message = errorData.get("message");
+        if (message != null) {
+            if (message.isJsonPrimitive()) {
+                error.setMessage(message.getAsString());
+            } else if (message.isJsonObject() || message.isJsonArray()) {
+                ArrayList<String> messagesList = new ArrayList<>();
+                traverseJsonElement(message, messagesList);
+                error.setMessage(String.join(", ", messagesList));
+            } else {
+                throw new JsonParseException("Invalid message format");
+            }
+        }
+
+        JsonElement errorsAsJson = errorData.get("errors");
+if (errorsAsJson != null) {
+            JsonArray errorsAsArray = errorsAsJson.getAsJsonArray();
+            List<Object> errors = new ArrayList<>();
+            for (JsonElement errorAsJson : errorsAsArray) {
+                if (errorAsJson.isJsonObject()) {
+                    JsonObject errorAsJsonObject = errorAsJson.getAsJsonObject();
+                    FieldError fieldError = new FieldError();
+
+                    JsonElement field = errorAsJsonObject.get("field");
+                    if (field != null) {
+                        fieldError.setField(field.getAsString());
+                    }
+
+                    JsonElement fieldMessage = errorAsJsonObject.get("message");
+                    if (fieldMessage != null) {
+                        fieldError.setMessage(fieldMessage.getAsString());
+                    }
+
+                    JsonElement suggestion = errorAsJsonObject.get("suggestion");
+                    if (suggestion != null && !suggestion.isJsonNull()) {
+                        fieldError.setSuggestion(suggestion.getAsString());
+                    }
+
+                    errors.add(fieldError);
+                } else if (errorAsJson.isJsonPrimitive() && errorAsJson.getAsJsonPrimitive().isString()) {
+                    errors.add(errorAsJson.getAsString());
+                }
+            }
+
+            if (!errors.isEmpty() && errors.get(0) instanceof FieldError) {
+                error.setErrors(FieldErrorOrStringList.fromErrorList((List<FieldError>) (List<?>) errors));
+            } else if (!errors.isEmpty() && errors.get(0) instanceof String) {
+                error.setErrors(FieldErrorOrStringList.fromStringList((List<String>) (List<?>) errors));
+            }
+        }
+
+        return error;
     }
 }

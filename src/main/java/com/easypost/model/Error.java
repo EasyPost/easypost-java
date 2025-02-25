@@ -34,25 +34,20 @@ public final class Error {
      *
      * @param errors The errors.
      */
-    void setErrors(final FieldErrorOrStringList errors) {
-        this.errors = errors;
-    }
-
-    /**
-     * Set the errors of this error object from a list of FieldError objects.
-     *
-     * @param errorList The list of FieldError objects.
-     */
-    void setErrors(final List<FieldError> errorList) {
-        this.errors = FieldErrorOrStringList.fromErrorList(errorList);
-    }
-
-    /**
-     * Set the errors of this error object from a list of strings.
-     *
-     * @param stringList The list of strings.
-     */
-    void setErrorsFromStringList(final List<String> stringList) {
-        this.errors = FieldErrorOrStringList.fromStringList(stringList);
+    void setErrors(final Object errors) {
+        if (errors instanceof List) {
+            List<?> errorList = (List<?>) errors;
+            if (!errorList.isEmpty()) {
+                if (errorList.get(0) instanceof FieldError) {
+                    this.errors = FieldErrorOrStringList.fromErrorList((List<FieldError>) errorList);
+                } else if (errorList.get(0) instanceof String) {
+                    this.errors = FieldErrorOrStringList.fromStringList((List<String>) errorList);
+                }
+            }
+        } else if (errors instanceof FieldErrorOrStringList) {
+            this.errors = (FieldErrorOrStringList) errors;
+        } else {
+            throw new IllegalArgumentException("Invalid type for errors");
+        }
     }
 }

@@ -50,4 +50,20 @@ public class FieldErrorOrStringList extends AbstractList<Object> {
         }
         return 0;
     }
+
+    public String getMessage(int index) {
+        if (isErrorList()) {
+            return errorList.get(index).getMessage();
+        } else if (isStringList()) {
+            return stringList.get(index);
+        }
+        throw new IndexOutOfBoundsException("Index out of bounds or list is empty");
+    }
+
+    public String getField(int index) {
+        if (isErrorList()) {
+            return errorList.get(index).getField();
+        }
+        throw new UnsupportedOperationException("Field is not available for string list");
+    }
 }

@@ -20,6 +20,8 @@ import com.easypost.http.Requestor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.easypost.model.FieldError;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,8 +56,8 @@ public final class ErrorTest extends Requestor {
         assertEquals(422, exception.getStatusCode());
         assertEquals("PARAMETER.REQUIRED", exception.getCode());
         assertEquals("Missing required parameter.", exception.getMessage());
-        assertEquals("cannot be blank", exception.getErrors().get(0).getMessage());
-        assertEquals("shipment", exception.getErrors().get(0).getField());
+        assertEquals("cannot be blank", exception.getErrors().getMessage(0));
+        assertEquals("shipment", exception.getErrors().getField(0));
     }
 
     /**
@@ -71,7 +73,7 @@ public final class ErrorTest extends Requestor {
         HashMap<String, Object> claimData = Fixtures.basicClaim();
         claimData.put("tracking_code", "123"); // Intentionally pass a bad tracking code
 
-        APIException exception = assertThrows(InvalidRequestError.class, () -> vcr.client.claim.create(claimData));
+        APIException exception = assertThrows(NotFoundError.class, () -> vcr.client.claim.create(claimData));
 
         assertEquals(404, exception.getStatusCode());
         assertEquals("NOT_FOUND", exception.getCode());
