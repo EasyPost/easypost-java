@@ -1,11 +1,3 @@
-/**
- * EasyPostResource.java
- * This file is a part of EasyPost API SDK.
- * (c) 2022 EasyPost
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 package com.easypost.http;
 
 import com.easypost.Constants;
@@ -32,6 +24,7 @@ import com.easypost.hooks.RequestHookResponses;
 import com.easypost.hooks.ResponseHookResponses;
 import com.easypost.model.EasyPostResource;
 import com.easypost.model.Error;
+import com.easypost.model.FieldErrorOrStringList;
 import com.easypost.service.EasyPostClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -653,7 +646,7 @@ public abstract class Requestor {
         Error error = Constants.Http.GSON.fromJson(rBody, Error.class);
         String errorMessage = error.getMessage();
         String errorCode = error.getCode();
-        List<Error> errors = error.getErrors();
+        FieldErrorOrStringList errors = error.getErrors();
 
         if (rCode >= Constants.ErrorCodes.REDIRECT_CODE_BEGIN && rCode <= Constants.ErrorCodes.REDIRECT_CODE_END) {
             throw new RedirectError(errorMessage, errorCode, rCode, errors);

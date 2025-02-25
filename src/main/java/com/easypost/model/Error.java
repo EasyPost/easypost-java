@@ -1,16 +1,15 @@
 package com.easypost.model;
 
-import java.util.List;
 import lombok.Getter;
+
+import java.util.List;
 
 @Getter
 @SuppressWarnings("JavaLangClash")
 public final class Error {
     private String message;
     private String code;
-    private List<Error> errors;
-    private String suggestion;
-    private String field;
+    private FieldErrorOrStringList errors;
 
     /**
      * Set the message of this error object.
@@ -35,25 +34,25 @@ public final class Error {
      *
      * @param errors The errors.
      */
-    void setErrors(final List<Error> errors) {
+    void setErrors(final FieldErrorOrStringList errors) {
         this.errors = errors;
     }
 
     /**
-     * Set the suggestion of this error object.
+     * Set the errors of this error object from a list of FieldError objects.
      *
-     * @param suggestion The suggestion.
+     * @param errorList The list of FieldError objects.
      */
-    void setSuggestion(final String suggestion) {
-        this.suggestion = suggestion;
+    void setErrors(final List<FieldError> errorList) {
+        this.errors = FieldErrorOrStringList.fromErrorList(errorList);
     }
 
     /**
-     * Set the field of this error object.
+     * Set the errors of this error object from a list of strings.
      *
-     * @param field The field.
+     * @param stringList The list of strings.
      */
-    void setField(final String field) {
-        this.field = field;
+    void setErrorsFromStringList(final List<String> stringList) {
+        this.errors = FieldErrorOrStringList.fromStringList(stringList);
     }
 }

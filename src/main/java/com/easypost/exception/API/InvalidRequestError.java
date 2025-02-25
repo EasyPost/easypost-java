@@ -1,8 +1,6 @@
 package com.easypost.exception.API;
 
-import java.util.List;
-
-import com.easypost.model.Error;
+import com.easypost.model.FieldErrorOrStringList;
 import com.easypost.exception.APIException;
 
 public class InvalidRequestError extends APIException {
@@ -14,7 +12,7 @@ public class InvalidRequestError extends APIException {
      * @param statusCode the exception status code
      * @param errors     the errors array
      */
-    public InvalidRequestError(final String message, final String code, final int statusCode, List<Error> errors) {
+    public InvalidRequestError(final String message, final String code, final int statusCode, FieldErrorOrStringList errors) {
         super(message, code, statusCode, errors);
     }
 }

@@ -1,23 +1,14 @@
-/**
- * APIException.java
- * This file is a part of EasyPost API SDK.
- * (c) 2022 EasyPost
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 package com.easypost.exception;
 
+import com.easypost.model.FieldErrorOrStringList;
 import com.easypost.model.Error;
-
-import java.util.List;
 
 public class APIException extends EasyPostException {
     private static final long serialVersionUID = 1L;
     private final String code;
     private final Integer statusCode;
     private final String message;
-    private final List<Error> errors;
+    private final FieldErrorOrStringList errors;
 
     /**
      * APIException constructor.
@@ -46,7 +37,7 @@ public class APIException extends EasyPostException {
      * @param statusCode the exception status code
      * @param errors     the errors array
      */
-    public APIException(final String message, final String code, final int statusCode, final List<Error> errors) {
+    public APIException(final String message, final String code, final int statusCode, final FieldErrorOrStringList errors) {
         this(message, code, statusCode, errors, null);
     }
 
@@ -60,7 +51,7 @@ public class APIException extends EasyPostException {
      * @param ex         the exception cause
      */
     public APIException(final String message, final String code, final Integer statusCode,
-        final List<Error> errors, final Throwable ex) {
+        final FieldErrorOrStringList errors, final Throwable ex) {
         super(message);
         this.code = code;
         this.statusCode = statusCode;
@@ -101,7 +92,7 @@ public class APIException extends EasyPostException {
      *
      * @return errors of the exception
      */
-    public List<Error> getErrors() {
+    public FieldErrorOrStringList getErrors() {
         return errors;
     }
 }
