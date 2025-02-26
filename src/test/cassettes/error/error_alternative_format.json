@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1740505524,
+    "request": {
+      "body": "{\n  \"email_evidence_attachments\": [\n    \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAeUlEQVR42mP8//8/AwAI/AL+4Q7AIAAAAABJRU5ErkJggg\\u003d\\u003d\"\n  ],\n  \"supporting_documentation_attachments\": [\n    \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAeUlEQVR42mP8//8/AwAI/AL+4Q7AIAAAAABJRU5ErkJggg\\u003d\\u003d\"\n  ],\n  \"description\": \"Test description\",\n  \"type\": \"damage\",\n  \"invoice_attachments\": [\n    \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAeUlEQVR42mP8//8/AwAI/AL+4Q7AIAAAAABJRU5ErkJggg\\u003d\\u003d\"\n  ],\n  \"tracking_code\": \"123\",\n  \"contact_email\": \"test@example.com\"\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/claims"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"NOT_FOUND\",\n    \"message\": \"The requested resource could not be found.\",\n    \"errors\": [\n      \"No eligible insurance found with provided tracking code.\"\n    ]\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 404 Not Found"
+        ],
+        "content-length": [
+          "156"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb39nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "c1c6fbd367be01b4e2b8558f001d4c8a"
+        ],
+        "x-proxied": [
+          "intlb4nuq 51d74985a2",
+          "extlb1nuq 99aac35317"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.028904"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202502251451-d4f6425809-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 404,
+        "message": "Not Found"
+      },
+      "uri": "https://api.easypost.com/v2/claims"
+    },
+    "duration": 130
+  }
+]

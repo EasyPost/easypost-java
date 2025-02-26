@@ -1,23 +1,13 @@
-/**
- * APIException.java
- * This file is a part of EasyPost API SDK.
- * (c) 2022 EasyPost
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 package com.easypost.exception;
 
-import com.easypost.model.Error;
-
-import java.util.List;
+import com.easypost.model.FieldErrorOrStringList;
 
 public class APIException extends EasyPostException {
     private static final long serialVersionUID = 1L;
     private final String code;
     private final Integer statusCode;
     private final String message;
-    private final List<Error> errors;
+    private final FieldErrorOrStringList errors;
 
     /**
      * APIException constructor.
@@ -43,11 +33,10 @@ public class APIException extends EasyPostException {
      *
      * @param message    the exception message
      * @param code       the exception code
-     * @param statusCode the exception status code
      * @param errors     the errors array
      */
-    public APIException(final String message, final String code, final int statusCode, final List<Error> errors) {
-        this(message, code, statusCode, errors, null);
+    public APIException(final String message, final String code, final FieldErrorOrStringList errors) {
+        this(message, code, errors, null);
     }
 
     /**
@@ -55,17 +44,28 @@ public class APIException extends EasyPostException {
      *
      * @param message    the exception message
      * @param code       the exception code
-     * @param statusCode the exception status code
      * @param errors     the errors array
+     * @param statusCode the exception status code
+     */
+    public APIException(final String message, final String code, final FieldErrorOrStringList errors, final Integer statusCode) {
+        this(message, code, errors, statusCode, null);
+    }
+
+    /**
+     * APIException constructor.
+     *
+     * @param message    the exception message
+     * @param code       the exception code
+     * @param errors     the errors array
+     * @param statusCode the exception status code
      * @param ex         the exception cause
      */
-    public APIException(final String message, final String code, final Integer statusCode,
-        final List<Error> errors, final Throwable ex) {
+    public APIException(final String message, final String code, final FieldErrorOrStringList errors, final Integer statusCode, final Throwable ex) {
         super(message);
-        this.code = code;
-        this.statusCode = statusCode;
         this.message = message;
+        this.code = code;
         this.errors = errors;
+        this.statusCode = statusCode;
     }
 
     /**
@@ -101,7 +101,7 @@ public class APIException extends EasyPostException {
      *
      * @return errors of the exception
      */
-    public List<Error> getErrors() {
+    public FieldErrorOrStringList getErrors() {
         return errors;
     }
 }

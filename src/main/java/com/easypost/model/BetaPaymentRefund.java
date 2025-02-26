@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class BetaPaymentRefund extends EasyPostResource{
     private int refundedAmount;
-    private List<Error> errors;
+    private List<FieldError> errors;
     private List<String> refundedPaymentLogs;
     private String paymentLogId;
     private String refundedAmountCurrencys;

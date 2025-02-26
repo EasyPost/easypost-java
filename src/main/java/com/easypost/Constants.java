@@ -1,9 +1,9 @@
 package com.easypost;
 
+import com.easypost.exception.APIException;
 import com.easypost.http.HashMapSerializer;
 import com.easypost.model.AddressVerification;
 import com.easypost.model.AddressVerificationDeserializer;
-import com.easypost.model.Error;
 import com.easypost.model.ErrorDeserializer;
 import com.easypost.model.SmartrateCollection;
 import com.easypost.model.SmartrateCollectionDeserializer;
@@ -80,7 +80,7 @@ public abstract class Constants {
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .registerTypeAdapter(HashMap.class, new HashMapSerializer())
                 .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer())
-                .registerTypeAdapter(Error.class, new ErrorDeserializer())
+                .registerTypeAdapter(APIException.class, new ErrorDeserializer())
                 .registerTypeAdapter(AddressVerification.class, new AddressVerificationDeserializer())
                 .registerTypeAdapter(StatelessRate[].class, new StatelessRateDeserializer())
                 .registerTypeAdapter(Webhook[].class, new WebhookDeserializer()).create();
