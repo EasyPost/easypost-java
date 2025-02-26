@@ -5,10 +5,19 @@ import lombok.Getter;
 
 @Getter
 public final class AddressVerificationFieldError {
+    private String message;
     private String code;
     private String field;
-    private String message;
     private String suggestion;
+
+    /**
+     * Set the message of this error object.
+     *
+     * @param message The error message.
+     */
+    void setMessage(final String message) {
+        this.message = message;
+    }
 
     /**
      * Set the code of this error object.
@@ -26,15 +35,6 @@ public final class AddressVerificationFieldError {
      */
     void setField(final String field) {
         this.field = field;
-    }
-
-    /**
-     * Set the message of this error object.
-     *
-     * @param message The error message.
-     */
-    void setMessage(final String message) {
-        this.message = message;
     }
 
     /**

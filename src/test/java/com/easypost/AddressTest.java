@@ -90,6 +90,7 @@ public final class AddressTest {
         address = vcr.client.address.create(addressData);
 
         assertInstanceOf(Address.class, address);
+
         assertEquals(false, address.getVerifications().getDelivery().getSuccess());
         assertInstanceOf(AddressDetail.class, address.getVerifications().getDelivery().getDetails());
         AddressVerificationFieldError addressVerificationFieldErrorGetDelivery = address.getVerifications().getDelivery().getErrors().get(0);

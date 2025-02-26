@@ -3,6 +3,11 @@
 ## Next Release
 
 - Adds `WebhookCustomHeader` model, allowing `custom_headers` to be passed when creating/updating a webhook
+- Fixes error parsing
+  - Allows for alternative format of `errors` field (previously we deserialized the `errors` field into a list of `Error` objects; however, sometimes the errors are simply a list of strings. This change make the `errors` field a list of `Object` allowing for either the new `FieldError` object or a list of strings. Users will need to check for the type of error returned and handle appropriately)
+  - Removed the unused `Error` model
+  - Added an explicit `AddressVerificationFieldError` model
+  - The `BetaPaymentRefund` now uses a list of `FieldError` instead of `Error` for the `errors` field
 - Corrects payload wrapping for updating a webhook
 - Bumps dependencies
 
