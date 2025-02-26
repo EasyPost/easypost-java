@@ -93,7 +93,10 @@ public final class AddressTest {
 
         assertEquals(false, address.getVerifications().getDelivery().getSuccess());
         assertInstanceOf(AddressDetail.class, address.getVerifications().getDelivery().getDetails());
-        AddressVerificationFieldError addressVerificationFieldErrorGetDelivery = address.getVerifications().getDelivery().getErrors().get(0);
+        AddressVerificationFieldError addressVerificationFieldErrorGetDelivery = address.getVerifications()
+            .getDelivery()
+            .getErrors()
+            .get(0);
         assertEquals("E.ADDRESS.NOT_FOUND", addressVerificationFieldErrorGetDelivery.getCode());
         assertEquals("address", addressVerificationFieldErrorGetDelivery.getField());
         assertNull(addressVerificationFieldErrorGetDelivery.getSuggestion());
@@ -101,7 +104,10 @@ public final class AddressTest {
 
         assertEquals(false, address.getVerifications().getZip4().getSuccess());
         assertNull(address.getVerifications().getZip4().getDetails());
-        AddressVerificationFieldError addressVerificationFieldErrorZip4 = address.getVerifications().getZip4().getErrors().get(0);
+        AddressVerificationFieldError addressVerificationFieldErrorZip4 = address.getVerifications()
+            .getZip4()
+            .getErrors()
+            .get(0);
         assertEquals("E.ADDRESS.NOT_FOUND", addressVerificationFieldErrorZip4.getCode());
         assertEquals("address", addressVerificationFieldErrorZip4.getField());
         assertNull(addressVerificationFieldErrorZip4.getSuggestion());

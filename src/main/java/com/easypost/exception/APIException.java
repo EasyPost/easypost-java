@@ -60,7 +60,8 @@ public class APIException extends EasyPostException {
      * @param statusCode the exception status code
      * @param ex         the exception cause
      */
-    public APIException(final String message, final String code, final List<Object> errors, final Integer statusCode, final Throwable ex) {
+    public APIException(final String message, final String code, final List<Object> errors, 
+        final Integer statusCode, final Throwable ex) {
         super(message);
         this.message = message;
         this.code = code;
@@ -70,7 +71,7 @@ public class APIException extends EasyPostException {
 
     /**
      * Get status code of the error object.
-     * 
+     *
      * @return statusCode the status code of the error object
      */
     public Integer getStatusCode() {
