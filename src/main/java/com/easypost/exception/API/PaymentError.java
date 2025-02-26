@@ -9,10 +9,10 @@ public class PaymentError extends APIException {
      *
      * @param message    the exception message
      * @param code       the exception code
-     * @param statusCode the exception status code
      * @param errors     the errors array
+     * @param statusCode the exception status code
      */
-    public PaymentError(final String message, final String code, final int statusCode, FieldErrorOrStringList errors) {
-        super(message, code, statusCode, errors);
+    public PaymentError(final String message, final String code, FieldErrorOrStringList errors, final int statusCode) {
+        super(message, code, errors, statusCode);
     }
 }

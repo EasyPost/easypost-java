@@ -37,11 +37,11 @@ public final class AddressVerificationDeserializer implements JsonDeserializer<A
 
         if (errorsAsJson != null) {
             JsonArray errorsAsArray = errorsAsJson.getAsJsonArray();
-            ArrayList<Error> errors = new ArrayList<>();
+            ArrayList<AddressVerificationFieldError> errors = new ArrayList<>();
             for (JsonElement errorAsJson : errorsAsArray) {
                 JsonObject errorAsJsonObject = errorAsJson.getAsJsonObject();
 
-                Error error = new Error();
+                AddressVerificationFieldError error = new AddressVerificationFieldError();
 
                 JsonElement code = errorAsJsonObject.get("code");
                 if (code != null) {
@@ -53,15 +53,15 @@ public final class AddressVerificationDeserializer implements JsonDeserializer<A
                     error.setMessage(message.getAsString());
                 }
 
-                // JsonElement field = errorAsJsonObject.get("field");
-                // if (field != null) {
-                //     error.setField(field.getAsString());
-                // }
+                JsonElement field = errorAsJsonObject.get("field");
+                if (field != null) {
+                    error.setField(field.getAsString());
+                }
 
-                // JsonElement suggestion = errorAsJsonObject.get("suggestion");
-                // if (suggestion != null && !suggestion.isJsonNull()) {
-                //     error.setSuggestion(suggestion.getAsString());
-                // }
+                JsonElement suggestion = errorAsJsonObject.get("suggestion");
+                if (suggestion != null && !suggestion.isJsonNull()) {
+                    error.setSuggestion(suggestion.getAsString());
+                }
 
                 errors.add(error);
             }

@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public final class AddressVerification {
     private Boolean success;
-    private List<Error> errors;
+    private List<AddressVerificationFieldError> errors;
     private AddressDetail details;
 
     /**
@@ -23,7 +23,7 @@ public final class AddressVerification {
      *
      * @param errors The errors.
      */
-    void setErrors(final List<Error> errors) {
+    void setErrors(final List<AddressVerificationFieldError> errors) {
         this.errors = errors;
     }
 

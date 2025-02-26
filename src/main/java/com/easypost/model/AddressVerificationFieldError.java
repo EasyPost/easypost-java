@@ -4,10 +4,20 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public final class FieldError {
+public final class AddressVerificationFieldError {
+    private String code;
     private String field;
     private String message;
     private String suggestion;
+
+    /**
+     * Set the code of this error object.
+     *
+     * @param code The code.
+     */
+    void setCode(final String code) {
+        this.code = code;
+    }
 
     /**
      * Set the field of this error object.

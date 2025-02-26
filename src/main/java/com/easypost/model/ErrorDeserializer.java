@@ -1,6 +1,7 @@
 package com.easypost.model;
 
 import com.easypost.Constants;
+import com.easypost.exception.APIException;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.List;
 
-public final class ErrorDeserializer implements JsonDeserializer<Error> {
+public final class ErrorDeserializer implements JsonDeserializer<APIException> {
     /**
      * Recursively traverse an error JSON element and its sub-element(s), and extracts all
      * error string values found into the specified string list.
@@ -40,51 +41,53 @@ public final class ErrorDeserializer implements JsonDeserializer<Error> {
     }
 
     /**
-     * Deserialize an Error from a JSON object.
+     * Deserialize an APIException from a JSON object.
      *
      * @param json    JSON object to deserialize.
      * @param typeOfT Type of the object to deserialize.
      * @param context Deserialization context.
-     * @return Deserialized Error object.
+     * @return Deserialized APIException object.
      * @throws JsonParseException if the JSON object is not a valid SmartrateCollection.
      */
     @Override
-    public Error deserialize(final JsonElement json, final Type typeOfT,
+    public APIException deserialize(final JsonElement json, final Type typeOfT,
                              final JsonDeserializationContext context) throws JsonParseException {
         JsonObject jo = json.getAsJsonObject();
 
-        Error error = new Error();
+        String message = null;
+        String code = null;
+        FieldErrorOrStringList errors = null;
 
         JsonElement errorResponse = jo.get("error");
         if (errorResponse == null) {
-            error.setMessage(Constants.ErrorMessages.API_DID_NOT_RETURN_ERROR_DETAILS);
-            error.setCode("NO RESPONSE CODE");
-            return error;
+            message = Constants.ErrorMessages.API_DID_NOT_RETURN_ERROR_DETAILS;
+            code = "NO RESPONSE CODE";
+            return new APIException(message, code, null);
         }
         JsonObject errorData = errorResponse.getAsJsonObject();
 
-        JsonElement code = errorData.get("code");
-        if (code != null) {
-            error.setCode(code.getAsString());
+        JsonElement codeElement = errorData.get("code");
+        if (codeElement != null) {
+            code = codeElement.getAsString();
         }
 
-        JsonElement message = errorData.get("message");
-        if (message != null) {
-            if (message.isJsonPrimitive()) {
-                error.setMessage(message.getAsString());
-            } else if (message.isJsonObject() || message.isJsonArray()) {
+        JsonElement messageElement = errorData.get("message");
+        if (messageElement != null) {
+            if (messageElement.isJsonPrimitive()) {
+                message = messageElement.getAsString();
+            } else if (messageElement.isJsonObject() || messageElement.isJsonArray()) {
                 ArrayList<String> messagesList = new ArrayList<>();
-                traverseJsonElement(message, messagesList);
-                error.setMessage(String.join(", ", messagesList));
+                traverseJsonElement(messageElement, messagesList);
+                message = String.join(", ", messagesList);
             } else {
                 throw new JsonParseException("Invalid message format");
             }
         }
 
         JsonElement errorsAsJson = errorData.get("errors");
-if (errorsAsJson != null) {
+        if (errorsAsJson != null) {
             JsonArray errorsAsArray = errorsAsJson.getAsJsonArray();
-            List<Object> errors = new ArrayList<>();
+            List<Object> errorList = new ArrayList<>();
             for (JsonElement errorAsJson : errorsAsArray) {
                 if (errorAsJson.isJsonObject()) {
                     JsonObject errorAsJsonObject = errorAsJson.getAsJsonObject();
@@ -105,19 +108,19 @@ if (errorsAsJson != null) {
                         fieldError.setSuggestion(suggestion.getAsString());
                     }
 
-                    errors.add(fieldError);
-                } else if (errorAsJson.isJsonPrimitive() && errorAsJson.getAsJsonPrimitive().isString()) {
-                    errors.add(errorAsJson.getAsString());
+                    errorList.add(fieldError);
+                } else {
+                    errorList.add(errorAsJson.getAsString());
                 }
             }
 
-            if (!errors.isEmpty() && errors.get(0) instanceof FieldError) {
-                error.setErrors(FieldErrorOrStringList.fromErrorList((List<FieldError>) (List<?>) errors));
-            } else if (!errors.isEmpty() && errors.get(0) instanceof String) {
-                error.setErrors(FieldErrorOrStringList.fromStringList((List<String>) (List<?>) errors));
+            if (!errorList.isEmpty() && errorList.get(0) instanceof FieldError) {
+                errors = FieldErrorOrStringList.fromErrorList((List<FieldError>) (List<?>) errorList);
+            } else if (!errorList.isEmpty() && errorList.get(0) instanceof String) {
+                errors = FieldErrorOrStringList.fromStringList((List<String>) (List<?>) errorList);
             }
         }
 
-        return error;
+        return new APIException(message, code, errors);
     }
 }

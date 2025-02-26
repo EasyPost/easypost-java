@@ -6,7 +6,7 @@ import java.util.AbstractList;
 import java.util.List;
 
 @Getter
-public class FieldErrorOrStringList extends AbstractList<Object> {
+public final class FieldErrorOrStringList extends AbstractList<FieldErrorOrString> {
     private final List<FieldError> errorList;
     private final List<String> stringList;
 
@@ -30,13 +30,13 @@ public class FieldErrorOrStringList extends AbstractList<Object> {
     public boolean isStringList() {
         return stringList != null;
     }
-    
+
     @Override
-    public Object get(int index) {
+    public FieldErrorOrString get(int index) {
         if (isErrorList()) {
-            return errorList.get(index);
+            return new FieldErrorOrString(errorList.get(index));
         } else if (isStringList()) {
-            return stringList.get(index);
+            return new FieldErrorOrString(stringList.get(index));
         }
         throw new IndexOutOfBoundsException("Index out of bounds or list is empty");
     }
@@ -49,21 +49,5 @@ public class FieldErrorOrStringList extends AbstractList<Object> {
             return stringList.size();
         }
         return 0;
-    }
-
-    public String getMessage(int index) {
-        if (isErrorList()) {
-            return errorList.get(index).getMessage();
-        } else if (isStringList()) {
-            return stringList.get(index);
-        }
-        throw new IndexOutOfBoundsException("Index out of bounds or list is empty");
-    }
-
-    public String getField(int index) {
-        if (isErrorList()) {
-            return errorList.get(index).getField();
-        }
-        throw new UnsupportedOperationException("Field is not available for string list");
     }
 }

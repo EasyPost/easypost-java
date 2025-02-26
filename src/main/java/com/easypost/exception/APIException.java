@@ -1,7 +1,6 @@
 package com.easypost.exception;
 
 import com.easypost.model.FieldErrorOrStringList;
-import com.easypost.model.Error;
 
 public class APIException extends EasyPostException {
     private static final long serialVersionUID = 1L;
@@ -34,11 +33,10 @@ public class APIException extends EasyPostException {
      *
      * @param message    the exception message
      * @param code       the exception code
-     * @param statusCode the exception status code
      * @param errors     the errors array
      */
-    public APIException(final String message, final String code, final int statusCode, final FieldErrorOrStringList errors) {
-        this(message, code, statusCode, errors, null);
+    public APIException(final String message, final String code, final FieldErrorOrStringList errors) {
+        this(message, code, errors, null);
     }
 
     /**
@@ -46,17 +44,28 @@ public class APIException extends EasyPostException {
      *
      * @param message    the exception message
      * @param code       the exception code
-     * @param statusCode the exception status code
      * @param errors     the errors array
+     * @param statusCode the exception status code
+     */
+    public APIException(final String message, final String code, final FieldErrorOrStringList errors, final Integer statusCode) {
+        this(message, code, errors, statusCode, null);
+    }
+
+    /**
+     * APIException constructor.
+     *
+     * @param message    the exception message
+     * @param code       the exception code
+     * @param errors     the errors array
+     * @param statusCode the exception status code
      * @param ex         the exception cause
      */
-    public APIException(final String message, final String code, final Integer statusCode,
-        final FieldErrorOrStringList errors, final Throwable ex) {
+    public APIException(final String message, final String code, final FieldErrorOrStringList errors, final Integer statusCode, final Throwable ex) {
         super(message);
-        this.code = code;
-        this.statusCode = statusCode;
         this.message = message;
+        this.code = code;
         this.errors = errors;
+        this.statusCode = statusCode;
     }
 
     /**

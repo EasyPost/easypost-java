@@ -2,6 +2,7 @@ package com.easypost.http;
 
 import com.easypost.Constants;
 import com.easypost.EasyPost;
+import com.easypost.exception.APIException;
 import com.easypost.exception.API.BadRequestError;
 import com.easypost.exception.API.EncodingError;
 import com.easypost.exception.API.ForbiddenError;
@@ -23,7 +24,6 @@ import com.easypost.exception.General.MissingParameterError;
 import com.easypost.hooks.RequestHookResponses;
 import com.easypost.hooks.ResponseHookResponses;
 import com.easypost.model.EasyPostResource;
-import com.easypost.model.Error;
 import com.easypost.model.FieldErrorOrStringList;
 import com.easypost.service.EasyPostClient;
 import com.google.gson.JsonElement;
@@ -643,42 +643,42 @@ public abstract class Requestor {
         if (rBody == null || rBody.length() == 0) {
             rBody = "{}";
         }
-        Error error = Constants.Http.GSON.fromJson(rBody, Error.class);
+        APIException error = Constants.Http.GSON.fromJson(rBody, APIException.class);
         String errorMessage = error.getMessage();
         String errorCode = error.getCode();
         FieldErrorOrStringList errors = error.getErrors();
 
         if (rCode >= Constants.ErrorCodes.REDIRECT_CODE_BEGIN && rCode <= Constants.ErrorCodes.REDIRECT_CODE_END) {
-            throw new RedirectError(errorMessage, errorCode, rCode, errors);
+            throw new RedirectError(errorMessage, errorCode, errors, rCode);
         }
 
         switch (rCode) {
             case Constants.ErrorCodes.UNAUTHORIZED_ERROR:
-                throw new UnauthorizedError(errorMessage, errorCode, rCode, errors);
+                throw new UnauthorizedError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.FORBIDDEN_ERROR:
-                throw new ForbiddenError(errorMessage, errorCode, rCode, errors);
+                throw new ForbiddenError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.PAYMENT_ERROR:
-                throw new PaymentError(errorMessage, errorCode, rCode, errors);
+                throw new PaymentError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.NOT_FOUND_ERROR:
-                throw new NotFoundError(errorMessage, errorCode, rCode, errors);
+                throw new NotFoundError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.METHOD_NOT_ALLOWED_ERROR:
-                throw new MethodNotAllowedError(errorMessage, errorCode, rCode, errors);
+                throw new MethodNotAllowedError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.TIMEOUT_ERROR:
-                throw new TimeoutError(errorMessage, errorCode, rCode, errors);
+                throw new TimeoutError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.BAD_REQUEST_ERROR:
-                throw new BadRequestError(errorMessage, errorCode, rCode, errors);
+                throw new BadRequestError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.INVALID_REQUEST_ERROR:
-                throw new InvalidRequestError(errorMessage, errorCode, rCode, errors);
+                throw new InvalidRequestError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.RATE_LIMIT_ERROR:
-                throw new RateLimitError(errorMessage, errorCode, rCode, errors);
+                throw new RateLimitError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.INTERNAL_SERVER_ERROR:
-                throw new InternalServerError(errorMessage, errorCode, rCode, errors);
+                throw new InternalServerError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.SERVICE_UNAVAILABLE_ERROR:
-                throw new ServiceUnavailableError(errorMessage, errorCode, rCode, errors);
+                throw new ServiceUnavailableError(errorMessage, errorCode, errors, rCode);
             case Constants.ErrorCodes.GATEWAY_TIMEOUT_ERROR:
-                throw new GatewayTimeoutError(errorMessage, errorCode, rCode, errors);
+                throw new GatewayTimeoutError(errorMessage, errorCode, errors, rCode);
             default:
-                throw new UnknownApiError(errorMessage, errorCode, rCode, errors);
+                throw new UnknownApiError(errorMessage, errorCode, errors, rCode);
         }
     }
 
