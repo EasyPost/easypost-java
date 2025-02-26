@@ -5,6 +5,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.model.CarrierAccount;
 import com.easypost.model.CarrierType;
+import com.easypost.model.FieldError;
 import com.easypost.model.Pickup;
 import com.easypost.model.Shipment;
 import com.google.common.collect.ImmutableMap;
@@ -109,8 +110,9 @@ public final class CarrierAccountTest {
             // We're sending bad data to the API, so we expect an error
             assertEquals(422, e.getStatusCode());
             // We expect one of the sub-errors to be regarding a missing field
-            // assertTrue(e.getErrors().stream().anyMatch(error -> error.getField().equals("account_number") &&
-            //         error.getMessage().equals("must be present and a string")));
+            FieldError fieldError = (FieldError) e.getErrors().get(0);
+            assertEquals("shipping_streets", fieldError.getField());
+            assertEquals("must be present and a string", fieldError.getMessage());
         }
     }
 
