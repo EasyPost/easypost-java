@@ -24,7 +24,6 @@ import com.easypost.exception.General.MissingParameterError;
 import com.easypost.hooks.RequestHookResponses;
 import com.easypost.hooks.ResponseHookResponses;
 import com.easypost.model.EasyPostResource;
-import com.easypost.model.FieldErrorOrStringList;
 import com.easypost.service.EasyPostClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -646,7 +645,7 @@ public abstract class Requestor {
         APIException error = Constants.Http.GSON.fromJson(rBody, APIException.class);
         String errorMessage = error.getMessage();
         String errorCode = error.getCode();
-        FieldErrorOrStringList errors = error.getErrors();
+        List<Object> errors = error.getErrors();
 
         if (rCode >= Constants.ErrorCodes.REDIRECT_CODE_BEGIN && rCode <= Constants.ErrorCodes.REDIRECT_CODE_END) {
             throw new RedirectError(errorMessage, errorCode, errors, rCode);

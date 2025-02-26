@@ -1,7 +1,8 @@
 package com.easypost.exception.API;
 
-import com.easypost.model.FieldErrorOrStringList;
 import com.easypost.exception.APIException;
+
+import java.util.List;
 
 public class TimeoutError extends APIException {
     /**
@@ -12,7 +13,7 @@ public class TimeoutError extends APIException {
      * @param errors     the errors array
      * @param statusCode the exception status code
      */
-    public TimeoutError(final String message, final String code, FieldErrorOrStringList errors, final int statusCode) {
+    public TimeoutError(final String message, final String code, List<Object> errors, final int statusCode) {
         super(message, code, errors, statusCode);
     }
 }

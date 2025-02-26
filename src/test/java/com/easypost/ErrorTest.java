@@ -17,6 +17,7 @@ import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.APIException;
 import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
+import com.easypost.model.FieldError;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -56,8 +57,9 @@ public final class ErrorTest extends Requestor {
         assertEquals(422, exception.getStatusCode());
         assertEquals("PARAMETER.REQUIRED", exception.getCode());
         assertEquals("Missing required parameter.", exception.getMessage());
-        // assertEquals("cannot be blank", exception.getErrors().get(0));
-        // assertEquals("shipment", exception.getErrors().get(0).getField());
+        FieldError fieldError = (FieldError) exception.getErrors().get(0);
+        assertEquals("cannot be blank", fieldError.getMessage());
+        assertEquals("shipment", fieldError.getField());
     }
 
     /**

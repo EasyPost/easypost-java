@@ -13,8 +13,8 @@ import com.google.gson.JsonPrimitive;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Map.Entry;
 import java.util.List;
+import java.util.Map.Entry;
 
 public final class ErrorDeserializer implements JsonDeserializer<APIException> {
     /**
@@ -51,12 +51,12 @@ public final class ErrorDeserializer implements JsonDeserializer<APIException> {
      */
     @Override
     public APIException deserialize(final JsonElement json, final Type typeOfT,
-                             final JsonDeserializationContext context) throws JsonParseException {
+                                       final JsonDeserializationContext context) throws JsonParseException {
         JsonObject jo = json.getAsJsonObject();
 
         String message = null;
         String code = null;
-        FieldErrorOrStringList errors = null;
+        List<Object> errors = new ArrayList<>();
 
         JsonElement errorResponse = jo.get("error");
         if (errorResponse == null) {
@@ -85,9 +85,9 @@ public final class ErrorDeserializer implements JsonDeserializer<APIException> {
         }
 
         JsonElement errorsAsJson = errorData.get("errors");
+        List<Object> errorList = new ArrayList<>();
         if (errorsAsJson != null) {
             JsonArray errorsAsArray = errorsAsJson.getAsJsonArray();
-            List<Object> errorList = new ArrayList<>();
             for (JsonElement errorAsJson : errorsAsArray) {
                 if (errorAsJson.isJsonObject()) {
                     JsonObject errorAsJsonObject = errorAsJson.getAsJsonObject();
@@ -113,14 +113,8 @@ public final class ErrorDeserializer implements JsonDeserializer<APIException> {
                     errorList.add(errorAsJson.getAsString());
                 }
             }
-
-            if (!errorList.isEmpty() && errorList.get(0) instanceof FieldError) {
-                errors = FieldErrorOrStringList.fromErrorList((List<FieldError>) (List<?>) errorList);
-            } else if (!errorList.isEmpty() && errorList.get(0) instanceof String) {
-                errors = FieldErrorOrStringList.fromStringList((List<String>) (List<?>) errorList);
-            }
         }
 
-        return new APIException(message, code, errors);
+        return new APIException(message, code, errorList);
     }
 }
