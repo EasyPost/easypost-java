@@ -17,6 +17,7 @@ import com.easypost.exception.API.UnknownApiError;
 import com.easypost.exception.APIException;
 import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
+import com.easypost.model.FieldError;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +42,7 @@ public final class ErrorTest extends Requestor {
     }
 
     /**
-     * Test creating a bad shipment and retrieving errors.
+     * Tests that we assign properties of an error correctly.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -54,8 +55,30 @@ public final class ErrorTest extends Requestor {
         assertEquals(422, exception.getStatusCode());
         assertEquals("PARAMETER.REQUIRED", exception.getCode());
         assertEquals("Missing required parameter.", exception.getMessage());
-        assertEquals("cannot be blank", exception.getErrors().get(0).getMessage());
-        assertEquals("shipment", exception.getErrors().get(0).getField());
+        FieldError fieldError = (FieldError) exception.getErrors().get(0);
+        assertEquals("cannot be blank", fieldError.getMessage());
+        assertEquals("shipment", fieldError.getField());
+    }
+
+    /**
+     * Tests that we assign properties of an error correctly when returned via the alternative format.
+     * NOTE: Claims (among other things) uses the alternative errors format.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testErrorAlternativeFormat() throws EasyPostException {
+        vcr.setUpTest("error_alternative_format");
+
+        HashMap<String, Object> claimData = Fixtures.basicClaim();
+        claimData.put("tracking_code", "123"); // Intentionally pass a bad tracking code
+
+        APIException exception = assertThrows(NotFoundError.class, () -> vcr.client.claim.create(claimData));
+
+        assertEquals(404, exception.getStatusCode());
+        assertEquals("NOT_FOUND", exception.getCode());
+        assertEquals("The requested resource could not be found.", exception.getMessage());
+        assertEquals("No eligible insurance found with provided tracking code.", exception.getErrors().get(0));
     }
 
     /**

@@ -1,16 +1,13 @@
 package com.easypost.model;
 
-import java.util.List;
 import lombok.Getter;
 
 @Getter
-@SuppressWarnings("JavaLangClash")
-public final class Error {
+public final class AddressVerificationFieldError {
     private String message;
     private String code;
-    private List<Error> errors;
-    private String suggestion;
     private String field;
+    private String suggestion;
 
     /**
      * Set the message of this error object.
@@ -24,28 +21,10 @@ public final class Error {
     /**
      * Set the code of this error object.
      *
-     * @param code The error code.
+     * @param code The code.
      */
     void setCode(final String code) {
         this.code = code;
-    }
-
-    /**
-     * Set the errors of this error object.
-     *
-     * @param errors The errors.
-     */
-    void setErrors(final List<Error> errors) {
-        this.errors = errors;
-    }
-
-    /**
-     * Set the suggestion of this error object.
-     *
-     * @param suggestion The suggestion.
-     */
-    void setSuggestion(final String suggestion) {
-        this.suggestion = suggestion;
     }
 
     /**
@@ -55,5 +34,14 @@ public final class Error {
      */
     void setField(final String field) {
         this.field = field;
+    }
+
+    /**
+     * Set the suggestion of this error object.
+     *
+     * @param suggestion The suggestion.
+     */
+    void setSuggestion(final String suggestion) {
+        this.suggestion = suggestion;
     }
 }

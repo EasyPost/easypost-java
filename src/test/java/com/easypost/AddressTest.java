@@ -5,6 +5,8 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.model.Address;
 import com.easypost.model.AddressCollection;
+import com.easypost.model.AddressDetail;
+import com.easypost.model.AddressVerificationFieldError;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -88,8 +90,28 @@ public final class AddressTest {
         address = vcr.client.address.create(addressData);
 
         assertInstanceOf(Address.class, address);
-        assertNotNull(address.getVerifications().getDelivery());
-        assertNotNull(address.getVerifications().getZip4());
+
+        assertEquals(false, address.getVerifications().getDelivery().getSuccess());
+        assertInstanceOf(AddressDetail.class, address.getVerifications().getDelivery().getDetails());
+        AddressVerificationFieldError addressVerificationFieldErrorGetDelivery = address.getVerifications()
+            .getDelivery()
+            .getErrors()
+            .get(0);
+        assertEquals("E.ADDRESS.NOT_FOUND", addressVerificationFieldErrorGetDelivery.getCode());
+        assertEquals("address", addressVerificationFieldErrorGetDelivery.getField());
+        assertNull(addressVerificationFieldErrorGetDelivery.getSuggestion());
+        assertEquals("Address not found", addressVerificationFieldErrorGetDelivery.getMessage());
+
+        assertEquals(false, address.getVerifications().getZip4().getSuccess());
+        assertNull(address.getVerifications().getZip4().getDetails());
+        AddressVerificationFieldError addressVerificationFieldErrorZip4 = address.getVerifications()
+            .getZip4()
+            .getErrors()
+            .get(0);
+        assertEquals("E.ADDRESS.NOT_FOUND", addressVerificationFieldErrorZip4.getCode());
+        assertEquals("address", addressVerificationFieldErrorZip4.getField());
+        assertNull(addressVerificationFieldErrorZip4.getSuggestion());
+        assertEquals("Address not found", addressVerificationFieldErrorZip4.getMessage());
     }
 
     /**

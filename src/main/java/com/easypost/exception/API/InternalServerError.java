@@ -1,9 +1,8 @@
 package com.easypost.exception.API;
 
-import java.util.List;
-
-import com.easypost.model.Error;
 import com.easypost.exception.APIException;
+
+import java.util.List;
 
 public class InternalServerError extends APIException {
     /**
@@ -11,10 +10,10 @@ public class InternalServerError extends APIException {
      *
      * @param message    the exception message
      * @param code       the exception code
-     * @param statusCode the exception status code
      * @param errors     the errors array
+     * @param statusCode the exception status code
      */
-    public InternalServerError(final String message, final String code, final int statusCode, List<Error> errors) {
-        super(message, code, statusCode, errors);
+    public InternalServerError(final String message, final String code, List<Object> errors, final int statusCode) {
+        super(message, code, errors, statusCode);
     }
 }
