@@ -103,30 +103,6 @@ public class UserService {
     }
 
     /**
-     * Get this User's API keys.
-     *
-     * @deprecated Use {@link ApiKeyService#retrieveApiKeysForUser(String)} instead.
-     * @param id The ID of the user.
-     * @return List of ApiKey objects.
-     * @throws EasyPostException when the request fails.
-     */
-    public List<ApiKey> apiKeys(final String id) throws EasyPostException {
-        ApiKeys parentKeys = client.apiKey.all();
-
-        if (Objects.equals(id, parentKeys.getId())) {
-            return parentKeys.getKeys();
-        }
-
-        for (int i = 0; i < parentKeys.getChildren().size(); i++) {
-            if (id.equals(parentKeys.getChildren().get(i).getId())) {
-                return parentKeys.getChildren().get(i).getKeys();
-            }
-        }
-
-        throw new FilteringError(String.format(Constants.ErrorMessages.NO_OBJECT_FOUND, "API keys"));
-    }
-
-    /**
      * Update the user brand.
      *
      * @param id     The ID of user.

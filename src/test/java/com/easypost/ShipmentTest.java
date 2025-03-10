@@ -392,9 +392,6 @@ public final class ShipmentTest {
         assertNotNull(smartRate.getTimeInTransit().getPercentile95());
         assertNotNull(smartRate.getTimeInTransit().getPercentile97());
         assertNotNull(smartRate.getTimeInTransit().getPercentile99());
-
-        assertThrows(InvalidParameterError.class,
-                () -> smartRate.getTimeInTransit().getSmartRateAccuracy("percentile_100"));
     }
 
     /**
@@ -530,20 +527,6 @@ public final class ShipmentTest {
         assertEquals("GroundAdvantage", lowestSmartRateFilters.getService());
         assertEquals(5.93, lowestSmartRateFilters.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRateFilters.getCarrier());
-
-        // Test lowest smartrate with invalid filters (should error due to strict
-        // delivery days)
-        assertThrows(EasyPostException.class, () -> {
-            vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartrateAccuracy.Percentile90);
-        });
-
-        SmartRate deprecatedLowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 3,
-                SmartrateAccuracy.Percentile90);
-
-        // Test lowest smartrate with valid filters
-        assertEquals("GroundAdvantage", deprecatedLowestSmartRateFilters.getService());
-        assertEquals(5.93, deprecatedLowestSmartRateFilters.getRate(), 0.01);
-        assertEquals("USPS", deprecatedLowestSmartRateFilters.getCarrier());
 
         // Test lowest smartrate with invalid filters (should error due to strict
         // delivery days)

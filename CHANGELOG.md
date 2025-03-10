@@ -8,6 +8,13 @@
   - Removed the unused `Error` model
   - Added an explicit `AddressVerificationFieldError` model
   - The `BetaPaymentRefund` now uses a list of `FieldError` instead of `Error` for the `errors` field
+- Removes deprecated functions
+  - `TimeInTransit.getSmartRateAccuracy` (use `TimeInTransit.getSmartrateAccuracy` instead)
+  - `paymentMethod.all` (use `billing.retrievePaymentMethods` instead)
+  - `shipment.getSmartrates` (use `shipment.smartrates` instead)
+  - String overload for `shipment.lowestSmartRate`, 3rd param requires a valid `SmartrateAccuracy`
+  - `user.apiKeys` (use `apiKey.retrieveApiKeysForUser` instead)
+  - `utilities.getLowestSmartRate` (use `utilities.findLowestSmartrate` instead)
 - Corrects payload wrapping for updating a webhook
 - Bumps dependencies
 

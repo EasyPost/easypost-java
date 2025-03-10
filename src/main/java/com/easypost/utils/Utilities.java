@@ -140,27 +140,6 @@ public abstract class Utilities {
     }
 
     /**
-     * Get the lowest Smartrate from a list of Smartrates.
-     *
-     * @param smartrates       List of Smartrates to filter from.
-     * @param deliveryDay      Delivery days restriction to use when filtering.
-     * @param deliveryAccuracy Delivery days accuracy restriction to use when
-     *                         filtering.
-     * @return lowest Smartrate object
-     * @throws EasyPostException when the request fails.
-     * @deprecated Use {@link #findLowestSmartrate(List, int, SmartrateAccuracy)} instead.
-     * Deprecated: v5.5.0 - v7.0.0
-     */
-    @Deprecated
-    @InlineMe(replacement =
-        "Utilities.findLowestSmartrate(smartrates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy))",
-        imports = {"com.easypost.model.SmartrateAccuracy", "com.easypost.utils.Utilities"})
-    public static SmartRate getLowestSmartRate(final List<SmartRate> smartrates, int deliveryDay,
-            String deliveryAccuracy) throws EasyPostException {
-        return findLowestSmartrate(smartrates, deliveryDay, SmartrateAccuracy.getByKeyName(deliveryAccuracy));
-    }
-
-    /**
      * Find the lowest Smartrate from a list of Smartrates.
      *
      * @param smartrates       List of Smartrates to filter from.
