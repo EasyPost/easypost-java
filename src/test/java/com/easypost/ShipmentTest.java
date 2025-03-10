@@ -2,7 +2,6 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.exception.General.InvalidParameterError;
 import com.easypost.model.Address;
 import com.easypost.model.EndShipper;
 import com.easypost.model.EstimatedDeliveryDate;

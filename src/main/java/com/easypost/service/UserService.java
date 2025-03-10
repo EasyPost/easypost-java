@@ -1,13 +1,9 @@
 package com.easypost.service;
 
-import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.exception.General.FilteringError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
-import com.easypost.model.ApiKey;
-import com.easypost.model.ApiKeys;
 import com.easypost.model.Brand;
 import com.easypost.model.ChildUserCollection;
 import com.easypost.model.User;
@@ -15,9 +11,7 @@ import com.easypost.model.User;
 import lombok.SneakyThrows;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 
 public class UserService {

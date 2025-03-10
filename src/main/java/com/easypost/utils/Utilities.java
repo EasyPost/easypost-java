@@ -9,7 +9,6 @@ import com.easypost.model.Rate;
 import com.easypost.model.SmartRate;
 import com.easypost.model.SmartrateAccuracy;
 import com.easypost.model.StatelessRate;
-import com.google.errorprone.annotations.InlineMe;
 
 import java.util.List;
 import java.util.Map;
