@@ -15,6 +15,9 @@ public class TrackerCollection extends PaginatedCollection<Tracker> {
     private String trackingCode;
 
     @Setter
+    private List<String> trackingCodes;
+
+    @Setter
     private String carrier;
 
     @Override
@@ -32,6 +35,9 @@ public class TrackerCollection extends PaginatedCollection<Tracker> {
         // We only want to include these parameters if they are set (versus defaulting to false; anti-pattern)
         if (trackingCode != null) {
             parameters.put("tracking_code", trackingCode);
+        }
+        if (trackingCodes != null) {
+            parameters.put("tracking_codes", trackingCodes);
         }
         if (carrier != null) {
             parameters.put("carrier", carrier);

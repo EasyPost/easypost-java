@@ -68,6 +68,7 @@ public class TrackerService {
                 Requestor.request(RequestMethod.GET, endpoint, params, TrackerCollection.class, client);
         // we store the params in the collection so that we can use them to get the next page
         trackerCollection.setTrackingCode(InternalUtilities.getOrDefault(params, "tracking_code", null));
+        trackerCollection.setTrackingCodes(InternalUtilities.getOrDefault(params, "tracking_codes", null));
         trackerCollection.setCarrier(InternalUtilities.getOrDefault(params, "carrier", null));
 
         return trackerCollection;
