@@ -3,11 +3,19 @@
 ## Next Release
 
 - Adds `WebhookCustomHeader` model, allowing `custom_headers` to be passed when creating/updating a webhook
+- Adds `tracking_codes` param to tracker index endpoint
 - Fixes error parsing
   - Allows for alternative format of `errors` field (previously we deserialized the `errors` field into a list of `Error` objects; however, sometimes the errors are simply a list of strings. This change make the `errors` field a list of `Object` allowing for either the new `FieldError` object or a list of strings. Users will need to check for the type of error returned and handle appropriately)
   - Removed the unused `Error` model
   - Added an explicit `AddressVerificationFieldError` model
   - The `BetaPaymentRefund` now uses a list of `FieldError` instead of `Error` for the `errors` field
+- Removes deprecated functions
+  - `TimeInTransit.getSmartRateAccuracy` (use `TimeInTransit.getSmartrateAccuracy` instead)
+  - `paymentMethod.all` (use `billing.retrievePaymentMethods` instead)
+  - `shipment.getSmartrates` (use `shipment.smartrates` instead)
+  - String overload for `shipment.lowestSmartRate`, 3rd param requires a valid `SmartrateAccuracy`
+  - `user.apiKeys` (use `apiKey.retrieveApiKeysForUser` instead)
+  - `utilities.getLowestSmartRate` (use `utilities.findLowestSmartrate` instead)
 - Corrects payload wrapping for updating a webhook
 - Bumps dependencies
 

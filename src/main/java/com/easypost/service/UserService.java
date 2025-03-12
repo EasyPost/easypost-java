@@ -1,13 +1,9 @@
 package com.easypost.service;
 
-import com.easypost.Constants;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
-import com.easypost.exception.General.FilteringError;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
-import com.easypost.model.ApiKey;
-import com.easypost.model.ApiKeys;
 import com.easypost.model.Brand;
 import com.easypost.model.ChildUserCollection;
 import com.easypost.model.User;
@@ -15,9 +11,7 @@ import com.easypost.model.User;
 import lombok.SneakyThrows;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 
 public class UserService {
@@ -100,30 +94,6 @@ public class UserService {
         String endpoint = "users/" + id;
 
         Requestor.request(RequestMethod.DELETE, endpoint, null, User.class, client);
-    }
-
-    /**
-     * Get this User's API keys.
-     *
-     * @deprecated Use {@link ApiKeyService#retrieveApiKeysForUser(String)} instead.
-     * @param id The ID of the user.
-     * @return List of ApiKey objects.
-     * @throws EasyPostException when the request fails.
-     */
-    public List<ApiKey> apiKeys(final String id) throws EasyPostException {
-        ApiKeys parentKeys = client.apiKey.all();
-
-        if (Objects.equals(id, parentKeys.getId())) {
-            return parentKeys.getKeys();
-        }
-
-        for (int i = 0; i < parentKeys.getChildren().size(); i++) {
-            if (id.equals(parentKeys.getChildren().get(i).getId())) {
-                return parentKeys.getChildren().get(i).getKeys();
-            }
-        }
-
-        throw new FilteringError(String.format(Constants.ErrorMessages.NO_OBJECT_FOUND, "API keys"));
     }
 
     /**

@@ -27,37 +27,6 @@ public final class TimeInTransit {
     /**
      * Get the delivery accuracy of a specific percentile of this TimeInTransit.
      *
-     * @param percentile the percentile to find the corresponding accuracy for
-     * @return the delivery accuracy of the specified percentile
-     * @throws EasyPostException when the percentile is not valid
-     * @deprecated Use {@link #getBySmartrateAccuracy(SmartrateAccuracy)} instead.
-     * Deprecated: v5.5.0 - v7.0.0
-     */
-    @Deprecated
-    public int getSmartRateAccuracy(final String percentile) throws EasyPostException {
-        switch (percentile) {
-            case "percentile_50":
-                return this.percentile50;
-            case "percentile_75":
-                return this.percentile75;
-            case "percentile_85":
-                return this.percentile85;
-            case "percentile_90":
-                return this.percentile90;
-            case "percentile_95":
-                return this.percentile95;
-            case "percentile_97":
-                return this.percentile97;
-            case "percentile_99":
-                return this.percentile99;
-            default:
-                throw new InvalidParameterError("percentile");
-        }
-    }
-
-    /**
-     * Get the delivery accuracy of a specific percentile of this TimeInTransit.
-     *
      * @param accuracy the SmartrateAccuracy to find the corresponding accuracy for
      * @return the delivery accuracy of the specified percentile
      * @throws EasyPostException when the percentile is not valid
