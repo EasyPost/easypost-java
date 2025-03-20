@@ -2,11 +2,13 @@ package com.easypost;
 
 import com.easypost.exception.API.InvalidRequestError;
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.ClientSecret;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BetaReferralCustomerTest {
     private static TestUtils.VCR vcr;
@@ -68,5 +70,33 @@ public class BetaReferralCustomerTest {
         assertEquals("TRANSACTION.DOES_NOT_EXIST", exception.getCode());
         assertEquals(422, exception.getStatusCode());
         assertEquals("We could not find a transaction with that id.", exception.getMessage());
+    }
+
+    /**
+     * Test creating a client secret for credit cards.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateCreditCardClientSecret() throws EasyPostException {
+        vcr.setUpTest("create_credit_card_client_secret");
+
+        ClientSecret response = vcr.client.betaReferralCustomer.createCreditCardClientSecret();
+
+        assertTrue(response.getClientSecret().startsWith("seti_"));
+    }
+
+    /**
+     * Test creating a client secret for bank accounts.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateBankAccountClientSecret() throws EasyPostException {
+        vcr.setUpTest("create_bank_account_client_secret");
+
+        ClientSecret response = vcr.client.betaReferralCustomer.createBankAccountClientSecret();
+
+        assertTrue(response.getClientSecret().startsWith("fcsess_client_secret_"));
     }
 }

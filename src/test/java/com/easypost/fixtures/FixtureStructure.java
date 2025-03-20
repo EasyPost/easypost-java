@@ -1,6 +1,7 @@
 package com.easypost.fixtures;
 
 import com.easypost.fixtures.components.Addresses;
+import com.easypost.fixtures.components.Billing;
 import com.easypost.fixtures.components.CarrierAccounts;
 import com.easypost.fixtures.components.CarrierStrings;
 import com.easypost.fixtures.components.Claims;
@@ -25,6 +26,9 @@ public final class FixtureStructure {
 
     @SerializedName ("addresses")
     public Addresses addresses;
+
+    @SerializedName ("billing")
+    public Billing billing;
 
     @SerializedName ("carrier_accounts")
     public CarrierAccounts carrierAccounts;

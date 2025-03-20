@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1742503697,
+    "request": {
+      "body": "{\n  \"credit_card\": {\n    \"payment_method_id\": \"pm_0Pn6bQDqT4huGUvd0CjpRerH\",\n    \"priority\": \"primary\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/credit_cards"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"CREDIT_CARD.NOT_FOUND\",\n    \"message\": \"Stripe::PaymentMethod does not exist for the specified reference_id\",\n    \"errors\": []\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 404 Not Found"
+        ],
+        "content-length": [
+          "134"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb42nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "64f5803167dc7f11e2baa012002efd6f"
+        ],
+        "x-proxied": [
+          "intlb3nuq 284c5d344a",
+          "extlb1nuq 99aac35317"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.444659"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202503202010-5de35d6868-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 404,
+        "message": "Not Found"
+      },
+      "uri": "https://api.easypost.com/v2/credit_cards"
+    },
+    "duration": 562
+  }
+]

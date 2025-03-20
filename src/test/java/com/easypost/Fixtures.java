@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import com.easypost.fixtures.components.Billing;
+
 import static com.easypost.TestUtils.getSourceFileDirectory;
 import static com.easypost.TestUtils.readFile;
 
@@ -102,15 +104,6 @@ public abstract class Fixtures {
      */
     public static String reportDate() {
         return "2022-05-04";
-    }
-
-    /**
-     * Get the default report prefix.
-     *
-     * @return The default report prefix
-     */
-    public static String reportIdPrefix() {
-        return "shprep_";
     }
 
     /**
@@ -379,5 +372,14 @@ public abstract class Fixtures {
      */
     public static String desiredDeliveryDate() {
         return "2024-08-21";
+    }
+
+    /**
+     * Get the billing fixture data.
+     *
+     * @return The billing fixture data
+     */
+    public static Billing billing() {
+        return Objects.requireNonNull(getFixtureData()).billing;
     }
 }

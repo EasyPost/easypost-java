@@ -2,7 +2,9 @@ package com.easypost;
 
 import com.easypost.exception.API.ExternalApiError;
 import com.easypost.exception.EasyPostException;
+import com.easypost.exception.API.InvalidRequestError;
 import com.easypost.exception.General.EndOfPaginationError;
+import com.easypost.exception.API.NotFoundError;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.ReferralCustomer;
@@ -23,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public final class ReferralTest {
+public final class ReferralCustomerTest {
     private static TestUtils.VCR vcr;
 
     /**
@@ -33,7 +35,7 @@ public final class ReferralTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        vcr = new TestUtils.VCR("referral", TestUtils.ApiKey.PARTNER);
+        vcr = new TestUtils.VCR("referral_customer", TestUtils.ApiKey.PARTNER);
     }
 
     /**
@@ -168,5 +170,49 @@ public final class ReferralTest {
         assertThrows(ExternalApiError.class,
                 () -> vcr.client.referralCustomer.addCreditCardToUser(referralUserKey(), "1234", 1234, 1234, "1234",
                         PaymentMethod.Priority.PRIMARY));
+    }
+
+    /**
+     * Test adding a credit card from Stripe for a Referral user raises an error when it fails.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testAddCreditCardFromStripe() throws EasyPostException {
+        vcr.setUpTest("add_credit_card_from_stripe");
+
+        NotFoundError exception = assertThrows(NotFoundError.class, () -> {
+            vcr.client.referralCustomer.addCreditCardFromStripe(
+                referralUserKey(),
+                Fixtures.billing().paymentMethodId,
+                PaymentMethod.Priority.PRIMARY
+            );
+        });
+
+        assertEquals("Stripe::PaymentMethod does not exist for the specified reference_id", exception.getMessage());
+    }
+
+    /**
+     * Test adding a bank account from Stripe for a Referral user raises an error when it fails.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testAddBankAccountFromStripe() throws EasyPostException {
+        vcr.setUpTest("add_bank_account_from_stripe");
+
+        InvalidRequestError exception = assertThrows(InvalidRequestError.class, () -> {
+            vcr.client.referralCustomer.addBankAccountFromStripe(
+                referralUserKey(),
+                Fixtures.billing().financialConnectionsId,
+                Fixtures.billing().mandateData,
+                PaymentMethod.Priority.PRIMARY
+            );
+        });
+
+        assertEquals(
+            "account_holder_name must be present when creating a Financial Connections payment method", 
+            exception.getMessage()
+        );
     }
 }

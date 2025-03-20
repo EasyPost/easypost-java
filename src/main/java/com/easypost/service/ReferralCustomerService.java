@@ -167,6 +167,59 @@ public class ReferralCustomerService {
     }
 
     /**
+     * Add a credit card to EasyPost for a ReferralCustomer with a payment method ID from Stripe.
+     * This function requires the ReferralCustomer User's API key.
+     *
+     * @param referralApiKey  API key of the referral user.
+     * @param paymentMethodId Payment method ID from Stripe.
+     * @param priority        Priority of the credit card (e.g., "primary" or "secondary").
+     * @return PaymentMethodObject object.
+     * @throws EasyPostException when the request fails.
+     */
+    public PaymentMethodObject addCreditCardFromStripe(final String referralApiKey, final String paymentMethodId,
+                                                    final PaymentMethod.Priority priority) throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> creditCardParams = new HashMap<>();
+        creditCardParams.put("payment_method_id", paymentMethodId);
+        creditCardParams.put("priority", priority.toString().toLowerCase());
+        params.put("credit_card", creditCardParams);
+
+        EasyPostClient referralClient = new EasyPostClient(referralApiKey);
+
+        String endpoint = "credit_cards";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, PaymentMethodObject.class, referralClient);
+    }
+
+    /**
+     * Add a bank account to EasyPost for a ReferralCustomer.
+     * This function requires the ReferralCustomer User's API key.
+     *
+     * @param referralApiKey          API key of the referral user.
+     * @param financialConnectionsId  Financial connections ID from Stripe.
+     * @param mandateData             Mandate data for the bank account.
+     * @param priority                Priority of the bank account (e.g., "primary" or "secondary").
+     * @return PaymentMethodObject object.
+     * @throws EasyPostException when the request fails.
+     */
+    public PaymentMethodObject addBankAccountFromStripe(final String referralApiKey, 
+                                                        final String financialConnectionsId,
+                                                        final Map<String, Object> mandateData,
+                                                        final PaymentMethod.Priority priority)
+            throws EasyPostException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("financial_connections_id", financialConnectionsId);
+        params.put("mandate_data", mandateData);
+        params.put("priority", priority.toString().toLowerCase());
+
+        EasyPostClient referralClient = new EasyPostClient(referralApiKey);
+
+        String endpoint = "bank_accounts";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, PaymentMethodObject.class, referralClient);
+    }
+
+    /**
      * Retrieve EasyPost Stripe API key.
      *
      * @return EasyPost Stripe API key.
