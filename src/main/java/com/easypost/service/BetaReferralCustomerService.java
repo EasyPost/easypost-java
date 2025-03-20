@@ -6,6 +6,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.BetaPaymentRefund;
+import com.easypost.model.ClientSecret;
 import com.easypost.model.PaymentMethod;
 import com.easypost.model.PaymentMethodObject;
 
@@ -91,5 +92,45 @@ public class BetaReferralCustomerService {
 
         return Requestor.request(RequestMethod.POST, endpoint, params,
                 BetaPaymentRefund.class, client, "beta");
+    }
+
+    /**
+     * Creates a client secret to use with Stripe when adding a credit card.
+     *
+     * @return ClientSecret containing the client secret.
+     * @throws EasyPostException When the request fails.
+     */
+    public ClientSecret createCreditCardClientSecret() throws EasyPostException {
+        String endpoint = "setup_intents";
+
+        return Requestor.request(RequestMethod.POST, endpoint, null, ClientSecret.class, client, "beta");
+    }
+
+    /**
+     * Creates a client secret to use with Stripe when adding a bank account.
+     *
+     * @return ClientSecret containing the client secret.
+     * @throws EasyPostException When the request fails.
+     */
+    public ClientSecret createBankAccountClientSecret() throws EasyPostException {
+        return createBankAccountClientSecret(null);
+    }
+
+    /**
+     * Creates a client secret to use with Stripe when adding a bank account.
+     *
+     * @param returnUrl Optional return URL for the bank account setup.
+     * @return ClientSecret containing the client secret.
+     * @throws EasyPostException When the request fails.
+     */
+    public ClientSecret createBankAccountClientSecret(String returnUrl) throws EasyPostException {
+        HashMap<String, Object> params = new HashMap<>();
+        if (returnUrl != null) {
+            params.put("return_url", returnUrl);
+        }
+
+        String endpoint = "financial_connections_sessions";
+
+        return Requestor.request(RequestMethod.POST, endpoint, params, ClientSecret.class, client, "beta");
     }
 }

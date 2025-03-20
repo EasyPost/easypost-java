@@ -48,6 +48,8 @@ public class PaymentMethodObject extends EasyPostResource {
     private String name;
     // bank_account
     private boolean verified;
+    // both
+    private boolean requiresMandateCollection;
 
     /**
      * Get the type of this PaymentMethodObject object.

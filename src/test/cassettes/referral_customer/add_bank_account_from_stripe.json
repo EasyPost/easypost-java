@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1742503697,
+    "request": {
+      "body": "{\n  \"financial_connections_id\": \"fca_0QAc7sDqT4huGUvdf6BahYa9\",\n  \"mandate_data\": {\n    \"ip_address\": \"127.0.0.1\",\n    \"accepted_at\": 1.72251073E9,\n    \"user_agent\": \"Mozilla/5.0\"\n  },\n  \"priority\": \"primary\"\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/bank_accounts"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"BANK_ACCOUNT.INVALID_PARAMS\",\n    \"message\": \"account_holder_name must be present when creating a Financial Connections payment method\",\n    \"errors\": []\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 422 Unprocessable Entity"
+        ],
+        "content-length": [
+          "161"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb33nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "64f5803467dc7f11e2baa010002efd3c"
+        ],
+        "x-proxied": [
+          "intlb4nuq 284c5d344a",
+          "extlb1nuq 99aac35317"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.036008"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202503202010-5de35d6868-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 422,
+        "message": "Unprocessable Entity"
+      },
+      "uri": "https://api.easypost.com/v2/bank_accounts"
+    },
+    "duration": 146
+  }
+]
