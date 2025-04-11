@@ -43,9 +43,18 @@ public final class CarrierAccountTest {
         data.put("type", "UpsAccount");
         data.put("account_number", "123456789");
 
-        CarrierAccount upsAccount = vcr.client.carrierAccount.create(data);
-        testCarrierAccountId = upsAccount.getId(); // trigger deletion after test
-        return upsAccount;
+        CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);
+        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
+        return carrierAccount;
+    }
+
+    private static CarrierAccount createAmazonCarrierAccount() throws EasyPostException {
+        Map<String, Object> data = new HashMap<>();
+        data.put("type", "AmazonShippingAccount");
+
+        CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);
+        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
+        return carrierAccount;
     }
 
     /**
@@ -126,11 +135,27 @@ public final class CarrierAccountTest {
     public void testCreateWithUPS() throws EasyPostException {
         vcr.setUpTest("create_with_ups");
 
-        CarrierAccount upsAccount = createUpsCarrierAccount();
+        CarrierAccount carrierAccount = createUpsCarrierAccount();
 
-        assertInstanceOf(CarrierAccount.class, upsAccount);
-        assertTrue(upsAccount.getId().startsWith("ca_"));
-        assertEquals("UpsAccount", upsAccount.getType());
+        assertInstanceOf(CarrierAccount.class, carrierAccount);
+        assertTrue(carrierAccount.getId().startsWith("ca_"));
+        assertEquals("UpsAccount", carrierAccount.getType());
+    }
+
+    /**
+     * Test creating an Amazon carrier account.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateWithAmazon() throws EasyPostException {
+        // vcr.setUpTest("create_with_amazon");
+
+        CarrierAccount carrierAccount = createAmazonCarrierAccount();
+
+        assertInstanceOf(CarrierAccount.class, carrierAccount);
+        assertTrue(carrierAccount.getId().startsWith("ca_"));
+        assertEquals("AmazonShippingAccount", carrierAccount.getType());
     }
 
     /**
@@ -197,15 +222,15 @@ public final class CarrierAccountTest {
     public void testUpdateUpsAccount() throws EasyPostException {
         vcr.setUpTest("update_ups");
 
-        CarrierAccount upsAccount = createUpsCarrierAccount();
+        CarrierAccount carrierAccount = createUpsCarrierAccount();
         Map<String, Object> updateParams = new HashMap<>();
         updateParams.put("account_number", "987654321");
 
-        CarrierAccount updatedUpsAccount = vcr.client.carrierAccount.update(upsAccount.getId(), updateParams);
+        CarrierAccount updatedCarrierAccount = vcr.client.carrierAccount.update(carrierAccount.getId(), updateParams);
 
-        assertInstanceOf(CarrierAccount.class, updatedUpsAccount);
-        assertTrue(updatedUpsAccount.getId().startsWith("ca_"));
-        assertEquals("UpsAccount", updatedUpsAccount.getType());
+        assertInstanceOf(CarrierAccount.class, updatedCarrierAccount);
+        assertTrue(updatedCarrierAccount.getId().startsWith("ca_"));
+        assertEquals("UpsAccount", updatedCarrierAccount.getType());
     }
 
     /**

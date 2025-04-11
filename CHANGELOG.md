@@ -9,6 +9,7 @@
   - `referralCustomer.addCreditCardFromStripe`
   - `referralCustomer.addBankAccountFromStripe`
 - Adds `tracking_codes` param to tracker index endpoint
+- Routes `AmazonShippingAccount` to the correct endpoint
 - Fixes error parsing
   - Allows for alternative format of `errors` field (previously we deserialized the `errors` field into a list of `Error` objects; however, sometimes the errors are simply a list of strings. This change make the `errors` field a list of `Object` allowing for either the new `FieldError` object or a list of strings. Users will need to check for the type of error returned and handle appropriately)
   - Removed the unused `Error` model
