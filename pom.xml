@@ -125,12 +125,13 @@
                     <properties>
                         <configurationParameters>junit.jupiter.execution.order.random.seed=99</configurationParameters>
                     </properties>
+                    <argLine>-javaagent:${settings.localRepository}/net/bytebuddy/byte-buddy-agent/1.12.19/byte-buddy-agent-1.12.19.jar</argLine>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
+                <version>0.8.13</version>
                 <configuration>
                     <excludes>
                         <!-- Exclude all the getters in model for code coverage -->

@@ -12,7 +12,7 @@ clean:
 
 ## coverage - Test (and build) the project to generate a coverage report
 coverage:
-	mvn verify -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report
+	mvn test -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true jacoco:report
 
 ## checkstyle - Check if project follows CheckStyle rules (must run install-checkstyle first)
 checkstyle:

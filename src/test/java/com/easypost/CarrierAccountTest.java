@@ -149,7 +149,7 @@ public final class CarrierAccountTest {
      */
     @Test
     public void testCreateWithAmazon() throws EasyPostException {
-        // vcr.setUpTest("create_with_amazon");
+        vcr.setUpTest("create_with_amazon");
 
         CarrierAccount carrierAccount = createAmazonCarrierAccount();
 
