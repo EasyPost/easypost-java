@@ -138,8 +138,9 @@ public class CarrierAccountService {
      *
      * @param carrierAccountType The type of carrier account to create.
      * @return The top-layer key for the carrier account creation/update request.
+     * @throws MissingParameterError when the request fails.
      */
-    private static String selectTopLayerKey(final String carrierAccountType) throws EasyPostException {
+    private static String selectTopLayerKey(final String carrierAccountType) throws MissingParameterError {
         if (carrierAccountType == null) {
             throw new MissingParameterError(
                     String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));

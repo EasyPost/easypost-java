@@ -32,7 +32,6 @@ public final class CarrierAccountTest {
     private static MockedStatic<Requestor> requestMock = Mockito.mockStatic(Requestor.class);
 
     private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
-        // This method creates DhlEcsAccount carrier account.
         CarrierAccount carrierAccount = vcr.client.carrierAccount.create(Fixtures.basicCarrierAccount());
         testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
         return carrierAccount;
@@ -42,15 +41,6 @@ public final class CarrierAccountTest {
         Map<String, Object> data = new HashMap<>();
         data.put("type", "UpsAccount");
         data.put("account_number", "123456789");
-
-        CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);
-        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
-        return carrierAccount;
-    }
-
-    private static CarrierAccount createAmazonCarrierAccount() throws EasyPostException {
-        Map<String, Object> data = new HashMap<>();
-        data.put("type", "AmazonShippingAccount");
 
         CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);
         testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
@@ -151,7 +141,11 @@ public final class CarrierAccountTest {
     public void testCreateWithAmazon() throws EasyPostException {
         vcr.setUpTest("create_with_amazon");
 
-        CarrierAccount carrierAccount = createAmazonCarrierAccount();
+        Map<String, Object> data = new HashMap<>();
+        data.put("type", "AmazonShippingAccount");
+
+        CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);
+        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
 
         assertInstanceOf(CarrierAccount.class, carrierAccount);
         assertTrue(carrierAccount.getId().startsWith("ca_"));
