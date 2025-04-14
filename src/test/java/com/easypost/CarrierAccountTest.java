@@ -29,8 +29,6 @@ public final class CarrierAccountTest {
 
     private static TestUtils.VCR vcr;
 
-    private static MockedStatic<Requestor> requestMock = Mockito.mockStatic(Requestor.class);
-
     private static CarrierAccount createBasicCarrierAccount() throws EasyPostException {
         CarrierAccount carrierAccount = vcr.client.carrierAccount.create(Fixtures.basicCarrierAccount());
         testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
@@ -284,6 +282,8 @@ public final class CarrierAccountTest {
      */
     @Test
     public void testCarrierFieldsJsonSerialization() {
+        MockedStatic<Requestor> requestMock = Mockito.mockStatic(Requestor.class);
+
         String carrierAccountJson = "[{\"id\":\"ca_123\",\"object\":\"CarrierAccount\",\"fields\":{\"credentials\":" +
                 "{\"account_number\":{\"visibility\":\"visible\",\"label\":\"DHL Account Number\"," +
                 "\"value\":\"123456\"},\"country\":{\"visibility\":\"visible\",\"label\":" +
