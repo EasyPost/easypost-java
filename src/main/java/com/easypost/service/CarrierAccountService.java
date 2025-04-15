@@ -93,7 +93,7 @@ public class CarrierAccountService {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
         wrappedParams.put(selectTopLayerKey(type), params);
 
-        String endpoint = (Constants.UpsAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(type) 
+        String endpoint = (Constants.CarrierAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(type) 
                   ? "ups_oauth_registrations/"
                   : "carrier_accounts/") + id;
 
@@ -121,10 +121,12 @@ public class CarrierAccountService {
      * @return The endpoint for the carrier account creation request.
      */
     private static String selectCarrierAccountCreationEndpoint(final String carrierAccountType) {
-        if (Constants.CarrierAccountTypes.CARRIER_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
+        if (Constants.CarrierAccountTypes.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
             return "carrier_accounts/register";
-        } else if (Constants.UpsAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(carrierAccountType)) {
+        } else if (Constants.CarrierAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(carrierAccountType)) {
             return "ups_oauth_registrations";
+        } else if (Constants.CarrierAccountTypes.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.contains(carrierAccountType)) {
+            return "carrier_accounts/register_oauth";
         } else {
             return "carrier_accounts";
         }
@@ -136,15 +138,20 @@ public class CarrierAccountService {
      *
      * @param carrierAccountType The type of carrier account to create.
      * @return The top-layer key for the carrier account creation/update request.
+     * @throws MissingParameterError when the request fails.
      */
-    private static String selectTopLayerKey(final String carrierAccountType) throws EasyPostException {
+    private static String selectTopLayerKey(final String carrierAccountType) throws MissingParameterError {
         if (carrierAccountType == null) {
             throw new MissingParameterError(
                     String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));
         }
 
-        return Constants.UpsAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(carrierAccountType)
-            ? "ups_oauth_registrations"
-            : "carrier_account";
+        if (Constants.CarrierAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(carrierAccountType)) {
+            return "ups_oauth_registrations";
+        } else if (Constants.CarrierAccountTypes.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.contains(carrierAccountType)) {
+            return "carrier_account_oauth_registrations";
+        } else {
+            return "carrier_account";
+        }
     }
 }
