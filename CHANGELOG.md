@@ -8,6 +8,7 @@
   - `betaReferralCustomer.createBankAccountClientSecret`
   - `referralCustomer.addCreditCardFromStripe`
   - `referralCustomer.addBankAccountFromStripe`
+- Adds missing tracker props
 - Adds `tracking_codes` param to tracker index endpoint
 - Routes `AmazonShippingAccount` to the correct endpoint
 - Fixes error parsing
