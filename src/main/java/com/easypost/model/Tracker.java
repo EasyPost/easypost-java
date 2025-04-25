@@ -18,4 +18,6 @@ public class Tracker extends EasyPostResource {
     private CarrierDetail carrierDetail;
     private String publicUrl;
     private String statusDetail;
+    private Boolean finalized;
+    private Boolean isReturn;
 }
