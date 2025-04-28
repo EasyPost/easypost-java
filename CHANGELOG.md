@@ -1,6 +1,8 @@
 # CHANGELOG
 
-## Next Release
+## v8.0.0 (2025-04-28)
+
+See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-7x-to-80) for more details.
 
 - Adds `WebhookCustomHeader` model, allowing `custom_headers` to be passed when creating/updating a webhook
 - Adds the following functions to assist ReferralCustomers add credit cards and bank accounts:
@@ -11,6 +13,7 @@
 - Adds missing tracker props
 - Adds `tracking_codes` param to tracker index endpoint
 - Routes `AmazonShippingAccount` to the correct endpoint
+- Corrects payload wrapping for updating a webhook
 - Fixes error parsing
   - Allows for alternative format of `errors` field (previously we deserialized the `errors` field into a list of `Error` objects; however, sometimes the errors are simply a list of strings. This change make the `errors` field a list of `Object` allowing for either the new `FieldError` object or a list of strings. Users will need to check for the type of error returned and handle appropriately)
   - Removed the unused `Error` model
@@ -23,7 +26,6 @@
   - String overload for `shipment.lowestSmartRate`, 3rd param requires a valid `SmartrateAccuracy`
   - `user.apiKeys` (use `apiKey.retrieveApiKeysForUser` instead)
   - `utilities.getLowestSmartRate` (use `utilities.findLowestSmartrate` instead)
-- Corrects payload wrapping for updating a webhook
 - Bumps dependencies
 
 ## v7.4.4 (2025-01-03)
@@ -78,6 +80,8 @@
 - Adds the `object` field to all models; previously, most models were missing this field.
 
 ## v7.0.0 (2023-12-06)
+
+See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-6x-to-70) for more details.
 
 - Removes `withCarbonOffset` parameter from `create`, `buy`, and `regenerateRates` functions of the Shipment service as EasyPost now offers Carbon Neutral shipments by default for free
 - Removes the undocumented `createAndBuy` function from the Batch service. The proper usage is to create a batch first and buy it separately
@@ -148,6 +152,8 @@
   - `refundByPaymentLog` refunds you wallet by a PaymentLog ID
 
 ## v6.0.0 (2023-01-05)
+
+See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-5x-to-60) for more details.
 
 Includes all the changes from `v6.0.0-rc1` listed below in addition to the following:
 
@@ -292,7 +298,7 @@ Includes all the changes from `v6.0.0-rc1` listed below in addition to the follo
 
 ## v5.0.0 (2022-01-14)
 
-Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_GUIDE.md).
+See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-4x-to-50) for more details.
 
 - Bump minimum Java version from 1.5 to 8
 - Changed PUT/POST request bodies from url-form encoded to JSON encoded
