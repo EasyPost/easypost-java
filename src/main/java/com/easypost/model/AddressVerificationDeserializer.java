@@ -18,11 +18,12 @@ public final class AddressVerificationDeserializer implements JsonDeserializer<A
      * @param typeOfT Type of the object to deserialize.
      * @param context Deserialization context.
      * @return Deserialized AddressVerification object.
-     * @throws JsonParseException if the JSON object is not a valid SmartrateCollection.
+     * @throws JsonParseException if the JSON object is not a valid
+     *                            SmartRateCollection.
      */
     @Override
     public AddressVerification deserialize(final JsonElement json, final Type typeOfT,
-    final JsonDeserializationContext context) throws JsonParseException {
+            final JsonDeserializationContext context) throws JsonParseException {
         JsonObject jo = json.getAsJsonObject();
 
         AddressVerification addressVerification = new AddressVerification();

@@ -14,8 +14,8 @@ import com.easypost.model.RecommendShipDateForShipmentResult;
 import com.easypost.model.RecommendShipDateResponse;
 import com.easypost.model.Shipment;
 import com.easypost.model.SmartRate;
-import com.easypost.model.SmartrateAccuracy;
-import com.easypost.model.SmartrateCollection;
+import com.easypost.model.SmartRateAccuracy;
+import com.easypost.model.SmartRateCollection;
 import com.easypost.utils.InternalUtilities;
 import lombok.SneakyThrows;
 
@@ -39,7 +39,7 @@ public class ShipmentService {
     /**
      * Create a new Shipment object from a map of parameters.
      *
-     * @param params           The map of parameters.
+     * @param params The map of parameters.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -77,7 +77,8 @@ public class ShipmentService {
 
         ShipmentCollection shipmentCollection = Requestor.request(RequestMethod.GET, endpoint, params,
                 ShipmentCollection.class, client);
-        // we store the params in the collection so that we can use them to get the next page
+        // we store the params in the collection so that we can use them to get the next
+        // page
 
         shipmentCollection.setPurchased(InternalUtilities.getOrDefault(params, "purchased", null));
         shipmentCollection.setIncludeChildren(InternalUtilities.getOrDefault(params, "include_children", null));
@@ -106,7 +107,8 @@ public class ShipmentService {
      */
     public ShipmentCollection getNextPage(ShipmentCollection collection, Integer pageSize) throws EndOfPaginationError {
         return collection.getNextPage(new Function<Map<String, Object>, ShipmentCollection>() {
-            @Override @SneakyThrows
+            @Override
+            @SneakyThrows
             public ShipmentCollection apply(Map<String, Object> parameters) {
                 return all(parameters);
             }
@@ -127,8 +129,8 @@ public class ShipmentService {
     /**
      * Get new rates for this Shipment.
      *
-     * @param id               The ID of shipment.
-     * @param params           The options for the query.
+     * @param id     The ID of shipment.
+     * @param params The options for the query.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -145,8 +147,8 @@ public class ShipmentService {
      * @return List of SmartRate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<SmartRate> smartrates(final String id) throws EasyPostException {
-        return this.smartrates(id, null);
+    public List<SmartRate> smartRates(final String id) throws EasyPostException {
+        return this.smartRates(id, null);
     }
 
     /**
@@ -157,13 +159,13 @@ public class ShipmentService {
      * @return List of SmartRate objects
      * @throws EasyPostException when the request fails.
      */
-    public List<SmartRate> smartrates(final String id, final Map<String, Object> params) throws EasyPostException {
+    public List<SmartRate> smartRates(final String id, final Map<String, Object> params) throws EasyPostException {
         String endpoint = "shipments/" + id + "/smartrate";
 
-        SmartrateCollection smartrateCollection = Requestor.request(RequestMethod.GET, endpoint, params,
-                SmartrateCollection.class, client);
+        SmartRateCollection smartRateCollection = Requestor.request(RequestMethod.GET, endpoint, params,
+                SmartRateCollection.class, client);
 
-        return smartrateCollection.getSmartrates();
+        return smartRateCollection.getSmartRates();
     }
 
     /**
@@ -212,9 +214,9 @@ public class ShipmentService {
     /**
      * Buy this Shipment.
      *
-     * @param id               The ID of shipment.
-     * @param params           The options for the query.
-     * @param endShipperId     The id of the end shipper to use for this purchase.
+     * @param id           The ID of shipment.
+     * @param params       The options for the query.
+     * @param endShipperId The id of the end shipper to use for this purchase.
      * @return Shipment object
      * @throws EasyPostException when the request fails.
      */
@@ -292,13 +294,13 @@ public class ShipmentService {
      * @return lowest SmartRate object
      * @throws EasyPostException when the request fails.
      */
-    public SmartRate lowestSmartRate(final String id, final int deliveryDay, SmartrateAccuracy deliveryAccuracy)
+    public SmartRate lowestSmartRate(final String id, final int deliveryDay, SmartRateAccuracy deliveryAccuracy)
             throws EasyPostException {
-        List<SmartRate> smartrates = this.smartrates(id, null);
+        List<SmartRate> smartrates = this.smartRates(id, null);
 
-        SmartRate lowestSmartrate = findLowestSmartrate(smartrates, deliveryDay, deliveryAccuracy);
+        SmartRate lowestSmartRate = findLowestSmartRate(smartrates, deliveryDay, deliveryAccuracy);
 
-        return lowestSmartrate;
+        return lowestSmartRate;
     }
 
     /**
@@ -308,28 +310,28 @@ public class ShipmentService {
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when
      *                         filtering.
-     * @return lowest Smartrate object
+     * @return lowest SmartRate object
      * @throws EasyPostException when the request fails.
      */
-    public SmartRate findLowestSmartrate(final List<SmartRate> smartRates, int deliveryDay,
-            SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
-        SmartRate lowestSmartrate = null;
+    public SmartRate findLowestSmartRate(final List<SmartRate> smartRates, int deliveryDay,
+            SmartRateAccuracy deliveryAccuracy) throws EasyPostException {
+        SmartRate lowestSmartRate = null;
 
         for (SmartRate rate : smartRates) {
-            int smartrateDeliveryDay = rate.getTimeInTransit().getBySmartrateAccuracy(deliveryAccuracy);
+            int smartrateDeliveryDay = rate.getTimeInTransit().getSmartRateAccuracy(deliveryAccuracy);
 
             if (smartrateDeliveryDay > deliveryDay) {
                 continue;
-            } else if (lowestSmartrate == null || rate.getRate() < lowestSmartrate.getRate()) {
-                lowestSmartrate = rate;
+            } else if (lowestSmartRate == null || rate.getRate() < lowestSmartRate.getRate()) {
+                lowestSmartRate = rate;
             }
         }
 
-        if (lowestSmartrate == null) {
+        if (lowestSmartRate == null) {
             throw new FilteringError(String.format(Constants.ErrorMessages.NO_OBJECT_FOUND, "rate"));
         }
 
-        return lowestSmartrate;
+        return lowestSmartRate;
     }
 
     /**
@@ -388,10 +390,11 @@ public class ShipmentService {
     }
 
     /**
-     * Retrieve a recommended ship date for an existing Shipment via the Precision Shipping API,
+     * Retrieve a recommended ship date for an existing Shipment via the Precision
+     * Shipping API,
      * based on a specific desired delivery date.
      *
-     * @param id              The id of the shipment.
+     * @param id                  The id of the shipment.
      * @param desiredDeliveryDate The desired delivery date.
      * @return EstimatedDeliveryDate object.
      * @throws EasyPostException When the request fails.

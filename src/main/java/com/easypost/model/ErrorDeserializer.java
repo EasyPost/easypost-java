@@ -16,10 +16,11 @@ import java.util.Map.Entry;
 
 public final class ErrorDeserializer implements JsonDeserializer<APIException> {
     /**
-     * Recursively traverse an error JSON element and its sub-element(s), and extracts all
+     * Recursively traverse an error JSON element and its sub-element(s), and
+     * extracts all
      * error string values found into the specified string list.
      *
-     * @param element the JSON element to traverse
+     * @param element      the JSON element to traverse
      * @param messagesList the list of strings to append found values to
      */
     private void traverseJsonElement(JsonElement element, ArrayList<String> messagesList) {
@@ -45,11 +46,12 @@ public final class ErrorDeserializer implements JsonDeserializer<APIException> {
      * @param typeOfT Type of the object to deserialize.
      * @param context Deserialization context.
      * @return Deserialized APIException object.
-     * @throws JsonParseException if the JSON object is not a valid SmartrateCollection.
+     * @throws JsonParseException if the JSON object is not a valid
+     *                            SmartRateCollection.
      */
     @Override
     public APIException deserialize(final JsonElement json, final Type typeOfT,
-                                       final JsonDeserializationContext context) throws JsonParseException {
+            final JsonDeserializationContext context) throws JsonParseException {
         JsonObject jo = json.getAsJsonObject();
 
         String message = null;
@@ -83,7 +85,6 @@ public final class ErrorDeserializer implements JsonDeserializer<APIException> {
         }
 
         JsonElement errorsAsJson = errorData.get("errors");
-        List<Object> errorList = new ArrayList<>();
         if (errorsAsJson != null) {
             JsonArray errorsAsArray = errorsAsJson.getAsJsonArray();
             for (JsonElement errorAsJson : errorsAsArray) {
@@ -106,13 +107,13 @@ public final class ErrorDeserializer implements JsonDeserializer<APIException> {
                         fieldError.setSuggestion(suggestion.getAsString());
                     }
 
-                    errorList.add(fieldError);
+                    errors.add(fieldError);
                 } else {
-                    errorList.add(errorAsJson.getAsString());
+                    errors.add(errorAsJson.getAsString());
                 }
             }
         }
 
-        return new APIException(message, code, errorList);
+        return new APIException(message, code, errors);
     }
 }

@@ -33,14 +33,19 @@ See the `CHANGELOG` for more details.
 
 *Likelihood of Impact: **Medium***
 
-The following deprecated functions have been removed:
+The following functions have changed:
 
-- `TimeInTransit.getSmartRateAccuracy` (use `TimeInTransit.getSmartrateAccuracy` instead)
-- `paymentMethod.all` (use `billing.retrievePaymentMethods` instead)
-- `shipment.getSmartrates` (use `shipment.smartrates` instead)
-- String overload for `shipment.lowestSmartRate`, 3rd param requires a valid `SmartrateAccuracy`
-- `user.apiKeys` (use `apiKey.retrieveApiKeysForUser` instead)
-- `utilities.getLowestSmartRate` (use `utilities.findLowestSmartrate` instead)
+- Removed deprecated functions
+  - `paymentMethod.all` (use `billing.retrievePaymentMethods` instead)
+  - `user.apiKeys` (use `apiKey.retrieveApiKeysForUser` instead)
+- Changed deprecated functions
+  - `shipment.lowestSmartRate` (3rd param expects a valid `SmartRateAccuracy`)
+  - `utilities.findLowestSmartRate` (3rd param expects a valid `SmartRateAccuracy`)
+- Renames
+  - `SmartrateAccuracy` is now `SmartRateAccuracy`
+  - `SmartrateCollection` is now `SmartRateCollection`
+  - `shipment.smartrates` is now `shipment.smartRates`
+  - `TimeInTransit.getBySmartrateAccuracy` is now `TimeInTransit.getSmartRateAccuracy`
 
 ## Upgrading from 6.x to 7.0
 

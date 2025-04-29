@@ -8,27 +8,29 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
-public final class SmartrateCollectionDeserializer implements JsonDeserializer<SmartrateCollection> {
+public final class SmartRateCollectionDeserializer implements JsonDeserializer<SmartRateCollection> {
     /**
-     * Deserialize a SmartrateCollection from a JSON object.
+     * Deserialize a SmartRateCollection from a JSON object.
      *
      * @param json    JSON object to deserialize.
      * @param typeOfT Type of the object to deserialize.
      * @param context Deserialization context.
-     * @return Deserialized SmartrateCollection object.
-     * @throws JsonParseException if the JSON object is not a valid SmartrateCollection.
+     * @return Deserialized SmartRateCollection object.
+     * @throws JsonParseException if the JSON object is not a valid
+     *                            SmartRateCollection.
      */
     @Override
-    public SmartrateCollection deserialize(final JsonElement json, final Type typeOfT,
-                                           final JsonDeserializationContext context) throws JsonParseException {
-        SmartrateCollection smartrateCollection = new SmartrateCollection();
+    public SmartRateCollection deserialize(final JsonElement json, final Type typeOfT,
+            final JsonDeserializationContext context) throws JsonParseException {
+        SmartRateCollection smartrateCollection = new SmartRateCollection();
 
         JsonObject jo = (JsonObject) json;
         JsonElement results = jo.get("result");
 
         if (results == null || !results.isJsonArray()) {
             return smartrateCollection;
-            // return empty collection if "results" key does not exist or corresponding value is not an array
+            // return empty collection if "results" key does not exist or corresponding
+            // value is not an array
         }
         // the JsonDeserializationContext should have access to the other type adapters,
         // so we can tap into the RateDeserializer from here

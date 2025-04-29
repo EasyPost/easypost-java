@@ -6,7 +6,7 @@ import com.easypost.exception.General.InvalidParameterError;
 import lombok.Getter;
 
 @Getter
-public enum SmartrateAccuracy {
+public enum SmartRateAccuracy {
     Percentile50("percentile_50"),
     Percentile75("percentile_75"),
     Percentile85("percentile_85"),
@@ -22,7 +22,7 @@ public enum SmartrateAccuracy {
      *
      * @param keyName the internal key name
      */
-    SmartrateAccuracy(String keyName) {
+    SmartRateAccuracy(String keyName) {
         this.keyName = keyName;
     }
 
@@ -33,8 +33,8 @@ public enum SmartrateAccuracy {
      * @return the enum value
      * @throws EasyPostException if the key name is not found
      */
-    public static SmartrateAccuracy getByKeyName(String keyName) throws EasyPostException {
-        for (SmartrateAccuracy smartrateAccuracy : values()) {
+    public static SmartRateAccuracy getByKeyName(String keyName) throws EasyPostException {
+        for (SmartRateAccuracy smartrateAccuracy : values()) {
             if (smartrateAccuracy.getKeyName().equals(keyName)) {
                 return smartrateAccuracy;
             }

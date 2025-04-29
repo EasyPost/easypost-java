@@ -20,12 +20,16 @@ See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-7x-to-80) for more detai
   - Added an explicit `AddressVerificationFieldError` model
   - The `BetaPaymentRefund` now uses a list of `FieldError` instead of `Error` for the `errors` field
 - Removes deprecated functions
-  - `TimeInTransit.getSmartRateAccuracy` (use `TimeInTransit.getSmartrateAccuracy` instead)
   - `paymentMethod.all` (use `billing.retrievePaymentMethods` instead)
-  - `shipment.getSmartrates` (use `shipment.smartrates` instead)
-  - String overload for `shipment.lowestSmartRate`, 3rd param requires a valid `SmartrateAccuracy`
   - `user.apiKeys` (use `apiKey.retrieveApiKeysForUser` instead)
-  - `utilities.getLowestSmartRate` (use `utilities.findLowestSmartrate` instead)
+- Replaces deprecated functions
+  - `shipment.lowestSmartRate` (3rd param expects a valid `SmartRateAccuracy`)
+  - `utilities.findLowestSmartRate` (3rd param expects a valid `SmartRateAccuracy`)
+- Renames
+  - `SmartrateAccuracy` is now `SmartRateAccuracy`
+  - `SmartrateCollection` is now `SmartRateCollection`
+  - `shipment.smartrates` is now `shipment.smartRates`
+  - `TimeInTransit.getBySmartrateAccuracy` is now `TimeInTransit.getSmartRateAccuracy`
 - Bumps dependencies
 
 ## v7.4.4 (2025-01-03)
