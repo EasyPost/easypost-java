@@ -20,7 +20,7 @@ public final class SmartRateCollection {
      *
      * @param smartRates List of Smartrate objects.
      */
-    public void setSmartrates(final List<SmartRate> smartRates) {
+    public void setSmartRates(final List<SmartRate> smartRates) {
         this.smartRates = smartRates;
     }
 
@@ -37,7 +37,7 @@ public final class SmartRateCollection {
      * @param smartRates List of Smartrate objects
      */
     public SmartRateCollection(final List<SmartRate> smartRates) {
-        setSmartrates(smartRates);
+        setSmartRates(smartRates);
     }
 
     /**
