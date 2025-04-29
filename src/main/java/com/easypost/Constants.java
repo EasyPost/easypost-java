@@ -24,17 +24,21 @@ public abstract class Constants {
     public static final String EASYPOST_SUPPORT_EMAIL = "support@easypost.com";
 
     public abstract static class ErrorMessages {
-        public static final String EXTERNAL_API_CALL_FAILED = "Could not send card details to %s, please try again later";
+        public static final String EXTERNAL_API_CALL_FAILED =
+                "Could not send card details to %s, please try again later";
         public static final String ENCODED_ERROR = "Encode error for %s";
         public static final String INVALID_API_KEY_TYPE = "Invalid API key type.";
         public static final String INVALID_PARAMETER = "Invalid parameter: %s.";
-        public static final String INVALID_PAYMENT = "The chosen payment method is not a credit card. Please try again.";
+        public static final String INVALID_PAYMENT =
+                "The chosen payment method is not a credit card. Please try again.";
         public static final String INVALID_WEBHOOK_SIGNATURE = "Webhook does not contain a valid HMAC signature.";
         public static final String MISSING_REQUIRED_PARAMETER = "Missing required parameter: %s.";
         public static final String NO_OBJECT_FOUND = "No %s found.";
-        public static final String NO_PAYMENT_METHODS = "No payment methods are set up. Please add a payment method and try again.";
+        public static final String NO_PAYMENT_METHODS =
+                "No payment methods are set up. Please add a payment method and try again.";
         public static final String API_DID_NOT_RETURN_ERROR_DETAILS = "API did not return error details.";
-        public static final String WEBHOOK_DOES_NOT_MATCH = "Webhook received did not originate from EasyPost or had a webhook secret mismatch.";
+        public static final String WEBHOOK_DOES_NOT_MATCH =
+                "Webhook received did not originate from EasyPost or had a webhook secret mismatch.";
 
         public static final String NO_MORE_PAGES_TO_RETRIEVE = "There are no more pages to retrieve.";
     }
@@ -58,13 +62,16 @@ public abstract class Constants {
 
     public abstract static class CarrierAccountTypes {
         public static final List<String> CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_WORKFLOW = ImmutableList.of(
-                "FedexAccount", "FedexSmartpostAccount");
+            "FedexAccount", "FedexSmartpostAccount"
+        );
 
         public static final List<String> UPS_OAUTH_CARRIER_ACCOUNT_TYPES = ImmutableList.of(
-                "UpsAccount", "UpsMailInnovationsAccount", "UpsSurepostAccount");
+            "UpsAccount", "UpsMailInnovationsAccount", "UpsSurepostAccount"
+        );
 
         public static final List<String> CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH = ImmutableList.of(
-                "AmazonShippingAccount");
+            "AmazonShippingAccount"
+        );
     }
 
     public abstract static class Http {
