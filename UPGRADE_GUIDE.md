@@ -2,11 +2,54 @@
 
 Use the following guide to assist in the upgrade process of the `easypost-java` library between major versions.
 
+- [Upgrading from 7.x to 8.x](#upgrading-from-7x-to-80)
 - [Upgrading from 6.x to 7.x](#upgrading-from-6x-to-70)
 - [Upgrading from 5.x to 6.0](#upgrading-from-5x-to-60)
 - [Upgrading from 4.x to 5.0](#upgrading-from-4x-to-50)
 
+## Upgrading from 7.x to 8.0
+
+### 8.0 High Impact Changes
+
+- [Error Parsing](#80-error-parsing)
+
+### 8.0 Medium Impact Changes
+
+- [Deprecations](#80-deprecations)
+
+## 8.0 Error Parsing
+
+*Likelihood of Impact: **High***
+
+The `errors` key of an error response can return either a list of `FieldError` objects or a list of strings. The error parsing has been expanded to include both formats. As such, you will now need to check for the format of the `errors` field and handle the errors appropriately for the type that is returned.
+
+The `Error` model has been removed since it is unused and we directly assign properties of an error response to the `ApiError` type.
+
+The `BetaPaymentRefund` now uses a list of `FieldError` instead of `Error` for the `errors` field.
+
+See the `CHANGELOG` for more details.
+
+## 8.0 Deprecations
+
+*Likelihood of Impact: **Medium***
+
+The following functions have changed:
+
+- Removed deprecated functions
+  - `paymentMethod.all` (use `billing.retrievePaymentMethods` instead)
+  - `user.apiKeys` (use `apiKey.retrieveApiKeysForUser` instead)
+- Changed deprecated functions
+  - `shipment.lowestSmartRate` (3rd param expects a valid `SmartRateAccuracy`)
+  - `utilities.findLowestSmartRate` (3rd param expects a valid `SmartRateAccuracy`)
+- Renames
+  - `SmartrateAccuracy` is now `SmartRateAccuracy`
+  - `SmartrateCollection` is now `SmartRateCollection`
+  - `shipment.smartrates` is now `shipment.smartRates`
+  - `TimeInTransit.getBySmartrateAccuracy` is now `TimeInTransit.getSmartRateAccuracy`
+
 ## Upgrading from 6.x to 7.0
+
+**NOTICE:** v7 is deprecated.
 
 ### 7.0 High Impact Changes
 

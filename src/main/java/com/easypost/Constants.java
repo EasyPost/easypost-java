@@ -5,8 +5,8 @@ import com.easypost.http.HashMapSerializer;
 import com.easypost.model.AddressVerification;
 import com.easypost.model.AddressVerificationDeserializer;
 import com.easypost.model.ErrorDeserializer;
-import com.easypost.model.SmartrateCollection;
-import com.easypost.model.SmartrateCollectionDeserializer;
+import com.easypost.model.SmartRateCollection;
+import com.easypost.model.SmartRateCollectionDeserializer;
 import com.easypost.model.StatelessRate;
 import com.easypost.model.StatelessRateDeserializer;
 import com.easypost.model.Webhook;
@@ -83,7 +83,7 @@ public abstract class Constants {
         public static final Gson GSON = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .registerTypeAdapter(HashMap.class, new HashMapSerializer())
-                .registerTypeAdapter(SmartrateCollection.class, new SmartrateCollectionDeserializer())
+                .registerTypeAdapter(SmartRateCollection.class, new SmartRateCollectionDeserializer())
                 .registerTypeAdapter(APIException.class, new ErrorDeserializer())
                 .registerTypeAdapter(AddressVerification.class, new AddressVerificationDeserializer())
                 .registerTypeAdapter(StatelessRate[].class, new StatelessRateDeserializer())

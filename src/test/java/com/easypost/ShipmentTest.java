@@ -12,7 +12,7 @@ import com.easypost.model.RecommendShipDateForShipmentResult;
 import com.easypost.model.Shipment;
 import com.easypost.model.ShipmentCollection;
 import com.easypost.model.SmartRate;
-import com.easypost.model.SmartrateAccuracy;
+import com.easypost.model.SmartRateAccuracy;
 import com.easypost.utils.Utilities;
 import com.google.common.collect.ImmutableList;
 import org.junit.jupiter.api.BeforeAll;
@@ -195,8 +195,10 @@ public final class ShipmentTest {
 
         ShipmentCollection shipmentCollection = vcr.client.shipment.all(params);
 
-        // Can't access protected method directly, need to make a temporary extended class, yay
-        // Downside, ShipmentCollection and Shipment are no longer final because they need to be extended
+        // Can't access protected method directly, need to make a temporary extended
+        // class, yay
+        // Downside, ShipmentCollection and Shipment are no longer final because they
+        // need to be extended
         final class ExtendedShipmentCollection extends ShipmentCollection {
 
             ExtendedShipmentCollection(ShipmentCollection shipmentCollection) {
@@ -366,7 +368,7 @@ public final class ShipmentTest {
     }
 
     /**
-     * Test getting Smartrates from a shipment.
+     * Test getting SmartRates from a shipment.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -379,7 +381,7 @@ public final class ShipmentTest {
         assertNotNull(shipment.getRates());
         Rate rate = shipment.getRates().get(0);
 
-        List<SmartRate> smartRates = vcr.client.shipment.smartrates(shipment.getId());
+        List<SmartRate> smartRates = vcr.client.shipment.smartRates(shipment.getId());
         assertInstanceOf(List.class, smartRates);
         SmartRate smartRate = smartRates.get(0);
 
@@ -455,8 +457,10 @@ public final class ShipmentTest {
     public void testCreateWithIds() throws EasyPostException {
         vcr.setUpTest("create_with_ids");
 
-        // VCR will overwrite the first address recording if the parameters are the exact same,
-        // which will cause us to lose the response from the first address creation and cause the replay to fail.
+        // VCR will overwrite the first address recording if the parameters are the
+        // exact same,
+        // which will cause us to lose the response from the first address creation and
+        // cause the replay to fail.
         // So wee need to use two different addresses here.
         Address fromAddress = vcr.client.address.create(Fixtures.caAddress1());
         Address toAddress = vcr.client.address.create(Fixtures.caAddress2());
@@ -510,7 +514,7 @@ public final class ShipmentTest {
     }
 
     /**
-     * Test getting the lowest Smartrate of a shipment.
+     * Test getting the lowest SmartRate of a shipment.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -520,7 +524,7 @@ public final class ShipmentTest {
 
         Shipment shipment = createBasicShipment();
         SmartRate lowestSmartRateFilters = vcr.client.shipment.lowestSmartRate(shipment.getId(), 3,
-                SmartrateAccuracy.Percentile90);
+                SmartRateAccuracy.Percentile90);
 
         // Test lowest smartrate with valid filters
         assertEquals("GroundAdvantage", lowestSmartRateFilters.getService());
@@ -530,7 +534,7 @@ public final class ShipmentTest {
         // Test lowest smartrate with invalid filters (should error due to strict
         // delivery days)
         assertThrows(EasyPostException.class, () -> {
-            vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartrateAccuracy.Percentile90);
+            vcr.client.shipment.lowestSmartRate(shipment.getId(), 0, SmartRateAccuracy.Percentile90);
         });
     }
 
@@ -545,7 +549,7 @@ public final class ShipmentTest {
 
         Shipment shipment = createBasicShipment();
 
-        List<SmartRate> rates = vcr.client.shipment.smartrates(shipment.getId());
+        List<SmartRate> rates = vcr.client.shipment.smartRates(shipment.getId());
 
         assertInstanceOf(List.class, rates);
 
@@ -560,17 +564,17 @@ public final class ShipmentTest {
      * @throws EasyPostException if an exception is thrown.
      */
     @Test
-    public void testGetLowestSmartRate() throws EasyPostException {
+    public void testFindLowestSmartRate() throws EasyPostException {
         vcr.setUpTest("get_lowest_smartrate");
 
         Shipment shipment = createBasicShipment();
 
-        List<SmartRate> rates = vcr.client.shipment.smartrates(shipment.getId());
-        SmartRate lowestSmartrate = vcr.client.shipment.findLowestSmartrate(rates, 3, SmartrateAccuracy.Percentile85);
+        List<SmartRate> rates = vcr.client.shipment.smartRates(shipment.getId());
+        SmartRate lowestSmartRate = vcr.client.shipment.findLowestSmartRate(rates, 3, SmartRateAccuracy.Percentile85);
 
-        assertEquals("GroundAdvantage", lowestSmartrate.getService());
-        assertEquals(5.93, lowestSmartrate.getRate(), 0.01);
-        assertEquals("USPS", lowestSmartrate.getCarrier());
+        assertEquals("GroundAdvantage", lowestSmartRate.getService());
+        assertEquals(5.93, lowestSmartRate.getRate(), 0.01);
+        assertEquals("USPS", lowestSmartRate.getCarrier());
     }
 
     /**
@@ -583,10 +587,10 @@ public final class ShipmentTest {
         vcr.setUpTest("lowest_smartrate_list");
 
         Shipment shipment = createBasicShipment();
-        List<SmartRate> smartRates = vcr.client.shipment.smartrates(shipment.getId());
+        List<SmartRate> smartRates = vcr.client.shipment.smartRates(shipment.getId());
 
         // Test lowest smartrate with valid filters
-        SmartRate lowestSmartRate = Utilities.findLowestSmartrate(smartRates, 3, SmartrateAccuracy.Percentile90);
+        SmartRate lowestSmartRate = Utilities.findLowestSmartRate(smartRates, 3, SmartRateAccuracy.Percentile90);
         assertEquals("GroundAdvantage", lowestSmartRate.getService());
         assertEquals(5.93, lowestSmartRate.getRate(), 0.01);
         assertEquals("USPS", lowestSmartRate.getCarrier());
@@ -594,7 +598,7 @@ public final class ShipmentTest {
         // Test lowest smartrate with invalid filters (should error due to strict
         // delivery days)
         assertThrows(EasyPostException.class, () -> {
-            Utilities.findLowestSmartrate(smartRates, 0, SmartrateAccuracy.Percentile90);
+            Utilities.findLowestSmartRate(smartRates, 0, SmartRateAccuracy.Percentile90);
         });
     }
 
@@ -682,7 +686,8 @@ public final class ShipmentTest {
     }
 
     /**
-     * Tests that we retrieve time-in-transit data for each of the Rates of a Shipment.
+     * Tests that we retrieve time-in-transit data for each of the Rates of a
+     * Shipment.
      *
      * @throws EasyPostException when the request fails.
      */
@@ -703,7 +708,8 @@ public final class ShipmentTest {
     }
 
     /**
-     * Test that we retrieve SmartRates when providing a shipment and desired delivery date.
+     * Test that we retrieve SmartRates when providing a shipment and desired
+     * delivery date.
      *
      * @throws EasyPostException when the request fails.
      */

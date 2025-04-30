@@ -27,11 +27,11 @@ public final class TimeInTransit {
     /**
      * Get the delivery accuracy of a specific percentile of this TimeInTransit.
      *
-     * @param accuracy the SmartrateAccuracy to find the corresponding accuracy for
+     * @param accuracy the SmartRateAccuracy to find the corresponding accuracy for
      * @return the delivery accuracy of the specified percentile
      * @throws EasyPostException when the percentile is not valid
      */
-    public int getBySmartrateAccuracy(SmartrateAccuracy accuracy) throws EasyPostException {
+    public int getSmartRateAccuracy(SmartRateAccuracy accuracy) throws EasyPostException {
         switch (accuracy) {
             case Percentile50:
                 return this.percentile50;

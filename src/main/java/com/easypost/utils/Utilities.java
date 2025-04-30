@@ -7,7 +7,7 @@ import com.easypost.exception.General.SignatureVerificationError;
 import com.easypost.model.Event;
 import com.easypost.model.Rate;
 import com.easypost.model.SmartRate;
-import com.easypost.model.SmartrateAccuracy;
+import com.easypost.model.SmartRateAccuracy;
 import com.easypost.model.StatelessRate;
 
 import java.util.List;
@@ -139,33 +139,33 @@ public abstract class Utilities {
     }
 
     /**
-     * Find the lowest Smartrate from a list of Smartrates.
+     * Find the lowest SmartRate from a list of SmartRates.
      *
-     * @param smartrates       List of Smartrates to filter from.
+     * @param smartRates       List of SmartRates to filter from.
      * @param deliveryDay      Delivery days restriction to use when filtering.
      * @param deliveryAccuracy Delivery days accuracy restriction to use when
      *                         filtering.
-     * @return lowest Smartrate object
+     * @return lowest SmartRate object
      * @throws EasyPostException when the request fails.
      */
-    public static SmartRate findLowestSmartrate(final List<SmartRate> smartrates, int deliveryDay,
-            SmartrateAccuracy deliveryAccuracy) throws EasyPostException {
-        SmartRate lowestSmartrate = null;
+    public static SmartRate findLowestSmartRate(final List<SmartRate> smartRates, int deliveryDay,
+            SmartRateAccuracy deliveryAccuracy) throws EasyPostException {
+        SmartRate lowestSmartRate = null;
 
-        for (SmartRate rate : smartrates) {
-            int smartrateDeliveryDay = rate.getTimeInTransit().getBySmartrateAccuracy(deliveryAccuracy);
+        for (SmartRate rate : smartRates) {
+            int smartrateDeliveryDay = rate.getTimeInTransit().getSmartRateAccuracy(deliveryAccuracy);
 
             if (smartrateDeliveryDay > deliveryDay) {
                 continue;
-            } else if (lowestSmartrate == null || rate.getRate() < lowestSmartrate.getRate()) {
-                lowestSmartrate = rate;
+            } else if (lowestSmartRate == null || rate.getRate() < lowestSmartRate.getRate()) {
+                lowestSmartRate = rate;
             }
         }
 
-        if (lowestSmartrate == null) {
+        if (lowestSmartRate == null) {
             throw new FilteringError(String.format(Constants.ErrorMessages.NO_OBJECT_FOUND, "rate"));
         }
 
-        return lowestSmartrate;
+        return lowestSmartRate;
     }
 }
