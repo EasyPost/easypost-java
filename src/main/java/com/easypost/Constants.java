@@ -65,12 +65,8 @@ public abstract class Constants {
             "FedexAccount", "FedexSmartpostAccount"
         );
 
-        public static final List<String> UPS_OAUTH_CARRIER_ACCOUNT_TYPES = ImmutableList.of(
-            "UpsAccount", "UpsMailInnovationsAccount", "UpsSurepostAccount"
-        );
-
         public static final List<String> CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH = ImmutableList.of(
-            "AmazonShippingAccount"
+            "AmazonShippingAccount", "UpsAccount", "UpsMailInnovationsAccount", "UpsSurepostAccount"
         );
     }
 

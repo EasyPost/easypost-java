@@ -88,14 +88,9 @@ public class CarrierAccountService {
      * @throws EasyPostException when the request fails.
      */
     public CarrierAccount update(String id, final Map<String, Object> params) throws EasyPostException {
-        CarrierAccount carrierAccount = this.retrieve(id);
-        String type = (String) carrierAccount.getType();
+        String endpoint = "carrier_accounts/" + id;
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put(selectTopLayerKey(type), params);
-
-        String endpoint = (Constants.CarrierAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(type) 
-                  ? "ups_oauth_registrations/"
-                  : "carrier_accounts/") + id;
+        wrappedParams.put("carrier_account", params);
 
         return Requestor.request(RequestMethod.PUT, endpoint, wrappedParams, CarrierAccount.class,
                 client);
@@ -123,8 +118,6 @@ public class CarrierAccountService {
     private static String selectCarrierAccountCreationEndpoint(final String carrierAccountType) {
         if (Constants.CarrierAccountTypes.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
             return "carrier_accounts/register";
-        } else if (Constants.CarrierAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(carrierAccountType)) {
-            return "ups_oauth_registrations";
         } else if (Constants.CarrierAccountTypes.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.contains(carrierAccountType)) {
             return "carrier_accounts/register_oauth";
         } else {
@@ -146,9 +139,7 @@ public class CarrierAccountService {
                     String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));
         }
 
-        if (Constants.CarrierAccountTypes.UPS_OAUTH_CARRIER_ACCOUNT_TYPES.contains(carrierAccountType)) {
-            return "ups_oauth_registrations";
-        } else if (Constants.CarrierAccountTypes.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.contains(carrierAccountType)) {
+        if (Constants.CarrierAccountTypes.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.contains(carrierAccountType)) {
             return "carrier_account_oauth_registrations";
         } else {
             return "carrier_account";
