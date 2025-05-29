@@ -16,6 +16,7 @@ public class Claim extends EasyPostResource {
     private String insuranceId;
     private String paymentMethod;
     private String recipientName;
+    private String reference;
     private String requestedAmount;
     private String salvageValue;
     private String shipmentId;
