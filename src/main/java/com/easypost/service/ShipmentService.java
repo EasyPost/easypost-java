@@ -375,7 +375,7 @@ public class ShipmentService {
      * 
      * @param id              The id of the shipment.
      * @param plannedShipDate The planned shipment date.
-     * @return EstimatedDeliveryDate object.
+     * @return List of EstimatedDeliveryDate objects.
      * @throws EasyPostException When the request fails.
      */
     public List<EstimatedDeliveryDate> retrieveEstimatedDeliveryDate(final String id, final String plannedShipDate)
@@ -396,7 +396,7 @@ public class ShipmentService {
      *
      * @param id                  The id of the shipment.
      * @param desiredDeliveryDate The desired delivery date.
-     * @return EstimatedDeliveryDate object.
+     * @return List of RecommendShipDateForShipmentResult objects.
      * @throws EasyPostException When the request fails.
      */
     public List<RecommendShipDateForShipmentResult> recommendShipDate(final String id, final String desiredDeliveryDate)
@@ -408,5 +408,40 @@ public class ShipmentService {
         RecommendShipDateResponse response = Requestor.request(RequestMethod.GET, endpoint, params,
                 RecommendShipDateResponse.class, client);
         return response.getRates();
+    }
+
+    /**
+     * Create and buy a Luma Shipment in one call.
+     *
+     * @param params The map of parameters.
+     * @return Shipment object.
+     * @throws EasyPostException When the request fails.
+     */
+    public Shipment createAndBuyLuma(final Map<String, Object> params)
+            throws EasyPostException {
+        Map<String, Object> wrappedParams = new HashMap<>();
+        wrappedParams.put("shipment", params);
+        String endpoint = "shipments/luma";
+
+        Shipment response = Requestor.request(RequestMethod.POST, endpoint, wrappedParams,
+                Shipment.class, client);
+        return response;
+    }
+
+    /**
+     * Buy a Shipment with Luma.
+     *
+     * @param id     The ID of shipment.
+     * @param params The map of parameters.
+     * @return Shipment object.
+     * @throws EasyPostException When the request fails.
+     */
+    public Shipment buyLuma(final String id, final Map<String, Object> params)
+            throws EasyPostException {
+        String endpoint = "shipments/" + id + "/luma";
+
+        Shipment response = Requestor.request(RequestMethod.POST, endpoint, params,
+                Shipment.class, client);
+        return response;
     }
 }
