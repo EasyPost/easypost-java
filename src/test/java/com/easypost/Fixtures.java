@@ -382,4 +382,22 @@ public abstract class Fixtures {
     public static Billing billing() {
         return Objects.requireNonNull(getFixtureData()).billing;
     }
+
+    /**
+     * Get the Luma ruleset name fixture data.
+     *
+     * @return The Luma ruleset name fixture data
+     */
+    public static String lumaRulesetName() {
+        return Objects.requireNonNull(getFixtureData()).luma.rulesetName;
+    }
+
+    /**
+     * Get the Luma planned ship date fixture data.
+     *
+     * @return The Luma planned ship date fixture data
+     */
+    public static String lumaPlannedShipDate() {
+        return "2025-06-13";
+    }
 }

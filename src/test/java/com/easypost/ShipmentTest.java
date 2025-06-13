@@ -725,4 +725,46 @@ public final class ShipmentTest {
             assertNotNull(estimatedDeliveryDate.getEasypostTimeInTransitData());
         }
     }
+
+    /**
+     * Test that we create and buy a Shipment with Luma.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateAndBuyLuma() throws EasyPostException {
+        vcr.setUpTest("create_and_buy_luma");
+
+        Map<String, Object> shipmentData = Fixtures.oneCallBuyShipment();
+        shipmentData.remove("service");
+        shipmentData.put("ruleset_name", Fixtures.lumaRulesetName());
+        shipmentData.put("planned_ship_date", Fixtures.lumaPlannedShipDate());
+
+        Shipment shipment = vcr.client.shipment.createAndBuyLuma(shipmentData);
+        
+        assertNotNull(shipment.getPostageLabel());
+    }
+
+    /**
+     * Test that we buy a Shipment with Luma.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testBuyLuma() throws EasyPostException {
+        vcr.setUpTest("buy_luma");
+
+        Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
+
+        Map<String, Object> params = Fixtures.oneCallBuyShipment();
+        params.put("ruleset_name", Fixtures.lumaRulesetName());
+        params.put("planned_ship_date", Fixtures.lumaPlannedShipDate());
+
+        Shipment boughtShipment = vcr.client.shipment.buyLuma(
+            shipment.getId(),
+            params
+        );
+
+        assertNotNull(boughtShipment.getPostageLabel());
+    }
 }
