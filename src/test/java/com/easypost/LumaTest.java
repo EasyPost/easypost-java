@@ -37,6 +37,6 @@ public final class LumaTest {
 
         LumaInfo response = vcr.client.luma.getPromise(shipmentData);
 
-        assertNotNull(response.getRulesetDescription());
+        assertNotNull(response.getLumaSelectedRate());
     }
 }
