@@ -19,7 +19,7 @@ public final class LumaTest {
      */
     @BeforeAll
     public static void setup() throws EasyPostException {
-        vcr = new TestUtils.VCR("shipment", TestUtils.ApiKey.TEST);
+        vcr = new TestUtils.VCR("luma", TestUtils.ApiKey.TEST);
     }
 
     /**

@@ -756,7 +756,7 @@ public final class ShipmentTest {
 
         Shipment shipment = vcr.client.shipment.create(Fixtures.basicShipment());
 
-        Map<String, Object> params = Fixtures.oneCallBuyShipment();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put("ruleset_name", Fixtures.lumaRulesetName());
         params.put("planned_ship_date", Fixtures.lumaPlannedShipDate());
 

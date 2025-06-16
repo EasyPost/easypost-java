@@ -398,6 +398,6 @@ public abstract class Fixtures {
      * @return The Luma planned ship date fixture data
      */
     public static String lumaPlannedShipDate() {
-        return "2025-06-13";
+        return "2025-06-16";
     }
 }
