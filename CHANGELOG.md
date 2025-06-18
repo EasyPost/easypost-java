@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v8.2.0 (2025-06-18)
+
+- Adds the following functions
+  - `shipment.createAndBuyLuma`
+  - `shipment.buyLuma`
+  - `luma.getPromise`
+
 ## v8.1.0 (2025-05-29)
 
 - Adds `reference` to Claims

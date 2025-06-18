@@ -10,6 +10,7 @@ import com.easypost.fixtures.components.CustomsInfos;
 import com.easypost.fixtures.components.CustomsItems;
 import com.easypost.fixtures.components.FormOptions;
 import com.easypost.fixtures.components.Insurances;
+import com.easypost.fixtures.components.Luma;
 import com.easypost.fixtures.components.Orders;
 import com.easypost.fixtures.components.PageSizes;
 import com.easypost.fixtures.components.Parcels;
@@ -53,6 +54,9 @@ public final class FixtureStructure {
 
     @SerializedName ("insurances")
     public Insurances insurances;
+
+    @SerializedName ("luma")
+    public Luma luma;
 
     @SerializedName ("orders")
     public Orders orders;

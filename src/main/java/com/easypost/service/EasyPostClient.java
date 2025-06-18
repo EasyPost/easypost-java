@@ -32,6 +32,7 @@ public class EasyPostClient {
     public final EndShipperService endShipper;
     public final EventService event;
     public final InsuranceService insurance;
+    public final LumaService luma;
     public final OrderService order;
     public final ParcelService parcel;
     public final PaymentMethodService paymentMethod;
@@ -143,6 +144,7 @@ public class EasyPostClient {
         this.endShipper = new EndShipperService(this);
         this.event = new EventService(this);
         this.insurance = new InsuranceService(this);
+        this.luma = new LumaService(this);
         this.order = new OrderService(this);
         this.parcel = new ParcelService(this);
         this.paymentMethod = new PaymentMethodService(this);
