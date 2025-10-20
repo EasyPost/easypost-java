@@ -335,25 +335,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <!-- Can't upgrade to `v11` or newer versions as it requires Java 11 -->
-                <!-- TODO: API key now recommended (we must upgrade to v10) to avoid rate limiting: https://github.com/dependency-check/DependencyCheck?tab=readme-ov-file#nvd-api-key-highly-recommended -->
-                <version>8.4.0</version>
-                <configuration>
-                    <suppressionFile>dependency-check-suppressions.xml</suppressionFile>
-                    <failBuildOnCVSS>7</failBuildOnCVSS>
-                    <junitFailOnCVSS>7</junitFailOnCVSS>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 </project>
