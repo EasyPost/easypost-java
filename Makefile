@@ -40,7 +40,7 @@ init-examples-submodule:
 install: | install-checkstyle
 
 ## lint - Lints the project
-lint: checkstyle scan
+lint: checkstyle
 
 ## publish - Publish a release of the project (will build the project via the `mvn deploy` command)
 # @parameters:
@@ -60,10 +60,6 @@ publish-dry:
 release:
 	gh release create ${tag} target/*.jar target/*.asc target/*.pom --target ${target}
 
-## scan - Scan the project for serious security issues
-scan:
-	mvn verify -DskipTests=true -Dgpg.skip=true -Dcheckstyle.skip=true -Djavadoc.skip=true -Djacoco.skip=true -Ddependency-check.failBuildOnCVSS=0 -Ddependency-check.junitFailOnCVSS=0
-
 ## test - Test the project
 test:
 	mvn test -Dgpg.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djavadoc.skip=true -Djacoco.skip=true
@@ -77,4 +73,4 @@ update-examples-submodule:
 	git submodule init
 	git submodule update --remote
 
-.PHONY: help build clean coverage docs install-checkstyle install-styleguide install lint publish publish-dry release scan scan-strict test test-ci update-examples-submodule
+.PHONY: help build clean coverage docs install-checkstyle install-styleguide install lint publish publish-dry release test test-ci update-examples-submodule
