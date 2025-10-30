@@ -66,7 +66,7 @@ public abstract class Constants {
         );
 
         public static final List<String> CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH = ImmutableList.of(
-            "AmazonShippingAccount", "UpsAccount", "UpsMailInnovationsAccount", "UpsSurepostAccount"
+            "AmazonShippingAccount", "UpsAccount", "UpsMailInnovationsAccount", "UpsSurepostAccount", "UspsShipAccount",
         );
     }
 
