@@ -52,7 +52,7 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Upload output files to release
-        uses: AButler/upload-release-assets@v3.0
+        uses: AButler/upload-release-assets@v3.0.1
         with:
           files: "target/*.jar;target/*.pom;target/*.asc"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
