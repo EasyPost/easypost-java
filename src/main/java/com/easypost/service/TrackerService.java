@@ -100,4 +100,20 @@ public class TrackerService {
             }
         }, collection.getTrackers(), pageSize);
     }
+
+    /**
+     * Retrieve a batch of Tracker objects.
+     *
+     * @param params Map of parameters used to filter the list of Trackers.
+     * @return TrackerCollection object.
+     * @throws EasyPostException when the request fails.
+     */
+    public TrackerCollection retrieveBatch(final Map<String, Object> params) throws EasyPostException {
+        String endpoint = "trackers/batch";
+
+        TrackerCollection trackerCollection =
+                Requestor.request(RequestMethod.POST, endpoint, params, TrackerCollection.class, client);
+
+        return trackerCollection;
+    }
 }
