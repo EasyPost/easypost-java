@@ -207,4 +207,25 @@ public final class TrackerTest {
         assertEquals(trackingCode, nextPageParams.get("tracking_code"));
         assertEquals(carrier, nextPageParams.get("carrier"));
     }
+
+    /**
+     * Test retrieving a batch of trackers.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testRetrieveBatch() throws EasyPostException {
+        vcr.setUpTest("retrieve_batch");
+
+        Tracker tracker = createBasicTracker();
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("tracking_codes", ImmutableList.of(tracker.getTrackingCode()));
+
+        TrackerCollection trackers = vcr.client.tracker.retrieveBatch(params);
+
+        List<Tracker> trackersList = trackers.getTrackers();
+
+        assertTrue(trackersList.stream().allMatch(singleTracker -> singleTracker != null));
+    }
 }
