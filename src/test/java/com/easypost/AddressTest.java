@@ -278,11 +278,73 @@ public final class AddressTest {
     @Test
     public void testInvalidAddressCreation() throws EasyPostException {
         vcr.setUpTest("error_address_creation");
+        Map<String, Object> params = new HashMap<>();
         InvalidRequestError exception =
-                assertThrows(InvalidRequestError.class, () -> vcr.client.address.createAndVerify(null));
+                assertThrows(InvalidRequestError.class, () -> vcr.client.address.createAndVerify(params));
 
         assertEquals("PARAMETER.REQUIRED", exception.getCode());
         assertEquals(422, exception.getStatusCode());
         assertEquals("Missing required parameter.", exception.getMessage());
+    }
+
+    /**
+     * Test creating an address with the verify_carrier param.
+     * We purposefully pass in slightly incorrect data to get the corrected address
+     * back once verified.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateVerifyCarrier() throws EasyPostException {
+        vcr.setUpTest("create_verify_carrier");
+
+        Map<String, Object> addressData = Fixtures.incorrectAddress();
+
+        addressData.put("verify", true);
+        addressData.put("verify_carrier", "UPS");
+        Address address = vcr.client.address.create(addressData);
+
+        assertInstanceOf(Address.class, address);
+
+        AddressVerificationFieldError addressVerificationFieldErrorGetDelivery = address.getVerifications()
+            .getDelivery()
+            .getErrors()
+            .get(0);
+        AddressVerificationFieldError addressVerificationFieldErrorZip4 = address.getVerifications()
+            .getZip4()
+            .getErrors()
+            .get(0);
+        assertEquals("Address not found", addressVerificationFieldErrorGetDelivery.getMessage());
+        assertEquals("Address not found", addressVerificationFieldErrorZip4.getMessage());
+    }
+
+    /**
+     * Test creating and verifying an address with the verify_carrier param.
+     * We purposefully pass in slightly incorrect data to get the corrected address
+     * back once verified.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testCreateAndVerifyCarrier() throws EasyPostException {
+        vcr.setUpTest("create_and_verify_carrier");
+
+        Map<String, Object> addressData = Fixtures.incorrectAddress();
+
+        addressData.put("verify_carrier", "UPS");
+        Address address = vcr.client.address.createAndVerify(addressData);
+
+        assertInstanceOf(Address.class, address);
+
+        AddressVerificationFieldError addressVerificationFieldErrorGetDelivery = address.getVerifications()
+            .getDelivery()
+            .getErrors()
+            .get(0);
+        AddressVerificationFieldError addressVerificationFieldErrorZip4 = address.getVerifications()
+            .getZip4()
+            .getErrors()
+            .get(0);
+        assertEquals("Address not found", addressVerificationFieldErrorGetDelivery.getMessage());
+        assertEquals("Address not found", addressVerificationFieldErrorZip4.getMessage());
     }
 }

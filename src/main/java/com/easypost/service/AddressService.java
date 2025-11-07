@@ -43,6 +43,10 @@ public class AddressService {
             wrappedParams.put("verify_strict", params.remove("verify_strict"));
         }
 
+        if (params.containsKey("verify_carrier")) {
+            wrappedParams.put("verify_carrier", params.remove("verify_carrier"));
+        }
+
         wrappedParams.put("address", params);
 
         String endpoint = "addresses";
@@ -113,6 +117,11 @@ public class AddressService {
      */
     public Address createAndVerify(final Map<String, Object> params) throws EasyPostException {
         Map<String, Object> wrappedParams = new HashMap<String, Object>();
+
+        if (params.containsKey("verify_carrier")) {
+            wrappedParams.put("verify_carrier", params.remove("verify_carrier"));
+        }
+
         wrappedParams.put("address", params);
 
         String endpoint = "addresses/create_and_verify";

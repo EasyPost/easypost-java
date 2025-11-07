@@ -1,0 +1,94 @@
+[
+  {
+    "recordedAt": 1762540176,
+    "request": {
+      "body": "{\n  \"address\": {\n    \"zip\": \"00001\",\n    \"country\": \"US\",\n    \"city\": \"Not A City\",\n    \"phone\": \"REDACTED\",\n    \"company\": \"EasyPost\",\n    \"street1\": \"000 unknown street\",\n    \"state\": \"ZZ\",\n    \"email\": \"test@example.com\"\n  },\n  \"verify_carrier\": \"UPS\"\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/addresses/create_and_verify"
+    },
+    "response": {
+      "body": "{\n  \"address\": {\n    \"zip\": \"00001\",\n    \"country\": \"US\",\n    \"city\": \"NOT A CITY\",\n    \"created_at\": \"2025-11-07T18:29:36Z\",\n    \"verifications\": {\n      \"delivery\": {\n        \"success\": true,\n        \"details\": {\n          \"latitude\": null,\n          \"time_zone\": null,\n          \"longitude\": null\n        },\n        \"errors\": [\n          {\n            \"code\": \"E.ADDRESS.NOT_FOUND\",\n            \"field\": \"address\",\n            \"suggestion\": null,\n            \"message\": \"Address not found\"\n          }\n        ]\n      },\n      \"verify_carrier\": \"ups\",\n      \"zip4\": {\n        \"success\": true,\n        \"details\": null,\n        \"errors\": [\n          {\n            \"code\": \"E.ADDRESS.NOT_FOUND\",\n            \"field\": \"address\",\n            \"suggestion\": null,\n            \"message\": \"Address not found\"\n          }\n        ]\n      }\n    },\n    \"mode\": \"test\",\n    \"federal_tax_id\": null,\n    \"state_tax_id\": null,\n    \"carrier_facility\": null,\n    \"residential\": null,\n    \"updated_at\": \"2025-11-07T18:29:36Z\",\n    \"phone\": \"REDACTED\",\n    \"name\": null,\n    \"company\": \"EASYPOST\",\n    \"street1\": \"000 UNKNOWN STREET\",\n    \"id\": \"adr_b6c1cfd0bc0711f0ac45ac1f6bc539ae\",\n    \"street2\": \"\",\n    \"state\": \"ZZ\",\n    \"email\": \"TEST@EXAMPLE.COM\",\n    \"object\": \"Address\"\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "820"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb42nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "bcd43725690e3a8fe786bc4002abc67c"
+        ],
+        "x-proxied": [
+          "intlb6nuq c0061e0a2e",
+          "extlb2nuq cbbd141214"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.795785"
+        ],
+        "location": [
+          "/api/v2/addresses/adr_b6c1cfd0bc0711f0ac45ac1f6bc539ae"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202511071754-85836cab32-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/addresses/create_and_verify"
+    },
+    "duration": 968
+  }
+]
