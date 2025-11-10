@@ -13,8 +13,8 @@ jobs:
       matrix:
         javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: "zulu"
           java-version: "21" # Always use the most recent LTS JDK for building
@@ -24,17 +24,18 @@ jobs:
       - name: Build Library
         run: make build
       - name: Set up Java ${{ matrix.javaversion }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: "zulu"
           java-version: ${{ matrix.javaversion }}
+          cache: "maven"
       - name: Run test with Java ${{ matrix.javaversion }}
         run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test-ci
   coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: "zulu"
           java-version: "21" # Always use the most recent LTS JDK for building
@@ -61,8 +62,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: "zulu"
           java-version: "21" # Always use the most recent LTS JDK for building
@@ -80,8 +81,8 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: "zulu"
           java-version: "21" # Always use the most recent LTS JDK for building
