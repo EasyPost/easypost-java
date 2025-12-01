@@ -1,6 +1,7 @@
 package com.easypost.model;
 
 import java.util.List;
+import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 
 @Getter
@@ -21,4 +22,7 @@ public class BaseUser extends EasyPostResource {
     private String insuranceFeeRate;
     private String insuranceFeeMinimum;
     private List<User> children;
+
+    @SerializedName("api_keys")
+    private List<ApiKey> apiKeys;
 }
