@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v8.4.1 (2025-12-01)
+
+- Adds missing `apiKeys` field to `BaseUser`
+- Removes unecessary `SerializedName` entries in `StatelessRate`
+
 ## v8.4.0 (2025-11-24)
 
 - Adds the following functions:
