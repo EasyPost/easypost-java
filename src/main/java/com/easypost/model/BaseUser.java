@@ -21,4 +21,5 @@ public class BaseUser extends EasyPostResource {
     private String insuranceFeeRate;
     private String insuranceFeeMinimum;
     private List<User> children;
+    private List<ApiKey> apiKeys;
 }
