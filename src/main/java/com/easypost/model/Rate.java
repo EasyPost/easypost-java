@@ -1,5 +1,7 @@
 package com.easypost.model;
 
+import java.util.Map;
+
 import lombok.Getter;
 
 @Getter
@@ -19,4 +21,5 @@ public class Rate extends EasyPostResource {
     private String shipmentId;
     private String carrierAccountId;
     private String billingType;
+    private Map<String, String> details;
 }
