@@ -1,0 +1,38 @@
+[
+  {
+    "recordedAt": 1733428800,
+    "request": {
+      "body": "{\n  \"name\": \"auto-generated-uuid\",\n  \"pin_method\": \"EMAIL\"\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/fedex_registrations/123456789/pin"
+    },
+    "response": {
+      "body": "{\n  \"id\": \"fedex_reg_def\",\n  \"object\": \"FedexRegistration\",\n  \"status\": \"success\",\n  \"message\": \"PIN sent via EMAIL\"\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "117"
+        ],
+        "content-type": [
+          "application/json; charset=utf-8"
+        ]
+      },
+      "message": "OK",
+      "statusCode": 200
+    }
+  }
+]

@@ -26,6 +26,7 @@ public class EasyPostClient {
     public final BillingService billing = new BillingService(this);
     public final CarrierAccountService carrierAccount = new CarrierAccountService(this);
     public final CarrierMetadataService carrierMetadata = new CarrierMetadataService(this);
+    public final FedexRegistrationService fedexRegistration = new FedexRegistrationService(this);
     public final CarrierTypeService carrierType = new CarrierTypeService(this);
     public final ClaimService claim = new ClaimService(this);
     public final CustomerPortalService customerPortal = new CustomerPortalService(this);

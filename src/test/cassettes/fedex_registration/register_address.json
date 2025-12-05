@@ -1,0 +1,38 @@
+[
+  {
+    "recordedAt": 1733428800,
+    "request": {
+      "body": "{\n  \"name\": \"auto-generated-uuid\",\n  \"billing_address\": {\n    \"street1\": \"179 N Harbor Dr\",\n    \"city\": \"Redondo Beach\",\n    \"state\": \"CA\",\n    \"zip\": \"90277\",\n    \"country\": \"US\",\n    \"company\": \"EasyPost\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/fedex_registrations/123456789/address"
+    },
+    "response": {
+      "body": "{\n  \"id\": \"fedex_reg_123\",\n  \"object\": \"FedexRegistration\",\n  \"status\": \"success\",\n  \"message\": \"Address registered successfully\"\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "120"
+        ],
+        "content-type": [
+          "application/json; charset=utf-8"
+        ]
+      },
+      "message": "OK",
+      "statusCode": 200
+    }
+  }
+]

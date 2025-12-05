@@ -1,0 +1,38 @@
+[
+  {
+    "recordedAt": 1733428800,
+    "request": {
+      "body": "{\n  \"name\": \"auto-generated-uuid\",\n  \"invoice_number\": \"INV-12345\",\n  \"invoice_date\": \"2025-01-01\"\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/fedex_registrations/123456789/invoice"
+    },
+    "response": {
+      "body": "{\n  \"id\": \"fedex_reg_abc\",\n  \"object\": \"FedexRegistration\",\n  \"status\": \"success\",\n  \"message\": \"Invoice submitted successfully\"\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "124"
+        ],
+        "content-type": [
+          "application/json; charset=utf-8"
+        ]
+      },
+      "message": "OK",
+      "statusCode": 200
+    }
+  }
+]
