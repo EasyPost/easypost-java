@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/fedex_registrations/123456789/pin"
     },
     "response": {
-      "body": "{\n  \"id\": \"fedex_reg_456\",\n  \"object\": \"FedexRegistration\",\n  \"status\": \"success\",\n  \"message\": \"PIN sent via SMS\"\n}",
+      "body": "{\n  \"id\": \"fedex_reg_456\",\n  \"object\": \"FedExAccountValidationResponse\",\n  \"email_address\": \"test@example.com\",\n  \"phone_number\": \"+1234567890\",\n  \"options\": {\n    \"sms\": \"SMS\",\n    \"call\": \"CALL\",\n    \"email\": \"EMAIL\"\n  }\n}",
       "httpVersion": null,
       "headers": {
         "null": [

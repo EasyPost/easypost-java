@@ -3,6 +3,7 @@ package com.easypost.service;
 import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
+import com.easypost.model.FedExAccountValidationResponse;
 import com.easypost.model.FedexRegistration;
 
 import java.util.HashMap;
@@ -33,12 +34,12 @@ public class FedexRegistrationService {
      * @param postalCode         Postal/ZIP code.
      * @param countryCode        Country code (e.g., "US").
      * @param carrierAccountId   EasyPost carrier account ID to update.
-     * @return FedexRegistration object.
+     * @return FedExAccountValidationResponse object with next steps (PIN or invoice validation).
      * @throws EasyPostException when the request fails.
      */
-    public FedexRegistration registerAddress(final String fedexAccountNumber, final String name, final String street1,
-            final String city, final String state, final String postalCode, final String countryCode,
-            final String carrierAccountId) throws EasyPostException {
+    public FedExAccountValidationResponse registerAddress(final String fedexAccountNumber, final String name,
+            final String street1, final String city, final String state, final String postalCode,
+            final String countryCode, final String carrierAccountId) throws EasyPostException {
         Map<String, Object> addressValidation = new HashMap<>();
         addressValidation.put("name", name);
         addressValidation.put("street1", street1);
@@ -67,15 +68,16 @@ public class FedexRegistrationService {
      *                           If "address_validation.name" is not provided, a UUID will be
      *                           auto-generated.
      *                           Optional: "easypost_details" object with "carrier_account_id".
-     * @return FedexRegistration object.
+     * @return FedExAccountValidationResponse object with next steps (PIN or invoice validation).
      * @throws EasyPostException when the request fails.
      */
-    public FedexRegistration registerAddress(final String fedexAccountNumber, final Map<String, Object> params)
-            throws EasyPostException {
+    public FedExAccountValidationResponse registerAddress(final String fedexAccountNumber,
+            final Map<String, Object> params) throws EasyPostException {
         Map<String, Object> wrappedParams = wrapAddressValidation(params);
         String endpoint = String.format("fedex_registrations/%s/address", fedexAccountNumber);
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, FedexRegistration.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, FedExAccountValidationResponse.class,
+                client);
     }
 
     /**
@@ -84,10 +86,10 @@ public class FedexRegistrationService {
      *
      * @param fedexAccountNumber The FedEx account number.
      * @param pinMethodOption    The PIN delivery method: "SMS", "CALL", or "EMAIL".
-     * @return FedexRegistration object.
+     * @return FedExAccountValidationResponse object confirming PIN was sent.
      * @throws EasyPostException when the request fails.
      */
-    public FedexRegistration requestPin(final String fedexAccountNumber, final String pinMethodOption)
+    public FedExAccountValidationResponse requestPin(final String fedexAccountNumber, final String pinMethodOption)
             throws EasyPostException {
         Map<String, Object> pinMethod = new HashMap<>();
         pinMethod.put("option", pinMethodOption);
@@ -106,14 +108,14 @@ public class FedexRegistrationService {
      * @param params             Map of parameters containing "pin_method" with "option" field.
      *                           The "option" value must be one of "SMS", "CALL", or "EMAIL".
      *                           Example: {"pin_method": {"option": "SMS"}}
-     * @return FedexRegistration object.
+     * @return FedExAccountValidationResponse object confirming PIN was sent.
      * @throws EasyPostException when the request fails.
      */
-    public FedexRegistration requestPin(final String fedexAccountNumber, final Map<String, Object> params)
+    public FedExAccountValidationResponse requestPin(final String fedexAccountNumber, final Map<String, Object> params)
             throws EasyPostException {
         String endpoint = String.format("fedex_registrations/%s/pin", fedexAccountNumber);
 
-        return Requestor.request(RequestMethod.POST, endpoint, params, FedexRegistration.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, params, FedExAccountValidationResponse.class, client);
     }
 
     /**

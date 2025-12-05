@@ -18,7 +18,7 @@
       "uri": "https://api.easypost.com/v2/fedex_registrations/123456789/pin/validate"
     },
     "response": {
-      "body": "{\n  \"id\": \"fedex_reg_789\",\n  \"object\": \"FedexRegistration\",\n  \"status\": \"success\",\n  \"message\": \"PIN validated successfully\"\n}",
+      "body": "{\n  \"id\": \"ca_fedex789\",\n  \"object\": \"FedexRegistration\",\n  \"type\": \"FedexAccount\",\n  \"credentials\": {\n    \"account_number\": \"123456789\",\n    \"corporate_account_number\": \"987654321\"\n  }\n}",
       "httpVersion": null,
       "headers": {
         "null": [

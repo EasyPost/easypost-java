@@ -1,6 +1,7 @@
 package com.easypost;
 
 import com.easypost.exception.EasyPostException;
+import com.easypost.model.FedExAccountValidationResponse;
 import com.easypost.model.FedexRegistration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -49,11 +51,16 @@ public final class FedexRegistrationTest {
         params.put("address_validation", addressValidation);
         params.put("easypost_details", easypostDetails);
 
-        FedexRegistration registration = vcr.client.fedexRegistration.registerAddress(TEST_FEDEX_ACCOUNT_NUMBER,
-                params);
+        FedExAccountValidationResponse response = vcr.client.fedexRegistration
+                .registerAddress(TEST_FEDEX_ACCOUNT_NUMBER, params);
 
-        assertInstanceOf(FedexRegistration.class, registration);
-        assertNotNull(registration.getId());
+        assertInstanceOf(FedExAccountValidationResponse.class, response);
+        assertNotNull(response.getId());
+        assertNotNull(response.getEmailAddress());
+        assertNotNull(response.getPhoneNumber());
+        assertNotNull(response.getOptions());
+        assertEquals("test@example.com", response.getEmailAddress());
+        assertEquals("+1234567890", response.getPhoneNumber());
     }
 
     /**
@@ -71,10 +78,14 @@ public final class FedexRegistrationTest {
         Map<String, Object> params = new HashMap<>();
         params.put("pin_method", pinMethod);
 
-        FedexRegistration registration = vcr.client.fedexRegistration.requestPin(TEST_FEDEX_ACCOUNT_NUMBER, params);
+        FedExAccountValidationResponse response = vcr.client.fedexRegistration.requestPin(TEST_FEDEX_ACCOUNT_NUMBER,
+                params);
 
-        assertInstanceOf(FedexRegistration.class, registration);
-        assertNotNull(registration.getId());
+        assertInstanceOf(FedExAccountValidationResponse.class, response);
+        assertNotNull(response.getId());
+        assertNotNull(response.getEmailAddress());
+        assertNotNull(response.getPhoneNumber());
+        assertNotNull(response.getOptions());
     }
 
     /**
@@ -101,6 +112,9 @@ public final class FedexRegistrationTest {
 
         assertInstanceOf(FedexRegistration.class, registration);
         assertNotNull(registration.getId());
+        assertEquals("FedexAccount", registration.getType());
+        assertNotNull(registration.getCredentials());
+        assertEquals("123456789", registration.getCredentials().get("account_number"));
     }
 
     /**
@@ -130,6 +144,9 @@ public final class FedexRegistrationTest {
 
         assertInstanceOf(FedexRegistration.class, registration);
         assertNotNull(registration.getId());
+        assertEquals("FedexAccount", registration.getType());
+        assertNotNull(registration.getCredentials());
+        assertEquals("123456789", registration.getCredentials().get("account_number"));
     }
 
 }
