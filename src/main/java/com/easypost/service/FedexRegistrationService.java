@@ -25,92 +25,164 @@ public class FedexRegistrationService {
      * Register the billing address for a FedEx account.
      *
      * @param fedexAccountNumber The FedEx account number.
-     * @param params             Map of parameters for address registration.
-     *                           If params does not contain "name", a UUID will be auto-generated.
-     *                           Optional: "easypost_details" object for additional metadata like
-     *                           "reference" or "description".
+     * @param params             Map of parameters containing "address_validation" with address fields
+     *                           (name, street1, city, state, postal_code, country_code).
+     *                           If "address_validation.name" is not provided, a UUID will be
+     *                           auto-generated.
+     *                           Optional: "easypost_details" object with "carrier_account_id".
      * @return FedexRegistration object.
      * @throws EasyPostException when the request fails.
      */
     public FedexRegistration registerAddress(final String fedexAccountNumber, final Map<String, Object> params)
             throws EasyPostException {
-        Map<String, Object> processedParams = ensureNameParameter(params);
+        Map<String, Object> wrappedParams = wrapAddressValidation(params);
         String endpoint = String.format("fedex_registrations/%s/address", fedexAccountNumber);
 
-        return Requestor.request(RequestMethod.POST, endpoint, processedParams, FedexRegistration.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, FedexRegistration.class, client);
     }
 
     /**
      * Request a PIN for FedEx account verification.
      *
      * @param fedexAccountNumber The FedEx account number.
-     * @param params             Map of parameters for PIN request.
-     *                           Required: "pin_method" - one of "SMS", "CALL", or "EMAIL".
-     *                           If params does not contain "name", a UUID will be auto-generated.
-     *                           Optional: "easypost_details" object for additional metadata.
+     * @param params             Map of parameters containing "pin_method" with "option" field.
+     *                           The "option" value must be one of "SMS", "CALL", or "EMAIL".
+     *                           Example: {"pin_method": {"option": "SMS"}}
      * @return FedexRegistration object.
      * @throws EasyPostException when the request fails.
      */
     public FedexRegistration requestPin(final String fedexAccountNumber, final Map<String, Object> params)
             throws EasyPostException {
-        Map<String, Object> processedParams = ensureNameParameter(params);
         String endpoint = String.format("fedex_registrations/%s/pin", fedexAccountNumber);
 
-        return Requestor.request(RequestMethod.POST, endpoint, processedParams, FedexRegistration.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, params, FedexRegistration.class, client);
     }
 
     /**
      * Validate the PIN entered by the user for FedEx account verification.
      *
      * @param fedexAccountNumber The FedEx account number.
-     * @param params             Map of parameters for PIN validation.
-     *                           Required: PIN value provided by the user.
-     *                           If params does not contain "name", a UUID will be auto-generated.
-     *                           Optional: "easypost_details" object for additional metadata.
+     * @param params             Map of parameters containing "pin_validation" with "pin_code" and
+     *                           "name" fields. If "pin_validation.name" is not provided, a UUID will be
+     *                           auto-generated.
+     *                           Optional: "easypost_details" object with "carrier_account_id".
      * @return FedexRegistration object.
      * @throws EasyPostException when the request fails.
      */
     public FedexRegistration validatePin(final String fedexAccountNumber, final Map<String, Object> params)
             throws EasyPostException {
-        Map<String, Object> processedParams = ensureNameParameter(params);
+        Map<String, Object> wrappedParams = wrapPinValidation(params);
         String endpoint = String.format("fedex_registrations/%s/pin/validate", fedexAccountNumber);
 
-        return Requestor.request(RequestMethod.POST, endpoint, processedParams, FedexRegistration.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, FedexRegistration.class, client);
     }
 
     /**
      * Submit invoice information to complete FedEx account registration.
      *
      * @param fedexAccountNumber The FedEx account number.
-     * @param params             Map of parameters for invoice submission.
-     *                           Required: Invoice information.
-     *                           If params does not contain "name", a UUID will be auto-generated.
-     *                           Optional: "easypost_details" object for additional metadata.
+     * @param params             Map of parameters containing "invoice_validation" with invoice fields
+     *                           (name, invoice_number, invoice_date, invoice_amount, invoice_currency).
+     *                           If "invoice_validation.name" is not provided, a UUID will be
+     *                           auto-generated.
+     *                           Optional: "easypost_details" object with "carrier_account_id".
      * @return FedexRegistration object.
      * @throws EasyPostException when the request fails.
      */
     public FedexRegistration submitInvoice(final String fedexAccountNumber, final Map<String, Object> params)
             throws EasyPostException {
-        Map<String, Object> processedParams = ensureNameParameter(params);
+        Map<String, Object> wrappedParams = wrapInvoiceValidation(params);
         String endpoint = String.format("fedex_registrations/%s/invoice", fedexAccountNumber);
 
-        return Requestor.request(RequestMethod.POST, endpoint, processedParams, FedexRegistration.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, FedexRegistration.class, client);
     }
 
     /**
-     * Ensures the "name" parameter exists in the params map.
+     * Wraps address validation parameters and ensures the "name" field exists.
+     * If not present, generates a UUID (with hyphens removed) as the name.
+     *
+     * @param params The original parameters map.
+     * @return A new map with properly wrapped address_validation and easypost_details.
+     */
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> wrapAddressValidation(final Map<String, Object> params) {
+        Map<String, Object> wrappedParams = new HashMap<>();
+
+        if (params.containsKey("address_validation")) {
+            Map<String, Object> addressValidation = new HashMap<>(
+                (Map<String, Object>) params.get("address_validation"));
+            ensureNameField(addressValidation);
+            wrappedParams.put("address_validation", addressValidation);
+        }
+
+        if (params.containsKey("easypost_details")) {
+            wrappedParams.put("easypost_details", params.get("easypost_details"));
+        }
+
+        return wrappedParams;
+    }
+
+    /**
+     * Wraps PIN validation parameters and ensures the "name" field exists.
+     * If not present, generates a UUID (with hyphens removed) as the name.
+     *
+     * @param params The original parameters map.
+     * @return A new map with properly wrapped pin_validation and easypost_details.
+     */
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> wrapPinValidation(final Map<String, Object> params) {
+        Map<String, Object> wrappedParams = new HashMap<>();
+
+        if (params.containsKey("pin_validation")) {
+            Map<String, Object> pinValidation = new HashMap<>(
+                (Map<String, Object>) params.get("pin_validation"));
+            ensureNameField(pinValidation);
+            wrappedParams.put("pin_validation", pinValidation);
+        }
+
+        if (params.containsKey("easypost_details")) {
+            wrappedParams.put("easypost_details", params.get("easypost_details"));
+        }
+
+        return wrappedParams;
+    }
+
+    /**
+     * Wraps invoice validation parameters and ensures the "name" field exists.
+     * If not present, generates a UUID (with hyphens removed) as the name.
+     *
+     * @param params The original parameters map.
+     * @return A new map with properly wrapped invoice_validation and easypost_details.
+     */
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> wrapInvoiceValidation(final Map<String, Object> params) {
+        Map<String, Object> wrappedParams = new HashMap<>();
+
+        if (params.containsKey("invoice_validation")) {
+            Map<String, Object> invoiceValidation = new HashMap<>(
+                (Map<String, Object>) params.get("invoice_validation"));
+            ensureNameField(invoiceValidation);
+            wrappedParams.put("invoice_validation", invoiceValidation);
+        }
+
+        if (params.containsKey("easypost_details")) {
+            wrappedParams.put("easypost_details", params.get("easypost_details"));
+        }
+
+        return wrappedParams;
+    }
+
+    /**
+     * Ensures the "name" field exists in the provided map.
      * If not present, generates a UUID (with hyphens removed) as the name.
      * This follows the pattern used in the web UI implementation.
      *
-     * @param params The original parameters map.
-     * @return A new map with the "name" parameter ensured.
+     * @param map The map to ensure the "name" field in.
      */
-    private Map<String, Object> ensureNameParameter(final Map<String, Object> params) {
-        Map<String, Object> processedParams = new HashMap<>(params);
-        if (!processedParams.containsKey("name") || processedParams.get("name") == null) {
+    private void ensureNameField(final Map<String, Object> map) {
+        if (!map.containsKey("name") || map.get("name") == null) {
             String uuid = UUID.randomUUID().toString().replace("-", "");
-            processedParams.put("name", uuid);
+            map.put("name", uuid);
         }
-        return processedParams;
     }
 }

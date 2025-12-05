@@ -34,8 +34,20 @@ public final class FedexRegistrationTest {
     public void testRegisterAddress() throws EasyPostException {
         vcr.setUpTest("register_address");
 
+        Map<String, Object> addressValidation = new HashMap<>();
+        addressValidation.put("name", "Test Account");
+        addressValidation.put("street1", "179 N Harbor Dr");
+        addressValidation.put("city", "Redondo Beach");
+        addressValidation.put("state", "CA");
+        addressValidation.put("postal_code", "90277");
+        addressValidation.put("country_code", "US");
+
+        Map<String, Object> easypostDetails = new HashMap<>();
+        easypostDetails.put("carrier_account_id", "ca_123456778");
+
         Map<String, Object> params = new HashMap<>();
-        params.put("billing_address", Fixtures.caAddress1());
+        params.put("address_validation", addressValidation);
+        params.put("easypost_details", easypostDetails);
 
         FedexRegistration registration = vcr.client.fedexRegistration.registerAddress(TEST_FEDEX_ACCOUNT_NUMBER,
                 params);
@@ -53,8 +65,11 @@ public final class FedexRegistrationTest {
     public void testRequestPin() throws EasyPostException {
         vcr.setUpTest("request_pin");
 
+        Map<String, Object> pinMethod = new HashMap<>();
+        pinMethod.put("option", "SMS");
+
         Map<String, Object> params = new HashMap<>();
-        params.put("pin_method", "SMS");
+        params.put("pin_method", pinMethod);
 
         FedexRegistration registration = vcr.client.fedexRegistration.requestPin(TEST_FEDEX_ACCOUNT_NUMBER, params);
 
@@ -71,8 +86,16 @@ public final class FedexRegistrationTest {
     public void testValidatePin() throws EasyPostException {
         vcr.setUpTest("validate_pin");
 
+        Map<String, Object> pinValidation = new HashMap<>();
+        pinValidation.put("pin_code", "123456");
+        pinValidation.put("name", "Test Account");
+
+        Map<String, Object> easypostDetails = new HashMap<>();
+        easypostDetails.put("carrier_account_id", "ca_123456778");
+
         Map<String, Object> params = new HashMap<>();
-        params.put("pin", "123456");
+        params.put("pin_validation", pinValidation);
+        params.put("easypost_details", easypostDetails);
 
         FedexRegistration registration = vcr.client.fedexRegistration.validatePin(TEST_FEDEX_ACCOUNT_NUMBER, params);
 
@@ -89,9 +112,19 @@ public final class FedexRegistrationTest {
     public void testSubmitInvoice() throws EasyPostException {
         vcr.setUpTest("submit_invoice");
 
+        Map<String, Object> invoiceValidation = new HashMap<>();
+        invoiceValidation.put("name", "Test Account");
+        invoiceValidation.put("invoice_number", "INV-12345");
+        invoiceValidation.put("invoice_date", "2025-01-01");
+        invoiceValidation.put("invoice_amount", "100.00");
+        invoiceValidation.put("invoice_currency", "USD");
+
+        Map<String, Object> easypostDetails = new HashMap<>();
+        easypostDetails.put("carrier_account_id", "ca_123456778");
+
         Map<String, Object> params = new HashMap<>();
-        params.put("invoice_number", "INV-12345");
-        params.put("invoice_date", "2025-01-01");
+        params.put("invoice_validation", invoiceValidation);
+        params.put("easypost_details", easypostDetails);
 
         FedexRegistration registration = vcr.client.fedexRegistration.submitInvoice(TEST_FEDEX_ACCOUNT_NUMBER, params);
 
@@ -108,10 +141,14 @@ public final class FedexRegistrationTest {
     public void testAutoGenerateName() throws EasyPostException {
         vcr.setUpTest("auto_generate_name");
 
-        Map<String, Object> params = new HashMap<>();
-        params.put("pin_method", "EMAIL");
+        Map<String, Object> pinValidation = new HashMap<>();
+        pinValidation.put("pin_code", "123456");
+        // name is intentionally not provided to test auto-generation
 
-        FedexRegistration registration = vcr.client.fedexRegistration.requestPin(TEST_FEDEX_ACCOUNT_NUMBER, params);
+        Map<String, Object> params = new HashMap<>();
+        params.put("pin_validation", pinValidation);
+
+        FedexRegistration registration = vcr.client.fedexRegistration.validatePin(TEST_FEDEX_ACCOUNT_NUMBER, params);
 
         assertInstanceOf(FedexRegistration.class, registration);
         assertNotNull(registration.getId());
