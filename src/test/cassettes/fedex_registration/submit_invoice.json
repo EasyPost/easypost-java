@@ -2,7 +2,7 @@
   {
     "recordedAt": 1733428800,
     "request": {
-      "body": "{\n  \"name\": \"auto-generated-uuid\",\n  \"invoice_number\": \"INV-12345\",\n  \"invoice_date\": \"2025-01-01\"\n}",
+      "body": "{\n  \"invoice_validation\": {\n    \"name\": \"Test Account\",\n    \"invoice_number\": \"INV-12345\",\n    \"invoice_date\": \"2025-01-01\",\n    \"invoice_amount\": \"100.00\",\n    \"invoice_currency\": \"USD\"\n  },\n  \"easypost_details\": {\n    \"carrier_account_id\": \"ca_123456778\"\n  }\n}",
       "method": "POST",
       "headers": {
         "Accept-Charset": [
@@ -31,8 +31,12 @@
           "application/json; charset=utf-8"
         ]
       },
-      "message": "OK",
-      "statusCode": 200
-    }
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/fedex_registrations/123456789/invoice"
+    },
+    "duration": 100
   }
 ]

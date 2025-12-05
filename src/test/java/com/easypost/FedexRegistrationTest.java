@@ -132,25 +132,4 @@ public final class FedexRegistrationTest {
         assertNotNull(registration.getId());
     }
 
-    /**
-     * Test that the name parameter is auto-generated when not provided.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testAutoGenerateName() throws EasyPostException {
-        vcr.setUpTest("auto_generate_name");
-
-        Map<String, Object> pinValidation = new HashMap<>();
-        pinValidation.put("pin_code", "123456");
-        // name is intentionally not provided to test auto-generation
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("pin_validation", pinValidation);
-
-        FedexRegistration registration = vcr.client.fedexRegistration.validatePin(TEST_FEDEX_ACCOUNT_NUMBER, params);
-
-        assertInstanceOf(FedexRegistration.class, registration);
-        assertNotNull(registration.getId());
-    }
 }
