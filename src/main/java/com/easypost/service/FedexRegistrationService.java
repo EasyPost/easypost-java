@@ -45,10 +45,10 @@ public class FedexRegistrationService {
      *
      * @param fedexAccountNumber The FedEx account number.
      * @param pinMethodOption The PIN delivery method: "SMS", "CALL", or "EMAIL".
-     * @return FedExAccountValidationResponse object confirming PIN was sent.
+     * @return FedExRequestPinResponse object confirming PIN was sent.
      * @throws EasyPostException when the request fails.
      */
-    public FedExAccountValidationResponse requestPin(final String fedexAccountNumber, final String pinMethodOption)
+    public FedExRequestPinResponse requestPin(final String fedexAccountNumber, final String pinMethodOption)
             throws EasyPostException {
         Map<String, Object> pinMethod = new HashMap<>();
         pinMethod.put("option", pinMethodOption);
@@ -64,10 +64,10 @@ public class FedexRegistrationService {
      *
      * @param fedexAccountNumber The FedEx account number.
      * @param params Map of parameters.
-     * @return FedexRegistration object.
+     * @return FedExAccountValidationResponse object.
      * @throws EasyPostException when the request fails.
      */
-    public FedexRegistration validatePin(final String fedexAccountNumber, final Map<String, Object> params)
+    public FedExAccountValidationResponse validatePin(final String fedexAccountNumber, final Map<String, Object> params)
             throws EasyPostException {
         Map<String, Object> wrappedParams = wrapPinValidation(params);
         String endpoint = String.format("fedex_registrations/%s/pin/validate", fedexAccountNumber);
@@ -80,10 +80,10 @@ public class FedexRegistrationService {
      *
      * @param fedexAccountNumber The FedEx account number.
      * @param params Map of parameters.
-     * @return FedexRegistration object.
+     * @return FedExAccountValidationResponse object.
      * @throws EasyPostException when the request fails.
      */
-    public FedexRegistration submitInvoice(final String fedexAccountNumber, final Map<String, Object> params)
+    public FedExAccountValidationResponse submitInvoice(final String fedexAccountNumber, final Map<String, Object> params)
             throws EasyPostException {
         Map<String, Object> wrappedParams = wrapInvoiceValidation(params);
         String endpoint = String.format("fedex_registrations/%s/invoice", fedexAccountNumber);
