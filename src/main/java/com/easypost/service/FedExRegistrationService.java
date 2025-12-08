@@ -1,24 +1,24 @@
 package com.easypost.service;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.FedExAccountValidationResponse;
 import com.easypost.model.FedExRequestPinResponse;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-public class FedexRegistrationService {
+public class FedExRegistrationService {
     private final EasyPostClient client;
 
     /**
-     * FedexRegistrationService constructor.
+     * FedExRegistrationService constructor.
      *
      * @param client The client object.
      */
-    FedexRegistrationService(EasyPostClient client) {
+    FedExRegistrationService(EasyPostClient client) {
         this.client = client;
     }
 
