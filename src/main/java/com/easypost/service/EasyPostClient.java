@@ -146,7 +146,7 @@ public class EasyPostClient {
 
     /**
      * Unsubscribes to a request hook from the given function.
-     * 
+     *
      * @param function The function to be unsubscribed from the request hook
      */
     public void unsubscribeFromRequestHook(Function<RequestHookResponses, Object> function) {
@@ -155,7 +155,7 @@ public class EasyPostClient {
 
     /**
      * Subscribes to a response hook from the given function.
-     * 
+     *
      * @param function The function to be subscribed to the response hook
      */
     public void subscribeToResponseHook(Function<ResponseHookResponses, Object> function) {
@@ -164,7 +164,7 @@ public class EasyPostClient {
 
     /**
      * Unubscribes to a response hook from the given function.
-     * 
+     *
      * @param function The function to be unsubscribed from the response hook
      */
     public void unsubscribeFromResponseHook(Function<ResponseHookResponses, Object> function) {
