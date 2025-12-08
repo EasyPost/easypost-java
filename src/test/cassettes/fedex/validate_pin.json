@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1764972362,
+    "request": {
+      "body": "{\n  \"pin_validation\": {\n    \"pin_code\": \"784365\",\n    \"name\": \"EasyPost Test 2\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/fedex_registrations/206666561/pin/validate"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"UNPROCESSABLE_ENTITY\",\n    \"message\": \"Missing required field: carrier_account_id for the carrier account to update.\",\n    \"errors\": []\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 422 Unprocessable Entity"
+        ],
+        "content-length": [
+          "143"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb58nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "ca5aae196933574ae2b862b301994630"
+        ],
+        "x-proxied": [
+          "intlb4nuq c0061e0a2e",
+          "extlb2nuq cbbd141214"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.020150"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202512012024-6893cd428b-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 422,
+        "message": "Unprocessable Entity"
+      },
+      "uri": "https://api.easypost.com/v2/fedex_registrations/206666561/pin/validate"
+    },
+    "duration": 119
+  }
+]

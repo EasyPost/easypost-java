@@ -34,6 +34,7 @@ public class EasyPostClient {
     public final EmbeddableService embeddable = new EmbeddableService(this);
     public final EndShipperService endShipper = new EndShipperService(this);
     public final EventService event = new EventService(this);
+    public final FedExService fedex = new FedExService(this);
     public final InsuranceService insurance = new InsuranceService(this);
     public final LumaService luma = new LumaService(this);
     public final OrderService order = new OrderService(this);

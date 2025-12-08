@@ -1,0 +1,91 @@
+[
+  {
+    "recordedAt": 1764972009,
+    "request": {
+      "body": "{\n  \"address_validation\": {\n    \"country_code\": \"US\",\n    \"city\": \"Lehi\",\n    \"name\": \"EasyPost Test 2\",\n    \"street1\": \"2600 N ASHTON BLVD\",\n    \"street2\": \"APT 325\",\n    \"state\": \"UT\",\n    \"postal_code\": \"84043\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/fedex_registrations/206666561/address"
+    },
+    "response": {
+      "body": "{\n  \"email_address\": null,\n  \"options\": [\n    \"EMAIL\",\n    \"SMS\",\n    \"CALL\",\n    \"INVOICE\"\n  ],\n  \"phone_number\": \"REDACTED\"\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 201 Created"
+        ],
+        "content-length": [
+          "95"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb58nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "3de606bd693355e7e2b7efdb0121dd09"
+        ],
+        "x-proxied": [
+          "intlb4nuq c0061e0a2e",
+          "extlb1nuq cbbd141214"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "2.159871"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202512012024-6893cd428b-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 201,
+        "message": "Created"
+      },
+      "uri": "https://api.easypost.com/v2/fedex_registrations/206666561/address"
+    },
+    "duration": 2270
+  }
+]
