@@ -4,7 +4,7 @@ import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.http.Requestor.RequestMethod;
 import com.easypost.model.FedExAccountValidationResponse;
-import com.easypost.model.FedexRegistration;
+import com.easypost.model.FedExRequestPinResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +27,9 @@ public class FedexRegistrationService {
      * Advanced method for custom parameter structures.
      *
      * @param fedexAccountNumber The FedEx account number.
-     * @param params Map of parameters.
-     * @return FedExAccountValidationResponse object with next steps (PIN or invoice validation).
+     * @param params             Map of parameters.
+     * @return FedExAccountValidationResponse object with next steps (PIN or invoice
+     *         validation).
      * @throws EasyPostException when the request fails.
      */
     public FedExAccountValidationResponse registerAddress(final String fedexAccountNumber,
@@ -44,26 +45,26 @@ public class FedexRegistrationService {
      * Request a PIN for FedEx account verification.
      *
      * @param fedexAccountNumber The FedEx account number.
-     * @param pinMethodOption The PIN delivery method: "SMS", "CALL", or "EMAIL".
+     * @param pinMethodOption    The PIN delivery method: "SMS", "CALL", or "EMAIL".
      * @return FedExRequestPinResponse object confirming PIN was sent.
      * @throws EasyPostException when the request fails.
      */
     public FedExRequestPinResponse requestPin(final String fedexAccountNumber, final String pinMethodOption)
             throws EasyPostException {
-        Map<String, Object> pinMethod = new HashMap<>();
-        pinMethod.put("option", pinMethodOption);
+        Map<String, Object> wrappedParams = new HashMap<>();
+        Map<String, Object> pinMethodMap = new HashMap<>();
+        pinMethodMap.put("option", pinMethodOption);
+        wrappedParams.put("pin_method", pinMethodMap);
+        String endpoint = String.format("fedex_registrations/%s/pin", fedexAccountNumber);
 
-        Map<String, Object> params = new HashMap<>();
-        params.put("pin_method", pinMethod);
-
-        return requestPin(fedexAccountNumber, params);
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, FedExRequestPinResponse.class, client);
     }
 
     /**
      * Validate the PIN entered by the user for FedEx account verification.
      *
      * @param fedexAccountNumber The FedEx account number.
-     * @param params Map of parameters.
+     * @param params             Map of parameters.
      * @return FedExAccountValidationResponse object.
      * @throws EasyPostException when the request fails.
      */
@@ -72,23 +73,26 @@ public class FedexRegistrationService {
         Map<String, Object> wrappedParams = wrapPinValidation(params);
         String endpoint = String.format("fedex_registrations/%s/pin/validate", fedexAccountNumber);
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, FedexRegistration.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, FedExAccountValidationResponse.class,
+                client);
     }
 
     /**
      * Submit invoice information to complete FedEx account registration.
      *
      * @param fedexAccountNumber The FedEx account number.
-     * @param params Map of parameters.
+     * @param params             Map of parameters.
      * @return FedExAccountValidationResponse object.
      * @throws EasyPostException when the request fails.
      */
-    public FedExAccountValidationResponse submitInvoice(final String fedexAccountNumber, final Map<String, Object> params)
+    public FedExAccountValidationResponse submitInvoice(final String fedexAccountNumber,
+            final Map<String, Object> params)
             throws EasyPostException {
         Map<String, Object> wrappedParams = wrapInvoiceValidation(params);
         String endpoint = String.format("fedex_registrations/%s/invoice", fedexAccountNumber);
 
-        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, FedexRegistration.class, client);
+        return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, FedExAccountValidationResponse.class,
+                client);
     }
 
     /**
@@ -96,7 +100,8 @@ public class FedexRegistrationService {
      * If not present, generates a UUID (with hyphens removed) as the name.
      *
      * @param params The original parameters map.
-     * @return A new map with properly wrapped address_validation and easypost_details.
+     * @return A new map with properly wrapped address_validation and
+     *         easypost_details.
      */
     @SuppressWarnings("unchecked")
     private Map<String, Object> wrapAddressValidation(final Map<String, Object> params) {
@@ -104,7 +109,7 @@ public class FedexRegistrationService {
 
         if (params.containsKey("address_validation")) {
             Map<String, Object> addressValidation = new HashMap<>(
-                (Map<String, Object>) params.get("address_validation"));
+                    (Map<String, Object>) params.get("address_validation"));
             ensureNameField(addressValidation);
             wrappedParams.put("address_validation", addressValidation);
         }
@@ -129,7 +134,7 @@ public class FedexRegistrationService {
 
         if (params.containsKey("pin_validation")) {
             Map<String, Object> pinValidation = new HashMap<>(
-                (Map<String, Object>) params.get("pin_validation"));
+                    (Map<String, Object>) params.get("pin_validation"));
             ensureNameField(pinValidation);
             wrappedParams.put("pin_validation", pinValidation);
         }
@@ -146,7 +151,8 @@ public class FedexRegistrationService {
      * If not present, generates a UUID (with hyphens removed) as the name.
      *
      * @param params The original parameters map.
-     * @return A new map with properly wrapped invoice_validation and easypost_details.
+     * @return A new map with properly wrapped invoice_validation and
+     *         easypost_details.
      */
     @SuppressWarnings("unchecked")
     private Map<String, Object> wrapInvoiceValidation(final Map<String, Object> params) {
@@ -154,7 +160,7 @@ public class FedexRegistrationService {
 
         if (params.containsKey("invoice_validation")) {
             Map<String, Object> invoiceValidation = new HashMap<>(
-                (Map<String, Object>) params.get("invoice_validation"));
+                    (Map<String, Object>) params.get("invoice_validation"));
             ensureNameField(invoiceValidation);
             wrappedParams.put("invoice_validation", invoiceValidation);
         }
