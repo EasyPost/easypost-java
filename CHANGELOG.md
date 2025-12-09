@@ -1,9 +1,17 @@
 # CHANGELOG
 
+## v8.5.0 (2025-12-09)
+
+- Adds the following functions:
+  - `fedexRegistration.registerAddress`
+  - `fedexRegistration.requestPin`
+  - `fedexRegistration.validatePin`
+  - `fedexRegistration.submitInvoice`
+- Adds `details` property of a `Rate` objec
+
 ## v8.4.1 (2025-12-01)
 
 - Adds missing `apiKeys` field to `BaseUser`
-- Removes unecessary `SerializedName` entries in `StatelessRate`
 
 ## v8.4.0 (2025-11-24)
 

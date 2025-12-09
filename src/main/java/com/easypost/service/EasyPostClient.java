@@ -1,15 +1,15 @@
 package com.easypost.service;
 
-import lombok.Getter;
+import java.util.function.Function;
 
 import com.easypost.Constants;
 import com.easypost.exception.General.MissingParameterError;
-import com.easypost.hooks.ResponseHook;
-import com.easypost.hooks.ResponseHookResponses;
 import com.easypost.hooks.RequestHook;
 import com.easypost.hooks.RequestHookResponses;
+import com.easypost.hooks.ResponseHook;
+import com.easypost.hooks.ResponseHookResponses;
 
-import java.util.function.Function;
+import lombok.Getter;
 
 public class EasyPostClient {
     private final int connectTimeoutMilliseconds;
@@ -26,6 +26,7 @@ public class EasyPostClient {
     public final BillingService billing = new BillingService(this);
     public final CarrierAccountService carrierAccount = new CarrierAccountService(this);
     public final CarrierMetadataService carrierMetadata = new CarrierMetadataService(this);
+    public final FedExRegistrationService fedexRegistration = new FedExRegistrationService(this);
     public final CarrierTypeService carrierType = new CarrierTypeService(this);
     public final ClaimService claim = new ClaimService(this);
     public final CustomerPortalService customerPortal = new CustomerPortalService(this);
@@ -82,7 +83,7 @@ public class EasyPostClient {
      *
      * @param apiKey                     API key for API calls.
      * @param connectTimeoutMilliseconds Timeout for connection.
-     * @throws MissingParameterError     When the request fails.
+     * @throws MissingParameterError When the request fails.
      */
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds) throws MissingParameterError {
         this(apiKey, connectTimeoutMilliseconds, Constants.Http.API_BASE);
@@ -94,7 +95,7 @@ public class EasyPostClient {
      * @param apiKey                     API key for API calls.
      * @param connectTimeoutMilliseconds Timeout for connection.
      * @param apiBase                    API base for API calls.
-     * @throws MissingParameterError     When the request fails.
+     * @throws MissingParameterError When the request fails.
      */
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, String apiBase) throws MissingParameterError {
         this(apiKey, connectTimeoutMilliseconds, Constants.Http.DEFAULT_READ_TIMEOUT_MILLISECONDS, apiBase);
@@ -106,7 +107,7 @@ public class EasyPostClient {
      * @param apiKey                     API key for API calls.
      * @param connectTimeoutMilliseconds Timeout for connection.
      * @param readTimeoutMilliseconds    Timeout for read.
-     * @throws MissingParameterError     When the request fails.
+     * @throws MissingParameterError When the request fails.
      */
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, int readTimeoutMilliseconds)
             throws MissingParameterError {
@@ -120,7 +121,7 @@ public class EasyPostClient {
      * @param connectTimeoutMilliseconds Timeout for connection.
      * @param readTimeoutMilliseconds    Timeout for read.
      * @param apiBase                    API base for API calls.
-     * @throws MissingParameterError     When the request fails.
+     * @throws MissingParameterError When the request fails.
      */
     public EasyPostClient(String apiKey, int connectTimeoutMilliseconds, int readTimeoutMilliseconds, String apiBase)
             throws MissingParameterError {
@@ -136,6 +137,7 @@ public class EasyPostClient {
 
     /**
      * Subscribes to a request hook from the given function.
+     * 
      * @param function The function to be subscribed to the request hook
      */
     public void subscribeToRequestHook(Function<RequestHookResponses, Object> function) {
@@ -144,6 +146,7 @@ public class EasyPostClient {
 
     /**
      * Unsubscribes to a request hook from the given function.
+     *
      * @param function The function to be unsubscribed from the request hook
      */
     public void unsubscribeFromRequestHook(Function<RequestHookResponses, Object> function) {
@@ -152,6 +155,7 @@ public class EasyPostClient {
 
     /**
      * Subscribes to a response hook from the given function.
+     *
      * @param function The function to be subscribed to the response hook
      */
     public void subscribeToResponseHook(Function<ResponseHookResponses, Object> function) {
@@ -160,6 +164,7 @@ public class EasyPostClient {
 
     /**
      * Unubscribes to a response hook from the given function.
+     *
      * @param function The function to be unsubscribed from the response hook
      */
     public void unsubscribeFromResponseHook(Function<ResponseHookResponses, Object> function) {
