@@ -1,26 +1,27 @@
 package com.easypost;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.model.Event;
-import com.easypost.model.Webhook;
-import com.easypost.model.WebhookCustomHeader;
-import com.easypost.utils.Utilities;
-import com.google.common.collect.ImmutableMap;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.easypost.exception.EasyPostException;
+import com.easypost.model.Event;
+import com.easypost.model.Webhook;
+import com.easypost.model.WebhookCustomHeader;
+import com.easypost.utils.Utilities;
+import com.google.common.collect.ImmutableMap;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public final class WebhookTest {
@@ -119,6 +120,10 @@ public final class WebhookTest {
 
         assertTrue(webhooks.size() > 0);
         assertTrue(webhooks.stream().allMatch(webhook -> webhook != null));
+        // Test that deserialization worked by accessing a field with an underscore
+        for (Webhook webhook : webhooks) {
+            assertTrue(webhook.getCreatedAt() != null);
+        }
     }
 
     /**

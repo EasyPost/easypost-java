@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v8.5.1 (2026-01-08)
+
+- Corrects `StatelessRateDeserializer` and `WebhookDeserializer` to treat all camelCase fields like all other models to to properly deserialize JSON fields containing underscors
+
 ## v8.5.0 (2025-12-09)
 
 - Adds the following functions:
@@ -12,6 +16,7 @@
 ## v8.4.1 (2025-12-01)
 
 - Adds missing `apiKeys` field to `BaseUser`
+- Removes unecessary `SerializedName` entries in `StatelessRate`
 
 ## v8.4.0 (2025-11-24)
 
