@@ -2,7 +2,7 @@
 
 ## v8.5.1 (2026-01-08)
 
-- Corrects `StatelessRateDeserializer` and `WebhookDeserializer` to treat all camelCase fields like all other models to to properly deserialize JSON fields containing underscors
+- Corrects `StatelessRateDeserializer` and `WebhookDeserializer` to treat all camelCase fields like all other models to properly deserialize JSON fields containing underscors
 
 ## v8.5.0 (2025-12-09)
 
