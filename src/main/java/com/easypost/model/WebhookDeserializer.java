@@ -1,13 +1,15 @@
 package com.easypost.model;
 
-import com.google.gson.Gson;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.easypost.Constants;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-
-import java.lang.reflect.Type;
 
 public final class WebhookDeserializer implements JsonDeserializer<Webhook[]> {
     /**
@@ -21,11 +23,20 @@ public final class WebhookDeserializer implements JsonDeserializer<Webhook[]> {
      */
     @Override
     public Webhook[] deserialize(final JsonElement json, final Type typeOfT,
-    final JsonDeserializationContext context) throws JsonParseException{
+            final JsonDeserializationContext context) throws JsonParseException {
         JsonObject jo = json.getAsJsonObject();
         JsonElement results = jo.get("webhooks");
-        Gson gson = new Gson();
 
-        return gson.fromJson(results, Webhook[].class);
+        if (results == null || !results.isJsonArray()) {
+            return new Webhook[0];
+        }
+
+        List<Webhook> webhooksList = new ArrayList<>();
+        for (JsonElement element : results.getAsJsonArray()) {
+            Webhook webhook = Constants.Http.GSON.fromJson(element, Webhook.class);
+            webhooksList.add(webhook);
+        }
+
+        return webhooksList.toArray(new Webhook[0]);
     }
 }

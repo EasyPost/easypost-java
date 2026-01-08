@@ -1,5 +1,8 @@
 package com.easypost;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.easypost.exception.APIException;
 import com.easypost.http.HashMapSerializer;
 import com.easypost.model.AddressVerification;
@@ -15,9 +18,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.HashMap;
-import java.util.List;
 
 public abstract class Constants {
 
@@ -62,12 +62,11 @@ public abstract class Constants {
 
     public abstract static class CarrierAccountTypes {
         public static final List<String> CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_WORKFLOW = ImmutableList.of(
-            "FedexAccount", "FedexSmartpostAccount"
-        );
+                "FedexAccount", "FedexSmartpostAccount");
 
         public static final List<String> CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH = ImmutableList.of(
-            "AmazonShippingAccount", "UpsAccount", "UpsMailInnovationsAccount", "UpsSurepostAccount", "UspsShipAccount"
-        );
+                "AmazonShippingAccount", "UpsAccount", "UpsMailInnovationsAccount", "UpsSurepostAccount",
+                "UspsShipAccount");
     }
 
     public abstract static class Http {
@@ -77,13 +76,18 @@ public abstract class Constants {
         public static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
 
         public static final Gson GSON = new GsonBuilder()
+                // Standard model deserializer
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                // Core (de)serializers
                 .registerTypeAdapter(HashMap.class, new HashMapSerializer())
-                .registerTypeAdapter(SmartRateCollection.class, new SmartRateCollectionDeserializer())
                 .registerTypeAdapter(APIException.class, new ErrorDeserializer())
+                // Model custom deserializers
                 .registerTypeAdapter(AddressVerification.class, new AddressVerificationDeserializer())
+                .registerTypeAdapter(SmartRateCollection.class, new SmartRateCollectionDeserializer())
                 .registerTypeAdapter(StatelessRate[].class, new StatelessRateDeserializer())
-                .registerTypeAdapter(Webhook[].class, new WebhookDeserializer()).create();
+                .registerTypeAdapter(Webhook[].class, new WebhookDeserializer())
+                .create();
+
         public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().setPrettyPrinting().serializeNulls()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
     }
