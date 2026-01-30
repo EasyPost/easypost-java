@@ -119,7 +119,7 @@ Users can subscribe to HTTP requests and responses via the `RequestHook` and `Re
 
 API documentation can be found at: <https://docs.easypost.com>.
 
-Library documentation can be found on the web at: <https://easypost.github.io/easypost-java/> or by building them locally via the `make docs` command.
+Library documentation can be found on the web at: <https://easypost.github.io/easypost-java/> or by building them locally via the `just docs` command.
 
 Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_GUIDE.md).
 
@@ -135,26 +135,26 @@ For additional support, see our [org-wide support policy](https://github.com/Eas
 
 ```bash
 # Install dependencies
-make install
+just install
 
 # Build project
-make build
+just build
 
 # Lint project
-make lint
+just lint
 
 # Run tests
-EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make build test
-EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make coverage
+EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... just build test
+EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... just coverage
 
 # Run security analysis
-make scan
+just scan
 
 # Generate library documentation
-make docs
+just docs
 
 # Update submodules
-make update-examples-submodule
+just update-examples-submodule
 ```
 
 ### Testing

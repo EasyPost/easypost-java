@@ -11,14 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"]
+        javaversion:
+          ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25']
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
       - uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
-          java-version: "25" # Always use the most recent LTS JDK for building
-          cache: "maven"
+          distribution: 'zulu'
+          java-version: '25' # Always use the most recent LTS JDK for building
+          cache: 'maven'
       - name: Install dependencies
         run: make install
       - name: Build Library
@@ -26,20 +28,21 @@ jobs:
       - name: Set up Java ${{ matrix.javaversion }}
         uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
+          distribution: 'zulu'
           java-version: ${{ matrix.javaversion }}
-          cache: "maven"
+          cache: 'maven'
       - name: Run test with Java ${{ matrix.javaversion }}
         run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test-ci
   coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
       - uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
-          java-version: "25" # Always use the most recent LTS JDK for building
-          cache: "maven"
+          distribution: 'zulu'
+          java-version: '25' # Always use the most recent LTS JDK for building
+          cache: 'maven'
       - name: Install dependencies
         run: make install
       - name: Test coverage
@@ -58,16 +61,17 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: "./coverage.lcov"
+          path-to-lcov: './coverage.lcov'
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
       - uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
-          java-version: "25" # Always use the most recent LTS JDK for building
-          cache: "maven"
+          distribution: 'zulu'
+          java-version: '25' # Always use the most recent LTS JDK for building
+          cache: 'maven'
       - name: Install checkstyle and style guide
         run: make install-checkstyle
       - name: Lint
@@ -81,12 +85,13 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
       - uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
-          java-version: "25" # Always use the most recent LTS JDK for building
-          cache: "maven"
+          distribution: 'zulu'
+          java-version: '25' # Always use the most recent LTS JDK for building
+          cache: 'maven'
       - name: Install Dependencies
         run: make install
       - name: Generate Docs
