@@ -11,39 +11,42 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        javaversion: ["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"]
+        javaversion:
+          ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25']
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
       - uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
-          java-version: "25" # Always use the most recent LTS JDK for building
-          cache: "maven"
+          distribution: 'zulu'
+          java-version: '25' # Always use the most recent LTS JDK for building
+          cache: 'maven'
       - name: Install dependencies
-        run: make install
+        run: just install
       - name: Build Library
-        run: make build
+        run: just build
       - name: Set up Java ${{ matrix.javaversion }}
         uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
+          distribution: 'zulu'
           java-version: ${{ matrix.javaversion }}
-          cache: "maven"
+          cache: 'maven'
       - name: Run test with Java ${{ matrix.javaversion }}
-        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test-ci
+        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just test-ci
   coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
       - uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
-          java-version: "25" # Always use the most recent LTS JDK for building
-          cache: "maven"
+          distribution: 'zulu'
+          java-version: '25' # Always use the most recent LTS JDK for building
+          cache: 'maven'
       - name: Install dependencies
-        run: make install
+        run: just install
       - name: Test coverage
-        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make coverage
+        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just coverage
       - name: Load Rust cache
         if: github.ref == 'refs/heads/master'
         uses: Swatinem/rust-cache@v2
@@ -58,20 +61,21 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: "./coverage.lcov"
+          path-to-lcov: './coverage.lcov'
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
       - uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
-          java-version: "25" # Always use the most recent LTS JDK for building
-          cache: "maven"
+          distribution: 'zulu'
+          java-version: '25' # Always use the most recent LTS JDK for building
+          cache: 'maven'
       - name: Install checkstyle and style guide
-        run: make install-checkstyle
+        run: just install-checkstyle
       - name: Lint
-        run: make lint
+        run: just lint
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
@@ -81,16 +85,17 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
       - uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
-          java-version: "25" # Always use the most recent LTS JDK for building
-          cache: "maven"
+          distribution: 'zulu'
+          java-version: '25' # Always use the most recent LTS JDK for building
+          cache: 'maven'
       - name: Install Dependencies
-        run: make install
+        run: just install
       - name: Generate Docs
-        run: make docs
+        run: just docs
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v3
         with:
