@@ -22,9 +22,9 @@ jobs:
           java-version: '25' # Always use the most recent LTS JDK for building
           cache: 'maven'
       - name: Install dependencies
-        run: make install
+        run: just install
       - name: Build Library
-        run: make build
+        run: just build
       - name: Set up Java ${{ matrix.javaversion }}
         uses: actions/setup-java@v5
         with:
@@ -32,7 +32,7 @@ jobs:
           java-version: ${{ matrix.javaversion }}
           cache: 'maven'
       - name: Run test with Java ${{ matrix.javaversion }}
-        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test-ci
+        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just test-ci
   coverage:
     runs-on: ubuntu-latest
     steps:
@@ -44,9 +44,9 @@ jobs:
           java-version: '25' # Always use the most recent LTS JDK for building
           cache: 'maven'
       - name: Install dependencies
-        run: make install
+        run: just install
       - name: Test coverage
-        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make coverage
+        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just coverage
       - name: Load Rust cache
         if: github.ref == 'refs/heads/master'
         uses: Swatinem/rust-cache@v2
@@ -73,9 +73,9 @@ jobs:
           java-version: '25' # Always use the most recent LTS JDK for building
           cache: 'maven'
       - name: Install checkstyle and style guide
-        run: make install-checkstyle
+        run: just install-checkstyle
       - name: Lint
-        run: make lint
+        run: just lint
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
@@ -93,9 +93,9 @@ jobs:
           java-version: '25' # Always use the most recent LTS JDK for building
           cache: 'maven'
       - name: Install Dependencies
-        run: make install
+        run: just install
       - name: Generate Docs
-        run: make docs
+        run: just docs
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v3
         with:

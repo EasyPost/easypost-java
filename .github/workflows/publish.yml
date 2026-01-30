@@ -43,7 +43,7 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
 
       - name: Clean, build and publish to Apache Maven Central
-        run: make install-styleguide publish pass=${{ secrets.MAVEN_GPG_PASSPHRASE }}
+        run: just install-styleguide publish pass=${{ secrets.MAVEN_GPG_PASSPHRASE }}
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
