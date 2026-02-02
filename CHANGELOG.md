@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v8.6.0 (2026-02-03)
+
+- Adds the following functions usable by child and referral customer users:
+  - `apiKey.create`
+  - `apiKey.delete`
+  - `apiKey.enable`
+  - `apiKey.disable`
+
 ## v8.5.1 (2026-01-08)
 
 - Corrects `StatelessRateDeserializer` and `WebhookDeserializer` to treat all camelCase fields like all other models to properly deserialize JSON fields containing underscors
