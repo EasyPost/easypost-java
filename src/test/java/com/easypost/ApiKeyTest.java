@@ -1,21 +1,25 @@
 package com.easypost;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.exception.General.FilteringError;
-import com.easypost.model.ApiKey;
-import com.easypost.model.ApiKeys;
-import com.easypost.model.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import com.easypost.exception.EasyPostException;
+import com.easypost.exception.General.FilteringError;
+import com.easypost.model.ApiKey;
+import com.easypost.model.ApiKeys;
+import com.easypost.model.User;
 
 public final class ApiKeyTest {
     private static String testUserId = null;
@@ -61,6 +65,24 @@ public final class ApiKeyTest {
     }
 
     /**
+     * Test retrieving all API keys for a user.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testApiKeys() throws EasyPostException {
+        vcr.setUpTest("api_keys");
+
+        User user = createUser();
+
+        List<ApiKey> apiKeys = vcr.client.apiKey.retrieveApiKeysForUser(user.getId());
+
+        assertNotNull(apiKeys);
+
+        assertThrows(FilteringError.class, () -> vcr.client.apiKey.retrieveApiKeysForUser("invalid_id"));
+    }
+
+    /**
      * Test retrieving all API keys.
      *
      * @throws EasyPostException when the request fails.
@@ -79,20 +101,30 @@ public final class ApiKeyTest {
     }
 
     /**
-     * Test retrieving all API keys for a user.
+     * Test creating an API key for a child user.
      *
      * @throws EasyPostException when the request fails.
      */
     @Test
-    public void testApiKeys() throws EasyPostException {
-        vcr.setUpTest("api_keys");
+    public void testApiKeyLifecycle() throws EasyPostException {
+        vcr.setUpTest("lifecycle");
 
-        User user = createUser();
+        // Create an API key
+        TestUtils.VCR referralVcr = new TestUtils.VCR("api_key", TestUtils.ApiKey.REFERRAL);
+        ApiKey apiKey = referralVcr.client.apiKey.create("production");
+        assertInstanceOf(ApiKey.class, apiKey);
+        assertTrue(apiKey.getId().startsWith("ak_"));
+        assertEquals("production", apiKey.getMode());
 
-        List<ApiKey> apiKeys = vcr.client.apiKey.retrieveApiKeysForUser(user.getId());
+        // Disable the API key
+        apiKey = referralVcr.client.apiKey.disable(apiKey.getId());
+        assertFalse(apiKey.getActive());
 
-        assertNotNull(apiKeys);
+        // Enable the API key
+        apiKey = referralVcr.client.apiKey.enable(apiKey.getId());
+        assertTrue(apiKey.getActive());
 
-        assertThrows(FilteringError.class, () -> vcr.client.apiKey.retrieveApiKeysForUser("invalid_id"));
+        // Delete the API key
+        referralVcr.client.apiKey.delete(apiKey.getId());
     }
 }
