@@ -116,4 +116,16 @@ public class TrackerService {
 
         return trackerCollection;
     }
+
+    /**
+     * Delete a Tracker object.
+     *
+     * @param id ID of the Tracker to delete.
+     * @throws EasyPostException when the request fails.
+     */
+    public void delete(final String id) throws EasyPostException {
+        String endpoint = String.format("trackers/%s", id);
+
+        Requestor.request(RequestMethod.DELETE, endpoint, null, Tracker.class, client);
+    }
 }

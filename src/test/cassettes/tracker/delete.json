@@ -1,0 +1,180 @@
+[
+  {
+    "recordedAt": 1770145106,
+    "request": {
+      "body": "{\n  \"tracker\": {\n    \"carrier\": \"USPS\",\n    \"tracking_code\": \"EZ1000000001\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/trackers"
+    },
+    "response": {
+      "body": "{\n  \"carrier_detail\": {\n    \"est_delivery_date_local\": null,\n    \"origin_location\": \"HOUSTON TX, 77001\",\n    \"destination_tracking_location\": null,\n    \"guaranteed_delivery_date\": null,\n    \"est_delivery_time_local\": null,\n    \"service\": \"First-Class Package Service\",\n    \"container_type\": null,\n    \"initial_delivery_attempt\": null,\n    \"origin_tracking_location\": {\n      \"zip\": \"77063\",\n      \"country\": null,\n      \"city\": \"HOUSTON\",\n      \"state\": \"TX\",\n      \"object\": \"TrackingLocation\"\n    },\n    \"destination_location\": \"CHARLESTON SC, 29401\",\n    \"alternate_identifier\": null,\n    \"object\": \"CarrierDetail\"\n  },\n  \"created_at\": \"2025-11-06T17:22:58Z\",\n  \"weight\": null,\n  \"tracking_details\": [\n    {\n      \"tracking_location\": {\n        \"zip\": null,\n        \"country\": null,\n        \"city\": null,\n        \"state\": null,\n        \"object\": \"TrackingLocation\"\n      },\n      \"est_delivery_date\": null,\n      \"datetime\": \"2025-10-06T17:22:58Z\",\n      \"description\": \"\",\n      \"source\": \"USPS\",\n      \"message\": \"Pre-Shipment Info Sent to USPS\",\n      \"object\": \"TrackingDetail\",\n      \"status\": \"pre_transit\",\n      \"status_detail\": \"status_update\",\n      \"carrier_code\": \"\"\n    },\n    {\n      \"tracking_location\": {\n        \"zip\": \"77063\",\n        \"country\": null,\n        \"city\": \"HOUSTON\",\n        \"state\": \"TX\",\n        \"object\": \"TrackingLocation\"\n      },\n      \"est_delivery_date\": null,\n      \"datetime\": \"2025-10-07T05:59:58Z\",\n      \"description\": \"\",\n      \"source\": \"USPS\",\n      \"message\": \"Shipping Label Created\",\n      \"object\": \"TrackingDetail\",\n      \"status\": \"pre_transit\",\n      \"status_detail\": \"status_update\",\n      \"carrier_code\": \"\"\n    }\n  ],\n  \"shipment_id\": null,\n  \"tracking_code\": \"EZ1000000001\",\n  \"status_detail\": \"status_update\",\n  \"mode\": \"test\",\n  \"finalized\": true,\n  \"public_url\": \"https://track.easypost.com/djE6dHJrXzJlNWJmZTAyZTE3MTRjODU5MDdiYTdhYTU2ODI1NDI3\",\n  \"est_delivery_date\": \"2025-11-06T17:22:58Z\",\n  \"carrier\": \"USPS\",\n  \"delivery_evidence\": [],\n  \"is_return\": false,\n  \"updated_at\": \"2025-11-06T17:22:58Z\",\n  \"signed_by\": null,\n  \"id\": \"trk_2e5bfe02e1714c85907ba7aa56825427\",\n  \"object\": \"Tracker\",\n  \"status\": \"pre_transit\"\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "1691"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb34nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "e05a3b9c69824552e789838a003ca558"
+        ],
+        "x-proxied": [
+          "intlb4nuq 5f0235a1ab",
+          "extlb1nuq cbbd141214"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.109996"
+        ],
+        "location": [
+          "/api/v2/trackers/trk_2e5bfe02e1714c85907ba7aa56825427"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202602022215-5a5c93c546-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/trackers"
+    },
+    "duration": 339
+  },
+  {
+    "recordedAt": 1770145106,
+    "request": {
+      "body": "",
+      "method": "DELETE",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/trackers/trk_2e5bfe02e1714c85907ba7aa56825427"
+    },
+    "response": {
+      "body": "{\n  \"success\": true\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "16"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "bigweb64nuq"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "x-ep-request-uuid": [
+          "e05a3b9c69824552e789838b003ca5f3"
+        ],
+        "x-proxied": [
+          "intlb4nuq 5f0235a1ab",
+          "extlb1nuq cbbd141214"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.038769"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202602022215-5a5c93c546-master"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/trackers/trk_2e5bfe02e1714c85907ba7aa56825427"
+    },
+    "duration": 270
+  }
+]

@@ -228,4 +228,19 @@ public final class TrackerTest {
 
         assertTrue(trackersList.stream().allMatch(singleTracker -> singleTracker != null));
     }
+
+    /**
+     * Test deleting a tracker.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testDelete() throws EasyPostException {
+        vcr.setUpTest("delete");
+
+        Tracker tracker = createBasicTracker();
+
+        // Nothing gets returned here, simply ensure no error gets raised
+        vcr.client.tracker.delete(tracker.getId());
+    }
 }
