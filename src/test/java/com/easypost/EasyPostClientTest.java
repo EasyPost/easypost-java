@@ -1,16 +1,16 @@
 package com.easypost;
 
-import com.easypost.exception.EasyPostException;
-import com.easypost.http.Requestor.RequestMethod;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import com.easypost.exception.EasyPostException;
+import com.easypost.http.Requestor.RequestMethod;
 
 public final class EasyPostClientTest {
     private static TestUtils.VCR vcr;
@@ -39,11 +39,8 @@ public final class EasyPostClientTest {
 
         Map<String, Object> response = vcr.client.makeApiCall(RequestMethod.GET, "addresses", params);
 
-        assertNotNull(response);
         List<?> addresses = (List<?>) response.get("addresses");
-        assertNotNull(addresses);
         assertEquals(1, addresses.size());
-
         Map<String, Object> firstAddress = (Map<String, Object>) addresses.get(0);
         assertEquals("Address", firstAddress.get("object"));
     }
