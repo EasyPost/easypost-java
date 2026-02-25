@@ -1,13 +1,17 @@
 package com.easypost.service;
 
+import java.util.Map;
 import java.util.function.Function;
 
 import com.easypost.Constants;
+import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.MissingParameterError;
 import com.easypost.hooks.RequestHook;
 import com.easypost.hooks.RequestHookResponses;
 import com.easypost.hooks.ResponseHook;
 import com.easypost.hooks.ResponseHookResponses;
+import com.easypost.http.Requestor;
+import com.easypost.http.Requestor.RequestMethod;
 
 import lombok.Getter;
 
@@ -214,5 +218,24 @@ public class EasyPostClient {
      */
     public String getApiBase() {
         return apiBase;
+    }
+
+    /**
+     * Make an API call to the EasyPost API.
+     *
+     * This public, generic interface is useful for making arbitrary API calls to the EasyPost API that
+     * are not yet supported by the client library's services. When possible, the service for your use case
+     * should be used instead as it provides a more convenient and higher-level interface depending on the endpoint.
+     *
+     * @param method   The HTTP method to use for the request.
+     * @param endpoint The endpoint to call (e.g., "/addresses").
+     * @param params   The parameters to send with the request.
+     * @return A Map containing the API response.
+     * @throws EasyPostException when the request fails.
+     */
+    @SuppressWarnings("unchecked")
+    public Map<String, Object> makeApiCall(RequestMethod method, String endpoint, Map<String, Object> params)
+            throws EasyPostException {
+        return Requestor.request(method, endpoint, params, Map.class, this);
     }
 }
