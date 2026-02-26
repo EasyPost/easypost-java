@@ -56,12 +56,11 @@ jobs:
       - name: Convert coverage report
         if: github.ref == 'refs/heads/master'
         run: grcov target/site/jacoco/jacoco.xml --source-dir ./ --ignore "target/*" > coverage.lcov
-      - name: Coveralls
+      - name: Coverage
         if: github.ref == 'refs/heads/master'
-        uses: coverallsapp/github-action@master
+        uses: codecov/codecov-action@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: './coverage.lcov'
+          token: ${{ secrets.CODECOV_TOKEN }}
   lint:
     runs-on: ubuntu-latest
     steps:
