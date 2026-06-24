@@ -46,12 +46,14 @@ public class FedExRegistrationService {
      *
      * @param fedexAccountNumber The FedEx account number.
      * @param pinMethodOption    The PIN delivery method: "SMS", "CALL", or "EMAIL".
+     * @param params             Map of parameters.
      * @return FedExRequestPinResponse object confirming PIN was sent.
      * @throws EasyPostException when the request fails.
      */
-    public FedExRequestPinResponse requestPin(final String fedexAccountNumber, final String pinMethodOption)
+    public FedExRequestPinResponse requestPin(final String fedexAccountNumber, final String pinMethodOption,
+            final Map<String, Object> params)
             throws EasyPostException {
-        Map<String, Object> wrappedParams = new HashMap<>();
+        Map<String, Object> wrappedParams = wrapPinValidation(params);
         Map<String, Object> pinMethodMap = new HashMap<>();
         pinMethodMap.put("option", pinMethodOption);
         wrappedParams.put("pin_method", pinMethodMap);

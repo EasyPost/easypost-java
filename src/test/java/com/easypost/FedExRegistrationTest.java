@@ -94,8 +94,11 @@ public final class FedExRegistrationTest {
         String fedexAccountNumber = "123456789";
         Map<String, Object> pinMethodMap = new java.util.HashMap<>();
         pinMethodMap.put("option", "SMS");
+        Map<String, Object> easypostDetails = new java.util.HashMap<>();
+        easypostDetails.put("carrier_account_id", "ca_123");
         Map<String, Object> params = new java.util.HashMap<>();
         params.put("pin_method", pinMethodMap);
+        params.put("easypost_details", easypostDetails);
 
         String jsonResponse = "{\"message\":\"sent secured Pin\"}";
         FedExRequestPinResponse pinResponse = Constants.Http.GSON.fromJson(jsonResponse, FedExRequestPinResponse.class);
@@ -109,7 +112,7 @@ public final class FedExRegistrationTest {
                 vcr.client))
                 .thenReturn(pinResponse);
 
-        FedExRequestPinResponse response = vcr.client.fedexRegistration.requestPin(fedexAccountNumber, "SMS");
+        FedExRequestPinResponse response = vcr.client.fedexRegistration.requestPin(fedexAccountNumber, "SMS", params);
         assertEquals("sent secured Pin", response.getMessage());
     }
 
