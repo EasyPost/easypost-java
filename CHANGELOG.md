@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Sends card details in the request body instead of the URL query string when `referralCustomer.addCreditCardToUser` creates a Stripe token
+
 ## v8.8.0 (2026-06-25)
 
 - Adds `params` to `requestPin` ensuring users can pass `easypost_details` to the call

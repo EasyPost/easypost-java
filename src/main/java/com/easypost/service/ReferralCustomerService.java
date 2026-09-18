@@ -18,6 +18,7 @@ import lombok.SneakyThrows;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -257,8 +258,10 @@ public class ReferralCustomerService {
         params.put("exp_year", String.valueOf(expirationYear));
         params.put("cvc", cvc);
 
-        String encodedURL = InternalUtilities.getEncodedURL(params, "card");
-        URL stripeUrl = new URL("https://api.stripe.com/v1/tokens?" + encodedURL);
+        // Card details must travel in the form-encoded request body, never in the URL,
+        // so they cannot end up in access logs, proxy logs, or Referer headers.
+        String encodedBody = InternalUtilities.getEncodedURL(params, "card");
+        URL stripeUrl = new URL("https://api.stripe.com/v1/tokens");
 
         HttpURLConnection conn;
         if (EasyPost._vcrUrlFunction != null) {
@@ -271,6 +274,10 @@ public class ReferralCustomerService {
         conn.setRequestProperty("Authorization", apiToken);
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setDoOutput(true);
+
+        try (OutputStream outputStream = conn.getOutputStream()) {
+            outputStream.write(encodedBody.getBytes(StandardCharsets.UTF_8));
+        }
 
         StringBuilder response;
 
