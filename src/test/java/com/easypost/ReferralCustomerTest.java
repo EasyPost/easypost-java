@@ -1,12 +1,10 @@
 package com.easypost;
 
-import com.easypost.exception.API.ExternalApiError;
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.API.InvalidRequestError;
 import com.easypost.exception.General.EndOfPaginationError;
 import com.easypost.exception.API.NotFoundError;
 import com.easypost.model.PaymentMethod;
-import com.easypost.model.PaymentMethodObject;
 import com.easypost.model.ReferralCustomer;
 import com.easypost.model.ReferralCustomerCollection;
 import org.junit.jupiter.api.BeforeAll;
@@ -138,41 +136,6 @@ public final class ReferralCustomerTest {
     }
 
     /**
-     * Test adding a credit card to a Referral user.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testReferralAddCreditCard() throws Exception {
-        vcr.setUpTest("referral_add_credit_card");
-
-        Map<String, Object> creditCardDetails = Fixtures.creditCardDetails();
-        PaymentMethodObject creditCard = vcr.client.referralCustomer.addCreditCardToUser(referralUserKey(),
-                (String) creditCardDetails.get("number"),
-                Integer.parseInt((String) creditCardDetails.get("expiration_month")),
-                Integer.parseInt((String) creditCardDetails.get("expiration_year")),
-                (String) creditCardDetails.get("cvc"), PaymentMethod.Priority.PRIMARY);
-
-        assertInstanceOf(PaymentMethodObject.class, creditCard);
-        assertTrue(creditCard.getId().startsWith("pm_"));
-        assertEquals(((String) Fixtures.creditCardDetails().get("number")).substring(12), creditCard.getLast4());
-    }
-
-    /**
-     * Test creating bad Stripe token with invalid input parameters.
-     *
-     * @throws Exception when the request fails.
-     */
-    @Test
-    public void testCreateBadStripeToken() throws Exception {
-        vcr.setUpTest("create_bad_stripe_token");
-
-        assertThrows(ExternalApiError.class,
-                () -> vcr.client.referralCustomer.addCreditCardToUser(referralUserKey(), "1234", 1234, 1234, "1234",
-                        PaymentMethod.Priority.PRIMARY));
-    }
-
-    /**
      * Test adding a credit card from Stripe for a Referral user raises an error when it fails.
      *
      * @throws EasyPostException when the request fails.
@@ -214,5 +177,20 @@ public final class ReferralCustomerTest {
             "account_holder_name must be present when creating a Financial Connections payment method", 
             exception.getMessage()
         );
+    }
+
+    /**
+     * Test retrieving EasyPost Stripe API key.
+     *
+     * @throws EasyPostException when the request fails.
+     */
+    @Test
+    public void testRetrieveEasypostStripeApiKey() throws EasyPostException {
+        vcr.setUpTest("retrieve_easypost_stripe_api_key");
+
+        String publicKey = vcr.client.referralCustomer.retrieveEasypostStripeApiKey();
+
+        assertInstanceOf(String.class, publicKey);
+        assertTrue(publicKey.startsWith("pk_"));
     }
 }
