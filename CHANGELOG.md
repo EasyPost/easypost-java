@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Next Release
+
+- Removes the deprecated, unusable `addCreditCardToUser` function
+  - Stripe has disabled the ability to pass plain credit card details over the wire and now requires using [Stripe.js/Elements/Checkout](https://support.stripe.com/questions/card-tokenization-restrictions-using-publishable-keys). Follow the [Decentralized (EasyPost-Manage Billing) Guide](https://docs.easypost.com/guides/get-started-with-forge/easypost-managed-billing-guide#referralcustomer-billing-management) for more details on the new flow to use.
+  - Makes `referralCustomer.retrieveEasypostStripeApiKey` public to help facilitate adding credit cards using Stripe.js
+
 ## v8.8.0 (2026-06-25)
 
 - Adds `params` to `requestPin` ensuring users can pass `easypost_details` to the call
