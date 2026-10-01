@@ -6,6 +6,7 @@ import lombok.Getter;
 public final class Surcharge {
     private String object;
     private String type;
+    private String category;
     private String amount;
     private String listAmount;
     private String retailAmount;
