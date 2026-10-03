@@ -478,7 +478,7 @@ See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-4x-to-50) for more detai
 
 ## v3.0.1 (2016-08-19)
 
-- Added delete() to Users (for children only)
+- Removed some CRUD methods that are not (and never were) valid
 
 ## v3.0.0 (2016-07-25)
 
@@ -567,7 +567,7 @@ See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-4x-to-50) for more detai
 ## v2.0.13 (2015-04-07)
 
 - Fixed Address createAndVerify method
-- Added Address verifyWithCarrier and createAndVerify methods
+- Added Address verifyWithCarrier and createAndVerifyWithCarrier methods
 
 ## v2.0.12 (2015-03-03)
 
