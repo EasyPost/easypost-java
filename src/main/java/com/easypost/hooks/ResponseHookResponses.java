@@ -20,7 +20,7 @@ public class ResponseHookResponses {
      * ResponseHookResponses constructor.
      *
      * @param httpStatus The HTTP status code of the response.
-     * @param headers The headers of the response.
+     * @param headers The headers of the request, with the API key redacted to its last four characters.
      * @param method The HTTP method of the request.
      * @param path The path of the request.
      * @param responseBody The response body as a string.
