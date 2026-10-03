@@ -39,6 +39,8 @@ public abstract class Constants {
         public static final String API_DID_NOT_RETURN_ERROR_DETAILS = "API did not return error details.";
         public static final String WEBHOOK_DOES_NOT_MATCH =
                 "Webhook received did not originate from EasyPost or had a webhook secret mismatch.";
+        public static final String RESPONSE_BODY_TOO_LARGE =
+                "The API response body exceeded the maximum allowed size of %d bytes and was not read.";
 
         public static final String NO_MORE_PAGES_TO_RETRIEVE = "There are no more pages to retrieve.";
     }
@@ -74,6 +76,7 @@ public abstract class Constants {
         public static final String CHARSET = "UTF-8";
         public static final int DEFAULT_CONNECT_TIMEOUT_MILLISECONDS = 30000;
         public static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60000;
+        public static final int MAX_RESPONSE_BODY_BYTES = 10 * 1024 * 1024; // 10 MB
 
         public static final Gson GSON = new GsonBuilder()
                 // Standard model deserializer

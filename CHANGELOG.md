@@ -6,6 +6,7 @@
 - Removes the deprecated, unusable `addCreditCardToUser` function
   - Stripe has disabled the ability to pass plain credit card details over the wire and now requires using [Stripe.js/Elements/Checkout](https://support.stripe.com/questions/card-tokenization-restrictions-using-publishable-keys). Follow the [Decentralized (EasyPost-Manage Billing) Guide](https://docs.easypost.com/guides/get-started-with-forge/easypost-managed-billing-guide#referralcustomer-billing-management) for more details on the new flow to use.
   - Makes `referralCustomer.retrieveEasypostStripeApiKey` public to help facilitate adding credit cards using Stripe.js
+- Caps HTTP response bodies at 10 MB to prevent heap exhaustion from oversized responses. Responses that declare or stream more than this now throw an `HttpError` instead of being read into memory without limit
 
 ## v8.8.0 (2026-06-25)
 
@@ -477,7 +478,7 @@ See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-4x-to-50) for more detai
 
 ## v3.0.1 (2016-08-19)
 
-- Removed some CRUD methods that are not (and never were) valid
+- Added delete() to Users (for children only)
 
 ## v3.0.0 (2016-07-25)
 
@@ -566,7 +567,7 @@ See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-4x-to-50) for more detai
 ## v2.0.13 (2015-04-07)
 
 - Fixed Address createAndVerify method
-- Added Address verifyWithCarrier and createAndVerifyWithCarrier methods
+- Added Address verifyWithCarrier and createAndVerify methods
 
 ## v2.0.12 (2015-03-03)
 

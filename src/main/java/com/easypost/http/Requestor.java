@@ -30,6 +30,7 @@ import com.google.gson.JsonObject;
 import lombok.Generated;
 
 import javax.net.ssl.HttpsURLConnection;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -47,7 +48,6 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.UUID;
 
 public abstract class Requestor {
@@ -60,6 +60,7 @@ public abstract class Requestor {
 
     private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
+    private static final int RESPONSE_READ_BUFFER_SIZE = 8192;
 
     private static String urlEncodePair(final String key, final String value) throws UnsupportedEncodingException {
         return String.format("%s=%s", URLEncoder.encode(key, Constants.Http.CHARSET),
@@ -318,22 +319,55 @@ public abstract class Requestor {
     }
 
     /**
-     * Get response body from the InputStream.
+     * Get response body from the InputStream, reading at most
+     * {@link Constants.Http#MAX_RESPONSE_BODY_BYTES} bytes.
      *
      * @param responseStream The InputStream from the response body.
+     * @param contentLength  The declared Content-Length of the response, or -1 if unknown.
      * @return InputStream in string value.
      * @throws IOException When the request fails.
+     * @throws HttpError   When the response body exceeds the maximum allowed size.
      */
-    private static String getResponseBody(final InputStream responseStream) throws IOException {
-        if (responseStream.available() == 0) {
-            // Return empty string if the InputSteam is empty to avoid exceptions.
+    protected static String getResponseBody(final InputStream responseStream, final long contentLength)
+            throws IOException, HttpError {
+        if (responseStream == null) {
             return "";
         }
 
-        @SuppressWarnings("resource")
-        String rBody = new Scanner(responseStream, Constants.Http.CHARSET).useDelimiter("\\A").next();
-        responseStream.close();
-        return rBody;
+        try {
+            // Reject a declared oversized body before reading anything. The limit is still enforced while
+            // reading below, since Content-Length may be missing or wrong.
+            if (contentLength > Constants.Http.MAX_RESPONSE_BODY_BYTES) {
+                throw responseBodyTooLargeError();
+            }
+
+            ByteArrayOutputStream body = new ByteArrayOutputStream();
+            byte[] buffer = new byte[RESPONSE_READ_BUFFER_SIZE];
+            long totalBytesRead = 0;
+            int bytesRead = responseStream.read(buffer);
+            while (bytesRead != -1) {
+                totalBytesRead += bytesRead;
+                if (totalBytesRead > Constants.Http.MAX_RESPONSE_BODY_BYTES) {
+                    throw responseBodyTooLargeError();
+                }
+                body.write(buffer, 0, bytesRead);
+                bytesRead = responseStream.read(buffer);
+            }
+
+            return body.toString(Constants.Http.CHARSET);
+        } finally {
+            responseStream.close();
+        }
+    }
+
+    /**
+     * Build the error thrown when a response body exceeds the maximum allowed size.
+     *
+     * @return HttpError object.
+     */
+    private static HttpError responseBodyTooLargeError() {
+        return new HttpError(String.format(Constants.ErrorMessages.RESPONSE_BODY_TOO_LARGE,
+                Constants.Http.MAX_RESPONSE_BODY_BYTES));
     }
 
     /**
@@ -377,9 +411,9 @@ public abstract class Requestor {
             if (rCode == HttpURLConnection.HTTP_NO_CONTENT) {
                 rBody = "";
             } else if (rCode >= HttpURLConnection.HTTP_OK && rCode < HttpURLConnection.HTTP_MULT_CHOICE) {
-                rBody = getResponseBody(conn.getInputStream());
+                rBody = getResponseBody(conn.getInputStream(), conn.getContentLengthLong());
             } else {
-                rBody = getResponseBody(conn.getErrorStream());
+                rBody = getResponseBody(conn.getErrorStream(), conn.getContentLengthLong());
             }
             return new EasyPostResponse(rCode, rBody);
         } catch (MissingParameterError e) {
@@ -755,9 +789,11 @@ public abstract class Requestor {
             Object response = fetchMethod.invoke(urlFetchService, request);
 
             int responseCode = (Integer) response.getClass().getDeclaredMethod("getResponseCode").invoke(response);
-            String responseBody = new String(
-                    (byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response),
-                    Constants.Http.CHARSET);
+            byte[] responseContent = (byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response);
+            if (responseContent != null && responseContent.length > Constants.Http.MAX_RESPONSE_BODY_BYTES) {
+                throw responseBodyTooLargeError();
+            }
+            String responseBody = new String(responseContent, Constants.Http.CHARSET);
 
             return new EasyPostResponse(responseCode, responseBody);
 
