@@ -1,0 +1,100 @@
+[
+  {
+    "recordedAt": 1792096188,
+    "request": {
+      "body": "{\n  \"carrier_account_oauth_registrations\": {\n    \"type\": \"UpsAccount\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/register_oauth"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"UNPROCESSABLE_ENTITY\",\n    \"message\": \"The request was understood, but cannot be processed.\",\n    \"errors\": [\n      {\n        \"field\": \"account_number\",\n        \"message\": \"The provided Carrier Account\\u0027s Account Number is required but missing.\"\n      }\n    ]\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 422 Unprocessable Entity"
+        ],
+        "content-length": [
+          "227"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "web101azw"
+        ],
+        "vary": [
+          "EasyPost-Api-Version"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-canary": [
+          "direct"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "easypost-api-version": [
+          "2015-01-01"
+        ],
+        "x-ep-request-uuid": [
+          "5218e5896ad137bce2bc525c0008bde3"
+        ],
+        "x-proxied": [
+          "intlb4azw f29267e751",
+          "extlb1azw ff4cfe6eb5"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.021612"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202610151955-b13716d895-main"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 422,
+        "message": "Unprocessable Entity"
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/register_oauth"
+    },
+    "duration": 109
+  }
+]
