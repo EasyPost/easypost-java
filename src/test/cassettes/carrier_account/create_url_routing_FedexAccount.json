@@ -1,0 +1,97 @@
+[
+  {
+    "recordedAt": 1792096187,
+    "request": {
+      "body": "{\n  \"carrier_account\": {\n    \"registration_data\": {},\n    \"type\": \"FedexAccount\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/register"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"GONE\",\n    \"message\": \"The requested resource is no longer available at the server and no forwarding address is known.\",\n    \"errors\": [\n      {\n        \"message\": \"FedEx account registrations must use the multi-factor authentication (MFA) registration workflow. See: https://support.easypost.com/hc/en-us/articles/35262738410253-FedEx-Multi-Factor-Authentication\"\n      }\n    ]\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 410 Gone"
+        ],
+        "content-length": [
+          "357"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "web115azw"
+        ],
+        "vary": [
+          "EasyPost-Api-Version"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "easypost-api-version": [
+          "2015-01-01"
+        ],
+        "x-ep-request-uuid": [
+          "add87ec46ad137bbe2bc523e006262d7"
+        ],
+        "x-proxied": [
+          "intlb3azw f29267e751",
+          "extlb3azw ff4cfe6eb5"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.089783"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202610151955-b13716d895-main"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 410,
+        "message": "Gone"
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/register"
+    },
+    "duration": 178
+  }
+]

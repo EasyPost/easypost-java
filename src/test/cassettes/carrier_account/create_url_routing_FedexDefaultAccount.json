@@ -1,0 +1,189 @@
+[
+  {
+    "recordedAt": 1792096139,
+    "request": {
+      "body": "{\n  \"carrier_account\": {\n    \"registration_data\": {},\n    \"type\": \"FedexDefaultAccount\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/open"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"UNPROCESSABLE_ENTITY\",\n    \"message\": \"The request was understood, but cannot be processed.\",\n    \"errors\": [\n      {\n        \"field\": \"name\",\n        \"message\": \"is missing\"\n      },\n      {\n        \"field\": \"street1\",\n        \"message\": \"is missing\"\n      },\n      {\n        \"field\": \"city\",\n        \"message\": \"is missing\"\n      },\n      {\n        \"field\": \"state\",\n        \"message\": \"is missing\"\n      },\n      {\n        \"field\": \"postal_code\",\n        \"message\": \"is missing\"\n      },\n      {\n        \"field\": \"country\",\n        \"message\": \"is missing\"\n      },\n      {\n        \"field\": \"phone\",\n        \"message\": \"is missing\"\n      },\n      {\n        \"field\": \"email\",\n        \"message\": \"is missing\"\n      }\n    ]\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 422 Unprocessable Entity"
+        ],
+        "content-length": [
+          "453"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "web107azw"
+        ],
+        "vary": [
+          "EasyPost-Api-Version"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "easypost-api-version": [
+          "2015-01-01"
+        ],
+        "x-ep-request-uuid": [
+          "2cb8c6456ad1378be2bc41a000088881"
+        ],
+        "x-proxied": [
+          "intlb4azw f29267e751",
+          "extlb2azw ff4cfe6eb5"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.023869"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202610151955-b13716d895-main"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 422,
+        "message": "Unprocessable Entity"
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/open"
+    },
+    "duration": 112
+  },
+  {
+    "recordedAt": 1792096139,
+    "request": {
+      "body": "",
+      "method": "GET",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_720352f88fce4ebbb7e8fb4306826bbf"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"NOT_FOUND\",\n    \"message\": \"The requested resource could not be found.\",\n    \"errors\": []\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 404 Not Found"
+        ],
+        "content-length": [
+          "97"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "web107azw"
+        ],
+        "vary": [
+          "EasyPost-Api-Version"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "easypost-api-version": [
+          "2015-01-01"
+        ],
+        "x-ep-request-uuid": [
+          "aebfacae6ad1378be2bc41b80062190d"
+        ],
+        "x-proxied": [
+          "intlb2azw f29267e751",
+          "extlb3azw ff4cfe6eb5"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.038834"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202610151955-b13716d895-main"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 404,
+        "message": "Not Found"
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_720352f88fce4ebbb7e8fb4306826bbf"
+    },
+    "duration": 130
+  }
+]

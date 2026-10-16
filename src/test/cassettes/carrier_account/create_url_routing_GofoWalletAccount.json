@@ -1,0 +1,189 @@
+[
+  {
+    "recordedAt": 1792096185,
+    "request": {
+      "body": "{\n  \"carrier_account\": {\n    \"registration_data\": {},\n    \"type\": \"GofoWalletAccount\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/open"
+    },
+    "response": {
+      "body": "{\n  \"readable\": \"GOFO Wallet\",\n  \"credentials\": {},\n  \"created_at\": \"2026-10-15T20:29:45Z\",\n  \"description\": \"GOFO Wallet Account\",\n  \"type\": \"GofoWalletAccount\",\n  \"reference\": null,\n  \"updated_at\": \"2026-10-15T20:29:45Z\",\n  \"clone\": false,\n  \"billing_type\": \"easypost\",\n  \"logo\": null,\n  \"id\": \"ca_4f79588ef6fd43b38624a958c7907fe7\",\n  \"fields\": {\n    \"credentials\": {}\n  },\n  \"object\": \"CarrierAccount\"\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 201 Created"
+        ],
+        "content-length": [
+          "460"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "web126azw"
+        ],
+        "vary": [
+          "EasyPost-Api-Version"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "easypost-api-version": [
+          "2015-01-01"
+        ],
+        "x-ep-request-uuid": [
+          "ef2f756d6ad137b9e2bc4ec50008b902"
+        ],
+        "x-proxied": [
+          "intlb4azw f29267e751",
+          "extlb1azw ff4cfe6eb5"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.090634"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202610151955-b13716d895-main"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 201,
+        "message": "Created"
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/open"
+    },
+    "duration": 179
+  },
+  {
+    "recordedAt": 1792096185,
+    "request": {
+      "body": "",
+      "method": "DELETE",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_4f79588ef6fd43b38624a958c7907fe7"
+    },
+    "response": {
+      "body": "{}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 200 OK"
+        ],
+        "content-length": [
+          "2"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "web119azw"
+        ],
+        "vary": [
+          "EasyPost-Api-Version"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "easypost-api-version": [
+          "2015-01-01"
+        ],
+        "x-ep-request-uuid": [
+          "2cb8c6446ad137b9e2bc4ec60008ca62"
+        ],
+        "x-proxied": [
+          "intlb1azw f29267e751",
+          "extlb2azw ff4cfe6eb5"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.062628"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202610151955-b13716d895-main"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 200,
+        "message": "OK"
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/ca_4f79588ef6fd43b38624a958c7907fe7"
+    },
+    "duration": 148
+  }
+]

@@ -33,9 +33,14 @@ public class CarrierAccountService {
      */
     public CarrierAccount create(final Map<String, Object> params) throws EasyPostException {
         String type = (String) params.get("type");
-        Map<String, Object> wrappedParams = new HashMap<String, Object>();
-        wrappedParams.put(selectTopLayerKey(type), params);
+        if (type == null) {
+            throw new MissingParameterError(
+                    String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));
+        }
+
         String endpoint = selectCarrierAccountCreationEndpoint(type);
+        Map<String, Object> wrappedParams = new HashMap<String, Object>();
+        wrappedParams.put(selectTopLayerKey(endpoint), params);
 
         return Requestor.request(RequestMethod.POST, endpoint, wrappedParams, CarrierAccount.class, client);
     }
@@ -116,30 +121,25 @@ public class CarrierAccountService {
      * @return The endpoint for the carrier account creation request.
      */
     private static String selectCarrierAccountCreationEndpoint(final String carrierAccountType) {
-        if (Constants.CarrierAccountTypes.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_WORKFLOW.contains(carrierAccountType)) {
-            return "carrier_accounts/register";
-        } else if (Constants.CarrierAccountTypes.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.contains(carrierAccountType)) {
-            return "carrier_accounts/register_oauth";
-        } else {
-            return "carrier_accounts";
+        for (Map.Entry<String, List<String>> entry : Constants.CarrierAccountTypes.CARRIER_ACCOUNT_CREATE_ENDPOINT_TYPES
+                .entrySet()) {
+            if (entry.getValue().contains(carrierAccountType)) {
+                return entry.getKey();
+            }
         }
+
+        return "carrier_accounts";
     }
 
     /**
      * Select the top-layer key for the carrier account creation/update request based on the
      * carrier type.
      *
-     * @param carrierAccountType The type of carrier account to create.
+     * @param carrierAccountEndpoint The endpoint of carrier account to create.
      * @return The top-layer key for the carrier account creation/update request.
-     * @throws MissingParameterError when the request fails.
      */
-    private static String selectTopLayerKey(final String carrierAccountType) throws MissingParameterError {
-        if (carrierAccountType == null) {
-            throw new MissingParameterError(
-                    String.format(Constants.ErrorMessages.MISSING_REQUIRED_PARAMETER, "carrier account type"));
-        }
-
-        if (Constants.CarrierAccountTypes.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.contains(carrierAccountType)) {
+    private static String selectTopLayerKey(final String carrierAccountEndpoint) {
+        if ("carrier_accounts/register_oauth".equals(carrierAccountEndpoint)) {
             return "carrier_account_oauth_registrations";
         } else {
             return "carrier_account";
