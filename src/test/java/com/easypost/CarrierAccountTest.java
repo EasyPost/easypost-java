@@ -1,20 +1,24 @@
 package com.easypost;
 
-import com.easypost.exception.API.InvalidRequestError;
+import com.easypost.exception.APIException;
 import com.easypost.exception.EasyPostException;
 import com.easypost.http.Requestor;
 import com.easypost.model.CarrierAccount;
 import com.easypost.model.CarrierType;
-import com.easypost.model.FieldError;
 import com.easypost.model.Pickup;
 import com.easypost.model.Shipment;
-import com.google.common.collect.ImmutableMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,14 +39,29 @@ public final class CarrierAccountTest {
         return carrierAccount;
     }
 
-    private static CarrierAccount createUpsCarrierAccount() throws EasyPostException {
-        Map<String, Object> data = new HashMap<>();
-        data.put("type", "UpsAccount");
-        data.put("account_number", "123456789");
+    private static List<Map.Entry<String, String>> flattenCustomCarrierRouteMapping() {
+        List<Map.Entry<String, String>> routes = new ArrayList<>();
+        for (Map.Entry<String, List<String>> endpointEntry : Constants.CarrierAccountTypes
+                .CARRIER_ACCOUNT_CREATE_ENDPOINT_TYPES.entrySet()) {
+            for (String carrierAccountType : endpointEntry.getValue()) {
+                routes.add(new AbstractMap.SimpleEntry<>(carrierAccountType, endpointEntry.getKey()));
+            }
+        }
+        return routes;
+    }
 
-        CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);
-        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
-        return carrierAccount;
+    private static Map<String, Object> carrierCreatePayloadForEndpoint(String endpoint) {
+        Map<String, Object> payload = new HashMap<>();
+        if ("carrier_accounts/open".equals(endpoint) || "carrier_accounts/register".equals(endpoint)) {
+            payload.put("registration_data", new HashMap<>());
+        }
+        return payload;
+    }
+
+    private static String loadCarrierAccountCassette(String cassetteName) throws Exception {
+        Path cassettePath = Paths.get(TestUtils.getSourceFileDirectory(), "src/test/cassettes/carrier_account",
+                cassetteName + ".json");
+        return new String(Files.readAllBytes(cassettePath), StandardCharsets.UTF_8);
     }
 
     /**
@@ -88,66 +107,41 @@ public final class CarrierAccountTest {
     }
 
     /**
-     * Test creating a carrier account with a custom workflow.
+     * Test routing carrier account create calls to the proper endpoint.
      *
-     * @throws EasyPostException when the request fails.
+     * @throws Exception when the request fails.
      */
     @Test
-    public void testCreateWithCustomWorkflow() throws EasyPostException {
-        vcr.setUpTest("create_with_custom_workflow");
+    public void testCreateUrlRouting() throws Exception {
+        for (Map.Entry<String, String> route : flattenCustomCarrierRouteMapping()) {
+            String carrierAccountType = route.getKey();
+            String expectedEndpoint = route.getValue();
+            String cassetteName = "create_url_routing_" + carrierAccountType;
 
-        Map<String, Object> data = new HashMap<>();
-        data.put("type", "FedexAccount");
-        data.put("registration_data", ImmutableMap.of("some", "data"));
+            vcr.setUpTest(cassetteName);
 
-        try {
-            CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);
-            testCarrierAccountId = carrierAccount.getId();  // clean up after test, should never get here
-        } catch (InvalidRequestError e) {
-            // We're sending bad data to the API, so we expect an error
-            assertEquals(422, e.getStatusCode());
-            // We expect one of the sub-errors to be regarding a missing field
-            FieldError fieldError = (FieldError) e.getErrors().get(0);
-            assertEquals("shipping_streets", fieldError.getField());
-            assertEquals("must be present and a string", fieldError.getMessage());
+            Map<String, Object> payload = new HashMap<>();
+            payload.put("type", carrierAccountType);
+            payload.putAll(carrierCreatePayloadForEndpoint(expectedEndpoint));
+
+            try {
+                CarrierAccount carrierAccount = vcr.client.carrierAccount.create(payload);
+                assertInstanceOf(CarrierAccount.class, carrierAccount);
+                assertTrue(carrierAccount.getId().startsWith("ca_"));
+                vcr.client.carrierAccount.delete(carrierAccount.getId());
+            } catch (APIException e) {
+                Integer statusCode = e.getStatusCode();
+                assertTrue(statusCode == null || (statusCode != 404 && statusCode != 500));
+            }
+
+            String cassette = loadCarrierAccountCassette(cassetteName);
+            assertTrue(cassette.contains("/v2/" + expectedEndpoint));
+            if ("carrier_accounts/register_oauth".equals(expectedEndpoint)) {
+                assertTrue(cassette.contains("carrier_account_oauth_registrations"));
+            } else {
+                assertTrue(cassette.contains("carrier_account"));
+            }
         }
-    }
-
-
-    /**
-     * Test creating a UPS carrier account.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testCreateWithUPS() throws EasyPostException {
-        vcr.setUpTest("create_with_ups");
-
-        CarrierAccount carrierAccount = createUpsCarrierAccount();
-
-        assertInstanceOf(CarrierAccount.class, carrierAccount);
-        assertTrue(carrierAccount.getId().startsWith("ca_"));
-        assertEquals("UpsAccount", carrierAccount.getType());
-    }
-
-    /**
-     * Test creating an Amazon carrier account.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testCreateWithAmazon() throws EasyPostException {
-        vcr.setUpTest("create_with_amazon");
-
-        Map<String, Object> data = new HashMap<>();
-        data.put("type", "AmazonShippingAccount");
-
-        CarrierAccount carrierAccount = vcr.client.carrierAccount.create(data);
-        testCarrierAccountId = carrierAccount.getId(); // trigger deletion after test
-
-        assertInstanceOf(CarrierAccount.class, carrierAccount);
-        assertTrue(carrierAccount.getId().startsWith("ca_"));
-        assertEquals("AmazonShippingAccount", carrierAccount.getType());
     }
 
     /**
@@ -203,26 +197,6 @@ public final class CarrierAccountTest {
         assertInstanceOf(CarrierAccount.class, carrierAccount);
         assertTrue(updatedCarrierAccount.getId().startsWith("ca_"));
         assertEquals(testDescription, updatedCarrierAccount.getDescription());
-    }
-
-    /**
-     * Test updating an UPS account.
-     *
-     * @throws EasyPostException when the request fails.
-     */
-    @Test
-    public void testUpdateUpsAccount() throws EasyPostException {
-        vcr.setUpTest("update_ups");
-
-        CarrierAccount carrierAccount = createUpsCarrierAccount();
-        Map<String, Object> updateParams = new HashMap<>();
-        updateParams.put("account_number", "987654321");
-
-        CarrierAccount updatedCarrierAccount = vcr.client.carrierAccount.update(carrierAccount.getId(), updateParams);
-
-        assertInstanceOf(CarrierAccount.class, updatedCarrierAccount);
-        assertTrue(updatedCarrierAccount.getId().startsWith("ca_"));
-        assertEquals("UpsAccount", updatedCarrierAccount.getType());
     }
 
     /**

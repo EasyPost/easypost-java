@@ -2,6 +2,7 @@ package com.easypost;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.easypost.exception.APIException;
 import com.easypost.http.HashMapSerializer;
@@ -15,6 +16,7 @@ import com.easypost.model.StatelessRateDeserializer;
 import com.easypost.model.Webhook;
 import com.easypost.model.WebhookDeserializer;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -63,12 +65,14 @@ public abstract class Constants {
     }
 
     public abstract static class CarrierAccountTypes {
-        public static final List<String> CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_WORKFLOW = ImmutableList.of(
-                "FedexAccount", "FedexSmartpostAccount");
-
-        public static final List<String> CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH = ImmutableList.of(
-                "AmazonShippingAccount", "UpsAccount", "UpsMailInnovationsAccount", "UpsSurepostAccount",
-                "UspsShipAccount");
+        public static final Map<String, List<String>> CARRIER_ACCOUNT_CREATE_ENDPOINT_TYPES = ImmutableMap.of(
+                "carrier_accounts/open", ImmutableList.of(
+                        "FedexDefaultAccount", "GofoWalletAccount", "UpsDapAccount", "UniUniWalletAccount",
+                        "VehoWalletAccount"),
+                "carrier_accounts/register", ImmutableList.of("FedexAccount", "FedexSmartpostAccount"),
+                "carrier_accounts/register_oauth", ImmutableList.of(
+                        "AmazonShippingAccount", "UpsAccount", "UpsMailInnovationsAccount", "UpsSurepostAccount",
+                        "UspsShipAccount"));
     }
 
     public abstract static class Http {

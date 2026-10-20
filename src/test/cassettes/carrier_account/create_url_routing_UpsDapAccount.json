@@ -1,0 +1,97 @@
+[
+  {
+    "recordedAt": 1792096186,
+    "request": {
+      "body": "{\n  \"carrier_account\": {\n    \"registration_data\": {},\n    \"type\": \"UpsDapAccount\"\n  }\n}",
+      "method": "POST",
+      "headers": {
+        "Accept-Charset": [
+          "UTF-8"
+        ],
+        "User-Agent": [
+          "REDACTED"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/open"
+    },
+    "response": {
+      "body": "{\n  \"error\": {\n    \"code\": \"PARAMETER.REQUIRED\",\n    \"message\": \"Missing required parameter.\",\n    \"errors\": [\n      {\n        \"field\": \"postal_code\",\n        \"message\": \"is required but missing\"\n      }\n    ]\n  }\n}",
+      "httpVersion": null,
+      "headers": {
+        "null": [
+          "HTTP/1.1 422 Unprocessable Entity"
+        ],
+        "content-length": [
+          "150"
+        ],
+        "expires": [
+          "0"
+        ],
+        "x-node": [
+          "web107azw"
+        ],
+        "vary": [
+          "EasyPost-Api-Version"
+        ],
+        "x-frame-options": [
+          "SAMEORIGIN"
+        ],
+        "x-download-options": [
+          "noopen"
+        ],
+        "x-permitted-cross-domain-policies": [
+          "none"
+        ],
+        "x-backend": [
+          "easypost"
+        ],
+        "pragma": [
+          "no-cache"
+        ],
+        "strict-transport-security": [
+          "max-age\u003d31536000; includeSubDomains; preload"
+        ],
+        "x-xss-protection": [
+          "1; mode\u003dblock"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "easypost-api-version": [
+          "2015-01-01"
+        ],
+        "x-ep-request-uuid": [
+          "5218e5886ad137bae2bc4edf0008ba02"
+        ],
+        "x-proxied": [
+          "intlb1azw f29267e751",
+          "extlb1azw ff4cfe6eb5"
+        ],
+        "referrer-policy": [
+          "strict-origin-when-cross-origin"
+        ],
+        "x-runtime": [
+          "0.058223"
+        ],
+        "content-type": [
+          "application/json; charset\u003dutf-8"
+        ],
+        "x-version-label": [
+          "easypost-202610151955-b13716d895-main"
+        ],
+        "cache-control": [
+          "private, no-cache, no-store"
+        ]
+      },
+      "status": {
+        "code": 422,
+        "message": "Unprocessable Entity"
+      },
+      "uri": "https://api.easypost.com/v2/carrier_accounts/open"
+    },
+    "duration": 168
+  }
+]
