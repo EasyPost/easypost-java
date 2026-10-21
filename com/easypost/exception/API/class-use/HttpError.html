@@ -73,23 +73,30 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>static &lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">Requestor.</span><code><a href="../../../http/Requestor.html#request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient)" class="member-name-link">request</a><wbr>(<a href="../../../http/Requestor.RequestMethod.html" title="enum in com.easypost.http">Requestor.RequestMethod</a>&nbsp;method,
+<div class="col-first even-row-color"><code>protected static <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Requestor.</span><code><a href="../../../http/Requestor.html#getResponseBody(java.io.InputStream,long)" class="member-name-link">getResponseBody</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;responseStream,
+ long&nbsp;contentLength)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Get response body from the InputStream, reading at most
+<a href="../../../Constants.Http.html#MAX_RESPONSE_BODY_BYTES"><code>Constants.Http.MAX_RESPONSE_BODY_BYTES</code></a> bytes.</div>
+</div>
+<div class="col-first odd-row-color"><code>static &lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">Requestor.</span><code><a href="../../../http/Requestor.html#request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient)" class="member-name-link">request</a><wbr>(<a href="../../../http/Requestor.RequestMethod.html" title="enum in com.easypost.http">Requestor.RequestMethod</a>&nbsp;method,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endpoint,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;clazz,
  <a href="../../../service/EasyPostClient.html" title="class in com.easypost.service">EasyPostClient</a>&nbsp;client)</code></div>
-<div class="col-last even-row-color">
+<div class="col-last odd-row-color">
 <div class="block">Send an HTTP request to EasyPost.</div>
 </div>
-<div class="col-first odd-row-color"><code>static &lt;T&gt;&nbsp;T</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">Requestor.</span><code><a href="../../../http/Requestor.html#request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient,java.lang.String)" class="member-name-link">request</a><wbr>(<a href="../../../http/Requestor.RequestMethod.html" title="enum in com.easypost.http">Requestor.RequestMethod</a>&nbsp;method,
+<div class="col-first even-row-color"><code>static &lt;T&gt;&nbsp;T</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">Requestor.</span><code><a href="../../../http/Requestor.html#request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient,java.lang.String)" class="member-name-link">request</a><wbr>(<a href="../../../http/Requestor.RequestMethod.html" title="enum in com.easypost.http">Requestor.RequestMethod</a>&nbsp;method,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endpoint,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;clazz,
  <a href="../../../service/EasyPostClient.html" title="class in com.easypost.service">EasyPostClient</a>&nbsp;client,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;apiVersion)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-last even-row-color">
 <div class="block">Send an HTTP request to EasyPost.</div>
 </div>
 </div>

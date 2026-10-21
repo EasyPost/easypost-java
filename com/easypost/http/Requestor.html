@@ -64,6 +64,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
+<li><a href="#getResponseBody(java.io.InputStream,long)" tabindex="0">getResponseBody(InputStream, long)</a></li>
 <li><a href="#request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient)" tabindex="0">request(Requestor.RequestMethod, String, Map, Class, EasyPostClient)</a></li>
 <li><a href="#request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient,java.lang.String)" tabindex="0">request(Requestor.RequestMethod, String, Map, Class, EasyPostClient, String)</a></li>
 <li><a href="#handleAPIError(java.lang.String,int)" tabindex="0">handleAPIError(String, int)</a></li>
@@ -127,29 +128,36 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#handleAPIError(java.lang.String,int)" class="member-name-link">handleAPIError</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rBody,
- int&nbsp;rCode)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getResponseBody(java.io.InputStream,long)" class="member-name-link">getResponseBody</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;responseStream,
+ long&nbsp;contentLength)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Get response body from the InputStream, reading at most
+<a href="../Constants.Http.html#MAX_RESPONSE_BODY_BYTES"><code>Constants.Http.MAX_RESPONSE_BODY_BYTES</code></a> bytes.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#handleAPIError(java.lang.String,int)" class="member-name-link">handleAPIError</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rBody,
+ int&nbsp;rCode)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Handles API error based on the error status code.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient)" class="member-name-link">request</a><wbr>(<a href="Requestor.RequestMethod.html" title="enum in com.easypost.http">Requestor.RequestMethod</a>&nbsp;method,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient)" class="member-name-link">request</a><wbr>(<a href="Requestor.RequestMethod.html" title="enum in com.easypost.http">Requestor.RequestMethod</a>&nbsp;method,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endpoint,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;clazz,
  <a href="../service/EasyPostClient.html" title="class in com.easypost.service">EasyPostClient</a>&nbsp;client)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Send an HTTP request to EasyPost.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient,java.lang.String)" class="member-name-link">request</a><wbr>(<a href="Requestor.RequestMethod.html" title="enum in com.easypost.http">Requestor.RequestMethod</a>&nbsp;method,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient,java.lang.String)" class="member-name-link">request</a><wbr>(<a href="Requestor.RequestMethod.html" title="enum in com.easypost.http">Requestor.RequestMethod</a>&nbsp;method,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endpoint,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;clazz,
  <a href="../service/EasyPostClient.html" title="class in com.easypost.service">EasyPostClient</a>&nbsp;client,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;apiVersion)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Send an HTTP request to EasyPost.</div>
 </div>
 </div>
@@ -185,6 +193,29 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="getResponseBody(java.io.InputStream,long)">
+<h3>getResponseBody</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">protected static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getResponseBody</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;responseStream,
+ long&nbsp;contentLength)</span>
+                                 throws <span class="exceptions"><a href="https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a>,
+<a href="../exception/API/HttpError.html" title="class in com.easypost.exception.API">HttpError</a></span></div>
+<div class="block">Get response body from the InputStream, reading at most
+<a href="../Constants.Http.html#MAX_RESPONSE_BODY_BYTES"><code>Constants.Http.MAX_RESPONSE_BODY_BYTES</code></a> bytes.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>responseStream</code> - The InputStream from the response body.</dd>
+<dd><code>contentLength</code> - The declared Content-Length of the response, or -1 if unknown.</dd>
+<dt>Returns:</dt>
+<dd>InputStream in string value.</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - When the request fails.</dd>
+<dd><code><a href="../exception/API/HttpError.html" title="class in com.easypost.exception.API">HttpError</a></code> - When the response body exceeds the maximum allowed size.</dd>
+</dl>
+</div>
+</section>
+</li>
 <li>
 <section class="detail" id="request(com.easypost.http.Requestor.RequestMethod,java.lang.String,java.util.Map,java.lang.Class,com.easypost.service.EasyPostClient)">
 <h3>request</h3>
