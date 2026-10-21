@@ -60,6 +60,8 @@ public abstract class Requestor {
 
     private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
     private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.easypost.net.customURLStreamHandler";
+    private static final String API_KEY_REDACTION_MASK = "****";
+    private static final int API_KEY_VISIBLE_CHARACTERS = 4;
 
     private static String urlEncodePair(final String key, final String value) throws UnsupportedEncodingException {
         return String.format("%s=%s", URLEncoder.encode(key, Constants.Http.CHARSET),
@@ -86,6 +88,36 @@ public abstract class Requestor {
         headers.put("Authorization", String.format("Bearer %s", apiKey));
 
         return headers;
+    }
+
+    /**
+     * Set the header passed to request and response hooks. This is a copy of the HTTP request header with the
+     * API key redacted to its last four characters, so hooks never receive the full API key.
+     *
+     * @param apiKey API of this HTTP request.
+     * @return HTTP header with the API key redacted.
+     * @throws MissingParameterError When the request fails.
+     */
+    private static Map<String, String> generateHookHeaders(String apiKey) throws MissingParameterError {
+        Map<String, String> headers = generateHeaders(apiKey);
+        headers.put("Authorization", String.format("Bearer %s", redactApiKey(apiKey)));
+
+        return headers;
+    }
+
+    /**
+     * Redact an API key so only its last four characters are visible.
+     *
+     * @param apiKey API key to redact.
+     * @return Redacted API key.
+     */
+    private static String redactApiKey(String apiKey) {
+        // Fully mask keys too short to hide most of their characters.
+        if (apiKey == null || apiKey.length() <= API_KEY_VISIBLE_CHARACTERS * 2) {
+            return API_KEY_REDACTION_MASK;
+        }
+
+        return API_KEY_REDACTION_MASK + apiKey.substring(apiKey.length() - API_KEY_VISIBLE_CHARACTERS);
     }
 
     /**
@@ -576,7 +608,7 @@ public abstract class Requestor {
         }
         Instant requestTimestamp = Instant.now();
         UUID requestUuid = UUID.randomUUID();
-        Map<String, String> headers = generateHeaders(client.getApiKey());
+        Map<String, String> headers = generateHookHeaders(client.getApiKey());
 
         RequestHookResponses requestResponse = new RequestHookResponses(headers, method.toString(), url, body,
                 requestTimestamp.toString(), requestUuid.toString());

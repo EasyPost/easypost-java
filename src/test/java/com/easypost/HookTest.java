@@ -4,15 +4,26 @@ import com.easypost.exception.API.NotFoundError;
 import com.easypost.exception.EasyPostException;
 import com.easypost.hooks.RequestHookResponses;
 import com.easypost.hooks.ResponseHookResponses;
+import com.easypost.service.EasyPostClient;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import javax.net.ssl.HttpsURLConnection;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class HookTest {
@@ -28,6 +39,14 @@ public class HookTest {
     @BeforeAll
     public static void setup() throws EasyPostException {
         vcr = new TestUtils.VCR("hook", TestUtils.ApiKey.TEST);
+    }
+
+    /**
+     * Clear the connection override after each test.
+     */
+    @AfterEach
+    public void tearDown() {
+        EasyPost._vcrUrlFunction = null;
     }
 
     /**
@@ -112,6 +131,42 @@ public class HookTest {
     }
 
     /**
+     * Build a mocked connection that returns a successful Address response.
+     *
+     * @return HttpsURLConnection object.
+     * @throws IOException if the mock cannot be set up.
+     */
+    private static HttpsURLConnection mockConnection() throws IOException {
+        byte[] body = "{\"id\": \"adr_123\", \"object\": \"Address\"}".getBytes(StandardCharsets.UTF_8);
+        HttpsURLConnection connection = Mockito.mock(HttpsURLConnection.class);
+        Mockito.when(connection.getResponseCode()).thenReturn(200);
+        Mockito.when(connection.getInputStream()).thenReturn(new ByteArrayInputStream(body));
+        return connection;
+    }
+
+    /**
+     * Make a request over a mocked connection and capture the headers passed to the request and response hooks.
+     *
+     * @param apiKey     The API key to make the request with.
+     * @param connection The mocked connection to send the request over.
+     * @return The headers passed to the request hook, followed by the headers passed to the response hook.
+     * @throws EasyPostException when the request fails.
+     */
+    private static List<Map<String, String>> captureHookHeaders(String apiKey, HttpsURLConnection connection)
+            throws EasyPostException {
+        EasyPost._vcrUrlFunction = url -> connection;
+        EasyPostClient client = new EasyPostClient(apiKey);
+        List<Map<String, String>> hookHeaders = new ArrayList<>();
+        client.subscribeToRequestHook(data -> hookHeaders.add(data.getHeaders()));
+        client.subscribeToResponseHook(data -> hookHeaders.add(data.getHeaders()));
+
+        client.address.retrieve("adr_123");
+
+        assertEquals(2, hookHeaders.size());
+        return hookHeaders;
+    }
+
+    /**
      * Test creating a Parcel with request hook subscribed.
      *
      * @throws EasyPostException when the request fails.
@@ -181,5 +236,43 @@ public class HookTest {
         }
 
         assertTrue(hookHit);
+    }
+
+    /**
+     * Test that request and response hooks receive the API key redacted to its last four characters,
+     * while the real request still sends the full API key.
+     *
+     * @throws EasyPostException when the request fails.
+     * @throws IOException       when the mock cannot be set up.
+     */
+    @Test
+    public void testHooksReceiveRedactedApiKey() throws EasyPostException, IOException {
+        String apiKey = "EZTKfakeapikey12345WXYZ";
+        HttpsURLConnection connection = mockConnection();
+
+        for (Map<String, String> headers : captureHookHeaders(apiKey, connection)) {
+            assertEquals("Bearer ****WXYZ", headers.get("Authorization"));
+            assertFalse(headers.values().stream().anyMatch(value -> value.contains(apiKey)));
+        }
+
+        Mockito.verify(connection).setRequestProperty("Authorization", "Bearer " + apiKey);
+    }
+
+    /**
+     * Test that hooks receive a fully masked API key when the key is too short to partially reveal.
+     *
+     * @throws EasyPostException when the request fails.
+     * @throws IOException       when the mock cannot be set up.
+     */
+    @Test
+    public void testHooksFullyRedactShortApiKey() throws EasyPostException, IOException {
+        String apiKey = "short123";
+        HttpsURLConnection connection = mockConnection();
+
+        for (Map<String, String> headers : captureHookHeaders(apiKey, connection)) {
+            assertEquals("Bearer ****", headers.get("Authorization"));
+        }
+
+        Mockito.verify(connection).setRequestProperty("Authorization", "Bearer " + apiKey);
     }
 }

@@ -19,7 +19,7 @@ public class RequestHookResponses {
     /**
      * RequestHookResponses constructor.
      *
-     * @param headers The headers of the request.
+     * @param headers The headers of the request, with the API key redacted to its last four characters.
      * @param method The HTTP method of the request.
      * @param path The path of the request.
      * @param requestBody The JSON object representing the request body.
