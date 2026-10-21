@@ -106,6 +106,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>8</maven.compiler.release>
+        <!-- Populated by the jacoco agent when it runs; empty otherwise so the surefire argLine below resolves -->
+        <argLine></argLine>
     </properties>
     <build>
         <resources>
@@ -122,6 +124,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
+                    <!-- Mockito 4's Byte Buddy does not officially support the newest JDKs when mocking JDK classes -->
+                    <argLine>@{argLine} -Dnet.bytebuddy.experimental=true</argLine>
                     <properties>
                         <configurationParameters>junit.jupiter.execution.order.random.seed=99</configurationParameters>
                     </properties>
