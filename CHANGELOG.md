@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v8.9.0 (2026-10-27)
 
 - Adds `surcharges` property and model to `Rate` object
 - Removes the deprecated, unusable `addCreditCardToUser` function

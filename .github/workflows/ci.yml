@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         javaversion:
@@ -34,7 +34,7 @@ jobs:
       - name: Run test with Java ${{ matrix.javaversion }}
         run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just test-ci
   coverage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - uses: extractions/setup-just@v3
@@ -62,7 +62,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - uses: extractions/setup-just@v3
@@ -82,7 +82,7 @@ jobs:
           path: ${{github.workspace}}/target/dependency-check-report.html
   docs:
     if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - uses: extractions/setup-just@v3
