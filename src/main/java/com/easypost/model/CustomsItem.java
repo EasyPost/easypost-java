@@ -12,4 +12,6 @@ public final class CustomsItem extends EasyPostResource {
     private Float weight;
     private String code;
     private String currency;
+    private String manufacturerProductId;
+    private String standardizedProductId;
 }

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v8.10.0 (2026-10-29)
+
+- Adds `manufacturerProductId` and `standardizedProductId` to `CustomsItem`
+- Adds `address` to `TaxIdentifier`
+
 ## v8.9.0 (2026-10-27)
 
 - Adds `surcharges` property and model to `Rate` object

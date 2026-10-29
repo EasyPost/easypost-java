@@ -8,4 +8,5 @@ public final class TaxIdentifier extends EasyPostResource {
     private String taxId;
     private String taxIdType;
     private String issuingCountry;
+    private Address address;
 }
