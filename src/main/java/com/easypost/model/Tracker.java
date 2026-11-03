@@ -20,4 +20,5 @@ public class Tracker extends EasyPostResource {
     private String statusDetail;
     private Boolean finalized;
     private Boolean isReturn;
+    private List<DeliveryEvidence> deliveryEvidence;
 }

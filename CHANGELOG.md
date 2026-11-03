@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds `deliveryEvidence` property and `DeliveryEvidence` model to `Tracker` object
+
 ## v8.10.0 (2026-10-29)
 
 - Adds `manufacturerProductId` and `standardizedProductId` to `CustomsItem`

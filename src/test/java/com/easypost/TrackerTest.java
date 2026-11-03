@@ -2,6 +2,7 @@ package com.easypost;
 
 import com.easypost.exception.EasyPostException;
 import com.easypost.exception.General.EndOfPaginationError;
+import com.easypost.model.DeliveryEvidence;
 import com.easypost.model.Tracker;
 import com.easypost.model.TrackerCollection;
 import com.google.common.collect.ImmutableList;
@@ -242,5 +243,21 @@ public final class TrackerTest {
 
         // Nothing gets returned here, simply ensure no error gets raised
         vcr.client.tracker.delete(tracker.getId());
+    }
+
+    /**
+     * Test that delivery evidence on a tracker deserializes.
+     */
+    @Test
+    public void testDeliveryEvidence() {
+        String data = "{\"id\": \"trk_123\", \"object\": \"Tracker\", \"delivery_evidence\": "
+                + "[{\"type\": \"signature\", \"image\": \"https://example.com/signature.png\"}]}";
+        Tracker tracker = Constants.Http.GSON.fromJson(data, Tracker.class);
+
+        List<DeliveryEvidence> deliveryEvidence = tracker.getDeliveryEvidence();
+
+        assertEquals(1, deliveryEvidence.size());
+        assertEquals("signature", deliveryEvidence.get(0).getType());
+        assertEquals("https://example.com/signature.png", deliveryEvidence.get(0).getImage());
     }
 }
