@@ -27,7 +27,6 @@ import com.easypost.model.EasyPostResource;
 import com.easypost.service.EasyPostClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import lombok.Generated;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.ByteArrayOutputStream;
@@ -37,13 +36,10 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.URLStreamHandler;
-import java.nio.charset.Charset;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
@@ -649,19 +645,8 @@ public abstract class Requestor {
 
         client.getRequestHooks().executeEventHandler(requestResponse);
 
-        EasyPostResponse response;
-        try {
-            // HTTPSURLConnection verifies SSL cert by default
-            response = makeURLConnectionRequest(method, url, query, body, client);
-        } catch (ClassCastException ce) {
-            // appengine
-            String appEngineEnv = System.getProperty("com.google.appengine.runtime.environment", null);
-            if (appEngineEnv != null) {
-                response = makeAppEngineRequest(method, url, query, body, client);
-            } else {
-                throw ce;
-            }
-        }
+        // HTTPSURLConnection verifies SSL cert by default
+        EasyPostResponse response = makeURLConnectionRequest(method, url, query, body, client);
         int rCode = response.getResponseCode();
         String rBody = response.getResponseBody();
 
@@ -744,95 +729,6 @@ public abstract class Requestor {
                 throw new GatewayTimeoutError(errorMessage, errorCode, errors, rCode);
             default:
                 throw new UnknownApiError(errorMessage, errorCode, errors, rCode);
-        }
-    }
-
-    /**
-     * Make a request using Google's App Engine library.
-     *
-     * @param method The HTTP method.
-     * @param url    The URL to make the request to.
-     * @param query  The query string.
-     * @param body   The request body.
-     * @param client The EasyPost client.
-     * @return The response from the API.
-     * @throws HttpError when the request process fails.
-     */
-    @Generated // Exclude from the jacoco test coverage
-    private static EasyPostResponse makeAppEngineRequest(final RequestMethod method, String url, final String query,
-            final JsonObject body, final EasyPostClient client)
-            throws HttpError {
-        String unknownErrorMessage = String.format(
-                "Sorry, an unknown error occurred while trying to use the Google App Engine runtime." +
-                        "Please email %s for assistance.",
-                Constants.EASYPOST_SUPPORT_EMAIL);
-        try {
-            if ((method == RequestMethod.GET || method == RequestMethod.DELETE) && query != null) {
-                url = String.format("%s?%s", url, query);
-            }
-            URL fetchURL = new URL(url);
-
-            Class<?> requestMethodClass = Class.forName("com.google.appengine.api.urlfetch.HTTPMethod");
-            Object httpMethod = requestMethodClass.getDeclaredField(method.name()).get(null);
-
-            Class<?> fetchOptionsBuilderClass = Class.forName("com.google.appengine.api.urlfetch.FetchOptions$Builder");
-            Object fetchOptions = null;
-            try {
-                fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("validateCertificate").invoke(null);
-            } catch (NoSuchMethodException e) {
-                System.err.printf(
-                        "Warning: this App Engine SDK version does not allow verification of SSL certificates;" +
-                                "this exposes you to a MITM attack. Please upgrade your App Engine SDK to >=1.5.0. " +
-                                "If you have questions, email %s.%n",
-                        Constants.EASYPOST_SUPPORT_EMAIL);
-                fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("withDefaults").invoke(null);
-            }
-
-            Class<?> fetchOptionsClass = Class.forName("com.google.appengine.api.urlfetch.FetchOptions");
-
-            // Heroku times out after 30s, so leave some time for the API to return a
-            // response
-            fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class)
-                    .invoke(fetchOptions, client.getConnectionTimeoutMilliseconds());
-
-            Class<?> requestClass = Class.forName("com.google.appengine.api.urlfetch.HTTPRequest");
-
-            Object request = requestClass.getDeclaredConstructor(URL.class, requestMethodClass, fetchOptionsClass)
-                    .newInstance(fetchURL, httpMethod, fetchOptions);
-
-            if ((method == RequestMethod.POST || method == RequestMethod.PUT) && body != null) {
-                String bodyString = body.toString();
-                requestClass.getDeclaredMethod("setPayload", byte[].class)
-                    .invoke(request, bodyString.getBytes(Charset.defaultCharset()));
-            }
-
-            for (Map.Entry<String, String> header : generateHeaders(client.getApiKey()).entrySet()) {
-                Class<?> httpHeaderClass = Class.forName("com.google.appengine.api.urlfetch.HTTPHeader");
-                Object reqHeader = httpHeaderClass.getDeclaredConstructor(String.class, String.class)
-                        .newInstance(header.getKey(), header.getValue());
-                requestClass.getDeclaredMethod("setHeader", httpHeaderClass).invoke(request, reqHeader);
-            }
-
-            Class<?> urlFetchFactoryClass = Class.forName("com.google.appengine.api.urlfetch.URLFetchServiceFactory");
-            Object urlFetchService = urlFetchFactoryClass.getDeclaredMethod("getURLFetchService").invoke(null);
-
-            Method fetchMethod = urlFetchService.getClass().getDeclaredMethod("fetch", requestClass);
-            fetchMethod.setAccessible(true);
-            Object response = fetchMethod.invoke(urlFetchService, request);
-
-            int responseCode = (Integer) response.getClass().getDeclaredMethod("getResponseCode").invoke(response);
-            byte[] responseContent = (byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response);
-            if (responseContent != null && responseContent.length > Constants.Http.MAX_RESPONSE_BODY_BYTES) {
-                throw responseBodyTooLargeError();
-            }
-            String responseBody = new String(responseContent, Constants.Http.CHARSET);
-
-            return new EasyPostResponse(responseCode, responseBody);
-
-        } catch (InvocationTargetException | MalformedURLException | SecurityException | NoSuchFieldException
-                | NoSuchMethodException | ClassNotFoundException | IllegalArgumentException | IllegalAccessException
-                | InstantiationException | MissingParameterError | UnsupportedEncodingException e) {
-            throw new HttpError(unknownErrorMessage, e);
         }
     }
 }

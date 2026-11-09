@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Removes the legacy Google App Engine `urlfetch` fallback; all requests now use `HttpsURLConnection`
+
 ## v8.11.0 (2026-11-09)
 
 - Adds `deliveryEvidence` property and `DeliveryEvidence` model to `Tracker` object
